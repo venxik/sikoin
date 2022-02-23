@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { colors } from '../constants';
 import { dimensions } from '../utils';
-
+import PropTypes from 'prop-types';
 const TextboxBorder = props => {
   const {
     style,
@@ -37,6 +37,28 @@ const TextboxBorder = props => {
       />
     </View>
   );
+};
+
+TextboxBorder.propTypes = {
+  style: PropTypes.any,
+  disabled: PropTypes.bool,
+  icon: PropTypes.any,
+  value: PropTypes.string,
+  textBoxStyle: PropTypes.any,
+  secureTextEntry: PropTypes.bool,
+  placeholder: PropTypes.string,
+  onChangeText: PropTypes.func,
+};
+
+TextboxBorder.defaultProp = {
+  style: null,
+  disabled: false,
+  icon: null,
+  value: null,
+  textBoxStyle: null,
+  secureTextEntry: false,
+  placeholder: null,
+  onChangeText: null,
 };
 
 const styles = StyleSheet.create({

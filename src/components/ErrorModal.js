@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'components';
+import { ButtonText } from '../components';
 import { dismissErrorModal } from 'reducers/ErrorModalReducer';
 import { SCREEN_WIDTH } from 'utils/dimensions';
 
@@ -19,7 +19,7 @@ const ErrorModal = props => {
   const dispatch = useDispatch();
   const {
     options: { isVisible, errorType },
-  } = props;
+  } = props || {};
 
   useEffect(() => {
     if (isVisible) {
@@ -55,7 +55,7 @@ const ErrorModal = props => {
             }}></TouchableOpacity>
           <Text style={styles.headerModalText}>Modal title</Text>
           <Text style={styles.contentModalText}>Modal body</Text>
-          <Button
+          <ButtonText
             text={'Button'}
             onPress={closeModal}
             style={{ width: '100%' }}

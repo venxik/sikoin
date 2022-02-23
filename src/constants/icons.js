@@ -9,6 +9,8 @@ const bottom_paper = require('assets/icons/bottom_paper.png');
 const bottom_profile_bold = require('assets/icons/bottom_profile_bold.png');
 const bottom_profile = require('assets/icons/bottom_profile.png');
 const edit_textbox = require('assets/icons/edit_textbox.png');
+const popup_success = require('assets/icons/popup_success.png');
+const handwriting = require('assets/icons/handwriting.png');
 
 export default {
   arrow_left_primary,
@@ -22,4 +24,6 @@ export default {
   bottom_profile,
   bottom_profile_bold,
   edit_textbox,
+  popup_success,
+  handwriting,
 };

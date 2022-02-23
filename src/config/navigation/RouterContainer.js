@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackWrapper } from 'config/navigation';
 import { useSelector } from 'react-redux';
-import { ErrorModal, LoadingIndicator } from 'components';
+import { ErrorModal, LoadingIndicator } from '../../components';
 
 const RouterContainer = () => {
   const { isLoading } = useSelector(state => state.loading);

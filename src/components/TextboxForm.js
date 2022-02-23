@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { colors, icons } from '../constants';
 import { dimensions } from '../utils';
+import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
   const { style, disabled, value, secureTextEntry, onChangeText, title } =
@@ -42,6 +43,26 @@ const TextboxForm = props => {
       </View>
     </View>
   );
+};
+
+TextboxForm.propTypes = {
+  style: PropTypes.any,
+  disabled: PropTypes.bool,
+  value: PropTypes.string,
+  textBoxStyle: PropTypes.any,
+  secureTextEntry: PropTypes.bool,
+  placeholder: PropTypes.string,
+  onChangeText: PropTypes.func,
+};
+
+TextboxForm.defaultProp = {
+  style: null,
+  disabled: false,
+  value: null,
+  textBoxStyle: null,
+  secureTextEntry: false,
+  placeholder: null,
+  onChangeText: null,
 };
 
 const styles = StyleSheet.create({

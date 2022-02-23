@@ -10,8 +10,8 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { colors } from '../constants';
-import { dimensions } from '../utils';
+import { colors } from '../../constants';
+import { dimensions } from '../../utils';
 
 const dotSize = 4;
 const image = {

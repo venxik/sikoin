@@ -4,15 +4,18 @@ import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { colors } from '../constants';
 
-const HeaderBack = (props) => {
-  const { customPress, onPress, rightIcon, customLeftIcon, title } = props || {};
+const HeaderBack = props => {
+  const { customPress, onPress, rightIcon, customLeftIcon, title } =
+    props || {};
   const navigation = useNavigation();
 
   const validatePress = () => {
     if (customPress) onPress();
     else navigation.goBack();
   };
-  const leftIcon = customLeftIcon ? customLeftIcon : require('assets/icons/arrow_left_primary.png')
+  const leftIcon = customLeftIcon
+    ? customLeftIcon
+    : require('assets/icons/arrow_left_primary.png');
   return (
     <View style={[Styles.container, { ...props.style }]}>
       <View style={Styles.innerContainer}>
@@ -24,7 +27,6 @@ const HeaderBack = (props) => {
           />
         </TouchableOpacity>
         <Text style={Styles.title}>{title}</Text>
-        <View style={Styles.rightContainer}></View>
       </View>
       <View style={Styles.rightContainer}>{rightIcon}</View>
     </View>
@@ -34,10 +36,17 @@ const HeaderBack = (props) => {
 HeaderBack.propTypes = {
   customPress: PropTypes.bool,
   onPress: PropTypes.func,
+  rightIcon: PropTypes.any,
+  customLeftIcon: PropTypes.any,
+  title: PropTypes.string,
 };
 
 HeaderBack.defaultProps = {
-  customPress: false,
+  customPress: null,
+  onPress: null,
+  rightIcon: null,
+  customLeftIcon: null,
+  title: null,
 };
 
 export default HeaderBack;
@@ -48,12 +57,12 @@ const Styles = StyleSheet.create({
     paddingBottom: '3%',
     paddingHorizontal: '6%',
     flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: colors.primaryWhite,
   },
   title: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: colors.black
+    color: colors.black,
   },
   innerContainer: {
     flexDirection: 'row',
@@ -65,6 +74,6 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     width: '20%',
     alignItems: 'center',
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
 });
