@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "78154163643",
+    "project_id": "sikoin-fca2f",
+    "storage_bucket": "sikoin-fca2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78154163643:android:63d3c12220b6d7b62f909e",
+        "android_client_info": {
+          "package_name": "com.sikoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78154163643-nhh9s64o1vkr3ofdbki406nfbk2b4ahl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sikoin",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "78154163643-imf55agd5lun8edmhrekepa9m088anca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwSl8sZcMwsIHmSbN9HEef1XdLPxu7SqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78154163643-imf55agd5lun8edmhrekepa9m088anca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
