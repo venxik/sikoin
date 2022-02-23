@@ -6,42 +6,37 @@ import {
   SafeAreaView,
   Animated,
   Image,
+  // eslint-disable-next-line no-unused-vars
   ScrollView,
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { colors } from '../../constants';
+import { colors, icons, images } from '../../constants';
 import { dimensions } from '../../utils';
 
 const dotSize = 4;
-const image = {
-  onboarding1: require('assets/images/onboarding_1.png'),
-  onboarding2: require('assets/images/onboarding_2.png'),
-  onboarding3: require('assets/images/onboarding_3.png'),
-};
 
 const onBoardings = [
   {
     title: 'Jelajahi Pengalaman Berkoperasi Baru',
     desc: 'Berkomunikasi dengan tim Kamu serta siapkan proses dan sasaran bisnis melalui aplikasi seluler dan web.',
-    img: image.onboarding1,
+    img: images.onboarding_1,
     last: false,
   },
   {
     title: 'Semua Di Satu Tempat',
     desc: 'Nikmati fitur koperasi modern yang berlimpah dalam satu sistem terpadu. ',
-    img: image.onboarding2,
+    img: images.onboarding_2,
     last: false,
   },
   {
     title: 'Akses Tiada Batas',
     desc: 'Data anggota, simpanan, pinjaman, keuangan, bisnis, transaksi, dan lainnya akan terekam dan terkait satu sama lain.',
-    img: image.onboarding3,
+    img: images.onboarding_3,
     last: true,
   },
 ];
 
-const OnboardingScreen = ({ navigation }) => {
+const OnboardingScreen = () => {
   const scrollX = new Animated.Value(0);
 
   const renderDots = () => {
@@ -80,8 +75,6 @@ const OnboardingScreen = ({ navigation }) => {
   };
 
   const renderScrollView = () => {
-    const dotPosition = Animated.divide(scrollX, dimensions.SCREEN_WIDTH);
-
     return (
       <Animated.ScrollView
         horizontal
@@ -135,7 +128,7 @@ const OnboardingScreen = ({ navigation }) => {
                       alignItems: 'center',
                     }}>
                     <Image
-                      source={require('assets/icons/arrow_right.png')}
+                      source={icons.arrow_right}
                       style={{ width: '50%', height: '50%' }}
                     />
                   </TouchableOpacity>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import type { Node } from 'react';
 import {
   SafeAreaView,
   ScrollView,

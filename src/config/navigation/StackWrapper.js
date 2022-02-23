@@ -9,7 +9,7 @@ import * as screens from 'containers';
 import { dimensions } from '../../utils';
 import { navigationRef, isReadyRef } from 'config/navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { strings, colors, icons } from '../../constants';
+import { colors, icons } from '../../constants';
 
 // import Linking from 'config/navigation/Linking';
 
