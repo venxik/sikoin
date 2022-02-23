@@ -33,12 +33,20 @@ const Test2Screen = ({ onOK }) => {
     ref.current.readSignature();
   };
 
-  const style = `.m-signature-pad--footer {display: none; margin: 0px;}`;
-  // const style = `.m-signature-pad--footer
-  // .button {
-  //   background-color: red;
-  //   color: #FFF;
-  // }`;
+  const style = `
+    body,html {
+      width: 100px;
+      height: 100px;
+    }
+    .m-signature-pad--footer {display: none;}
+    .m-signature-pad--body {
+      position: absolute;
+      bottom: 0px;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      border: none;
+    }`;
 
   const rightHeaderIcon = () => {
     return (
@@ -61,7 +69,7 @@ const Test2Screen = ({ onOK }) => {
         style={{
           borderRadius: 20,
           backgroundColor: colors.white,
-          height: dimensions.SCREEN_HEIGHT * 0.6,
+          height: dimensions.SCREEN_HEIGHT * 0.63,
           alignItems: 'center',
           marginHorizontal: 20,
           paddingTop: 20,
@@ -80,9 +88,20 @@ const Test2Screen = ({ onOK }) => {
         <View
           style={{
             width: dimensions.SCREEN_WIDTH * 0.8,
-            height: dimensions.SCREEN_HEIGHT * 0.35,
+            height: dimensions.SCREEN_HEIGHT * 0.4,
+            borderWidth: 0.5,
+            borderColor: colors.black,
+            borderRadius: 20,
+            padding: 10,
           }}>
-          <SignatureScreen ref={ref} onOK={handleOK} webStyle={style} />
+          <SignatureScreen
+            ref={ref}
+            onOK={handleOK}
+            webStyle={style}
+            backgroundColor={colors.white}
+            trimWhitespace={true}
+            style={{ width: '100%', height: '60%', borderRadius: 10 }}
+          />
         </View>
       </View>
       <View style={styles.row}>
