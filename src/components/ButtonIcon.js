@@ -5,7 +5,7 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const ButtonIcon = props => {
-  const { buttonContainerStyle, onPress, disabled, icon } = props || {};
+  const { buttonContainerStyle, onPress, disabled, icon, shadow } = props || {};
 
   const buttonStyle = () => {
     let defaultStyle = { ...styles.defaultContainer, ...buttonContainerStyle };
@@ -13,6 +13,16 @@ const ButtonIcon = props => {
       defaultStyle = {
         ...buttonContainerStyle,
         backgroundColor: colors.strokeGrey,
+      };
+    }
+    if (shadow) {
+      defaultStyle = {
+        ...defaultStyle,
+        shadowColor: 'black',
+        shadowOpacity: 0.7,
+        shadowOffset: { width: 0, height: 5 },
+        shadowRadius: 10,
+        elevation: 10,
       };
     }
 
@@ -57,11 +67,6 @@ const styles = StyleSheet.create({
     height: dimensions.SCREEN_HEIGHT * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.7,
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 10,
-    elevation: 20,
     backgroundColor: colors.red,
   },
   defaultText: {

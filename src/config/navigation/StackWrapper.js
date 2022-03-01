@@ -89,20 +89,6 @@ const RootTab = () => {
         })}
       />
       <Tab.Screen
-        name="Test3Screen"
-        component={screens.DaftarKoperasiScreen}
-        options={({ route }) => ({
-          tabBarIcon: props => (
-            <IconBottom
-              focused={props.focused}
-              image={
-                props.focused ? icons.bottom_paper_bold : icons.bottom_paper
-              }
-            />
-          ),
-        })}
-      />
-      <Tab.Screen
         name="Test4Screen"
         component={screens.DaftarKoperasiIntro2Screen}
         options={({ route }) => ({
@@ -135,6 +121,56 @@ const MainStackNavigator = () => (
   </MainStack.Navigator>
 );
 
+const OnboardingStackNavigator = () => (
+  <MainStack.Navigator
+    initialRouteName={'OnboardingScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <MainStack.Screen
+      name="OnboardingScreen"
+      component={screens.OnboardingScreen}
+    />
+    <MainStack.Screen
+      name="LoginStackNavigator"
+      component={LoginStackNavigator}
+    />
+  </MainStack.Navigator>
+);
+
+const LoginStackNavigator = () => (
+  <MainStack.Navigator
+    initialRouteName={'LoginScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <MainStack.Screen name="LoginScreen" component={screens.LoginScreen} />
+    <MainStack.Screen
+      name="DaftarKoperasiStackNavigator"
+      component={DaftarKoperasiStackNavigator}
+    />
+  </MainStack.Navigator>
+);
+
+const DaftarKoperasiStackNavigator = () => (
+  <MainStack.Navigator
+    initialRouteName={'DaftarKoperasiIntroScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <MainStack.Screen
+      name="DaftarKoperasiIntroScreen"
+      component={screens.DaftarKoperasiIntroScreen}
+    />
+  </MainStack.Navigator>
+);
+
 const ParentStackNavigator = () => {
   React.useEffect(
     () => () => {
@@ -162,7 +198,7 @@ const ParentStackNavigator = () => {
         }}>
         <ParentStack.Screen
           name="MainStack"
-          component={screens.DaftarKoperasiScreen}
+          component={OnboardingStackNavigator}
         />
       </ParentStack.Navigator>
     </NavigationContainer>

@@ -34,7 +34,7 @@ const TextboxBorder = props => {
         />
       ) : null}
       <TextInput
-        style={textBoxStyle}
+        style={[{ marginLeft: 10 }, textBoxStyle]}
         autoCorrect={false}
         autoCapitalize="none"
         clearButtonMode="always"

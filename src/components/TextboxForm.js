@@ -25,7 +25,7 @@ const TextboxForm = props => {
           alignItems: 'center',
         }}>
         <TextInput
-          style={styles.textBoxStyle}
+          style={[{ marginLeft: 10 }, textBoxStyle]}
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"

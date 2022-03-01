@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { colors } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
-import { any } from 'react-native/Libraries/Text/TextNativeComponent';
 
 const ButtonText = props => {
   const {
@@ -14,6 +13,7 @@ const ButtonText = props => {
     text,
     icon,
     iconLocation,
+    shadow,
   } = props || {};
 
   const buttonStyle = () => {
@@ -22,6 +22,16 @@ const ButtonText = props => {
       defaultStyle = {
         ...defaultStyle,
         backgroundColor: colors.strokeGrey,
+      };
+    }
+    if (shadow) {
+      defaultStyle = {
+        ...defaultStyle,
+        shadowColor: 'black',
+        shadowOpacity: 0.7,
+        shadowOffset: { width: 0, height: 5 },
+        shadowRadius: 10,
+        elevation: 10,
       };
     }
 
@@ -87,12 +97,8 @@ const styles = StyleSheet.create({
     // height: dimensions.SCREEN_HEIGHT * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowOpacity: 0.7,
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 10,
-    elevation: 20,
-    backgroundColor: colors.red,
+    backgroundColor: colors.primary,
+    paddingVertical: '4%',
   },
   defaultText: {
     fontSize: 14,

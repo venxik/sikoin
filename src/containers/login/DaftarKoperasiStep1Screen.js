@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const DaftarKoperasiIntro2Screen = props => {
+const DaftarKoperasiStep1Screen = () => {
   return (
     <View style={styles.container}>
-      <Text>DaftarKoperasiIntro2Screen</Text>
+      <Text>DaftarKoperasiStep1Screen</Text>
     </View>
   );
 };
-export default DaftarKoperasiIntro2Screen;
+export default DaftarKoperasiStep1Screen;
 
 const styles = StyleSheet.create({
   container: {

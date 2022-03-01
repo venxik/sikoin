@@ -14,6 +14,8 @@ const popup_success = require('assets/icons/popup_success.png');
 const handwriting = require('assets/icons/handwriting.png');
 const icon_email = require('assets/icons/icon_email.png');
 const icon_password = require('assets/icons/icon_password.png');
+const icon_info_popup = require('assets/icons/icon_info_popup.png');
+const arrow_left_white = require('assets/icons/arrow_left_white.png');
 
 export default {
   arrow_left_primary,
@@ -31,4 +33,6 @@ export default {
   handwriting,
   icon_email,
   icon_password,
+  icon_info_popup,
+  arrow_left_white,
 };

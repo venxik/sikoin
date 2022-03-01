@@ -16,29 +16,31 @@ const Popup2Button = props => {
     buttonRightTitle,
     buttonLeftOnPress,
     buttonRightOnPress,
+    headerTextStyle,
+    contentTextStyle,
   } = props;
-  const scaleValue = useRef(new Animated.Value(0)).current;
+  // const scaleValue = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    if (showModal) {
-      Animated.spring(scaleValue, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [showModal]);
+  // useEffect(() => {
+  //   if (showModal) {
+  //     Animated.spring(scaleValue, {
+  //       toValue: 1,
+  //       duration: 200,
+  //       useNativeDriver: true,
+  //     }).start();
+  //   }
+  // }, [showModal]);
 
   const closeModal = press => {
-    Animated.timing(scaleValue, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: true,
-    }).start(() => {
-      if (press) {
-        press();
-      }
-    });
+    // Animated.timing(scaleValue, {
+    //   toValue: 0,
+    //   duration: 200,
+    //   useNativeDriver: true,
+    // }).start(() => {
+    if (press) {
+      press();
+    }
+    // });
   };
 
   const buttonLeftPressed = () => {
@@ -49,38 +51,51 @@ const Popup2Button = props => {
   };
 
   return (
-    <Modal animationType="fade" transparent={true} visible={showModal}>
+    <Modal animationType="slide" transparent={true} visible={showModal}>
       <View style={styles.modalMainView}>
-        <Animated.View
-          style={[styles.modalView, { transform: [{ scale: scaleValue }] }]}>
+        <Animated.View style={[styles.modalView]}>
           {headerImage && (
             <Image
               source={headerImage}
               style={{
-                width: dimensions.SCREEN_WIDTH * 0.4,
-                height: dimensions.SCREEN_WIDTH * 0.4,
+                width: dimensions.SCREEN_WIDTH * 0.2,
+                height: dimensions.SCREEN_WIDTH * 0.2,
+                marginVertical: 30,
               }}
             />
           )}
-          {customContent ? (
-            customContent
-          ) : (
-            <View style={{ alignItems: 'center' }}>
-              <Text style={styles.headerModalText}>{headerText}</Text>
-              <Text style={styles.contentModalText}>{contentText}</Text>
-            </View>
-          )}
+          <View
+            style={{
+              alignItems: 'center',
+            }}>
+            {headerText && (
+              <Text style={[styles.headerModalText, headerTextStyle]}>
+                {headerText}
+              </Text>
+            )}
+            {contentText && (
+              <Text style={[styles.contentModalText, contentTextStyle]}>
+                {contentText}
+              </Text>
+            )}
+          </View>
+          {customContent && customContent}
           <View
             style={{
               width: '100%',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              backgroundColor: 'yellow',
             }}>
             <ButtonText
               text={buttonLeftTitle}
               onPress={buttonLeftPressed}
-              buttonContainerStyle={{ width: '47%' }}
+              buttonContainerStyle={{
+                width: '47%',
+                backgroundColor: colors.white,
+                borderColor: colors.primary,
+                borderWidth: 1,
+              }}
+              textStyle={{ color: colors.primary }}
             />
             <ButtonText
               text={buttonRightTitle}
@@ -105,6 +120,8 @@ Popup2Button.propTypes = {
   buttonRightTitle: PropTypes.string,
   buttonLeftOnPress: PropTypes.func,
   buttonRightOnPress: PropTypes.func,
+  headerTextStyle: PropTypes.object,
+  contentTextStyle: PropTypes.object,
 };
 
 Popup2Button.defaultProp = {
@@ -113,6 +130,8 @@ Popup2Button.defaultProp = {
   contentText: 'default',
   customContent: null,
   headerImage: null,
+  headerTextStyle: null,
+  contentTextStyle: null,
 };
 
 export default Popup2Button;
@@ -127,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
   modalView: {
     width: '85%',
@@ -135,14 +154,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 4,
-    // elevation: 5,
   },
   headerModalText: {
     fontSize: 18,
@@ -152,9 +163,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentModalText: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.black,
-    paddingVertical: 20,
     textAlign: 'center',
+    paddingVertical: 10,
   },
 });

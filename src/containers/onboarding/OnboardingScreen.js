@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -10,34 +11,39 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { colors, icons, images } from '../../constants';
+import { colors, icons, images, strings } from '../../constants';
 import { dimensions } from '../../utils';
 
 const dotSize = 4;
 
 const onBoardings = [
   {
-    title: 'Jelajahi Pengalaman Berkoperasi Baru',
-    desc: 'Berkomunikasi dengan tim Kamu serta siapkan proses dan sasaran bisnis melalui aplikasi seluler dan web.',
+    title: strings.onboarding_title_1,
+    desc: strings.onboarding_desc_1,
     img: images.onboarding_1,
     last: false,
   },
   {
-    title: 'Semua Di Satu Tempat',
-    desc: 'Nikmati fitur koperasi modern yang berlimpah dalam satu sistem terpadu. ',
+    title: strings.onboarding_title_2,
+    desc: strings.onboarding_desc_2,
     img: images.onboarding_2,
     last: false,
   },
   {
-    title: 'Akses Tiada Batas',
-    desc: 'Data anggota, simpanan, pinjaman, keuangan, bisnis, transaksi, dan lainnya akan terekam dan terkait satu sama lain.',
+    title: strings.onboarding_title_2,
+    desc: strings.onboarding_desc_3,
     img: images.onboarding_3,
     last: true,
   },
 ];
 
 const OnboardingScreen = () => {
+  const navigation = useNavigation();
   const scrollX = new Animated.Value(0);
+
+  const navigateToLoginScreen = () => {
+    navigation.navigate('LoginStackNavigator');
+  };
 
   const renderDots = () => {
     const dotPosition = Animated.divide(scrollX, dimensions.SCREEN_WIDTH);
@@ -119,6 +125,7 @@ const OnboardingScreen = () => {
                 <View
                   style={{ position: 'absolute', bottom: '7%', right: '20%' }}>
                   <TouchableOpacity
+                    onPress={navigateToLoginScreen}
                     style={{
                       width: 50,
                       height: 50,
