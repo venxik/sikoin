@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { colors } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
@@ -64,7 +64,7 @@ ButtonIcon.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    height: dimensions.SCREEN_HEIGHT * 0.05,
+    paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.red,

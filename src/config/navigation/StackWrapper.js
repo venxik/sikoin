@@ -1,11 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Image, View } from 'react-native';
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as screens from 'containers';
+import * as screens from '../../containers';
 import { dimensions } from '../../utils';
 import { navigationRef, isReadyRef } from 'config/navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +16,9 @@ const { SCREEN_WIDTH, SCREEN_HEIGHT } = dimensions;
 // Top Stack
 const MainStack = createNativeStackNavigator();
 const ParentStack = createNativeStackNavigator();
+const DaftarKoperasiStack = createNativeStackNavigator();
+const OnboardingStack = createNativeStackNavigator();
+const LoginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // const shouldShowBottomNavigation = (route) => {
@@ -56,7 +57,7 @@ const IconBottom = props => (
   </View>
 );
 
-const RootTab = () => {
+const BottomTab = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -65,9 +66,9 @@ const RootTab = () => {
         headerShown: false,
       }}>
       <Tab.Screen
-        name="MainStackNavigator"
-        component={MainStackNavigator}
-        options={({ route }) => ({
+        name="HomeStackNavigator"
+        component={HomeStackNavigator}
+        options={() => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
@@ -78,8 +79,8 @@ const RootTab = () => {
       />
       <Tab.Screen
         name="Test2Screen"
-        component={screens.TestScreen}
-        options={({ route }) => ({
+        component={screens.Test2Screen}
+        options={() => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
@@ -90,8 +91,8 @@ const RootTab = () => {
       />
       <Tab.Screen
         name="Test4Screen"
-        component={screens.DaftarKoperasiIntro2Screen}
-        options={({ route }) => ({
+        component={screens.Test3Screen}
+        options={() => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
@@ -106,69 +107,80 @@ const RootTab = () => {
   );
 };
 
-const MainStackNavigator = () => (
+const HomeStackNavigator = () => (
   <MainStack.Navigator
-    initialRouteName={'TestScreen'}
+    initialRouteName={'HomeScreen'}
     screenOptions={{
       headerMode: 'none',
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen
-      name="TestScreen"
-      component={screens.DaftarKoperasiIntro2Screen}
-    />
+    <MainStack.Screen name="TestScreen" component={screens.Test2Screen} />
+    <MainStack.Screen name="HomeScreen" component={screens.HomeScreen} />
   </MainStack.Navigator>
 );
 
 const OnboardingStackNavigator = () => (
-  <MainStack.Navigator
+  <OnboardingStack.Navigator
     initialRouteName={'OnboardingScreen'}
     screenOptions={{
       headerMode: 'none',
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen
+    <OnboardingStack.Screen
       name="OnboardingScreen"
       component={screens.OnboardingScreen}
     />
-    <MainStack.Screen
+    <OnboardingStack.Screen
       name="LoginStackNavigator"
       component={LoginStackNavigator}
     />
-  </MainStack.Navigator>
+  </OnboardingStack.Navigator>
 );
 
 const LoginStackNavigator = () => (
-  <MainStack.Navigator
+  <LoginStack.Navigator
     initialRouteName={'LoginScreen'}
     screenOptions={{
       headerMode: 'none',
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen name="LoginScreen" component={screens.LoginScreen} />
-    <MainStack.Screen
+    <LoginStack.Screen name="LoginScreen" component={screens.LoginScreen} />
+    <LoginStack.Screen
       name="DaftarKoperasiStackNavigator"
       component={DaftarKoperasiStackNavigator}
     />
-  </MainStack.Navigator>
+    <LoginStack.Screen name="BottomTab" component={BottomTab} />
+  </LoginStack.Navigator>
 );
 
 const DaftarKoperasiStackNavigator = () => (
-  <MainStack.Navigator
+  <DaftarKoperasiStack.Navigator
     initialRouteName={'DaftarKoperasiIntroScreen'}
     screenOptions={{
       headerMode: 'none',
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen
+    <DaftarKoperasiStack.Screen
       name="DaftarKoperasiIntroScreen"
       component={screens.DaftarKoperasiIntroScreen}
     />
-  </MainStack.Navigator>
+    <DaftarKoperasiStack.Screen
+      name="DaftarKoperasiStep1Screen"
+      component={screens.DaftarKoperasiStep1Screen}
+    />
+    <DaftarKoperasiStack.Screen
+      name="DaftarKoperasiStep2Screen"
+      component={screens.DaftarKoperasiStep2Screen}
+    />
+    <DaftarKoperasiStack.Screen
+      name="DaftarKoperasiSuccessScreen"
+      component={screens.DaftarKoperasiSuccessScreen}
+    />
+  </DaftarKoperasiStack.Navigator>
 );
 
 const ParentStackNavigator = () => {
@@ -186,9 +198,10 @@ const ParentStackNavigator = () => {
       onReady={() => {
         isReadyRef.current = true;
       }}
-      onStateChange={state => {
-        // console.log('NAVIGATION STATE (onStateChange): ', state);
-      }}>
+      // onStateChange={state => {
+      //   // console.log('NAVIGATION STATE (onStateChange): ', state);
+      // }}
+    >
       <ParentStack.Navigator
         initialRouteName={'MainStack'}
         screenOptions={{

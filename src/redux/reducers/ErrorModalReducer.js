@@ -1,4 +1,4 @@
-import { strings, apis } from 'constants';
+import { strings, apis } from '../../constants';
 import { createSlice } from '@reduxjs/toolkit';
 import { isEmpty } from 'lodash';
 

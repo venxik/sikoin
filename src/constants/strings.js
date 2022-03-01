@@ -20,11 +20,26 @@ export default {
     'Cek emailmu untuk melihat password sementara.',
 
   /* DAFTAR KOPERASI */
+  daftar: 'Daftar',
   daftar_koperasi_title_1: 'Apakah koperasimu sudah memiliki akses ke CoopApp?',
   daftar_koperasi_title_2:
     'Kita lihat dulu yuk bagaimana CoopApp bisa membawa koperasi mu menjadi koperasi super',
+  daftar_koperasi_isi_data_title_1:
+    'Dapatkan akses masuk CoopApp mu hanya dengan mengikuti 2 langkah saja',
+  daftar_koperasi_isi_data_title_2:
+    'Masukan emailmu untuk mendapatkan Username & Password sementara',
+  daftar_koperasi_isi_data_hint_2:
+    'Kamu dapat mengganti Username & Password sewaktu-waktu dari dalam aplikasi CoopApp.',
+  isi_data: 'Isi Data',
+  daftar_koperasi_success_1: 'Username & Password sudah dikirim ke',
+  daftar_koperasi_success_2:
+    'Kamu dapat menggunakan Username & Password tersebut untuk masuk ke aplikasi CoopApp.',
+  masukan_nama_koperasimu: 'Masukan nama koperasimu...',
+  masukan_no_anggota: 'Masukan nomor anggotamu...',
+  cek_inbox: 'Cek Inboxmu ya!',
 
   /*BUTTON*/
+  kembali_ke_login: 'Kembali Ke Login',
   masuk: 'Masuk',
   daftar_ke_koperasimu: 'Daftar Ke Koperasimu',
   lupa_password: 'Lupa Password?',
@@ -33,4 +48,9 @@ export default {
   belum: 'Belum',
   sudah: 'Sudah',
   ayo: 'Ayo!',
+  selanjutnya: 'Selanjutnya',
+  pilih_tgl_lahir: 'Pilih Tanggal Lahir',
+  kirim_otp_ke_email: 'Kirim OTP Ke Email',
+
+  email: 'Email',
 };

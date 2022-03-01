@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { SpinnerLoading } from 'components';
-import { colors } from 'constants';
+import { colors } from '../constants';
 
 const LoadingIndicator = () => (
   <View style={styles.loadingContainer}>

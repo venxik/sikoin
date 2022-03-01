@@ -60,11 +60,25 @@ const ButtonText = props => {
           alignItems: 'center',
         }}>
         {iconLocation === 'left' ? (
-          <Image source={icon} style={{ width: 30, height: 30 }} />
+          <Image
+            source={icon}
+            style={{
+              marginRight: 10,
+              width: dimensions.SCREEN_WIDTH * 0.05,
+              height: dimensions.SCREEN_WIDTH * 0.05,
+            }}
+          />
         ) : null}
         <Text style={updateTextStyle()}>{text}</Text>
         {iconLocation === 'right' ? (
-          <Image source={icon} style={{ width: 30, height: 30 }} />
+          <Image
+            source={icon}
+            style={{
+              marginLeft: 10,
+              width: dimensions.SCREEN_WIDTH * 0.05,
+              height: dimensions.SCREEN_WIDTH * 0.05,
+            }}
+          />
         ) : null}
       </View>
     </TouchableOpacity>
@@ -94,11 +108,10 @@ ButtonText.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    // height: dimensions.SCREEN_HEIGHT * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primary,
-    paddingVertical: '4%',
+    paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
   },
   defaultText: {
     fontSize: 14,

@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons } from '../constants';
@@ -6,30 +5,33 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const DropdownForm = props => {
-  const { onPress, customText, icon } = props || {};
-  const navigation = useNavigation();
+  const { onPress, customText, icon, style } = props || {};
   return (
-    <TouchableOpacity
-      // onPress={}
-      style={[styles.container, props.style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <View
         style={{
           flexDirection: 'row',
         }}>
         {icon ? (
-          <Image source={icon} style={{ width: 20, height: 20 }} />
+          <Image
+            source={icon}
+            style={{
+              width: dimensions.SCREEN_WIDTH * 0.06,
+              height: dimensions.SCREEN_WIDTH * 0.06,
+              marginRight: dimensions.SCREEN_WIDTH * 0.06,
+            }}
+          />
         ) : null}
         <Text
           style={{
-            marginLeft: dimensions.SCREEN_WIDTH * 0.06,
             color: colors.primary,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: 'bold',
           }}>
           {customText ? customText : 'Pilih...'}
         </Text>
       </View>
-      <Image source={icons.arrow_right} style={{ width: 20, height: 20 }} />
+      <Image source={icons.icon_dropdown} style={{ width: 20, height: 20 }} />
     </TouchableOpacity>
   );
 };
@@ -54,10 +56,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    paddingVertical: dimensions.SCREEN_HEIGHT * 0.02,
+    paddingVertical: dimensions.SCREEN_WIDTH * 0.04,
     paddingHorizontal: dimensions.SCREEN_WIDTH * 0.04,
     backgroundColor: colors.tonalLightPrimary,
     borderRadius: dimensions.SCREEN_HEIGHT * 0.02,
-    // backgroundColor: 'red',
   },
 });

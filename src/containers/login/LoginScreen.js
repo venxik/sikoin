@@ -21,7 +21,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [resetEmail, setResetEmail] = useState(null);
-  const { email: emailFromReducer } = useSelector(state => state.LoginReducers);
+  // const { email: emailFromReducer } = useSelector(state => state.LoginReducers);
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
   const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =
     useState(false);
@@ -41,6 +41,10 @@ const LoginScreen = () => {
 
   const navigateToDaftarKoperasi = () => {
     navigation.navigate('DaftarKoperasiStackNavigator');
+  };
+
+  const navigateToHomeScreen = () => {
+    navigation.navigate('BottomTab');
   };
 
   const resetPassword = () => {
@@ -70,9 +74,10 @@ const LoginScreen = () => {
             }}>
             <TextboxBorder
               style={{
-                paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
                 marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
+                marginTop: 10,
                 width: '100%',
+                paddingHorizontal: 5,
               }}
               value={email}
               onChangeText={e => onChangeResetPassEmailText(e)}
@@ -100,7 +105,6 @@ const LoginScreen = () => {
       <View style={{ width: '100%' }}>
         <TextboxBorder
           style={{
-            paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
             marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
           }}
           value={email}
@@ -111,7 +115,6 @@ const LoginScreen = () => {
         />
         <TextboxBorder
           style={{
-            paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
             marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
             marginTop: dimensions.SCREEN_HEIGHT * 0.02,
           }}
@@ -124,10 +127,8 @@ const LoginScreen = () => {
 
         <View style={{ width: '100%', marginTop: 20 }}>
           <ButtonText
-            // onPress={() => setShowModal(true)}
+            onPress={navigateToHomeScreen}
             buttonContainerStyle={{
-              paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
               marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
               backgroundColor: colors.primary,
             }}
@@ -136,8 +137,6 @@ const LoginScreen = () => {
           <ButtonText
             onPress={navigateToDaftarKoperasi}
             buttonContainerStyle={{
-              paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
               marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
               marginTop: dimensions.SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalPrimary,
@@ -148,8 +147,6 @@ const LoginScreen = () => {
           <ButtonText
             onPress={() => setShowForgetPassModal(true)}
             buttonContainerStyle={{
-              paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
               marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
               marginTop: dimensions.SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalLightPrimary,

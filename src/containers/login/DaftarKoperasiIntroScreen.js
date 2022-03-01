@@ -15,6 +15,10 @@ const DaftarKoperasiIntroScreen = () => {
     else navigation.goBack();
   };
 
+  const navigateToStep1Screen = () => {
+    navigation.navigate('DaftarKoperasiStep1Screen');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack
@@ -98,7 +102,7 @@ const DaftarKoperasiIntroScreen = () => {
             textStyle={{ color: colors.primary }}
           />
           <ButtonText
-            // onPress={() => setShowModal(true)}
+            onPress={navigateToStep1Screen}
             buttonContainerStyle={{
               width: '47%',
               paddingVertical: dimensions.SCREEN_WIDTH * 0.03,

@@ -16,6 +16,11 @@ const icon_email = require('assets/icons/icon_email.png');
 const icon_password = require('assets/icons/icon_password.png');
 const icon_info_popup = require('assets/icons/icon_info_popup.png');
 const arrow_left_white = require('assets/icons/arrow_left_white.png');
+const icon_pencil_textbox = require('assets/icons/icon_pencil_textbox.png');
+const icon_number_textbox = require('assets/icons/icon_number_textbox.png');
+const icon_dropdown = require('assets/icons/icon_dropdown.png');
+const arrow_right_button_white = require('assets/icons/arrow_right_button_white.png');
+const arrow_left_button_white = require('assets/icons/arrow_left_button_white.png');
 
 export default {
   arrow_left_primary,
@@ -35,4 +40,9 @@ export default {
   icon_password,
   icon_info_popup,
   arrow_left_white,
+  icon_pencil_textbox,
+  icon_number_textbox,
+  icon_dropdown,
+  arrow_right_button_white,
+  arrow_left_button_white,
 };

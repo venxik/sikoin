@@ -1,11 +1,120 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  ButtonText,
+  DropdownForm,
+  HeaderBack,
+  TextboxBorder,
+} from '../../components';
+import { colors, icons, strings } from '../../constants';
+import { dimensions } from '../../utils';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const DaftarKoperasiStep1Screen = () => {
+  const navigation = useNavigation();
+
+  const [koperasiName, setKoperasiName] = useState(null);
+  const [noAnggota, setNoAnggota] = useState(null);
+
+  const onChangeKoperasiName = value => {
+    setKoperasiName(value);
+  };
+
+  const onChangeNoAnggota = value => {
+    setNoAnggota(value);
+  };
+
+  const navigateToStep2 = () => {
+    navigation.navigate('DaftarKoperasiStep2Screen');
+  };
   return (
-    <View style={styles.container}>
-      <Text>DaftarKoperasiStep1Screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.daftar} />
+      {/* TOP SIDE */}
+      <View
+        style={{
+          backgroundColor: colors.tonalLightPrimary,
+          borderRadius: 20,
+          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+          padding: dimensions.SCREEN_WIDTH * 0.05,
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            alignItems: 'center',
+          }}>
+          <AnimatedCircularProgress
+            size={dimensions.SCREEN_WIDTH * 0.13}
+            rotation={180}
+            width={3}
+            fill={2}
+            tintColor={colors.primary}
+            backgroundColor={colors.primaryLight}>
+            {() => <Text style={{ fontWeight: 'bold' }}>1/2</Text>}
+          </AnimatedCircularProgress>
+          <Text
+            style={{
+              marginLeft: 16,
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: colors.black,
+            }}>
+            {strings.isi_data}
+          </Text>
+        </View>
+        <Text style={{ marginTop: 16, color: colors.black }}>
+          {strings.daftar_koperasi_isi_data_title_1}
+        </Text>
+      </View>
+      {/* BOTTOM SIDE */}
+      <View
+        style={{
+          marginTop: 16,
+          backgroundColor: colors.white,
+          borderRadius: 20,
+          margin: dimensions.SCREEN_WIDTH * 0.05,
+          padding: dimensions.SCREEN_WIDTH * 0.05,
+        }}>
+        <TextboxBorder
+          value={koperasiName}
+          onChangeText={e => onChangeKoperasiName(e)}
+          secureTextEntry={false}
+          placeholder={strings.masukan_nama_koperasimu}
+          icon={icons.icon_pencil_textbox}
+        />
+        <TextboxBorder
+          style={{
+            marginTop: 20,
+          }}
+          value={noAnggota}
+          onChangeText={e => onChangeNoAnggota(e)}
+          secureTextEntry={false}
+          placeholder={strings.masukan_no_anggota}
+          icon={icons.icon_number_textbox}
+        />
+        <DropdownForm
+          customText={strings.pilih_tgl_lahir}
+          style={{ marginTop: 20 }}
+        />
+      </View>
+
+      <ButtonText
+        onPress={navigateToStep2}
+        buttonContainerStyle={{
+          position: 'absolute',
+          bottom: 20,
+          width: '90%',
+          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+        }}
+        text={strings.selanjutnya}
+        icon={icons.arrow_right_button_white}
+        iconLocation="right"
+        shadow
+      />
+    </SafeAreaView>
   );
 };
 export default DaftarKoperasiStep1Screen;
@@ -13,7 +122,7 @@ export default DaftarKoperasiStep1Screen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // width: '100%',
+    height: '100%',
   },
 });
