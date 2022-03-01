@@ -20,7 +20,7 @@ const ButtonText = props => {
     let defaultStyle = { ...styles.defaultContainer, ...buttonContainerStyle };
     if (disabled) {
       defaultStyle = {
-        ...buttonContainerStyle,
+        ...defaultStyle,
         backgroundColor: colors.strokeGrey,
       };
     }
@@ -29,10 +29,10 @@ const ButtonText = props => {
   };
 
   const updateTextStyle = () => {
-    let defaultStyle = styles.defaultText;
+    let defaultStyle = { ...styles.defaultText, ...textStyle };
 
     if (disabled) {
-      defaultStyle = { ...textStyle, color: colors.black };
+      defaultStyle = { ...defaultStyle, color: colors.black };
     }
 
     return defaultStyle;
@@ -48,7 +48,6 @@ const ButtonText = props => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          flex: 1,
         }}>
         {iconLocation === 'left' ? (
           <Image source={icon} style={{ width: 30, height: 30 }} />
@@ -85,7 +84,7 @@ ButtonText.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    height: dimensions.SCREEN_HEIGHT * 0.05,
+    // height: dimensions.SCREEN_HEIGHT * 0.05,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: 'black',

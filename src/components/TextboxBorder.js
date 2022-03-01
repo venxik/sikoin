@@ -24,7 +24,15 @@ const TextboxBorder = props => {
 
   return (
     <View style={[styles.defaultContainer, style]}>
-      {icon ? <Image source={icon} style={{ width: 30, height: 30 }} /> : null}
+      {icon ? (
+        <Image
+          source={icon}
+          style={{
+            width: dimensions.SCREEN_WIDTH * 0.06,
+            height: dimensions.SCREEN_WIDTH * 0.06,
+          }}
+        />
+      ) : null}
       <TextInput
         style={textBoxStyle}
         autoCorrect={false}
@@ -64,7 +72,7 @@ TextboxBorder.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    height: dimensions.SCREEN_HEIGHT * 0.06,
+    // height: dimensions.SCREEN_HEIGHT * 0.06,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',

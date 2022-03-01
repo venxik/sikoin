@@ -78,7 +78,7 @@ const RootTab = () => {
       />
       <Tab.Screen
         name="Test2Screen"
-        component={screens.Test2Screen}
+        component={screens.TestScreen}
         options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
@@ -90,7 +90,7 @@ const RootTab = () => {
       />
       <Tab.Screen
         name="Test3Screen"
-        component={screens.Test3Screen}
+        component={screens.DaftarKoperasiScreen}
         options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
@@ -104,7 +104,7 @@ const RootTab = () => {
       />
       <Tab.Screen
         name="Test4Screen"
-        component={screens.Test4Screen}
+        component={screens.DaftarKoperasiIntro2Screen}
         options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
@@ -128,7 +128,10 @@ const MainStackNavigator = () => (
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen name="TestScreen" component={screens.TestScreen} />
+    <MainStack.Screen
+      name="TestScreen"
+      component={screens.DaftarKoperasiIntro2Screen}
+    />
   </MainStack.Navigator>
 );
 
@@ -157,7 +160,10 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}>
-        <ParentStack.Screen name="MainStack" component={RootTab} />
+        <ParentStack.Screen
+          name="MainStack"
+          component={screens.DaftarKoperasiScreen}
+        />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

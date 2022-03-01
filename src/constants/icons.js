@@ -12,6 +12,8 @@ const bottom_profile = require('assets/icons/bottom_profile.png');
 const edit_textbox = require('assets/icons/edit_textbox.png');
 const popup_success = require('assets/icons/popup_success.png');
 const handwriting = require('assets/icons/handwriting.png');
+const icon_email = require('assets/icons/icon_email.png');
+const icon_password = require('assets/icons/icon_password.png');
 
 export default {
   arrow_left_primary,
@@ -27,4 +29,6 @@ export default {
   edit_textbox,
   popup_success,
   handwriting,
+  icon_email,
+  icon_password,
 };
