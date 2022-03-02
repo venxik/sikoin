@@ -10,7 +10,6 @@ import {
   View,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from 'actions/DummyActions';
 
 const Test4Screen = () => {
   const isDarkMode = useColorScheme() === 'dark';

@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import { colors, icons, images, strings } from '../../constants';
 import { dimensions } from '../../utils';
-import { setEmailToReducer } from '../../redux/actions/LoginActions';
+import { setEmailToReducer } from '../../redux/actions/LoginAction';
 
 const LoginScreen = () => {
   const navigation = useNavigation();

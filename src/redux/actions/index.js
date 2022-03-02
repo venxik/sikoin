@@ -1,4 +1,4 @@
 import DummyAction from './DummyActions';
-import LoginActions from './LoginActions';
+import LoginAction from './LoginAction';
 
-export { DummyAction, LoginActions };
+export { DummyAction, LoginAction };

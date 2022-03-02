@@ -12,6 +12,7 @@ import {
   Animated,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import {
   CardKabar,
   CardLastItem,
@@ -24,6 +25,7 @@ import { dimensions } from '../../utils';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
   const miniFlatlist = [
     { title: strings.simpanan, amount: '17.000.000', button: strings.mutasi },
     { title: strings.saldo, amount: '100.000.000', button: strings.topup },
@@ -49,82 +51,19 @@ const HomeScreen = () => {
     { image: images.menu_diskon, label: strings.diskon, navigateTo: '' },
     { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
   ];
-  const kabarList = [
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      profile_pic: images.dummy_profile_pic,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-      name: 'Achmad Ega',
-      timestamp: '12 Desember 2021',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      profile_pic: images.dummy_profile_pic,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-      name: 'Achmad Ega',
-      timestamp: '12 Desember 2021',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      profile_pic: images.dummy_profile_pic,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-      name: 'Achmad Ega',
-      timestamp: '12 Desember 2021',
-    },
-  ];
 
-  const promoList = [
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: images.daftar_koperasi_bg,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: images.daftar_koperasi_bg,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: images.daftar_koperasi_bg,
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-  ];
-
-  const marketList = [
-    {
-      productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
-    },
-    {
-      productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
-    },
-    {
-      productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
-    },
-    {
-      productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
-    },
-  ];
   const miniFlatlistSize = dimensions.SCREEN_HEIGHT * 0.17;
   const dotSize = 8;
   const menuSize = dimensions.SCREEN_WIDTH * 0.35;
   const cardKabarHeight = dimensions.SCREEN_HEIGHT * 0.5;
   const cardPromoHeight = dimensions.SCREEN_HEIGHT * 0.7;
 
+  const { kabarDataList } = useSelector(state => state.KabarReducer);
+  const { promoDataList } = useSelector(state => state.PromoReducer);
+  const { marketDataList } = useSelector(state => state.MarketDataReducer);
+  const { profileData } = useSelector(state => state.ProfileDataReducer);
+  const { profilePic, koperasiPic, name, code, koperasiName } =
+    profileData || {};
   const [showSaldo, setShowSaldo] = useState(false);
 
   const cardHeader = title => {
@@ -139,10 +78,15 @@ const HomeScreen = () => {
           }}>
           {title}
         </Text>
-        <Image
-          source={icons.arrow_right_circle_primary}
-          style={{ width: dimensions.ICON_SIZE, height: dimensions.ICON_SIZE }}
-        />
+        <TouchableOpacity>
+          <Image
+            source={icons.arrow_right_circle_primary}
+            style={{
+              width: dimensions.ICON_SIZE,
+              height: dimensions.ICON_SIZE,
+            }}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -153,14 +97,14 @@ const HomeScreen = () => {
         {cardHeader(strings.kabar)}
         <FlatList
           horizontal
-          data={kabarList}
+          data={kabarDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar item={item} style={{ height: cardKabarHeight }} />
-              {index === kabarList.length - 1 && (
+              {index === kabarDataList.length - 1 && (
                 <CardLastItem
                   style={{ height: cardKabarHeight }}
                   icon={icons.icon_kabar_white}
@@ -179,7 +123,7 @@ const HomeScreen = () => {
         {cardHeader(strings.promo)}
         <FlatList
           horizontal
-          data={promoList}
+          data={promoDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
@@ -199,7 +143,7 @@ const HomeScreen = () => {
         {cardHeader(strings.market)}
         <FlatList
           horizontal
-          data={marketList}
+          data={marketDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
@@ -209,7 +153,7 @@ const HomeScreen = () => {
                 item={item}
                 style={{ height: cardPromoHeight }}
               />
-              {index === marketList.length - 1 && (
+              {index === marketDataList.length - 1 && (
                 <CardLastItem
                   style={{ height: cardPromoHeight }}
                   icon={icons.icon_market_white}
@@ -224,33 +168,31 @@ const HomeScreen = () => {
 
   const renderMenuFlatlist = () => {
     return (
-      <View>
-        <FlatList
-          data={menuList}
-          contentContainerStyle={{
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            paddingTop: 40,
-          }}
-          keyExtractor={(item, index) => index.toString()}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                alignItems: 'center',
-                width: '50%',
-                paddingVertical: 10,
-              }}>
-              <Image
-                source={item.image}
-                style={{ width: menuSize, height: menuSize }}
-              />
-              <Text style={{ fontSize: 16, position: 'absolute', bottom: 25 }}>
-                {item.label}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
+      <View
+        style={{
+          marginTop: 40,
+          flexWrap: 'wrap',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          width: '100%',
+        }}>
+        {menuList.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={{
+              alignItems: 'center',
+              width: '50%',
+              paddingVertical: 10,
+            }}>
+            <Image
+              source={item.image}
+              style={{ width: menuSize, height: menuSize }}
+            />
+            <Text style={{ fontSize: 16, position: 'absolute', bottom: 25 }}>
+              {item.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
     );
   };
@@ -452,13 +394,13 @@ const HomeScreen = () => {
         }}>
         <TouchableOpacity>
           <ImageBackground
-            source={images.dummy_profile_pic}
+            source={profilePic}
             style={{
               width: dimensions.SCREEN_WIDTH * 0.25,
               height: dimensions.SCREEN_WIDTH * 0.25,
             }}>
             <Image
-              source={images.dummy_koperasi_pic}
+              source={koperasiPic}
               style={{
                 width: dimensions.SCREEN_WIDTH * 0.2,
                 height: dimensions.SCREEN_WIDTH * 0.2,
@@ -482,12 +424,12 @@ const HomeScreen = () => {
               color: colors.black,
               fontWeight: 'bold',
             }}>
-            Hi, Egsdasdasdasdasdasa!
+            Hi, {name}
           </Text>
           <View>
-            <Text style={{ fontSize: 14, marginBottom: 6 }}>JBC-0001</Text>
+            <Text style={{ fontSize: 14, marginBottom: 6 }}>{code}</Text>
             <Text style={{ fontSize: 14, color: colors.black }}>
-              {'Jababeka & co'}
+              {koperasiName}
             </Text>
           </View>
         </View>

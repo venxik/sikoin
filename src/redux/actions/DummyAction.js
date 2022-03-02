@@ -1,8 +1,7 @@
 import { FETCH_DATA_FAILED, FETCH_DATA_SUCCESS } from '../types';
-import { showLoading, hideLoading } from 'reducers/LoadingReducer';
-import { apis } from 'constants';
-import { HttpService } from 'config/services';
-import axios from 'axios';
+import { showLoading, hideLoading } from '../reducers/LoadingReducer';
+import { apis } from '../../constants';
+import { HttpService } from '../../config/services';
 
 const fetchData = () => {
   return async dispatch => {

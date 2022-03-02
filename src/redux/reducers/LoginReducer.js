@@ -5,7 +5,7 @@ const initialState = {
   error: null,
 };
 
-const LoginReducers = (state = initialState, action) => {
+const LoginReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_EMAIL:
       return { ...state, email: action.payload };
@@ -14,4 +14,4 @@ const LoginReducers = (state = initialState, action) => {
   }
 };
 
-export default LoginReducers;
+export default LoginReducer;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackWrapper } from 'config/navigation';
+import { StackWrapper } from '../navigation';
 import { useSelector } from 'react-redux';
 import { ErrorModal, LoadingIndicator } from '../../components';
 

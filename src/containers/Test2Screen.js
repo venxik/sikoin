@@ -9,8 +9,6 @@ import {
   View,
   Image,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from 'actions/DummyActions';
 import SignatureScreen from 'react-native-signature-canvas';
 import { ButtonText, HeaderBack } from '../components';
 import { colors, icons } from '../constants';

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { showErrorModal } from 'reducers/ErrorModalReducer';
 import { hideLoading } from 'reducers/LoadingReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
-import { store } from 'config/store/ReduxStore';
+import { store } from '../../config/store/ReduxStore';
 
 let instance = null;
 
