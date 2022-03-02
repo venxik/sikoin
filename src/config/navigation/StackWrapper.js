@@ -209,7 +209,10 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}>
-        <ParentStack.Screen name="MainStack" component={HomeStackNavigator} />
+        <ParentStack.Screen
+          name="MainStack"
+          component={OnboardingStackNavigator}
+        />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

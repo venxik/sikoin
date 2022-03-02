@@ -1,30 +1,16 @@
 import rootReducer from 'reducers';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import { createStore, applyMiddleware } from 'redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import thunk from 'redux-thunk';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    thunk: true,
-    serializableCheck: {
-      ignoredActions: false,
-    },
-  }),
-];
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
 
-// if (__DEV__) {
-//   middleware.push(
-//     createLogger({
-//       collapsed: true,
-//       duration: true,
-//       timestamp: true,
-//       logErrors: true,
-//       diff: true,
-//     }),
-//   );
-// }
+const persistReducers = persistReducer(persistConfig, rootReducer);
+const store = createStore(persistReducers, applyMiddleware(thunk));
+const persist = persistStore(store);
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware,
-});
-
-export const getStore = () => store;
+export { store, persist };

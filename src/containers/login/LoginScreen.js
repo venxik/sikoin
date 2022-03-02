@@ -18,10 +18,11 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState(null);
+  const { email: emailFromReducer } = useSelector(state => state.LoginReducers);
+
+  const [email, setEmail] = useState(emailFromReducer);
   const [password, setPassword] = useState(null);
   const [resetEmail, setResetEmail] = useState(null);
-  // const { email: emailFromReducer } = useSelector(state => state.LoginReducers);
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
   const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =
     useState(false);

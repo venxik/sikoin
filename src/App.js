@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { ProviderWrapper, RouterContainer } from 'config/navigation';
-import { store } from 'config/store/ReduxStore';
+import { ProviderWrapper, RouterContainer } from '../src/config/navigation';
+import { store, persist } from '../src/config/store/ReduxStore';
 import { fcmService } from './utils/FCMService';
 import { localNotificationService } from './utils/LocalNotificationService';
 import { Alert } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import SplashScreen from 'react-native-splash-screen';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const App = () => {
   useEffect(() => {
@@ -55,9 +56,11 @@ const App = () => {
 
   return (
     <ProviderWrapper store={store}>
-      <PaperProvider>
-        <RouterContainer />
-      </PaperProvider>
+      <PersistGate persistor={persist} loading={null}>
+        <PaperProvider>
+          <RouterContainer />
+        </PaperProvider>
+      </PersistGate>
     </ProviderWrapper>
   );
 };
