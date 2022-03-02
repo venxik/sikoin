@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   defaultText: {
     fontSize: 14,
     color: colors.white,
+    fontWeight: 'bold',
   },
 });
 

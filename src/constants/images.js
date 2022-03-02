@@ -7,6 +7,14 @@ const login_hi = require('assets/images/login_hi.png');
 const daftar_koperasi_question_mark = require('assets/images/daftar_koperasi_question_mark.png');
 const daftar_koperasi_question_mark_2 = require('assets/images/daftar_koperasi_question_mark_2.png');
 const daftar_koperasi_bg = require('assets/images/daftar_koperasi_bg.png');
+const dummy_profile_pic = require('assets/images/dummy_profile_pic.png');
+const dummy_koperasi_pic = require('assets/images/dummy_koperasi_pic.png');
+const menu_pinjaman = require('assets/images/menu_pinjaman.png');
+const menu_transaksi = require('assets/images/menu_transaksi.png');
+const menu_market = require('assets/images/menu_market.png');
+const menu_voucher = require('assets/images/menu_voucher.png');
+const menu_diskon = require('assets/images/menu_diskon.png');
+const menu_dokumen = require('assets/images/menu_dokumen.png');
 
 export default {
   onboarding_1,
@@ -17,4 +25,12 @@ export default {
   daftar_koperasi_question_mark,
   daftar_koperasi_question_mark_2,
   daftar_koperasi_bg,
+  dummy_profile_pic,
+  dummy_koperasi_pic,
+  menu_diskon,
+  menu_dokumen,
+  menu_market,
+  menu_pinjaman,
+  menu_transaksi,
+  menu_voucher,
 };

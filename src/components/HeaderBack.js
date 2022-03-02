@@ -3,9 +3,11 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { colors, icons } from '../constants';
+import { dimensions } from '../utils';
 
 const HeaderBack = props => {
-  const { onPress, rightIcon, customLeftIcon, title, style } = props || {};
+  const { onPress, rightIcon, customLeftIcon, title, style, disabled } =
+    props || {};
   const navigation = useNavigation();
 
   const validatePress = () => {
@@ -16,9 +18,12 @@ const HeaderBack = props => {
   return (
     <View style={[Styles.container, { ...style }]}>
       <View style={Styles.innerContainer}>
-        <TouchableOpacity onPress={validatePress}>
+        <TouchableOpacity onPress={validatePress} disabled={disabled}>
           <Image
-            style={{ width: 24, height: 24 }}
+            style={{
+              width: dimensions.ICON_SIZE,
+              height: dimensions.ICON_SIZE,
+            }}
             resizeMode={'stretch'}
             source={leftIcon}
           />
@@ -37,6 +42,7 @@ HeaderBack.propTypes = {
   customLeftIcon: PropTypes.any,
   title: PropTypes.string,
   style: PropTypes.any,
+  disabled: PropTypes.bool,
 };
 
 HeaderBack.defaultProps = {
@@ -46,6 +52,7 @@ HeaderBack.defaultProps = {
   customLeftIcon: null,
   title: null,
   style: null,
+  disabled: false,
 };
 
 export default HeaderBack;
@@ -53,7 +60,7 @@ export default HeaderBack;
 const Styles = StyleSheet.create({
   container: {
     paddingVertical: '5%',
-    paddingHorizontal: '6%',
+    paddingHorizontal: '8%',
     flexDirection: 'row',
     backgroundColor: 'rgba(0,0,0,0)',
   },
@@ -61,7 +68,7 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: colors.black,
-    marginLeft: 10,
+    marginLeft: 20,
   },
   innerContainer: {
     flexDirection: 'row',

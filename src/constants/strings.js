@@ -52,5 +52,30 @@ export default {
   pilih_tgl_lahir: 'Pilih Tanggal Lahir',
   kirim_otp_ke_email: 'Kirim OTP Ke Email',
 
+  /*HOME*/
+  beranda: 'Beranda',
+  simpanan: 'Simpanan',
+  mutasi: 'Mutasi',
+  topup: 'Top Up',
+  saldo: 'Saldo',
+
+  /*MENU*/
+  pinjaman: 'Pinjaman',
+  transaksi: 'Transaksi',
+  market: 'Market',
+  voucher: 'Voucher',
+  diskon: 'Diskon',
+  dokumen: 'Dokumen',
+
+  /*KABAR*/
+  kabar: 'Kabar',
+
+  /*PROMO*/
+  promo: 'Promo',
+
+  /*MARKET*/
+  market: 'Market',
+  beli_dgn_voucher: 'Beli Dengan Voucher',
   email: 'Email',
+  selengkapnya: 'Selengkapnya',
 };

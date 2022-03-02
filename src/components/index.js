@@ -9,6 +9,10 @@ import SubmenuListItem from './SubmenuListItem';
 import DropdownForm from './DropdownForm';
 import Popup1Button from './Popup1Button';
 import Popup2Button from './Popup2Button';
+import CardKabar from './CardKabar';
+import CardLastItem from './CardLastItem';
+import CardPromo from './CardPromo';
+import CardMarketLarge from './CardMarketLarge';
 
 export {
   ButtonIcon,
@@ -22,4 +26,8 @@ export {
   DropdownForm,
   Popup1Button,
   Popup2Button,
+  CardKabar,
+  CardLastItem,
+  CardPromo,
+  CardMarketLarge,
 };

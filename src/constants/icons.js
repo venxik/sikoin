@@ -21,6 +21,20 @@ const icon_number_textbox = require('assets/icons/icon_number_textbox.png');
 const icon_dropdown = require('assets/icons/icon_dropdown.png');
 const arrow_right_button_white = require('assets/icons/arrow_right_button_white.png');
 const arrow_left_button_white = require('assets/icons/arrow_left_button_white.png');
+const icon_scan = require('assets/icons/icon_scan.png');
+const icon_notification = require('assets/icons/icon_notification.png');
+const icon_home_header = require('assets/icons/icon_home_header.png');
+const arrow_right_primary_2 = require('assets/icons/arrow_right_primary_2.png');
+const icon_mutasi = require('assets/icons/icon_mutasi.png');
+const icon_topup = require('assets/icons/icon_topup.png');
+const arrow_right_circle_primary = require('assets/icons/arrow_right_circle_primary.png');
+const arrow_up_circle_primary = require('assets/icons/arrow_up_circle_primary.png');
+const icon_kabar_white = require('assets/icons/icon_kabar_white.png');
+const icon_wishlist = require('assets/icons/icon_wishlist.png');
+const icon_voucher_small = require('assets/icons/icon_voucher_small.png');
+const arrow_right_primary = require('assets/icons/arrow_right_primary.png');
+const icon_market_white = require('assets/icons/icon_market_white.png');
+const arrow_down_circle_primary = require('assets/icons/arrow_down_circle_primary.png');
 
 export default {
   arrow_left_primary,
@@ -45,4 +59,18 @@ export default {
   icon_dropdown,
   arrow_right_button_white,
   arrow_left_button_white,
+  icon_scan,
+  icon_notification,
+  icon_home_header,
+  arrow_right_primary_2,
+  icon_mutasi,
+  icon_topup,
+  arrow_right_circle_primary,
+  arrow_up_circle_primary,
+  icon_kabar_white,
+  icon_wishlist,
+  icon_voucher_small,
+  arrow_right_primary,
+  icon_market_white,
+  arrow_down_circle_primary,
 };
