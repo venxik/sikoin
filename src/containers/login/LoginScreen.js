@@ -29,7 +29,7 @@ const LoginScreen = () => {
 
   const onChangeEmailText = value => {
     setEmail(value);
-    dispatch(setEmailToReducer(value));
+    // dispatch(setEmailToReducer(value));
   };
 
   const onChangePasswordText = value => {

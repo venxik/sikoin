@@ -1,12 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Image,
-  ImageBackground,
   ScrollView,
   FlatList,
   Animated,
@@ -23,28 +28,17 @@ import {
   ProfilePicture,
 } from '../../components';
 import { colors, icons, images, strings } from '../../constants';
-import { dimensions } from '../../utils';
+import { dimensions, formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const bottomSheetModalRef = useRef(null);
-  const miniFlatlist = [
-    { title: strings.simpanan, amount: '17.000.000', button: strings.mutasi },
-    { title: strings.saldo, amount: '100.000.000', button: strings.topup },
+
+  const saldoFlatlist = [
+    { title: strings.simpanan, button: strings.mutasi },
+    { title: strings.saldo, button: strings.topup },
   ];
-  const miniList2 = {
-    simpanan: {
-      title: strings.simpanan,
-      amount: '17.000.000',
-      button: strings.mutasi,
-    },
-    saldo: {
-      title: strings.saldo,
-      amount: '100.000.000',
-      button: strings.topup,
-    },
-  };
 
   const menuList = [
     { image: images.menu_pinjaman, label: strings.pinjaman, navigateTo: '' },
@@ -66,8 +60,9 @@ const HomeScreen = () => {
   const { marketDataList } = useSelector(state => state.MarketDataReducer);
   const { profileData } = useSelector(state => state.ProfileDataReducer);
   const { name, code, koperasiName } = profileData || {};
-  const [showSaldo, setShowSaldo] = useState(false);
   const [selectedKabar, setSelectedKabar] = useState({});
+  const { simpanan, saldo } = useSelector(state => state.SaldoSimpananReducer);
+
   // variables
   const snapPoints = useMemo(() => ['10%', '90%'], []);
 
@@ -85,7 +80,7 @@ const HomeScreen = () => {
     handlePresentModalPress();
   };
 
-  const navigateToSaldoSimpanan = () => {
+  const navigateToSaldoSimpanan = showSaldo => {
     navigation.navigate('SaldoSimpananStackNavigator', {
       screen: 'SaldoSimpananMainScreen',
       params: { showSaldo: showSaldo },
@@ -231,83 +226,7 @@ const HomeScreen = () => {
     );
   };
 
-  const renderMiniList2 = () => {
-    return (
-      <View
-        style={{
-          width: '100%',
-          borderRadius: 20,
-          backgroundColor: colors.tonalLightPrimary,
-          borderColor: colors.primary,
-          borderWidth: 1,
-          flexDirection: 'row',
-          paddingHorizontal: 10,
-        }}>
-        <TouchableOpacity
-          style={{ justifyContent: 'center', marginRight: 10 }}
-          onPress={() => setShowSaldo(e => !e)}>
-          <Image
-            source={
-              showSaldo
-                ? icons.arrow_up_circle_primary
-                : icons.arrow_down_circle_primary
-            }
-            style={{
-              width: dimensions.ICON_SIZE * 1.2,
-              height: dimensions.ICON_SIZE * 1.2,
-            }}
-          />
-        </TouchableOpacity>
-        <View
-          style={{
-            width: '80%',
-            height: miniFlatlistSize,
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <View style={{ justifyContent: 'space-between' }}>
-            <TouchableOpacity
-              style={{ flexDirection: 'row', alignItems: 'center' }}
-              onPress={navigateToSaldoSimpanan}>
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: colors.black,
-                  fontWeight: 'bold',
-                }}>
-                {showSaldo ? miniList2.saldo.title : miniList2.simpanan.title}
-              </Text>
-              <Image
-                source={icons.arrow_right_primary_2}
-                style={{
-                  width: dimensions.ICON_SIZE * 0.8,
-                  height: dimensions.ICON_SIZE * 0.8,
-                  marginLeft: 10,
-                }}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-            <Text style={{ fontSize: 15 }}>
-              {showSaldo ? miniList2.saldo.amount : miniList2.simpanan.amount}
-            </Text>
-          </View>
-          <TouchableOpacity style={{ alignItems: 'center', marginRight: 20 }}>
-            <Image
-              source={showSaldo ? icons.icon_mutasi : icons.icon_topup}
-              style={{ width: 40, height: 40, marginBottom: 10 }}
-              resizeMode="contain"
-            />
-            <Text>
-              {showSaldo ? miniList2.saldo.button : miniList2.simpanan.button}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
-
-  const renderMiniFlatlist = () => {
+  const renderMiniScrollView = () => {
     const scrollY = useRef(new Animated.Value(0)).current;
 
     return (
@@ -321,7 +240,7 @@ const HomeScreen = () => {
           paddingHorizontal: 10,
         }}>
         <View style={{ justifyContent: 'center' }}>
-          {miniFlatlist.map((_, index) => {
+          {saldoFlatlist.map((_, index) => {
             const inputRange = [
               (index - 1) * miniFlatlistSize,
               index * miniFlatlistSize,
@@ -349,28 +268,25 @@ const HomeScreen = () => {
             );
           })}
         </View>
-        <View
-          style={{
-            height: miniFlatlistSize,
-            overflow: 'hidden',
-          }}>
-          <Animated.FlatList
-            data={miniFlatlist}
-            pagingEnabled
-            snapToInterval={miniFlatlistSize}
-            contentContainerStyle={{
-              paddingHorizontal: 20,
-            }}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-              { useNativeDriver: false },
-            )}
-            showsVerticalScrollIndicator={false}
-            decelerationRate="fast"
-            scrollEventThrottle={16}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
+        <Animated.ScrollView
+          style={{ height: miniFlatlistSize }}
+          nestedScrollEnabled={true}
+          pagingEnabled
+          contentContainerStyle={{
+            paddingHorizontal: 20,
+          }}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: false },
+          )}
+          showsVerticalScrollIndicator={false}
+          decelerationRate="fast"
+          scrollEventThrottle={16}
+          keyExtractor={(item, index) => index.toString()}>
+          {saldoFlatlist.map((item, index) => {
+            return (
               <View
+                key={index}
                 style={{
                   width: '100%',
                   height: miniFlatlistSize,
@@ -378,7 +294,11 @@ const HomeScreen = () => {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 }}>
-                <View style={{ justifyContent: 'space-between' }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigateToSaldoSimpanan(item.title === strings.saldo)
+                  }
+                  style={{ justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text
                       style={{
@@ -398,8 +318,13 @@ const HomeScreen = () => {
                       resizeMode="contain"
                     />
                   </View>
-                  <Text style={{ fontSize: 15 }}>{'Rp ' + item.amount}</Text>
-                </View>
+                  <Text style={{ fontSize: 15 }}>
+                    Rp{' '}
+                    {index === 1
+                      ? formatter.formatStringToCurrencyNumber(simpanan.total)
+                      : formatter.formatStringToCurrencyNumber(saldo.total)}
+                  </Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   style={{ alignItems: 'center', marginRight: 20 }}>
                   <Image
@@ -414,9 +339,9 @@ const HomeScreen = () => {
                   <Text>{item.button}</Text>
                 </TouchableOpacity>
               </View>
-            )}
-          />
-        </View>
+            );
+          })}
+        </Animated.ScrollView>
       </View>
     );
   };
@@ -555,7 +480,7 @@ const HomeScreen = () => {
       {renderBottomSheet()}
 
       <ScrollView
-        // contentContainerStyle={{ flex: 1, width: '100%' }}
+        nestedScrollEnabled={true}
         style={{ width: '100%', height: '100%' }}>
         {/* BODY */}
         <View
@@ -566,8 +491,7 @@ const HomeScreen = () => {
             marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
           }}>
           <View style={{ marginBottom: 20 }}>{renderProfile()}</View>
-          {renderMiniList2()}
-          {/* {renderMiniFlatlist()} */}
+          {renderMiniScrollView()}
           {renderMenuFlatlist()}
         </View>
         <View
