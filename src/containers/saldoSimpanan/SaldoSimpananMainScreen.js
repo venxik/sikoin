@@ -12,7 +12,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { HeaderBack, Popup1Button, SaldoItemList } from '../../components';
-import { colors, icons, images, strings } from '../../constants';
+import { colors, icons, images, sizes, strings } from '../../constants';
 import { currency, dimensions } from '../../utils';
 
 const Button = props => {
@@ -60,9 +60,9 @@ const SaldoSimpananMainScreen = ({ route }) => {
       <View>
         <View
           style={{
-            borderRadius: 20,
+            borderRadius: sizes.padding,
             backgroundColor: colors.white,
-            paddingVertical: 20,
+            paddingVertical: sizes.padding,
             paddingHorizontal: 40,
             width: '100%',
             justifyContent: 'space-between',
@@ -93,9 +93,9 @@ const SaldoSimpananMainScreen = ({ route }) => {
       <View>
         <View
           style={{
-            borderRadius: 20,
+            borderRadius: sizes.padding,
             backgroundColor: colors.white,
-            paddingVertical: 20,
+            paddingVertical: sizes.padding,
             paddingHorizontal: 40,
             width: '100%',
             justifyContent: 'space-evenly',
@@ -140,7 +140,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
         <Text
           style={{
             color: colors.primaryLight,
-            marginTop: 20,
+            marginTop: sizes.padding,
             fontWeight: '500',
           }}>
           {showSaldo ? strings.totalSaldo : strings.totalSimpanan} :
@@ -177,8 +177,8 @@ const SaldoSimpananMainScreen = ({ route }) => {
       style={{
         alignItems: 'flex-start',
         width: '100%',
-        paddingLeft: 20,
-        marginBottom: 20,
+        paddingLeft: sizes.padding,
+        marginBottom: sizes.padding,
       }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <View
@@ -247,7 +247,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
         <BottomSheetScrollView>
           <View
             style={{
-              padding: 20,
+              padding: sizes.padding,
               width: '100%',
               height: '100%',
               backgroundColor: colors.primaryWhite,

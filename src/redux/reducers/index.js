@@ -9,7 +9,7 @@ import MarketDataReducer from './MarketDataReducer';
 import ProfileDataReducer from './ProfileDataReducer';
 import SaldoSimpananReducer from './SaldoSimpananReducer';
 
-export default combineReducers({
+const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
   loading: LoadingReducer,
   DummyReducer: DummyReducer,
@@ -20,3 +20,5 @@ export default combineReducers({
   ProfileDataReducer: ProfileDataReducer,
   SaldoSimpananReducer: SaldoSimpananReducer,
 });
+
+export default rootReducers;

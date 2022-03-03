@@ -77,6 +77,7 @@ ButtonText.propTypes = {
   text: PropTypes.string,
   icon: PropTypes.any,
   iconLocation: PropTypes.string,
+  shadow: PropTypes.bool,
 };
 
 ButtonText.defaultProp = {
@@ -87,6 +88,7 @@ ButtonText.defaultProp = {
   text: '',
   icon: null,
   iconLocation: null,
+  shadow: true,
 };
 
 const styles = StyleSheet.create({

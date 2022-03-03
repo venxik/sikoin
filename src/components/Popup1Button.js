@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Modal, Image } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
-import { colors, strings } from '../constants';
+import { colors, sizes, strings } from '../constants';
 import { dimensions } from '../utils';
 
 const Popup1Button = props => {
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
   modalView: {
     width: '85%',
     backgroundColor: colors.white,
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: sizes.padding,
+    padding: sizes.padding,
     alignItems: 'center',
   },
   headerModalText: {
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 14,
     color: colors.bodyTextGrey,
-    paddingVertical: 20,
+    paddingVertical: sizes.padding,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: sizes.padding,
   },
 });

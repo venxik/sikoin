@@ -8,3 +8,5 @@ export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
 
 export const SET_EMAIL = 'SET_EMAIL';
+
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';

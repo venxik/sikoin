@@ -1,4 +1,4 @@
 import dimensions from './dimensions';
-import currency from './currency';
+import currency from './formatter';
 
 export { dimensions, currency };

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack, TextboxBorder } from '../../components';
-import { colors, icons, strings } from '../../constants';
+import { colors, icons, sizes, strings } from '../../constants';
 import { dimensions } from '../../utils';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -26,7 +26,7 @@ const DaftarKoperasiStep2Screen = () => {
       <View
         style={{
           backgroundColor: colors.tonalLightPrimary,
-          borderRadius: 20,
+          borderRadius: sizes.padding,
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
           padding: dimensions.SCREEN_WIDTH * 0.05,
         }}>
@@ -48,7 +48,7 @@ const DaftarKoperasiStep2Screen = () => {
           <Text
             style={{
               marginLeft: 16,
-              fontSize: 20,
+              fontSize: sizes.padding,
               fontWeight: 'bold',
               color: colors.black,
             }}>
@@ -64,7 +64,7 @@ const DaftarKoperasiStep2Screen = () => {
         style={{
           marginTop: 16,
           backgroundColor: colors.white,
-          borderRadius: 20,
+          borderRadius: sizes.padding,
           margin: dimensions.SCREEN_WIDTH * 0.05,
           padding: dimensions.SCREEN_WIDTH * 0.05,
         }}>
@@ -75,7 +75,7 @@ const DaftarKoperasiStep2Screen = () => {
           placeholder={strings.masukan_nama_koperasimu}
           icon={icons.icon_email}
         />
-        <Text style={{ marginTop: 20, fontSize: 12 }}>
+        <Text style={{ marginTop: sizes.padding, fontSize: 12 }}>
           {strings.daftar_koperasi_isi_data_hint_2}
         </Text>
       </View>
@@ -84,7 +84,7 @@ const DaftarKoperasiStep2Screen = () => {
         onPress={navigateToSuccessScreen}
         buttonContainerStyle={{
           position: 'absolute',
-          bottom: 20,
+          bottom: sizes.padding,
           width: '90%',
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
         }}

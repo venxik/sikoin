@@ -28,7 +28,6 @@ const Tab = createBottomTabNavigator();
 
 const shouldShowBottomNavigation = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
-  console.log(routeName);
   switch (routeName) {
     case 'OnboardingStackNavigator':
       return false;
@@ -38,7 +37,11 @@ const shouldShowBottomNavigation = route => {
       return false;
     case 'SaldoSimpananStackNavigator':
       return false;
-    case 'ProfileStackNavigator':
+    case 'EditProfileScreen':
+      return false;
+    case 'DataDiriMainScreen':
+      return false;
+    case 'PengaturanScreen':
       return false;
     default:
       return true;
@@ -138,6 +141,18 @@ const ProfileStackNavigator = () => (
     <ProfileStack.Screen
       name="ProfileMainScreen"
       component={screens.ProfileMainScreen}
+    />
+    <ProfileStack.Screen
+      name="EditProfileScreen"
+      component={screens.EditProfileScreen}
+    />
+    <ProfileStack.Screen
+      name="DataDiriMainScreen"
+      component={screens.DataDiriMainScreen}
+    />
+    <ProfileStack.Screen
+      name="PengaturanScreen"
+      component={screens.PengaturanScreen}
     />
   </ProfileStack.Navigator>
 );

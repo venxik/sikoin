@@ -11,6 +11,9 @@ import DaftarKoperasiSuccessScreen from './login/DaftarKoperasiSuccessScreen';
 import HomeScreen from './home/HomeScreen';
 import SaldoSimpananMainScreen from './saldoSimpanan/SaldoSimpananMainScreen';
 import ProfileMainScreen from './profile/ProfileMainScreen';
+import EditProfileScreen from './profile/EditProfileScreen';
+import DataDiriMainScreen from './profile/DataDiriMainScreen';
+import PengaturanScreen from './profile/PengaturanScreen';
 
 export {
   TestScreen,
@@ -26,4 +29,7 @@ export {
   HomeScreen,
   SaldoSimpananMainScreen,
   ProfileMainScreen,
+  EditProfileScreen,
+  DataDiriMainScreen,
+  PengaturanScreen,
 };

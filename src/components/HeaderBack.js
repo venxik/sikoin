@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import { colors, icons } from '../constants';
+import { colors, icons, sizes } from '../constants';
 import { dimensions } from '../utils';
 
 const HeaderBack = props => {
@@ -76,7 +76,7 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: colors.black,
-    marginLeft: 20,
+    marginLeft: sizes.padding,
   },
   innerContainer: {
     flexDirection: 'row',

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, icons } from '../constants';
+import { colors, icons, sizes } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ const SubmenuListItem = props => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      // onPress={navigation.navigate(navigateTo)}
+      onPress={() => navigation.navigate(navigateTo)}
       style={[styles.container, style]}>
       <View
         style={{
@@ -46,10 +46,9 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: colors.strokeDarkGrey,
-    paddingVertical: '10%',
-    marginHorizontal: 0,
+    paddingVertical: '8%',
   },
-  iconStyle: { width: 20, height: 20 },
+  iconStyle: { width: sizes.padding, height: sizes.padding },
   titleStyle: {
     marginLeft: 10,
     color: colors.bodyText,

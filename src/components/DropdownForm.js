@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, icons } from '../constants';
+import { colors, icons, sizes } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
@@ -31,7 +31,10 @@ const DropdownForm = props => {
           {customText ? customText : 'Pilih...'}
         </Text>
       </View>
-      <Image source={icons.icon_dropdown} style={{ width: 20, height: 20 }} />
+      <Image
+        source={icons.icon_dropdown}
+        style={{ width: sizes.padding, height: sizes.padding }}
+      />
     </TouchableOpacity>
   );
 };

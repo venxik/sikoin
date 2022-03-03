@@ -10,7 +10,7 @@ import {
   Popup2Button,
   TextboxBorder,
 } from '../../components';
-import { colors, icons, images, strings } from '../../constants';
+import { colors, icons, images, sizes, strings } from '../../constants';
 import { dimensions } from '../../utils';
 import { setEmailToReducer } from '../../redux/actions/LoginAction';
 
@@ -71,7 +71,7 @@ const LoginScreen = () => {
             style={{
               alignItems: 'center',
               width: '100%',
-              marginBottom: 20,
+              marginBottom: sizes.padding,
             }}>
             <TextboxBorder
               style={{
@@ -126,7 +126,7 @@ const LoginScreen = () => {
           icon={icons.icon_password}
         />
 
-        <View style={{ width: '100%', marginTop: 20 }}>
+        <View style={{ width: '100%', marginTop: sizes.padding }}>
           <ButtonText
             onPress={navigateToHomeScreen}
             buttonContainerStyle={{

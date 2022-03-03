@@ -4,14 +4,14 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { ButtonText, HeaderBack } from '../../components';
-import { colors, icons, strings } from '../../constants';
+import { colors, icons, sizes, strings } from '../../constants';
 import { dimensions } from '../../utils';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const DaftarKoperasiSuccessScreen = () => {
   const navigation = useNavigation();
 
-  const { email } = useSelector(state => state.LoginReducers);
+  const { email } = useSelector(state => state.LoginReducer);
 
   const navigateToLoginScreen = () => {
     navigation.dispatch(
@@ -28,7 +28,7 @@ const DaftarKoperasiSuccessScreen = () => {
       <View
         style={{
           backgroundColor: colors.tonalLightPrimary,
-          borderRadius: 20,
+          borderRadius: sizes.padding,
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
           padding: dimensions.SCREEN_WIDTH * 0.05,
         }}>
@@ -58,7 +58,7 @@ const DaftarKoperasiSuccessScreen = () => {
           <Text
             style={{
               marginLeft: 16,
-              fontSize: 20,
+              fontSize: sizes.padding,
               fontWeight: 'bold',
               color: colors.black,
             }}>
@@ -79,7 +79,7 @@ const DaftarKoperasiSuccessScreen = () => {
             fontSize: 18,
             color: colors.primary,
             fontWeight: 'bold',
-            marginVertical: 20,
+            marginVertical: sizes.padding,
           }}>
           {email}Text
         </Text>
@@ -96,7 +96,7 @@ const DaftarKoperasiSuccessScreen = () => {
         onPress={navigateToLoginScreen}
         buttonContainerStyle={{
           position: 'absolute',
-          bottom: 20,
+          bottom: sizes.padding,
           width: '90%',
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
         }}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, icons, strings } from '../constants';
+import { colors, icons, sizes, strings } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ const CardMarketLarge = props => {
   return (
     <View style={[styles.container, style]}>
       <Image source={image} style={styles.imageStyle} />
-      <View style={{ padding: 20, marginTop: '100%' }}>
+      <View style={{ padding: sizes.padding, marginTop: '100%' }}>
         <View style={styles.containerStyle}>
           <Text style={styles.titleStyle}>{productName}</Text>
           <TouchableOpacity onPress={onPressWishlist}>
@@ -32,7 +32,7 @@ const CardMarketLarge = props => {
             style={{
               width: 30,
               height: 30,
-              marginRight: 20,
+              marginRight: sizes.padding,
             }}
           />
           <Text
@@ -42,8 +42,8 @@ const CardMarketLarge = props => {
           <Image
             source={icons.arrow_right_primary}
             style={{
-              width: 20,
-              height: 20,
+              width: sizes.padding,
+              height: sizes.padding,
               marginLeft: 6,
             }}
           />
@@ -72,16 +72,16 @@ export default CardMarketLarge;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    borderRadius: 20,
+    borderRadius: sizes.padding,
     width: dimensions.SCREEN_WIDTH * 0.8,
-    marginRight: 20,
+    marginRight: sizes.padding,
   },
   imageStyle: {
     ...StyleSheet.absoluteFill,
     width: '100%',
     height: '65%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: sizes.padding,
+    borderTopRightRadius: sizes.padding,
   },
   containerStyle: {
     flexDirection: 'row',

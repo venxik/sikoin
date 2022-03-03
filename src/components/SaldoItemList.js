@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors, icons } from '../constants';
+import { colors, icons, sizes } from '../constants';
 import { currency, dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const SaldoItemList = props => {
   const { text, nominal, onPress } = props || {};
   return (
-    <View style={{ marginBottom: 20 }}>
+    <View style={{ marginBottom: sizes.padding }}>
       <View style={styles.mainContainer}>
         <View style={styles.leftDotStyle} />
         <View style={styles.innerContainer}>
-          <View style={{ marginLeft: 20 }}>
+          <View style={{ marginLeft: sizes.padding }}>
             <Text style={styles.titleStyle}>{text}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={styles.nominalStyle}>Rp</Text>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   bottomLineStyle: {
     marginTop: 10,
-    marginLeft: 20,
+    marginLeft: sizes.padding,
     width: '90%',
     height: 0.5,
     backgroundColor: colors.bodyTextLightGrey,

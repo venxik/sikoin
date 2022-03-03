@@ -6,4 +6,6 @@ const formatStringToCurrencyNumber = number => {
   return formattedNumber;
 };
 
-export default { formatStringToCurrencyNumber };
+const emailRegex = string => {};
+
+export default { formatStringToCurrencyNumber, emailRegex };

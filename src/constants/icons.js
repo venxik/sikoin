@@ -46,6 +46,8 @@ const icon_edit_profile = require('assets/icons/icon_edit_profile.png');
 const icon_data_diri = require('assets/icons/icon_data_diri.png');
 const icon_data_koperasi = require('assets/icons/icon_data_koperasi.png');
 const icon_pengaturan = require('assets/icons/icon_pengaturan.png');
+const icon_info_black = require('assets/icons/icon_info_black.png');
+const icon_notification_black = require('assets/icons/icon_notification_black.png');
 
 export default {
   arrow_left_primary,
@@ -95,4 +97,6 @@ export default {
   icon_data_diri,
   icon_data_koperasi,
   icon_pengaturan,
+  icon_info_black,
+  icon_notification_black,
 };

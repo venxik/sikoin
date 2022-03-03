@@ -1,5 +1,5 @@
 import { images } from '../../constants';
-import { SET_EMAIL } from '../types';
+import { UPDATE_PROFILE } from '../types';
 
 const initialState = {
   profileData: {
@@ -8,14 +8,26 @@ const initialState = {
     name: 'Test 12321321',
     code: 'JBC-0001',
     koperasiName: 'Jababeka & co',
+    email: 'sdsadasdas',
+    noTelp: '081312321321',
   },
   error: null,
 };
 
 const ProfileDataReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case SET_EMAIL:
-    //   return { ...state, profileData: action.payload };
+    case UPDATE_PROFILE: {
+      return {
+        ...state,
+        profileData: {
+          ...state.profileData,
+          email: action.payload.email,
+          noTelp: action.payload.noTelp,
+          name: action.payload.nama,
+        },
+      };
+    }
+
     default:
       return state;
   }

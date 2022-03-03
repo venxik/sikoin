@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { colors, images, strings } from '../constants';
+import { colors, images, sizes, strings } from '../constants';
 import { dimensions } from '../utils';
 import ButtonText from './ButtonText';
 import PropTypes from 'prop-types';
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     ...StyleSheet.absoluteFillObject,
-    borderRadius: 20,
+    borderRadius: sizes.padding,
     width: '100%',
     height: '100%',
   },
-  iconStyle: { width: '30%', height: '30%', marginBottom: 20 },
+  iconStyle: { width: '30%', height: '30%', marginBottom: sizes.padding },
 });

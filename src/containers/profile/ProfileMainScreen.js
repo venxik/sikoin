@@ -8,14 +8,16 @@ import {
   ProfilePicture,
   SubmenuListItem,
 } from '../../components';
-import { colors, icons, strings } from '../../constants';
+import { colors, icons, sizes, strings } from '../../constants';
 
 const ProfileMainScreen = () => {
   const navigation = useNavigation();
   const { profileData } = useSelector(state => state.ProfileDataReducer);
   const { name, code, koperasiName } = profileData || {};
 
-  const navigateToEditProfile = () => {};
+  const navigateToEditProfile = () => {
+    navigation.navigate('EditProfileScreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -28,7 +30,7 @@ const ProfileMainScreen = () => {
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>
           <ProfilePicture />
-          <View style={{ paddingHorizontal: 10, marginBottom: 20 }}>
+          <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{name}</Text>
             <Text style={styles.koperasiText}>{koperasiName}</Text>
             <View style={{ marginTop: 10 }}>
@@ -55,7 +57,7 @@ const ProfileMainScreen = () => {
           <SubmenuListItem
             icon={icons.icon_data_diri}
             title={strings.data_diri}
-            navigateTo={'test'}
+            navigateTo={'DataDiriMainScreen'}
           />
           <SubmenuListItem
             icon={icons.icon_data_koperasi}
@@ -65,7 +67,7 @@ const ProfileMainScreen = () => {
           <SubmenuListItem
             icon={icons.icon_pengaturan}
             title={strings.pengaturan}
-            navigateTo={'test'}
+            navigateTo={'PengaturanScreen'}
           />
         </View>
       </ScrollView>
@@ -79,20 +81,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topContainer: {
-    borderRadius: 20,
+    borderRadius: sizes.padding,
     backgroundColor: colors.white,
-    padding: 20,
+    padding: sizes.padding,
     width: '100%',
-    marginBottom: 20,
+    marginBottom: sizes.padding,
   },
   mainContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: sizes.padding,
   },
   nameText: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: sizes.padding,
     color: colors.bodyText,
-    marginTop: 20,
+    marginTop: sizes.padding,
   },
   koperasiText: {
     fontWeight: '700',

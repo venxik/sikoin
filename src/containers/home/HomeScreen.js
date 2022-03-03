@@ -92,6 +92,10 @@ const HomeScreen = () => {
     });
   };
 
+  const navigateToProfile = () => {
+    navigation.navigate('ProfileStackNavigator');
+  };
+
   const cardHeader = title => {
     return (
       <View style={{ flexDirection: 'row', width: '100%' }}>
@@ -424,7 +428,7 @@ const HomeScreen = () => {
           flexDirection: 'row',
           paddingHorizontal: 20,
         }}>
-        <ProfilePicture />
+        <ProfilePicture onPress={navigateToProfile} />
         <View
           style={{
             width: '60%',

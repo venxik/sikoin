@@ -16,6 +16,7 @@ import CardMarketLarge from './CardMarketLarge';
 import SaldoItemList from './SaldoItemList';
 import CustomBackdrop from './CustomBackdrop';
 import ProfilePicture from './ProfilePicture';
+import SubmenuListItemCustom from './SubmenuListItemCustom';
 
 export {
   ButtonIcon,
@@ -36,4 +37,5 @@ export {
   SaldoItemList,
   CustomBackdrop,
   ProfilePicture,
+  SubmenuListItemCustom,
 };

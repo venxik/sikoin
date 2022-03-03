@@ -8,7 +8,7 @@ import {
   HeaderBack,
   TextboxBorder,
 } from '../../components';
-import { colors, icons, strings } from '../../constants';
+import { colors, icons, sizes, strings } from '../../constants';
 import { dimensions } from '../../utils';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
@@ -36,7 +36,7 @@ const DaftarKoperasiStep1Screen = () => {
       <View
         style={{
           backgroundColor: colors.tonalLightPrimary,
-          borderRadius: 20,
+          borderRadius: sizes.padding,
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
           padding: dimensions.SCREEN_WIDTH * 0.05,
         }}>
@@ -58,7 +58,7 @@ const DaftarKoperasiStep1Screen = () => {
           <Text
             style={{
               marginLeft: 16,
-              fontSize: 20,
+              fontSize: sizes.padding,
               fontWeight: 'bold',
               color: colors.black,
             }}>
@@ -74,7 +74,7 @@ const DaftarKoperasiStep1Screen = () => {
         style={{
           marginTop: 16,
           backgroundColor: colors.white,
-          borderRadius: 20,
+          borderRadius: sizes.padding,
           margin: dimensions.SCREEN_WIDTH * 0.05,
           padding: dimensions.SCREEN_WIDTH * 0.05,
         }}>
@@ -87,7 +87,7 @@ const DaftarKoperasiStep1Screen = () => {
         />
         <TextboxBorder
           style={{
-            marginTop: 20,
+            marginTop: sizes.padding,
           }}
           value={noAnggota}
           onChangeText={e => onChangeNoAnggota(e)}
@@ -97,7 +97,7 @@ const DaftarKoperasiStep1Screen = () => {
         />
         <DropdownForm
           customText={strings.pilih_tgl_lahir}
-          style={{ marginTop: 20 }}
+          style={{ marginTop: sizes.padding }}
         />
       </View>
 
@@ -105,7 +105,7 @@ const DaftarKoperasiStep1Screen = () => {
         onPress={navigateToStep2}
         buttonContainerStyle={{
           position: 'absolute',
-          bottom: 20,
+          bottom: sizes.padding,
           width: '90%',
           marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
         }}

@@ -1,9 +1,9 @@
 import NetInfo from '@react-native-community/netinfo';
-import { apis, storage } from 'constants';
+import { apis, storage } from '../../constants';
 import axios from 'axios';
 
-import { showErrorModal } from 'reducers/ErrorModalReducer';
-import { hideLoading } from 'reducers/LoadingReducer';
+import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
+import { hideLoading } from '../../redux/reducers/LoadingReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../../config/store/ReduxStore';
 

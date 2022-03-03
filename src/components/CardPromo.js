@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors } from '../constants';
+import { colors, sizes } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
@@ -10,9 +10,13 @@ const CardPromo = props => {
   return (
     <View style={[styles.container, style]}>
       <Image source={image} style={styles.imageStyle} />
-      <View style={{ padding: 20, marginTop: '95%' }}>
-        <Text style={{ fontSize: 20, color: colors.bodyText }}>{title}</Text>
-        <Text style={{ marginVertical: 20, fontSize: 15 }}>{content}</Text>
+      <View style={{ padding: sizes.padding, marginTop: '95%' }}>
+        <Text style={{ fontSize: sizes.padding, color: colors.bodyText }}>
+          {title}
+        </Text>
+        <Text style={{ marginVertical: sizes.padding, fontSize: 15 }}>
+          {content}
+        </Text>
       </View>
     </View>
   );
@@ -35,15 +39,15 @@ export default CardPromo;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    borderRadius: 20,
+    borderRadius: sizes.padding,
     width: dimensions.SCREEN_WIDTH * 0.8,
-    marginRight: 20,
+    marginRight: sizes.padding,
   },
   imageStyle: {
     ...StyleSheet.absoluteFill,
     width: '100%',
     height: '60%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: sizes.padding,
+    borderTopRightRadius: sizes.padding,
   },
 });

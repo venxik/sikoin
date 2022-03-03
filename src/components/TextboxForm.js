@@ -12,32 +12,42 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
-  const { style, textBoxStyle, value, secureTextEntry, onChangeText, title } =
-    props || {};
+  const {
+    style,
+    textBoxStyle,
+    value,
+    secureTextEntry,
+    onChangeText,
+    title,
+    editable,
+    multiline,
+    placeholder,
+    keyboardType,
+  } = props || {};
 
   return (
     <View style={[styles.defaultContainer, style]}>
       <Text style={styles.titleText}>{title}</Text>
       <View style={styles.innerContainer}>
         <TextInput
-          style={[{ marginLeft: 10 }, textBoxStyle]}
+          style={[styles.textBox, { ...textBoxStyle }]}
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"
           secureTextEntry={secureTextEntry}
-          // placeholder={placeholder}
+          placeholder={placeholder}
+          editable={editable}
           onChangeText={onChangeText}
           value={value}
-          multiline
+          multiline={multiline}
+          keyboardType={keyboardType}
         />
         <Image
           source={icons.edit_textbox}
           style={{
             width: dimensions.ICON_SIZE,
             height: dimensions.ICON_SIZE,
-            flex: 0.1,
           }}
-          resizeMode={'cover'}
         />
       </View>
     </View>
@@ -52,6 +62,9 @@ TextboxForm.propTypes = {
   secureTextEntry: PropTypes.bool,
   placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
+  editable: PropTypes.bool,
+  multiline: PropTypes.bool,
+  keyboardType: PropTypes.string,
 };
 
 TextboxForm.defaultProp = {
@@ -62,6 +75,9 @@ TextboxForm.defaultProp = {
   secureTextEntry: false,
   placeholder: null,
   onChangeText: null,
+  editable: true,
+  multiline: true,
+  keyboardType: null,
 };
 
 const styles = StyleSheet.create({
@@ -69,10 +85,13 @@ const styles = StyleSheet.create({
     minHeight: dimensions.SCREEN_HEIGHT * 0.06,
     backgroundColor: colors.white,
   },
-  textBoxStyle: {
-    flex: 0.85,
+  textBox: {
+    width: '90%',
     borderBottomWidth: 1,
     borderBottomColor: colors.strokeGrey,
+    color: colors.bodyText,
+    fontSize: 15,
+    fontWeight: '500',
   },
   defaultText: {
     fontSize: 14,
@@ -83,7 +102,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleText: { color: colors.bodyTextGrey, fontSize: 14 },
+  titleText: { color: colors.bodyTextGrey },
 });
 
 export default TextboxForm;

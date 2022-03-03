@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { ProviderWrapper, RouterContainer } from '../src/config/navigation';
+import { RouterContainer } from '../src/config/navigation';
 import { store, persist } from '../src/config/store/ReduxStore';
 import { fcmService } from './utils/FCMService';
 import { localNotificationService } from './utils/LocalNotificationService';
@@ -10,6 +10,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
 
 const App = () => {
   useEffect(() => {
@@ -57,17 +58,17 @@ const App = () => {
   }, []);
 
   return (
-    <ProviderWrapper store={store}>
-      <PersistGate persistor={persist} loading={null}>
-        <PaperProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <BottomSheetModalProvider>
+    <PaperProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <Provider store={store}>
+            <PersistGate persistor={persist} loading={null}>
               <RouterContainer />
-            </BottomSheetModalProvider>
-          </GestureHandlerRootView>
-        </PaperProvider>
-      </PersistGate>
-    </ProviderWrapper>
+            </PersistGate>
+          </Provider>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </PaperProvider>
   );
 };
 

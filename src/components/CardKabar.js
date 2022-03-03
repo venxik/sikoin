@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, strings } from '../constants';
+import { colors, icons, sizes, strings } from '../constants';
 import { dimensions } from '../utils';
 import ButtonText from './ButtonText';
 import PropTypes from 'prop-types';
@@ -52,14 +52,14 @@ export default CardKabar;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: sizes.padding,
+    padding: sizes.padding,
     width: dimensions.SCREEN_WIDTH * 0.8,
-    marginRight: 20,
+    marginRight: sizes.padding,
     justifyContent: 'center',
   },
-  titleStyle: { fontSize: 20, color: colors.bodyText },
+  titleStyle: { fontSize: sizes.padding, color: colors.bodyText },
   rowStyle: { flexDirection: 'row', marginTop: 30 },
   innerRowStyle: { justifyContent: 'space-evenly', marginLeft: 10 },
-  contentStyle: { marginVertical: 20, fontSize: 15 },
+  contentStyle: { marginVertical: sizes.padding, fontSize: 15 },
 });

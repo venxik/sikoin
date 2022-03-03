@@ -12,6 +12,9 @@ const TextboxBorder = props => {
     secureTextEntry,
     placeholder,
     onChangeText,
+    editable,
+    multiline,
+    keyboardType,
   } = props || {};
 
   return (
@@ -34,6 +37,9 @@ const TextboxBorder = props => {
         placeholder={placeholder}
         onChangeText={onChangeText}
         value={value}
+        multiline={multiline}
+        keyboardType={keyboardType}
+        editable={editable}
       />
     </View>
   );
@@ -48,6 +54,9 @@ TextboxBorder.propTypes = {
   secureTextEntry: PropTypes.bool,
   placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
+  editable: PropTypes.bool,
+  multiline: PropTypes.bool,
+  keyboardType: PropTypes.string,
 };
 
 TextboxBorder.defaultProp = {
@@ -59,6 +68,9 @@ TextboxBorder.defaultProp = {
   secureTextEntry: false,
   placeholder: null,
   onChangeText: null,
+  editable: true,
+  multiline: true,
+  keyboardType: null,
 };
 
 const styles = StyleSheet.create({

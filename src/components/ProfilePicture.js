@@ -12,11 +12,11 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const ProfilePicture = props => {
-  const { onPress, style } = props || {};
+  const { onPress, style, disabled } = props || {};
   const { profileData } = useSelector(state => state.ProfileDataReducer);
   const { profilePic, koperasiPic } = profileData || {};
   return (
-    <TouchableOpacity onPress={onPress} style={style}>
+    <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
       <ImageBackground source={profilePic} style={styles.profilePicStyle}>
         <Image source={koperasiPic} style={styles.koperasiPicStyle} />
       </ImageBackground>
@@ -26,10 +26,12 @@ const ProfilePicture = props => {
 
 ProfilePicture.propTypes = {
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 ProfilePicture.defaultProp = {
   onPress: null,
+  disabled: false,
 };
 
 export default ProfilePicture;

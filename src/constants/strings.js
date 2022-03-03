@@ -52,6 +52,7 @@ export default {
   pilih_tgl_lahir: 'Pilih Tanggal Lahir',
   kirim_otp_ke_email: 'Kirim OTP Ke Email',
   paham: 'Paham',
+  simpan: 'Simpan',
 
   /*HOME*/
   beranda: 'Beranda',
@@ -101,4 +102,7 @@ export default {
   data_diri: 'Data Diri',
   data_koperasi: 'Data Koperasi',
   pengaturan: 'Pengaturan',
+  info_coopapp: 'Tentang Coop App',
+  nama: 'Nama',
+  no_telp: 'No Telp.',
 };
