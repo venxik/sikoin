@@ -18,7 +18,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { email: emailFromReducer } = useSelector(state => state.LoginReducers);
+  const { email: emailFromReducer } = useSelector(state => state.LoginReducer);
 
   const [email, setEmail] = useState(emailFromReducer);
   const [password, setPassword] = useState(null);

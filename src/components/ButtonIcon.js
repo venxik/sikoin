@@ -34,15 +34,7 @@ const ButtonIcon = props => {
       style={buttonStyle()}
       onPress={onPress}
       disabled={disabled}>
-      <Image
-        source={icon}
-        style={{
-          width: 30,
-          height: 30,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      />
+      <Image source={icon} style={styles.iconStyle} />
     </TouchableOpacity>
   );
 };
@@ -72,6 +64,12 @@ const styles = StyleSheet.create({
   defaultText: {
     fontSize: 14,
     color: colors.white,
+  },
+  iconStyle: {
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

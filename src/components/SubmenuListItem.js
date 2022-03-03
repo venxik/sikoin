@@ -1,33 +1,25 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors } from '../constants';
+import { colors, icons } from '../constants';
 import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const SubmenuListItem = props => {
-  const { icon, title, navigateTo } = props || {};
+  const { icon, title, navigateTo, style } = props || {};
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       // onPress={navigation.navigate(navigateTo)}
-      style={[styles.container, props.style]}>
+      style={[styles.container, style]}>
       <View
         style={{
           flexDirection: 'row',
         }}>
-        <Image source={icon} style={{ width: 20, height: 20 }} />
-        <Text
-          style={{
-            marginLeft: dimensions.SCREEN_WIDTH * 0.06,
-            color: colors.black,
-            fontSize: 16,
-            fontWeight: 'bold',
-          }}>
-          {title}
-        </Text>
+        <Image source={icon} style={styles.iconStyle} />
+        <Text style={styles.titleStyle}>{title}</Text>
       </View>
-      <Image source={icon} style={{ width: 20, height: 20 }} />
+      <Image source={icons.arrow_right_primary_2} style={styles.iconStyle} />
     </TouchableOpacity>
   );
 };
@@ -52,10 +44,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: colors.strokeDarkGrey,
-    paddingVertical: dimensions.SCREEN_HEIGHT * 0.02,
-    paddingHorizontal: dimensions.SCREEN_WIDTH * 0.04,
-    // backgroundColor: 'red',
+    paddingVertical: '10%',
+    marginHorizontal: 0,
+  },
+  iconStyle: { width: 20, height: 20 },
+  titleStyle: {
+    marginLeft: 10,
+    color: colors.bodyText,
+    fontSize: 15,
+    fontWeight: '500',
   },
 });

@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Image, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as screens from '../../containers';
 import { dimensions } from '../../utils';
-import { navigationRef, isReadyRef } from 'config/navigation/NavigationService';
+import { navigationRef, isReadyRef } from '../navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons } from '../../constants';
 
@@ -19,23 +22,28 @@ const ParentStack = createNativeStackNavigator();
 const DaftarKoperasiStack = createNativeStackNavigator();
 const OnboardingStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const SaldoSimpananStack = createNativeStackNavigator();
+const ProfileStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// const shouldShowBottomNavigation = (route) => {
-//   const routeName = getFocusedRouteNameFromRoute(route) ?? 'RoadmapStackNavigator';
-
-//   switch (routeName) {
-//     case 'Chapter1StackNavigator':
-//       return false;
-//     case 'Chapter2StackNavigator':
-//       return false;
-//     case 'Chapter3StackNavigator':
-//       return false;
-//     case 'Chapter4StackNavigator':
-//     default:
-//       return true;
-//   }
-// };
+const shouldShowBottomNavigation = route => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
+  console.log(routeName);
+  switch (routeName) {
+    case 'OnboardingStackNavigator':
+      return false;
+    case 'LoginStackNavigator':
+      return false;
+    case 'DaftarKoperasiStackNavigator':
+      return false;
+    case 'SaldoSimpananStackNavigator':
+      return false;
+    case 'ProfileStackNavigator':
+      return false;
+    default:
+      return true;
+  }
+};
 
 const IconBottom = props => (
   <View
@@ -68,31 +76,39 @@ const BottomTab = () => {
       <Tab.Screen
         name="HomeStackNavigator"
         component={HomeStackNavigator}
-        options={() => ({
+        options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
               image={props.focused ? icons.bottom_home_bold : icons.bottom_home}
             />
           ),
+          tabBarStyle: {
+            height: dimensions.SCREEN_HEIGHT * 0.1,
+            display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
+          },
         })}
       />
       <Tab.Screen
         name="Test2Screen"
         component={screens.Test2Screen}
-        options={() => ({
+        options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
               image={props.focused ? icons.bottom_chat_bold : icons.bottom_chat}
             />
           ),
+          tabBarStyle: {
+            height: dimensions.SCREEN_HEIGHT * 0.1,
+            display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
+          },
         })}
       />
       <Tab.Screen
-        name="Test4Screen"
-        component={screens.Test3Screen}
-        options={() => ({
+        name="ProfileStackNavigator"
+        component={ProfileStackNavigator}
+        options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
               focused={props.focused}
@@ -101,11 +117,45 @@ const BottomTab = () => {
               }
             />
           ),
+          tabBarStyle: {
+            height: dimensions.SCREEN_HEIGHT * 0.1,
+            display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
+          },
         })}
       />
     </Tab.Navigator>
   );
 };
+
+const ProfileStackNavigator = () => (
+  <ProfileStack.Navigator
+    initialRouteName={'ProfileMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <ProfileStack.Screen
+      name="ProfileMainScreen"
+      component={screens.ProfileMainScreen}
+    />
+  </ProfileStack.Navigator>
+);
+
+const SaldoSimpananStackNavigator = () => (
+  <SaldoSimpananStack.Navigator
+    initialRouteName={'SaldoSimpananMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <SaldoSimpananStack.Screen
+      name="SaldoSimpananMainScreen"
+      component={screens.SaldoSimpananMainScreen}
+    />
+  </SaldoSimpananStack.Navigator>
+);
 
 const HomeStackNavigator = () => (
   <MainStack.Navigator
@@ -117,6 +167,10 @@ const HomeStackNavigator = () => (
     }}>
     <MainStack.Screen name="TestScreen" component={screens.Test2Screen} />
     <MainStack.Screen name="HomeScreen" component={screens.HomeScreen} />
+    <MainStack.Screen
+      name="SaldoSimpananStackNavigator"
+      component={SaldoSimpananStackNavigator}
+    />
   </MainStack.Navigator>
 );
 
@@ -197,11 +251,7 @@ const ParentStackNavigator = () => {
       ref={navigationRef}
       onReady={() => {
         isReadyRef.current = true;
-      }}
-      // onStateChange={state => {
-      //   // console.log('NAVIGATION STATE (onStateChange): ', state);
-      // }}
-    >
+      }}>
       <ParentStack.Navigator
         initialRouteName={'MainStack'}
         screenOptions={{

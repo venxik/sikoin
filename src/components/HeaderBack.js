@@ -6,8 +6,15 @@ import { colors, icons } from '../constants';
 import { dimensions } from '../utils';
 
 const HeaderBack = props => {
-  const { onPress, rightIcon, customLeftIcon, title, style, disabled } =
-    props || {};
+  const {
+    onPress,
+    rightIcon,
+    customLeftIcon,
+    title,
+    style,
+    disabled,
+    textStyle,
+  } = props || {};
   const navigation = useNavigation();
 
   const validatePress = () => {
@@ -28,7 +35,7 @@ const HeaderBack = props => {
             source={leftIcon}
           />
         </TouchableOpacity>
-        <Text style={Styles.title}>{title}</Text>
+        <Text style={[Styles.title, { ...textStyle }]}>{title}</Text>
       </View>
       <View style={Styles.rightContainer}>{rightIcon}</View>
     </View>
@@ -43,6 +50,7 @@ HeaderBack.propTypes = {
   title: PropTypes.string,
   style: PropTypes.any,
   disabled: PropTypes.bool,
+  textStyle: PropTypes.object,
 };
 
 HeaderBack.defaultProps = {
@@ -53,6 +61,7 @@ HeaderBack.defaultProps = {
   title: null,
   style: null,
   disabled: false,
+  textStyle: null,
 };
 
 export default HeaderBack;
@@ -62,7 +71,6 @@ const Styles = StyleSheet.create({
     paddingVertical: '5%',
     paddingHorizontal: '8%',
     flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,0)',
   },
   title: {
     fontWeight: 'bold',

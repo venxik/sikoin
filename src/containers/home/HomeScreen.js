@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -18,14 +18,17 @@ import {
   CardLastItem,
   CardMarketLarge,
   CardPromo,
+  CustomBackdrop,
   HeaderBack,
+  ProfilePicture,
 } from '../../components';
 import { colors, icons, images, strings } from '../../constants';
 import { dimensions } from '../../utils';
+import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-
+  const bottomSheetModalRef = useRef(null);
   const miniFlatlist = [
     { title: strings.simpanan, amount: '17.000.000', button: strings.mutasi },
     { title: strings.saldo, amount: '100.000.000', button: strings.topup },
@@ -62,9 +65,32 @@ const HomeScreen = () => {
   const { promoDataList } = useSelector(state => state.PromoReducer);
   const { marketDataList } = useSelector(state => state.MarketDataReducer);
   const { profileData } = useSelector(state => state.ProfileDataReducer);
-  const { profilePic, koperasiPic, name, code, koperasiName } =
-    profileData || {};
+  const { name, code, koperasiName } = profileData || {};
   const [showSaldo, setShowSaldo] = useState(false);
+  const [selectedKabar, setSelectedKabar] = useState({});
+  // variables
+  const snapPoints = useMemo(() => ['10%', '90%'], []);
+
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleSheetChanges = useCallback(index => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
+  const selectKabarCard = item => {
+    setSelectedKabar(item);
+    handlePresentModalPress();
+  };
+
+  const navigateToSaldoSimpanan = () => {
+    navigation.navigate('SaldoSimpananStackNavigator', {
+      screen: 'SaldoSimpananMainScreen',
+      params: { showSaldo: showSaldo },
+    });
+  };
 
   const cardHeader = title => {
     return (
@@ -103,7 +129,11 @@ const HomeScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardKabar item={item} style={{ height: cardKabarHeight }} />
+              <CardKabar
+                item={item}
+                style={{ height: cardKabarHeight }}
+                onPress={() => selectKabarCard(item)}
+              />
               {index === kabarDataList.length - 1 && (
                 <CardLastItem
                   style={{ height: cardKabarHeight }}
@@ -233,7 +263,9 @@ const HomeScreen = () => {
             justifyContent: 'space-between',
           }}>
           <View style={{ justifyContent: 'space-between' }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity
+              style={{ flexDirection: 'row', alignItems: 'center' }}
+              onPress={navigateToSaldoSimpanan}>
               <Text
                 style={{
                   fontSize: 20,
@@ -251,7 +283,7 @@ const HomeScreen = () => {
                 }}
                 resizeMode="contain"
               />
-            </View>
+            </TouchableOpacity>
             <Text style={{ fontSize: 15 }}>
               {showSaldo ? miniList2.saldo.amount : miniList2.simpanan.amount}
             </Text>
@@ -392,26 +424,7 @@ const HomeScreen = () => {
           flexDirection: 'row',
           paddingHorizontal: 20,
         }}>
-        <TouchableOpacity>
-          <ImageBackground
-            source={profilePic}
-            style={{
-              width: dimensions.SCREEN_WIDTH * 0.25,
-              height: dimensions.SCREEN_WIDTH * 0.25,
-            }}>
-            <Image
-              source={koperasiPic}
-              style={{
-                width: dimensions.SCREEN_WIDTH * 0.2,
-                height: dimensions.SCREEN_WIDTH * 0.2,
-                position: 'absolute',
-                bottom: -dimensions.SCREEN_WIDTH * 0.08,
-                right: -dimensions.SCREEN_WIDTH * 0.05,
-              }}
-            />
-          </ImageBackground>
-        </TouchableOpacity>
-
+        <ProfilePicture />
         <View
           style={{
             width: '60%',
@@ -451,7 +464,7 @@ const HomeScreen = () => {
             resizeMode="contain"
           />
         </TouchableOpacity> */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePresentModalPress}>
           <Image
             source={icons.icon_notification}
             style={{
@@ -465,6 +478,67 @@ const HomeScreen = () => {
     );
   };
 
+  const renderBottomSheet = () => {
+    return (
+      <BottomSheetModal
+        backdropComponent={CustomBackdrop}
+        enablePanDownToClose
+        ref={bottomSheetModalRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}>
+        <BottomSheetScrollView>
+          <View style={{ padding: 20 }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginBottom: 20,
+              }}>
+              <View
+                style={{
+                  width: 3,
+                  backgroundColor: colors.primary,
+                  borderRadius: 3,
+                  marginRight: 10,
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: '600',
+                  color: colors.primary,
+                }}>
+                {selectedKabar.company}
+              </Text>
+            </View>
+            <Text
+              style={{ fontSize: 24, color: colors.black, fontWeight: 'bold' }}>
+              {selectedKabar.title}
+            </Text>
+            <View style={{ flexDirection: 'row', marginVertical: 30 }}>
+              <Image
+                source={selectedKabar.profile_pic}
+                style={{ width: 60, height: 60 }}
+              />
+              <View style={{ justifyContent: 'space-evenly', marginLeft: 10 }}>
+                <Text style={{ color: colors.bodyText, fontSize: 16 }}>
+                  {name}
+                </Text>
+                <Text style={{ fontSize: 15, color: colors.bodyTextGrey }}>
+                  {selectedKabar.timestamp}
+                </Text>
+              </View>
+            </View>
+            <Text
+              style={{ fontSize: 15, color: colors.bodyText, lineHeight: 24 }}>
+              {selectedKabar.fullContent}
+            </Text>
+          </View>
+        </BottomSheetScrollView>
+      </BottomSheetModal>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack
@@ -474,6 +548,8 @@ const HomeScreen = () => {
         customLeftIcon={icons.icon_home_header}
         rightIcon={renderRightButtonHeader()}
       />
+      {renderBottomSheet()}
+
       <ScrollView
         // contentContainerStyle={{ flex: 1, width: '100%' }}
         style={{ width: '100%', height: '100%' }}>

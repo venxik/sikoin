@@ -2,33 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, strings } from '../constants';
 import { dimensions } from '../utils';
+import PropTypes from 'prop-types';
 
 const CardMarketLarge = props => {
   const { item, onPress, style, onPressWishlist } = props || null;
   const { productName, price, image } = item || {};
   return (
     <View style={[styles.container, style]}>
-      <Image
-        source={image}
-        style={{
-          ...StyleSheet.absoluteFill,
-          width: '100%',
-          height: '65%',
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}
-      />
+      <Image source={image} style={styles.imageStyle} />
       <View style={{ padding: 20, marginTop: '100%' }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-          <Text style={{ fontSize: 16, color: colors.bodyText, flex: 0.8 }}>
-            {productName}
-          </Text>
+        <View style={styles.containerStyle}>
+          <Text style={styles.titleStyle}>{productName}</Text>
           <TouchableOpacity onPress={onPressWishlist}>
             <Image
               source={icons.icon_wishlist}
@@ -40,12 +24,9 @@ const CardMarketLarge = props => {
           </TouchableOpacity>
         </View>
 
-        <Text style={{ marginTop: 10, fontSize: 24, color: colors.bodyText }}>
-          {price}
-        </Text>
+        <Text style={styles.priceContainer}>{price}</Text>
 
-        <TouchableOpacity
-          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+        <TouchableOpacity onPress={onPress} style={styles.touchableContainer}>
           <Image
             source={icons.icon_voucher_small}
             style={{
@@ -71,6 +52,21 @@ const CardMarketLarge = props => {
     </View>
   );
 };
+
+CardMarketLarge.propTypes = {
+  item: PropTypes.object,
+  onPress: PropTypes.func,
+  style: PropTypes.object,
+  onPressWishlist: PropTypes.func,
+};
+
+CardMarketLarge.defaultProp = {
+  item: null,
+  onPress: null,
+  style: null,
+  onPressWishlist: null,
+};
+
 export default CardMarketLarge;
 
 const styles = StyleSheet.create({
@@ -79,5 +75,25 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: dimensions.SCREEN_WIDTH * 0.8,
     marginRight: 20,
+  },
+  imageStyle: {
+    ...StyleSheet.absoluteFill,
+    width: '100%',
+    height: '65%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  containerStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  },
+  titleStyle: { fontSize: 16, color: colors.bodyText, flex: 0.8 },
+  priceContainer: { marginTop: 10, fontSize: 24, color: colors.bodyText },
+  touchableContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });

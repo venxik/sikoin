@@ -8,6 +8,8 @@ import { Alert } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App = () => {
   useEffect(() => {
@@ -58,7 +60,11 @@ const App = () => {
     <ProviderWrapper store={store}>
       <PersistGate persistor={persist} loading={null}>
         <PaperProvider>
-          <RouterContainer />
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <BottomSheetModalProvider>
+              <RouterContainer />
+            </BottomSheetModalProvider>
+          </GestureHandlerRootView>
         </PaperProvider>
       </PersistGate>
     </ProviderWrapper>

@@ -51,6 +51,7 @@ export default {
   selanjutnya: 'Selanjutnya',
   pilih_tgl_lahir: 'Pilih Tanggal Lahir',
   kirim_otp_ke_email: 'Kirim OTP Ke Email',
+  paham: 'Paham',
 
   /*HOME*/
   beranda: 'Beranda',
@@ -73,9 +74,31 @@ export default {
   /*PROMO*/
   promo: 'Promo',
 
+  /*SALDO SIMPANAN */
+  totalSaldo: 'Total Saldo',
+  totalSimpanan: 'Total Simpanan',
+  penarikan: 'Penarikan',
+  pokok: 'Pokok',
+  wajib: 'Wajib',
+  sukarela: 'Sukarela',
+  popup_simpanan_content:
+    'Saldo Simpanan digunakan untuk kewajiban berkoperasi. Simpanan tertentu dapat digunakan sebagai alat transaksi pembayaran di dalam CoopApp.',
+  popup_saldo_content:
+    'Saldo dapat digunakan sebagai alat transaksi pembayaran untuk :',
+
   /*MARKET*/
-  market: 'Market',
   beli_dgn_voucher: 'Beli Dengan Voucher',
   email: 'Email',
   selengkapnya: 'Selengkapnya',
+
+  /*VOUCHER*/
+  voucher_center: 'Voucher Center',
+
+  // PROFILE
+  profile: 'Profile',
+  edit_profile: 'Edit Profile',
+  menu_profile: 'Menu Profil',
+  data_diri: 'Data Diri',
+  data_koperasi: 'Data Koperasi',
+  pengaturan: 'Pengaturan',
 };

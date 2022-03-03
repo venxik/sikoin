@@ -10,7 +10,7 @@ export const COLORS = {
   white: '#fff',
   bodyText: '#323D4A',
   bodyTextGrey: '#4E5F73',
-  bodyTextLigthGrey: '#9FADBE',
+  bodyTextLightGrey: '#9FADBE',
   strokeGrey: '#DCE1E7',
   strokeDarkGrey: '#B7C2CE',
   green: '#50AF60',

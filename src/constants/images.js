@@ -15,6 +15,8 @@ const menu_market = require('assets/images/menu_market.png');
 const menu_voucher = require('assets/images/menu_voucher.png');
 const menu_diskon = require('assets/images/menu_diskon.png');
 const menu_dokumen = require('assets/images/menu_dokumen.png');
+const img_simpanan_icon = require('assets/images/img_simpanan_icon.png');
+const img_saldo_icon = require('assets/images/img_saldo_icon.png');
 
 export default {
   onboarding_1,
@@ -33,4 +35,6 @@ export default {
   menu_pinjaman,
   menu_transaksi,
   menu_voucher,
+  img_saldo_icon,
+  img_simpanan_icon,
 };

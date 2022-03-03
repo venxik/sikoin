@@ -20,8 +20,8 @@ const TextboxBorder = props => {
         <Image
           source={icon}
           style={{
-            width: dimensions.SCREEN_WIDTH * 0.04,
-            height: dimensions.SCREEN_WIDTH * 0.04,
+            width: dimensions.ICON_SIZE,
+            height: dimensions.ICON_SIZE,
           }}
         />
       ) : null}

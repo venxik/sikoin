@@ -35,6 +35,17 @@ const icon_voucher_small = require('assets/icons/icon_voucher_small.png');
 const arrow_right_primary = require('assets/icons/arrow_right_primary.png');
 const icon_market_white = require('assets/icons/icon_market_white.png');
 const arrow_down_circle_primary = require('assets/icons/arrow_down_circle_primary.png');
+const icon_rp = require('assets/icons/icon_rp.png');
+const icon_info = require('assets/icons/icon_info.png');
+const icon_mutasi_primary = require('assets/icons/icon_mutasi_primary.png');
+const icon_penarikan_primary = require('assets/icons/icon_penarikan_primary.png');
+const icon_transaksi_primary = require('assets/icons/icon_transaksi_primary.png');
+const arrow_right_square = require('assets/icons/arrow_right_square.png');
+const icon_profile = require('assets/icons/icon_profile.png');
+const icon_edit_profile = require('assets/icons/icon_edit_profile.png');
+const icon_data_diri = require('assets/icons/icon_data_diri.png');
+const icon_data_koperasi = require('assets/icons/icon_data_koperasi.png');
+const icon_pengaturan = require('assets/icons/icon_pengaturan.png');
 
 export default {
   arrow_left_primary,
@@ -73,4 +84,15 @@ export default {
   arrow_right_primary,
   icon_market_white,
   arrow_down_circle_primary,
+  icon_rp,
+  icon_info,
+  icon_mutasi_primary,
+  icon_penarikan_primary,
+  icon_transaksi_primary,
+  arrow_right_square,
+  icon_profile,
+  icon_edit_profile,
+  icon_data_diri,
+  icon_data_koperasi,
+  icon_pengaturan,
 };

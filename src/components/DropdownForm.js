@@ -16,9 +16,9 @@ const DropdownForm = props => {
           <Image
             source={icon}
             style={{
-              width: dimensions.SCREEN_WIDTH * 0.06,
-              height: dimensions.SCREEN_WIDTH * 0.06,
-              marginRight: dimensions.SCREEN_WIDTH * 0.06,
+              width: dimensions.ICON_SIZE,
+              height: dimensions.ICON_SIZE,
+              marginRight: dimensions.ICON_SIZE,
             }}
           />
         ) : null}

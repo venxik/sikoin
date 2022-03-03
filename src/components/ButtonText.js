@@ -53,32 +53,16 @@ const ButtonText = props => {
       style={buttonStyle()}
       onPress={onPress}
       disabled={disabled}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.innerContainer}>
         {iconLocation === 'left' ? (
           <Image
             source={icon}
-            style={{
-              marginRight: 10,
-              width: dimensions.SCREEN_WIDTH * 0.05,
-              height: dimensions.SCREEN_WIDTH * 0.05,
-            }}
+            style={[styles.iconStyle, { marginRight: 10 }]}
           />
         ) : null}
         <Text style={updateTextStyle()}>{text}</Text>
         {iconLocation === 'right' ? (
-          <Image
-            source={icon}
-            style={{
-              marginLeft: 10,
-              width: dimensions.SCREEN_WIDTH * 0.05,
-              height: dimensions.SCREEN_WIDTH * 0.05,
-            }}
-          />
+          <Image source={icon} style={[styles.iconStyle, { marginLeft: 10 }]} />
         ) : null}
       </View>
     </TouchableOpacity>
@@ -117,6 +101,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.white,
     fontWeight: 'bold',
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconStyle: {
+    width: dimensions.SCREEN_WIDTH * 0.05,
+    height: dimensions.SCREEN_WIDTH * 0.05,
   },
 });
 

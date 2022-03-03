@@ -11,8 +11,7 @@ import {
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ButtonText } from '../components';
-import { dismissErrorModal } from 'reducers/ErrorModalReducer';
-import { SCREEN_WIDTH } from 'utils/dimensions';
+import { dismissErrorModal } from '../redux/reducers/ErrorModalReducer';
 
 const ErrorModal = props => {
   const scaleValue = useRef(new Animated.Value(0)).current;

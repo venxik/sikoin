@@ -12,18 +12,13 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
-  const { style, disabled, value, secureTextEntry, onChangeText, title } =
+  const { style, textBoxStyle, value, secureTextEntry, onChangeText, title } =
     props || {};
 
   return (
     <View style={[styles.defaultContainer, style]}>
-      <Text style={{ color: colors.bodyTextGrey, fontSize: 14 }}>{title}</Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+      <Text style={styles.titleText}>{title}</Text>
+      <View style={styles.innerContainer}>
         <TextInput
           style={[{ marginLeft: 10 }, textBoxStyle]}
           autoCorrect={false}
@@ -37,7 +32,11 @@ const TextboxForm = props => {
         />
         <Image
           source={icons.edit_textbox}
-          style={{ width: 20, height: 20, flex: 0.1 }}
+          style={{
+            width: dimensions.ICON_SIZE,
+            height: dimensions.ICON_SIZE,
+            flex: 0.1,
+          }}
           resizeMode={'cover'}
         />
       </View>
@@ -79,6 +78,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.white,
   },
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  titleText: { color: colors.bodyTextGrey, fontSize: 14 },
 });
 
 export default TextboxForm;

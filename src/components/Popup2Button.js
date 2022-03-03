@@ -80,12 +80,7 @@ const Popup2Button = props => {
             )}
           </View>
           {customContent && customContent}
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+          <View style={styles.buttonContainer}>
             <ButtonText
               text={buttonLeftTitle}
               onPress={buttonLeftPressed}
@@ -167,5 +162,10 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: 'center',
     paddingVertical: 10,
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

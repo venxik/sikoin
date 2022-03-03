@@ -1,23 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, images, strings } from '../constants';
+import { colors, icons, strings } from '../constants';
 import { dimensions } from '../utils';
 import ButtonText from './ButtonText';
+import PropTypes from 'prop-types';
 
 const CardKabar = props => {
   const { item, onPress, style } = props || null;
   const { title, profile_pic, content, timestamp, name } = item || {};
   return (
     <View style={[styles.container, style]}>
-      <Text style={{ fontSize: 20, color: colors.bodyText }}>{title}</Text>
-      <View style={{ flexDirection: 'row', marginTop: 30 }}>
+      <Text style={styles.titleStyle}>{title}</Text>
+      <View style={styles.rowStyle}>
         <Image source={profile_pic} style={{ width: 60, height: 60 }} />
-        <View style={{ justifyContent: 'space-evenly', marginLeft: 10 }}>
+        <View style={styles.innerRowStyle}>
           <Text style={{ color: colors.bodyText }}>{name}</Text>
           <Text style={{ fontSize: 12 }}>{timestamp}</Text>
         </View>
       </View>
-      <Text style={{ marginVertical: 20, fontSize: 15 }}>{content}</Text>
+      <Text style={styles.contentStyle}>{content}</Text>
 
       <ButtonText
         icon={icons.arrow_up_circle_primary}
@@ -33,6 +34,19 @@ const CardKabar = props => {
     </View>
   );
 };
+
+CardKabar.propTypes = {
+  item: PropTypes.object,
+  onPress: PropTypes.func,
+  style: PropTypes.object,
+};
+
+CardKabar.defaultProp = {
+  item: null,
+  onPress: null,
+  style: null,
+};
+
 export default CardKabar;
 
 const styles = StyleSheet.create({
@@ -44,4 +58,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
     justifyContent: 'center',
   },
+  titleStyle: { fontSize: 20, color: colors.bodyText },
+  rowStyle: { flexDirection: 'row', marginTop: 30 },
+  innerRowStyle: { justifyContent: 'space-evenly', marginLeft: 10 },
+  contentStyle: { marginVertical: 20, fontSize: 15 },
 });

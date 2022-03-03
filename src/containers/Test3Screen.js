@@ -16,7 +16,7 @@ const Test3Screen = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const dispatch = useDispatch();
-  const { error, data } = useSelector(state => state.DummyReducers);
+  const { error, data } = useSelector(state => state.DummyReducer);
 
   // useEffect(() => {
   //   dispatch(fetchData());
