@@ -1,8 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, sizes } from '../constants';
-import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const SubmenuListItem = props => {

@@ -78,6 +78,7 @@ const Test2Screen = ({ onOK }) => {
           style={{
             width: SCREEN_WIDTH * 0.8,
             height: SCREEN_HEIGHT * 0.4,
+            borderStyle: 'dashed',
             borderWidth: 0.5,
             borderColor: colors.black,
             borderRadius: 20,
@@ -123,7 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: SCREEN_WIDTH * 0.05,
-    // alignItems: 'center',
   },
 });
 
