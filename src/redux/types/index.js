@@ -18,3 +18,8 @@ export const UPDATE_ALAMAT = 'UPDATE_ALAMAT';
 export const ADD_KELUARGA = 'ADD_KELUARGA';
 export const UPDATE_KELUARGA = 'UPDATE_KELUARGA';
 export const DELETE_KELUARGA = 'DELETE_KELUARGA';
+
+export const ADD_KTP = 'ADD_KTP';
+
+export const ADD_BIODATA = 'ADD_BIODATA';
+export const ADD_TTD = 'ADD_TTD';

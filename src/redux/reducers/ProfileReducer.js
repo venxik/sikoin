@@ -1,5 +1,5 @@
 import { images } from '../../constants';
-import { UPDATE_PROFILE } from '../types';
+import { SET_EMAIL, UPDATE_PROFILE } from '../types';
 
 const initialState = {
   profileData: {
@@ -14,7 +14,7 @@ const initialState = {
   error: null,
 };
 
-const ProfileDataReducer = (state = initialState, action) => {
+const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PROFILE: {
       return {
@@ -27,10 +27,17 @@ const ProfileDataReducer = (state = initialState, action) => {
         },
       };
     }
-
+    case SET_EMAIL:
+      return {
+        ...state,
+        profileData: {
+          ...state.profileData,
+          email: action.payload,
+        },
+      };
     default:
       return state;
   }
 };
 
-export default ProfileDataReducer;
+export default ProfileReducer;

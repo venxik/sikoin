@@ -53,6 +53,7 @@ export default {
   kirim_otp_ke_email: 'Kirim OTP Ke Email',
   paham: 'Paham',
   simpan: 'Simpan',
+  pilih_dot: 'Pilih...',
 
   /*HOME*/
   beranda: 'Beranda',
@@ -134,4 +135,33 @@ export default {
   tambah_ref_keluarga: 'Tambah Referensi Keluarga',
   no_ktp: 'Nomor KTP',
   status_ref: 'Status Referensi',
+
+  //KTP
+  daftar_ktp: 'Daftar KTP',
+  tambah_data_ktp: 'Tambah Data KTP',
+  ubah_ktp: 'Ubah Data KTP Ku',
+  tambah_ktp: 'Tambah KTP',
+
+  //BIODATA
+  tempat_lahir: 'Tempat Lahir',
+  tgl_lahir: 'Tanggal Lahir',
+  gender: 'Gender',
+  gol_darah: 'Gol. Darah',
+  kewarganegaraan: 'Kewarganegaraan',
+  pendidikan_terakhir: 'Pendidikan Terakhir',
+  agama: 'Agama',
+  status_pernikahan: 'Status Pernikahan',
+  jumlah_anak: 'Jumlah Anak',
+  detail_pekerjaan: 'Detail Pekerjaan',
+  tmptTglLahir: 'Tempat & Tanggal Lahir',
+  golongan_darah: 'Golongan Darah',
+  edit_biodata: 'Edit Biodata',
+  tambah_biodata: 'Tambah Biodata',
+
+  //TTD
+  ubah_ttd: 'Ubah Tanda Tanganku',
+  tambah_ttd: 'Tambah Tanda Tangan',
+  popup_ttd_title: 'Digital Signature CoopApp',
+  gambar_ttd: 'Gambar Tanda tanganmu dibawah ini',
+  popup_ttd_content: `Tanda Tangan Elektronik (Digital Signature) CoopApp sudah berdasarkan Pasal 1 Angka 12 Undang-Undang Nomor 19 Tahun 2016 tentang Informasi dan Transaksi Elektronik bahwa : \n\n “Tanda Tangan Elektronik adalah tanda tangan yang terdiri atas Informasi Elektronik yang dilekatkan, terasosiasi atau terkait dengan Informasi Elektronik lainnya yang digunakan sebagai alat verifikasi dan autentikasi secara sah.”`,
 };

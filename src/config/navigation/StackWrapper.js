@@ -90,8 +90,8 @@ const BottomTab = () => {
         })}
       />
       <Tab.Screen
-        name="Test2Screen"
-        component={screens.Test2Screen}
+        name="ChatStackNavigator"
+        component={ProfileStackNavigator}
         options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
@@ -186,6 +186,30 @@ const DataDiriStackNavigator = () => (
       name="DaftarRefKeluargaMainScreen"
       component={screens.DaftarRefKeluargaMainScreen}
     />
+    <DataDiriStack.Screen
+      name="DaftarKtpMainScreen"
+      component={screens.DaftarKtpMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarKtpAddScreen"
+      component={screens.DaftarKtpAddScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarBiodataMainScreen"
+      component={screens.DaftarBiodataMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarBiodataAddScreen"
+      component={screens.DaftarBiodataAddScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarTtdMainScreen"
+      component={screens.DaftarTtdMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarTtdAddScreen"
+      component={screens.DaftarTtdAddScreen}
+    />
   </DataDiriStack.Navigator>
 );
 
@@ -212,7 +236,6 @@ const HomeStackNavigator = () => (
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <MainStack.Screen name="TestScreen" component={screens.Test2Screen} />
     <MainStack.Screen name="HomeScreen" component={screens.HomeScreen} />
     <MainStack.Screen
       name="SaldoSimpananStackNavigator"

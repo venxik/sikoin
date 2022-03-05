@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
@@ -17,17 +16,16 @@ import {
 } from '../../../components';
 import CardAlamat from '../../../components/CardAlamat';
 import { icons, sizes, strings } from '../../../constants';
-import { deleteAlamatFromReducer } from '../../../redux/actions/AlamatAction';
+import { AlamatAction } from '../../../redux/actions';
 
 const DaftarAlamatMainScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const item = [1, 1, 1, 21, 21];
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
   const [selectAlamat, setSelectAlamat] = useState(null);
-  const { alamatList } = useSelector(s => s.AlamatReducer);
+  const { alamatList } = useSelector(s => s.AlamatReducer) || {};
 
   const navigateToAddScreen = (update, index, item) => {
     navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
@@ -39,7 +37,7 @@ const DaftarAlamatMainScreen = () => {
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(deleteAlamatFromReducer(selectAlamat));
+    dispatch(AlamatAction.deleteAlamatFromReducer(selectAlamat));
     setShowDeletePopup(false);
     setSuccessShowDeletePopup(true);
   };

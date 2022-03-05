@@ -18,4 +18,4 @@ const deleteKelFromReducer = data => ({
   payload: data,
 });
 
-export { addKelToReducer, updateKelToReducer, deleteKelFromReducer };
+export default { addKelToReducer, updateKelToReducer, deleteKelFromReducer };

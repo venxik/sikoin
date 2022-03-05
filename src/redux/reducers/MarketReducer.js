@@ -27,7 +27,7 @@ const initialState = {
   error: null,
 };
 
-const MarketDataReducer = (state = initialState, action) => {
+const MarketReducer = (state = initialState, action) => {
   switch (action.type) {
     // case SET_EMAIL:
     //   return { ...state, marketDataList: action.payload };
@@ -36,4 +36,4 @@ const MarketDataReducer = (state = initialState, action) => {
   }
 };
 
-export default MarketDataReducer;
+export default MarketReducer;

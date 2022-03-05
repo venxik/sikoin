@@ -52,7 +52,7 @@ const Popup2Button = props => {
   return (
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={styles.modalMainView}>
-        <Animated.View style={[styles.modalView]}>
+        <Animated.View style={styles.modalView}>
           {headerImage && (
             <Image
               source={headerImage}
@@ -131,11 +131,6 @@ Popup2Button.defaultProp = {
 export default Popup2Button;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   modalMainView: {
     flex: 1,
     justifyContent: 'center',
@@ -152,8 +147,7 @@ const styles = StyleSheet.create({
   headerModalText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.black,
-    width: '70%',
+    color: colors.bodyText,
     textAlign: 'center',
   },
   contentModalText: {

@@ -16,12 +16,24 @@ import {
 } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { RefKeluargaAction } from '../../../redux/actions';
+import { BiodataAction } from '../../../redux/actions';
 
-const DaftarRefKeluargaAddScreen = ({ route }) => {
+const DaftarBiodataAddScreen = ({ route }) => {
   const { params } = route || {};
-  const { update, item, index } = params || {};
-  const { status, noTelp, nama, noKtp } = item || {};
+  const { update, data } = params || {};
+  const {
+    tempatLahir,
+    tanggalLahir,
+    gender,
+    golDarah,
+    kewarganegaraan,
+    pendidikanTerakhir,
+    agama,
+    statusPernikahan,
+    jumlahAnak,
+    pekerjaan,
+    detailPekerjaan,
+  } = data || {};
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -32,19 +44,15 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      status: update ? status : '',
-      noTelp: update ? noTelp : '',
-      nama: update ? nama : '',
-      noKtp: update ? noKtp : '',
+      tempatLahir: update ? tempatLahir : '',
+      jumlahAnak: update ? jumlahAnak : '',
+      detailPekerjaan: update ? detailPekerjaan : '',
     },
   });
 
-  const onSubmit = data => {
-    if (update) {
-      dispatch(RefKeluargaAction.updateKelToReducer({ index, data }));
-    } else {
-      dispatch(RefKeluargaAction.addKelToReducer(data));
-    }
+  const submitData = data => {
+    // dispatch(BiodataAction.addBiodataToReducer(data));
+    console.log(data);
     navigation.goBack();
   };
 
@@ -62,42 +70,76 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
           <View style={styles.innerContainer}>
             <Controller
               control={control}
-              name="nama"
+              name="tempatLahir"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.nama}
+                  title={strings.tempat_lahir}
                 />
               )}
               rules={{ required: true }}
             />
-
-            <DropdownForm value={'Profile'} title={strings.status_ref} />
-
+            <DropdownForm
+              value={update ? tanggalLahir : strings.pilih_dot}
+              title={strings.tgl_lahir}
+            />
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <DropdownForm
+                style={{ width: '45%' }}
+                value={update ? gender : strings.pilih_dot}
+                title={strings.gender}
+              />
+              <DropdownForm
+                style={{ width: '45%' }}
+                value={update ? golDarah : strings.pilih_dot}
+                title={strings.gol_darah}
+              />
+            </View>
+            <DropdownForm
+              value={update ? kewarganegaraan : strings.pilih_dot}
+              title={strings.kewarganegaraan}
+            />
+            <DropdownForm
+              value={update ? pendidikanTerakhir : strings.pilih_dot}
+              title={strings.pendidikan_terakhir}
+            />
+            <DropdownForm
+              value={update ? agama : strings.pilih_dot}
+              title={strings.agama}
+            />
+            <DropdownForm
+              value={update ? statusPernikahan : strings.pilih_dot}
+              title={strings.status_pernikahan}
+            />
             <Controller
               control={control}
-              name="noKtp"
+              name="jumlahAnak"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.no_ktp}
+                  title={strings.jumlah_anak}
                 />
               )}
               rules={{ required: true }}
             />
+            <DropdownForm
+              value={update ? pekerjaan : strings.pilih_dot}
+              title={strings.pekerjaan}
+            />
             <Controller
               control={control}
-              name="noTelp"
+              name="detailPekerjaan"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.no_telp}
+                  title={strings.detail_pekerjaan}
                 />
               )}
               rules={{ required: true }}
@@ -108,7 +150,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
 
       <ButtonText
         shadow
-        onPress={handleSubmit(onSubmit)}
+        onPress={handleSubmit(submitData)}
         buttonContainerStyle={{
           position: 'absolute',
           bottom: sizes.padding,
@@ -120,7 +162,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
     </SafeAreaView>
   );
 };
-export default DaftarRefKeluargaAddScreen;
+export default DaftarBiodataAddScreen;
 
 const styles = StyleSheet.create({
   container: {

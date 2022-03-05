@@ -16,7 +16,7 @@ const DropdownForm = props => {
       <View style={[styles.defaultContainer, style]}>
         <Text style={styles.titleText}>{title}</Text>
         <View style={styles.innerContainer}>
-          <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
+          <TouchableOpacity onPress={onPress} style={styles.container}>
             <View
               style={{
                 flexDirection: 'row',
@@ -87,6 +87,7 @@ DropdownForm.propTypes = {
   onPress: PropTypes.func,
   icon: PropTypes.any,
   title: PropTypes.string,
+  style: PropTypes.object,
 };
 
 DropdownForm.defaultProp = {
@@ -94,6 +95,7 @@ DropdownForm.defaultProp = {
   onPress: null,
   icon: null,
   title: null,
+  style: null,
 };
 
 export default DropdownForm;

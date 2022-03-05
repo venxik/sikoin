@@ -95,25 +95,12 @@ const OnboardingScreen = () => {
         )}>
         {onBoardings.map((item, index) => {
           return (
-            <View
-              key={index}
-              style={{
-                width: SCREEN_WIDTH,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+            <View key={index} style={styles.mainContainer}>
+              <View style={styles.mainInnerContainer}>
                 <Image
                   source={item.img}
                   resizeMode="cover"
-                  style={{
-                    width: SCREEN_WIDTH * 0.8,
-                    height: SCREEN_WIDTH * 0.8,
-                  }}
+                  style={styles.logo}
                 />
               </View>
               <View style={{ paddingHorizontal: '10%' }}>
@@ -121,18 +108,10 @@ const OnboardingScreen = () => {
                 <Text style={styles.descText}>{item.desc}</Text>
               </View>
               {item.last ? (
-                <View
-                  style={{ position: 'absolute', bottom: '7%', right: '20%' }}>
+                <View style={styles.lastButtonContainer}>
                   <TouchableOpacity
                     onPress={navigateToLoginScreen}
-                    style={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 50,
-                      backgroundColor: colors.primary,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
+                    style={styles.lastButton}>
                     <Image
                       source={icons.arrow_right}
                       style={{ width: '50%', height: '50%' }}
@@ -149,9 +128,7 @@ const OnboardingScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ height: '100%' }}>{renderScrollView()}</View>
-      <View style={{ position: 'absolute', bottom: '10%', width: '100%' }}>
-        {renderDots()}
-      </View>
+      <View style={styles.dotMainContainer}>{renderDots()}</View>
     </SafeAreaView>
   );
 };
@@ -173,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.black,
   },
+  dotMainContainer: { position: 'absolute', bottom: '10%', width: '100%' },
   dotContainer: {
     justifyContent: 'center',
     flexDirection: 'row',
@@ -181,5 +159,27 @@ const styles = StyleSheet.create({
     borderRadius: dotSize,
     height: dotSize,
     marginHorizontal: dotSize,
+  },
+  mainContainer: {
+    width: SCREEN_WIDTH,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainInnerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: SCREEN_WIDTH * 0.8,
+    height: SCREEN_WIDTH * 0.8,
+  },
+  lastButtonContainer: { position: 'absolute', bottom: '7%', right: '20%' },
+  lastButton: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

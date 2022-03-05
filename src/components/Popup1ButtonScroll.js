@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, Image } from 'react-native';
+import { View, Text, StyleSheet, Modal, Image, ScrollView } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../constants';
 
-const Popup1Button = props => {
+const Popup1ButtonScroll = props => {
   const {
     showPopup,
     headerText,
@@ -46,32 +46,30 @@ const Popup1Button = props => {
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={styles.modalMainView}>
         <View style={styles.modalView}>
-          {headerImage && (
-            <Image
-              source={headerImage}
-              style={[
-                {
-                  width: SCREEN_WIDTH * 0.2,
-                  height: SCREEN_WIDTH * 0.2,
-                  marginVertical: 30,
-                },
-                { ...iconStyle },
-              ]}
-            />
-          )}
-          <View style={{ alignItems: 'center' }}>
-            {headerText && (
-              <Text style={[styles.headerModalText, headerTextStyle]}>
-                {headerText}
-              </Text>
+          <ScrollView
+            style={{ height: '50%', marginBottom: sizes.padding }}
+            contentContainerStyle={{ alignItems: 'center' }}>
+            {headerImage && (
+              <Image
+                resizeMode="contain"
+                source={headerImage}
+                style={[styles.icon, { ...iconStyle }]}
+              />
             )}
-            {contentText && (
-              <Text style={[styles.contentModalText, contentTextStyle]}>
-                {contentText}
-              </Text>
-            )}
-          </View>
-          {customContent && customContent}
+            <View style={{ alignItems: 'center' }}>
+              {headerText && (
+                <Text style={[styles.headerModalText, headerTextStyle]}>
+                  {headerText}
+                </Text>
+              )}
+              {contentText && (
+                <Text style={[styles.contentModalText, contentTextStyle]}>
+                  {contentText}
+                </Text>
+              )}
+            </View>
+            {customContent && customContent}
+          </ScrollView>
           <View style={{ width: '100%' }}>
             <ButtonText
               text={customButtonText ? customButtonText : strings.tutup}
@@ -84,7 +82,7 @@ const Popup1Button = props => {
   );
 };
 
-Popup1Button.propTypes = {
+Popup1ButtonScroll.propTypes = {
   showPopup: PropTypes.bool,
   headerText: PropTypes.string,
   contentText: PropTypes.string,
@@ -97,7 +95,7 @@ Popup1Button.propTypes = {
   iconStyle: PropTypes.object,
 };
 
-Popup1Button.defaultProp = {
+Popup1ButtonScroll.defaultProp = {
   showPopup: false,
   headerText: 'default',
   contentText: 'default',
@@ -109,7 +107,7 @@ Popup1Button.defaultProp = {
   iconStyle: null,
 };
 
-export default Popup1Button;
+export default Popup1ButtonScroll;
 
 const styles = StyleSheet.create({
   modalMainView: {
@@ -138,5 +136,10 @@ const styles = StyleSheet.create({
     paddingVertical: sizes.padding,
     textAlign: 'center',
     lineHeight: sizes.padding,
+  },
+  icon: {
+    width: SCREEN_WIDTH * 0.2,
+    height: SCREEN_WIDTH * 0.2,
+    marginVertical: 30,
   },
 });

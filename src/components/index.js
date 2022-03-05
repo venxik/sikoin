@@ -19,6 +19,8 @@ import ProfilePicture from './ProfilePicture';
 import SubmenuListItemCustom from './SubmenuListItemCustom';
 import ListEmptyDataComponent from './ListEmptyDataComponent';
 import CardRefKeluarga from './CardRefKeluarga';
+import DetailItemList from './DetailItemList';
+import Popup1ButtonScroll from './Popup1ButtonScroll';
 
 export {
   ButtonIcon,
@@ -42,4 +44,6 @@ export {
   SubmenuListItemCustom,
   ListEmptyDataComponent,
   CardRefKeluarga,
+  DetailItemList,
+  Popup1ButtonScroll,
 };

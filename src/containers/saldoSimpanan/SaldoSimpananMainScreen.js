@@ -1,8 +1,5 @@
-import BottomSheet, {
-  BottomSheetScrollView,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-} from '@gorhom/bottom-sheet';
+/* eslint-disable react/prop-types */
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
@@ -16,23 +13,32 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { HeaderBack, Popup1Button, SaldoItemList } from '../../components';
-import { colors, icons, images, sizes, strings } from '../../constants';
+import {
+  colors,
+  icons,
+  images,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
 import { formatter } from '../../utils';
 
 const Button = props => {
-  const { icon, text } = props || {};
+  const { icon, text, onPress } = props || {};
   return (
-    <View style={{ alignItems: 'center' }}>
+    <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
       <Image source={icon} style={{ width: 50, height: 50 }} />
       <Text>{text}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const SaldoSimpananMainScreen = ({ route }) => {
   const { showSaldo } = route.params || {};
   const navigation = useNavigation();
-  const { simpanan, saldo } = useSelector(state => state.SaldoSimpananReducer);
+  const { simpanan, saldo } =
+    useSelector(state => state.SaldoSimpananReducer) || {};
   const [showInfoModal, setShowInfoModal] = useState(false);
 
   const sheetRef = useRef(null);
@@ -48,10 +54,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
         <TouchableOpacity onPress={() => setShowInfoModal(e => !e)}>
           <Image
             source={icons.icon_info}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-            }}
+            style={styles.icon}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -62,16 +65,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
   const renderSaldoContent = () => {
     return (
       <View>
-        <View
-          style={{
-            borderRadius: sizes.padding,
-            backgroundColor: colors.white,
-            paddingVertical: sizes.padding,
-            paddingHorizontal: 40,
-            width: '100%',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-          }}>
+        <View style={styles.saldoContainer}>
           <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
@@ -95,16 +89,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
   const renderSimpananContent = () => {
     return (
       <View>
-        <View
-          style={{
-            borderRadius: sizes.padding,
-            backgroundColor: colors.white,
-            paddingVertical: sizes.padding,
-            paddingHorizontal: 40,
-            width: '100%',
-            justifyContent: 'space-evenly',
-            flexDirection: 'row',
-          }}>
+        <View style={styles.simpananContainer}>
           <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
@@ -123,50 +108,22 @@ const SaldoSimpananMainScreen = ({ route }) => {
   const renderBackgroundItem = () => (
     <ImageBackground
       source={images.daftar_koperasi_bg}
-      style={{
-        width: '100%',
-        height: SCREEN_HEIGHT * 0.8,
-      }}>
-      <View
-        style={{
-          marginTop: -40,
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}>
+      style={styles.background}>
+      <View style={styles.titleContainer}>
         <Image
           source={showSaldo ? images.img_saldo_icon : images.img_simpanan_icon}
-          style={{
-            width: SCREEN_WIDTH * 0.4,
-            height: SCREEN_WIDTH * 0.4,
-          }}
+          style={styles.logo}
         />
-        <Text
-          style={{
-            color: colors.primaryLight,
-            marginTop: sizes.padding,
-            fontWeight: '500',
-          }}>
+        <Text style={styles.textTitle}>
           {showSaldo ? strings.totalSaldo : strings.totalSimpanan} :
         </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <View style={styles.saldoRowContainer}>
           <Image
             source={icons.icon_rp}
             style={{ width: 34, height: 34 }}
             resizeMode="cover"
           />
-          <Text
-            style={{
-              fontSize: 34,
-              color: colors.white,
-              marginLeft: 16,
-              fontWeight: '700',
-            }}>
+          <Text style={styles.textSaldo}>
             {showSaldo
               ? formatter.formatStringToCurrencyNumber(saldo.total)
               : formatter.formatStringToCurrencyNumber(simpanan.total)}
@@ -177,37 +134,13 @@ const SaldoSimpananMainScreen = ({ route }) => {
   );
 
   const customSaldoPopupContent = () => (
-    <View
-      style={{
-        alignItems: 'flex-start',
-        width: '100%',
-        paddingLeft: sizes.padding,
-        marginBottom: sizes.padding,
-      }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View
-          style={{
-            width: 4,
-            height: 4,
-            borderRadius: 4,
-            backgroundColor: colors.primary,
-            marginRight: 10,
-          }}
-        />
-        <Text style={{ color: colors.primary, fontWeight: '500' }}>
-          {strings.market}
-        </Text>
+    <View style={styles.customPopupContainer}>
+      <View style={styles.customPopupRow}>
+        <View style={styles.blueDot} />
+        <Text style={styles.customPopupText}>{strings.market}</Text>
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View
-          style={{
-            width: 4,
-            height: 4,
-            borderRadius: 4,
-            backgroundColor: colors.primary,
-            marginRight: 10,
-          }}
-        />
+      <View style={styles.customPopupRow}>
+        <View style={styles.blueDot} />
         <Text style={{ color: colors.primary, fontWeight: '500' }}>
           {strings.voucher_center}
         </Text>
@@ -249,13 +182,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
         snapPoints={snapPoints}
         onChange={handleSheetChange}>
         <BottomSheetScrollView>
-          <View
-            style={{
-              padding: sizes.padding,
-              width: '100%',
-              height: '100%',
-              backgroundColor: colors.primaryWhite,
-            }}>
+          <View style={styles.bottomSheetContainer}>
             {showSaldo ? renderSaldoContent() : renderSimpananContent()}
           </View>
         </BottomSheetScrollView>
@@ -268,5 +195,78 @@ export default SaldoSimpananMainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  icon: {
+    width: sizes.icon_size,
+    height: sizes.icon_size,
+  },
+  saldoContainer: {
+    borderRadius: sizes.padding,
+    backgroundColor: colors.white,
+    paddingVertical: sizes.padding,
+    paddingHorizontal: 40,
+    width: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  simpananContainer: {
+    borderRadius: sizes.padding,
+    backgroundColor: colors.white,
+    paddingVertical: sizes.padding,
+    paddingHorizontal: 40,
+    width: '100%',
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
+  },
+  background: {
+    width: '100%',
+    height: SCREEN_HEIGHT * 0.8,
+  },
+  titleContainer: {
+    marginTop: -40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+  },
+  logo: {
+    width: SCREEN_WIDTH * 0.4,
+    height: SCREEN_WIDTH * 0.4,
+  },
+  textTitle: {
+    color: colors.primaryLight,
+    marginTop: sizes.padding,
+    fontWeight: '500',
+  },
+  saldoRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textSaldo: {
+    fontSize: 34,
+    color: colors.white,
+    marginLeft: 16,
+    fontWeight: '700',
+  },
+  customPopupContainer: {
+    alignItems: 'flex-start',
+    width: '100%',
+    paddingLeft: sizes.padding,
+    marginBottom: sizes.padding,
+  },
+  blueDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 4,
+    backgroundColor: colors.primary,
+    marginRight: 10,
+  },
+  customPopupRow: { flexDirection: 'row', alignItems: 'center' },
+  customPopupText: { color: colors.primary, fontWeight: '500' },
+  bottomSheetContainer: {
+    padding: sizes.padding,
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.primaryWhite,
   },
 });

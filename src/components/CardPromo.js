@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
@@ -7,9 +7,9 @@ const CardPromo = props => {
   const { item, onPress, style } = props || null;
   const { title, content, image } = item || {};
   return (
-    <View style={[styles.container, style]}>
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <Image source={image} style={styles.imageStyle} />
-      <View style={{ padding: sizes.padding, marginTop: '95%' }}>
+      <View style={styles.bottomContainer}>
         <Text style={{ fontSize: sizes.padding, color: colors.bodyText }}>
           {title}
         </Text>
@@ -17,7 +17,7 @@ const CardPromo = props => {
           {content}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -43,10 +43,12 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
   },
   imageStyle: {
-    ...StyleSheet.absoluteFill,
     width: '100%',
     height: '60%',
     borderTopLeftRadius: sizes.padding,
     borderTopRightRadius: sizes.padding,
+  },
+  bottomContainer: {
+    padding: sizes.padding,
   },
 });

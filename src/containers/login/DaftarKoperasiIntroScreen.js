@@ -1,10 +1,16 @@
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack } from '../../components';
-import { colors, icons, images, strings } from '../../constants';
+import {
+  colors,
+  icons,
+  images,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  strings,
+} from '../../constants';
 
 const DaftarKoperasiIntroScreen = () => {
   const navigation = useNavigation();
@@ -27,107 +33,50 @@ const DaftarKoperasiIntroScreen = () => {
         customLeftIcon={icons.arrow_left_white}
       />
       <Image
-        style={{
-          width: '100%',
-          height: '75%',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          left: 0,
-        }}
+        style={styles.background}
         resizeMode="stretch"
         source={images.daftar_koperasi_bg}
       />
       {index === 1 ? (
         <Image
-          style={{
-            width: '80%',
-            height: '80%',
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            zIndex: 1,
-          }}
+          style={styles.bgImage1}
           resizeMode="stretch"
           source={images.daftar_koperasi_question_mark}
         />
       ) : (
         <Image
-          style={{
-            width: '80%',
-            height: '95%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 1,
-          }}
+          style={styles.bgImage2}
           resizeMode="stretch"
           source={images.daftar_koperasi_question_mark_2}
         />
       )}
 
-      <Text
-        style={{
-          position: 'absolute',
-          bottom: SCREEN_HEIGHT * 0.4,
-          color: colors.white,
-          fontSize: 24,
-          paddingHorizontal: 40,
-          zIndex: 200,
-        }}>
+      <Text style={styles.textTitle}>
         {index === 1
           ? strings.daftar_koperasi_title_1
           : strings.daftar_koperasi_title_2}
       </Text>
 
       {index === 1 ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            paddingHorizontal: 40,
-            zIndex: 10,
-            justifyContent: 'space-between',
-            position: 'absolute',
-            bottom: SCREEN_HEIGHT * 0.3,
-          }}>
+        <View style={styles.buttonContainer1}>
           <ButtonText
             onPress={() => setIndex(2)}
-            buttonContainerStyle={{
-              width: '47%',
-              paddingVertical: SCREEN_WIDTH * 0.03,
-              backgroundColor: colors.white,
-            }}
+            buttonContainerStyle={styles.buttonLeftStyle}
             text={strings.belum}
             textStyle={{ color: colors.primary }}
           />
           <ButtonText
             onPress={navigateToStep1Screen}
-            buttonContainerStyle={{
-              width: '47%',
-              paddingVertical: SCREEN_WIDTH * 0.03,
-              backgroundColor: colors.primary,
-            }}
+            buttonContainerStyle={styles.buttonRightStyle}
             text={strings.sudah}
             textStyle={{ color: colors.white }}
           />
         </View>
       ) : (
-        <View
-          style={{
-            width: '100%',
-            paddingHorizontal: 40,
-            zIndex: 10,
-            position: 'absolute',
-            bottom: SCREEN_HEIGHT * 0.3,
-          }}>
+        <View style={styles.buttonContainer2}>
           <ButtonText
             onPress={() => setIndex(2)}
-            buttonContainerStyle={{
-              width: '100%',
-              paddingVertical: SCREEN_WIDTH * 0.03,
-              backgroundColor: colors.white,
-            }}
+            buttonContainerStyle={styles.buttonStyle2}
             text={strings.ayo}
             textStyle={{ color: colors.primary }}
           />
@@ -142,5 +91,67 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+  },
+  background: {
+    width: '100%',
+    height: '75%',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+  },
+  bgImage1: {
+    width: '80%',
+    height: '80%',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    zIndex: 1,
+  },
+  bgImage2: {
+    width: '80%',
+    height: '95%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+  },
+  textTitle: {
+    position: 'absolute',
+    bottom: SCREEN_HEIGHT * 0.4,
+    color: colors.white,
+    fontSize: 24,
+    paddingHorizontal: 40,
+    zIndex: 200,
+  },
+  buttonContainer1: {
+    flexDirection: 'row',
+    width: '100%',
+    paddingHorizontal: 40,
+    zIndex: 10,
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: SCREEN_HEIGHT * 0.3,
+  },
+  buttonContainer2: {
+    width: '100%',
+    paddingHorizontal: 40,
+    zIndex: 10,
+    position: 'absolute',
+    bottom: SCREEN_HEIGHT * 0.3,
+  },
+  buttonLeftStyle: {
+    width: '47%',
+    paddingVertical: SCREEN_WIDTH * 0.03,
+    backgroundColor: colors.white,
+  },
+  buttonRightStyle: {
+    width: '47%',
+    paddingVertical: SCREEN_WIDTH * 0.03,
+  },
+  buttonStyle2: {
+    width: '100%',
+    paddingVertical: SCREEN_WIDTH * 0.03,
+    backgroundColor: colors.white,
   },
 });

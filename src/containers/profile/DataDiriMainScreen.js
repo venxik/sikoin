@@ -22,8 +22,16 @@ const DataDiriMainScreen = () => {
           title={strings.daftar_alamat}
           onPress={() => navigateToOtherScreen('DaftarAlamatMainScreen')}
         />
-        <SubmenuListItem icon={icons.icon_profile} title={strings.biodata} />
-        <SubmenuListItem icon={icons.icon_daftar_ktp} title={strings.ktp} />
+        <SubmenuListItem
+          icon={icons.icon_profile}
+          title={strings.biodata}
+          onPress={() => navigateToOtherScreen('DaftarBiodataMainScreen')}
+        />
+        <SubmenuListItem
+          icon={icons.icon_daftar_ktp}
+          title={strings.ktp}
+          onPress={() => navigateToOtherScreen('DaftarKtpMainScreen')}
+        />
         <SubmenuListItem
           icon={icons.icon_referensi_keluarga}
           title={strings.referensi_keluarga}
@@ -32,6 +40,7 @@ const DataDiriMainScreen = () => {
         <SubmenuListItem
           icon={icons.icon_tanda_tangan}
           title={strings.tanda_tangan}
+          onPress={() => navigateToOtherScreen('DaftarTtdMainScreen')}
         />
         <SubmenuListItem
           icon={icons.icon_pekerjaan}

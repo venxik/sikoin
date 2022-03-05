@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
@@ -17,7 +16,7 @@ import {
   Popup2Button,
 } from '../../../components';
 import { icons, sizes, strings } from '../../../constants';
-import { deleteKelFromReducer } from '../../../redux/actions/RefKeluargaAction';
+import { RefKeluargaAction } from '../../../redux/actions';
 
 const DaftarRefKeluargaMainScreen = () => {
   const navigation = useNavigation();
@@ -26,7 +25,7 @@ const DaftarRefKeluargaMainScreen = () => {
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
   const [selectKeluarga, setSelectKeluarga] = useState(null);
-  const { keluargaList } = useSelector(s => s.RefKeluargaReducer);
+  const { keluargaList } = useSelector(s => s.RefKeluargaReducer) || {};
 
   const navigateToAddScreen = (update, index, item) => {
     navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
@@ -38,7 +37,7 @@ const DaftarRefKeluargaMainScreen = () => {
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(deleteKelFromReducer(selectKeluarga));
+    dispatch(RefKeluargaAction.deleteKelFromReducer(selectKeluarga));
     setShowDeletePopup(false);
     setSuccessShowDeletePopup(true);
   };

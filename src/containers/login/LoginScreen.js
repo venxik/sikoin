@@ -10,17 +10,25 @@ import {
   Popup2Button,
   TextboxBorder,
 } from '../../components';
-import { colors, icons, images, sizes, strings } from '../../constants';
-import { setEmailToReducer } from '../../redux/actions/LoginAction';
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@gorhom/bottom-sheet';
+import {
+  colors,
+  icons,
+  images,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
+import { ProfileAction } from '../../redux/actions';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { email: emailFromReducer } = useSelector(state => state.LoginReducer);
+  const { profileData } = useSelector(state => state.ProfileReducer) || {};
+  const { email: emailReducer } = profileData || {};
 
-  const [email, setEmail] = useState(emailFromReducer);
+  const [email, setEmail] = useState(emailReducer);
   const [password, setPassword] = useState(null);
   const [resetEmail, setResetEmail] = useState(null);
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
@@ -29,7 +37,7 @@ const LoginScreen = () => {
 
   const onChangeEmailText = value => {
     setEmail(value);
-    // dispatch(setEmailToReducer(value));
+    dispatch(ProfileAction.setEmailToReducer(value));
   };
 
   const onChangePasswordText = value => {
@@ -55,6 +63,18 @@ const LoginScreen = () => {
     }
   };
 
+  const renderCustomPopupContent = () => (
+    <View style={styles.customPopupContainer}>
+      <TextboxBorder
+        style={styles.customPopupTextbox}
+        value={email}
+        onChangeText={e => onChangeResetPassEmailText(e)}
+        secureTextEntry={false}
+        placeholder={strings.email_textbox_placeholder}
+      />
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <Popup2Button
@@ -66,27 +86,7 @@ const LoginScreen = () => {
         contentText={strings.popup_lupa_password_desc}
         showPopup={showForgetPassModal}
         headerImage={icons.icon_info_popup}
-        customContent={
-          <View
-            style={{
-              alignItems: 'center',
-              width: '100%',
-              marginBottom: sizes.padding,
-            }}>
-            <TextboxBorder
-              style={{
-                marginHorizontal: SCREEN_WIDTH * 0.1,
-                marginTop: 10,
-                width: '100%',
-                paddingHorizontal: 5,
-              }}
-              value={email}
-              onChangeText={e => onChangeResetPassEmailText(e)}
-              secureTextEntry={false}
-              placeholder={strings.email_textbox_placeholder}
-            />
-          </View>
-        }
+        customContent={renderCustomPopupContent()}
       />
       <Popup1Button
         headerText={strings.popup_lupa_password_success_title}
@@ -95,14 +95,7 @@ const LoginScreen = () => {
         onPress={() => setShowForgetPassSuccessModal(false)}
         headerImage={icons.popup_success}
       />
-      <Image
-        source={images.login_hi}
-        style={{
-          width: SCREEN_WIDTH * 0.5,
-          height: SCREEN_WIDTH * 0.5,
-          marginBottom: SCREEN_HEIGHT * 0.1,
-        }}
-      />
+      <Image source={images.login_hi} style={styles.logo} />
       <View style={{ width: '100%' }}>
         <TextboxBorder
           style={{
@@ -167,5 +160,21 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  customPopupContainer: {
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: sizes.padding,
+  },
+  customPopupTextbox: {
+    marginHorizontal: SCREEN_WIDTH * 0.1,
+    marginTop: 10,
+    width: '100%',
+    paddingHorizontal: 5,
+  },
+  logo: {
+    width: SCREEN_WIDTH * 0.5,
+    height: SCREEN_WIDTH * 0.5,
+    marginBottom: SCREEN_HEIGHT * 0.1,
   },
 });

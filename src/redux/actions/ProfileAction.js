@@ -1,4 +1,4 @@
-import { UPDATE_PROFILE } from '../types';
+import { UPDATE_PROFILE, SET_EMAIL } from '../types';
 
 const setProfileDataToReducer = data => {
   return {
@@ -7,4 +7,11 @@ const setProfileDataToReducer = data => {
   };
 };
 
-export { setProfileDataToReducer };
+const setEmailToReducer = email => {
+  return {
+    type: SET_EMAIL,
+    payload: email,
+  };
+};
+
+export default { setProfileDataToReducer, setEmailToReducer };

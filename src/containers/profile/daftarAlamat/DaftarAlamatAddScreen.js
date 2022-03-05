@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
@@ -11,10 +12,7 @@ import { useDispatch } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import {
-  addAlamatToReducer,
-  updateAlamatToReducer,
-} from '../../../redux/actions/AlamatAction';
+import { AlamatAction } from '../../../redux/actions';
 
 const DaftarAlamatAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -51,9 +49,9 @@ const DaftarAlamatAddScreen = ({ route }) => {
 
   const onSubmit = data => {
     if (update) {
-      dispatch(updateAlamatToReducer({ index, data }));
+      dispatch(AlamatAction.updateAlamatToReducer({ index, data }));
     } else {
-      dispatch(addAlamatToReducer(data));
+      dispatch(AlamatAction.addAlamatToReducer(data));
     }
     navigation.goBack();
   };

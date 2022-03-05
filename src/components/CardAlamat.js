@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const CardAlamat = props => {
   const { item, onPressUbah, onPressDelete } = props || {};
   const { judul, alamatLengkap } = item;
-  const { name } = useSelector(state => state.ProfileDataReducer.profileData);
+  const { name } = useSelector(state => state.ProfileReducer.profileData) || {};
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>

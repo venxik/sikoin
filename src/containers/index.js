@@ -1,7 +1,3 @@
-import TestScreen from './TestScreen';
-import Test2Screen from './Test2Screen';
-import Test3Screen from './Test3Screen';
-import Test4Screen from './Test4Screen';
 import OnboardingScreen from './onboarding/OnboardingScreen';
 import LoginScreen from './login/LoginScreen';
 import DaftarKoperasiIntroScreen from './login/DaftarKoperasiIntroScreen';
@@ -19,12 +15,14 @@ import DaftarAlamatAddScreen from './profile/daftarAlamat/DaftarAlamatAddScreen'
 import DaftarAlamatMapScreen from './profile/daftarAlamat/DaftarAlamatMapScreen';
 import DaftarRefKeluargaMainScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaMainScreen';
 import DaftarRefKeluargaAddScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaAddScreen';
+import DaftarKtpMainScreen from './profile/daftarKtp/DaftarKtpMainScreen';
+import DaftarKtpAddScreen from './profile/daftarKtp/DaftarKtpAddScreen';
+import DaftarBiodataMainScreen from './profile/daftarBiodata/DaftarBiodataMainScreen';
+import DaftarBiodataAddScreen from './profile/daftarBiodata/DaftarBiodataAddScreen';
+import DaftarTtdMainScreen from './profile/daftarTtd/DaftarTtdMainScreen';
+import DaftarTtdAddScreen from './profile/daftarTtd/DaftarTtdAddScreen';
 
 export {
-  TestScreen,
-  Test2Screen,
-  Test3Screen,
-  Test4Screen,
   OnboardingScreen,
   LoginScreen,
   DaftarKoperasiIntroScreen,
@@ -42,4 +40,10 @@ export {
   DaftarAlamatMapScreen,
   DaftarRefKeluargaAddScreen,
   DaftarRefKeluargaMainScreen,
+  DaftarKtpMainScreen,
+  DaftarKtpAddScreen,
+  DaftarBiodataMainScreen,
+  DaftarBiodataAddScreen,
+  DaftarTtdAddScreen,
+  DaftarTtdMainScreen,
 };

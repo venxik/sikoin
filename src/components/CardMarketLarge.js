@@ -9,7 +9,7 @@ const CardMarketLarge = props => {
   return (
     <View style={[styles.container, style]}>
       <Image source={image} style={styles.imageStyle} />
-      <View style={{ padding: sizes.padding, marginTop: '100%' }}>
+      <View style={styles.bottomContainer}>
         <View style={styles.containerStyle}>
           <Text style={styles.titleStyle}>{productName}</Text>
           <TouchableOpacity onPress={onPressWishlist}>
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
   },
   imageStyle: {
-    ...StyleSheet.absoluteFill,
     width: '100%',
     height: '65%',
     borderTopLeftRadius: sizes.padding,
@@ -94,5 +93,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
+  },
+  bottomContainer: {
+    padding: sizes.padding,
+    width: '100%',
   },
 });

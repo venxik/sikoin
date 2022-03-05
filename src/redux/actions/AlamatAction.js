@@ -18,4 +18,8 @@ const deleteAlamatFromReducer = data => ({
   payload: data,
 });
 
-export { addAlamatToReducer, updateAlamatToReducer, deleteAlamatFromReducer };
+export default {
+  addAlamatToReducer,
+  updateAlamatToReducer,
+  deleteAlamatFromReducer,
+};

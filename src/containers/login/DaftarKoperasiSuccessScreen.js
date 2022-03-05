@@ -10,7 +10,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 const DaftarKoperasiSuccessScreen = () => {
   const navigation = useNavigation();
 
-  const { email } = useSelector(state => state.LoginReducer);
+  const { email } = useSelector(state => state.LoginReducer) || {};
 
   const navigateToLoginScreen = () => {
     navigation.dispatch(
@@ -24,19 +24,8 @@ const DaftarKoperasiSuccessScreen = () => {
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.daftar} />
       {/* TOP SIDE */}
-      <View
-        style={{
-          backgroundColor: colors.tonalLightPrimary,
-          borderRadius: sizes.padding,
-          marginHorizontal: SCREEN_WIDTH * 0.05,
-          padding: SCREEN_WIDTH * 0.05,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            alignItems: 'center',
-          }}>
+      <View style={styles.topContainer}>
+        <View style={styles.topInnerContainer}>
           <AnimatedCircularProgress
             size={SCREEN_WIDTH * 0.13}
             rotation={180}
@@ -44,61 +33,22 @@ const DaftarKoperasiSuccessScreen = () => {
             fill={100}
             tintColor={colors.primary}
             backgroundColor={colors.primaryLight}>
-            {() => (
-              <Image
-                source={icons.icon_email}
-                style={{
-                  width: SCREEN_WIDTH * 0.05,
-                  height: SCREEN_WIDTH * 0.05,
-                }}
-              />
-            )}
+            {() => <Image source={icons.icon_email} style={styles.iconStyle} />}
           </AnimatedCircularProgress>
-          <Text
-            style={{
-              marginLeft: 16,
-              fontSize: sizes.padding,
-              fontWeight: 'bold',
-              color: colors.black,
-            }}>
-            {strings.cek_inbox}
-          </Text>
+          <Text style={styles.textTitle}>{strings.cek_inbox}</Text>
         </View>
-        <Text
-          style={{
-            marginTop: 16,
-            color: colors.black,
-            fontSize: 24,
-            fontWeight: '300',
-          }}>
+        <Text style={styles.textContent1}>
           {strings.daftar_koperasi_success_1}
         </Text>
-        <Text
-          style={{
-            fontSize: 18,
-            color: colors.primary,
-            fontWeight: 'bold',
-            marginVertical: sizes.padding,
-          }}>
-          {email}Text
-        </Text>
-        <Text
-          style={{
-            color: colors.black,
-            fontSize: 16,
-          }}>
+        <Text style={styles.textEmail}>{email}Text</Text>
+        <Text style={styles.textContent2}>
           {strings.daftar_koperasi_success_2}
         </Text>
       </View>
 
       <ButtonText
         onPress={navigateToLoginScreen}
-        buttonContainerStyle={{
-          position: 'absolute',
-          bottom: sizes.padding,
-          width: '90%',
-          marginHorizontal: SCREEN_WIDTH * 0.05,
-        }}
+        buttonContainerStyle={styles.buttonContainer}
         text={strings.kembali_ke_login}
         icon={icons.arrow_left_button_white}
         iconLocation="left"
@@ -112,6 +62,55 @@ export default DaftarKoperasiSuccessScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  topContainer: {
+    backgroundColor: colors.tonalLightPrimary,
+    borderRadius: sizes.padding,
+    marginHorizontal: SCREEN_WIDTH * 0.05,
+    padding: SCREEN_WIDTH * 0.05,
+  },
+  topInnerContainer: {
+    flexDirection: 'row',
     width: '100%',
+    alignItems: 'center',
+  },
+  textTitle: {
+    marginLeft: 16,
+    fontSize: sizes.padding,
+    fontWeight: 'bold',
+    color: colors.bodyText,
+  },
+  bottomContainer: {
+    marginTop: 16,
+    backgroundColor: colors.white,
+    borderRadius: sizes.padding,
+    margin: SCREEN_WIDTH * 0.05,
+    padding: SCREEN_WIDTH * 0.05,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: sizes.padding,
+    width: '90%',
+    marginHorizontal: SCREEN_WIDTH * 0.05,
+  },
+  iconStyle: {
+    width: SCREEN_WIDTH * 0.05,
+    height: SCREEN_WIDTH * 0.05,
+  },
+  textContent1: {
+    marginTop: 16,
+    color: colors.bodyText,
+    fontSize: 24,
+    fontWeight: '300',
+  },
+  textEmail: {
+    fontSize: 18,
+    color: colors.primary,
+    fontWeight: 'bold',
+    marginVertical: sizes.padding,
+  },
+  textContent2: {
+    color: colors.bodyText,
+    fontSize: 16,
   },
 });

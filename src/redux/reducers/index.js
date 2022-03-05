@@ -2,27 +2,31 @@ import { combineReducers } from 'redux';
 import ErrorModalReducer from './ErrorModalReducer';
 import LoadingReducer from './LoadingReducer';
 import DummyReducer from './DummyReducers';
-import LoginReducer from './LoginReducer';
 import KabarReducer from './KabarReducer';
 import PromoReducer from './PromoReducer';
-import MarketDataReducer from './MarketDataReducer';
-import ProfileDataReducer from './ProfileDataReducer';
+import MarketReducer from './MarketReducer';
+import ProfileReducer from './ProfileReducer';
 import SaldoSimpananReducer from './SaldoSimpananReducer';
 import AlamatReducer from './AlamatReducer';
 import RefKeluargaReducer from './RefKeluargaReducer';
+import KtpReducer from './KtpReducer';
+import BiodataReducer from './BiodataReducer';
+import TtdReducer from './TtdReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
   loading: LoadingReducer,
   DummyReducer: DummyReducer,
-  LoginReducer: LoginReducer,
   KabarReducer: KabarReducer,
   PromoReducer: PromoReducer,
-  MarketDataReducer: MarketDataReducer,
-  ProfileDataReducer: ProfileDataReducer,
+  MarketReducer: MarketReducer,
+  ProfileReducer: ProfileReducer,
   SaldoSimpananReducer: SaldoSimpananReducer,
   AlamatReducer: AlamatReducer,
   RefKeluargaReducer: RefKeluargaReducer,
+  KtpReducer: KtpReducer,
+  BiodataReducer: BiodataReducer,
+  TtdReducer: TtdReducer,
 });
 
 export default rootReducers;

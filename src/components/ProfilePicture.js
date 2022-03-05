@@ -10,13 +10,15 @@ import PropTypes from 'prop-types';
 import { SCREEN_WIDTH } from '../constants';
 
 const ProfilePicture = props => {
-  const { onPress, style, disabled } = props || {};
-  const { profileData } = useSelector(state => state.ProfileDataReducer);
+  const { onPress, style, disabled, showKoperasi } = props || {};
+  const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { profilePic, koperasiPic } = profileData || {};
   return (
     <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
       <ImageBackground source={profilePic} style={styles.profilePicStyle}>
-        <Image source={koperasiPic} style={styles.koperasiPicStyle} />
+        {showKoperasi && (
+          <Image source={koperasiPic} style={styles.koperasiPicStyle} />
+        )}
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -26,12 +28,14 @@ ProfilePicture.propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   style: PropTypes.object,
+  showKoperasi: PropTypes.bool,
 };
 
 ProfilePicture.defaultProp = {
   onPress: null,
   disabled: false,
   style: null,
+  showKoperasi: true,
 };
 
 export default ProfilePicture;

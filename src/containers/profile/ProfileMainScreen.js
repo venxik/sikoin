@@ -12,7 +12,7 @@ import { colors, icons, sizes, strings } from '../../constants';
 
 const ProfileMainScreen = () => {
   const navigation = useNavigation();
-  const { profileData } = useSelector(state => state.ProfileDataReducer);
+  const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { name, code, koperasiName } = profileData || {};
 
   const navigateToEditProfile = () => {

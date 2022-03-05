@@ -21,14 +21,23 @@ import {
   HeaderBack,
   ProfilePicture,
 } from '../../components';
-import { colors, icons, images, sizes, strings } from '../../constants';
-import { formatter } from '../../utils';
 import {
-  BottomSheetModal,
-  BottomSheetScrollView,
+  colors,
+  icons,
+  images,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
-} from '@gorhom/bottom-sheet';
+  sizes,
+  strings,
+} from '../../constants';
+import { formatter } from '../../utils';
+import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+
+const miniFlatlistSize = SCREEN_HEIGHT * 0.17;
+const dotSize = 8;
+const menuSize = SCREEN_WIDTH * 0.35;
+const cardKabarHeight = SCREEN_HEIGHT * 0.45;
+const cardPromoHeight = SCREEN_HEIGHT * 0.7;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -48,16 +57,10 @@ const HomeScreen = () => {
     { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
   ];
 
-  const miniFlatlistSize = SCREEN_HEIGHT * 0.17;
-  const dotSize = 8;
-  const menuSize = SCREEN_WIDTH * 0.35;
-  const cardKabarHeight = SCREEN_HEIGHT * 0.5;
-  const cardPromoHeight = SCREEN_HEIGHT * 0.7;
-
-  const { kabarDataList } = useSelector(state => state.KabarReducer);
-  const { promoDataList } = useSelector(state => state.PromoReducer);
-  const { marketDataList } = useSelector(state => state.MarketDataReducer);
-  const { profileData } = useSelector(state => state.ProfileDataReducer);
+  const { kabarDataList } = useSelector(state => state.KabarReducer) || {};
+  const { promoDataList } = useSelector(state => state.PromoReducer) || {};
+  const { marketDataList } = useSelector(state => state.MarketReducer) || {};
+  const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { name, code, koperasiName } = profileData || {};
   const [selectedKabar, setSelectedKabar] = useState({});
   const { simpanan, saldo } = useSelector(state => state.SaldoSimpananReducer);
@@ -92,23 +95,12 @@ const HomeScreen = () => {
 
   const cardHeader = title => {
     return (
-      <View style={{ flexDirection: 'row', width: '100%' }}>
-        <Text
-          style={{
-            fontSize: 17,
-            color: colors.bodyText,
-            fontWeight: 'bold',
-            marginRight: 20,
-          }}>
-          {title}
-        </Text>
+      <View style={styles.cardHeaderContainer}>
+        <Text style={styles.cardHeaderTitle}>{title}</Text>
         <TouchableOpacity>
           <Image
             source={icons.arrow_right_circle_primary}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-            }}
+            style={styles.icon}
           />
         </TouchableOpacity>
       </View>
@@ -196,29 +188,14 @@ const HomeScreen = () => {
 
   const renderMenuFlatlist = () => {
     return (
-      <View
-        style={{
-          marginTop: 40,
-          flexWrap: 'wrap',
-          alignItems: 'flex-start',
-          flexDirection: 'row',
-          width: '100%',
-        }}>
+      <View style={styles.menuContainer}>
         {menuList.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{
-              alignItems: 'center',
-              width: '50%',
-              paddingVertical: 10,
-            }}>
+          <TouchableOpacity key={index} style={styles.menuInnerContainer}>
             <Image
               source={item.image}
               style={{ width: menuSize, height: menuSize }}
             />
-            <Text style={{ fontSize: 16, position: 'absolute', bottom: 25 }}>
-              {item.label}
-            </Text>
+            <Text style={styles.menuText}>{item.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -229,15 +206,7 @@ const HomeScreen = () => {
     const scrollY = useRef(new Animated.Value(0)).current;
 
     return (
-      <View
-        style={{
-          borderRadius: 20,
-          backgroundColor: colors.tonalLightPrimary,
-          borderColor: colors.primary,
-          borderWidth: 1,
-          flexDirection: 'row',
-          paddingHorizontal: 10,
-        }}>
+      <View style={styles.miniScrollContainer}>
         <View style={{ justifyContent: 'center' }}>
           {saldoFlatlist.map((_, index) => {
             const inputRange = [
@@ -256,13 +225,12 @@ const HomeScreen = () => {
             return (
               <Animated.View
                 key={index.toString()}
-                style={{
-                  width: dotSize,
-                  height: dotSize,
-                  borderRadius: dotSize,
-                  backgroundColor: color,
-                  margin: dotSize / 2,
-                }}
+                style={[
+                  styles.dotIndicator,
+                  {
+                    backgroundColor: color,
+                  },
+                ]}
               />
             );
           })}
@@ -284,55 +252,35 @@ const HomeScreen = () => {
           keyExtractor={(item, index) => index.toString()}>
           {saldoFlatlist.map((item, index) => {
             return (
-              <View
-                key={index}
-                style={{
-                  width: '100%',
-                  height: miniFlatlistSize,
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
+              <View key={index} style={styles.miniScrollInnerContainer}>
                 <TouchableOpacity
                   onPress={() =>
                     navigateToSaldoSimpanan(item.title === strings.saldo)
                   }
                   style={{ justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        color: colors.black,
-                        fontWeight: 'bold',
-                      }}>
-                      {item.title}
-                    </Text>
+                    <Text style={styles.textMiniScrollTitle}>{item.title}</Text>
                     <Image
                       source={icons.arrow_right_primary_2}
-                      style={{
-                        width: sizes.icon_size * 0.8,
-                        height: sizes.icon_size * 0.8,
-                        marginLeft: 10,
-                      }}
+                      style={styles.miniScrollArrow}
                       resizeMode="contain"
                     />
                   </View>
                   <Text style={{ fontSize: 15 }}>
                     Rp{' '}
-                    {index === 1
+                    {item.title === strings.simpanan
                       ? formatter.formatStringToCurrencyNumber(simpanan.total)
                       : formatter.formatStringToCurrencyNumber(saldo.total)}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={{ alignItems: 'center', marginRight: 20 }}>
+                <TouchableOpacity style={styles.miniScrollButton}>
                   <Image
                     source={
-                      item.button === 'Mutasi'
+                      item.button === strings.mutasi
                         ? icons.icon_mutasi
                         : icons.icon_topup
                     }
-                    style={{ width: 40, height: 40, marginBottom: 10 }}
+                    style={styles.iconMiniScrollButton}
                     resizeMode="contain"
                   />
                   <Text>{item.button}</Text>
@@ -347,31 +295,13 @@ const HomeScreen = () => {
 
   const renderProfile = () => {
     return (
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingHorizontal: 20,
-        }}>
+      <View style={styles.profileContainer}>
         <ProfilePicture onPress={navigateToProfile} />
-        <View
-          style={{
-            width: '60%',
-            marginLeft: 20,
-            justifyContent: 'space-between',
-          }}>
-          <Text
-            style={{
-              fontSize: 24,
-              color: colors.black,
-              fontWeight: 'bold',
-            }}>
-            Hi, {name}
-          </Text>
+        <View style={styles.profileInnerContainer}>
+          <Text style={styles.textProfileName}>Hi, {name}!</Text>
           <View>
-            <Text style={{ fontSize: 14, marginBottom: 6 }}>{code}</Text>
-            <Text style={{ fontSize: 14, color: colors.black }}>
-              {koperasiName}
-            </Text>
+            <Text style={styles.textProfileCode}>{code}</Text>
+            <Text style={styles.textProfileKoperasi}>{koperasiName}</Text>
           </View>
         </View>
       </View>
@@ -381,24 +311,10 @@ const HomeScreen = () => {
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
-        {/* <TouchableOpacity>
-          <Image
-            source={icons.icon_scan}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-              marginRight: 20,
-            }}
-            resizeMode="contain"
-          />
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={handlePresentModalPress}>
+        <TouchableOpacity>
           <Image
             source={icons.icon_notification}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-            }}
+            style={styles.icon}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -416,49 +332,29 @@ const HomeScreen = () => {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
         <BottomSheetScrollView>
-          <View style={{ padding: 20 }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                marginBottom: 20,
-              }}>
-              <View
-                style={{
-                  width: 3,
-                  backgroundColor: colors.primary,
-                  borderRadius: 3,
-                  marginRight: 10,
-                }}
-              />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: '600',
-                  color: colors.primary,
-                }}>
+          <View style={{ padding: sizes.padding }}>
+            <View style={styles.kabarSheetContainer}>
+              <View style={styles.kabarSheetTopIcon} />
+              <Text style={styles.kabarSheetCompany}>
                 {selectedKabar.company}
               </Text>
             </View>
-            <Text
-              style={{ fontSize: 24, color: colors.black, fontWeight: 'bold' }}>
+            <Text style={styles.textKabarSheetTitle}>
               {selectedKabar.title}
             </Text>
-            <View style={{ flexDirection: 'row', marginVertical: 30 }}>
+            <View style={styles.kabarSheetBottomContainer}>
               <Image
                 source={selectedKabar.profile_pic}
-                style={{ width: 60, height: 60 }}
+                style={styles.kabarSheetProfileImage}
               />
-              <View style={{ justifyContent: 'space-evenly', marginLeft: 10 }}>
-                <Text style={{ color: colors.bodyText, fontSize: 16 }}>
-                  {name}
-                </Text>
-                <Text style={{ fontSize: 15, color: colors.bodyTextGrey }}>
+              <View style={styles.kabarSheetNameContainer}>
+                <Text style={styles.kabarSheetNameText}>{name}</Text>
+                <Text style={styles.kabarSheetTimeStampText}>
                   {selectedKabar.timestamp}
                 </Text>
               </View>
             </View>
-            <Text
-              style={{ fontSize: 15, color: colors.bodyText, lineHeight: 24 }}>
+            <Text style={styles.kabarSheetContentText}>
               {selectedKabar.fullContent}
             </Text>
           </View>
@@ -511,5 +407,115 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+  },
+  cardHeaderContainer: { flexDirection: 'row', width: '100%' },
+  cardHeaderTitle: {
+    fontSize: 17,
+    color: colors.bodyText,
+    fontWeight: 'bold',
+    marginRight: 20,
+  },
+  icon: {
+    width: sizes.icon_size,
+    height: sizes.icon_size,
+  },
+  menuContainer: {
+    marginTop: 40,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    width: '100%',
+  },
+  menuInnerContainer: {
+    alignItems: 'center',
+    width: '50%',
+    paddingVertical: 10,
+  },
+  menuText: { fontSize: 16, position: 'absolute', bottom: 25 },
+  miniScrollContainer: {
+    borderRadius: 20,
+    backgroundColor: colors.tonalLightPrimary,
+    borderColor: colors.primary,
+    borderWidth: 1,
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+  },
+  dotIndicator: {
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    margin: dotSize / 2,
+  },
+  miniScrollInnerContainer: {
+    width: '100%',
+    height: miniFlatlistSize,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textMiniScrollTitle: {
+    fontSize: 20,
+    color: colors.bodyText,
+    fontWeight: 'bold',
+  },
+  miniScrollArrow: {
+    width: sizes.icon_size * 0.8,
+    height: sizes.icon_size * 0.8,
+    marginLeft: 10,
+  },
+  miniScrollButton: { alignItems: 'center', marginRight: 20 },
+  iconMiniScrollButton: { width: 40, height: 40, marginBottom: 10 },
+  profileContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+  },
+  profileInnerContainer: {
+    width: '60%',
+    marginLeft: 20,
+    justifyContent: 'space-between',
+  },
+  textProfileName: {
+    fontSize: 24,
+    color: colors.bodyText,
+    fontWeight: 'bold',
+  },
+  textProfileCode: {
+    marginBottom: 6,
+    color: colors.bodyTextLightGrey,
+    fontSize: 15,
+  },
+  textProfileKoperasi: { fontSize: 15, color: colors.black },
+  kabarSheetContainer: {
+    flexDirection: 'row',
+    marginBottom: sizes.padding,
+  },
+  kabarSheetTopIcon: {
+    width: 3,
+    backgroundColor: colors.primary,
+    borderRadius: 3,
+    marginRight: 10,
+  },
+  kabarSheetCompany: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.primary,
+  },
+  textKabarSheetTitle: {
+    fontSize: 24,
+    color: colors.black,
+    fontWeight: 'bold',
+  },
+  kabarSheetBottomContainer: { flexDirection: 'row', marginVertical: 30 },
+  kabarSheetProfileImage: { width: 60, height: 60 },
+  kabarSheetNameContainer: {
+    justifyContent: 'space-evenly',
+    marginLeft: 10,
+  },
+  kabarSheetNameText: { justifyContent: 'space-evenly', marginLeft: 10 },
+  kabarSheetTimeStampText: { fontSize: 15, color: colors.bodyTextGrey },
+  kabarSheetContentText: {
+    fontSize: 15,
+    color: colors.bodyText,
+    lineHeight: 24,
   },
 });

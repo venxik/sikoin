@@ -32,19 +32,8 @@ const DaftarKoperasiStep1Screen = () => {
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.daftar} />
       {/* TOP SIDE */}
-      <View
-        style={{
-          backgroundColor: colors.tonalLightPrimary,
-          borderRadius: sizes.padding,
-          marginHorizontal: SCREEN_WIDTH * 0.05,
-          padding: SCREEN_WIDTH * 0.05,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            alignItems: 'center',
-          }}>
+      <View style={styles.topContainer}>
+        <View style={styles.topInnerContainer}>
           <AnimatedCircularProgress
             size={SCREEN_WIDTH * 0.13}
             rotation={180}
@@ -54,29 +43,14 @@ const DaftarKoperasiStep1Screen = () => {
             backgroundColor={colors.primaryLight}>
             {() => <Text style={{ fontWeight: 'bold' }}>1/2</Text>}
           </AnimatedCircularProgress>
-          <Text
-            style={{
-              marginLeft: 16,
-              fontSize: sizes.padding,
-              fontWeight: 'bold',
-              color: colors.black,
-            }}>
-            {strings.isi_data}
-          </Text>
+          <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
         <Text style={{ marginTop: 16, color: colors.black }}>
           {strings.daftar_koperasi_isi_data_title_1}
         </Text>
       </View>
       {/* BOTTOM SIDE */}
-      <View
-        style={{
-          marginTop: 16,
-          backgroundColor: colors.white,
-          borderRadius: sizes.padding,
-          margin: SCREEN_WIDTH * 0.05,
-          padding: SCREEN_WIDTH * 0.05,
-        }}>
+      <View style={styles.bottomContainer}>
         <TextboxBorder
           value={koperasiName}
           onChangeText={e => onChangeKoperasiName(e)}
@@ -102,12 +76,7 @@ const DaftarKoperasiStep1Screen = () => {
 
       <ButtonText
         onPress={navigateToStep2}
-        buttonContainerStyle={{
-          position: 'absolute',
-          bottom: sizes.padding,
-          width: '90%',
-          marginHorizontal: SCREEN_WIDTH * 0.05,
-        }}
+        buttonContainerStyle={styles.buttonContainer}
         text={strings.selanjutnya}
         icon={icons.arrow_right_button_white}
         iconLocation="right"
@@ -121,7 +90,35 @@ export default DaftarKoperasiStep1Screen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // width: '100%',
-    height: '100%',
+  },
+  topContainer: {
+    backgroundColor: colors.tonalLightPrimary,
+    borderRadius: sizes.padding,
+    marginHorizontal: SCREEN_WIDTH * 0.05,
+    padding: SCREEN_WIDTH * 0.05,
+  },
+  topInnerContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+  },
+  textTitle: {
+    marginLeft: 16,
+    fontSize: sizes.padding,
+    fontWeight: 'bold',
+    color: colors.black,
+  },
+  bottomContainer: {
+    marginTop: 16,
+    backgroundColor: colors.white,
+    borderRadius: sizes.padding,
+    margin: SCREEN_WIDTH * 0.05,
+    padding: SCREEN_WIDTH * 0.05,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: sizes.padding,
+    width: '90%',
+    marginHorizontal: SCREEN_WIDTH * 0.05,
   },
 });

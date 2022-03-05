@@ -15,17 +15,8 @@ const PengaturanScreen = () => {
   const [isNotifEnabled, setIsNotifEnabled] = useState(false);
   const toggleSwitch = () => setIsNotifEnabled(previousState => !previousState);
 
-  const navigateToOtherScreen = screen => {
-    navigation.navigate(screen);
-  };
-
   const renderNotificationSwitch = () => (
-    <Switch
-      // thumbColor={isNotifEnabled ? 'lightgreen' : '#f4f3f4'}
-      // ios_backgroundColor="#3e3e3e"
-      onValueChange={toggleSwitch}
-      value={isNotifEnabled}
-    />
+    <Switch onValueChange={toggleSwitch} value={isNotifEnabled} />
   );
   return (
     <SafeAreaView style={styles.container}>

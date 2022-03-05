@@ -58,6 +58,8 @@ const icon_pekerjaan = require('assets/icons/icon_pekerjaan.png');
 const icon_add_data = require('assets/icons/icon_add_data.png');
 const icon_pin = require('assets/icons/icon_pin.png');
 const icon_delete = require('assets/icons/icon_delete.png');
+const icon_info_primary = require('assets/icons/icon_info_primary.png');
+const icon_reset_ttd = require('assets/icons/icon_reset_ttd.png');
 
 export default {
   arrow_left_primary,
@@ -119,4 +121,6 @@ export default {
   icon_add_data,
   icon_pin,
   icon_delete,
+  icon_info_primary,
+  icon_reset_ttd,
 };
