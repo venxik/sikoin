@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, sizes } from '../constants';
-import { dimensions } from '../utils';
+import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const CardPromo = props => {
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    width: dimensions.SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
   },
   imageStyle: {

@@ -10,3 +10,11 @@ export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
 export const SET_EMAIL = 'SET_EMAIL';
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+
+export const DELETE_ALAMAT = 'DELETE_ALAMAT';
+export const ADD_ALAMAT = 'ADD_ALAMAT';
+export const UPDATE_ALAMAT = 'UPDATE_ALAMAT';
+
+export const ADD_KELUARGA = 'ADD_KELUARGA';
+export const UPDATE_KELUARGA = 'UPDATE_KELUARGA';
+export const DELETE_KELUARGA = 'DELETE_KELUARGA';

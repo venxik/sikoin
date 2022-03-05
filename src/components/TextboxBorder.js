@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, TextInput } from 'react-native';
-import { colors } from '../constants';
-import { dimensions } from '../utils';
+import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 const TextboxBorder = props => {
   const {
@@ -23,8 +22,8 @@ const TextboxBorder = props => {
         <Image
           source={icon}
           style={{
-            width: dimensions.ICON_SIZE,
-            height: dimensions.ICON_SIZE,
+            width: sizes.icon_size,
+            height: sizes.icon_size,
           }}
         />
       ) : null}
@@ -76,7 +75,7 @@ TextboxBorder.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    paddingHorizontal: dimensions.SCREEN_WIDTH * 0.04,
+    paddingHorizontal: SCREEN_WIDTH * 0.04,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',

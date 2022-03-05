@@ -1,18 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-} from 'react-native';
+import React, { useRef } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
 import SignatureScreen from 'react-native-signature-canvas';
 import { ButtonText, HeaderBack } from '../components';
-import { colors, icons } from '../constants';
-import { dimensions } from '../utils';
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../constants';
+import {} from '../utils';
 
 const Test2Screen = ({ onOK }) => {
   const ref = useRef();
@@ -67,7 +58,7 @@ const Test2Screen = ({ onOK }) => {
         style={{
           borderRadius: 20,
           backgroundColor: colors.white,
-          height: dimensions.SCREEN_HEIGHT * 0.63,
+          height: SCREEN_HEIGHT * 0.63,
           alignItems: 'center',
           marginHorizontal: 20,
           paddingTop: 20,
@@ -85,8 +76,8 @@ const Test2Screen = ({ onOK }) => {
         </Text>
         <View
           style={{
-            width: dimensions.SCREEN_WIDTH * 0.8,
-            height: dimensions.SCREEN_HEIGHT * 0.4,
+            width: SCREEN_WIDTH * 0.8,
+            height: SCREEN_HEIGHT * 0.4,
             borderWidth: 0.5,
             borderColor: colors.black,
             borderRadius: 20,
@@ -131,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    paddingHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+    paddingHorizontal: SCREEN_WIDTH * 0.05,
     // alignItems: 'center',
   },
 });

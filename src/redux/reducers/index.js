@@ -8,6 +8,8 @@ import PromoReducer from './PromoReducer';
 import MarketDataReducer from './MarketDataReducer';
 import ProfileDataReducer from './ProfileDataReducer';
 import SaldoSimpananReducer from './SaldoSimpananReducer';
+import AlamatReducer from './AlamatReducer';
+import RefKeluargaReducer from './RefKeluargaReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
@@ -19,6 +21,8 @@ const rootReducers = combineReducers({
   MarketDataReducer: MarketDataReducer,
   ProfileDataReducer: ProfileDataReducer,
   SaldoSimpananReducer: SaldoSimpananReducer,
+  AlamatReducer: AlamatReducer,
+  RefKeluargaReducer: RefKeluargaReducer,
 });
 
 export default rootReducers;

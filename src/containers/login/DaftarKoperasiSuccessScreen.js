@@ -4,8 +4,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { ButtonText, HeaderBack } from '../../components';
-import { colors, icons, sizes, strings } from '../../constants';
-import { dimensions } from '../../utils';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const DaftarKoperasiSuccessScreen = () => {
@@ -29,8 +28,8 @@ const DaftarKoperasiSuccessScreen = () => {
         style={{
           backgroundColor: colors.tonalLightPrimary,
           borderRadius: sizes.padding,
-          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
-          padding: dimensions.SCREEN_WIDTH * 0.05,
+          marginHorizontal: SCREEN_WIDTH * 0.05,
+          padding: SCREEN_WIDTH * 0.05,
         }}>
         <View
           style={{
@@ -39,7 +38,7 @@ const DaftarKoperasiSuccessScreen = () => {
             alignItems: 'center',
           }}>
           <AnimatedCircularProgress
-            size={dimensions.SCREEN_WIDTH * 0.13}
+            size={SCREEN_WIDTH * 0.13}
             rotation={180}
             width={3}
             fill={100}
@@ -49,8 +48,8 @@ const DaftarKoperasiSuccessScreen = () => {
               <Image
                 source={icons.icon_email}
                 style={{
-                  width: dimensions.SCREEN_WIDTH * 0.05,
-                  height: dimensions.SCREEN_WIDTH * 0.05,
+                  width: SCREEN_WIDTH * 0.05,
+                  height: SCREEN_WIDTH * 0.05,
                 }}
               />
             )}
@@ -98,7 +97,7 @@ const DaftarKoperasiSuccessScreen = () => {
           position: 'absolute',
           bottom: sizes.padding,
           width: '90%',
-          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+          marginHorizontal: SCREEN_WIDTH * 0.05,
         }}
         text={strings.kembali_ke_login}
         icon={icons.arrow_left_button_white}

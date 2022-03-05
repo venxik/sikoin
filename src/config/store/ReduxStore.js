@@ -14,4 +14,7 @@ const persistReducers = persistReducer(persistConfig, rootReducer);
 const store = createStore(persistReducers, applyMiddleware(thunk));
 const persist = persistStore(store);
 
+//this is for development
+persist.purge();
+
 export { store, persist };

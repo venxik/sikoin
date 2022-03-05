@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { colors, icons, sizes } from '../constants';
-import { currency, dimensions } from '../utils';
+import { formatter } from '../utils';
 import PropTypes from 'prop-types';
 
 const SaldoItemList = props => {
@@ -17,7 +17,7 @@ const SaldoItemList = props => {
               <Text style={styles.nominalStyle}>Rp</Text>
               <View style={styles.nominalDotStyle} />
               <Text style={styles.nominalStyle}>
-                {currency.formatStringToCurrencyNumber(nominal)}
+                {formatter.formatStringToCurrencyNumber(nominal)}
               </Text>
             </View>
           </View>
@@ -25,8 +25,8 @@ const SaldoItemList = props => {
             <Image
               source={icons.arrow_right_square}
               style={{
-                width: dimensions.ICON_SIZE,
-                height: dimensions.ICON_SIZE,
+                width: sizes.icon_size,
+                height: sizes.icon_size,
               }}
             />
           </TouchableOpacity>

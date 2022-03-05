@@ -1,11 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -27,9 +21,14 @@ import {
   HeaderBack,
   ProfilePicture,
 } from '../../components';
-import { colors, icons, images, strings } from '../../constants';
-import { dimensions, formatter } from '../../utils';
-import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { colors, icons, images, sizes, strings } from '../../constants';
+import { formatter } from '../../utils';
+import {
+  BottomSheetModal,
+  BottomSheetScrollView,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '@gorhom/bottom-sheet';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -49,11 +48,11 @@ const HomeScreen = () => {
     { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
   ];
 
-  const miniFlatlistSize = dimensions.SCREEN_HEIGHT * 0.17;
+  const miniFlatlistSize = SCREEN_HEIGHT * 0.17;
   const dotSize = 8;
-  const menuSize = dimensions.SCREEN_WIDTH * 0.35;
-  const cardKabarHeight = dimensions.SCREEN_HEIGHT * 0.5;
-  const cardPromoHeight = dimensions.SCREEN_HEIGHT * 0.7;
+  const menuSize = SCREEN_WIDTH * 0.35;
+  const cardKabarHeight = SCREEN_HEIGHT * 0.5;
+  const cardPromoHeight = SCREEN_HEIGHT * 0.7;
 
   const { kabarDataList } = useSelector(state => state.KabarReducer);
   const { promoDataList } = useSelector(state => state.PromoReducer);
@@ -71,8 +70,8 @@ const HomeScreen = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const handleSheetChanges = useCallback(index => {
-    console.log('handleSheetChanges', index);
+  const handleSheetChanges = useCallback(() => {
+    // console.log('handleSheetChanges', index);
   }, []);
 
   const selectKabarCard = item => {
@@ -107,8 +106,8 @@ const HomeScreen = () => {
           <Image
             source={icons.arrow_right_circle_primary}
             style={{
-              width: dimensions.ICON_SIZE,
-              height: dimensions.ICON_SIZE,
+              width: sizes.icon_size,
+              height: sizes.icon_size,
             }}
           />
         </TouchableOpacity>
@@ -311,8 +310,8 @@ const HomeScreen = () => {
                     <Image
                       source={icons.arrow_right_primary_2}
                       style={{
-                        width: dimensions.ICON_SIZE * 0.8,
-                        height: dimensions.ICON_SIZE * 0.8,
+                        width: sizes.icon_size * 0.8,
+                        height: sizes.icon_size * 0.8,
                         marginLeft: 10,
                       }}
                       resizeMode="contain"
@@ -386,8 +385,8 @@ const HomeScreen = () => {
           <Image
             source={icons.icon_scan}
             style={{
-              width: dimensions.ICON_SIZE,
-              height: dimensions.ICON_SIZE,
+              width: sizes.icon_size,
+              height: sizes.icon_size,
               marginRight: 20,
             }}
             resizeMode="contain"
@@ -397,8 +396,8 @@ const HomeScreen = () => {
           <Image
             source={icons.icon_notification}
             style={{
-              width: dimensions.ICON_SIZE,
-              height: dimensions.ICON_SIZE,
+              width: sizes.icon_size,
+              height: sizes.icon_size,
             }}
             resizeMode="contain"
           />
@@ -488,7 +487,7 @@ const HomeScreen = () => {
             backgroundColor: colors.white,
             borderRadius: 20,
             paddingVertical: 20,
-            marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+            marginHorizontal: SCREEN_WIDTH * 0.05,
           }}>
           <View style={{ marginBottom: 20 }}>{renderProfile()}</View>
           {renderMiniScrollView()}
@@ -496,7 +495,7 @@ const HomeScreen = () => {
         </View>
         <View
           style={{
-            marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+            marginHorizontal: SCREEN_WIDTH * 0.05,
           }}>
           {renderKabarCard()}
           {renderPromoCard()}

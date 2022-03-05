@@ -1,10 +1,10 @@
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack } from '../../components';
 import { colors, icons, images, strings } from '../../constants';
-import { dimensions } from '../../utils';
 
 const DaftarKoperasiIntroScreen = () => {
   const navigation = useNavigation();
@@ -69,7 +69,7 @@ const DaftarKoperasiIntroScreen = () => {
       <Text
         style={{
           position: 'absolute',
-          bottom: dimensions.SCREEN_HEIGHT * 0.4,
+          bottom: SCREEN_HEIGHT * 0.4,
           color: colors.white,
           fontSize: 24,
           paddingHorizontal: 40,
@@ -89,13 +89,13 @@ const DaftarKoperasiIntroScreen = () => {
             zIndex: 10,
             justifyContent: 'space-between',
             position: 'absolute',
-            bottom: dimensions.SCREEN_HEIGHT * 0.3,
+            bottom: SCREEN_HEIGHT * 0.3,
           }}>
           <ButtonText
             onPress={() => setIndex(2)}
             buttonContainerStyle={{
               width: '47%',
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
+              paddingVertical: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.white,
             }}
             text={strings.belum}
@@ -105,7 +105,7 @@ const DaftarKoperasiIntroScreen = () => {
             onPress={navigateToStep1Screen}
             buttonContainerStyle={{
               width: '47%',
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
+              paddingVertical: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.primary,
             }}
             text={strings.sudah}
@@ -119,13 +119,13 @@ const DaftarKoperasiIntroScreen = () => {
             paddingHorizontal: 40,
             zIndex: 10,
             position: 'absolute',
-            bottom: dimensions.SCREEN_HEIGHT * 0.3,
+            bottom: SCREEN_HEIGHT * 0.3,
           }}>
           <ButtonText
             onPress={() => setIndex(2)}
             buttonContainerStyle={{
               width: '100%',
-              paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
+              paddingVertical: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.white,
             }}
             text={strings.ayo}

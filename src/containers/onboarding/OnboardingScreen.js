@@ -11,8 +11,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { colors, icons, images, strings } from '../../constants';
-import { dimensions } from '../../utils';
+import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
 
 const dotSize = 4;
 
@@ -46,7 +45,7 @@ const OnboardingScreen = () => {
   };
 
   const renderDots = () => {
-    const dotPosition = Animated.divide(scrollX, dimensions.SCREEN_WIDTH);
+    const dotPosition = Animated.divide(scrollX, SCREEN_WIDTH);
     return (
       <View style={styles.dotContainer}>
         {onBoardings.map((item, index) => {
@@ -99,7 +98,7 @@ const OnboardingScreen = () => {
             <View
               key={index}
               style={{
-                width: dimensions.SCREEN_WIDTH,
+                width: SCREEN_WIDTH,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
@@ -112,8 +111,8 @@ const OnboardingScreen = () => {
                   source={item.img}
                   resizeMode="cover"
                   style={{
-                    width: dimensions.SCREEN_WIDTH * 0.8,
-                    height: dimensions.SCREEN_WIDTH * 0.8,
+                    width: SCREEN_WIDTH * 0.8,
+                    height: SCREEN_WIDTH * 0.8,
                   }}
                 />
               </View>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { colors } from '../constants';
-import { dimensions } from '../utils';
+import { colors, SCREEN_WIDTH } from '../constants';
 import PropTypes from 'prop-types';
 
 const ButtonText = props => {
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primary,
-    paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.03,
   },
   defaultText: {
     fontSize: 14,
@@ -110,8 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconStyle: {
-    width: dimensions.SCREEN_WIDTH * 0.05,
-    height: dimensions.SCREEN_WIDTH * 0.05,
+    width: SCREEN_WIDTH * 0.05,
+    height: SCREEN_WIDTH * 0.05,
   },
 });
 

@@ -1,8 +1,12 @@
 import { Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+
+export const SCREEN_HEIGHT = Dimensions.get('window').height;
+export const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export const sizes = {
-  padding: width * 0.05,
+  padding: SCREEN_WIDTH * 0.05,
+  icon_size: 24,
+  profile_pic_size: SCREEN_WIDTH * 0.25,
 };
 
-export default { sizes };
+export default { SCREEN_WIDTH, SCREEN_HEIGHT, sizes };

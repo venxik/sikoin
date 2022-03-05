@@ -105,4 +105,33 @@ export default {
   info_coopapp: 'Tentang Coop App',
   nama: 'Nama',
   no_telp: 'No Telp.',
+  biodata: 'Biodata',
+  ktp: 'KTP',
+  referensi_keluarga: 'Referensi Keluarga',
+  tanda_tangan: 'Tanda Tangan',
+  pekerjaan: 'Pekerjaan',
+  identitas_pekerjaan: 'Identitas & Pekerjaan',
+  ubah: 'Ubah',
+  tidak_jadi: 'Tidak Jadi',
+  hapus: 'Hapus',
+
+  // ALAMAT
+  yakin_hapus_alamat: 'Apakah kamu yakin ingin menghapus alamat ini?',
+  sukses_hapus_alamat: 'Alamat sudah dihapus',
+  daftar_alamat: 'Daftar Alamat',
+  tambah_alamat: 'Tambah Alamat',
+  ubah_alamat: 'Ubah Alamat',
+  judul_alamat: 'Judul Alamat',
+  alamat_lengkap: 'Alamat Lengkap',
+  rt: 'RT',
+  rw: 'RW',
+  provinsi: 'Provinsi',
+  kabupaten: 'Kabupaten',
+  kecamatan: 'Kecamatan',
+  kodepos: 'Kode Pos',
+
+  //REFRENSI KELUARGA
+  tambah_ref_keluarga: 'Tambah Referensi Keluarga',
+  no_ktp: 'Nomor KTP',
+  status_ref: 'Status Referensi',
 };

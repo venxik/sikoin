@@ -1,4 +1,8 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetScrollView,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
@@ -13,7 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { HeaderBack, Popup1Button, SaldoItemList } from '../../components';
 import { colors, icons, images, sizes, strings } from '../../constants';
-import { currency, dimensions } from '../../utils';
+import { formatter } from '../../utils';
 
 const Button = props => {
   const { icon, text } = props || {};
@@ -45,8 +49,8 @@ const SaldoSimpananMainScreen = ({ route }) => {
           <Image
             source={icons.icon_info}
             style={{
-              width: dimensions.ICON_SIZE,
-              height: dimensions.ICON_SIZE,
+              width: sizes.icon_size,
+              height: sizes.icon_size,
             }}
             resizeMode="contain"
           />
@@ -121,7 +125,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
       source={images.daftar_koperasi_bg}
       style={{
         width: '100%',
-        height: dimensions.SCREEN_HEIGHT * 0.8,
+        height: SCREEN_HEIGHT * 0.8,
       }}>
       <View
         style={{
@@ -133,8 +137,8 @@ const SaldoSimpananMainScreen = ({ route }) => {
         <Image
           source={showSaldo ? images.img_saldo_icon : images.img_simpanan_icon}
           style={{
-            width: dimensions.SCREEN_WIDTH * 0.4,
-            height: dimensions.SCREEN_WIDTH * 0.4,
+            width: SCREEN_WIDTH * 0.4,
+            height: SCREEN_WIDTH * 0.4,
           }}
         />
         <Text
@@ -164,8 +168,8 @@ const SaldoSimpananMainScreen = ({ route }) => {
               fontWeight: '700',
             }}>
             {showSaldo
-              ? currency.formatStringToCurrencyNumber(saldo.total)
-              : currency.formatStringToCurrencyNumber(simpanan.total)}
+              ? formatter.formatStringToCurrencyNumber(saldo.total)
+              : formatter.formatStringToCurrencyNumber(simpanan.total)}
           </Text>
         </View>
       </View>
@@ -228,7 +232,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
             ? strings.popup_saldo_content
             : strings.popup_simpanan_content
         }
-        showModal={showInfoModal}
+        showPopup={showInfoModal}
         onPress={() => setShowInfoModal(e => !e)}
         headerImage={
           showSaldo ? images.img_saldo_icon : images.img_simpanan_icon

@@ -6,23 +6,20 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
+  ImageBackground,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  ButtonText,
-  HeaderBack,
-  ProfilePicture,
-  TextboxForm,
-} from '../../components';
-import { colors, sizes, strings } from '../../constants';
+import { ButtonText, HeaderBack, TextboxForm } from '../../components';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { setProfileDataToReducer } from '../../redux/actions/ProfileAction';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { profileData } = useSelector(state => state.ProfileDataReducer);
-  const { name, code, email, noTelp } = profileData || {};
+  const { name, code, email, noTelp, profilePic } = profileData || {};
 
   const [emailValue, setEmailValue] = useState(email);
   const [nameValue, setNameValue] = useState(name);
@@ -63,7 +60,18 @@ const EditProfileScreen = () => {
         />
         <ScrollView>
           <View style={styles.innerContainer}>
-            <ProfilePicture />
+            <ImageBackground source={profilePic} style={styles.profilePicStyle}>
+              <View style={styles.iconContainer}>
+                <Image
+                  resizeMode="cover"
+                  source={icons.icon_edit_profle_picture}
+                  style={{
+                    width: sizes.icon_size * 2,
+                    height: sizes.icon_size * 2,
+                  }}
+                />
+              </View>
+            </ImageBackground>
             <View
               style={{ paddingHorizontal: 10, marginVertical: sizes.padding }}>
               <View
@@ -71,13 +79,11 @@ const EditProfileScreen = () => {
                 <Text style={styles.codeText}>{code}</Text>
               </View>
               <TextboxForm
-                style={{ marginBottom: sizes.padding }}
                 value={nameValue}
                 onChangeText={onChangeName}
                 title={strings.nama}
               />
               <TextboxForm
-                style={{ marginBottom: sizes.padding }}
                 value={phoneValue}
                 onChangeText={onChangePhone}
                 title={strings.no_telp}
@@ -122,5 +128,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     color: colors.bodyTextLightGrey,
+  },
+  profilePicStyle: {
+    width: SCREEN_WIDTH * 0.25,
+    height: SCREEN_WIDTH * 0.25,
+  },
+  iconContainer: {
+    borderRadius: SCREEN_WIDTH * 0.25,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

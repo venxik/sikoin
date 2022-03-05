@@ -19,6 +19,10 @@ const ProfileMainScreen = () => {
     navigation.navigate('EditProfileScreen');
   };
 
+  const navigateToOtherScreen = screen => {
+    navigation.navigate(screen);
+  };
+
   return (
     <View style={styles.container}>
       <HeaderBack
@@ -57,17 +61,16 @@ const ProfileMainScreen = () => {
           <SubmenuListItem
             icon={icons.icon_data_diri}
             title={strings.data_diri}
-            navigateTo={'DataDiriMainScreen'}
+            onPress={() => navigateToOtherScreen('DataDiriStackNavigator')}
           />
           <SubmenuListItem
             icon={icons.icon_data_koperasi}
             title={strings.data_koperasi}
-            navigateTo={'test'}
           />
           <SubmenuListItem
             icon={icons.icon_pengaturan}
             title={strings.pengaturan}
-            navigateTo={'PengaturanScreen'}
+            onPress={() => navigateToOtherScreen('PengaturanScreen')}
           />
         </View>
       </ScrollView>

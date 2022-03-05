@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
   Image,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
+import { SCREEN_WIDTH } from '../constants';
 
 const ProfilePicture = props => {
   const { onPress, style, disabled } = props || {};
@@ -27,26 +25,28 @@ const ProfilePicture = props => {
 ProfilePicture.propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
+  style: PropTypes.object,
 };
 
 ProfilePicture.defaultProp = {
   onPress: null,
   disabled: false,
+  style: null,
 };
 
 export default ProfilePicture;
 
 const styles = StyleSheet.create({
   profilePicStyle: {
-    width: dimensions.SCREEN_WIDTH * 0.25,
-    height: dimensions.SCREEN_WIDTH * 0.25,
+    width: SCREEN_WIDTH * 0.25,
+    height: SCREEN_WIDTH * 0.25,
   },
   koperasiPicStyle: {
-    width: dimensions.SCREEN_WIDTH * 0.2,
-    height: dimensions.SCREEN_WIDTH * 0.2,
+    width: SCREEN_WIDTH * 0.2,
+    height: SCREEN_WIDTH * 0.2,
     position: 'absolute',
-    bottom: -dimensions.SCREEN_WIDTH * 0.08,
-    right: -dimensions.SCREEN_WIDTH * 0.05,
+    bottom: -SCREEN_WIDTH * 0.08,
+    right: -SCREEN_WIDTH * 0.05,
   },
   container: {
     flex: 1,

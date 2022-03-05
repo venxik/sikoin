@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, sizes, strings } from '../constants';
-import { dimensions } from '../utils';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../constants';
 import ButtonText from './ButtonText';
 import PropTypes from 'prop-types';
 
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
     padding: sizes.padding,
-    width: dimensions.SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
     justifyContent: 'center',
   },

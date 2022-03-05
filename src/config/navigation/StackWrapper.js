@@ -7,15 +7,11 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as screens from '../../containers';
-import { dimensions } from '../../utils';
 import { navigationRef, isReadyRef } from '../navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { colors, icons } from '../../constants';
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 
 // import Linking from 'config/navigation/Linking';
-
-const { SCREEN_WIDTH, SCREEN_HEIGHT } = dimensions;
-
 // Top Stack
 const MainStack = createNativeStackNavigator();
 const ParentStack = createNativeStackNavigator();
@@ -24,6 +20,7 @@ const OnboardingStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
 const SaldoSimpananStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
+const DataDiriStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const shouldShowBottomNavigation = route => {
@@ -39,9 +36,9 @@ const shouldShowBottomNavigation = route => {
       return false;
     case 'EditProfileScreen':
       return false;
-    case 'DataDiriMainScreen':
-      return false;
     case 'PengaturanScreen':
+      return false;
+    case 'DataDiriStackNavigator':
       return false;
     default:
       return true;
@@ -87,7 +84,7 @@ const BottomTab = () => {
             />
           ),
           tabBarStyle: {
-            height: dimensions.SCREEN_HEIGHT * 0.1,
+            height: SCREEN_HEIGHT * 0.1,
             display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
           },
         })}
@@ -103,7 +100,7 @@ const BottomTab = () => {
             />
           ),
           tabBarStyle: {
-            height: dimensions.SCREEN_HEIGHT * 0.1,
+            height: SCREEN_HEIGHT * 0.1,
             display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
           },
         })}
@@ -121,7 +118,7 @@ const BottomTab = () => {
             />
           ),
           tabBarStyle: {
-            height: dimensions.SCREEN_HEIGHT * 0.1,
+            height: SCREEN_HEIGHT * 0.1,
             display: shouldShowBottomNavigation(route) ? 'flex' : 'none',
           },
         })}
@@ -147,14 +144,49 @@ const ProfileStackNavigator = () => (
       component={screens.EditProfileScreen}
     />
     <ProfileStack.Screen
-      name="DataDiriMainScreen"
-      component={screens.DataDiriMainScreen}
+      name="DataDiriStackNavigator"
+      component={DataDiriStackNavigator}
     />
     <ProfileStack.Screen
       name="PengaturanScreen"
       component={screens.PengaturanScreen}
     />
   </ProfileStack.Navigator>
+);
+
+const DataDiriStackNavigator = () => (
+  <DataDiriStack.Navigator
+    initialRouteName={'DataDiriMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <DataDiriStack.Screen
+      name="DataDiriMainScreen"
+      component={screens.DataDiriMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarAlamatMainScreen"
+      component={screens.DaftarAlamatMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarAlamatAddScreen"
+      component={screens.DaftarAlamatAddScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarAlamatMapScreen"
+      component={screens.DaftarAlamatMapScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarRefKeluargaAddScreen"
+      component={screens.DaftarRefKeluargaAddScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarRefKeluargaMainScreen"
+      component={screens.DaftarRefKeluargaMainScreen}
+    />
+  </DataDiriStack.Navigator>
 );
 
 const SaldoSimpananStackNavigator = () => (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { colors } from '../constants';
-import { dimensions } from '../utils';
+import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const ButtonIcon = props => {
@@ -56,18 +55,18 @@ ButtonIcon.defaultProp = {
 const styles = StyleSheet.create({
   defaultContainer: {
     borderRadius: 14,
-    paddingVertical: dimensions.SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.01,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.red,
+    backgroundColor: colors.primary,
   },
   defaultText: {
     fontSize: 14,
     color: colors.white,
   },
   iconStyle: {
-    width: 30,
-    height: 30,
+    width: sizes.padding,
+    height: sizes.padding,
     justifyContent: 'center',
     alignItems: 'center',
   },

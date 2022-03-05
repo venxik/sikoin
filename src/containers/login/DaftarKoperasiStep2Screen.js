@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack, TextboxBorder } from '../../components';
-import { colors, icons, sizes, strings } from '../../constants';
-import { dimensions } from '../../utils';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const DaftarKoperasiStep2Screen = () => {
@@ -27,8 +26,8 @@ const DaftarKoperasiStep2Screen = () => {
         style={{
           backgroundColor: colors.tonalLightPrimary,
           borderRadius: sizes.padding,
-          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
-          padding: dimensions.SCREEN_WIDTH * 0.05,
+          marginHorizontal: SCREEN_WIDTH * 0.05,
+          padding: SCREEN_WIDTH * 0.05,
         }}>
         <View
           style={{
@@ -37,7 +36,7 @@ const DaftarKoperasiStep2Screen = () => {
             alignItems: 'center',
           }}>
           <AnimatedCircularProgress
-            size={dimensions.SCREEN_WIDTH * 0.13}
+            size={SCREEN_WIDTH * 0.13}
             rotation={180}
             width={3}
             fill={50}
@@ -65,8 +64,8 @@ const DaftarKoperasiStep2Screen = () => {
           marginTop: 16,
           backgroundColor: colors.white,
           borderRadius: sizes.padding,
-          margin: dimensions.SCREEN_WIDTH * 0.05,
-          padding: dimensions.SCREEN_WIDTH * 0.05,
+          margin: SCREEN_WIDTH * 0.05,
+          padding: SCREEN_WIDTH * 0.05,
         }}>
         <TextboxBorder
           value={email}
@@ -86,7 +85,7 @@ const DaftarKoperasiStep2Screen = () => {
           position: 'absolute',
           bottom: sizes.padding,
           width: '90%',
-          marginHorizontal: dimensions.SCREEN_WIDTH * 0.05,
+          marginHorizontal: SCREEN_WIDTH * 0.05,
         }}
         text={strings.kirim_otp_ke_email}
         icon={icons.arrow_right_button_white}

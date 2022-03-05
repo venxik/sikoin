@@ -3,7 +3,6 @@ import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { colors, icons, sizes } from '../constants';
-import { dimensions } from '../utils';
 
 const HeaderBack = props => {
   const {
@@ -28,8 +27,8 @@ const HeaderBack = props => {
         <TouchableOpacity onPress={validatePress} disabled={disabled}>
           <Image
             style={{
-              width: dimensions.ICON_SIZE,
-              height: dimensions.ICON_SIZE,
+              width: sizes.icon_size,
+              height: sizes.icon_size,
             }}
             resizeMode={'stretch'}
             source={leftIcon}
@@ -76,7 +75,7 @@ const Styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: colors.black,
-    marginLeft: sizes.padding,
+    marginLeft: 12,
   },
   innerContainer: {
     flexDirection: 'row',

@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  TextInput,
-} from 'react-native';
-import { colors, icons } from '../constants';
-import { dimensions } from '../utils';
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { colors, icons, SCREEN_HEIGHT, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
@@ -30,6 +22,7 @@ const TextboxForm = props => {
       <Text style={styles.titleText}>{title}</Text>
       <View style={styles.innerContainer}>
         <TextInput
+          {...props}
           style={[styles.textBox, { ...textBoxStyle }]}
           autoCorrect={false}
           autoCapitalize="none"
@@ -45,8 +38,8 @@ const TextboxForm = props => {
         <Image
           source={icons.edit_textbox}
           style={{
-            width: dimensions.ICON_SIZE,
-            height: dimensions.ICON_SIZE,
+            width: sizes.icon_size,
+            height: sizes.icon_size,
           }}
         />
       </View>
@@ -82,8 +75,9 @@ TextboxForm.defaultProp = {
 
 const styles = StyleSheet.create({
   defaultContainer: {
-    minHeight: dimensions.SCREEN_HEIGHT * 0.06,
+    minHeight: SCREEN_HEIGHT * 0.06,
     backgroundColor: colors.white,
+    marginBottom: sizes.padding,
   },
   textBox: {
     width: '90%',

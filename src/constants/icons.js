@@ -48,6 +48,16 @@ const icon_data_koperasi = require('assets/icons/icon_data_koperasi.png');
 const icon_pengaturan = require('assets/icons/icon_pengaturan.png');
 const icon_info_black = require('assets/icons/icon_info_black.png');
 const icon_notification_black = require('assets/icons/icon_notification_black.png');
+const icon_copy_clipboard = require('assets/icons/icon_copy_clipboard.png');
+const icon_edit_profle_picture = require('assets/icons/icon_edit_profle_picture.png');
+const icon_daftar_alamat = require('assets/icons/icon_daftar_alamat.png');
+const icon_daftar_ktp = require('assets/icons/icon_daftar_ktp.png');
+const icon_referensi_keluarga = require('assets/icons/icon_referensi_keluarga.png');
+const icon_tanda_tangan = require('assets/icons/icon_tanda_tangan.png');
+const icon_pekerjaan = require('assets/icons/icon_pekerjaan.png');
+const icon_add_data = require('assets/icons/icon_add_data.png');
+const icon_pin = require('assets/icons/icon_pin.png');
+const icon_delete = require('assets/icons/icon_delete.png');
 
 export default {
   arrow_left_primary,
@@ -99,4 +109,14 @@ export default {
   icon_pengaturan,
   icon_info_black,
   icon_notification_black,
+  icon_copy_clipboard,
+  icon_edit_profle_picture,
+  icon_daftar_alamat,
+  icon_daftar_ktp,
+  icon_referensi_keluarga,
+  icon_tanda_tangan,
+  icon_pekerjaan,
+  icon_add_data,
+  icon_pin,
+  icon_delete,
 };

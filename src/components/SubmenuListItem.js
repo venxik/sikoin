@@ -6,12 +6,9 @@ import { dimensions } from '../utils';
 import PropTypes from 'prop-types';
 
 const SubmenuListItem = props => {
-  const { icon, title, navigateTo, style } = props || {};
-  const navigation = useNavigation();
+  const { icon, title, onPress, style } = props || {};
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(navigateTo)}
-      style={[styles.container, style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <View
         style={{
           flexDirection: 'row',
@@ -25,13 +22,13 @@ const SubmenuListItem = props => {
 };
 
 SubmenuListItem.propTypes = {
-  navigateTo: PropTypes.string,
+  onPress: PropTypes.func,
   title: PropTypes.string,
   icon: PropTypes.any,
 };
 
 SubmenuListItem.defaultProp = {
-  navigateTo: null,
+  onPress: null,
   title: null,
   icon: null,
 };
@@ -48,9 +45,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.strokeDarkGrey,
     paddingVertical: '8%',
   },
-  iconStyle: { width: sizes.padding, height: sizes.padding },
+  iconStyle: { width: sizes.padding * 1.2, height: sizes.padding },
   titleStyle: {
-    marginLeft: 10,
+    marginLeft: sizes.padding,
     color: colors.bodyText,
     fontSize: 15,
     fontWeight: '500',

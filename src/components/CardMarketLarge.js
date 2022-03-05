@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, icons, sizes, strings } from '../constants';
-import { dimensions } from '../utils';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../constants';
 import PropTypes from 'prop-types';
 
 const CardMarketLarge = props => {
@@ -17,8 +16,8 @@ const CardMarketLarge = props => {
             <Image
               source={icons.icon_wishlist}
               style={{
-                width: dimensions.ICON_SIZE,
-                height: dimensions.ICON_SIZE,
+                width: sizes.icon_size,
+                height: sizes.icon_size,
               }}
             />
           </TouchableOpacity>
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    width: dimensions.SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
   },
   imageStyle: {

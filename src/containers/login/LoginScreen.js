@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,8 +11,8 @@ import {
   TextboxBorder,
 } from '../../components';
 import { colors, icons, images, sizes, strings } from '../../constants';
-import { dimensions } from '../../utils';
 import { setEmailToReducer } from '../../redux/actions/LoginAction';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '@gorhom/bottom-sheet';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -64,7 +64,7 @@ const LoginScreen = () => {
         buttonRightTitle={strings.reset}
         headerText={strings.popup_lupa_password_title}
         contentText={strings.popup_lupa_password_desc}
-        showModal={showForgetPassModal}
+        showPopup={showForgetPassModal}
         headerImage={icons.icon_info_popup}
         customContent={
           <View
@@ -75,7 +75,7 @@ const LoginScreen = () => {
             }}>
             <TextboxBorder
               style={{
-                marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
+                marginHorizontal: SCREEN_WIDTH * 0.1,
                 marginTop: 10,
                 width: '100%',
                 paddingHorizontal: 5,
@@ -91,22 +91,22 @@ const LoginScreen = () => {
       <Popup1Button
         headerText={strings.popup_lupa_password_success_title}
         contentText={strings.popup_lupa_password_success_desc}
-        showModal={showForgetPassSuccessModal}
+        showPopup={showForgetPassSuccessModal}
         onPress={() => setShowForgetPassSuccessModal(false)}
         headerImage={icons.popup_success}
       />
       <Image
         source={images.login_hi}
         style={{
-          width: dimensions.SCREEN_WIDTH * 0.5,
-          height: dimensions.SCREEN_WIDTH * 0.5,
-          marginBottom: dimensions.SCREEN_HEIGHT * 0.1,
+          width: SCREEN_WIDTH * 0.5,
+          height: SCREEN_WIDTH * 0.5,
+          marginBottom: SCREEN_HEIGHT * 0.1,
         }}
       />
       <View style={{ width: '100%' }}>
         <TextboxBorder
           style={{
-            marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
+            marginHorizontal: SCREEN_WIDTH * 0.1,
           }}
           value={email}
           onChangeText={e => onChangeEmailText(e)}
@@ -116,8 +116,8 @@ const LoginScreen = () => {
         />
         <TextboxBorder
           style={{
-            marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
-            marginTop: dimensions.SCREEN_HEIGHT * 0.02,
+            marginHorizontal: SCREEN_WIDTH * 0.1,
+            marginTop: SCREEN_HEIGHT * 0.02,
           }}
           value={password}
           onChangeText={e => onChangePasswordText(e)}
@@ -130,7 +130,7 @@ const LoginScreen = () => {
           <ButtonText
             onPress={navigateToHomeScreen}
             buttonContainerStyle={{
-              marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
+              marginHorizontal: SCREEN_WIDTH * 0.1,
               backgroundColor: colors.primary,
             }}
             text={strings.masuk}
@@ -138,8 +138,8 @@ const LoginScreen = () => {
           <ButtonText
             onPress={navigateToDaftarKoperasi}
             buttonContainerStyle={{
-              marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
-              marginTop: dimensions.SCREEN_WIDTH * 0.03,
+              marginHorizontal: SCREEN_WIDTH * 0.1,
+              marginTop: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalPrimary,
             }}
             textStyle={{ color: colors.primary }}
@@ -148,8 +148,8 @@ const LoginScreen = () => {
           <ButtonText
             onPress={() => setShowForgetPassModal(true)}
             buttonContainerStyle={{
-              marginHorizontal: dimensions.SCREEN_WIDTH * 0.1,
-              marginTop: dimensions.SCREEN_WIDTH * 0.03,
+              marginHorizontal: SCREEN_WIDTH * 0.1,
+              marginTop: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalLightPrimary,
             }}
             textStyle={{ color: colors.primary }}

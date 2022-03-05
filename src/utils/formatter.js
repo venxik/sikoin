@@ -1,9 +1,11 @@
 const formatStringToCurrencyNumber = number => {
-  let formattedNumber;
-  formattedNumber = new Intl.NumberFormat('en-ID', {
-    minimumFractionDigits: 0,
-  }).format(number);
-  return formattedNumber;
+  if (number) {
+    let formattedNumber;
+    formattedNumber = new Intl.NumberFormat('en-ID', {
+      minimumFractionDigits: 0,
+    }).format(number);
+    return formattedNumber;
+  }
 };
 
 const validateEmail = email => {

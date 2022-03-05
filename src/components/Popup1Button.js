@@ -2,12 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, Modal, Image } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
-import { colors, sizes, strings } from '../constants';
-import { dimensions } from '../utils';
+import { colors, SCREEN_WIDTH, sizes, strings } from '../constants';
 
 const Popup1Button = props => {
   const {
-    showModal,
+    showPopup,
     headerText,
     contentText,
     onPress,
@@ -22,14 +21,14 @@ const Popup1Button = props => {
   // const scaleValue = useRef(new Animated.Value(0)).current;
 
   // useEffect(() => {
-  //   if (showModal) {
+  //   if (showPopup) {
   //     Animated.spring(scaleValue, {
   //       toValue: 1,
   //       duration: 200,
   //       useNativeDriver: true,
   //     }).start();
   //   }
-  // }, [showModal]);
+  // }, [showPopup]);
 
   const closeModal = () => {
     // Animated.timing(scaleValue, {
@@ -44,7 +43,7 @@ const Popup1Button = props => {
   };
 
   return (
-    <Modal animationType="slide" transparent={true} visible={showModal}>
+    <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={styles.modalMainView}>
         <View style={[styles.modalView]}>
           {headerImage && (
@@ -52,8 +51,8 @@ const Popup1Button = props => {
               source={headerImage}
               style={[
                 {
-                  width: dimensions.SCREEN_WIDTH * 0.2,
-                  height: dimensions.SCREEN_WIDTH * 0.2,
+                  width: SCREEN_WIDTH * 0.2,
+                  height: SCREEN_WIDTH * 0.2,
                   marginVertical: 30,
                 },
                 { ...iconStyle },
@@ -86,7 +85,7 @@ const Popup1Button = props => {
 };
 
 Popup1Button.propTypes = {
-  showModal: PropTypes.bool,
+  showPopup: PropTypes.bool,
   headerText: PropTypes.string,
   contentText: PropTypes.string,
   onPress: PropTypes.func,
@@ -99,7 +98,7 @@ Popup1Button.propTypes = {
 };
 
 Popup1Button.defaultProp = {
-  showModal: false,
+  showPopup: false,
   headerText: 'default',
   contentText: 'default',
   customContent: null,
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
   modalView: {
     width: '85%',

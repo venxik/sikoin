@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { colors, images, sizes, strings } from '../constants';
-import { dimensions } from '../utils';
+import { colors, images, SCREEN_WIDTH, sizes, strings } from '../constants';
 import ButtonText from './ButtonText';
 import PropTypes from 'prop-types';
 
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: dimensions.SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.8,
   },
   imageStyle: {
     ...StyleSheet.absoluteFillObject,

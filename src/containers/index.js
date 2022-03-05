@@ -14,6 +14,11 @@ import ProfileMainScreen from './profile/ProfileMainScreen';
 import EditProfileScreen from './profile/EditProfileScreen';
 import DataDiriMainScreen from './profile/DataDiriMainScreen';
 import PengaturanScreen from './profile/PengaturanScreen';
+import DaftarAlamatMainScreen from './profile/daftarAlamat/DaftarAlamatMainScreen';
+import DaftarAlamatAddScreen from './profile/daftarAlamat/DaftarAlamatAddScreen';
+import DaftarAlamatMapScreen from './profile/daftarAlamat/DaftarAlamatMapScreen';
+import DaftarRefKeluargaMainScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaMainScreen';
+import DaftarRefKeluargaAddScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaAddScreen';
 
 export {
   TestScreen,
@@ -32,4 +37,9 @@ export {
   EditProfileScreen,
   DataDiriMainScreen,
   PengaturanScreen,
+  DaftarAlamatMainScreen,
+  DaftarAlamatAddScreen,
+  DaftarAlamatMapScreen,
+  DaftarRefKeluargaAddScreen,
+  DaftarRefKeluargaMainScreen,
 };
