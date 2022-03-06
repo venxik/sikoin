@@ -210,6 +210,14 @@ const DataDiriStackNavigator = () => (
       name="DaftarTtdAddScreen"
       component={screens.DaftarTtdAddScreen}
     />
+    <DataDiriStack.Screen
+      name="DaftarPekerjaanMainScreen"
+      component={screens.DaftarPekerjaanMainScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarPekerjaanAddScreen"
+      component={screens.DaftarPekerjaanAddScreen}
+    />
   </DataDiriStack.Navigator>
 );
 
@@ -329,10 +337,7 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}>
-        <ParentStack.Screen
-          name="MainStack"
-          component={OnboardingStackNavigator}
-        />
+        <ParentStack.Screen name="MainStack" component={HomeStackNavigator} />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

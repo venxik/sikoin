@@ -311,6 +311,45 @@ const HomeScreen = () => {
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
+        {/* <Menu>
+          <MenuTrigger>
+            <Image
+              source={icons.icon_notification}
+              style={styles.icon}
+              resizeMode="contain"
+            />
+          </MenuTrigger>
+          <MenuOptions
+            optionsContainerStyle={{
+              padding: sizes.padding / 2,
+              borderRadius: sizes.padding,
+            }}>
+            <MenuOption onSelect={() => alert(`Save`)}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image
+                  source={icons.icon_notification}
+                  style={styles.icon}
+                  resizeMode="contain"
+                />
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    width: '80%',
+                  }}>
+                  This is only test, please disperse
+                </Text>
+              </View>
+            </MenuOption>
+            <MenuOption onSelect={() => alert(`Delete`)}>
+              <Text style={{ color: 'red' }}>Delete</Text>
+            </MenuOption>
+            <MenuOption
+              onSelect={() => alert(`Not called`)}
+              disabled={true}
+              text="Disabled"
+            />
+          </MenuOptions>
+        </Menu> */}
         <TouchableOpacity>
           <Image
             source={icons.icon_notification}

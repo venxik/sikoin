@@ -10,31 +10,29 @@ import {
   ListEmptyDataComponent,
 } from '../../../components';
 import { colors, icons, sizes, strings } from '../../../constants';
+import { formatter } from '../../../utils';
 
-const DaftarBiodataMainScreen = () => {
+const DaftarPekerjaanMainScreen = () => {
   const navigation = useNavigation();
 
   // const [showDeletePopup, setShowDeletePopup] = useState(false);
   // const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
-  const { biodataData } = useSelector(s => s.BiodataReducer) || {};
+  const { pekerjaanData } = useSelector(s => s.PekerjaanReducer) || {};
   const {
-    tempatLahir,
-    tanggalLahir,
-    gender,
-    golDarah,
-    kewarganegaraan,
-    pendidikanTerakhir,
-    agama,
-    statusPernikahan,
-    jumlahAnak,
-    pekerjaan,
-    detailPekerjaan,
-  } = biodataData || {};
+    masaKerjaTahun,
+    masaKerjaBulan,
+    gajiBulanan,
+    bank,
+    noRekening,
+    namaPerusahaan,
+    alamatKantor,
+    provinsiKota,
+  } = pekerjaanData || {};
 
   const navigateToAddScreen = update => {
-    navigation.navigate('DaftarBiodataAddScreen', {
+    navigation.navigate('DaftarPekerjaanAddScreen', {
       update: update,
-      data: biodataData,
+      data: pekerjaanData,
     });
   };
 
@@ -52,13 +50,13 @@ const DaftarBiodataMainScreen = () => {
   const renderEmpty = () => (
     <View style={{ flex: 1 }}>
       <ListEmptyDataComponent
-        text={strings.tambah_biodata}
+        text={strings.tambah_kepegawaian}
         onPress={navigateToAddScreen}
       />
     </View>
   );
 
-  const renderBiodata = () => {
+  const renderPekerjaan = () => {
     return (
       <ScrollView
         contentContainerStyle={{
@@ -67,34 +65,38 @@ const DaftarBiodataMainScreen = () => {
         <View style={styles.cardContainer}>
           <DetailItemListHeader />
           <DetailItemList
-            title={strings.tmptTglLahir}
-            content={tempatLahir.concat(', ' + tanggalLahir)}
-          />
-          <DetailItemList title={strings.gender} content={gender} />
-          <DetailItemList title={strings.golongan_darah} content={golDarah} />
-          <DetailItemList
-            title={strings.kewarganegaraan}
-            content={kewarganegaraan}
+            title={strings.gaji_bulanan}
+            content={`Rp ${formatter.formatStringToCurrencyNumber(
+              gajiBulanan,
+            )}`}
           />
           <DetailItemList
-            title={strings.pendidikan_terakhir}
-            content={pendidikanTerakhir}
+            title={strings.masa_kerja}
+            content={`${masaKerjaTahun} Tahun ${masaKerjaBulan} Bulan`}
           />
-          <DetailItemList title={strings.agama} content={agama} />
           <DetailItemList
-            title={strings.status_pernikahan}
-            content={statusPernikahan}
+            title={strings.gaji_pokok}
+            content={`Rp ${gajiBulanan}`}
           />
-          <DetailItemList title={strings.jumlah_anak} content={jumlahAnak} />
-          <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
           <DetailItemList
-            showBorder={false}
-            title={strings.detail_pekerjaan}
-            content={detailPekerjaan}
+            title={strings.rekening}
+            content={`${bank}\n${noRekening}`}
+          />
+          <DetailItemList
+            title={strings.nama_perusahaan}
+            content={namaPerusahaan}
+          />
+          <DetailItemList
+            title={strings.alamat_kantor}
+            content={alamatKantor}
+          />
+          <DetailItemList
+            title={strings.provinsi_kota}
+            content={provinsiKota}
           />
           <ButtonText
             onPress={() => navigateToAddScreen(true)}
-            text={strings.edit_biodata}
+            text={strings.edit_kepegawaian}
             icon={icons.icon_edit_profile}
             iconLocation="right"
             buttonContainerStyle={{ backgroundColor: colors.tonalLightPrimary }}
@@ -129,11 +131,11 @@ const DaftarBiodataMainScreen = () => {
         headerImage={icons.popup_success}
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       /> */}
-      {biodataData ? renderBiodata() : renderEmpty()}
+      {pekerjaanData ? renderPekerjaan() : renderEmpty()}
     </View>
   );
 };
-export default DaftarBiodataMainScreen;
+export default DaftarPekerjaanMainScreen;
 
 const styles = StyleSheet.create({
   container: {

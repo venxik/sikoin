@@ -27,13 +27,9 @@ const TextboxForm = props => {
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"
-          secureTextEntry={secureTextEntry}
-          placeholder={placeholder}
           editable={editable}
           onChangeText={onChangeText}
           value={value}
-          multiline={multiline}
-          keyboardType={keyboardType}
         />
         <Image
           source={icons.edit_textbox}
@@ -80,7 +76,7 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   textBox: {
-    width: '90%',
+    width: '80%',
     borderBottomWidth: 1,
     borderBottomColor: colors.strokeGrey,
     color: colors.bodyText,

@@ -5,6 +5,7 @@ import KtpAction from './KtpAction';
 import BiodataAction from './BiodataAction';
 import TtdAction from './TtdAction';
 import AlamatAction from './AlamatAction';
+import PekerjaanAction from './PekerjaanAction';
 
 export {
   DummyAction,
@@ -14,4 +15,5 @@ export {
   BiodataAction,
   TtdAction,
   AlamatAction,
+  PekerjaanAction,
 };

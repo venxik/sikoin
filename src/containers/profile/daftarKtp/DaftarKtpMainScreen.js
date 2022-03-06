@@ -7,8 +7,6 @@ import {
   ButtonText,
   HeaderBack,
   ListEmptyDataComponent,
-  Popup1Button,
-  Popup2Button,
 } from '../../../components';
 import {
   colors,

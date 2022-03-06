@@ -21,6 +21,7 @@ import ListEmptyDataComponent from './ListEmptyDataComponent';
 import CardRefKeluarga from './CardRefKeluarga';
 import DetailItemList from './DetailItemList';
 import Popup1ButtonScroll from './Popup1ButtonScroll';
+import DetailItemListHeader from './DetailItemListHeader';
 
 export {
   ButtonIcon,
@@ -46,4 +47,5 @@ export {
   CardRefKeluarga,
   DetailItemList,
   Popup1ButtonScroll,
+  DetailItemListHeader,
 };

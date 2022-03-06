@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
@@ -12,21 +11,22 @@ import { useDispatch } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { AlamatAction } from '../../../redux/actions';
+import { PekerjaanAction } from '../../../redux/actions';
 
-const DaftarAlamatAddScreen = ({ route }) => {
+const DaftarPekerjaanAddScreen = ({ route }) => {
   const { params } = route || {};
-  const { update, item, index } = params || {};
+  const { update, data } = params || {};
   const {
-    judul,
-    alamatLengkap,
-    rt,
-    rw,
-    provinsi,
-    kabupaten,
-    kecamatan,
-    kodepos,
-  } = item || {};
+    masaKerjaTahun,
+    masaKerjaBulan,
+    gajiBulanan,
+    bank,
+    noRekening,
+    namaPerusahaan,
+    alamatKantor,
+    provinsiKota,
+  } = data || {};
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -36,23 +36,20 @@ const DaftarAlamatAddScreen = ({ route }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      judul: update ? judul : '',
-      alamatLengkap: update ? alamatLengkap : '',
-      provinsi: update ? provinsi : '',
-      kabupaten: update ? kabupaten : '',
-      kecamatan: update ? kecamatan : '',
-      kodepos: update ? kodepos : '',
-      rt: update ? rt : '',
-      rw: update ? rw : '',
+      masaKerjaTahun: update ? masaKerjaTahun : '',
+      masaKerjaBulan: update ? masaKerjaBulan : '',
+      gajiBulanan: update ? gajiBulanan : '',
+      bank: update ? bank : '',
+      noRekening: update ? noRekening : '',
+      namaPerusahaan: update ? namaPerusahaan : '',
+      alamatKantor: update ? alamatKantor : '',
+      provinsiKota: update ? provinsiKota : '',
     },
   });
 
-  const onSubmit = data => {
-    if (update) {
-      dispatch(AlamatAction.updateAlamatToReducer({ index, data }));
-    } else {
-      dispatch(AlamatAction.addAlamatToReducer(data));
-    }
+  const submitData = data => {
+    console.log(data);
+    dispatch(PekerjaanAction.addPekerjaanDataToReducer(data));
     navigation.goBack();
   };
 
@@ -64,67 +61,39 @@ const DaftarAlamatAddScreen = ({ route }) => {
         keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
-          title={update ? strings.ubah_alamat : strings.tambah_alamat}
+          title={update ? strings.kepegawaian : strings.kepegawaian}
         />
         <ScrollView>
           <View style={styles.innerContainer}>
-            <Controller
-              control={control}
-              name="judul"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
-                  onBlur={onBlur}
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.judul_alamat}
-                />
-              )}
-              rules={{ required: true }}
-            />
-            <Controller
-              control={control}
-              name="alamatLengkap"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
-                  onBlur={onBlur}
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.alamat_lengkap}
-                  multiline
-                />
-              )}
-              rules={{ required: true }}
-            />
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
               <Controller
                 control={control}
-                name="rt"
+                name="masaKerjaTahun"
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextboxForm
-                    textBoxStyle={{ width: '70%' }}
                     style={{ width: '45%' }}
+                    onBlur={onBlur}
                     value={value}
                     onChangeText={value => onChange(value)}
-                    title={strings.rt}
-                    keyboardType="numeric"
-                    onBlur={onBlur}
+                    title={strings.masa_kerja_tahun}
                   />
                 )}
                 rules={{ required: true }}
               />
               <Controller
                 control={control}
-                name="rw"
+                name="masaKerjaBulan"
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextboxForm
-                    textBoxStyle={{ width: '70%' }}
                     style={{ width: '45%' }}
                     onBlur={onBlur}
                     value={value}
                     onChangeText={value => onChange(value)}
-                    title={strings.rw}
-                    keyboardType="numeric"
+                    title={strings.masa_kerja_bulan}
                   />
                 )}
                 rules={{ required: true }}
@@ -132,54 +101,78 @@ const DaftarAlamatAddScreen = ({ route }) => {
             </View>
             <Controller
               control={control}
-              name="provinsi"
+              name="gajiBulanan"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.provinsi}
+                  title={strings.gaji_bulanan}
                 />
               )}
               rules={{ required: true }}
             />
             <Controller
               control={control}
-              name="kabupaten"
+              name="bank"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.kabupaten}
+                  title={strings.bank}
                 />
               )}
               rules={{ required: true }}
             />
             <Controller
               control={control}
-              name="kecamatan"
+              name="noRekening"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.kecamatan}
+                  title={strings.no_rekening}
                 />
               )}
               rules={{ required: true }}
             />
-
             <Controller
               control={control}
-              name="kodepos"
+              name="namaPerusahaan"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextboxForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.kodepos}
-                  keyboardType="numeric"
+                  title={strings.nama_perusahaan}
+                />
+              )}
+              rules={{ required: true }}
+            />
+            <Controller
+              control={control}
+              name="alamatKantor"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextboxForm
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.alamat_kantor}
+                />
+              )}
+              rules={{ required: true }}
+            />
+            <Controller
+              control={control}
+              name="provinsiKota"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextboxForm
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.provinsi_kota}
                 />
               )}
               rules={{ required: true }}
@@ -190,7 +183,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
 
       <ButtonText
         shadow
-        onPress={handleSubmit(onSubmit)}
+        onPress={handleSubmit(submitData)}
         buttonContainerStyle={{
           position: 'absolute',
           bottom: sizes.padding,
@@ -202,7 +195,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
     </SafeAreaView>
   );
 };
-export default DaftarAlamatAddScreen;
+export default DaftarPekerjaanAddScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -211,6 +204,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     borderRadius: sizes.padding,
     backgroundColor: colors.white,
+    paddingTop: sizes.padding * 1.3,
     padding: sizes.padding,
     marginHorizontal: sizes.padding,
     marginBottom: 80,

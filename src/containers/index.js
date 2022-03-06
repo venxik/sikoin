@@ -21,6 +21,8 @@ import DaftarBiodataMainScreen from './profile/daftarBiodata/DaftarBiodataMainSc
 import DaftarBiodataAddScreen from './profile/daftarBiodata/DaftarBiodataAddScreen';
 import DaftarTtdMainScreen from './profile/daftarTtd/DaftarTtdMainScreen';
 import DaftarTtdAddScreen from './profile/daftarTtd/DaftarTtdAddScreen';
+import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/daftarPekerjaanMainScreen';
+import DaftarPekerjaanAddScreen from './profile/daftarPekerjaan/DaftarPekerjaanAddScreen';
 
 export {
   OnboardingScreen,
@@ -46,4 +48,6 @@ export {
   DaftarBiodataAddScreen,
   DaftarTtdAddScreen,
   DaftarTtdMainScreen,
+  DaftarPekerjaanMainScreen,
+  DaftarPekerjaanAddScreen,
 };

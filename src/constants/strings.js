@@ -164,4 +164,20 @@ export default {
   popup_ttd_title: 'Digital Signature CoopApp',
   gambar_ttd: 'Gambar Tanda tanganmu dibawah ini',
   popup_ttd_content: `Tanda Tangan Elektronik (Digital Signature) CoopApp sudah berdasarkan Pasal 1 Angka 12 Undang-Undang Nomor 19 Tahun 2016 tentang Informasi dan Transaksi Elektronik bahwa : \n\n “Tanda Tangan Elektronik adalah tanda tangan yang terdiri atas Informasi Elektronik yang dilekatkan, terasosiasi atau terkait dengan Informasi Elektronik lainnya yang digunakan sebagai alat verifikasi dan autentikasi secara sah.”`,
+
+  //PEKERJAAN
+  tambah_kepegawaian: 'Tambah Data Kepegawaian',
+  kepegawaian: 'Kepegawaian',
+  edit_kepegawaian: 'Edit Data Kepegawaian',
+  gaji_bulanan: 'Gaji Bulanan',
+  masa_kerja: 'Masa Kerja',
+  gaji_pokok: 'Gaji Pokok',
+  rekening: 'Rekening',
+  no_rekening: 'Nomor Rekening',
+  nama_perusahaan: 'Nama Perusahaan / PT',
+  alamat_kantor: 'Alamat Kantor',
+  provinsi_kota: 'Provinsi / Kota',
+  masa_kerja_tahun: 'Masa Kerja Tahun',
+  masa_kerja_bulan: 'Masa Kerja Bulan',
+  bank: 'Bank',
 };

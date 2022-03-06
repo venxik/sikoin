@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
 import { RouterContainer } from '../src/config/navigation';
 import { store, persist } from '../src/config/store/ReduxStore';
 import { fcmService } from './utils/FCMService';
@@ -11,6 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
+import { MenuProvider } from 'react-native-popup-menu';
 
 const App = () => {
   useEffect(() => {
@@ -58,17 +58,17 @@ const App = () => {
   }, []);
 
   return (
-    <PaperProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheetModalProvider>
-          <Provider store={store}>
-            <PersistGate persistor={persist} loading={null}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <Provider store={store}>
+          <PersistGate persistor={persist} loading={null}>
+            <MenuProvider>
               <RouterContainer />
-            </PersistGate>
-          </Provider>
-        </BottomSheetModalProvider>
-      </GestureHandlerRootView>
-    </PaperProvider>
+            </MenuProvider>
+          </PersistGate>
+        </Provider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 };
 

@@ -23,3 +23,5 @@ export const ADD_KTP = 'ADD_KTP';
 
 export const ADD_BIODATA = 'ADD_BIODATA';
 export const ADD_TTD = 'ADD_TTD';
+
+export const ADD_PEKERJAAN = 'ADD_PEKERJAAN';

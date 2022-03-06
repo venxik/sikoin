@@ -45,6 +45,7 @@ const DataDiriMainScreen = () => {
         <SubmenuListItem
           icon={icons.icon_pekerjaan}
           title={strings.pekerjaan}
+          onPress={() => navigateToOtherScreen('DaftarPekerjaanMainScreen')}
         />
       </View>
     </SafeAreaView>
