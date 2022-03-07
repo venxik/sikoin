@@ -4,18 +4,8 @@ import { colors, icons, SCREEN_HEIGHT, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
-  const {
-    style,
-    textBoxStyle,
-    value,
-    secureTextEntry,
-    onChangeText,
-    title,
-    editable,
-    multiline,
-    placeholder,
-    keyboardType,
-  } = props || {};
+  const { style, textBoxStyle, value, onChangeText, title, editable } =
+    props || {};
 
   return (
     <View style={[styles.defaultContainer, style]}>
