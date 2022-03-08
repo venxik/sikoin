@@ -9,14 +9,14 @@ import { useSelector } from 'react-redux';
 const CardAlamat = props => {
   const { item, onPressUbah, onPressDelete } = props || {};
   const { judul, alamatLengkap } = item;
-  const { name } = useSelector(state => state.ProfileReducer.profileData) || {};
+  const { nama } = useSelector(state => state.ProfileReducer.profileData) || {};
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Image source={icons.icon_pin} style={styles.pinIcon} />
         <Text style={styles.textJudul}>{judul}</Text>
       </View>
-      <Text style={styles.textName}>{name}</Text>
+      <Text style={styles.textName}>{nama}</Text>
       <Text style={styles.textAlamat}>{alamatLengkap}</Text>
       <View style={styles.bottomContainer}>
         <ButtonText

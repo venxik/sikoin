@@ -50,7 +50,7 @@ const DaftarKtpMainScreen = () => {
     <View style={{ flex: 1 }}>
       <ListEmptyDataComponent
         text={strings.tambah_data_ktp}
-        onPress={navigateToAddScreen}
+        onPress={() => navigateToAddScreen(false)}
       />
     </View>
   );
@@ -83,10 +83,7 @@ const DaftarKtpMainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.daftar_ktp}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.ktp} />
       {/* <Popup2Button
         buttonLeftOnPress={() => setShowDeletePopup(false)}
         buttonRightOnPress={() => confirmDeleteAlamat()}

@@ -1,4 +1,4 @@
-import { ADD_ALAMAT, DELETE_ALAMAT, UPDATE_ALAMAT } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   alamatList: [
@@ -61,30 +61,37 @@ const initialState = {
   error: null,
 };
 
-const AlamatReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_ALAMAT: {
-      return { ...state, alamatList: state.alamatList.concat(action.payload) };
-    }
-    case DELETE_ALAMAT: {
-      return {
-        alamatList: state.alamatList.filter(
-          (item, index) =>
-            item.judul.toLowerCase() !== action.payload.judul.toLowerCase(),
-        ),
-      };
-    }
-    case UPDATE_ALAMAT: {
-      return {
-        ...state,
-        alamatList: state.alamatList.map((p, index) =>
-          index === action.index ? action.payload : p,
-        ),
-      };
-    }
-    default:
-      return state;
-  }
-};
+const alamatSlice = createSlice({
+  name: 'alamatSlice',
+  initialState,
+  reducers: {
+    addAlamat: (state, { payload }) => {
+      state.alamatList.push(payload);
+    },
+    deleteAlamat: (state, { payload }) => {
+      state.alamatList = state.alamatList.filter(
+        item => item.judul.toLowerCase() != payload.judul.toLowerCase(),
+      );
+    },
+    updateAlamat: (state, { payload }) => {
+      const { data, index } = payload || {};
+      state.alamatList[index] = data;
+    },
+    addAlamatSuccess: state => {
+      state.error = null;
+    },
+    addAlamatFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default AlamatReducer;
+export const {
+  addAlamat,
+  addAlamatSuccess,
+  addAlamatFailed,
+  deleteAlamat,
+  updateAlamat,
+} = alamatSlice.actions;
+
+export default alamatSlice.reducer;

@@ -53,7 +53,7 @@ const DaftarBiodataMainScreen = () => {
     <View style={{ flex: 1 }}>
       <ListEmptyDataComponent
         text={strings.tambah_biodata}
-        onPress={navigateToAddScreen}
+        onPress={() => navigateToAddScreen(false)}
       />
     </View>
   );
@@ -107,10 +107,7 @@ const DaftarBiodataMainScreen = () => {
 
   return (
     <View style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.daftar_ktp}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.biodata} />
 
       {/* <Popup2Button
         buttonLeftOnPress={() => setShowDeletePopup(false)}

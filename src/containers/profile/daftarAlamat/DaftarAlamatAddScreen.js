@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { AlamatAction } from '../../../redux/actions';
+import { addAlamat, updateAlamat } from '../../../redux/reducers/AlamatReducer';
 
 const DaftarAlamatAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -49,9 +49,9 @@ const DaftarAlamatAddScreen = ({ route }) => {
 
   const onSubmit = data => {
     if (update) {
-      dispatch(AlamatAction.updateAlamatToReducer({ index, data }));
+      dispatch(updateAlamat({ index, data }));
     } else {
-      dispatch(AlamatAction.addAlamatToReducer(data));
+      dispatch(addAlamat(data));
     }
     navigation.goBack();
   };

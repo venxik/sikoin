@@ -54,6 +54,7 @@ export default {
   paham: 'Paham',
   simpan: 'Simpan',
   pilih_dot: 'Pilih...',
+  notifikasi: 'Notifikasi',
 
   /*HOME*/
   beranda: 'Beranda',
@@ -139,7 +140,8 @@ export default {
   //KTP
   daftar_ktp: 'Daftar KTP',
   tambah_data_ktp: 'Tambah Data KTP',
-  ubah_ktp: 'Ubah Data KTP Ku',
+  ubah_data_ktp: 'Ubah Data KTP Ku',
+  ubah_ktp: 'Ubah KTP',
   tambah_ktp: 'Tambah KTP',
 
   //BIODATA

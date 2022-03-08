@@ -64,7 +64,7 @@ const DaftarBiodataAddScreen = ({ route }) => {
         keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
-          title={update ? strings.ubah_alamat : strings.tambah_alamat}
+          title={strings.biodata}
         />
         <ScrollView>
           <View style={styles.innerContainer}>

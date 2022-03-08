@@ -1,5 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
 import { images } from '../../constants';
-import { SET_EMAIL } from '../types';
 
 const initialState = {
   promoDataList: [
@@ -25,13 +25,21 @@ const initialState = {
   error: null,
 };
 
-const PromoReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_EMAIL:
-      return { ...state, promoDataList: action.payload };
-    default:
-      return state;
-  }
-};
+const promoSlice = createSlice({
+  name: 'promoSlice',
+  initialState,
+  reducers: {
+    fetchPromoData: () => {},
+    fetchPromoDataSuccess: (state, { payload }) => {
+      state.promoDataList = payload;
+    },
+    fetchPromoDataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default PromoReducer;
+export const { fetchPromoData, fetchPromoDataFailed, fetchPromoDataSuccess } =
+  promoSlice.actions;
+
+export default promoSlice.reducer;

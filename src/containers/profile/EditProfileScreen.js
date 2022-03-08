@@ -13,16 +13,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import { ProfileAction } from '../../redux/actions';
+import { updateProfile } from '../../redux/reducers/ProfileReducer';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
-  const { name, code, email, noTelp, profilePic } = profileData || {};
+  const { nama, code, email, noTelp, profilePic } = profileData || {};
 
   const [emailValue, setEmailValue] = useState(email);
-  const [nameValue, setNameValue] = useState(name);
+  const [nameValue, setNameValue] = useState(nama);
   const [phoneValue, setPhoneValue] = useState(noTelp);
 
   const onChangeEmail = e => {
@@ -39,7 +39,7 @@ const EditProfileScreen = () => {
 
   const saveProfile = () => {
     dispatch(
-      ProfileAction.setProfileDataToReducer({
+      updateProfile({
         email: emailValue,
         nama: nameValue,
         noTelp: phoneValue,

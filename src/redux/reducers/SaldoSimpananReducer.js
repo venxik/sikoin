@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
   simpanan: {
     pokok: 1500000,
@@ -12,11 +14,34 @@ const initialState = {
   error: null,
 };
 
-const SaldoSimpananReducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+const saldoSimpananSlice = createSlice({
+  name: 'saldoSimpananSlice',
+  initialState,
+  reducers: {
+    fetchSimpananData: () => {},
+    fetchSimpananDataSuccess: (state, { payload }) => {
+      state.simpanan = payload;
+    },
+    fetchSimpananDataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    fetchSaldoData: () => {},
+    fetchSaldoDataSuccess: (state, { payload }) => {
+      state.saldo = payload;
+    },
+    fetchSaldoDataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default SaldoSimpananReducer;
+export const {
+  fetchSaldoData,
+  fetchSaldoDataFailed,
+  fetchSaldoDataSuccess,
+  fetchSimpananData,
+  fetchSimpananDataFailed,
+  fetchSimpananDataSuccess,
+} = saldoSimpananSlice.actions;
+
+export default saldoSimpananSlice.reducer;

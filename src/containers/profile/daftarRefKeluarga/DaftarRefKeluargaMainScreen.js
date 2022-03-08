@@ -16,7 +16,7 @@ import {
   Popup2Button,
 } from '../../../components';
 import { icons, sizes, strings } from '../../../constants';
-import { RefKeluargaAction } from '../../../redux/actions';
+import { deleteKeluarga } from '../../../redux/reducers/RefKeluargaReducer';
 
 const DaftarRefKeluargaMainScreen = () => {
   const navigation = useNavigation();
@@ -31,13 +31,13 @@ const DaftarRefKeluargaMainScreen = () => {
     navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
   };
 
-  const deleteKeluarga = item => {
+  const onPressDelete = item => {
     setShowDeletePopup(true);
     setSelectKeluarga(item);
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(RefKeluargaAction.deleteKelFromReducer(selectKeluarga));
+    dispatch(deleteKeluarga(selectKeluarga));
     setShowDeletePopup(false);
     setSuccessShowDeletePopup(true);
   };
@@ -45,10 +45,7 @@ const DaftarRefKeluargaMainScreen = () => {
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigateToAddScreen(false);
-          }}>
+        <TouchableOpacity onPress={() => navigateToAddScreen(false)}>
           <Image
             source={icons.icon_add_data}
             style={{
@@ -66,7 +63,7 @@ const DaftarRefKeluargaMainScreen = () => {
     <View style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.daftar_alamat}
+        title={strings.referensi_keluarga}
         rightIcon={renderRightButtonHeader()}
       />
       <Popup2Button
@@ -109,7 +106,7 @@ const DaftarRefKeluargaMainScreen = () => {
               <CardRefKeluarga
                 item={item}
                 onPressUbah={() => navigateToAddScreen(true, index, item)}
-                onPressDelete={() => deleteKeluarga(item)}
+                onPressDelete={() => onPressDelete(item)}
               />
             </View>
           );

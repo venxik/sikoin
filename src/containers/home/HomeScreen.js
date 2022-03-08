@@ -61,7 +61,7 @@ const HomeScreen = () => {
   const { promoDataList } = useSelector(state => state.PromoReducer) || {};
   const { marketDataList } = useSelector(state => state.MarketReducer) || {};
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
-  const { name, code, koperasiName } = profileData || {};
+  const { nama, code, koperasiName } = profileData || {};
   const [selectedKabar, setSelectedKabar] = useState({});
   const { simpanan, saldo } = useSelector(state => state.SaldoSimpananReducer);
 
@@ -298,7 +298,7 @@ const HomeScreen = () => {
       <View style={styles.profileContainer}>
         <ProfilePicture onPress={navigateToProfile} />
         <View style={styles.profileInnerContainer}>
-          <Text style={styles.textProfileName}>Hi, {name}!</Text>
+          <Text style={styles.textProfileName}>Hi, {nama}!</Text>
           <View>
             <Text style={styles.textProfileCode}>{code}</Text>
             <Text style={styles.textProfileKoperasi}>{koperasiName}</Text>
@@ -387,7 +387,7 @@ const HomeScreen = () => {
                 style={styles.kabarSheetProfileImage}
               />
               <View style={styles.kabarSheetNameContainer}>
-                <Text style={styles.kabarSheetNameText}>{name}</Text>
+                <Text style={styles.kabarSheetNameText}>{nama}</Text>
                 <Text style={styles.kabarSheetTimeStampText}>
                   {selectedKabar.timestamp}
                 </Text>

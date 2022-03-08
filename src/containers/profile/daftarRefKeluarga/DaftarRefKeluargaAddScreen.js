@@ -16,7 +16,10 @@ import {
 } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { RefKeluargaAction } from '../../../redux/actions';
+import {
+  addKeluarga,
+  updateKeluarga,
+} from '../../../redux/reducers/RefKeluargaReducer';
 
 const DaftarRefKeluargaAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -41,9 +44,9 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
 
   const onSubmit = data => {
     if (update) {
-      dispatch(RefKeluargaAction.updateKelToReducer({ index, data }));
+      dispatch(updateKeluarga({ index, data }));
     } else {
-      dispatch(RefKeluargaAction.addKelToReducer(data));
+      dispatch(addKeluarga(data));
     }
     navigation.goBack();
   };
@@ -56,7 +59,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
         keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
-          title={update ? strings.ubah_alamat : strings.tambah_alamat}
+          title={strings.referensi_keluarga}
         />
         <ScrollView>
           <View style={styles.innerContainer}>

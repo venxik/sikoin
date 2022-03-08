@@ -61,7 +61,7 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
         keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
-          title={update ? strings.kepegawaian : strings.kepegawaian}
+          title={strings.kepegawaian}
         />
         <ScrollView>
           <View style={styles.innerContainer}>

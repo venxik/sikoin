@@ -16,7 +16,7 @@ import {
 } from '../../../components';
 import CardAlamat from '../../../components/CardAlamat';
 import { icons, sizes, strings } from '../../../constants';
-import { AlamatAction } from '../../../redux/actions';
+import { deleteAlamat } from '../../../redux/reducers/AlamatReducer';
 
 const DaftarAlamatMainScreen = () => {
   const navigation = useNavigation();
@@ -31,13 +31,13 @@ const DaftarAlamatMainScreen = () => {
     navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
   };
 
-  const deleteAlamat = item => {
+  const onPressDeleteAlamat = item => {
     setShowDeletePopup(true);
     setSelectAlamat(item);
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(AlamatAction.deleteAlamatFromReducer(selectAlamat));
+    dispatch(deleteAlamat(selectAlamat));
     setShowDeletePopup(false);
     setSuccessShowDeletePopup(true);
   };
@@ -45,10 +45,7 @@ const DaftarAlamatMainScreen = () => {
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigateToAddScreen(false);
-          }}>
+        <TouchableOpacity onPress={() => navigateToAddScreen(false)}>
           <Image
             source={icons.icon_add_data}
             style={{
@@ -109,7 +106,7 @@ const DaftarAlamatMainScreen = () => {
               <CardAlamat
                 item={item}
                 onPressUbah={() => navigateToAddScreen(true, index, item)}
-                onPressDelete={() => deleteAlamat(item)}
+                onPressDelete={() => onPressDeleteAlamat(item)}
               />
             </View>
           );

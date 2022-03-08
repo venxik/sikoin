@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.strokeDarkGrey,
     paddingVertical: '8%',
   },
-  iconStyle: { width: sizes.padding * 1.2, height: sizes.padding },
+  iconStyle: { width: sizes.padding, height: sizes.padding },
   titleStyle: {
     marginLeft: sizes.padding,
     color: colors.bodyText,

@@ -1,5 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
 import { images } from '../../constants';
-import { SET_EMAIL } from '../types';
 
 const initialState = {
   kabarDataList: [
@@ -40,13 +40,21 @@ const initialState = {
   error: null,
 };
 
-const KabarReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_EMAIL:
-      return { ...state, kabarDataList: action.payload };
-    default:
-      return state;
-  }
-};
+const kabarSlice = createSlice({
+  name: 'kabarSlice',
+  initialState,
+  reducers: {
+    fetchKabar: () => {},
+    fetchKabarSuccess: (state, { payload }) => {
+      state.kabarDataList = payload;
+    },
+    fetchKabarFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default KabarReducer;
+export const { fetchKabarSuccess, fetchKabarFailed, fetchKabar } =
+  kabarSlice.actions;
+
+export default kabarSlice.reducer;

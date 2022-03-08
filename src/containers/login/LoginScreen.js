@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   ButtonText,
   Popup1Button,
@@ -19,11 +19,9 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { ProfileAction } from '../../redux/actions';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { email: emailReducer } = profileData || {};
@@ -37,7 +35,6 @@ const LoginScreen = () => {
 
   const onChangeEmailText = value => {
     setEmail(value);
-    dispatch(ProfileAction.setEmailToReducer(value));
   };
 
   const onChangePasswordText = value => {

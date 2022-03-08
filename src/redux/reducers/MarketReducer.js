@@ -1,5 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
 import { images } from '../../constants';
-import { SET_EMAIL } from '../types';
 
 const initialState = {
   marketDataList: [
@@ -27,13 +27,24 @@ const initialState = {
   error: null,
 };
 
-const MarketReducer = (state = initialState, action) => {
-  switch (action.type) {
-    // case SET_EMAIL:
-    //   return { ...state, marketDataList: action.payload };
-    default:
-      return state;
-  }
-};
+const marketSlice = createSlice({
+  name: 'marketSlice',
+  initialState,
+  reducers: {
+    fetchMarketData: () => {},
+    fetchMarketDataSuccess: (state, { payload }) => {
+      state.marketDataList = payload;
+    },
+    fetchMarketDataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default MarketReducer;
+export const {
+  fetchMarketData,
+  fetchMarketDataFailed,
+  fetchMarketDataSuccess,
+} = marketSlice.actions;
+
+export default marketSlice.reducer;

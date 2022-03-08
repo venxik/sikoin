@@ -77,7 +77,7 @@ const DaftarTtdAddScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack title="test" rightIcon={rightHeaderIcon()} />
+      <HeaderBack title={strings.tanda_tangan} rightIcon={rightHeaderIcon()} />
       <Popup1ButtonScroll
         headerText={strings.popup_ttd_title}
         contentText={strings.popup_ttd_content}

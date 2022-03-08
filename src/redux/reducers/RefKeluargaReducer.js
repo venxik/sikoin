@@ -1,4 +1,4 @@
-import { ADD_KELUARGA, DELETE_KELUARGA, UPDATE_KELUARGA } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   keluargaList: [
@@ -24,33 +24,37 @@ const initialState = {
   error: null,
 };
 
-const RefKeluargaReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_KELUARGA: {
-      return {
-        ...state,
-        keluargaList: state.keluargaList.concat(action.payload),
-      };
-    }
-    case DELETE_KELUARGA: {
-      return {
-        keluargaList: state.keluargaList.filter(
-          (item, index) =>
-            item.status.toLowerCase() !== action.payload.status.toLowerCase(),
-        ),
-      };
-    }
-    case UPDATE_KELUARGA: {
-      return {
-        ...state,
-        keluargaList: state.keluargaList.map((p, index) =>
-          index === action.index ? action.payload : p,
-        ),
-      };
-    }
-    default:
-      return state;
-  }
-};
+const refKeluargaSlice = createSlice({
+  name: 'refKeluargaSlice',
+  initialState,
+  reducers: {
+    addKeluarga: (state, { payload }) => {
+      state.keluargaList.push(payload);
+    },
+    deleteKeluarga: (state, { payload }) => {
+      state.keluargaList = state.keluargaList.filter(
+        item => item.status.toLowerCase() != payload.status.toLowerCase(),
+      );
+    },
+    updateKeluarga: (state, { payload }) => {
+      const { data, index } = payload || {};
+      state.keluargaList[index] = data;
+    },
+    addKeluargaSuccess: state => {
+      state.error = null;
+    },
+    addKeluargaFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default RefKeluargaReducer;
+export const {
+  addKeluarga,
+  addKeluargaFailed,
+  addKeluargaSuccess,
+  deleteKeluarga,
+  updateKeluarga,
+} = refKeluargaSlice.actions;
+
+export default refKeluargaSlice.reducer;

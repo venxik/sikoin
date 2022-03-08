@@ -51,7 +51,7 @@ const DaftarPekerjaanMainScreen = () => {
     <View style={{ flex: 1 }}>
       <ListEmptyDataComponent
         text={strings.tambah_kepegawaian}
-        onPress={navigateToAddScreen}
+        onPress={() => navigateToAddScreen(false)}
       />
     </View>
   );
@@ -111,7 +111,7 @@ const DaftarPekerjaanMainScreen = () => {
     <View style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.daftar_ktp}
+        title={strings.kepegawaian}
       />
 
       {/* <Popup2Button

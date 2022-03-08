@@ -42,10 +42,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: colors.strokeDarkGrey,
     paddingVertical: '8%',
-    marginHorizontal: 0,
   },
   titleStyle: {
-    marginLeft: 10,
+    marginLeft: sizes.padding,
     color: colors.bodyText,
     fontSize: 15,
     fontWeight: '500',

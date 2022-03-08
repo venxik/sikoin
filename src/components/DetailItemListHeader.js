@@ -5,12 +5,12 @@ import { colors } from '../constants';
 import ProfilePicture from './ProfilePicture';
 
 const DetailItemListHeader = () => {
-  const { name } = useSelector(s => s.ProfileReducer.profileData) || {};
+  const { nama } = useSelector(s => s.ProfileReducer.profileData) || {};
 
   return (
     <View style={styles.container}>
       <ProfilePicture disabled showKoperasi={false} />
-      <Text style={styles.nameText}>{name}</Text>
+      <Text style={styles.nameText}>{nama}</Text>
     </View>
   );
 };

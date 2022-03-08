@@ -27,7 +27,7 @@ const PengaturanScreen = () => {
       <View style={styles.innerContainer}>
         <SubmenuListItemCustom
           icon={icons.icon_notification_black}
-          title={strings.data_diri}
+          title={strings.notifikasi}
           customRightComponent={renderNotificationSwitch()}
         />
         <SubmenuListItem

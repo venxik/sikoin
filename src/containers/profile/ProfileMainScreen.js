@@ -13,7 +13,7 @@ import { colors, icons, sizes, strings } from '../../constants';
 const ProfileMainScreen = () => {
   const navigation = useNavigation();
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
-  const { name, code, koperasiName } = profileData || {};
+  const { nama, code, koperasiName } = profileData || {};
 
   const navigateToEditProfile = () => {
     navigation.navigate('EditProfileScreen');
@@ -35,7 +35,7 @@ const ProfileMainScreen = () => {
         <View style={styles.topContainer}>
           <ProfilePicture />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
-            <Text style={styles.nameText}>{name}</Text>
+            <Text style={styles.nameText}>{nama}</Text>
             <Text style={styles.koperasiText}>{koperasiName}</Text>
             <View style={{ marginTop: 10 }}>
               <Text style={styles.descText}>{code}</Text>

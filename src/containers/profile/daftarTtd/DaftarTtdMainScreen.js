@@ -52,10 +52,7 @@ const DaftarTtdMainScreen = () => {
           style={styles.imageKtp}
           resizeMode="contain"
         />
-        <ButtonText
-          onPress={() => navigateToAddScreen(true)}
-          text={strings.ubah_ttd}
-        />
+        <ButtonText onPress={navigateToAddScreen} text={strings.ubah_ttd} />
       </View>
     );
   };
@@ -64,7 +61,7 @@ const DaftarTtdMainScreen = () => {
     <View style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.daftar_ktp}
+        title={strings.tanda_tangan}
       />
       {/* <Popup2Button
         buttonLeftOnPress={() => setShowDeletePopup(false)}
