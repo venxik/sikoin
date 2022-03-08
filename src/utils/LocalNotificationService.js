@@ -7,12 +7,12 @@ class LocalNotificationService {
   configure = onOpenNotification => {
     PushNotification.configure({
       onRegister: function (token) {
-        console.log('[LocalNotificationService] onRegister: ', token);
+        // console.log('[LocalNotificationService] onRegister: ', token);
       },
 
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
-        console.log('[LocalNotificationService] onNotification:', notification);
+        // console.log('[LocalNotificationService] onNotification:', notification);
         if (!notification.data) {
           return;
         }

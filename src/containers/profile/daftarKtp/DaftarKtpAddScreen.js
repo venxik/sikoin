@@ -19,7 +19,7 @@ import {
   sizes,
   strings,
 } from '../../../constants';
-import { KtpAction } from '../../../redux/actions';
+import { addKtp } from '../../../redux/reducers/KtpReducer';
 
 const DaftarKtpAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -34,7 +34,7 @@ const DaftarKtpAddScreen = ({ route }) => {
   const submitKtp = () => {
     if (ktpImage && ktpNumber) {
       dispatch(
-        KtpAction.addKtpDataToReducer({
+        addKtp({
           ktpNumber: ktpNumber,
           ktpImage: ktpImage,
         }),

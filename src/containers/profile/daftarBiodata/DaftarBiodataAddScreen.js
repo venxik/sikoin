@@ -16,7 +16,7 @@ import {
 } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { BiodataAction } from '../../../redux/actions';
+import { addBiodata } from '../../../redux/reducers/BiodataReducer';
 
 const DaftarBiodataAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -51,7 +51,7 @@ const DaftarBiodataAddScreen = ({ route }) => {
   });
 
   const submitData = data => {
-    // dispatch(BiodataAction.addBiodataToReducer(data));
+    // dispatch(addBiodata(data));
     console.log(data);
     navigation.goBack();
   };

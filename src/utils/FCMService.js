@@ -29,7 +29,7 @@ class FCMService {
         }
       })
       .catch(error => {
-        console.log('[FCMService] Permission rejected ', error);
+        // console.log('[FCMService] Permission rejected ', error);
       });
   };
 
@@ -40,11 +40,11 @@ class FCMService {
         if (fcmToken) {
           onRegister(fcmToken);
         } else {
-          console.log('[FCMService] User does not have device token');
+          // console.log('[FCMService] User does not have device token');
         }
       })
       .catch(error => {
-        console.log('[FCMService] getToken rejected ', error);
+        // console.log('[FCMService] getToken rejected ', error);
       });
   };
 
@@ -55,7 +55,7 @@ class FCMService {
         this.getToken(onRegister);
       })
       .catch(error => {
-        console.log('[FCMService] Request Permission rejected ', error);
+        // console.log('[FCMService] Request Permission rejected ', error);
       });
   };
 
@@ -63,7 +63,7 @@ class FCMService {
     messaging()
       .deleteToken()
       .catch(error => {
-        console.log('[FCMService] Delete token error ', error);
+        // console.log('[FCMService] Delete token error ', error);
       });
   };
 
@@ -75,7 +75,7 @@ class FCMService {
     //When application is running, but in the background
     messaging().onNotificationOpenedApp(remoteMessage => {
       console.log(
-        '[FCMService] onNotificationOpenedApp Notification caused app to open from background ',
+        // '[FCMService] onNotificationOpenedApp Notification caused app to open from background ',
         remoteMessage,
       );
       if (remoteMessage) {
@@ -88,10 +88,10 @@ class FCMService {
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
-        console.log(
-          '[FCMService] onNotificationOpenedApp Notification caused app to open from quit state ',
-          remoteMessage,
-        );
+        // console.log(
+        //   '[FCMService] onNotificationOpenedApp Notification caused app to open from quit state ',
+        //   remoteMessage,
+        // );
         if (remoteMessage) {
           const notification = remoteMessage.notification;
           onOpenNotification(notification);
@@ -100,7 +100,7 @@ class FCMService {
 
     //Foreground state messages
     this.messageListener = messaging().onMessage(async remoteMessage => {
-      console.log('[FCMService] A new FCM message arrived! ', remoteMessage);
+      // console.log('[FCMService] A new FCM message arrived! ', remoteMessage);
       if (remoteMessage) {
         let notification = null;
         if (Platform.OS == 'ios') {
@@ -115,7 +115,7 @@ class FCMService {
 
     //Triggered when have new token
     messaging().onTokenRefresh(fcmToken => {
-      console.log('[FCMService] New token refresh: ', fcmToken);
+      // console.log('[FCMService] New token refresh: ', fcmToken);
       onRegister(fcmToken);
     });
   };

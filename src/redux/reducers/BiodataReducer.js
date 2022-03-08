@@ -1,4 +1,4 @@
-import { ADD_BIODATA } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   biodataData: {
@@ -17,17 +17,23 @@ const initialState = {
   error: null,
 };
 
-const BiodataReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_BIODATA: {
-      return {
-        ...state,
-        biodataData: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
+const biodataSlice = createSlice({
+  name: 'biodataSlice',
+  initialState,
+  reducers: {
+    addBiodata: (state, { payload }) => {
+      state.biodataData = payload;
+    },
+    addBiodataSuccess: (state, { payload }) => {
+      state.biodataData = payload;
+    },
+    addBiodataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default BiodataReducer;
+export const { addBiodata, addBiodataFailed, addBiodataSuccess } =
+  biodataSlice.actions;
+
+export default biodataSlice.reducer;

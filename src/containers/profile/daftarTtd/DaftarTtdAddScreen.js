@@ -23,7 +23,7 @@ import {
   sizes,
   strings,
 } from '../../../constants';
-import { TtdAction } from '../../../redux/actions';
+import { addTtd } from '../../../redux/reducers/TtdReducer';
 
 const DaftarTtdAddScreen = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const DaftarTtdAddScreen = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleOK = signature => {
-    dispatch(TtdAction.addTtdDataToReducer(signature));
+    dispatch(addTtd({ signature }));
     navigation.goBack();
   };
 
@@ -42,7 +42,6 @@ const DaftarTtdAddScreen = () => {
   };
 
   const handleConfirm = () => {
-    console.log('end');
     signatureRef.current.readSignature();
   };
 

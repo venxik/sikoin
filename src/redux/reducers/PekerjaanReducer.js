@@ -1,21 +1,27 @@
-import { ADD_PEKERJAAN } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   pekerjaanData: null,
   error: null,
 };
 
-const PekerjaanReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_PEKERJAAN: {
-      return {
-        ...state,
-        pekerjaanData: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
+const pekerjaanSlice = createSlice({
+  name: 'pekerjaanSlice',
+  initialState,
+  reducers: {
+    addPekerjaan: (state, { payload }) => {
+      state.pekerjaanData = payload;
+    },
+    addPekerjaanSuccess: (state, { payload }) => {
+      state.pekerjaanData = payload;
+    },
+    addPekerjaanFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default PekerjaanReducer;
+export const { addPekerjaan, addPekerjaanFailed, addPekerjaanSuccess } =
+  pekerjaanSlice.actions;
+
+export default pekerjaanSlice.reducer;

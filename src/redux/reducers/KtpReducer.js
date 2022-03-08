@@ -1,21 +1,26 @@
-import { ADD_KTP } from '../types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   ktpData: null,
   error: null,
 };
 
-const KtpReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_KTP: {
-      return {
-        ...state,
-        ktpData: action.payload,
-      };
-    }
-    default:
-      return state;
-  }
-};
+const ktpSlice = createSlice({
+  name: 'ktpSlice',
+  initialState,
+  reducers: {
+    addKtp: (state, { payload }) => {
+      state.ktpData = payload;
+    },
+    addKtpSuccess: (state, { payload }) => {
+      state.ktpData = payload;
+    },
+    addKtpFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+  },
+});
 
-export default KtpReducer;
+export const { addKtp, addKtpFailed, addKtpSuccess } = ktpSlice.actions;
+
+export default ktpSlice.reducer;

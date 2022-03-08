@@ -23,15 +23,15 @@ const App = () => {
         channelId: 'my-channel', // (required)
         channelName: 'My channel', // (required)
       },
-      created => console.log(`CreateChannel returned '${created}'`),
+      // created => console.log(`CreateChannel returned '${created}'`),
     );
 
     function onRegister(token) {
-      console.log('[App] onRegister: ', token);
+      // console.log('[App] onRegister: ', token);
     }
 
     function onNotification(notify) {
-      console.log('[App] onNotification: ', notify);
+      // console.log('[App] onNotification: ', notify);
       const options = {
         soundName: 'default',
         playSound: true,
@@ -46,12 +46,12 @@ const App = () => {
     }
 
     function onOpenNotification(notify) {
-      console.log('[App] onOpenNotification: ', notify);
+      // console.log('[App] onOpenNotification: ', notify);
       Alert.alert('Open Notification: ' + notify.body);
     }
 
     return () => {
-      console.log('[App] unregister');
+      // console.log('[App] unregister');
       fcmService.unregister();
       localNotificationService.unregister();
     };
