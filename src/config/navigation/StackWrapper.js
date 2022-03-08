@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as screens from '../../containers';
-import { navigationRef, isReadyRef } from '../navigation/NavigationService';
+import { navigationRef } from '../navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 
