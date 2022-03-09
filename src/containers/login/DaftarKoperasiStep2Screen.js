@@ -31,11 +31,11 @@ const DaftarKoperasiStep2Screen = () => {
             fill={50}
             tintColor={colors.primary}
             backgroundColor={colors.primaryLight}>
-            {() => <Text style={{ fontWeight: 'bold' }}>2/2</Text>}
+            {() => <Text style={styles.textCircle}>2/2</Text>}
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
-        <Text style={{ marginTop: 16, color: colors.black }}>
+        <Text style={styles.textTitle2}>
           {strings.daftar_koperasi_isi_data_title_2}
         </Text>
       </View>
@@ -48,7 +48,7 @@ const DaftarKoperasiStep2Screen = () => {
           placeholder={strings.masukan_nama_koperasimu}
           icon={icons.icon_email}
         />
-        <Text style={{ marginTop: sizes.padding, fontSize: 12 }}>
+        <Text style={styles.textHint}>
           {strings.daftar_koperasi_isi_data_hint_2}
         </Text>
       </View>
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   textTitle: {
     marginLeft: 16,
     fontSize: sizes.padding,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: colors.bodyText,
   },
   bottomContainer: {
@@ -99,5 +99,12 @@ const styles = StyleSheet.create({
     bottom: sizes.padding,
     width: '90%',
     marginHorizontal: SCREEN_WIDTH * 0.05,
+  },
+  textTitle2: { marginTop: 16, color: colors.bodyText },
+  textCircle: { fontWeight: '600', color: colors.bodyText },
+  textHint: {
+    marginTop: sizes.padding,
+    fontSize: 12,
+    color: colors.bodyTextGrey,
   },
 });

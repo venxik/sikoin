@@ -266,7 +266,7 @@ const HomeScreen = () => {
                       resizeMode="contain"
                     />
                   </View>
-                  <Text style={{ fontSize: 15 }}>
+                  <Text style={styles.textSaldo}>
                     Rp{' '}
                     {item.title === strings.simpanan
                       ? formatter.formatStringToCurrencyNumber(simpanan.total)
@@ -283,7 +283,7 @@ const HomeScreen = () => {
                     style={styles.iconMiniScrollButton}
                     resizeMode="contain"
                   />
-                  <Text>{item.button}</Text>
+                  <Text style={{ color: colors.bodyText }}>{item.button}</Text>
                 </TouchableOpacity>
               </View>
             );
@@ -470,7 +470,12 @@ const styles = StyleSheet.create({
     width: '50%',
     paddingVertical: 10,
   },
-  menuText: { fontSize: 16, position: 'absolute', bottom: 25 },
+  menuText: {
+    fontSize: 16,
+    position: 'absolute',
+    bottom: 25,
+    color: colors.bodyText,
+  },
   miniScrollContainer: {
     borderRadius: 20,
     backgroundColor: colors.tonalLightPrimary,
@@ -557,4 +562,5 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     lineHeight: 24,
   },
+  textSaldo: { fontSize: 15, color: colors.bodyTextGrey },
 });

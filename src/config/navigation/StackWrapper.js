@@ -316,20 +316,10 @@ const DaftarKoperasiStackNavigator = () => (
 );
 
 const ParentStackNavigator = () => {
-  React.useEffect(
-    () => () => {
-      isReadyRef.current = false;
-    },
-    [],
-  );
-
   return (
     <NavigationContainer
       // linking={Linking}
-      ref={navigationRef}
-      onReady={() => {
-        isReadyRef.current = true;
-      }}>
+      ref={navigationRef}>
       <ParentStack.Navigator
         initialRouteName={'MainStack'}
         screenOptions={{

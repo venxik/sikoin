@@ -3,42 +3,22 @@ import { View, StyleSheet, Image, TextInput } from 'react-native';
 import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 const TextboxBorder = props => {
-  const {
-    style,
-    icon,
-    value,
-    textBoxStyle,
-    secureTextEntry,
-    placeholder,
-    onChangeText,
-    editable,
-    multiline,
-    keyboardType,
-  } = props || {};
+  const { style, icon, value, textBoxStyle, placeholder, onChangeText } =
+    props || {};
 
   return (
     <View style={[styles.defaultContainer, style]}>
-      {icon ? (
-        <Image
-          source={icon}
-          style={{
-            width: sizes.icon_size,
-            height: sizes.icon_size,
-          }}
-        />
-      ) : null}
+      {icon ? <Image source={icon} style={styles.iconStyle} /> : null}
       <TextInput
-        style={[{ marginLeft: 10 }, textBoxStyle]}
+        {...props}
+        style={[styles.textInputStyle, textBoxStyle]}
+        placeholderTextColor={colors.bodyTextGrey}
         autoCorrect={false}
         autoCapitalize="none"
         clearButtonMode="always"
-        secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         onChangeText={onChangeText}
         value={value}
-        multiline={multiline}
-        keyboardType={keyboardType}
-        editable={editable}
       />
     </View>
   );
@@ -82,9 +62,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.strokeGrey,
   },
-  defaultText: {
-    fontSize: 14,
-    color: colors.white,
+  textInputStyle: { marginLeft: 10, color: colors.bodyText },
+  iconStyle: {
+    width: sizes.icon_size,
+    height: sizes.icon_size,
   },
 });
 

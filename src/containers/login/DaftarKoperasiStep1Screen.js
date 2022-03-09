@@ -41,11 +41,11 @@ const DaftarKoperasiStep1Screen = () => {
             fill={2}
             tintColor={colors.primary}
             backgroundColor={colors.primaryLight}>
-            {() => <Text style={{ fontWeight: 'bold' }}>1/2</Text>}
+            {() => <Text style={styles.textCircle}>1/2</Text>}
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
-        <Text style={{ marginTop: 16, color: colors.black }}>
+        <Text style={styles.textTitle2}>
           {strings.daftar_koperasi_isi_data_title_1}
         </Text>
       </View>
@@ -105,8 +105,8 @@ const styles = StyleSheet.create({
   textTitle: {
     marginLeft: 16,
     fontSize: sizes.padding,
-    fontWeight: 'bold',
-    color: colors.black,
+    fontWeight: '700',
+    color: colors.bodyText,
   },
   bottomContainer: {
     marginTop: 16,
@@ -121,4 +121,6 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: SCREEN_WIDTH * 0.05,
   },
+  textTitle2: { marginTop: 16, color: colors.bodyText },
+  textCircle: { fontWeight: '600', color: colors.bodyText },
 });

@@ -20,6 +20,7 @@ const DaftarKoperasiSuccessScreen = () => {
       }),
     );
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.daftar} />
@@ -40,7 +41,7 @@ const DaftarKoperasiSuccessScreen = () => {
         <Text style={styles.textContent1}>
           {strings.daftar_koperasi_success_1}
         </Text>
-        <Text style={styles.textEmail}>{email}Text</Text>
+        <Text style={styles.textEmail}>{email}</Text>
         <Text style={styles.textContent2}>
           {strings.daftar_koperasi_success_2}
         </Text>
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   textTitle: {
     marginLeft: 16,
     fontSize: sizes.padding,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: colors.bodyText,
   },
   bottomContainer: {

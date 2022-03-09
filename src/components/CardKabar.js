@@ -9,15 +9,15 @@ const CardKabar = props => {
   const { title, profile_pic, content, timestamp, name } = item || {};
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.titleStyle}>{title}</Text>
+      <Text style={styles.textTitle}>{title}</Text>
       <View style={styles.rowStyle}>
         <Image source={profile_pic} style={{ width: 60, height: 60 }} />
         <View style={styles.innerRowStyle}>
-          <Text style={{ color: colors.bodyText }}>{name}</Text>
-          <Text style={{ fontSize: 12 }}>{timestamp}</Text>
+          <Text style={styles.textName}>{name}</Text>
+          <Text style={styles.textDate}>{timestamp}</Text>
         </View>
       </View>
-      <Text style={styles.contentStyle}>{content}</Text>
+      <Text style={styles.textContent}>{content}</Text>
 
       <ButtonText
         icon={icons.arrow_up_circle_primary}
@@ -57,8 +57,14 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
     justifyContent: 'center',
   },
-  titleStyle: { fontSize: sizes.padding, color: colors.bodyText },
+  textTitle: { fontSize: sizes.padding, color: colors.bodyText },
   rowStyle: { flexDirection: 'row', marginTop: 30 },
   innerRowStyle: { justifyContent: 'space-evenly', marginLeft: 10 },
-  contentStyle: { marginVertical: sizes.padding, fontSize: 15 },
+  textContent: {
+    marginVertical: sizes.padding,
+    fontSize: 15,
+    color: colors.bodyTextGrey,
+  },
+  textName: { color: colors.bodyText },
+  textDate: { fontSize: 12, color: colors.bodyTextGrey },
 });

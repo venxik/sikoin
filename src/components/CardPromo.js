@@ -10,12 +10,8 @@ const CardPromo = props => {
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <Image source={image} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
-        <Text style={{ fontSize: sizes.padding, color: colors.bodyText }}>
-          {title}
-        </Text>
-        <Text style={{ marginVertical: sizes.padding, fontSize: 15 }}>
-          {content}
-        </Text>
+        <Text style={styles.textTitle}>{title}</Text>
+        <Text style={styles.textContent}>{content}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -50,5 +46,11 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     padding: sizes.padding,
+  },
+  textTitle: { fontSize: sizes.padding, color: colors.bodyText },
+  textContent: {
+    marginVertical: sizes.padding,
+    fontSize: 15,
+    color: colors.bodyText,
   },
 });
