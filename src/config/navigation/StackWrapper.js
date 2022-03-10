@@ -21,6 +21,8 @@ const LoginStack = createNativeStackNavigator();
 const SaldoSimpananStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const DataDiriStack = createNativeStackNavigator();
+const DiskonStack = createNativeStackNavigator();
+const TopupStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const shouldShowBottomNavigation = route => {
@@ -39,6 +41,10 @@ const shouldShowBottomNavigation = route => {
     case 'PengaturanScreen':
       return false;
     case 'DataDiriStackNavigator':
+      return false;
+    case 'DiskonStackNavigator':
+      return false;
+    case 'TopupStackNavigator':
       return false;
     default:
       return true;
@@ -126,6 +132,21 @@ const BottomTab = () => {
     </Tab.Navigator>
   );
 };
+
+const DiskonStackNavigator = () => (
+  <DiskonStack.Navigator
+    initialRouteName={'DiskonMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <DiskonStack.Screen
+      name="DiskonMainScreen"
+      component={screens.DiskonMainScreen}
+    />
+  </DiskonStack.Navigator>
+);
 
 const ProfileStackNavigator = () => (
   <ProfileStack.Navigator
@@ -236,6 +257,33 @@ const SaldoSimpananStackNavigator = () => (
   </SaldoSimpananStack.Navigator>
 );
 
+const TopupStackNavigator = () => (
+  <TopupStack.Navigator
+    initialRouteName={'TopupMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <TopupStack.Screen
+      name="TopupMainScreen"
+      component={screens.TopupMainScreen}
+    />
+    <TopupStack.Screen
+      name="TopupDetailScreen"
+      component={screens.TopupDetailScreen}
+    />
+    <TopupStack.Screen
+      name="TopupPembayaranScreen"
+      component={screens.TopupPembayaranScreen}
+    />
+    <TopupStack.Screen
+      name="TopupSuccessScreen"
+      component={screens.TopupSuccessScreen}
+    />
+  </TopupStack.Navigator>
+);
+
 const HomeStackNavigator = () => (
   <MainStack.Navigator
     initialRouteName={'HomeScreen'}
@@ -246,8 +294,16 @@ const HomeStackNavigator = () => (
     }}>
     <MainStack.Screen name="HomeScreen" component={screens.HomeScreen} />
     <MainStack.Screen
+      name="DiskonStackNavigator"
+      component={DiskonStackNavigator}
+    />
+    <MainStack.Screen
       name="SaldoSimpananStackNavigator"
       component={SaldoSimpananStackNavigator}
+    />
+    <MainStack.Screen
+      name="TopupStackNavigator"
+      component={TopupStackNavigator}
     />
   </MainStack.Navigator>
 );

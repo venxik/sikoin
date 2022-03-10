@@ -16,7 +16,11 @@ const PengaturanScreen = () => {
   const toggleSwitch = () => setIsNotifEnabled(previousState => !previousState);
 
   const renderNotificationSwitch = () => (
-    <Switch onValueChange={toggleSwitch} value={isNotifEnabled} />
+    <Switch
+      trackColor={{ false: colors.strokeGrey, true: colors.strokeGrey }}
+      onValueChange={toggleSwitch}
+      value={isNotifEnabled}
+    />
   );
   return (
     <SafeAreaView style={styles.container}>

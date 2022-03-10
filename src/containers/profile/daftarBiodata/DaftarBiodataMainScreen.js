@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
   ButtonText,
@@ -106,7 +106,7 @@ const DaftarBiodataMainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.biodata} />
 
       {/* <Popup2Button
@@ -127,7 +127,7 @@ const DaftarBiodataMainScreen = () => {
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       /> */}
       {biodataData ? renderBiodata() : renderEmpty()}
-    </View>
+    </SafeAreaView>
   );
 };
 export default DaftarBiodataMainScreen;

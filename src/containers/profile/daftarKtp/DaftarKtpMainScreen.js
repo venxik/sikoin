@@ -1,7 +1,14 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import {
   ButtonText,
@@ -82,7 +89,7 @@ const DaftarKtpMainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.ktp} />
       {/* <Popup2Button
         buttonLeftOnPress={() => setShowDeletePopup(false)}
@@ -102,7 +109,7 @@ const DaftarKtpMainScreen = () => {
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       /> */}
       {ktpData ? renderKtpCard() : renderEmpty()}
-    </View>
+    </SafeAreaView>
   );
 };
 export default DaftarKtpMainScreen;

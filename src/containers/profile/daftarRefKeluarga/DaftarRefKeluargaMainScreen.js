@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -60,7 +61,7 @@ const DaftarRefKeluargaMainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
         title={strings.referensi_keluarga}
@@ -112,7 +113,7 @@ const DaftarRefKeluargaMainScreen = () => {
           );
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 export default DaftarRefKeluargaMainScreen;

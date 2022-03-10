@@ -22,6 +22,8 @@ import CardRefKeluarga from './CardRefKeluarga';
 import DetailItemList from './DetailItemList';
 import Popup1ButtonScroll from './Popup1ButtonScroll';
 import DetailItemListHeader from './DetailItemListHeader';
+import MenuHeaderIcon from './MenuHeaderIcon';
+import CardDiskon from './CardDiskon';
 
 export {
   ButtonIcon,
@@ -48,4 +50,6 @@ export {
   DetailItemList,
   Popup1ButtonScroll,
   DetailItemListHeader,
+  MenuHeaderIcon,
+  CardDiskon,
 };

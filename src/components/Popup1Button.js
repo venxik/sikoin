@@ -16,6 +16,7 @@ const Popup1Button = props => {
     contentTextStyle,
     customButtonText,
     iconStyle,
+    style,
   } = props;
 
   // const scaleValue = useRef(new Animated.Value(0)).current;
@@ -45,18 +46,12 @@ const Popup1Button = props => {
   return (
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={styles.modalMainView}>
-        <View style={styles.modalView}>
+        <View style={[styles.modalView, style]}>
           {headerImage && (
             <Image
+              resizeMode="cover"
               source={headerImage}
-              style={[
-                {
-                  width: SCREEN_WIDTH * 0.2,
-                  height: SCREEN_WIDTH * 0.2,
-                  marginVertical: 30,
-                },
-                { ...iconStyle },
-              ]}
+              style={[styles.icon, { ...iconStyle }]}
             />
           )}
           <View style={{ alignItems: 'center' }}>
@@ -71,7 +66,7 @@ const Popup1Button = props => {
               </Text>
             )}
           </View>
-          {customContent && customContent}
+          {customContent}
           <View style={{ width: '100%' }}>
             <ButtonText
               text={customButtonText ? customButtonText : strings.tutup}
@@ -95,6 +90,7 @@ Popup1Button.propTypes = {
   contentTextStyle: PropTypes.object,
   customButtonText: PropTypes.string,
   iconStyle: PropTypes.object,
+  style: PropTypes.object,
 };
 
 Popup1Button.defaultProp = {
@@ -107,6 +103,7 @@ Popup1Button.defaultProp = {
   contentTextStyle: null,
   customButtonText: null,
   iconStyle: null,
+  style: null,
 };
 
 export default Popup1Button;
@@ -138,5 +135,10 @@ const styles = StyleSheet.create({
     paddingVertical: sizes.padding,
     textAlign: 'center',
     lineHeight: sizes.padding,
+  },
+  icon: {
+    width: SCREEN_WIDTH * 0.2,
+    height: SCREEN_WIDTH * 0.2,
+    marginVertical: 30,
   },
 });

@@ -23,6 +23,11 @@ import DaftarTtdMainScreen from './profile/daftarTtd/DaftarTtdMainScreen';
 import DaftarTtdAddScreen from './profile/daftarTtd/DaftarTtdAddScreen';
 import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/daftarPekerjaanMainScreen';
 import DaftarPekerjaanAddScreen from './profile/daftarPekerjaan/DaftarPekerjaanAddScreen';
+import DiskonMainScreen from './diskon/DiskonMainScreen';
+import TopupMainScreen from './saldoSimpanan/topup/TopupMainScreen';
+import TopupDetailScreen from './saldoSimpanan/topup/TopupDetailScreen';
+import TopupPembayaranScreen from './saldoSimpanan/topup/TopupPembayaranScreen';
+import TopupSuccessScreen from './saldoSimpanan/topup/TopupSuccessScreen';
 
 export {
   OnboardingScreen,
@@ -50,4 +55,9 @@ export {
   DaftarTtdMainScreen,
   DaftarPekerjaanMainScreen,
   DaftarPekerjaanAddScreen,
+  DiskonMainScreen,
+  TopupMainScreen,
+  TopupDetailScreen,
+  TopupPembayaranScreen,
+  TopupSuccessScreen,
 };

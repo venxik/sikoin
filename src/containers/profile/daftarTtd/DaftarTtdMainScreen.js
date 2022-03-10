@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
   ButtonText,
@@ -58,7 +58,7 @@ const DaftarTtdMainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
         title={strings.tanda_tangan}
@@ -81,7 +81,7 @@ const DaftarTtdMainScreen = () => {
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       /> */}
       {ttdBase64 ? renderTtd() : renderEmpty()}
-    </View>
+    </SafeAreaView>
   );
 };
 export default DaftarTtdMainScreen;

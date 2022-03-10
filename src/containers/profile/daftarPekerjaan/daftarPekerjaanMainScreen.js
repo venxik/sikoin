@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
   ButtonText,
@@ -108,7 +108,7 @@ const DaftarPekerjaanMainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
         title={strings.kepegawaian}
@@ -132,7 +132,7 @@ const DaftarPekerjaanMainScreen = () => {
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       /> */}
       {pekerjaanData ? renderPekerjaan() : renderEmpty()}
-    </View>
+    </SafeAreaView>
   );
 };
 export default DaftarPekerjaanMainScreen;

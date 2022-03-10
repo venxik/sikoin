@@ -18,6 +18,10 @@ const menu_dokumen = require('assets/images/menu_dokumen.png');
 const img_simpanan_icon = require('assets/images/img_simpanan_icon.png');
 const img_saldo_icon = require('assets/images/img_saldo_icon.png');
 const dummy_ktp = require('assets/images/dummy_ktp.png');
+const img_topup_popup = require('assets/images/img_topup_popup.png');
+const img_bca = require('assets/images/img_bca.png');
+const img_mandiri = require('assets/images/img_mandiri.png');
+const img_bni = require('assets/images/img_bni.png');
 
 export default {
   onboarding_1,
@@ -39,4 +43,8 @@ export default {
   img_saldo_icon,
   img_simpanan_icon,
   dummy_ktp,
+  img_topup_popup,
+  img_bca,
+  img_bni,
+  img_mandiri,
 };

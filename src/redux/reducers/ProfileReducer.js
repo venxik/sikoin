@@ -19,7 +19,6 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     updateProfile: (state, { payload }) => {
-      console.log(payload);
       state.profileData.email = payload.email;
       state.profileData.noTelp = payload.noTelp;
       state.profileData.nama = payload.nama;

@@ -89,6 +89,29 @@ export default {
   popup_saldo_content:
     'Saldo dapat digunakan sebagai alat transaksi pembayaran untuk :',
 
+  // TOPUP
+  top_up: 'Top Up',
+  pilih_jumlah: 'Pilih Jumlah',
+  ketik_manual: 'Ketik Manual',
+  simpanan_sukarela: 'Simpanan Sukarela',
+  voucher_belanja: 'Voucher Belanja',
+  pilih_saldo: 'Pilih saldo yang akan ditop-up',
+  konfirmasi: 'Konfirmasi',
+  ok: 'OK',
+  popup_topup_title: 'Tenang... semuanya aman!',
+  popup_topup_content:
+    'Teknologi cloud computing CoopApp selalu menjaga transaksi & kegiatan berkoperasimu secara real time.',
+  jumlah_topup: 'Jumlah Topup',
+  untuk_saldo: 'Untuk Saldo',
+  rincian: 'Rincian',
+  total: 'Total',
+  pilih_pembayaran: 'Pilih Metode Pembayaran',
+  pembayaran_title_1: 'Silahkan melakukan pembayaran sejumlah',
+  pembayaran_title_2: 'ke salah satu rekening di bawah ini',
+  topup_success_title: 'Terima kasih atas pembayaran Anda',
+  topup_success_content:
+    'Tim kami akan memverifikasi pembayaran Kamu. Dalam waktu 1x24 Jam tim kami akan menghubungi kamu melalui nomor terdaftar dan atau email.',
+  kembali: 'Kembali',
   /*MARKET*/
   beli_dgn_voucher: 'Beli Dengan Voucher',
   email: 'Email',

@@ -11,7 +11,6 @@ const ttdSlice = createSlice({
   reducers: {
     addTtd: (state, { payload }) => {
       const { signature } = payload || {};
-      console.log('hehe', signature);
       state.ttdBase64 = signature;
     },
     addTtdSuccess: (state, { payload }) => {

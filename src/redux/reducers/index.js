@@ -13,6 +13,7 @@ import KtpReducer from './KtpReducer';
 import BiodataReducer from './BiodataReducer';
 import TtdReducer from './TtdReducer';
 import PekerjaanReducer from './PekerjaanReducer';
+import DiskonReducer from './DiskonReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
@@ -29,6 +30,7 @@ const rootReducers = combineReducers({
   BiodataReducer: BiodataReducer,
   TtdReducer: TtdReducer,
   PekerjaanReducer: PekerjaanReducer,
+  DiskonReducer: DiskonReducer,
 });
 
 export default rootReducers;

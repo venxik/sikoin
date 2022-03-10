@@ -29,7 +29,7 @@ const Button = props => {
   return (
     <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
       <Image source={icon} style={{ width: 50, height: 50 }} />
-      <Text>{text}</Text>
+      <Text style={{ color: colors.bodyText }}>{text}</Text>
     </TouchableOpacity>
   );
 };

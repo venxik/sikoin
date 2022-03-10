@@ -53,7 +53,11 @@ const HomeScreen = () => {
     { image: images.menu_transaksi, label: strings.transaksi, navigateTo: '' },
     { image: images.menu_market, label: strings.market, navigateTo: '' },
     { image: images.menu_voucher, label: strings.voucher, navigateTo: '' },
-    { image: images.menu_diskon, label: strings.diskon, navigateTo: '' },
+    {
+      image: images.menu_diskon,
+      label: strings.diskon,
+      navigateTo: 'DiskonStackNavigator',
+    },
     { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
   ];
 
@@ -89,8 +93,14 @@ const HomeScreen = () => {
     });
   };
 
-  const navigateToProfile = () => {
-    navigation.navigate('ProfileStackNavigator');
+  const navigateToOtherScreen = screen => {
+    navigation.navigate(screen);
+  };
+
+  const onClickMiniScrollButton = showSaldo => {
+    if (showSaldo) {
+      navigation.navigate('TopupStackNavigator');
+    }
   };
 
   const cardHeader = title => {
@@ -190,7 +200,10 @@ const HomeScreen = () => {
     return (
       <View style={styles.menuContainer}>
         {menuList.map((item, index) => (
-          <TouchableOpacity key={index} style={styles.menuInnerContainer}>
+          <TouchableOpacity
+            key={index}
+            style={styles.menuInnerContainer}
+            onPress={() => navigateToOtherScreen(item.navigateTo)}>
             <Image
               source={item.image}
               style={{ width: menuSize, height: menuSize }}
@@ -273,7 +286,11 @@ const HomeScreen = () => {
                       : formatter.formatStringToCurrencyNumber(saldo.total)}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.miniScrollButton}>
+                <TouchableOpacity
+                  style={styles.miniScrollButton}
+                  onPress={() =>
+                    onClickMiniScrollButton(item.title === strings.saldo)
+                  }>
                   <Image
                     source={
                       item.button === strings.mutasi
@@ -296,7 +313,9 @@ const HomeScreen = () => {
   const renderProfile = () => {
     return (
       <View style={styles.profileContainer}>
-        <ProfilePicture onPress={navigateToProfile} />
+        <ProfilePicture
+          onPress={() => navigateToOtherScreen('ProfileStackNavigator')}
+        />
         <View style={styles.profileInnerContainer}>
           <Text style={styles.textProfileName}>Hi, {nama}!</Text>
           <View>

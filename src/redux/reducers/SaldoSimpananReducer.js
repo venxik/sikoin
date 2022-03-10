@@ -11,6 +11,7 @@ const initialState = {
     total: 1231222,
     simpananSukarela: 12312321,
   },
+  topUpNominal: '',
   error: null,
 };
 
@@ -32,6 +33,12 @@ const saldoSimpananSlice = createSlice({
     fetchSaldoDataFailed: (state, { payload }) => {
       state.error = payload;
     },
+    setTopupNominal: (state, { payload }) => {
+      state.topUpNominal = payload;
+    },
+    resetTopupNominal: state => {
+      state.topUpNominal = '';
+    },
   },
 });
 
@@ -42,6 +49,8 @@ export const {
   fetchSimpananData,
   fetchSimpananDataFailed,
   fetchSimpananDataSuccess,
+  setTopupNominal,
+  resetTopupNominal,
 } = saldoSimpananSlice.actions;
 
 export default saldoSimpananSlice.reducer;
