@@ -36,7 +36,7 @@ const PengaturanScreen = () => {
         />
         <SubmenuItemList
           icon={icons.icon_info_black}
-          title={strings.info_coopapp}
+          title={strings.info_sikoin}
         />
       </View>
     </SafeAreaView>

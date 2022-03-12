@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
+import AsyncStore from '../../utils/AsyncStore';
 
 const dotSize = 4;
 
@@ -41,6 +42,7 @@ const OnboardingScreen = () => {
   const scrollX = new Animated.Value(0);
 
   const navigateToLoginScreen = () => {
+    AsyncStore.storeData('@onboardingComplete', 'true');
     navigation.navigate('LoginStackNavigator');
   };
 

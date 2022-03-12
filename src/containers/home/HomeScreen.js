@@ -33,11 +33,11 @@ import {
 import { formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
-const miniFlatlistSize = SCREEN_HEIGHT * 0.17;
+const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
-const menuSize = SCREEN_WIDTH * 0.35;
-const cardKabarHeight = SCREEN_HEIGHT * 0.45;
-const cardPromoHeight = SCREEN_HEIGHT * 0.7;
+const menuSize = SCREEN_HEIGHT * 0.15;
+const cardKabarHeight = SCREEN_HEIGHT * 0.5;
+const cardPromoHeight = SCREEN_HEIGHT * 0.75;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -45,7 +45,7 @@ const HomeScreen = () => {
 
   const saldoFlatlist = [
     { title: strings.simpanan, button: strings.mutasi },
-    { title: strings.saldo, button: strings.topup },
+    { title: strings.saldo_belanja, button: strings.topup },
   ];
 
   const menuList = [
@@ -54,21 +54,11 @@ const HomeScreen = () => {
       label: strings.pinjaman,
       navigateTo: 'PinjamanStackNavigator',
     },
-    {
-      image: images.menu_transaksi,
-      label: strings.transaksi,
-      navigateTo: 'TransaksiStackNavigator',
-    },
     { image: images.menu_market, label: strings.market, navigateTo: '' },
     {
       image: images.menu_voucher,
       label: strings.voucher,
       navigateTo: 'VoucherStackNavigator',
-    },
-    {
-      image: images.menu_diskon,
-      label: strings.diskon,
-      navigateTo: 'DiskonStackNavigator',
     },
     { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
   ];
@@ -143,7 +133,7 @@ const HomeScreen = () => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar
                 item={item}
-                style={{ height: cardKabarHeight }}
+                // style={{ height: cardKabarHeight }}
                 onPress={() => selectKabarCard(item)}
               />
               {index === kabarDataList.length - 1 && (
@@ -208,7 +198,7 @@ const HomeScreen = () => {
     );
   };
 
-  const renderMenuFlatlist = () => {
+  const renderMainMenu = () => {
     return (
       <View style={styles.menuContainer}>
         {menuList.map((item, index) => (
@@ -280,7 +270,9 @@ const HomeScreen = () => {
               <View key={index} style={styles.miniScrollInnerContainer}>
                 <TouchableOpacity
                   onPress={() =>
-                    navigateToSaldoSimpanan(item.title === strings.saldo)
+                    navigateToSaldoSimpanan(
+                      item.title === strings.saldo_belanja,
+                    )
                   }
                   style={{ justifyContent: 'space-between' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -301,7 +293,9 @@ const HomeScreen = () => {
                 <TouchableOpacity
                   style={styles.miniScrollButton}
                   onPress={() =>
-                    onClickMiniScrollButton(item.title === strings.saldo)
+                    onClickMiniScrollButton(
+                      item.title === strings.saldo_belanja,
+                    )
                   }>
                   <Image
                     source={
@@ -416,7 +410,7 @@ const HomeScreen = () => {
           }}>
           <View style={{ marginBottom: 20 }}>{renderProfile()}</View>
           {renderMiniScrollView()}
-          {renderMenuFlatlist()}
+          {renderMainMenu()}
         </View>
         <View
           style={{
@@ -449,7 +443,7 @@ const styles = StyleSheet.create({
     height: sizes.icon_size,
   },
   menuContainer: {
-    marginTop: 40,
+    marginTop: sizes.padding,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -462,8 +456,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 16,
-    position: 'absolute',
-    bottom: 25,
+    marginTop: -sizes.padding,
     color: colors.bodyText,
   },
   miniScrollContainer: {
@@ -498,7 +491,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   miniScrollButton: { alignItems: 'center', marginRight: 20 },
-  iconMiniScrollButton: { width: 40, height: 40, marginBottom: 10 },
+  iconMiniScrollButton: { width: 40, height: 40 },
   profileContainer: {
     flexDirection: 'row',
     paddingHorizontal: 20,

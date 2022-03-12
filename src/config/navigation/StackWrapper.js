@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
@@ -10,6 +10,7 @@ import * as screens from '../../containers';
 import { navigationRef } from '../navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
+import AsyncStore from '../../utils/AsyncStore';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
@@ -27,6 +28,7 @@ const TopupStack = createNativeStackNavigator();
 const TransaksiStack = createNativeStackNavigator();
 const VoucherStack = createNativeStackNavigator();
 const PinjamanStack = createNativeStackNavigator();
+const ChatStack = createNativeStackNavigator();
 
 const shouldShowBottomNavigation = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -54,6 +56,8 @@ const shouldShowBottomNavigation = route => {
     case 'TransaksiStackNavigator':
       return false;
     case 'PinjamanStackNavigator':
+      return false;
+    case 'DataKoperasiMainScreen':
       return false;
     default:
       return true;
@@ -106,7 +110,7 @@ const BottomTab = () => {
       />
       <Tab.Screen
         name="ChatStackNavigator"
-        component={ProfileStackNavigator}
+        component={ChatStackNavigator}
         options={({ route }) => ({
           tabBarIcon: props => (
             <IconBottom
@@ -141,6 +145,21 @@ const BottomTab = () => {
     </Tab.Navigator>
   );
 };
+
+const ChatStackNavigator = () => (
+  <ChatStack.Navigator
+    initialRouteName={'ChatMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <ChatStack.Screen
+      name="ChatMainScreen"
+      component={screens.ChatMainScreen}
+    />
+  </ChatStack.Navigator>
+);
 
 const DiskonStackNavigator = () => (
   <DiskonStack.Navigator
@@ -235,14 +254,6 @@ const DataDiriStackNavigator = () => (
     <DataDiriStack.Screen
       name="DaftarBiodataAddScreen"
       component={screens.DaftarBiodataAddScreen}
-    />
-    <DataDiriStack.Screen
-      name="DaftarTtdMainScreen"
-      component={screens.DaftarTtdMainScreen}
-    />
-    <DataDiriStack.Screen
-      name="DaftarTtdAddScreen"
-      component={screens.DaftarTtdAddScreen}
     />
     <DataDiriStack.Screen
       name="DaftarPekerjaanMainScreen"
@@ -454,18 +465,34 @@ const DaftarKoperasiStackNavigator = () => (
 );
 
 const ParentStackNavigator = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      const data = await AsyncStore.getData('@onboardingComplete');
+      if (data !== null) {
+        setIsFirstLaunch(false);
+      }
+    })();
+  }, []);
+
   return (
     <NavigationContainer
       // linking={Linking}
       ref={navigationRef}>
       <ParentStack.Navigator
-        initialRouteName={'MainStack'}
+        // initialRouteName={'MainStack'}
         screenOptions={{
           headerMode: 'screen',
           headerShown: false,
           gestureEnabled: false,
         }}>
-        <ParentStack.Screen name="MainStack" component={LoginStackNavigator} />
+        <ParentStack.Screen
+          name="MainStack"
+          component={
+            isFirstLaunch ? OnboardingStackNavigator : LoginStackNavigator
+          }
+        />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

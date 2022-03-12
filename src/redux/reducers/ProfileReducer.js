@@ -8,7 +8,7 @@ const initialState = {
     nama: 'Test 12321321',
     code: 'JBC-0001',
     koperasiName: 'Jababeka & co',
-    email: 'sdsadasdas',
+    email: 'test@test.com',
     noTelp: '081312321321',
   },
   koperasiData: {

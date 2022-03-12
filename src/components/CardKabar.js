@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    padding: sizes.padding,
+    paddingHorizontal: sizes.padding,
     width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
     justifyContent: 'center',
   },
-  textTitle: { fontSize: sizes.padding, color: colors.bodyText },
-  rowStyle: { flexDirection: 'row', marginTop: 30 },
+  textTitle: { fontSize: 20, color: colors.bodyText },
+  rowStyle: { flexDirection: 'row', marginTop: SCREEN_WIDTH * 0.05 },
   innerRowStyle: { justifyContent: 'space-evenly', marginLeft: 10 },
   textContent: {
     marginVertical: sizes.padding,

@@ -15,7 +15,7 @@ const DetailItemList = props => {
         },
       ]}>
       <Text style={styles.titleText}>{title}</Text>
-      <Text style={styles.contentText}>{content}</Text>
+      <Text style={styles.contentText}>{content ? content : '-'}</Text>
     </View>
   );
 };
@@ -28,6 +28,8 @@ DetailItemList.propTypes = {
 
 DetailItemList.defaultProps = {
   showBorder: true,
+  content: '',
+  title: '',
 };
 
 export default DetailItemList;

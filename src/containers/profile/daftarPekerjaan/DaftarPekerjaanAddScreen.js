@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
-import { PekerjaanAction } from '../../../redux/actions';
 
 const DaftarPekerjaanAddScreen = ({ route }) => {
   const { params } = route || {};
@@ -49,7 +48,6 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
 
   const submitData = data => {
     console.log(data);
-    dispatch(PekerjaanAction.addPekerjaanDataToReducer(data));
     navigation.goBack();
   };
 

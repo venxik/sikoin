@@ -19,8 +19,6 @@ import DaftarKtpMainScreen from './profile/daftarKtp/DaftarKtpMainScreen';
 import DaftarKtpAddScreen from './profile/daftarKtp/DaftarKtpAddScreen';
 import DaftarBiodataMainScreen from './profile/daftarBiodata/DaftarBiodataMainScreen';
 import DaftarBiodataAddScreen from './profile/daftarBiodata/DaftarBiodataAddScreen';
-import DaftarTtdMainScreen from './profile/daftarTtd/DaftarTtdMainScreen';
-import DaftarTtdAddScreen from './profile/daftarTtd/DaftarTtdAddScreen';
 import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/daftarPekerjaanMainScreen';
 import DaftarPekerjaanAddScreen from './profile/daftarPekerjaan/DaftarPekerjaanAddScreen';
 import DiskonMainScreen from './diskon/DiskonMainScreen';
@@ -35,6 +33,7 @@ import PinjamanStep1 from './pinjaman/PinjamanStep1Screen';
 import PinjamanStep2 from './pinjaman/PinjamanStep2Screen';
 import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
 import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
+import ChatMainScreen from './chat/ChatMainScreen';
 
 export {
   OnboardingScreen,
@@ -58,8 +57,6 @@ export {
   DaftarKtpAddScreen,
   DaftarBiodataMainScreen,
   DaftarBiodataAddScreen,
-  DaftarTtdAddScreen,
-  DaftarTtdMainScreen,
   DaftarPekerjaanMainScreen,
   DaftarPekerjaanAddScreen,
   DiskonMainScreen,
@@ -74,4 +71,5 @@ export {
   PinjamanStep2,
   PinjamanStep3,
   PinjamanStep4,
+  ChatMainScreen,
 };

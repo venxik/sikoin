@@ -38,11 +38,6 @@ const DataDiriMainScreen = () => {
           onPress={() => navigateToOtherScreen('DaftarRefKeluargaMainScreen')}
         />
         <SubmenuItemList
-          icon={icons.icon_tanda_tangan}
-          title={strings.tanda_tangan}
-          onPress={() => navigateToOtherScreen('DaftarTtdMainScreen')}
-        />
-        <SubmenuItemList
           icon={icons.icon_pekerjaan}
           title={strings.pekerjaan}
           onPress={() => navigateToOtherScreen('DaftarPekerjaanMainScreen')}

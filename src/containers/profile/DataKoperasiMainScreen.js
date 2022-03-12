@@ -1,6 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, Image } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import { DetailItemList, HeaderBack } from '../../components';
 import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
@@ -16,18 +22,26 @@ const DataKoperasiMainScreen = () => {
         onPress={() => navigation.goBack()}
         title={strings.data_koperasi}
       />
-      <View style={styles.innerContainer}>
-        <Image
-          source={images.dummy_koperasi_pic}
-          style={styles.koperasiPic}
-          resizeMode="stretch"
-        />
-        <DetailItemList title={strings.nama_koperasi} content={namaKoperasi} />
-        <DetailItemList title={strings.no_badan_hukum} content={noBadanHukum} />
-        <DetailItemList title={strings.alamat} content={alamat} />
-        <DetailItemList title={strings.no_telp} content={noTelp} />
-        <DetailItemList title={strings.website} content={website} />
-      </View>
+      <ScrollView contentContainerStyle={{ paddingBottom: sizes.padding }}>
+        <View style={styles.innerContainer}>
+          <Image
+            source={images.dummy_koperasi_pic}
+            style={styles.koperasiPic}
+            resizeMode="stretch"
+          />
+          <DetailItemList
+            title={strings.nama_koperasi}
+            content={namaKoperasi}
+          />
+          <DetailItemList
+            title={strings.no_badan_hukum}
+            content={noBadanHukum}
+          />
+          <DetailItemList title={strings.alamat} content={alamat} />
+          <DetailItemList title={strings.no_telp} content={noTelp} />
+          <DetailItemList title={strings.website} content={website} />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

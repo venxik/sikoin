@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { updateProfile } from '../../redux/reducers/ProfileReducer';
+import { useForm, Controller } from 'react-hook-form';
+import { formatter } from '../../utils';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
@@ -21,32 +23,30 @@ const EditProfileScreen = () => {
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { nama, code, email, noTelp, profilePic } = profileData || {};
 
-  const [emailValue, setEmailValue] = useState(email);
-  const [nameValue, setNameValue] = useState(nama);
-  const [phoneValue, setPhoneValue] = useState(noTelp);
-
-  const onChangeEmail = e => {
-    setEmailValue(e);
-  };
-
-  const onChangeName = e => {
-    setNameValue(e);
-  };
-
-  const onChangePhone = e => {
-    setPhoneValue(e);
-  };
-
-  const saveProfile = () => {
+  const saveProfile = data => {
+    console.log(data);
+    const { email, nama, noTelp } = data || {};
     dispatch(
       updateProfile({
-        email: emailValue,
-        nama: nameValue,
-        noTelp: phoneValue,
+        email,
+        nama,
+        noTelp,
       }),
     );
     navigation.goBack();
   };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: email ? email : '',
+      nama: nama ? nama : '',
+      noTelp: noTelp ? noTelp : '',
+    },
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -78,20 +78,71 @@ const EditProfileScreen = () => {
                 style={{ flexDirection: 'row', marginBottom: sizes.padding }}>
                 <Text style={styles.codeText}>{code}</Text>
               </View>
-              <TextboxForm
-                value={nameValue}
-                onChangeText={onChangeName}
-                title={strings.nama}
+              <Controller
+                control={control}
+                name="nama"
+                render={({ field: { onChange, value } }) => (
+                  <TextboxForm
+                    error={errors.nama}
+                    errorText={errors.nama?.message}
+                    value={value}
+                    onChangeText={value => onChange(value)}
+                    title={strings.nama}
+                  />
+                )}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Nama tidak boleh kosong',
+                  },
+                }}
               />
-              <TextboxForm
-                value={phoneValue}
-                onChangeText={onChangePhone}
-                title={strings.no_telp}
+              <Controller
+                control={control}
+                name="noTelp"
+                render={({ field: { onChange, value } }) => (
+                  <TextboxForm
+                    error={errors.noTelp}
+                    errorText={errors.noTelp?.message}
+                    value={value}
+                    onChangeText={value => onChange(value)}
+                    title={strings.no_telp}
+                    keyboardType={'number-pad'}
+                  />
+                )}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Nomor Telepon tidak boleh kosong',
+                  },
+                  pattern: {
+                    value: formatter.NUMBER_REGEX,
+                    message: 'Mohon isi no telepon yang benar',
+                  },
+                }}
               />
-              <TextboxForm
-                value={emailValue}
-                onChangeText={onChangeEmail}
-                title={strings.email}
+              <Controller
+                control={control}
+                name="email"
+                render={({ field: { onChange, value } }) => (
+                  <TextboxForm
+                    error={errors.email}
+                    errorText={errors.email?.message}
+                    value={value}
+                    onChangeText={value => onChange(value)}
+                    title={strings.email}
+                  />
+                )}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Email tidak boleh kosong',
+                  },
+                  pattern: {
+                    value: formatter.EMAIL_REGEX,
+                    message: 'Email Harus Benar',
+                  },
+                }}
               />
             </View>
           </View>
@@ -100,7 +151,7 @@ const EditProfileScreen = () => {
 
       <ButtonText
         shadow
-        onPress={saveProfile}
+        onPress={handleSubmit(saveProfile)}
         buttonContainerStyle={{
           position: 'absolute',
           bottom: sizes.padding,

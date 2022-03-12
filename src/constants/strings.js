@@ -62,6 +62,8 @@ export default {
   mutasi: 'Mutasi',
   topup: 'Top Up',
   saldo: 'Saldo',
+  saldo_belanja: 'Saldo Belanja',
+  transfer_antar_simpanan: 'Transfer Antar Simpanan',
 
   /*MENU*/
   pinjaman: 'Pinjaman',
@@ -141,7 +143,7 @@ export default {
   data_diri: 'Data Diri',
   data_koperasi: 'Data Koperasi',
   pengaturan: 'Pengaturan',
-  info_coopapp: 'Tentang Coop App',
+  info_sikoin: 'Tentang SIKOIN',
   nama: 'Nama',
   no_telp: 'No Telp.',
   biodata: 'Biodata',
@@ -197,13 +199,6 @@ export default {
   edit_biodata: 'Edit Biodata',
   tambah_biodata: 'Tambah Biodata',
 
-  //TTD
-  ubah_ttd: 'Ubah Tanda Tanganku',
-  tambah_ttd: 'Tambah Tanda Tangan',
-  popup_ttd_title: 'Digital Signature CoopApp',
-  gambar_ttd: 'Gambar Tanda tanganmu dibawah ini',
-  popup_ttd_content: `Tanda Tangan Elektronik (Digital Signature) CoopApp sudah berdasarkan Pasal 1 Angka 12 Undang-Undang Nomor 19 Tahun 2016 tentang Informasi dan Transaksi Elektronik bahwa : \n\n “Tanda Tangan Elektronik adalah tanda tangan yang terdiri atas Informasi Elektronik yang dilekatkan, terasosiasi atau terkait dengan Informasi Elektronik lainnya yang digunakan sebagai alat verifikasi dan autentikasi secara sah.”`,
-
   //PEKERJAAN
   tambah_kepegawaian: 'Tambah Data Kepegawaian',
   kepegawaian: 'Kepegawaian',
@@ -225,4 +220,10 @@ export default {
   no_badan_hukum: 'No. Badan Hukum',
   alamat: 'Alamat',
   website: 'Website',
+
+  //VALIDATION
+  tidak_boleh_kosong: 'Tidak Boleh Kosong',
+  format: 'Format',
+  salah: 'Salah',
+  password: 'Password',
 };

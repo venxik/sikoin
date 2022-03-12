@@ -1,11 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import { colors, icons, SCREEN_HEIGHT, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const TextboxForm = props => {
-  const { style, textBoxStyle, value, onChangeText, title, editable } =
+  const { style, textBoxStyle, value, onChangeText, title, error, errorText } =
     props || {};
+  const [editable, setEditable] = useState(false);
 
   return (
     <View style={[styles.defaultContainer, style]}>
@@ -13,7 +21,14 @@ const TextboxForm = props => {
       <View style={styles.innerContainer}>
         <TextInput
           {...props}
-          style={[styles.textBox, { ...textBoxStyle }]}
+          style={[
+            styles.textBox,
+            {
+              ...textBoxStyle,
+              color: editable ? colors.bodyText : colors.bodyTextLightGrey,
+              borderBottomColor: error ? colors.red : colors.strokeGrey,
+            },
+          ]}
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"
@@ -21,42 +36,37 @@ const TextboxForm = props => {
           onChangeText={onChangeText}
           value={value}
         />
-        <Image
-          source={icons.edit_textbox}
-          style={{
-            width: sizes.icon_size,
-            height: sizes.icon_size,
-          }}
-        />
+        <TouchableOpacity onPress={() => setEditable(e => !e)}>
+          <Image
+            source={icons.edit_textbox}
+            style={{
+              width: sizes.icon_size,
+              height: sizes.icon_size,
+            }}
+          />
+        </TouchableOpacity>
       </View>
+      {error && <Text style={styles.textError}>{errorText}</Text>}
     </View>
   );
 };
 
 TextboxForm.propTypes = {
   style: PropTypes.any,
-  disabled: PropTypes.bool,
   value: PropTypes.string,
   textBoxStyle: PropTypes.any,
-  secureTextEntry: PropTypes.bool,
-  placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
-  editable: PropTypes.bool,
-  multiline: PropTypes.bool,
-  keyboardType: PropTypes.string,
+  title: PropTypes.string,
+  error: PropTypes.object,
 };
 
 TextboxForm.defaultProps = {
   style: null,
-  disabled: false,
   value: null,
   textBoxStyle: null,
-  secureTextEntry: false,
-  placeholder: null,
   onChangeText: null,
-  editable: true,
-  multiline: true,
-  keyboardType: null,
+  title: 'Title',
+  error: null,
 };
 
 const styles = StyleSheet.create({
@@ -66,9 +76,8 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   textBox: {
-    width: '80%',
+    width: '85%',
     borderBottomWidth: 1,
-    borderBottomColor: colors.strokeGrey,
     color: colors.bodyText,
     fontSize: 15,
     fontWeight: '500',
@@ -83,6 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleText: { color: colors.bodyTextGrey },
+  textError: { color: colors.red, fontSize: 12, marginTop: 2 },
 });
 
 export default TextboxForm;

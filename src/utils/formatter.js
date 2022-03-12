@@ -46,13 +46,14 @@ const validateEmail = email => {
     );
 };
 
-Number.prototype.format = function (n, x) {
-  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-  return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-};
+const NUMBER_REGEX = /^\d+$/;
+const EMAIL_REGEX =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export default {
   formatStringToCurrencyNumber,
   validateEmail,
   formatNumberToCurreny,
+  EMAIL_REGEX,
+  NUMBER_REGEX,
 };

@@ -1,55 +1,56 @@
 import React from 'react';
-import { View, StyleSheet, Image, TextInput } from 'react-native';
+import { View, StyleSheet, Image, TextInput, Text } from 'react-native';
 import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 const TextboxBorder = props => {
-  const { style, icon, value, textBoxStyle, placeholder, onChangeText } =
+  const { style, icon, value, textBoxStyle, onChangeText, error, errorText } =
     props || {};
 
   return (
-    <View style={[styles.defaultContainer, style]}>
-      {icon ? <Image source={icon} style={styles.iconStyle} /> : null}
-      <TextInput
-        {...props}
-        style={[styles.textInputStyle, textBoxStyle]}
-        placeholderTextColor={colors.bodyTextGrey}
-        autoCorrect={false}
-        autoCapitalize="none"
-        clearButtonMode="always"
-        placeholder={placeholder}
-        onChangeText={onChangeText}
-        value={value}
-      />
+    <View>
+      <View
+        style={[
+          styles.defaultContainer,
+          style,
+          {
+            borderColor: error ? colors.red : colors.strokeGrey,
+          },
+        ]}>
+        {icon ? <Image source={icon} style={styles.iconStyle} /> : null}
+        <TextInput
+          {...props}
+          style={[styles.textInputStyle, textBoxStyle]}
+          placeholderTextColor={colors.bodyTextGrey}
+          autoCorrect={false}
+          autoCapitalize="none"
+          clearButtonMode="always"
+          onChangeText={onChangeText}
+          value={value}
+        />
+      </View>
+      {error && <Text style={styles.textError}>{errorText}</Text>}
     </View>
   );
 };
 
 TextboxBorder.propTypes = {
   style: PropTypes.any,
-  disabled: PropTypes.bool,
   icon: PropTypes.any,
   value: PropTypes.string,
   textBoxStyle: PropTypes.any,
-  secureTextEntry: PropTypes.bool,
-  placeholder: PropTypes.string,
   onChangeText: PropTypes.func,
-  editable: PropTypes.bool,
-  multiline: PropTypes.bool,
-  keyboardType: PropTypes.string,
+  error: PropTypes.object,
+  errorText: PropTypes.string,
 };
 
 TextboxBorder.defaultProps = {
   style: null,
-  disabled: false,
   icon: null,
   value: null,
   textBoxStyle: null,
-  secureTextEntry: false,
-  placeholder: null,
   onChangeText: null,
-  editable: true,
-  multiline: true,
-  keyboardType: null,
+  error: null,
+  errorText: '',
 };
 
 const styles = StyleSheet.create({
@@ -60,12 +61,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: colors.strokeGrey,
   },
-  textInputStyle: { marginLeft: 10, color: colors.bodyText },
+  textInputStyle: { marginHorizontal: 10, color: colors.bodyText },
   iconStyle: {
     width: sizes.icon_size,
     height: sizes.icon_size,
+  },
+  textError: {
+    color: colors.red,
+    fontSize: 12,
+    marginTop: 2,
+    marginLeft: 10,
   },
 });
 

@@ -59,7 +59,6 @@ const icon_add_data = require('assets/icons/icon_add_data.png');
 const icon_pin = require('assets/icons/icon_pin.png');
 const icon_delete = require('assets/icons/icon_delete.png');
 const icon_info_primary = require('assets/icons/icon_info_primary.png');
-const icon_reset_ttd = require('assets/icons/icon_reset_ttd.png');
 const icon_ketik_manual = require('assets/icons/icon_ketik_manual.png');
 const icon_rp_dark = require('assets/icons/icon_rp_dark.png');
 const icon_dismiss = require('assets/icons/icon_dismiss.png');
@@ -136,7 +135,6 @@ export default {
   icon_pin,
   icon_delete,
   icon_info_primary,
-  icon_reset_ttd,
   icon_ketik_manual,
   icon_rp_dark,
   icon_dismiss,

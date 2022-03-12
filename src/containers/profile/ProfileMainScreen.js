@@ -33,7 +33,7 @@ const ProfileMainScreen = () => {
       />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>
-          <ProfilePicture />
+          <ProfilePicture disabled={true} />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{nama}</Text>
             <Text style={styles.koperasiText}>{koperasiName}</Text>

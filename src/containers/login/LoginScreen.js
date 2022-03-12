@@ -3,7 +3,6 @@ import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
 import {
   ButtonText,
   Popup1Button,
@@ -19,27 +18,16 @@ import {
   sizes,
   strings,
 } from '../../constants';
+import { formatter } from '../../utils';
+import { useForm, Controller } from 'react-hook-form';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
 
-  const { profileData } = useSelector(state => state.ProfileReducer) || {};
-  const { email: emailReducer } = profileData || {};
-
-  const [email, setEmail] = useState(emailReducer);
-  const [password, setPassword] = useState(null);
   const [resetEmail, setResetEmail] = useState(null);
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
   const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =
     useState(false);
-
-  const onChangeEmailText = value => {
-    setEmail(value);
-  };
-
-  const onChangePasswordText = value => {
-    setPassword(value);
-  };
 
   const onChangeResetPassEmailText = value => {
     setResetEmail(value);
@@ -49,7 +37,8 @@ const LoginScreen = () => {
     navigation.navigate('DaftarKoperasiStackNavigator');
   };
 
-  const navigateToHomeScreen = () => {
+  const navigateToHomeScreen = data => {
+    console.log(data);
     navigation.navigate('BottomTab');
   };
 
@@ -60,11 +49,22 @@ const LoginScreen = () => {
     }
   };
 
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
   const renderCustomPopupContent = () => (
     <View style={styles.customPopupContainer}>
       <TextboxBorder
         style={styles.customPopupTextbox}
-        value={email}
+        value={resetEmail}
         onChangeText={e => onChangeResetPassEmailText(e)}
         secureTextEntry={false}
         placeholder={strings.email_textbox_placeholder}
@@ -93,42 +93,66 @@ const LoginScreen = () => {
         headerImage={icons.popup_success}
       />
       <Image source={images.login_hi} style={styles.logo} />
-      <View style={{ width: '100%' }}>
-        <TextboxBorder
-          style={{
-            marginHorizontal: SCREEN_WIDTH * 0.1,
+      <View style={{ width: '100%', paddingHorizontal: SCREEN_WIDTH * 0.1 }}>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <TextboxBorder
+              error={errors.email}
+              errorText={errors.email?.message}
+              value={value}
+              onChangeText={e => onChange(e)}
+              placeholder={strings.email_textbox_placeholder}
+              icon={icons.icon_email}
+              keyboardType={'email-address'}
+            />
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: `${strings.email} ${strings.tidak_boleh_kosong}`,
+            },
+            pattern: {
+              value: formatter.EMAIL_REGEX,
+              message: `${strings.format} ${strings.email} ${strings.salah}`,
+            },
           }}
-          value={email}
-          onChangeText={e => onChangeEmailText(e)}
-          secureTextEntry={false}
-          placeholder={strings.email_textbox_placeholder}
-          icon={icons.icon_email}
         />
-        <TextboxBorder
-          style={{
-            marginHorizontal: SCREEN_WIDTH * 0.1,
-            marginTop: SCREEN_HEIGHT * 0.02,
+
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <TextboxBorder
+              error={errors.password}
+              errorText={errors.password?.message}
+              style={{ marginTop: 10 }}
+              value={value}
+              onChangeText={e => onChange(e)}
+              placeholder={strings.password_textbox_placeholder}
+              icon={icons.icon_password}
+              secureTextEntry={true}
+            />
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: `${strings.password} ${strings.tidak_boleh_kosong}`,
+            },
           }}
-          value={password}
-          onChangeText={e => onChangePasswordText(e)}
-          secureTextEntry={true}
-          placeholder={strings.password_textbox_placeholder}
-          icon={icons.icon_password}
         />
 
         <View style={{ width: '100%', marginTop: sizes.padding }}>
           <ButtonText
-            onPress={navigateToHomeScreen}
-            buttonContainerStyle={{
-              marginHorizontal: SCREEN_WIDTH * 0.1,
-              backgroundColor: colors.primary,
-            }}
+            shadow={false}
+            onPress={handleSubmit(navigateToHomeScreen)}
             text={strings.masuk}
           />
           <ButtonText
+            shadow={false}
             onPress={navigateToDaftarKoperasi}
             buttonContainerStyle={{
-              marginHorizontal: SCREEN_WIDTH * 0.1,
               marginTop: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalPrimary,
             }}
@@ -136,9 +160,9 @@ const LoginScreen = () => {
             text={strings.daftar_ke_koperasimu}
           />
           <ButtonText
+            shadow={false}
             onPress={() => setShowForgetPassModal(true)}
             buttonContainerStyle={{
-              marginHorizontal: SCREEN_WIDTH * 0.1,
               marginTop: SCREEN_WIDTH * 0.03,
               backgroundColor: colors.tonalLightPrimary,
             }}

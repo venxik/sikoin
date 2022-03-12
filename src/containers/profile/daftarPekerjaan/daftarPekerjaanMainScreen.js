@@ -79,10 +79,6 @@ const DaftarPekerjaanMainScreen = () => {
             content={`Rp ${gajiBulanan}`}
           />
           <DetailItemList
-            title={strings.rekening}
-            content={`${bank}\n${noRekening}`}
-          />
-          <DetailItemList
             title={strings.nama_perusahaan}
             content={namaPerusahaan}
           />

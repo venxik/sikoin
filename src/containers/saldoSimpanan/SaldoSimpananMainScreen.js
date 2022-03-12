@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
-import { HeaderBack, Popup1Button, SaldoItemList } from '../../components';
+import { HeaderBack, SaldoItemList } from '../../components';
 import {
   colors,
   icons,
@@ -27,9 +27,17 @@ import { formatter } from '../../utils';
 const Button = props => {
   const { icon, text, onPress } = props || {};
   return (
-    <TouchableOpacity style={{ alignItems: 'center' }} onPress={onPress}>
+    <TouchableOpacity
+      style={{ alignItems: 'center', width: '33%' }}
+      onPress={onPress}>
       <Image source={icon} style={{ width: 50, height: 50 }} />
-      <Text style={{ color: colors.bodyText }}>{text}</Text>
+      <Text
+        style={{
+          color: colors.bodyText,
+          textAlign: 'center',
+        }}>
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -39,7 +47,6 @@ const SaldoSimpananMainScreen = ({ route }) => {
   const navigation = useNavigation();
   const { simpanan, saldo } =
     useSelector(state => state.SaldoSimpananReducer) || {};
-  const [showInfoModal, setShowInfoModal] = useState(false);
 
   const sheetRef = useRef(null);
   const snapPoints = useMemo(() => ['40%', '70%'], []);
@@ -47,20 +54,6 @@ const SaldoSimpananMainScreen = ({ route }) => {
   const handleSheetChange = useCallback(() => {
     // console.log('handleSheetChange', index);
   }, []);
-
-  const renderRightButtonHeader = () => {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => setShowInfoModal(e => !e)}>
-          <Image
-            source={icons.icon_info}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  };
 
   const renderSaldoContent = () => {
     return (
@@ -94,7 +87,10 @@ const SaldoSimpananMainScreen = ({ route }) => {
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
           />
-          <Button icon={icons.icon_mutasi_primary} text={strings.mutasi} />
+          <Button
+            icon={icons.icon_mutasi_primary}
+            text={strings.transfer_antar_simpanan}
+          />
         </View>
         <View style={{ marginTop: 40 }}>
           <SaldoItemList text={strings.pokok} nominal={simpanan.pokok} />
@@ -133,21 +129,6 @@ const SaldoSimpananMainScreen = ({ route }) => {
     </ImageBackground>
   );
 
-  const customSaldoPopupContent = () => (
-    <View style={styles.customPopupContainer}>
-      <View style={styles.customPopupRow}>
-        <View style={styles.blueDot} />
-        <Text style={styles.customPopupText}>{strings.market}</Text>
-      </View>
-      <View style={styles.customPopupRow}>
-        <View style={styles.blueDot} />
-        <Text style={{ color: colors.primary, fontWeight: '500' }}>
-          {strings.voucher_center}
-        </Text>
-      </View>
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack
@@ -155,24 +136,7 @@ const SaldoSimpananMainScreen = ({ route }) => {
         onPress={() => navigation.goBack()}
         title={showSaldo ? strings.saldo : strings.simpanan}
         customLeftIcon={icons.arrow_left_white}
-        rightIcon={renderRightButtonHeader()}
         textStyle={{ color: colors.white }}
-      />
-      <Popup1Button
-        headerText={showSaldo ? strings.saldo : strings.simpanan}
-        contentText={
-          showSaldo
-            ? strings.popup_saldo_content
-            : strings.popup_simpanan_content
-        }
-        showPopup={showInfoModal}
-        onPress={() => setShowInfoModal(e => !e)}
-        headerImage={
-          showSaldo ? images.img_saldo_icon : images.img_simpanan_icon
-        }
-        customButtonText={strings.paham}
-        iconStyle={{ width: 100, height: 100 }}
-        customContent={customSaldoPopupContent()}
       />
       {renderBackgroundItem()}
       <BottomSheet
