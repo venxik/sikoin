@@ -35,7 +35,6 @@ import PinjamanStep1 from './pinjaman/PinjamanStep1Screen';
 import PinjamanStep2 from './pinjaman/PinjamanStep2Screen';
 import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
 import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
-import PinjamanStep5 from './pinjaman/PinjamanStep5Screen';
 
 export {
   OnboardingScreen,
@@ -75,5 +74,4 @@ export {
   PinjamanStep2,
   PinjamanStep3,
   PinjamanStep4,
-  PinjamanStep5,
 };

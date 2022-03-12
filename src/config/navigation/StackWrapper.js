@@ -351,10 +351,6 @@ const PinjamanStackNavigator = () => (
       name="PinjamanStep4"
       component={screens.PinjamanStep4}
     />
-    <PinjamanStack.Screen
-      name="PinjamanStep5"
-      component={screens.PinjamanStep5}
-    />
   </PinjamanStack.Navigator>
 );
 

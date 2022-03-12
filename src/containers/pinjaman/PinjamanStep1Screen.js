@@ -72,14 +72,12 @@ const PinjamanStep1 = () => {
           }}>
           <ButtonText
             onPress={() => navigation.goBack()}
-            shadow
             secondary
             text={strings.kembali}
             buttonContainerStyle={{ width: '48%' }}
           />
           <ButtonText
             onPress={navigateToStep2}
-            shadow
             text={strings.simpan}
             buttonContainerStyle={{ width: '48%' }}
           />

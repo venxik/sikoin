@@ -4,7 +4,8 @@ import { colors, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
 const ButtonIcon = props => {
-  const { buttonContainerStyle, onPress, disabled, icon, shadow } = props || {};
+  const { buttonContainerStyle, onPress, disabled, icon, shadow, secondary } =
+    props || {};
 
   const buttonStyle = () => {
     let defaultStyle = { ...styles.defaultContainer, ...buttonContainerStyle };
@@ -22,6 +23,13 @@ const ButtonIcon = props => {
         shadowOffset: { width: 0, height: 5 },
         shadowRadius: 10,
         elevation: 10,
+      };
+    }
+
+    if (secondary) {
+      defaultStyle = {
+        ...defaultStyle,
+        backgroundColor: colors.tonalLightPrimary,
       };
     }
 
@@ -43,6 +51,7 @@ ButtonIcon.propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   icon: PropTypes.any,
+  secondary: PropTypes.bool,
 };
 
 ButtonIcon.defaultProps = {
@@ -50,6 +59,7 @@ ButtonIcon.defaultProps = {
   onPress: null,
   disabled: false,
   icon: null,
+  secondary: false,
 };
 
 const styles = StyleSheet.create({

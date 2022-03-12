@@ -28,8 +28,8 @@ const PinjamanStep2 = () => {
     setPhoneValue(e);
   };
 
-  const navigateToStep2 = () => {
-    navigation.navigate('PinjamanStep2');
+  const navigateToStep3 = () => {
+    navigation.navigate('PinjamanStep3');
   };
 
   return (
@@ -78,7 +78,7 @@ const PinjamanStep2 = () => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <ButtonText
-            onPress={navigateToStep2}
+            onPress={navigateToStep3}
             shadow
             text={strings.simpan}
             buttonContainerStyle={{ width: '48%' }}
