@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   ButtonText,
   DetailItemList,
-  DetailItemListHeader,
+  DetailItemProfileHeader,
   HeaderBack,
   ListEmptyDataComponent,
 } from '../../../components';
@@ -65,7 +65,7 @@ const DaftarBiodataMainScreen = () => {
           paddingBottom: sizes.padding,
         }}>
         <View style={styles.cardContainer}>
-          <DetailItemListHeader />
+          <DetailItemProfileHeader />
           <DetailItemList
             title={strings.tmptTglLahir}
             content={tempatLahir.concat(', ' + tanggalLahir)}
@@ -99,6 +99,7 @@ const DaftarBiodataMainScreen = () => {
             iconLocation="right"
             buttonContainerStyle={{ backgroundColor: colors.tonalLightPrimary }}
             textStyle={{ color: colors.primary }}
+            shadow={false}
           />
         </View>
       </ScrollView>

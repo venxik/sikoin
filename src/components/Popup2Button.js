@@ -118,7 +118,7 @@ Popup2Button.propTypes = {
   contentTextStyle: PropTypes.object,
 };
 
-Popup2Button.defaultProp = {
+Popup2Button.defaultProps = {
   showPopup: false,
   headerText: 'default',
   contentText: 'default',

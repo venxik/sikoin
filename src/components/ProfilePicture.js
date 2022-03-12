@@ -31,7 +31,7 @@ ProfilePicture.propTypes = {
   showKoperasi: PropTypes.bool,
 };
 
-ProfilePicture.defaultProp = {
+ProfilePicture.defaultProps = {
   onPress: null,
   disabled: false,
   style: null,

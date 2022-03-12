@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
-const SubmenuListItem = props => {
+const SubmenuItemList = props => {
   const { icon, title, onPress, style } = props || {};
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
@@ -19,19 +19,19 @@ const SubmenuListItem = props => {
   );
 };
 
-SubmenuListItem.propTypes = {
+SubmenuItemList.propTypes = {
   onPress: PropTypes.func,
   title: PropTypes.string,
   icon: PropTypes.any,
 };
 
-SubmenuListItem.defaultProp = {
+SubmenuItemList.defaultProps = {
   onPress: null,
   title: null,
   icon: null,
 };
 
-export default SubmenuListItem;
+export default SubmenuItemList;
 
 const styles = StyleSheet.create({
   container: {

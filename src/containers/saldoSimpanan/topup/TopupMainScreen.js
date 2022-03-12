@@ -176,6 +176,7 @@ const TopupMainScreen = () => {
           text={strings.ketik_manual}
           textStyle={{ color: colors.bodyText }}
           buttonContainerStyle={styles.ketikManualButton}
+          shadow={false}
         />
         {!isEmpty(nominal) && (
           <View style={styles.showNominalContainer}>
@@ -250,6 +251,7 @@ const TopupMainScreen = () => {
           }}
           text={strings.ok}
           onPress={closeInputNominal}
+          shadow={false}
         />
       </View>
     );
@@ -309,6 +311,7 @@ const TopupMainScreen = () => {
         icon={icons.arrow_right_button_white}
         iconLocation={'right'}
         onPress={navigateToDetailScreen}
+        shadow={false}
       />
       <BottomSheet
         style={{ backgroundColor: colors.primaryWhite }}

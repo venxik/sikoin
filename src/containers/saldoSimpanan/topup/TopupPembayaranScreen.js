@@ -46,6 +46,7 @@ const TopupPembayaranScreen = ({ route }) => {
           icon={icons.arrow_right_button_white}
           iconLocation={'right'}
           onPress={navigateToSuccessScreen}
+          shadow={false}
         />
       </View>
     </SafeAreaView>

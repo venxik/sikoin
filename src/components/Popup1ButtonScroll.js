@@ -95,7 +95,7 @@ Popup1ButtonScroll.propTypes = {
   iconStyle: PropTypes.object,
 };
 
-Popup1ButtonScroll.defaultProp = {
+Popup1ButtonScroll.defaultProps = {
   showPopup: false,
   headerText: 'default',
   contentText: 'default',

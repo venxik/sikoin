@@ -70,7 +70,7 @@ ErrorModal.propTypes = {
   options: PropTypes.object,
 };
 
-ErrorModal.defaultProp = {
+ErrorModal.defaultProps = {
   error: {},
   options: {},
 };

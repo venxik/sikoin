@@ -35,7 +35,7 @@ CardLastItem.propTypes = {
   style: PropTypes.object,
 };
 
-CardLastItem.defaultProp = {
+CardLastItem.defaultProps = {
   icon: null,
   onPress: null,
   style: null,

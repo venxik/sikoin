@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
-import { HeaderBack, SubmenuListItem } from '../../components';
+import { HeaderBack, SubmenuItemList } from '../../components';
 import { colors, icons, sizes, strings } from '../../constants';
 
 const DataDiriMainScreen = () => {
@@ -17,32 +17,32 @@ const DataDiriMainScreen = () => {
       />
       <View style={styles.innerContainer}>
         <Text style={styles.titleText}>{strings.identitas_pekerjaan}</Text>
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_daftar_alamat}
           title={strings.daftar_alamat}
           onPress={() => navigateToOtherScreen('DaftarAlamatMainScreen')}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_profile}
           title={strings.biodata}
           onPress={() => navigateToOtherScreen('DaftarBiodataMainScreen')}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_daftar_ktp}
           title={strings.ktp}
           onPress={() => navigateToOtherScreen('DaftarKtpMainScreen')}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_referensi_keluarga}
           title={strings.referensi_keluarga}
           onPress={() => navigateToOtherScreen('DaftarRefKeluargaMainScreen')}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_tanda_tangan}
           title={strings.tanda_tangan}
           onPress={() => navigateToOtherScreen('DaftarTtdMainScreen')}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_pekerjaan}
           title={strings.pekerjaan}
           onPress={() => navigateToOtherScreen('DaftarPekerjaanMainScreen')}

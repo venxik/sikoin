@@ -59,7 +59,7 @@ CardMarketLarge.propTypes = {
   onPressWishlist: PropTypes.func,
 };
 
-CardMarketLarge.defaultProp = {
+CardMarketLarge.defaultProps = {
   item: null,
   onPress: null,
   style: null,

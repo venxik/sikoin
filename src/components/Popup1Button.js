@@ -93,7 +93,7 @@ Popup1Button.propTypes = {
   style: PropTypes.object,
 };
 
-Popup1Button.defaultProp = {
+Popup1Button.defaultProps = {
   showPopup: false,
   headerText: 'default',
   contentText: 'default',

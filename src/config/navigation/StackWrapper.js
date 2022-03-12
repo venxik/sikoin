@@ -13,6 +13,7 @@ import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
+const Tab = createBottomTabNavigator();
 const MainStack = createNativeStackNavigator();
 const ParentStack = createNativeStackNavigator();
 const DaftarKoperasiStack = createNativeStackNavigator();
@@ -23,7 +24,9 @@ const ProfileStack = createNativeStackNavigator();
 const DataDiriStack = createNativeStackNavigator();
 const DiskonStack = createNativeStackNavigator();
 const TopupStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const TransaksiStack = createNativeStackNavigator();
+const VoucherStack = createNativeStackNavigator();
+const PinjamanStack = createNativeStackNavigator();
 
 const shouldShowBottomNavigation = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -45,6 +48,12 @@ const shouldShowBottomNavigation = route => {
     case 'DiskonStackNavigator':
       return false;
     case 'TopupStackNavigator':
+      return false;
+    case 'VoucherStackNavigator':
+      return false;
+    case 'TransaksiStackNavigator':
+      return false;
+    case 'PinjamanStackNavigator':
       return false;
     default:
       return true;
@@ -172,6 +181,10 @@ const ProfileStackNavigator = () => (
       name="PengaturanScreen"
       component={screens.PengaturanScreen}
     />
+    <ProfileStack.Screen
+      name="DataKoperasiMainScreen"
+      component={screens.DataKoperasiMainScreen}
+    />
   </ProfileStack.Navigator>
 );
 
@@ -284,6 +297,67 @@ const TopupStackNavigator = () => (
   </TopupStack.Navigator>
 );
 
+const TransaksiStackNavigator = () => (
+  <TransaksiStack.Navigator
+    initialRouteName={'TransaksiMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <TransaksiStack.Screen
+      name="TransaksiMainScreen"
+      component={screens.TransaksiMainScreen}
+    />
+  </TransaksiStack.Navigator>
+);
+
+const VoucherStackNavigator = () => (
+  <VoucherStack.Navigator
+    initialRouteName={'VoucherMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <VoucherStack.Screen
+      name="VoucherMainScreen"
+      component={screens.VoucherMainScreen}
+    />
+  </VoucherStack.Navigator>
+);
+
+const PinjamanStackNavigator = () => (
+  <PinjamanStack.Navigator
+    initialRouteName={'PinjamanStep1'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <PinjamanStack.Screen
+      name="PinjamanStep1"
+      component={screens.PinjamanStep1}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanStep2"
+      component={screens.PinjamanStep2}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanStep3"
+      component={screens.PinjamanStep3}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanStep4"
+      component={screens.PinjamanStep4}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanStep5"
+      component={screens.PinjamanStep5}
+    />
+  </PinjamanStack.Navigator>
+);
+
 const HomeStackNavigator = () => (
   <MainStack.Navigator
     initialRouteName={'HomeScreen'}
@@ -304,6 +378,18 @@ const HomeStackNavigator = () => (
     <MainStack.Screen
       name="TopupStackNavigator"
       component={TopupStackNavigator}
+    />
+    <MainStack.Screen
+      name="TransaksiStackNavigator"
+      component={TransaksiStackNavigator}
+    />
+    <MainStack.Screen
+      name="VoucherStackNavigator"
+      component={VoucherStackNavigator}
+    />
+    <MainStack.Screen
+      name="PinjamanStackNavigator"
+      component={PinjamanStackNavigator}
     />
   </MainStack.Navigator>
 );
@@ -383,10 +469,7 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}>
-        <ParentStack.Screen
-          name="MainStack"
-          component={OnboardingStackNavigator}
-        />
+        <ParentStack.Screen name="MainStack" component={LoginStackNavigator} />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

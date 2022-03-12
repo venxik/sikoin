@@ -17,7 +17,7 @@ import {
   ButtonIcon,
   ButtonText,
   HeaderBack,
-  SubmenuListItem,
+  SubmenuItemList,
   DropdownForm,
   Popup1Button,
   Popup2Button,
@@ -140,7 +140,7 @@ const TestScreen = () => {
         title={'Testing'}
         // placeholder={'TESTING'}
       />
-      <SubmenuListItem
+      <SubmenuItemList
         icon={icons.bottom_home}
         title={'Profile'}
         navigateTo={'test'}

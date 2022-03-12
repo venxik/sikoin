@@ -45,7 +45,7 @@ ButtonIcon.propTypes = {
   icon: PropTypes.any,
 };
 
-ButtonIcon.defaultProp = {
+ButtonIcon.defaultProps = {
   buttonContainerStyle: null,
   onPress: null,
   disabled: false,

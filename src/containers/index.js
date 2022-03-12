@@ -28,6 +28,14 @@ import TopupMainScreen from './saldoSimpanan/topup/TopupMainScreen';
 import TopupDetailScreen from './saldoSimpanan/topup/TopupDetailScreen';
 import TopupPembayaranScreen from './saldoSimpanan/topup/TopupPembayaranScreen';
 import TopupSuccessScreen from './saldoSimpanan/topup/TopupSuccessScreen';
+import TransaksiMainScreen from './transaksi/TransaksiMainScreen';
+import VoucherMainScreen from './voucher/VoucherMainScreen';
+import DataKoperasiMainScreen from './profile/DataKoperasiMainScreen';
+import PinjamanStep1 from './pinjaman/PinjamanStep1Screen';
+import PinjamanStep2 from './pinjaman/PinjamanStep2Screen';
+import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
+import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
+import PinjamanStep5 from './pinjaman/PinjamanStep5Screen';
 
 export {
   OnboardingScreen,
@@ -60,4 +68,12 @@ export {
   TopupDetailScreen,
   TopupPembayaranScreen,
   TopupSuccessScreen,
+  TransaksiMainScreen,
+  VoucherMainScreen,
+  DataKoperasiMainScreen,
+  PinjamanStep1,
+  PinjamanStep2,
+  PinjamanStep3,
+  PinjamanStep4,
+  PinjamanStep5,
 };

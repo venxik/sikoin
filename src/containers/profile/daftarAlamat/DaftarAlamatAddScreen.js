@@ -189,7 +189,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
       </KeyboardAvoidingView>
 
       <ButtonText
-        shadow
         onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={{
           position: 'absolute',

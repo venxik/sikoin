@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.bodyTextGrey,
     marginBottom: 10,
+    lineHeight: 20,
   },
   separator: {
     width: '100%',

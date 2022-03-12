@@ -46,7 +46,7 @@ TextboxForm.propTypes = {
   keyboardType: PropTypes.string,
 };
 
-TextboxForm.defaultProp = {
+TextboxForm.defaultProps = {
   style: null,
   disabled: false,
   value: null,

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import {
   ButtonText,
   DetailItemList,
-  DetailItemListHeader,
+  DetailItemProfileHeader,
   HeaderBack,
   ListEmptyDataComponent,
 } from '../../../components';
@@ -63,7 +63,7 @@ const DaftarPekerjaanMainScreen = () => {
           paddingBottom: sizes.padding,
         }}>
         <View style={styles.cardContainer}>
-          <DetailItemListHeader />
+          <DetailItemProfileHeader />
           <DetailItemList
             title={strings.gaji_bulanan}
             content={`Rp ${formatter.formatStringToCurrencyNumber(
@@ -95,6 +95,7 @@ const DaftarPekerjaanMainScreen = () => {
             content={provinsiKota}
           />
           <ButtonText
+            shadow={false}
             onPress={() => navigateToAddScreen(true)}
             text={strings.edit_kepegawaian}
             icon={icons.icon_edit_profile}

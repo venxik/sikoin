@@ -20,14 +20,13 @@ const CardKabar = props => {
       <Text style={styles.textContent}>{content}</Text>
 
       <ButtonText
+        secondary
         icon={icons.arrow_up_circle_primary}
         iconLocation="left"
         onPress={onPress}
         buttonContainerStyle={{
-          backgroundColor: colors.tonalLightPrimary,
           width: '70%',
         }}
-        textStyle={{ color: colors.primary }}
         text={strings.selengkapnya}
       />
     </View>
@@ -40,7 +39,7 @@ CardKabar.propTypes = {
   style: PropTypes.object,
 };
 
-CardKabar.defaultProp = {
+CardKabar.defaultProps = {
   item: null,
   onPress: null,
   style: null,

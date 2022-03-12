@@ -38,7 +38,7 @@ TextboxBorder.propTypes = {
   keyboardType: PropTypes.string,
 };
 
-TextboxBorder.defaultProp = {
+TextboxBorder.defaultProps = {
   style: null,
   disabled: false,
   icon: null,

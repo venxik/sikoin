@@ -93,7 +93,6 @@ const DaftarKtpAddScreen = ({ route }) => {
       {renderKtpCard()}
 
       <ButtonText
-        shadow
         onPress={submitKtp}
         buttonContainerStyle={{
           position: 'absolute',

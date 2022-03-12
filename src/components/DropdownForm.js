@@ -90,7 +90,7 @@ DropdownForm.propTypes = {
   style: PropTypes.object,
 };
 
-DropdownForm.defaultProp = {
+DropdownForm.defaultProps = {
   value: null,
   onPress: null,
   icon: null,

@@ -113,6 +113,7 @@ const TopupDetailScreen = ({ route }) => {
         text={strings.pilih_pembayaran}
         icon={icons.arrow_right_button_white}
         iconLocation={'right'}
+        shadow={false}
         onPress={navigateToPembayaranScreen}
       />
     </SafeAreaView>

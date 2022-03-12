@@ -182,7 +182,6 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
       </KeyboardAvoidingView>
 
       <ButtonText
-        shadow
         onPress={handleSubmit(submitData)}
         buttonContainerStyle={{
           position: 'absolute',

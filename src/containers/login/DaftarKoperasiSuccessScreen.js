@@ -53,7 +53,6 @@ const DaftarKoperasiSuccessScreen = () => {
         text={strings.kembali_ke_login}
         icon={icons.arrow_left_button_white}
         iconLocation="left"
-        shadow
       />
     </SafeAreaView>
   );

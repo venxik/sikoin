@@ -44,13 +44,12 @@ const CardRefKeluarga = props => {
       </View>
       <View style={styles.bottomContainer}>
         <ButtonText
+          secondary
           text={strings.ubah}
           onPress={onPressUbah}
           buttonContainerStyle={{
-            backgroundColor: colors.tonalLightPrimary,
             width: '70%',
           }}
-          textStyle={{ color: colors.primary }}
         />
         <ButtonIcon
           onPress={onPressDelete}

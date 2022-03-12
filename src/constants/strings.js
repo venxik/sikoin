@@ -112,6 +112,7 @@ export default {
   topup_success_content:
     'Tim kami akan memverifikasi pembayaran Kamu. Dalam waktu 1x24 Jam tim kami akan menghubungi kamu melalui nomor terdaftar dan atau email.',
   kembali: 'Kembali',
+
   /*MARKET*/
   beli_dgn_voucher: 'Beli Dengan Voucher',
   email: 'Email',
@@ -119,6 +120,19 @@ export default {
 
   /*VOUCHER*/
   voucher_center: 'Voucher Center',
+  jumlah_voucher: 'Jumlah Voucher',
+  harga: 'Harga',
+  biaya_admin: 'Biaya Admin',
+  voucher_info_popup:
+    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi CoopApp.\n\nSelamat berkoperasi! ☀️',
+  snk: 'S&K',
+  voucherku: 'Voucher Ku',
+  tentang_voucher: 'Tentang Voucher Center',
+  batal: 'Batal',
+  beli: 'Beli',
+
+  //TRANSAKSI
+  unduh_riwayat_transaksi: 'Unduh Riwayat Transaksi',
 
   // PROFILE
   profile: 'Profile',
@@ -205,4 +219,10 @@ export default {
   masa_kerja_tahun: 'Masa Kerja Tahun',
   masa_kerja_bulan: 'Masa Kerja Bulan',
   bank: 'Bank',
+
+  //DATA KOPERASI
+  nama_koperasi: 'Nama Koperasi',
+  no_badan_hukum: 'No. Badan Hukum',
+  alamat: 'Alamat',
+  website: 'Website',
 };

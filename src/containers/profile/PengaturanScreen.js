@@ -4,8 +4,8 @@ import { View, StyleSheet, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   HeaderBack,
-  SubmenuListItem,
-  SubmenuListItemCustom,
+  SubmenuItemList,
+  SubmenuItemListCustom,
 } from '../../components';
 import { colors, icons, sizes, strings } from '../../constants';
 
@@ -29,12 +29,12 @@ const PengaturanScreen = () => {
         title={strings.pengaturan}
       />
       <View style={styles.innerContainer}>
-        <SubmenuListItemCustom
+        <SubmenuItemListCustom
           icon={icons.icon_notification_black}
           title={strings.notifikasi}
           customRightComponent={renderNotificationSwitch()}
         />
-        <SubmenuListItem
+        <SubmenuItemList
           icon={icons.icon_info_black}
           title={strings.info_coopapp}
         />

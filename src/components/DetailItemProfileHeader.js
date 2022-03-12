@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { colors } from '../constants';
 import ProfilePicture from './ProfilePicture';
 
-const DetailItemListHeader = () => {
+const DetailItemProfileHeader = () => {
   const { nama } = useSelector(s => s.ProfileReducer.profileData) || {};
 
   return (
@@ -14,7 +14,8 @@ const DetailItemListHeader = () => {
     </View>
   );
 };
-export default DetailItemListHeader;
+
+export default DetailItemProfileHeader;
 
 const styles = StyleSheet.create({
   container: {

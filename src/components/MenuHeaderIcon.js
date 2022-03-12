@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, SCREEN_WIDTH, strings } from '../constants';
+import { colors, images, SCREEN_WIDTH, strings } from '../constants';
 import PropTypes from 'prop-types';
 
 const MenuHeaderIcon = props => {
@@ -8,7 +8,11 @@ const MenuHeaderIcon = props => {
   const renderIcon = () => {
     switch (menu) {
       case strings.diskon:
-        return icons.icon_diskon;
+        return images.menu_diskon;
+      case strings.transaksi:
+        return images.menu_transaksi;
+      case strings.voucher_center:
+        return images.menu_voucher;
       default:
         return 0;
     }
@@ -39,7 +43,7 @@ MenuHeaderIcon.propTypes = {
   menu: PropTypes.string,
 };
 
-MenuHeaderIcon.defaultProp = {
+MenuHeaderIcon.defaultProps = {
   menu: '',
 };
 
@@ -50,6 +54,12 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  iconStyle: { width: SCREEN_WIDTH * 0.3, height: SCREEN_WIDTH * 0.3 },
-  textStyle: { color: colors.bodyText, fontSize: 34 },
+  iconStyle: { width: SCREEN_WIDTH * 0.4, height: SCREEN_WIDTH * 0.3 },
+  textStyle: {
+    color: colors.bodyText,
+    fontSize: 34,
+    fontWeight: '700',
+    textAlign: 'center',
+    width: '60%',
+  },
 });

@@ -14,6 +14,8 @@ import BiodataReducer from './BiodataReducer';
 import TtdReducer from './TtdReducer';
 import PekerjaanReducer from './PekerjaanReducer';
 import DiskonReducer from './DiskonReducer';
+import TransaksiReducer from './TransaksiReducer';
+import VoucherReducer from './VoucherReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
@@ -31,6 +33,8 @@ const rootReducers = combineReducers({
   TtdReducer: TtdReducer,
   PekerjaanReducer: PekerjaanReducer,
   DiskonReducer: DiskonReducer,
+  TransaksiReducer: TransaksiReducer,
+  VoucherReducer: VoucherReducer,
 });
 
 export default rootReducers;

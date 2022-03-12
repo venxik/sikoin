@@ -52,7 +52,11 @@ const DaftarTtdMainScreen = () => {
           style={styles.imageKtp}
           resizeMode="contain"
         />
-        <ButtonText onPress={navigateToAddScreen} text={strings.ubah_ttd} />
+        <ButtonText
+          onPress={navigateToAddScreen}
+          text={strings.ubah_ttd}
+          shadow={false}
+        />
       </View>
     );
   };

@@ -6,7 +6,7 @@ import {
   ButtonText,
   HeaderBack,
   ProfilePicture,
-  SubmenuListItem,
+  SubmenuItemList,
 } from '../../components';
 import { colors, icons, sizes, strings } from '../../constants';
 
@@ -48,26 +48,24 @@ const ProfileMainScreen = () => {
             icon={icons.icon_edit_profile}
             iconLocation="right"
             onPress={navigateToEditProfile}
-            buttonContainerStyle={{
-              backgroundColor: colors.tonalLightPrimary,
-              width: '100%',
-            }}
-            textStyle={{ color: colors.primary }}
+            secondary
             text={strings.edit_profile}
+            shadow={false}
           />
         </View>
         <View style={styles.topContainer}>
           <Text style={styles.menuProfile}>{strings.menu_profile}</Text>
-          <SubmenuListItem
+          <SubmenuItemList
             icon={icons.icon_data_diri}
             title={strings.data_diri}
             onPress={() => navigateToOtherScreen('DataDiriStackNavigator')}
           />
-          <SubmenuListItem
+          <SubmenuItemList
             icon={icons.icon_data_koperasi}
             title={strings.data_koperasi}
+            onPress={() => navigateToOtherScreen('DataKoperasiMainScreen')}
           />
-          <SubmenuListItem
+          <SubmenuItemList
             icon={icons.icon_pengaturan}
             title={strings.pengaturan}
             onPress={() => navigateToOtherScreen('PengaturanScreen')}

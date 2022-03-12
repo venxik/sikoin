@@ -81,6 +81,7 @@ const DaftarKtpMainScreen = () => {
           </TouchableOpacity>
         </View>
         <ButtonText
+          shadow={false}
           onPress={() => navigateToAddScreen(true)}
           text={strings.ubah_ktp}
         />

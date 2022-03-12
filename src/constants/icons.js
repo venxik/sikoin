@@ -60,13 +60,20 @@ const icon_pin = require('assets/icons/icon_pin.png');
 const icon_delete = require('assets/icons/icon_delete.png');
 const icon_info_primary = require('assets/icons/icon_info_primary.png');
 const icon_reset_ttd = require('assets/icons/icon_reset_ttd.png');
-const icon_diskon = require('assets/icons/icon_diskon.png');
 const icon_ketik_manual = require('assets/icons/icon_ketik_manual.png');
 const icon_rp_dark = require('assets/icons/icon_rp_dark.png');
 const icon_dismiss = require('assets/icons/icon_dismiss.png');
 const icon_delete_nominal = require('assets/icons/icon_delete_nominal.png');
 const icon_shield = require('assets/icons/icon_shield.png');
 const icon_topup_success = require('assets/icons/icon_topup_success.png');
+const icon_calendar_small = require('assets/icons/icon_calendar_small.png');
+const arrow_up_red = require('assets/icons/arrow_up_red.png');
+const icon_more_menu = require('assets/icons/icon_more_menu.png');
+const icon_unduh = require('assets/icons/icon_unduh.png');
+const icon_info_voucher = require('assets/icons/icon_info_voucher.png');
+const icon_voucher_black = require('assets/icons/icon_voucher_black.png');
+const minus_shape = require('assets/icons/minus_shape.png');
+const plus_shape = require('assets/icons/plus_shape.png');
 
 export default {
   arrow_left_primary,
@@ -130,11 +137,18 @@ export default {
   icon_delete,
   icon_info_primary,
   icon_reset_ttd,
-  icon_diskon,
   icon_ketik_manual,
   icon_rp_dark,
   icon_dismiss,
   icon_delete_nominal,
   icon_shield,
   icon_topup_success,
+  icon_calendar_small,
+  arrow_up_red,
+  icon_more_menu,
+  icon_unduh,
+  icon_info_voucher,
+  icon_voucher_black,
+  minus_shape,
+  plus_shape,
 };

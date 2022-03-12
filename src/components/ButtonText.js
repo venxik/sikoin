@@ -13,6 +13,7 @@ const ButtonText = props => {
     icon,
     iconLocation,
     shadow,
+    secondary,
   } = props || {};
 
   const buttonStyle = () => {
@@ -33,6 +34,12 @@ const ButtonText = props => {
         elevation: 10,
       };
     }
+    if (secondary) {
+      defaultStyle = {
+        ...defaultStyle,
+        backgroundColor: colors.tonalLightPrimary,
+      };
+    }
 
     return defaultStyle;
   };
@@ -42,6 +49,13 @@ const ButtonText = props => {
 
     if (disabled) {
       defaultStyle = { ...defaultStyle, color: colors.black };
+    }
+
+    if (secondary) {
+      defaultStyle = {
+        ...defaultStyle,
+        color: colors.primary,
+      };
     }
 
     return defaultStyle;
@@ -77,9 +91,10 @@ ButtonText.propTypes = {
   icon: PropTypes.any,
   iconLocation: PropTypes.string,
   shadow: PropTypes.bool,
+  secondary: PropTypes.bool,
 };
 
-ButtonText.defaultProp = {
+ButtonText.defaultProps = {
   buttonContainerStyle: null,
   textStyle: null,
   onPress: null,
@@ -88,6 +103,7 @@ ButtonText.defaultProp = {
   icon: null,
   iconLocation: null,
   shadow: true,
+  secondary: false,
 };
 
 const styles = StyleSheet.create({

@@ -23,7 +23,7 @@ CardPromo.propTypes = {
   style: PropTypes.object,
 };
 
-CardPromo.defaultProp = {
+CardPromo.defaultProps = {
   item: null,
   onPress: null,
   style: null,

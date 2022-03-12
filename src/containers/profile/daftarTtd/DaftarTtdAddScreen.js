@@ -104,19 +104,16 @@ const DaftarTtdAddScreen = () => {
       </View>
       <View style={styles.buttonRow}>
         <ButtonText
-          shadow
           icon={icons.icon_reset_ttd}
           iconLocation="left"
           text={strings.reset}
           onPress={handleClear}
-          textStyle={{ color: colors.primary }}
           buttonContainerStyle={{
             width: '47%',
-            backgroundColor: colors.tonalLightPrimary,
           }}
+          secondary
         />
         <ButtonText
-          shadow
           text={strings.simpan}
           onPress={handleConfirm}
           buttonContainerStyle={{ width: '47%' }}

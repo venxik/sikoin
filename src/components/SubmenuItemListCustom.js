@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, sizes } from '../constants';
 import PropTypes from 'prop-types';
 
-const SubmenuListItemCustom = props => {
+const SubmenuItemListCustom = props => {
   const { icon, title, style, customRightComponent } = props || {};
   return (
     <View style={[styles.container, style]}>
@@ -19,19 +19,19 @@ const SubmenuListItemCustom = props => {
   );
 };
 
-SubmenuListItemCustom.propTypes = {
+SubmenuItemListCustom.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.any,
   customRightComponent: PropTypes.element,
 };
 
-SubmenuListItemCustom.defaultProp = {
+SubmenuItemListCustom.defaultProps = {
   title: null,
   icon: null,
   customRightComponent: null,
 };
 
-export default SubmenuListItemCustom;
+export default SubmenuItemListCustom;
 
 const styles = StyleSheet.create({
   container: {

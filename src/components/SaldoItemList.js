@@ -43,7 +43,7 @@ SaldoItemList.propTypes = {
   onPress: PropTypes.func,
 };
 
-SaldoItemList.defaultProp = {
+SaldoItemList.defaultProps = {
   text: null,
   nominal: null,
   onPress: null,

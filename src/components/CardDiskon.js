@@ -19,7 +19,7 @@ CardDiskon.propTypes = {
   style: PropTypes.object,
 };
 
-CardDiskon.defaultProp = {
+CardDiskon.defaultProps = {
   item: null,
   onPress: null,
   style: null,

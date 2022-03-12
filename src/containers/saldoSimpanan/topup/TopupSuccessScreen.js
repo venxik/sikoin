@@ -43,7 +43,6 @@ const TopupSuccessScreen = () => {
             marginHorizontal: sizes.padding,
             width: '40%',
           }}
-          shadow
           text={strings.kembali}
           onPress={navigateToHome}
         />

@@ -11,6 +11,14 @@ const initialState = {
     email: 'sdsadasdas',
     noTelp: '081312321321',
   },
+  koperasiData: {
+    namaKoperasi: 'Koperasi AB',
+    noBadanHukum: '123213213',
+    alamat:
+      'Jl. Raya Daan Mogot No.6, RT.6/RW.3, Wijaya Kusuma, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460',
+    noTelp: '02131321',
+    website: 'www.koperasi.id',
+  },
   error: null,
 };
 

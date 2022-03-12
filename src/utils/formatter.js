@@ -8,6 +8,24 @@
 //   }
 // };
 
+const defaultOptions = {
+  significantDigits: 0,
+  thousandsSeparator: '.',
+  decimalSeparator: ',',
+};
+
+const formatNumberToCurreny = (value, options) => {
+  if (typeof value !== 'number') value = 0.0;
+  options = { ...defaultOptions, ...options };
+  value = value.toFixed(options.significantDigits);
+
+  const [currency] = value.split('.');
+  return `${currency.replace(
+    /\B(?=(\d{3})+(?!\d))/g,
+    options.thousandsSeparator,
+  )}`;
+};
+
 const formatStringToCurrencyNumber = nStr => {
   nStr += '';
   var x = nStr.split('.');
@@ -28,4 +46,13 @@ const validateEmail = email => {
     );
 };
 
-export default { formatStringToCurrencyNumber, validateEmail };
+Number.prototype.format = function (n, x) {
+  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+  return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
+export default {
+  formatStringToCurrencyNumber,
+  validateEmail,
+  formatNumberToCurreny,
+};
