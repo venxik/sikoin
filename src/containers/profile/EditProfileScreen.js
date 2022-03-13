@@ -24,7 +24,6 @@ const EditProfileScreen = () => {
   const { nama, code, email, noTelp, profilePic } = profileData || {};
 
   const saveProfile = data => {
-    console.log(data);
     const { email, nama, noTelp } = data || {};
     dispatch(
       updateProfile({
@@ -108,6 +107,7 @@ const EditProfileScreen = () => {
                     onChangeText={value => onChange(value)}
                     title={strings.no_telp}
                     keyboardType={'number-pad'}
+                    maxlength={13}
                   />
                 )}
                 rules={{

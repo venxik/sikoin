@@ -24,9 +24,10 @@ const DaftarAlamatMainScreen = () => {
   const dispatch = useDispatch();
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
+  const [showSuccessDeletePopup, setShowSuccessDeletePopup] = useState(false);
+  const [showFailedPopup, setShowFailedPopup] = useState(false);
   const [selectAlamat, setSelectAlamat] = useState(null);
-  const { alamatList } = useSelector(s => s.AlamatReducer) || {};
+  const { alamatList } = useSelector(s => s.AlamatReducer) || [];
 
   const navigateToAddScreen = (update, index, item) => {
     navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
@@ -40,13 +41,18 @@ const DaftarAlamatMainScreen = () => {
   const confirmDeleteAlamat = () => {
     dispatch(deleteAlamat(selectAlamat));
     setShowDeletePopup(false);
-    setSuccessShowDeletePopup(true);
+    setShowSuccessDeletePopup(true);
+  };
+
+  const onPressAddIcon = () => {
+    if (alamatList.length < 5) navigateToAddScreen(false);
+    else setShowFailedPopup(true);
   };
 
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => navigateToAddScreen(false)}>
+        <TouchableOpacity onPress={onPressAddIcon}>
           <Image
             source={icons.icon_add_data}
             style={{
@@ -80,8 +86,15 @@ const DaftarAlamatMainScreen = () => {
       <Popup1Button
         headerText={strings.sukses_hapus_alamat}
         showPopup={showSuccessDeletePopup}
-        onPress={() => setSuccessShowDeletePopup(false)}
+        onPress={() => setShowSuccessDeletePopup(false)}
         headerImage={icons.popup_success}
+        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
+      />
+      <Popup1Button
+        headerText={'Maksimal Alamat adalah 5'}
+        showPopup={showFailedPopup}
+        onPress={() => setShowFailedPopup(false)}
+        headerImage={icons.popup_failed}
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       />
       <FlatList

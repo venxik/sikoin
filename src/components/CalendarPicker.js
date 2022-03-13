@@ -19,10 +19,11 @@ const CalendarPicker = props => {
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setSelected(true);
+    if (event.type !== 'dismissed') {
+      setSelected(true);
+      setDate(selectedDate);
+    }
     setShow(false);
-    setDate(currentDate);
   };
 
   const showDatepicker = () => {
@@ -50,7 +51,7 @@ const CalendarPicker = props => {
             <Text
               style={{
                 color: colors.primary,
-                fontWeight: 'bold',
+                fontWeight: '500',
               }}>
               {selected ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}
             </Text>

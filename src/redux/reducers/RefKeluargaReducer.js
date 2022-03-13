@@ -14,12 +14,6 @@ const initialState = {
       nama: 'Halo ini Ibu',
       noKtp: '123456789012',
     },
-    {
-      status: 'Kakak',
-      noTelp: '081312212',
-      nama: 'Testing 12',
-      noKtp: '784214120021341',
-    },
   ],
   error: null,
 };

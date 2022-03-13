@@ -77,7 +77,7 @@ const DaftarBiodataAddScreen = () => {
   const submitData = data => {
     console.log(data);
     dispatch(addBiodata(data));
-    // navigation.goBack();
+    navigation.goBack();
   };
 
   return (

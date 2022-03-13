@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,14 @@ const TextboxForm = props => {
     props || {};
   const [editable, setEditable] = useState(false);
 
+  const input = useRef(null);
+
+  useEffect(() => {
+    if (editable) {
+      input.current.focus();
+    }
+  }, [editable]);
+
   return (
     <View style={[styles.defaultContainer, style]}>
       <Text style={styles.titleText}>{title}</Text>
@@ -26,9 +34,14 @@ const TextboxForm = props => {
             {
               ...textBoxStyle,
               color: editable ? colors.bodyText : colors.bodyTextLightGrey,
-              borderBottomColor: error ? colors.red : colors.strokeGrey,
+              borderBottomColor: error
+                ? colors.red
+                : editable
+                ? colors.bodyText
+                : colors.bodyTextLightGrey,
             },
           ]}
+          ref={input}
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"

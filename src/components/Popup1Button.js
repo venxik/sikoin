@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Modal, Image } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../constants';
+import { isEmpty } from 'lodash';
 
 const Popup1Button = props => {
   const {
@@ -55,12 +56,12 @@ const Popup1Button = props => {
             />
           )}
           <View style={{ alignItems: 'center' }}>
-            {headerText && (
+            {!isEmpty(headerText) && (
               <Text style={[styles.headerModalText, headerTextStyle]}>
                 {headerText}
               </Text>
             )}
-            {contentText && (
+            {!isEmpty(contentText) && (
               <Text style={[styles.contentModalText, contentTextStyle]}>
                 {contentText}
               </Text>
@@ -95,8 +96,8 @@ Popup1Button.propTypes = {
 
 Popup1Button.defaultProps = {
   showPopup: false,
-  headerText: 'default',
-  contentText: 'default',
+  headerText: '',
+  contentText: '',
   customContent: null,
   headerImage: null,
   headerTextStyle: null,

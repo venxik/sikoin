@@ -24,9 +24,10 @@ const DaftarRefKeluargaMainScreen = () => {
   const dispatch = useDispatch();
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
+  const [showSuccessDeletePopup, setShowSuccessDeletePopup] = useState(false);
+  const [showFailedPopup, setShowFailedPopup] = useState(false);
   const [selectKeluarga, setSelectKeluarga] = useState(null);
-  const { keluargaList } = useSelector(s => s.RefKeluargaReducer) || {};
+  const { keluargaList } = useSelector(s => s.RefKeluargaReducer) || [];
 
   const navigateToAddScreen = (update, index, item) => {
     navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
@@ -40,13 +41,18 @@ const DaftarRefKeluargaMainScreen = () => {
   const confirmDeleteAlamat = () => {
     dispatch(deleteKeluarga(selectKeluarga));
     setShowDeletePopup(false);
-    setSuccessShowDeletePopup(true);
+    setShowSuccessDeletePopup(true);
+  };
+
+  const onPressAddIcon = () => {
+    if (keluargaList.length < 2) navigateToAddScreen(false);
+    else setShowFailedPopup(true);
   };
 
   const renderRightButtonHeader = () => {
     return (
       <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => navigateToAddScreen(false)}>
+        <TouchableOpacity onPress={onPressAddIcon}>
           <Image
             source={icons.icon_add_data}
             style={{
@@ -80,8 +86,15 @@ const DaftarRefKeluargaMainScreen = () => {
       <Popup1Button
         headerText={strings.sukses_hapus_alamat}
         showPopup={showSuccessDeletePopup}
-        onPress={() => setSuccessShowDeletePopup(false)}
+        onPress={() => setShowSuccessDeletePopup(false)}
         headerImage={icons.popup_success}
+        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
+      />
+      <Popup1Button
+        headerText={'Maksimal Referensi Keluarga Adalah 2'}
+        showPopup={showFailedPopup}
+        onPress={() => setShowFailedPopup(false)}
+        headerImage={icons.popup_failed}
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       />
       <FlatList

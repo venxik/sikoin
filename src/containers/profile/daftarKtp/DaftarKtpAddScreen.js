@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useNavigation } from '@react-navigation/native';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,

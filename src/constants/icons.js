@@ -73,6 +73,7 @@ const icon_info_voucher = require('assets/icons/icon_info_voucher.png');
 const icon_voucher_black = require('assets/icons/icon_voucher_black.png');
 const minus_shape = require('assets/icons/minus_shape.png');
 const plus_shape = require('assets/icons/plus_shape.png');
+const popup_failed = require('assets/icons/popup_failed.png');
 
 export default {
   arrow_left_primary,
@@ -149,4 +150,5 @@ export default {
   icon_voucher_black,
   minus_shape,
   plus_shape,
+  popup_failed,
 };
