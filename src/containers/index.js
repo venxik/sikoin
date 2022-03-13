@@ -12,11 +12,12 @@ import DataDiriMainScreen from './profile/DataDiriMainScreen';
 import PengaturanScreen from './profile/PengaturanScreen';
 import DaftarAlamatMainScreen from './profile/daftarAlamat/DaftarAlamatMainScreen';
 import DaftarAlamatAddScreen from './profile/daftarAlamat/DaftarAlamatAddScreen';
-import DaftarAlamatMapScreen from './profile/daftarAlamat/DaftarAlamatMapScreen';
 import DaftarRefKeluargaMainScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaMainScreen';
 import DaftarRefKeluargaAddScreen from './profile/daftarRefKeluarga/DaftarRefKeluargaAddScreen';
 import DaftarKtpMainScreen from './profile/daftarKtp/DaftarKtpMainScreen';
 import DaftarKtpAddScreen from './profile/daftarKtp/DaftarKtpAddScreen';
+import DaftarKtpCameraScreen from './profile/daftarKtp/DaftarKtpCameraScreen';
+import DaftarKtpSelfieScreen from './profile/daftarKtp/DaftarKtpSelfieScreen';
 import DaftarBiodataMainScreen from './profile/daftarBiodata/DaftarBiodataMainScreen';
 import DaftarBiodataAddScreen from './profile/daftarBiodata/DaftarBiodataAddScreen';
 import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/daftarPekerjaanMainScreen';
@@ -50,7 +51,6 @@ export {
   PengaturanScreen,
   DaftarAlamatMainScreen,
   DaftarAlamatAddScreen,
-  DaftarAlamatMapScreen,
   DaftarRefKeluargaAddScreen,
   DaftarRefKeluargaMainScreen,
   DaftarKtpMainScreen,
@@ -72,4 +72,6 @@ export {
   PinjamanStep3,
   PinjamanStep4,
   ChatMainScreen,
+  DaftarKtpCameraScreen,
+  DaftarKtpSelfieScreen,
 };

@@ -74,10 +74,9 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
                   title={strings.nama}
                 />
               )}
-              rules={{ required: true }}
             />
 
-            <DropdownForm value={'Profile'} title={strings.status_ref} />
+            {/* <DropdownForm value={'Profile'} title={strings.status_ref} /> */}
 
             <Controller
               control={control}
@@ -90,7 +89,6 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
                   title={strings.no_ktp}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
@@ -103,7 +101,6 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
                   title={strings.no_telp}
                 />
               )}
-              rules={{ required: true }}
             />
           </View>
         </ScrollView>
@@ -127,8 +124,6 @@ export default DaftarRefKeluargaAddScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   innerContainer: {
     borderRadius: sizes.padding,

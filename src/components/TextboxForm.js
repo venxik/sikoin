@@ -58,6 +58,7 @@ TextboxForm.propTypes = {
   onChangeText: PropTypes.func,
   title: PropTypes.string,
   error: PropTypes.object,
+  errorText: PropTypes.string,
 };
 
 TextboxForm.defaultProps = {
@@ -67,6 +68,7 @@ TextboxForm.defaultProps = {
   onChangeText: null,
   title: 'Title',
   error: null,
+  errorText: '',
 };
 
 const styles = StyleSheet.create({

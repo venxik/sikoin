@@ -79,7 +79,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   title={strings.judul_alamat}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
@@ -93,7 +92,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   multiline
                 />
               )}
-              rules={{ required: true }}
             />
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -111,7 +109,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                     onBlur={onBlur}
                   />
                 )}
-                rules={{ required: true }}
               />
               <Controller
                 control={control}
@@ -127,7 +124,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                     keyboardType="numeric"
                   />
                 )}
-                rules={{ required: true }}
               />
             </View>
             <Controller
@@ -141,7 +137,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   title={strings.provinsi}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
@@ -154,7 +149,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   title={strings.kabupaten}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
@@ -167,7 +161,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   title={strings.kecamatan}
                 />
               )}
-              rules={{ required: true }}
             />
 
             <Controller
@@ -182,7 +175,6 @@ const DaftarAlamatAddScreen = ({ route }) => {
                   keyboardType="numeric"
                 />
               )}
-              rules={{ required: true }}
             />
           </View>
         </ScrollView>

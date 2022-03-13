@@ -37,8 +37,7 @@ const LoginScreen = () => {
     navigation.navigate('DaftarKoperasiStackNavigator');
   };
 
-  const navigateToHomeScreen = data => {
-    console.log(data);
+  const navigateToHomeScreen = () => {
     navigation.navigate('BottomTab');
   };
 
@@ -55,8 +54,8 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'sads@dsa.com',
+      password: 'sadsa',
     },
   });
 

@@ -5,6 +5,7 @@ import apis from './apis';
 import images from './images';
 import icons from './icons';
 import { sizes, SCREEN_WIDTH, SCREEN_HEIGHT } from './theme';
+import dropdownItems from './dropdownItems';
 
 export {
   colors,
@@ -16,4 +17,5 @@ export {
   sizes,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
+  dropdownItems,
 };

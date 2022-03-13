@@ -1,85 +1,68 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-} from '../constants';
+import React, { useCallback, useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { colors, icons, sizes, strings } from '../constants';
 import PropTypes from 'prop-types';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const DropdownForm = props => {
-  const { onPress, value, icon, style, title } = props || {};
+  const {
+    style,
+    title,
+    items,
+    setItems,
+    openId,
+    id,
+    setOpenId,
+    onChange,
+    existsValue,
+  } = props || {};
+  const [value, setValue] = useState(existsValue);
+
+  const setOpen = useCallback(open => {
+    setOpenId(open ? id : null);
+  }, []);
+
+  const dropdown = () => (
+    <DropDownPicker
+      style={styles.dropdown}
+      open={openId === id}
+      setOpen={setOpen}
+      placeholder={strings.pilih_dot}
+      onChangeValue={() => onChange(value)}
+      listMode="SCROLLVIEW"
+      value={value}
+      items={items}
+      setValue={setValue}
+      setItems={setItems}
+      itemSeparator={true}
+      showTickIcon={false}
+      placeholderStyle={styles.textValue}
+      dropDownDirection="BOTTOM"
+      ArrowDownIconComponent={() => (
+        <Image
+          source={icons.icon_dropdown}
+          style={{ width: sizes.padding, height: sizes.padding }}
+        />
+      )}
+      dropDownContainerStyle={styles.dropdownItemContainer}
+      itemSeparatorStyle={{
+        height: 0.5,
+        backgroundColor: colors.primary,
+      }}
+      listItemLabelStyle={[styles.textValue, { fontWeight: '600' }]}
+      labelStyle={styles.textValue}
+    />
+  );
+
   if (title) {
     return (
       <View style={[styles.defaultContainer, style]}>
         <Text style={styles.titleText}>{title}</Text>
-        <View style={styles.innerContainer}>
-          <TouchableOpacity onPress={onPress} style={styles.container}>
-            <View
-              style={{
-                flexDirection: 'row',
-              }}>
-              {icon ? (
-                <Image
-                  source={icon}
-                  style={{
-                    width: sizes.icon_size,
-                    height: sizes.icon_size,
-                    marginRight: sizes.icon_size,
-                  }}
-                />
-              ) : null}
-              <Text
-                style={{
-                  color: colors.primary,
-                  fontSize: 14,
-                  fontWeight: 'bold',
-                }}>
-                {value ? value : 'Pilih...'}
-              </Text>
-            </View>
-            <Image
-              source={icons.icon_dropdown}
-              style={{ width: sizes.padding, height: sizes.padding }}
-            />
-          </TouchableOpacity>
-        </View>
+        {dropdown()}
       </View>
     );
   }
-  return (
-    <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
-      <View
-        style={{
-          flexDirection: 'row',
-        }}>
-        {icon ? (
-          <Image
-            source={icon}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-              marginRight: sizes.icon_size,
-            }}
-          />
-        ) : null}
-        <Text
-          style={{
-            color: colors.primary,
-            fontSize: 14,
-            fontWeight: 'bold',
-          }}>
-          {value ? value : 'Pilih...'}
-        </Text>
-      </View>
-      <Image
-        source={icons.icon_dropdown}
-        style={{ width: sizes.padding, height: sizes.padding }}
-      />
-    </TouchableOpacity>
-  );
+  return dropdown();
 };
 
 DropdownForm.propTypes = {
@@ -88,6 +71,11 @@ DropdownForm.propTypes = {
   icon: PropTypes.any,
   title: PropTypes.string,
   style: PropTypes.object,
+  openId: PropTypes.string,
+  id: PropTypes.string,
+  setOpenId: PropTypes.any,
+  onChange: PropTypes.func,
+  existsValue: PropTypes.string,
 };
 
 DropdownForm.defaultProps = {
@@ -96,24 +84,33 @@ DropdownForm.defaultProps = {
   icon: null,
   title: null,
   style: null,
+  onOpen: null,
+  openId: '',
+  id: '',
+  setOpenId: null,
+  onChange: null,
+  existsValue: '',
 };
 
 export default DropdownForm;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingVertical: SCREEN_WIDTH * 0.04,
-    paddingHorizontal: SCREEN_WIDTH * 0.04,
-    backgroundColor: colors.tonalLightPrimary,
-    borderRadius: SCREEN_HEIGHT * 0.02,
-  },
   defaultContainer: {
-    backgroundColor: colors.white,
     marginBottom: sizes.padding,
   },
   titleText: { color: colors.bodyTextGrey, marginBottom: sizes.padding / 2 },
+  textValue: {
+    color: colors.primary,
+    fontWeight: '500',
+  },
+  dropdown: {
+    backgroundColor: colors.tonalLightPrimary,
+    borderWidth: 0,
+    borderRadius: sizes.padding / 1.5,
+  },
+  dropdownItemContainer: {
+    backgroundColor: colors.tonalLightPrimary,
+    borderWidth: 0.5,
+    borderColor: colors.primary,
+  },
 });

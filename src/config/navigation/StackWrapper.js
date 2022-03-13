@@ -228,10 +228,6 @@ const DataDiriStackNavigator = () => (
       component={screens.DaftarAlamatAddScreen}
     />
     <DataDiriStack.Screen
-      name="DaftarAlamatMapScreen"
-      component={screens.DaftarAlamatMapScreen}
-    />
-    <DataDiriStack.Screen
       name="DaftarRefKeluargaAddScreen"
       component={screens.DaftarRefKeluargaAddScreen}
     />
@@ -246,6 +242,14 @@ const DataDiriStackNavigator = () => (
     <DataDiriStack.Screen
       name="DaftarKtpAddScreen"
       component={screens.DaftarKtpAddScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarKtpCameraScreen"
+      component={screens.DaftarKtpCameraScreen}
+    />
+    <DataDiriStack.Screen
+      name="DaftarKtpSelfieScreen"
+      component={screens.DaftarKtpSelfieScreen}
     />
     <DataDiriStack.Screen
       name="DaftarBiodataMainScreen"
@@ -490,7 +494,7 @@ const ParentStackNavigator = () => {
         <ParentStack.Screen
           name="MainStack"
           component={
-            isFirstLaunch ? OnboardingStackNavigator : LoginStackNavigator
+            isFirstLaunch ? OnboardingStackNavigator : DataDiriStackNavigator
           }
         />
       </ParentStack.Navigator>

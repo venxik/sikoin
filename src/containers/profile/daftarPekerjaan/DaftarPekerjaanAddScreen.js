@@ -7,24 +7,25 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
+import { addPekerjaan } from '../../../redux/reducers/PekerjaanReducer';
+import { formatter } from '../../../utils';
 
-const DaftarPekerjaanAddScreen = ({ route }) => {
-  const { params } = route || {};
-  const { update, data } = params || {};
+const DaftarPekerjaanAddScreen = () => {
+  const { pekerjaanData } = useSelector(s => s.PekerjaanReducer) || {};
   const {
     masaKerjaTahun,
     masaKerjaBulan,
     gajiBulanan,
-    bank,
-    noRekening,
     namaPerusahaan,
     alamatKantor,
     provinsiKota,
-  } = data || {};
+    jabatanTerakhir,
+    noTelpKantor,
+  } = pekerjaanData || {};
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -35,19 +36,27 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      masaKerjaTahun: update ? masaKerjaTahun : '',
-      masaKerjaBulan: update ? masaKerjaBulan : '',
-      gajiBulanan: update ? gajiBulanan : '',
-      bank: update ? bank : '',
-      noRekening: update ? noRekening : '',
-      namaPerusahaan: update ? namaPerusahaan : '',
-      alamatKantor: update ? alamatKantor : '',
-      provinsiKota: update ? provinsiKota : '',
+      masaKerjaTahun: masaKerjaTahun ? masaKerjaTahun.toString() : '',
+      masaKerjaBulan: masaKerjaBulan ? masaKerjaBulan.toString() : '',
+      gajiBulanan: gajiBulanan ? gajiBulanan.toString() : '',
+      namaPerusahaan: namaPerusahaan ? namaPerusahaan : '',
+      alamatKantor: alamatKantor ? alamatKantor : '',
+      provinsiKota: provinsiKota ? provinsiKota : '',
+      jabatanTerakhir: jabatanTerakhir ? jabatanTerakhir : '',
+      noTelpKantor: noTelpKantor ? noTelpKantor : '',
     },
   });
 
   const submitData = data => {
-    console.log(data);
+    const { masaKerjaTahun, masaKerjaBulan, gajiBulanan } = data;
+    dispatch(
+      addPekerjaan({
+        ...data,
+        gajiBulanan: parseInt(gajiBulanan),
+        masaKerjaTahun: parseInt(masaKerjaTahun),
+        masaKerjaBulan: parseInt(masaKerjaBulan),
+      }),
+    );
     navigation.goBack();
   };
 
@@ -59,7 +68,7 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
         keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
-          title={strings.kepegawaian}
+          title={strings.pekerjaan}
         />
         <ScrollView>
           <View style={styles.innerContainer}>
@@ -71,109 +80,109 @@ const DaftarPekerjaanAddScreen = ({ route }) => {
               <Controller
                 control={control}
                 name="masaKerjaTahun"
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextboxForm
+                    error={errors.masaKerjaTahun}
+                    errorText={errors.masaKerjaTahun?.message}
                     style={{ width: '45%' }}
-                    onBlur={onBlur}
                     value={value}
                     onChangeText={value => onChange(value)}
                     title={strings.masa_kerja_tahun}
+                    keyboardType="number-pad"
                   />
                 )}
-                rules={{ required: true }}
+                rules={{ pattern: formatter.NUMBER_REGEX }}
               />
               <Controller
                 control={control}
                 name="masaKerjaBulan"
-                render={({ field: { onChange, onBlur, value } }) => (
+                render={({ field: { onChange, value } }) => (
                   <TextboxForm
+                    error={errors.masaKerjaBulan}
+                    errorText={errors.masaKerjaBulan?.message}
                     style={{ width: '45%' }}
-                    onBlur={onBlur}
                     value={value}
                     onChangeText={value => onChange(value)}
                     title={strings.masa_kerja_bulan}
+                    keyboardType="number-pad"
                   />
                 )}
-                rules={{ required: true }}
+                rules={{ pattern: formatter.NUMBER_REGEX }}
               />
             </View>
             <Controller
               control={control}
               name="gajiBulanan"
-              render={({ field: { onChange, onBlur, value } }) => (
+              render={({ field: { onChange, value } }) => (
                 <TextboxForm
-                  onBlur={onBlur}
+                  error={errors.gajiBulanan}
+                  errorText={errors.gajiBulanan?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.gaji_bulanan}
+                  keyboardType="number-pad"
                 />
               )}
-              rules={{ required: true }}
+              rules={{ pattern: formatter.NUMBER_REGEX }}
             />
             <Controller
               control={control}
-              name="bank"
-              render={({ field: { onChange, onBlur, value } }) => (
+              name="jabatanTerakhir"
+              render={({ field: { onChange, value } }) => (
                 <TextboxForm
-                  onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.bank}
+                  title={strings.jabatan_terakhir}
                 />
               )}
-              rules={{ required: true }}
-            />
-            <Controller
-              control={control}
-              name="noRekening"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
-                  onBlur={onBlur}
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.no_rekening}
-                />
-              )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
               name="namaPerusahaan"
-              render={({ field: { onChange, onBlur, value } }) => (
+              render={({ field: { onChange, value } }) => (
                 <TextboxForm
-                  onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.nama_perusahaan}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
               name="alamatKantor"
-              render={({ field: { onChange, onBlur, value } }) => (
+              render={({ field: { onChange, value } }) => (
                 <TextboxForm
-                  onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.alamat_kantor}
                 />
               )}
-              rules={{ required: true }}
+            />
+            <Controller
+              control={control}
+              name="noTelpKantor"
+              render={({ field: { onChange, value } }) => (
+                <TextboxForm
+                  error={errors.noTelpKantor}
+                  errorText={errors.noTelpKantor?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.no_telp}
+                  keyboardType="number-pad"
+                />
+              )}
+              rules={{ pattern: formatter.NUMBER_REGEX }}
             />
             <Controller
               control={control}
               name="provinsiKota"
-              render={({ field: { onChange, onBlur, value } }) => (
+              render={({ field: { onChange, value } }) => (
                 <TextboxForm
-                  onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.provinsi_kota}
                 />
               )}
-              rules={{ required: true }}
             />
           </View>
         </ScrollView>

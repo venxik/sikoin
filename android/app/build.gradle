@@ -142,6 +142,8 @@ android {
         versionCode 1
         versionName "1.0"
         resValue "string", "build_config_package", "com.sikoin"
+        missingDimensionStrategy 'react-native-camera', 'general'
+        multiDexEnabled true
     }
     splits {
         abi {

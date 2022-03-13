@@ -1,5 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
 import React from 'react';
 import {
   View,
@@ -10,14 +11,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useSelector } from 'react-redux';
-import {
-  ButtonText,
-  HeaderBack,
-  ListEmptyDataComponent,
-} from '../../../components';
+import { ButtonText, HeaderBack } from '../../../components';
 import {
   colors,
   icons,
+  images,
   SCREEN_HEIGHT,
   sizes,
   strings,
@@ -26,64 +24,49 @@ import {
 const DaftarKtpMainScreen = () => {
   const navigation = useNavigation();
 
-  // const [showDeletePopup, setShowDeletePopup] = useState(false);
-  // const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
   const { ktpData } = useSelector(s => s.KtpReducer) || {};
-  const { ktpNumber, ktpImage } = ktpData || {};
+  const { noKtp, gambarKtp } = ktpData || {};
 
-  const navigateToAddScreen = update => {
-    navigation.navigate('DaftarKtpAddScreen', {
-      update: update,
-      data: ktpData,
-    });
+  const navigateToAddScreen = () => {
+    navigation.navigate('DaftarKtpAddScreen');
   };
 
   const copyToClipboard = text => {
     Clipboard.setString(text.toString());
   };
 
-  // const deleteKeluarga = item => {
-  //   setShowDeletePopup(true);
-  //   setSelectKeluarga(item);
-  // };
-
-  // const confirmDeleteAlamat = () => {
-  //   dispatch(deleteKelFromReducer(selectKeluarga));
-  //   setShowDeletePopup(false);
-  //   setSuccessShowDeletePopup(true);
-  // };
-
-  const renderEmpty = () => (
-    <View style={{ flex: 1 }}>
-      <ListEmptyDataComponent
-        text={strings.tambah_data_ktp}
-        onPress={() => navigateToAddScreen(false)}
-      />
-    </View>
-  );
-
   const renderKtpCard = () => {
     return (
       <View style={styles.cardContainer}>
-        <Image source={ktpImage} style={styles.imageKtp} resizeMode="cover" />
+        <Image
+          source={
+            !isEmpty(gambarKtp)
+              ? { uri: `data:image/jpg;base64,${gambarKtp}` }
+              : images.dummy_ktp
+          }
+          style={styles.imageKtp}
+          resizeMode="cover"
+        />
         <View
           style={{
             flexDirection: 'row',
             marginVertical: sizes.padding,
             alignItems: 'center',
           }}>
-          <Text style={styles.textStyle}>{ktpNumber}</Text>
-          <TouchableOpacity onPress={copyToClipboard}>
-            <Image
-              source={icons.icon_copy_clipboard}
-              style={styles.iconClipboard}
-            />
-          </TouchableOpacity>
+          <Text style={styles.textStyle}>{noKtp ? noKtp : '-'}</Text>
+          {!isEmpty(noKtp) && (
+            <TouchableOpacity onPress={copyToClipboard}>
+              <Image
+                source={icons.icon_copy_clipboard}
+                style={styles.iconClipboard}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <ButtonText
           shadow={false}
-          onPress={() => navigateToAddScreen(true)}
-          text={strings.ubah_ktp}
+          onPress={() => navigateToAddScreen()}
+          text={strings.ubah_data_ktp}
         />
       </View>
     );
@@ -92,24 +75,7 @@ const DaftarKtpMainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.ktp} />
-      {/* <Popup2Button
-        buttonLeftOnPress={() => setShowDeletePopup(false)}
-        buttonRightOnPress={() => confirmDeleteAlamat()}
-        buttonLeftTitle={strings.tidak_jadi}
-        buttonRightTitle={strings.hapus}
-        headerText={strings.yakin_hapus_alamat}
-        showPopup={showDeletePopup}
-        headerImage={icons.icon_info_popup}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      />
-      <Popup1Button
-        headerText={strings.sukses_hapus_alamat}
-        showPopup={showSuccessDeletePopup}
-        onPress={() => setSuccessShowDeletePopup(false)}
-        headerImage={icons.popup_success}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      /> */}
-      {ktpData ? renderKtpCard() : renderEmpty()}
+      {renderKtpCard()}
     </SafeAreaView>
   );
 };

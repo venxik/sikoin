@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,20 +7,21 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonText,
+  CalendarPicker,
   DropdownForm,
   HeaderBack,
   TextboxForm,
 } from '../../../components';
-import { colors, sizes, strings } from '../../../constants';
+import { colors, dropdownItems, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { addBiodata } from '../../../redux/reducers/BiodataReducer';
+import dropDownItems from '../../../constants/dropdownItems';
 
-const DaftarBiodataAddScreen = ({ route }) => {
-  const { params } = route || {};
-  const { update, data } = params || {};
+const DaftarBiodataAddScreen = () => {
+  const { biodataData } = useSelector(s => s.BiodataReducer) || {};
   const {
     tempatLahir,
     tanggalLahir,
@@ -33,10 +34,31 @@ const DaftarBiodataAddScreen = ({ route }) => {
     jumlahAnak,
     pekerjaan,
     detailPekerjaan,
-  } = data || {};
+    bank,
+    noRek,
+  } = biodataData || {};
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const [genderItems, setGenderItems] = useState(dropDownItems.genderItem);
+  const [golDarahItems, setGolDarahItems] = useState(
+    dropDownItems.golDarahItem,
+  );
+  const [pendidikanItems, setPendidikanItems] = useState(
+    dropDownItems.pendidikanItem,
+  );
+  const [wargaItems, setWargaItems] = useState(
+    dropDownItems.kewarganegaraanItem,
+  );
+  const [agamaItems, setAgamaItems] = useState(dropDownItems.agamaItem);
+  const [statusPernikahanItems, setStatusPernikahanItems] = useState(
+    dropdownItems.statusPernikahanItem,
+  );
+  const [pekerjaanItems, setPekerjaanItems] = useState(
+    dropdownItems.pekerjaanItem,
+  );
+  const [openId, setOpenId] = useState('');
 
   const {
     control,
@@ -44,16 +66,18 @@ const DaftarBiodataAddScreen = ({ route }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      tempatLahir: update ? tempatLahir : '',
-      jumlahAnak: update ? jumlahAnak : '',
-      detailPekerjaan: update ? detailPekerjaan : '',
+      tempatLahir: tempatLahir ? tempatLahir : '',
+      jumlahAnak: jumlahAnak ? jumlahAnak : '',
+      detailPekerjaan: detailPekerjaan ? detailPekerjaan : '',
+      bank: bank ? bank : '',
+      noRek: noRek ? noRek : '',
     },
   });
 
   const submitData = data => {
-    // dispatch(addBiodata(data));
     console.log(data);
-    navigation.goBack();
+    dispatch(addBiodata(data));
+    // navigation.goBack();
   };
 
   return (
@@ -81,38 +105,119 @@ const DaftarBiodataAddScreen = ({ route }) => {
               )}
               rules={{ required: true }}
             />
-            <DropdownForm
-              value={update ? tanggalLahir : strings.pilih_dot}
+            <CalendarPicker
               title={strings.tgl_lahir}
+              onChangeDate={date => {
+                console.log(date);
+              }}
+              value={tanggalLahir}
             />
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <DropdownForm
-                style={{ width: '45%' }}
-                value={update ? gender : strings.pilih_dot}
-                title={strings.gender}
+                id={strings.jenis_kelamin}
+                openId={openId}
+                setOpenId={setOpenId}
+                style={{ width: '55%', zIndex: 9000 }}
+                title={strings.jenis_kelamin}
+                items={genderItems}
+                setItems={setGenderItems}
+                existsValue={gender}
+                onChange={value => {
+                  console.log(value);
+                }}
               />
               <DropdownForm
-                style={{ width: '45%' }}
-                value={update ? golDarah : strings.pilih_dot}
+                id={strings.gol_darah}
+                openId={openId}
+                setOpenId={setOpenId}
+                style={{ width: '40%', zIndex: 9000 }}
                 title={strings.gol_darah}
+                items={golDarahItems}
+                setItems={setGolDarahItems}
+                existsValue={golDarah}
+                onChange={value => {
+                  console.log(value);
+                }}
               />
             </View>
             <DropdownForm
-              value={update ? kewarganegaraan : strings.pilih_dot}
+              id={strings.kewarganegaraan}
+              openId={openId}
+              setOpenId={setOpenId}
+              style={{ zIndex: 8000 }}
               title={strings.kewarganegaraan}
+              items={wargaItems}
+              setItems={setWargaItems}
+              existsValue={kewarganegaraan}
+              onChange={value => {
+                console.log(value);
+              }}
             />
             <DropdownForm
-              value={update ? pendidikanTerakhir : strings.pilih_dot}
+              id={strings.pendidikan_terakhir}
+              openId={openId}
+              setOpenId={setOpenId}
+              style={{ zIndex: 7000 }}
               title={strings.pendidikan_terakhir}
+              items={pendidikanItems}
+              setItems={setPendidikanItems}
+              existsValue={pendidikanTerakhir}
+              onChange={value => {
+                console.log(value);
+              }}
             />
             <DropdownForm
-              value={update ? agama : strings.pilih_dot}
+              id={strings.agama}
+              openId={openId}
+              setOpenId={setOpenId}
+              style={{ zIndex: 6000 }}
               title={strings.agama}
+              items={agamaItems}
+              setItems={setAgamaItems}
+              existsValue={agama}
+              onChange={value => {
+                console.log(value);
+              }}
+            />
+            <Controller
+              control={control}
+              name="bank"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextboxForm
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.bank}
+                />
+              )}
+              rules={{ required: true }}
+            />
+            <Controller
+              control={control}
+              name="noRek"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextboxForm
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.no_rekening}
+                />
+              )}
+              rules={{ required: true }}
             />
             <DropdownForm
-              value={update ? statusPernikahan : strings.pilih_dot}
+              id={strings.status_pernikahan}
+              openId={openId}
+              setOpenId={setOpenId}
+              style={{ zIndex: 5000 }}
               title={strings.status_pernikahan}
+              items={statusPernikahanItems}
+              setItems={setStatusPernikahanItems}
+              existsValue={statusPernikahan}
+              onChange={value => {
+                console.log(value);
+              }}
             />
             <Controller
               control={control}
@@ -128,8 +233,17 @@ const DaftarBiodataAddScreen = ({ route }) => {
               rules={{ required: true }}
             />
             <DropdownForm
-              value={update ? pekerjaan : strings.pilih_dot}
+              id={strings.pekerjaan}
+              openId={openId}
+              setOpenId={setOpenId}
+              style={{ zIndex: 4000 }}
               title={strings.pekerjaan}
+              items={pekerjaanItems}
+              setItems={setPekerjaanItems}
+              existsValue={pekerjaan}
+              onChange={value => {
+                console.log(value);
+              }}
             />
             <Controller
               control={control}

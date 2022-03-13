@@ -7,15 +7,12 @@ import {
   DetailItemList,
   DetailItemProfileHeader,
   HeaderBack,
-  ListEmptyDataComponent,
 } from '../../../components';
 import { colors, icons, sizes, strings } from '../../../constants';
 
 const DaftarBiodataMainScreen = () => {
   const navigation = useNavigation();
 
-  // const [showDeletePopup, setShowDeletePopup] = useState(false);
-  // const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
   const { biodataData } = useSelector(s => s.BiodataReducer) || {};
   const {
     tempatLahir,
@@ -29,6 +26,8 @@ const DaftarBiodataMainScreen = () => {
     jumlahAnak,
     pekerjaan,
     detailPekerjaan,
+    bank,
+    noRek,
   } = biodataData || {};
 
   const navigateToAddScreen = update => {
@@ -38,26 +37,6 @@ const DaftarBiodataMainScreen = () => {
     });
   };
 
-  // const deleteKeluarga = item => {
-  //   setShowDeletePopup(true);
-  //   setSelectKeluarga(item);
-  // };
-
-  // const confirmDeleteAlamat = () => {
-  //   dispatch(deleteKelFromReducer(selectKeluarga));
-  //   setShowDeletePopup(false);
-  //   setSuccessShowDeletePopup(true);
-  // };
-
-  const renderEmpty = () => (
-    <View style={{ flex: 1 }}>
-      <ListEmptyDataComponent
-        text={strings.tambah_biodata}
-        onPress={() => navigateToAddScreen(false)}
-      />
-    </View>
-  );
-
   const renderBiodata = () => {
     return (
       <ScrollView
@@ -66,11 +45,9 @@ const DaftarBiodataMainScreen = () => {
         }}>
         <View style={styles.cardContainer}>
           <DetailItemProfileHeader />
-          <DetailItemList
-            title={strings.tmptTglLahir}
-            content={tempatLahir.concat(', ' + tanggalLahir)}
-          />
-          <DetailItemList title={strings.gender} content={gender} />
+          <DetailItemList title={strings.tempat_lahir} content={tempatLahir} />
+          <DetailItemList title={strings.tgl_lahir} content={tanggalLahir} />
+          <DetailItemList title={strings.jenis_kelamin} content={gender} />
           <DetailItemList title={strings.golongan_darah} content={golDarah} />
           <DetailItemList
             title={strings.kewarganegaraan}
@@ -81,6 +58,8 @@ const DaftarBiodataMainScreen = () => {
             content={pendidikanTerakhir}
           />
           <DetailItemList title={strings.agama} content={agama} />
+          <DetailItemList title={strings.bank} content={bank} />
+          <DetailItemList title={strings.no_rekening} content={noRek} />
           <DetailItemList
             title={strings.status_pernikahan}
             content={statusPernikahan}
@@ -109,25 +88,7 @@ const DaftarBiodataMainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.biodata} />
-
-      {/* <Popup2Button
-        buttonLeftOnPress={() => setShowDeletePopup(false)}
-        buttonRightOnPress={() => confirmDeleteAlamat()}
-        buttonLeftTitle={strings.tidak_jadi}
-        buttonRightTitle={strings.hapus}
-        headerText={strings.yakin_hapus_alamat}
-        showPopup={showDeletePopup}
-        headerImage={icons.icon_info_popup}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      />
-      <Popup1Button
-        headerText={strings.sukses_hapus_alamat}
-        showPopup={showSuccessDeletePopup}
-        onPress={() => setSuccessShowDeletePopup(false)}
-        headerImage={icons.popup_success}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      /> */}
-      {biodataData ? renderBiodata() : renderEmpty()}
+      {renderBiodata()}
     </SafeAreaView>
   );
 };

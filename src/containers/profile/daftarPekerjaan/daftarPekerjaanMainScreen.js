@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
 import React from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,6 @@ import {
   DetailItemList,
   DetailItemProfileHeader,
   HeaderBack,
-  ListEmptyDataComponent,
 } from '../../../components';
 import { colors, icons, sizes, strings } from '../../../constants';
 import { formatter } from '../../../utils';
@@ -15,46 +15,21 @@ import { formatter } from '../../../utils';
 const DaftarPekerjaanMainScreen = () => {
   const navigation = useNavigation();
 
-  // const [showDeletePopup, setShowDeletePopup] = useState(false);
-  // const [showSuccessDeletePopup, setSuccessShowDeletePopup] = useState(false);
   const { pekerjaanData } = useSelector(s => s.PekerjaanReducer) || {};
   const {
     masaKerjaTahun,
     masaKerjaBulan,
     gajiBulanan,
-    bank,
-    noRekening,
     namaPerusahaan,
     alamatKantor,
     provinsiKota,
+    jabatanTerakhir,
+    noTelpKantor,
   } = pekerjaanData || {};
 
-  const navigateToAddScreen = update => {
-    navigation.navigate('DaftarPekerjaanAddScreen', {
-      update: update,
-      data: pekerjaanData,
-    });
+  const navigateToAddScreen = () => {
+    navigation.navigate('DaftarPekerjaanAddScreen');
   };
-
-  // const deleteKeluarga = item => {
-  //   setShowDeletePopup(true);
-  //   setSelectKeluarga(item);
-  // };
-
-  // const confirmDeleteAlamat = () => {
-  //   dispatch(deleteKelFromReducer(selectKeluarga));
-  //   setShowDeletePopup(false);
-  //   setSuccessShowDeletePopup(true);
-  // };
-
-  const renderEmpty = () => (
-    <View style={{ flex: 1 }}>
-      <ListEmptyDataComponent
-        text={strings.tambah_kepegawaian}
-        onPress={() => navigateToAddScreen(false)}
-      />
-    </View>
-  );
 
   const renderPekerjaan = () => {
     return (
@@ -66,34 +41,41 @@ const DaftarPekerjaanMainScreen = () => {
           <DetailItemProfileHeader />
           <DetailItemList
             title={strings.gaji_bulanan}
-            content={`Rp ${formatter.formatStringToCurrencyNumber(
-              gajiBulanan,
-            )}`}
+            content={`Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`}
           />
           <DetailItemList
             title={strings.masa_kerja}
-            content={`${masaKerjaTahun} Tahun ${masaKerjaBulan} Bulan`}
+            content={
+              !isEmpty(masaKerjaTahun) && !isEmpty(masaKerjaBulan)
+                ? `${masaKerjaTahun} Tahun ${masaKerjaBulan} Bulan`
+                : ''
+            }
           />
           <DetailItemList
             title={strings.gaji_pokok}
-            content={`Rp ${gajiBulanan}`}
+            content={`Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`}
           />
           <DetailItemList
             title={strings.nama_perusahaan}
             content={namaPerusahaan}
           />
           <DetailItemList
+            title={strings.jabatan_terakhir}
+            content={jabatanTerakhir}
+          />
+          <DetailItemList
             title={strings.alamat_kantor}
             content={alamatKantor}
           />
+          <DetailItemList title={strings.no_telp} content={noTelpKantor} />
           <DetailItemList
             title={strings.provinsi_kota}
             content={provinsiKota}
           />
           <ButtonText
             shadow={false}
-            onPress={() => navigateToAddScreen(true)}
-            text={strings.edit_kepegawaian}
+            onPress={() => navigateToAddScreen()}
+            text={strings.edit_pekerjaan}
             icon={icons.icon_edit_profile}
             iconLocation="right"
             buttonContainerStyle={{ backgroundColor: colors.tonalLightPrimary }}
@@ -108,27 +90,9 @@ const DaftarPekerjaanMainScreen = () => {
     <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.kepegawaian}
+        title={strings.pekerjaan}
       />
-
-      {/* <Popup2Button
-        buttonLeftOnPress={() => setShowDeletePopup(false)}
-        buttonRightOnPress={() => confirmDeleteAlamat()}
-        buttonLeftTitle={strings.tidak_jadi}
-        buttonRightTitle={strings.hapus}
-        headerText={strings.yakin_hapus_alamat}
-        showPopup={showDeletePopup}
-        headerImage={icons.icon_info_popup}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      />
-      <Popup1Button
-        headerText={strings.sukses_hapus_alamat}
-        showPopup={showSuccessDeletePopup}
-        onPress={() => setSuccessShowDeletePopup(false)}
-        headerImage={icons.popup_success}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
-      /> */}
-      {pekerjaanData ? renderPekerjaan() : renderEmpty()}
+      {renderPekerjaan()}
     </SafeAreaView>
   );
 };

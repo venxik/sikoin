@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useNavigation } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import {
   View,
@@ -9,47 +10,50 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
 import {
   colors,
   icons,
-  images,
   SCREEN_HEIGHT,
   sizes,
   strings,
 } from '../../../constants';
-import { addKtp } from '../../../redux/reducers/KtpReducer';
+import { addKtpNumber } from '../../../redux/reducers/KtpReducer';
+import { useForm, Controller } from 'react-hook-form';
 
-const DaftarKtpAddScreen = ({ route }) => {
-  const { params } = route || {};
-  const { update, data } = params || {};
-  const { ktpNumber: ktpNumberParam, ktpImage: ktpImageParam } = data || {};
-
+const DaftarKtpAddScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [ktpNumber, setKtpNumber] = useState(update ? ktpNumberParam : null);
-  const [ktpImage, setKtpImage] = useState(update ? ktpImageParam : null);
 
-  const submitKtp = () => {
-    if (ktpImage && ktpNumber) {
+  const { ktpData } = useSelector(s => s.KtpReducer) || {};
+  const { noKtp, gambarKtp } = ktpData || {};
+
+  const submitKtp = data => {
+    if (data) {
       dispatch(
-        addKtp({
-          ktpNumber: ktpNumber,
-          ktpImage: ktpImage,
+        addKtpNumber({
+          noKtp: noKtp,
         }),
       );
       navigation.goBack();
     }
   };
 
-  const onChangeKtpNum = value => {
-    setKtpNumber(value);
+  const changeKtpImage = () => {
+    navigation.navigate('DaftarKtpCameraScreen');
+    // setKtpImage(images.dummy_ktp);
   };
 
-  const changeKtpImage = () => {
-    setKtpImage(images.dummy_ktp);
-  };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      noKtp: noKtp ? noKtp : '',
+    },
+  });
 
   const renderKtpCard = () => {
     return (
@@ -57,7 +61,11 @@ const DaftarKtpAddScreen = ({ route }) => {
         <TouchableOpacity onPress={changeKtpImage}>
           <ImageBackground
             imageStyle={styles.imageKtp}
-            source={ktpImage ? ktpImage : 0}
+            source={
+              !isEmpty(gambarKtp)
+                ? { uri: `data:image/jpg;base64,${gambarKtp}` }
+                : icons.icon_edit_profile_picture
+            }
             style={styles.imageKtp}
             resizeMode="cover">
             <View style={styles.iconContainer}>
@@ -72,12 +80,36 @@ const DaftarKtpAddScreen = ({ route }) => {
             </View>
           </ImageBackground>
         </TouchableOpacity>
-        <TextboxForm
-          style={{ marginTop: sizes.padding }}
-          value={ktpNumber}
-          onChangeText={value => onChangeKtpNum(value)}
-          title={strings.no_ktp}
-          keyboardType={'numeric'}
+        <Controller
+          control={control}
+          name="noKtp"
+          render={({ field: { onChange, value } }) => (
+            <TextboxForm
+              error={errors.noKtp}
+              errorText={errors.noKtp?.message}
+              style={{ marginTop: sizes.padding }}
+              value={value}
+              onChangeText={onChange}
+              title={strings.no_ktp}
+              keyboardType={'numeric'}
+              maxLength={16}
+            />
+          )}
+          rules={{
+            required: { value: true, message: 'KTP Harus Diisi' },
+            minLength: { value: 16, message: 'KTP Harus 16 Digit' },
+          }}
+        />
+
+        <ButtonText
+          text={'Tambah Dokumen Pendukung'}
+          secondary
+          buttonContainerStyle={{ marginBottom: sizes.padding }}
+        />
+        <ButtonText
+          text={'Tambah Selfie'}
+          secondary
+          onPress={() => navigation.navigate('DaftarKtpSelfieScreen')}
         />
       </View>
     );
@@ -87,13 +119,13 @@ const DaftarKtpAddScreen = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={update ? strings.ubah_ktp : strings.tambah_ktp}
+        title={strings.ubah_ktp}
       />
 
       {renderKtpCard()}
 
       <ButtonText
-        onPress={submitKtp}
+        onPress={handleSubmit(submitKtp)}
         buttonContainerStyle={{
           position: 'absolute',
           bottom: sizes.padding,
