@@ -7,23 +7,24 @@ import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   sizes,
-  strings,
 } from '../constants';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 
 const CalendarPicker = props => {
   const { title, style, onChangeDate, value } = props || {};
-  const [date, setDate] = useState(value ? value : new Date());
-  const [selected, setSelected] = useState(false);
+  const [date, setDate] = useState(
+    !isEmpty(value) ? new Date(value) : new Date(),
+  );
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
-    if (event.type !== 'dismissed') {
-      setSelected(true);
-      setDate(selectedDate);
-    }
     setShow(false);
+    if (event.type !== 'dismissed') {
+      setDate(selectedDate);
+      onChangeDate(selectedDate);
+    }
   };
 
   const showDatepicker = () => {
@@ -53,7 +54,7 @@ const CalendarPicker = props => {
                 color: colors.primary,
                 fontWeight: '500',
               }}>
-              {selected ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}
+              {moment(date).format('DD/MM/YYYY')}
             </Text>
           </View>
           <Image
@@ -68,7 +69,6 @@ const CalendarPicker = props => {
             display="default"
             onChange={(event, selectedDate) => {
               onChange(event, selectedDate);
-              onChangeDate(selectedDate);
             }}
           />
         )}
@@ -88,7 +88,7 @@ CalendarPicker.defaultProps = {
   title: 'Tanggal',
   style: null,
   onChangeDate: null,
-  value: new Date(),
+  value: null,
 };
 
 export default CalendarPicker;

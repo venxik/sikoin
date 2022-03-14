@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
 import { colors, SCREEN_WIDTH, sizes } from '../constants';
+import { isEmpty } from 'lodash';
 
 const Popup2Button = props => {
   const {
@@ -18,34 +19,17 @@ const Popup2Button = props => {
     headerTextStyle,
     contentTextStyle,
   } = props;
-  // const scaleValue = useRef(new Animated.Value(0)).current;
-
-  // useEffect(() => {
-  //   if (showPopup) {
-  //     Animated.spring(scaleValue, {
-  //       toValue: 1,
-  //       duration: 200,
-  //       useNativeDriver: true,
-  //     }).start();
-  //   }
-  // }, [showPopup]);
 
   const closeModal = press => {
-    // Animated.timing(scaleValue, {
-    //   toValue: 0,
-    //   duration: 200,
-    //   useNativeDriver: true,
-    // }).start(() => {
     if (press) {
       press();
     }
-    // });
   };
 
-  const buttonLeftPressed = () => {
+  const onPressLeftButton = () => {
     closeModal(buttonLeftOnPress);
   };
-  const buttonRightPressed = () => {
+  const onPressRightButton = () => {
     closeModal(buttonRightOnPress);
   };
 
@@ -67,12 +51,12 @@ const Popup2Button = props => {
             style={{
               alignItems: 'center',
             }}>
-            {headerText && (
+            {!isEmpty(headerText) && (
               <Text style={[styles.headerModalText, headerTextStyle]}>
                 {headerText}
               </Text>
             )}
-            {contentText && (
+            {!isEmpty(contentText) && (
               <Text style={[styles.contentModalText, contentTextStyle]}>
                 {contentText}
               </Text>
@@ -82,7 +66,7 @@ const Popup2Button = props => {
           <View style={styles.buttonContainer}>
             <ButtonText
               text={buttonLeftTitle}
-              onPress={buttonLeftPressed}
+              onPress={onPressLeftButton}
               buttonContainerStyle={{
                 width: '47%',
                 backgroundColor: colors.white,
@@ -93,7 +77,7 @@ const Popup2Button = props => {
             />
             <ButtonText
               text={buttonRightTitle}
-              onPress={buttonRightPressed}
+              onPress={onPressRightButton}
               buttonContainerStyle={{ width: '47%' }}
             />
           </View>
@@ -120,8 +104,8 @@ Popup2Button.propTypes = {
 
 Popup2Button.defaultProps = {
   showPopup: false,
-  headerText: 'default',
-  contentText: 'default',
+  headerText: '',
+  contentText: '',
   customContent: null,
   headerImage: null,
   headerTextStyle: null,

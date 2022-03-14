@@ -1,5 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   View,
   Text,
@@ -9,6 +15,7 @@ import {
   ScrollView,
   FlatList,
   Animated,
+  BackHandler,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -71,17 +78,26 @@ const HomeScreen = () => {
   const [selectedKabar, setSelectedKabar] = useState({});
   const { simpanan, saldo } = useSelector(state => state.SaldoSimpananReducer);
 
-  // variables
-  const snapPoints = useMemo(() => ['10%', '90%'], []);
+  useEffect(() => {
+    const backAction = () => {
+      BackHandler.exitApp();
+      return true;
+    };
 
-  // callbacks
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  // BOTTOMSHEET
+  const snapPoints = useMemo(() => ['10%', '90%'], []);
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-
-  const handleSheetChanges = useCallback(() => {
-    // console.log('handleSheetChanges', index);
-  }, []);
+  const handleSheetChanges = useCallback(() => {}, []);
 
   const selectKabarCard = item => {
     setSelectedKabar(item);
@@ -133,7 +149,7 @@ const HomeScreen = () => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar
                 item={item}
-                // style={{ height: cardKabarHeight }}
+                style={{ height: cardKabarHeight }}
                 onPress={() => selectKabarCard(item)}
               />
               {index === kabarDataList.length - 1 && (

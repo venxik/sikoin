@@ -18,10 +18,13 @@ const DaftarKtpSelfieScreen = () => {
   const takePic = async () => {
     try {
       const data = await takePicture();
-      RNFS.readFile(data.uri, 'base64').then(res => {
-        dispatch(addKtpImage(res));
+      // RNFS.readFile(data.uri, 'base64').then(res => {
+      //   dispatch(addKtpImage(res));
+      //   navigation.goBack();
+      // });
+      if (data) {
         navigation.goBack();
-      });
+      }
     } catch {
       e => {
         console.log(e);

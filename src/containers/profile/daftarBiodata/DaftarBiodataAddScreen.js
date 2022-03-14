@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -18,7 +18,7 @@ import {
 import { colors, dropdownItems, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { addBiodata } from '../../../redux/reducers/BiodataReducer';
-import dropDownItems from '../../../constants/dropdownItems';
+import { isEmpty } from 'lodash';
 
 const DaftarBiodataAddScreen = () => {
   const { biodataData } = useSelector(s => s.BiodataReducer) || {};
@@ -41,25 +41,6 @@ const DaftarBiodataAddScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [genderItems, setGenderItems] = useState(dropDownItems.genderItem);
-  const [golDarahItems, setGolDarahItems] = useState(
-    dropDownItems.golDarahItem,
-  );
-  const [pendidikanItems, setPendidikanItems] = useState(
-    dropDownItems.pendidikanItem,
-  );
-  const [wargaItems, setWargaItems] = useState(
-    dropDownItems.kewarganegaraanItem,
-  );
-  const [agamaItems, setAgamaItems] = useState(dropDownItems.agamaItem);
-  const [statusPernikahanItems, setStatusPernikahanItems] = useState(
-    dropdownItems.statusPernikahanItem,
-  );
-  const [pekerjaanItems, setPekerjaanItems] = useState(
-    dropdownItems.pekerjaanItem,
-  );
-  const [openId, setOpenId] = useState('');
-
   const {
     control,
     handleSubmit,
@@ -67,16 +48,29 @@ const DaftarBiodataAddScreen = () => {
   } = useForm({
     defaultValues: {
       tempatLahir: tempatLahir ? tempatLahir : '',
+      tanggalLahir: !isEmpty(tanggalLahir) ? tanggalLahir : '',
       jumlahAnak: jumlahAnak ? jumlahAnak : '',
       detailPekerjaan: detailPekerjaan ? detailPekerjaan : '',
       bank: bank ? bank : '',
       noRek: noRek ? noRek : '',
+      gender: gender ? gender : '',
+      golDarah: golDarah ? golDarah : '',
+      kewarganegaraan: kewarganegaraan ? kewarganegaraan : '',
+      pendidikanTerakhir: pendidikanTerakhir ? pendidikanTerakhir : '',
+      agama: agama ? agama : '',
+      statusPernikahan: statusPernikahan ? statusPernikahan : '',
+      pekerjaan: pekerjaan ? pekerjaan : '',
     },
   });
 
   const submitData = data => {
-    console.log(data);
-    dispatch(addBiodata(data));
+    const { tanggalLahir } = data || {};
+    dispatch(
+      addBiodata({
+        ...data,
+        tanggalLahir: tanggalLahir.toString(),
+      }),
+    );
     navigation.goBack();
   };
 
@@ -103,82 +97,92 @@ const DaftarBiodataAddScreen = () => {
                   title={strings.tempat_lahir}
                 />
               )}
-              rules={{ required: true }}
             />
-            <CalendarPicker
-              title={strings.tgl_lahir}
-              onChangeDate={date => {
-                console.log(date);
-              }}
-              value={tanggalLahir}
+            <Controller
+              control={control}
+              name="tanggalLahir"
+              render={({ field: { onChange, value } }) => (
+                <CalendarPicker
+                  title={strings.tgl_lahir}
+                  onChangeDate={date => {
+                    onChange(date);
+                  }}
+                  value={value}
+                />
+              )}
             />
+
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <DropdownForm
-                id={strings.jenis_kelamin}
-                openId={openId}
-                setOpenId={setOpenId}
-                style={{ width: '55%', zIndex: 9000 }}
-                title={strings.jenis_kelamin}
-                items={genderItems}
-                setItems={setGenderItems}
-                existsValue={gender}
-                onChange={value => {
-                  console.log(value);
-                }}
+              <Controller
+                control={control}
+                name="gender"
+                render={({ field: { onChange, value } }) => (
+                  <DropdownForm
+                    style={{ width: '55%' }}
+                    title={strings.jenis_kelamin}
+                    data={dropdownItems.genderItem}
+                    onChange={value => onChange(value)}
+                    value={value.value}
+                    maxHeight={120}
+                  />
+                )}
               />
-              <DropdownForm
-                id={strings.gol_darah}
-                openId={openId}
-                setOpenId={setOpenId}
-                style={{ width: '40%', zIndex: 9000 }}
-                title={strings.gol_darah}
-                items={golDarahItems}
-                setItems={setGolDarahItems}
-                existsValue={golDarah}
-                onChange={value => {
-                  console.log(value);
-                }}
+              <Controller
+                control={control}
+                name="golDarah"
+                render={({ field: { onChange, value } }) => (
+                  <DropdownForm
+                    error={errors.golDarah}
+                    errorText={errors.golDarah?.message}
+                    style={{ width: '40%' }}
+                    title={strings.gol_darah}
+                    data={dropdownItems.golDarahItem}
+                    onChange={value => onChange(value)}
+                    value={value.value}
+                    maxHeight={200}
+                  />
+                )}
               />
             </View>
-            <DropdownForm
-              id={strings.kewarganegaraan}
-              openId={openId}
-              setOpenId={setOpenId}
-              style={{ zIndex: 8000 }}
-              title={strings.kewarganegaraan}
-              items={wargaItems}
-              setItems={setWargaItems}
-              existsValue={kewarganegaraan}
-              onChange={value => {
-                console.log(value);
-              }}
+            <Controller
+              control={control}
+              name="kewarganegaraan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.kewarganegaraan}
+                  data={dropdownItems.kewarganegaraanItem}
+                  onChange={value => onChange(value)}
+                  value={value.value}
+                  maxHeight={120}
+                />
+              )}
             />
-            <DropdownForm
-              id={strings.pendidikan_terakhir}
-              openId={openId}
-              setOpenId={setOpenId}
-              style={{ zIndex: 7000 }}
-              title={strings.pendidikan_terakhir}
-              items={pendidikanItems}
-              setItems={setPendidikanItems}
-              existsValue={pendidikanTerakhir}
-              onChange={value => {
-                console.log(value);
-              }}
+            <Controller
+              control={control}
+              name="pendidikanTerakhir"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.pendidikan_terakhir}
+                  data={dropdownItems.pendidikanItem}
+                  onChange={value => onChange(value)}
+                  value={value.value}
+                  maxHeight={120}
+                />
+              )}
             />
-            <DropdownForm
-              id={strings.agama}
-              openId={openId}
-              setOpenId={setOpenId}
-              style={{ zIndex: 6000 }}
-              title={strings.agama}
-              items={agamaItems}
-              setItems={setAgamaItems}
-              existsValue={agama}
-              onChange={value => {
-                console.log(value);
-              }}
+            <Controller
+              control={control}
+              name="agama"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.agama}
+                  data={dropdownItems.agamaItem}
+                  onChange={value => onChange(value)}
+                  value={value.value}
+                  maxHeight={120}
+                />
+              )}
             />
             <Controller
               control={control}
@@ -191,7 +195,6 @@ const DaftarBiodataAddScreen = () => {
                   title={strings.bank}
                 />
               )}
-              rules={{ required: true }}
             />
             <Controller
               control={control}
@@ -204,20 +207,19 @@ const DaftarBiodataAddScreen = () => {
                   title={strings.no_rekening}
                 />
               )}
-              rules={{ required: true }}
             />
-            <DropdownForm
-              id={strings.status_pernikahan}
-              openId={openId}
-              setOpenId={setOpenId}
-              style={{ zIndex: 5000 }}
-              title={strings.status_pernikahan}
-              items={statusPernikahanItems}
-              setItems={setStatusPernikahanItems}
-              existsValue={statusPernikahan}
-              onChange={value => {
-                console.log(value);
-              }}
+            <Controller
+              control={control}
+              name="statusPernikahan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.status_pernikahan}
+                  data={dropdownItems.statusPernikahanItem}
+                  onChange={value => onChange(value)}
+                  value={value.value}
+                  maxHeight={120}
+                />
+              )}
             />
             <Controller
               control={control}
@@ -230,20 +232,19 @@ const DaftarBiodataAddScreen = () => {
                   title={strings.jumlah_anak}
                 />
               )}
-              rules={{ required: true }}
             />
-            <DropdownForm
-              id={strings.pekerjaan}
-              openId={openId}
-              setOpenId={setOpenId}
-              style={{ zIndex: 4000 }}
-              title={strings.pekerjaan}
-              items={pekerjaanItems}
-              setItems={setPekerjaanItems}
-              existsValue={pekerjaan}
-              onChange={value => {
-                console.log(value);
-              }}
+            <Controller
+              control={control}
+              name="pekerjaan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.pekerjaan}
+                  data={dropdownItems.pekerjaanItem}
+                  onChange={value => onChange(value)}
+                  value={value.value}
+                  maxHeight={120}
+                />
+              )}
             />
             <Controller
               control={control}
@@ -256,7 +257,6 @@ const DaftarBiodataAddScreen = () => {
                   title={strings.detail_pekerjaan}
                 />
               )}
-              rules={{ required: true }}
             />
           </View>
         </ScrollView>

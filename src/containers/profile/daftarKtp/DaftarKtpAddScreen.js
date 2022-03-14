@@ -21,10 +21,14 @@ import {
 } from '../../../constants';
 import { addKtpNumber } from '../../../redux/reducers/KtpReducer';
 import { useForm, Controller } from 'react-hook-form';
+import DocumentPicker from 'react-native-document-picker';
 
 const DaftarKtpAddScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const documentPickerOptions = {
+    type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
+  };
 
   const { ktpData } = useSelector(s => s.KtpReducer) || {};
   const { noKtp, gambarKtp } = ktpData || {};
@@ -43,6 +47,15 @@ const DaftarKtpAddScreen = () => {
   const changeKtpImage = () => {
     navigation.navigate('DaftarKtpCameraScreen');
     // setKtpImage(images.dummy_ktp);
+  };
+
+  const openDocumentPicker = async () => {
+    try {
+      const data = await DocumentPicker.pickSingle(documentPickerOptions);
+      console.log('Dokumen Pendukung :', data);
+    } catch {
+      e => console.log('Document picker error! ', e);
+    }
   };
 
   const {
@@ -102,6 +115,7 @@ const DaftarKtpAddScreen = () => {
         />
 
         <ButtonText
+          onPress={openDocumentPicker}
           text={'Tambah Dokumen Pendukung'}
           secondary
           buttonContainerStyle={{ marginBottom: sizes.padding }}

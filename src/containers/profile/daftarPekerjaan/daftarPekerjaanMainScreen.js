@@ -41,7 +41,11 @@ const DaftarPekerjaanMainScreen = () => {
           <DetailItemProfileHeader />
           <DetailItemList
             title={strings.gaji_bulanan}
-            content={`Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`}
+            content={
+              gajiBulanan
+                ? `Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`
+                : ''
+            }
           />
           <DetailItemList
             title={strings.masa_kerja}
@@ -53,7 +57,11 @@ const DaftarPekerjaanMainScreen = () => {
           />
           <DetailItemList
             title={strings.gaji_pokok}
-            content={`Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`}
+            content={
+              gajiBulanan
+                ? `Rp ${formatter.formatNumberToCurreny(gajiBulanan)}`
+                : ''
+            }
           />
           <DetailItemList
             title={strings.nama_perusahaan}

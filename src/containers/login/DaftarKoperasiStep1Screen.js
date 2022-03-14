@@ -69,8 +69,10 @@ const DaftarKoperasiStep1Screen = () => {
           icon={icons.icon_number_textbox}
         />
         <DropdownForm
-          customText={strings.pilih_tgl_lahir}
-          style={{ marginTop: sizes.padding }}
+          // data={dropdownItems.genderItem}
+          // onChange={value => onChange(value)}
+          // value={value.value}
+          maxHeight={120}
         />
       </View>
 

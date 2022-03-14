@@ -20,7 +20,7 @@ import DaftarKtpCameraScreen from './profile/daftarKtp/DaftarKtpCameraScreen';
 import DaftarKtpSelfieScreen from './profile/daftarKtp/DaftarKtpSelfieScreen';
 import DaftarBiodataMainScreen from './profile/daftarBiodata/DaftarBiodataMainScreen';
 import DaftarBiodataAddScreen from './profile/daftarBiodata/DaftarBiodataAddScreen';
-import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/daftarPekerjaanMainScreen';
+import DaftarPekerjaanMainScreen from './profile/daftarPekerjaan/DaftarPekerjaanMainScreen';
 import DaftarPekerjaanAddScreen from './profile/daftarPekerjaan/DaftarPekerjaanAddScreen';
 import DiskonMainScreen from './diskon/DiskonMainScreen';
 import TopupMainScreen from './saldoSimpanan/topup/TopupMainScreen';

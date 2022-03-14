@@ -494,7 +494,7 @@ const ParentStackNavigator = () => {
         <ParentStack.Screen
           name="MainStack"
           component={
-            isFirstLaunch ? OnboardingStackNavigator : DataDiriStackNavigator
+            isFirstLaunch ? OnboardingStackNavigator : LoginStackNavigator
           }
         />
       </ParentStack.Navigator>

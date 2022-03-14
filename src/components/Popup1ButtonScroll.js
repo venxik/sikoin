@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Modal, Image, ScrollView } from 'react-native';
 import { ButtonText } from '../components';
 import PropTypes from 'prop-types';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../constants';
+import { isEmpty } from 'lodash';
 
 const Popup1ButtonScroll = props => {
   const {
@@ -57,12 +58,12 @@ const Popup1ButtonScroll = props => {
               />
             )}
             <View style={{ alignItems: 'center' }}>
-              {headerText && (
+              {!isEmpty(headerText) && (
                 <Text style={[styles.headerModalText, headerTextStyle]}>
                   {headerText}
                 </Text>
               )}
-              {contentText && (
+              {!isEmpty(contentText) && (
                 <Text style={[styles.contentModalText, contentTextStyle]}>
                   {contentText}
                 </Text>
@@ -97,8 +98,8 @@ Popup1ButtonScroll.propTypes = {
 
 Popup1ButtonScroll.defaultProps = {
   showPopup: false,
-  headerText: 'default',
-  contentText: 'default',
+  headerText: '',
+  contentText: '',
   customContent: null,
   headerImage: null,
   headerTextStyle: null,

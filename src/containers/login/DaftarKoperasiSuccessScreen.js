@@ -1,4 +1,4 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,12 +13,7 @@ const DaftarKoperasiSuccessScreen = () => {
   const { email } = useSelector(state => state.LoginReducer) || {};
 
   const navigateToLoginScreen = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'LoginStackNavigator' }],
-      }),
-    );
+    navigation.navigate('LoginScreen');
   };
 
   return (

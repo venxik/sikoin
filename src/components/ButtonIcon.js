@@ -52,6 +52,7 @@ ButtonIcon.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.any,
   secondary: PropTypes.bool,
+  shadow: PropTypes.bool,
 };
 
 ButtonIcon.defaultProps = {
@@ -60,6 +61,7 @@ ButtonIcon.defaultProps = {
   disabled: false,
   icon: null,
   secondary: false,
+  shadow: false,
 };
 
 const styles = StyleSheet.create({

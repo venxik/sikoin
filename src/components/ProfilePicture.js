@@ -11,13 +11,21 @@ import { SCREEN_WIDTH } from '../constants';
 
 const ProfilePicture = props => {
   const { onPress, style, disabled, showKoperasi } = props || {};
-  const { profileData } = useSelector(state => state.ProfileReducer) || {};
-  const { profilePic, koperasiPic } = profileData || {};
+  const { profileData, koperasiData } =
+    useSelector(state => state.ProfileReducer) || {};
+  const { profilePic } = profileData || {};
+  const { koperasiPic } = koperasiData || {};
   return (
     <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
-      <ImageBackground source={profilePic} style={styles.profilePicStyle}>
+      <ImageBackground
+        imageStyle={styles.profilePicStyle}
+        source={{ uri: profilePic }}
+        style={styles.profilePicStyle}>
         {showKoperasi && (
-          <Image source={koperasiPic} style={styles.koperasiPicStyle} />
+          <Image
+            source={{ uri: koperasiPic }}
+            style={styles.koperasiPicStyle}
+          />
         )}
       </ImageBackground>
     </TouchableOpacity>
@@ -44,13 +52,15 @@ const styles = StyleSheet.create({
   profilePicStyle: {
     width: SCREEN_WIDTH * 0.25,
     height: SCREEN_WIDTH * 0.25,
+    borderRadius: SCREEN_WIDTH * 0.25,
   },
   koperasiPicStyle: {
-    width: SCREEN_WIDTH * 0.2,
-    height: SCREEN_WIDTH * 0.2,
+    width: SCREEN_WIDTH * 0.1,
+    height: SCREEN_WIDTH * 0.1,
+    borderRadius: SCREEN_WIDTH * 0.1,
     position: 'absolute',
-    bottom: -SCREEN_WIDTH * 0.08,
-    right: -SCREEN_WIDTH * 0.05,
+    bottom: -6,
+    right: -6,
   },
   container: {
     flex: 1,

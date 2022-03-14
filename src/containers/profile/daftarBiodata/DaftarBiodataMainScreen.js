@@ -9,6 +9,8 @@ import {
   HeaderBack,
 } from '../../../components';
 import { colors, icons, sizes, strings } from '../../../constants';
+import moment from 'moment';
+import { isEmpty } from 'lodash';
 
 const DaftarBiodataMainScreen = () => {
   const navigation = useNavigation();
@@ -46,26 +48,42 @@ const DaftarBiodataMainScreen = () => {
         <View style={styles.cardContainer}>
           <DetailItemProfileHeader />
           <DetailItemList title={strings.tempat_lahir} content={tempatLahir} />
-          <DetailItemList title={strings.tgl_lahir} content={tanggalLahir} />
-          <DetailItemList title={strings.jenis_kelamin} content={gender} />
-          <DetailItemList title={strings.golongan_darah} content={golDarah} />
+          <DetailItemList
+            title={strings.tgl_lahir}
+            content={
+              !isEmpty(tanggalLahir)
+                ? moment(new Date(tanggalLahir)).format('DD/MM/YYYY')
+                : ''
+            }
+          />
+          <DetailItemList
+            title={strings.jenis_kelamin}
+            content={gender?.value}
+          />
+          <DetailItemList
+            title={strings.golongan_darah}
+            content={golDarah?.value}
+          />
           <DetailItemList
             title={strings.kewarganegaraan}
-            content={kewarganegaraan}
+            content={kewarganegaraan?.value}
           />
           <DetailItemList
             title={strings.pendidikan_terakhir}
-            content={pendidikanTerakhir}
+            content={pendidikanTerakhir?.value}
           />
-          <DetailItemList title={strings.agama} content={agama} />
+          <DetailItemList title={strings.agama} content={agama?.value} />
           <DetailItemList title={strings.bank} content={bank} />
           <DetailItemList title={strings.no_rekening} content={noRek} />
           <DetailItemList
             title={strings.status_pernikahan}
-            content={statusPernikahan}
+            content={statusPernikahan?.value}
           />
           <DetailItemList title={strings.jumlah_anak} content={jumlahAnak} />
-          <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
+          <DetailItemList
+            title={strings.pekerjaan}
+            content={pekerjaan?.value}
+          />
           <DetailItemList
             showBorder={false}
             title={strings.detail_pekerjaan}

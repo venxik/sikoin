@@ -8,7 +8,12 @@ import {
   ScrollView,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
+import {
+  ButtonText,
+  HeaderBack,
+  TextboxCurrency,
+  TextboxForm,
+} from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { addPekerjaan } from '../../../redux/reducers/PekerjaanReducer';
@@ -38,7 +43,7 @@ const DaftarPekerjaanAddScreen = () => {
     defaultValues: {
       masaKerjaTahun: masaKerjaTahun ? masaKerjaTahun.toString() : '',
       masaKerjaBulan: masaKerjaBulan ? masaKerjaBulan.toString() : '',
-      gajiBulanan: gajiBulanan ? gajiBulanan.toString() : '',
+      gajiBulanan: gajiBulanan ? gajiBulanan : 0,
       namaPerusahaan: namaPerusahaan ? namaPerusahaan : '',
       alamatKantor: alamatKantor ? alamatKantor : '',
       provinsiKota: provinsiKota ? provinsiKota : '',
@@ -91,7 +96,7 @@ const DaftarPekerjaanAddScreen = () => {
                     keyboardType="number-pad"
                   />
                 )}
-                rules={{ pattern: formatter.NUMBER_REGEX }}
+                // rules={{ pattern: formatter.NUMBER_REGEX }}
               />
               <Controller
                 control={control}
@@ -107,14 +112,14 @@ const DaftarPekerjaanAddScreen = () => {
                     keyboardType="number-pad"
                   />
                 )}
-                rules={{ pattern: formatter.NUMBER_REGEX }}
+                // rules={{ pattern: formatter.NUMBER_REGEX }}
               />
             </View>
             <Controller
               control={control}
               name="gajiBulanan"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextboxCurrency
                   error={errors.gajiBulanan}
                   errorText={errors.gajiBulanan?.message}
                   value={value}
@@ -123,7 +128,7 @@ const DaftarPekerjaanAddScreen = () => {
                   keyboardType="number-pad"
                 />
               )}
-              rules={{ pattern: formatter.NUMBER_REGEX }}
+              // rules={{ pattern: formatter.NUMBER_REGEX }}
             />
             <Controller
               control={control}
@@ -171,7 +176,7 @@ const DaftarPekerjaanAddScreen = () => {
                   keyboardType="number-pad"
                 />
               )}
-              rules={{ pattern: formatter.NUMBER_REGEX }}
+              // rules={{ pattern: formatter.NUMBER_REGEX }}
             />
             <Controller
               control={control}

@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { DetailItemList, HeaderBack } from '../../components';
-import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { colors, SCREEN_WIDTH, sizes, strings } from '../../constants';
 
 const DataKoperasiMainScreen = () => {
   const navigation = useNavigation();
   const { koperasiData } = useSelector(s => s.ProfileReducer);
-  const { namaKoperasi, noBadanHukum, alamat, noTelp, website } =
+  const { namaKoperasi, noBadanHukum, alamat, noTelp, website, koperasiPic } =
     koperasiData || {};
   return (
     <SafeAreaView style={styles.container}>
@@ -25,9 +25,9 @@ const DataKoperasiMainScreen = () => {
       <ScrollView contentContainerStyle={{ paddingBottom: sizes.padding }}>
         <View style={styles.innerContainer}>
           <Image
-            source={images.dummy_koperasi_pic}
+            source={{ uri: koperasiPic }}
             style={styles.koperasiPic}
-            resizeMode="stretch"
+            resizeMode="cover"
           />
           <DetailItemList
             title={strings.nama_koperasi}
@@ -66,5 +66,7 @@ const styles = StyleSheet.create({
   koperasiPic: {
     width: SCREEN_WIDTH * 0.25,
     height: SCREEN_WIDTH * 0.25,
+    borderRadius: SCREEN_WIDTH * 0.25,
+    marginBottom: sizes.padding,
   },
 });

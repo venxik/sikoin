@@ -1,68 +1,43 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, icons, sizes, strings } from '../constants';
 import PropTypes from 'prop-types';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const DropdownForm = props => {
-  const {
-    style,
-    title,
-    items,
-    setItems,
-    openId,
-    id,
-    setOpenId,
-    onChange,
-    existsValue,
-  } = props || {};
-  const [value, setValue] = useState(existsValue);
-
-  const setOpen = useCallback(open => {
-    setOpenId(open ? id : null);
-  }, []);
+  const { title, style, error, errorText } = props || {};
 
   const dropdown = () => (
-    <DropDownPicker
-      style={styles.dropdown}
-      open={openId === id}
-      setOpen={setOpen}
-      placeholder={strings.pilih_dot}
-      onChangeValue={() => onChange(value)}
-      listMode="SCROLLVIEW"
-      value={value}
-      items={items}
-      setValue={setValue}
-      setItems={setItems}
-      itemSeparator={true}
-      showTickIcon={false}
+    <Dropdown
+      {...props}
+      style={[styles.dropdown, error && { borderColor: 'red', borderWidth: 1 }]}
+      containerStyle={styles.dropdownItemContainer}
       placeholderStyle={styles.textValue}
-      dropDownDirection="BOTTOM"
-      ArrowDownIconComponent={() => (
+      selectedTextStyle={styles.textValue}
+      renderRightIcon={() => (
         <Image
           source={icons.icon_dropdown}
           style={{ width: sizes.padding, height: sizes.padding }}
         />
       )}
-      dropDownContainerStyle={styles.dropdownItemContainer}
-      itemSeparatorStyle={{
-        height: 0.5,
-        backgroundColor: colors.primary,
-      }}
-      listItemLabelStyle={[styles.textValue, { fontWeight: '600' }]}
-      labelStyle={styles.textValue}
+      labelField="label"
+      valueField="value"
+      placeholder={strings.pilih_dot}
     />
   );
 
   if (title) {
     return (
-      <View style={[styles.defaultContainer, style]}>
+      <View style={style}>
         <Text style={styles.titleText}>{title}</Text>
         {dropdown()}
+        <Text style={styles.errorText}>{errorText}</Text>
       </View>
     );
   }
-  return dropdown();
+  return (
+    <View style={[style, { marginTop: sizes.padding }]}>{dropdown()}</View>
+  );
 };
 
 DropdownForm.propTypes = {
@@ -95,22 +70,22 @@ DropdownForm.defaultProps = {
 export default DropdownForm;
 
 const styles = StyleSheet.create({
-  defaultContainer: {
-    marginBottom: sizes.padding,
-  },
   titleText: { color: colors.bodyTextGrey, marginBottom: sizes.padding / 2 },
+  errorText: { color: colors.red, fontSize: 12 },
   textValue: {
     color: colors.primary,
     fontWeight: '500',
+    fontSize: 14,
   },
   dropdown: {
     backgroundColor: colors.tonalLightPrimary,
-    borderWidth: 0,
     borderRadius: sizes.padding / 1.5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
   },
   dropdownItemContainer: {
     backgroundColor: colors.tonalLightPrimary,
     borderWidth: 0.5,
-    borderColor: colors.primary,
+    borderRadius: sizes.padding,
   },
 });

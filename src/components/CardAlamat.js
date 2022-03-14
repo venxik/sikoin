@@ -20,6 +20,7 @@ const CardAlamat = props => {
       <Text style={styles.textAlamat}>{alamatLengkap}</Text>
       <View style={styles.bottomContainer}>
         <ButtonText
+          shadow={false}
           secondary
           text={strings.ubah}
           onPress={onPressUbah}

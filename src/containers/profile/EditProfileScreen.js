@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   ScrollView,
   ImageBackground,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,12 +17,17 @@ import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { updateProfile } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { formatter } from '../../utils';
+import DocumentPicker from 'react-native-document-picker';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { profileData } = useSelector(state => state.ProfileReducer) || {};
   const { nama, code, email, noTelp, profilePic } = profileData || {};
+  const [profilePicture, setProfilePicture] = useState(profilePic);
+  const documentPickerOptions = {
+    type: [DocumentPicker.types.images],
+  };
 
   const saveProfile = data => {
     const { email, nama, noTelp } = data || {};
@@ -30,6 +36,7 @@ const EditProfileScreen = () => {
         email,
         nama,
         noTelp,
+        profilePic: profilePicture,
       }),
     );
     navigation.goBack();
@@ -47,6 +54,16 @@ const EditProfileScreen = () => {
     },
   });
 
+  const openDocumentPicker = async () => {
+    try {
+      const data = await DocumentPicker.pickSingle(documentPickerOptions);
+      console.log('Dokumen Pendukung :', data);
+      setProfilePicture(data.uri);
+    } catch {
+      e => console.log('Document picker error! ', e);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -59,18 +76,26 @@ const EditProfileScreen = () => {
         />
         <ScrollView>
           <View style={styles.innerContainer}>
-            <ImageBackground source={profilePic} style={styles.profilePicStyle}>
-              <View style={styles.iconContainer}>
-                <Image
-                  resizeMode="cover"
-                  source={icons.icon_edit_profle_picture}
-                  style={{
-                    width: sizes.icon_size * 2,
-                    height: sizes.icon_size * 2,
-                  }}
-                />
-              </View>
-            </ImageBackground>
+            <TouchableOpacity
+              onPress={openDocumentPicker}
+              style={styles.profilePicStyle}>
+              <ImageBackground
+                imageStyle={styles.profilePicStyle}
+                resizeMode="cover"
+                source={{ uri: profilePicture }}>
+                <View style={styles.iconContainer}>
+                  <Image
+                    resizeMode="cover"
+                    source={icons.icon_edit_profle_picture}
+                    style={{
+                      width: sizes.icon_size * 2,
+                      height: sizes.icon_size * 2,
+                    }}
+                  />
+                </View>
+              </ImageBackground>
+            </TouchableOpacity>
+
             <View
               style={{ paddingHorizontal: 10, marginVertical: sizes.padding }}>
               <View
@@ -183,6 +208,7 @@ const styles = StyleSheet.create({
   profilePicStyle: {
     width: SCREEN_WIDTH * 0.25,
     height: SCREEN_WIDTH * 0.25,
+    borderRadius: SCREEN_WIDTH * 0.25,
   },
   iconContainer: {
     borderRadius: SCREEN_WIDTH * 0.25,

@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { images } from '../../constants';
 
 const initialState = {
   profileData: {
-    profilePic: images.dummy_profile_pic,
-    koperasiPic: images.dummy_koperasi_pic,
+    profilePic: 'https://picsum.photos/200/300',
     nama: 'Test 12321321',
     code: 'JBC-0001',
     koperasiName: 'Jababeka & co',
@@ -12,6 +10,7 @@ const initialState = {
     noTelp: '081312321321',
   },
   koperasiData: {
+    koperasiPic: 'https://picsum.photos/id/237/200/300',
     namaKoperasi: 'Koperasi AB',
     noBadanHukum: '123213213',
     alamat:
@@ -30,6 +29,7 @@ const profileSlice = createSlice({
       state.profileData.email = payload.email;
       state.profileData.noTelp = payload.noTelp;
       state.profileData.nama = payload.nama;
+      state.profileData.profilePic = payload.profilePic;
     },
   },
 });

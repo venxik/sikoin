@@ -13,6 +13,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
+import { createLogger } from 'redux-logger';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [
@@ -28,11 +29,22 @@ const middleware = [
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  // whitelist: '',
+  whitelist: ['AlamatReducer'],
 };
 
+if (__DEV__) {
+  middleware.push(
+    createLogger({
+      collapsed: true,
+      duration: true,
+      timestamp: true,
+      logErrors: true,
+      diff: true,
+    }),
+  );
+}
+
 const persistReducers = persistReducer(persistConfig, rootReducer);
-// const store = createStore(persistReducers, applyMiddleware(thunk));
 const store = configureStore({
   reducer: persistReducers,
   middleware,
@@ -42,7 +54,7 @@ const persist = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 
-//this is for development
-persist.purge();
+//this is for development reset redux persist every refresh
+// persist.purge();
 
 export { store, persist };
