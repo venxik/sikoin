@@ -7,11 +7,10 @@ const TextboxBorder = props => {
     props || {};
 
   return (
-    <View>
+    <View style={style}>
       <View
         style={[
           styles.defaultContainer,
-          style,
           {
             borderColor: error ? colors.red : colors.strokeGrey,
           },

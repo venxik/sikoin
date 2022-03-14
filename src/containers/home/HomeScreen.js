@@ -80,6 +80,9 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const backAction = () => {
+      if (navigation.canGoBack()) {
+        return false;
+      }
       BackHandler.exitApp();
       return true;
     };
@@ -149,7 +152,7 @@ const HomeScreen = () => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar
                 item={item}
-                style={{ height: cardKabarHeight }}
+                // style={{ height: cardKabarHeight }}
                 onPress={() => selectKabarCard(item)}
               />
               {index === kabarDataList.length - 1 && (
@@ -308,10 +311,11 @@ const HomeScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.miniScrollButton}
-                  onPress={() =>
-                    onClickMiniScrollButton(
-                      item.title === strings.saldo_belanja,
-                    )
+                  onPress={
+                    () => {}
+                    // onClickMiniScrollButton(
+                    //   item.title === strings.saldo_belanja,
+                    // )
                   }>
                   <Image
                     source={

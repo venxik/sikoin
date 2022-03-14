@@ -52,12 +52,13 @@ const TopupMainScreen = () => {
   const navigation = useNavigation();
   const { topUpNominal } = useSelector(s => s.SaldoSimpananReducer) || {};
   const [nominal, setNominal] = useState(topUpNominal);
+  const [nominalContainer, setNominalContainer] = useState('');
   const [selectedNominal, setSelectedNominal] = useState();
   const [selectedTopup, setSelectedTopup] = useState();
 
   //BottomSheet
   const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ['85%', '90%'], []);
+  const snapPoints = useMemo(() => ['90%', '95%'], []);
   const handleSheetChange = useCallback(() => {}, []);
 
   const navigateToDetailScreen = () => {
@@ -71,6 +72,7 @@ const TopupMainScreen = () => {
       deleteNominal();
     } else {
       setSelectedNominal(index);
+      setNominalContainer(value);
       setNominal(value);
     }
   };
@@ -89,25 +91,32 @@ const TopupMainScreen = () => {
   };
 
   const showInputNominal = () => {
-    deleteNominal('');
+    // deleteNominal();
+    if (isEmpty(nominal)) {
+      setNominalContainer('');
+    } else {
+      setNominalContainer(nominal);
+    }
     sheetRef.current?.expand();
   };
 
   const onPressInputNominal = item => {
     if (item === 'delete') {
-      if (!isEmpty(nominal)) {
-        setNominal(e => e.slice(0, -1));
+      if (!isEmpty(nominalContainer)) {
+        setNominalContainer(e => e.slice(0, -1));
       }
     } else if (item === '0' || item === '00') {
-      if (!isEmpty(nominal)) {
-        setNominal(e => e.concat(item));
+      if (!isEmpty(nominalContainer)) {
+        setNominalContainer(e => e.concat(item));
       }
     } else {
-      setNominal(e => e.concat(item));
+      setNominalContainer(e => e.concat(item));
     }
   };
 
-  const closeInputNominal = () => {
+  const onPressOkInputNominal = () => {
+    setNominal(nominalContainer);
+    setSelectedNominal();
     sheetRef.current?.close();
   };
 
@@ -216,12 +225,12 @@ const TopupMainScreen = () => {
             ellipsizeMode="head"
             style={[
               styles.textInputNominal,
-              !isEmpty(nominal)
+              !isEmpty(nominalContainer)
                 ? { color: colors.primary }
                 : { color: colors.bodyTextLightGrey },
             ]}>
-            {!isEmpty(nominal)
-              ? `Rp${formatter.formatStringToCurrencyNumber(nominal)}`
+            {!isEmpty(nominalContainer)
+              ? `Rp${formatter.formatStringToCurrencyNumber(nominalContainer)}`
               : 'Rp0..'}
           </Text>
         </View>
@@ -250,7 +259,7 @@ const TopupMainScreen = () => {
             width: '100%',
           }}
           text={strings.ok}
-          onPress={closeInputNominal}
+          onPress={onPressOkInputNominal}
           shadow={false}
         />
       </View>

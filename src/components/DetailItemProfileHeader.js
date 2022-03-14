@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   nameText: {
-    marginBottom: 40,
+    marginBottom: 30,
+    marginTop: 10,
     fontWeight: '700',
     fontSize: 24,
     color: colors.bodyText,

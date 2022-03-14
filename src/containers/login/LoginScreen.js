@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
@@ -38,7 +38,12 @@ const LoginScreen = () => {
   };
 
   const navigateToHomeScreen = () => {
-    navigation.navigate('BottomTab');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'BottomTab' }],
+      }),
+    );
   };
 
   const resetPassword = () => {
@@ -67,6 +72,7 @@ const LoginScreen = () => {
         onChangeText={e => onChangeResetPassEmailText(e)}
         secureTextEntry={false}
         placeholder={strings.email_textbox_placeholder}
+        keyboardType={'email-address'}
       />
     </View>
   );
@@ -187,10 +193,8 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   customPopupTextbox: {
-    marginHorizontal: SCREEN_WIDTH * 0.1,
     marginTop: 10,
     width: '100%',
-    paddingHorizontal: 5,
   },
   logo: {
     width: SCREEN_WIDTH * 0.5,
