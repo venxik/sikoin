@@ -65,6 +65,9 @@ export default {
   saldo_belanja: 'Saldo Belanja',
   transfer_antar_simpanan: 'Transfer Antar Simpanan',
 
+  //CHAT
+  chat: 'Chat',
+
   /*MENU*/
   pinjaman: 'Pinjaman',
   transaksi: 'Transaksi',

@@ -35,6 +35,7 @@ import PinjamanStep2 from './pinjaman/PinjamanStep2Screen';
 import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
 import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
 import ChatMainScreen from './chat/ChatMainScreen';
+import ChatDetailScreen from './chat/ChatDetailScreen';
 
 export {
   OnboardingScreen,
@@ -74,4 +75,5 @@ export {
   ChatMainScreen,
   DaftarKtpCameraScreen,
   DaftarKtpSelfieScreen,
+  ChatDetailScreen,
 };

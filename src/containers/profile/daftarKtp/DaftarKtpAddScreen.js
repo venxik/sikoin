@@ -34,13 +34,10 @@ const DaftarKtpAddScreen = () => {
   const { noKtp, gambarKtp } = ktpData || {};
 
   const submitKtp = data => {
+    console.log(data);
     if (data) {
-      dispatch(
-        addKtpNumber({
-          noKtp: noKtp,
-        }),
-      );
-      navigation.goBack();
+      dispatch(addKtpNumber(data.noKtp));
+      // navigation.goBack();
     }
   };
 

@@ -59,6 +59,8 @@ const shouldShowBottomNavigation = route => {
       return false;
     case 'DataKoperasiMainScreen':
       return false;
+    case 'ChatDetailScreen':
+      return false;
     default:
       return true;
   }
@@ -157,6 +159,10 @@ const ChatStackNavigator = () => (
     <ChatStack.Screen
       name="ChatMainScreen"
       component={screens.ChatMainScreen}
+    />
+    <ChatStack.Screen
+      name="ChatDetailScreen"
+      component={screens.ChatDetailScreen}
     />
   </ChatStack.Navigator>
 );

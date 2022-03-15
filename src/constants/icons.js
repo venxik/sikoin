@@ -74,6 +74,9 @@ const icon_voucher_black = require('assets/icons/icon_voucher_black.png');
 const minus_shape = require('assets/icons/minus_shape.png');
 const plus_shape = require('assets/icons/plus_shape.png');
 const popup_failed = require('assets/icons/popup_failed.png');
+const icon_chat = require('assets/icons/icon_chat.png');
+const icon_send_chat = require('assets/icons/icon_send_chat.png');
+const icon_attach_chat = require('assets/icons/icon_attach_chat.png');
 
 export default {
   arrow_left_primary,
@@ -151,4 +154,7 @@ export default {
   minus_shape,
   plus_shape,
   popup_failed,
+  icon_chat,
+  icon_send_chat,
+  icon_attach_chat,
 };

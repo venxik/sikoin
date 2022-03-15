@@ -14,6 +14,7 @@ const TextboxBorder = props => {
           {
             borderColor: error ? colors.red : colors.strokeGrey,
           },
+          style,
         ]}>
         {icon ? <Image source={icon} style={styles.iconStyle} /> : null}
         <TextInput
