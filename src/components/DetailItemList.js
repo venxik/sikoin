@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   titleText: {
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
     color: colors.bodyText,
     marginBottom: 10,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.bodyTextGrey,
     marginBottom: 10,
-    lineHeight: 20,
+    fontFamily: 'Inter-Regular',
   },
   separator: {
     width: '100%',

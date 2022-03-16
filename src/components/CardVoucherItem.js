@@ -48,7 +48,7 @@ export default CardVoucherItem;
 const styles = StyleSheet.create({
   textNominal: {
     fontSize: 24,
-    fontWeight: '700',
+    fontFamily: 'Inter-Bold',
     color: colors.primaryWhite,
   },
 });

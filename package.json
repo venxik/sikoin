@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "run_android_dd": "react-native run-android --variant=devDebug --appId=com.sikoin",
     "run_android_dr": "react-native run-android --variant=devRelease --appId=com.sikoin",
-    "build_android_dr": "cd android && ./gradlew assembleDevRelease && cd ..",
+    "build_android_dr": "cd android && .\\gradlew assembleDevRelease && cd ..",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",

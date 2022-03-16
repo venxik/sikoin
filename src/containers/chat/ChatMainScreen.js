@@ -14,8 +14,8 @@ const ChatMainScreen = () => {
         title={strings.chat}
       />
       <TouchableOpacity
-        style={styles.chatContainer}
-        onPress={() => navigation.navigate('ChatDetailScreen')}>
+        onPress={() => navigation.navigate('ChatDetailScreen')}
+        style={styles.chatContainer}>
         <Image
           source={{ uri: 'https://picsum.photos/200/300' }}
           style={styles.iconContainer}
@@ -25,7 +25,7 @@ const ChatMainScreen = () => {
             <Text numberOfLines={1} style={styles.textName}>
               Admin Koperasi
             </Text>
-            <Text style={{ color: colors.primaryLight }}>19.30</Text>
+            <Text style={styles.textTime}>19.30</Text>
           </View>
           <Text style={styles.textContent} numberOfLines={1}>
             This is dummy chat text adasd das dasd asd asd as d asd asd as das
@@ -59,8 +59,13 @@ const styles = StyleSheet.create({
   },
   textName: {
     color: colors.bodyText,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
   },
-  textContent: { color: colors.bodyText, width: '70%', marginTop: 6 },
+  textContent: {
+    color: colors.bodyText,
+    width: '70%',
+    fontFamily: 'Inter-Regular',
+  },
+  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium' },
 });

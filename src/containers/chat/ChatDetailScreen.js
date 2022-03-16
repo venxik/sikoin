@@ -32,9 +32,10 @@ const ChatDetailScreen = () => {
   }, []);
 
   const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, messages),
-    );
+    var temp = messages[0];
+    temp.sent = true;
+    temp.received = true;
+    setMessages(previousMessages => GiftedChat.append(previousMessages, temp));
     // setTimeout(() => botSend(step), Math.round(Math.random() * 1000));
   }, []);
 
@@ -107,11 +108,12 @@ const ChatDetailScreen = () => {
   };
 
   const renderComposer = props => {
+    const { onTextChanged, text } = props || {};
     return (
       <TextboxBorder
         {...props}
-        onChangeText={props.onTextChanged}
-        value={props.text}
+        onChangeText={onTextChanged}
+        value={text}
         multiline
         style={{
           width: SCREEN_WIDTH * 0.7,
@@ -119,7 +121,7 @@ const ChatDetailScreen = () => {
           marginVertical: 4,
           maxHeight: 100,
         }}
-        textBoxStyle={{ paddingVertical: 6, paddingLeft: 0 }}
+        textBoxStyle={{ paddingVertical: 6, paddingLeft: 0, width: '95%' }}
       />
     );
   };
@@ -145,17 +147,21 @@ const ChatDetailScreen = () => {
         wrapperStyle={{
           left: {
             backgroundColor: colors.tonalLightPrimary,
+            padding: sizes.padding / 4,
           },
           right: {
             backgroundColor: colors.primary,
+            padding: sizes.padding / 4,
           },
         }}
         textStyle={{
           left: {
             color: colors.bodyText,
+            fontFamily: 'Inter-Regular',
           },
           right: {
             color: colors.white,
+            fontFamily: 'Inter-Regular',
           },
         }}
       />
@@ -163,11 +169,22 @@ const ChatDetailScreen = () => {
   };
 
   const renderTicks = message => {
-    return (
-      (message.received || message.sent) && (
-        <Text style={{ color: 'black' }}>Read</Text>
-      )
-    );
+    // console.log('tick', message);
+    if (message?.user?._id !== 2) {
+      return (
+        (message.received || message.sent) && (
+          <Image
+            style={{
+              width: sizes.icon_size,
+              height: 10,
+              marginTop: 4,
+              marginLeft: -10,
+            }}
+            source={icons.icon_chat_read}
+          />
+        )
+      );
+    }
   };
 
   return (
@@ -204,12 +221,24 @@ const ChatDetailScreen = () => {
           left: {
             color: colors.primaryLight,
             fontSize: 13,
+            fontFamily: 'Poppins-Medium',
           },
           right: {
             color: colors.primaryLight,
             fontSize: 13,
+            fontFamily: 'Poppins-Medium',
           },
         }}
+        scrollToBottomComponent={props => (
+          <Image
+            source={icons.arrow_down_black}
+            style={{
+              width: 24,
+              height: 24,
+              alignSelf: 'center',
+            }}
+          />
+        )}
       />
     </View>
   );

@@ -70,17 +70,18 @@ const styles = StyleSheet.create({
   textJudul: {
     fontSize: 15,
     color: colors.bodyText,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
   textName: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: colors.bodyText,
-    marginTop: sizes.padding,
+    marginTop: sizes.padding / 2,
   },
   textAlamat: {
     fontSize: 12,
     color: colors.bodyTextGrey,
-    marginTop: sizes.padding / 2,
+    marginTop: sizes.padding / 4,
+    fontFamily: 'Inter-Regular',
   },
 });

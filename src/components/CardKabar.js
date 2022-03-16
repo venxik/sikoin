@@ -56,14 +56,23 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
     justifyContent: 'center',
   },
-  textTitle: { fontSize: 20, color: colors.bodyText },
-  rowStyle: { flexDirection: 'row', marginTop: SCREEN_WIDTH * 0.05 },
-  innerRowStyle: { justifyContent: 'space-evenly', marginLeft: 10 },
+  rowStyle: { flexDirection: 'row' },
+  innerRowStyle: { marginLeft: 10, justifyContent: 'center' },
+  textTitle: {
+    fontSize: 20,
+    color: colors.bodyText,
+    fontFamily: 'Poppins-Medium',
+  },
   textContent: {
     marginVertical: sizes.padding,
     fontSize: 15,
     color: colors.bodyTextGrey,
+    fontFamily: 'Inter-Regular',
   },
-  textName: { color: colors.bodyText },
-  textDate: { fontSize: 12, color: colors.bodyTextGrey },
+  textName: { color: colors.bodyText, fontFamily: 'Poppins-Medium' },
+  textDate: {
+    fontSize: 12,
+    color: colors.bodyTextGrey,
+    fontFamily: 'Inter-Regular',
+  },
 });

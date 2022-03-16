@@ -144,7 +144,7 @@ const VoucherMainScreen = () => {
                 />
               </TouchableOpacity>
               <View style={styles.textQtyContainer}>
-                <Text style={{ color: colors.bodyText, fontSize: 15 }}>
+                <Text style={[styles.textJumlahHarga, { marginLeft: 0 }]}>
                   {qty}
                 </Text>
               </View>
@@ -326,9 +326,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     width: '70%',
     color: colors.bodyText,
-    fontWeight: '500',
-    fontSize: 15,
-    lineHeight: 24,
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
   },
   modalMainView: {
     flex: 1,
@@ -361,7 +360,7 @@ const styles = StyleSheet.create({
     marginTop: sizes.padding,
     color: colors.bodyText,
     fontSize: 17,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   textQtyContainer: {
     alignItems: 'center',
@@ -374,7 +373,7 @@ const styles = StyleSheet.create({
     marginHorizontal: sizes.padding / 2,
   },
   textTitle: {
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: colors.bodyText,
     marginBottom: sizes.padding * 0.5,
   },
@@ -400,6 +399,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.bodyTextGrey,
     marginLeft: 8,
+    fontFamily: 'Inter-Regular',
   },
   dot: {
     width: 6,

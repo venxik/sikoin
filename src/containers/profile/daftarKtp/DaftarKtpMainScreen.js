@@ -32,8 +32,8 @@ const DaftarKtpMainScreen = () => {
     navigation.navigate('DaftarKtpAddScreen');
   };
 
-  const copyToClipboard = text => {
-    Clipboard.setString(text.toString());
+  const copyToClipboard = () => {
+    Clipboard.setString(noKtp.toString());
     ToastAndroid.show('No KTP telah disalin', 3000);
   };
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 20,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
     color: colors.bodyTextLightGrey,
   },
   imageKtp: {
@@ -103,5 +103,9 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT * 0.25,
     borderRadius: sizes.padding,
   },
-  iconClipboard: { width: 20, height: 20, marginLeft: sizes.padding },
+  iconClipboard: {
+    width: sizes.padding,
+    height: sizes.padding,
+    marginLeft: sizes.padding,
+  },
 });

@@ -312,10 +312,11 @@ const HomeScreen = () => {
                 <TouchableOpacity
                   style={styles.miniScrollButton}
                   onPress={
-                    () => {}
-                    // onClickMiniScrollButton(
-                    //   item.title === strings.saldo_belanja,
-                    // )
+                    // () => {}
+                    () =>
+                      onClickMiniScrollButton(
+                        item.title === strings.saldo_belanja,
+                      )
                   }>
                   <Image
                     source={
@@ -326,7 +327,7 @@ const HomeScreen = () => {
                     style={styles.iconMiniScrollButton}
                     resizeMode="contain"
                   />
-                  <Text style={{ color: colors.bodyText }}>{item.button}</Text>
+                  <Text style={styles.textMiniScrollBtn}>{item.button}</Text>
                 </TouchableOpacity>
               </View>
             );
@@ -455,7 +456,7 @@ const styles = StyleSheet.create({
   cardHeaderTitle: {
     fontSize: 17,
     color: colors.bodyText,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     marginRight: 20,
   },
   icon: {
@@ -478,6 +479,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: -sizes.padding,
     color: colors.bodyText,
+    fontFamily: 'Poppins-Medium',
   },
   miniScrollContainer: {
     borderRadius: 20,
@@ -503,8 +505,14 @@ const styles = StyleSheet.create({
   textMiniScrollTitle: {
     fontSize: 20,
     color: colors.bodyText,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
+  textSaldo: {
+    fontSize: 15,
+    color: colors.bodyTextGrey,
+    fontFamily: 'Inter-Medium',
+  },
+  textMiniScrollBtn: { fontFamily: 'Poppins-Medium', color: colors.bodyText },
   miniScrollArrow: {
     width: sizes.icon_size * 0.8,
     height: sizes.icon_size * 0.8,
@@ -524,14 +532,18 @@ const styles = StyleSheet.create({
   textProfileName: {
     fontSize: 24,
     color: colors.bodyText,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   textProfileCode: {
-    marginBottom: 6,
     color: colors.bodyTextLightGrey,
     fontSize: 15,
+    fontFamily: 'Inter-Regular',
   },
-  textProfileKoperasi: { fontSize: 15, color: colors.black },
+  textProfileKoperasi: {
+    fontSize: 15,
+    color: colors.bodyText,
+    fontFamily: 'Inter-Regular',
+  },
   kabarSheetContainer: {
     flexDirection: 'row',
     marginBottom: sizes.padding,
@@ -544,13 +556,13 @@ const styles = StyleSheet.create({
   },
   kabarSheetCompany: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: colors.primary,
   },
   textKabarSheetTitle: {
     fontSize: 24,
-    color: colors.black,
-    fontWeight: 'bold',
+    color: colors.bodyText,
+    fontFamily: 'Poppins-Bold',
   },
   kabarSheetBottomContainer: { flexDirection: 'row', marginVertical: 30 },
   kabarSheetProfileImage: { width: 60, height: 60 },
@@ -558,12 +570,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginLeft: 10,
   },
-  kabarSheetNameText: { justifyContent: 'space-evenly', marginLeft: 10 },
-  kabarSheetTimeStampText: { fontSize: 15, color: colors.bodyTextGrey },
+  kabarSheetNameText: {
+    justifyContent: 'center',
+    marginLeft: 10,
+    fontFamily: 'Poppins-Medium',
+    color: colors.bodyText,
+  },
+  kabarSheetTimeStampText: {
+    fontSize: 15,
+    color: colors.bodyTextGrey,
+    fontFamily: 'Inter-Regular',
+  },
   kabarSheetContentText: {
     fontSize: 15,
     color: colors.bodyText,
     lineHeight: 24,
+    fontFamily: 'Inter-Regular',
   },
-  textSaldo: { fontSize: 15, color: colors.bodyTextGrey },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, images, SCREEN_WIDTH, strings } from '../constants';
+import { colors, images, SCREEN_WIDTH, sizes, strings } from '../constants';
 import PropTypes from 'prop-types';
 
 const MenuHeaderIcon = props => {
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
   },
   iconStyle: { width: SCREEN_WIDTH * 0.4, height: SCREEN_WIDTH * 0.3 },
   textStyle: {
+    marginTop: -sizes.padding,
     color: colors.bodyText,
     fontSize: 34,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Regular',
     textAlign: 'center',
     width: '60%',
   },

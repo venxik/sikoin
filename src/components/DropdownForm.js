@@ -70,12 +70,15 @@ DropdownForm.defaultProps = {
 export default DropdownForm;
 
 const styles = StyleSheet.create({
-  titleText: { color: colors.bodyTextGrey, marginBottom: sizes.padding / 2 },
+  titleText: {
+    color: colors.bodyTextGrey,
+    fontFamily: 'Poppins-Regular',
+  },
   errorText: { color: colors.red, fontSize: 12 },
   textValue: {
     color: colors.primary,
-    fontWeight: '500',
     fontSize: 14,
+    fontFamily: 'Poppins-Medium',
   },
   dropdown: {
     backgroundColor: colors.tonalLightPrimary,

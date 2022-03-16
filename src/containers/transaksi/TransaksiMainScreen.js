@@ -64,9 +64,8 @@ const TransaksiMainScreen = () => {
                     marginLeft: 10,
                     width: '70%',
                     color: colors.bodyText,
-                    fontWeight: '500',
-                    fontSize: 15,
                     lineHeight: 24,
+                    fontFamily: 'Poppins-Medium',
                   }}>
                   {strings.unduh_riwayat_transaksi}
                 </Text>

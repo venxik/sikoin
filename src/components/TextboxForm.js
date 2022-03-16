@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     color: colors.bodyText,
     fontSize: 15,
-    fontWeight: '500',
+    fontFamily: 'Inter-Medium',
   },
   defaultText: {
     fontSize: 14,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleText: { color: colors.bodyTextGrey },
+  titleText: { color: colors.bodyTextGrey, fontFamily: 'Poppins-Regular' },
   textError: { color: colors.red, fontSize: 12, marginTop: 2 },
 });
 

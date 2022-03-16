@@ -144,13 +144,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     color: colors.primaryDark,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
   },
   descText: {
     marginTop: 16,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 15,
     color: colors.black,
+    fontFamily: 'Inter-Regular',
   },
   dotMainContainer: { position: 'absolute', bottom: '10%', width: '100%' },
   dotContainer: {

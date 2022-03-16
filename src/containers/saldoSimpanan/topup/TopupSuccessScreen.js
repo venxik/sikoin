@@ -74,11 +74,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: '70%',
     marginBottom: sizes.padding,
+    fontFamily: 'Poppins-Regular',
   },
   textContent: {
     color: colors.bodyText,
     fontSize: 15,
     textAlign: 'center',
     width: '90%',
+    fontFamily: 'Inter-Regular',
+    lineHeight: sizes.icon_size,
   },
 });

@@ -67,8 +67,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 16,
     color: colors.bodyText,
-    fontWeight: '600',
-    marginBottom: 4,
+    fontFamily: 'Poppins-SemiBold',
   },
   leftDotStyle: {
     marginTop: 8,
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
   nominalStyle: {
     fontSize: 15,
     color: colors.bodyTextGrey,
-    fontWeight: '500',
+    fontFamily: 'Inter-Medium',
   },
   nominalDotStyle: {
     marginHorizontal: 6,

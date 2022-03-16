@@ -64,23 +64,25 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: colors.bodyText,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     width: '70%',
   },
   textNominal: {
     color: colors.red,
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
   },
   textDetail: {
     width: '70%',
     fontSize: 12,
     color: colors.bodyText,
     marginBottom: 10,
+    fontFamily: 'Inter-Regular',
   },
   textTime: {
     fontSize: 12,
     color: colors.bodyTextLightGrey,
+    fontFamily: 'Inter-Regular',
   },
   dot: {
     width: 4,

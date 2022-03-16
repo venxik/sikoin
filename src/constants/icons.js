@@ -77,6 +77,8 @@ const popup_failed = require('assets/icons/popup_failed.png');
 const icon_chat = require('assets/icons/icon_chat.png');
 const icon_send_chat = require('assets/icons/icon_send_chat.png');
 const icon_attach_chat = require('assets/icons/icon_attach_chat.png');
+const arrow_down_black = require('assets/icons/arrow_down_black.png');
+const icon_chat_read = require('assets/icons/icon_chat_read.png');
 
 export default {
   arrow_left_primary,
@@ -157,4 +159,6 @@ export default {
   icon_chat,
   icon_send_chat,
   icon_attach_chat,
+  arrow_down_black,
+  icon_chat_read,
 };

@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     marginLeft: 16,
-    fontSize: sizes.padding,
-    fontWeight: '700',
+    fontSize: 24,
     color: colors.bodyText,
+    fontFamily: 'Poppins-Bold',
   },
   bottomContainer: {
     marginTop: 16,
@@ -96,16 +96,17 @@ const styles = StyleSheet.create({
     marginTop: 16,
     color: colors.bodyText,
     fontSize: 24,
-    fontWeight: '300',
+    fontFamily: 'Poppins-Regular',
   },
   textEmail: {
-    fontSize: 18,
+    fontSize: 17,
     color: colors.primary,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     marginVertical: sizes.padding,
   },
   textContent2: {
     color: colors.bodyText,
-    fontSize: 16,
+    fontSize: 15,
+    fontFamily: 'Inter-Regular',
   },
 });

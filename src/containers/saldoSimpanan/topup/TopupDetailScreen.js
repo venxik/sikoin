@@ -94,10 +94,15 @@ const TopupDetailScreen = ({ route }) => {
         <View
           style={[
             styles.rowContainerBorderless,
-            { padding: 0, justifyContent: 'space-between', marginTop: 6 },
+            {
+              justifyContent: 'space-between',
+              marginTop: 6,
+            },
           ]}>
-          <Text style={styles.textTitle}>{strings.total}</Text>
-          <Text style={styles.textTitle}>
+          <Text style={[styles.textTitle, { marginBottom: 0 }]}>
+            {strings.total}
+          </Text>
+          <Text style={[styles.textNominal, { fontSize: 14 }]}>
             Rp {formatter.formatStringToCurrencyNumber(nominal)}
           </Text>
         </View>
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   textTitle: {
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: colors.bodyText,
     marginBottom: sizes.padding * 0.5,
   },
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
   },
   textNominal: {
     fontSize: 24,
-    fontWeight: '700',
+    fontFamily: 'Inter-Bold',
     color: colors.bodyText,
   },
   icon: { width: 40, height: 40 },
@@ -170,10 +175,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.primary,
     marginLeft: 8,
+    fontFamily: 'Inter-Regular',
   },
   textJumlahTopup: {
     fontSize: 15,
     color: colors.bodyTextGrey,
     marginLeft: 8,
+    fontFamily: 'Inter-Regular',
   },
 });

@@ -35,7 +35,11 @@ const CardMarketLarge = props => {
             }}
           />
           <Text
-            style={{ color: colors.primary, fontWeight: '600', fontSize: 13 }}>
+            style={{
+              color: colors.primary,
+              fontSize: 13,
+              fontFamily: 'Poppins-SemiBold',
+            }}>
             {strings.beli_dgn_voucher}
           </Text>
           <Image
@@ -87,8 +91,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
-  titleStyle: { fontSize: 16, color: colors.bodyText, flex: 0.8 },
-  priceContainer: { marginTop: 10, fontSize: 24, color: colors.bodyText },
+  titleStyle: {
+    fontSize: 16,
+    color: colors.bodyText,
+    flex: 0.8,
+    fontFamily: 'Poppins-Medium',
+  },
+  priceContainer: {
+    fontSize: 24,
+    color: colors.bodyText,
+    fontFamily: 'Inter-Bold',
+  },
   touchableContainer: {
     flexDirection: 'row',
     alignItems: 'center',

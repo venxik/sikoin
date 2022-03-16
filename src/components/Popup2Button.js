@@ -130,16 +130,17 @@ const styles = StyleSheet.create({
   },
   headerModalText: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: colors.bodyText,
     textAlign: 'center',
+    fontFamily: 'Poppins-Bold',
   },
   contentModalText: {
-    fontSize: 14,
-    color: colors.black,
+    fontSize: 15,
+    color: colors.bodyText,
     textAlign: 'center',
     paddingVertical: sizes.padding,
     lineHeight: sizes.padding,
+    fontFamily: 'Inter-Regular',
   },
   buttonContainer: {
     width: '100%',

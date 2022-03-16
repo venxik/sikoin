@@ -502,6 +502,7 @@ const ParentStackNavigator = () => {
           component={
             isFirstLaunch ? OnboardingStackNavigator : LoginStackNavigator
           }
+          // component={OnboardingStackNavigator}
         />
       </ParentStack.Navigator>
     </NavigationContainer>

@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   customPopupTextbox: {
-    marginTop: 10,
     width: '100%',
   },
   logo: {

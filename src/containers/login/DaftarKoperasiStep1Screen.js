@@ -60,7 +60,7 @@ const DaftarKoperasiStep1Screen = () => {
         />
         <TextboxBorder
           style={{
-            marginTop: sizes.padding,
+            marginTop: sizes.padding / 2,
           }}
           value={noAnggota}
           onChangeText={e => onChangeNoAnggota(e)}
@@ -106,16 +106,22 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     marginLeft: 16,
-    fontSize: sizes.padding,
-    fontWeight: '700',
+    fontSize: 24,
     color: colors.bodyText,
+    fontFamily: 'Poppins-Bold',
+  },
+  textTitle2: {
+    marginTop: 16,
+    color: colors.bodyText,
+    fontSize: 15,
+    fontFamily: 'Inter-Regular',
   },
   bottomContainer: {
     marginTop: 16,
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
     margin: SCREEN_WIDTH * 0.05,
-    padding: SCREEN_WIDTH * 0.05,
+    padding: sizes.padding,
   },
   buttonContainer: {
     position: 'absolute',
@@ -123,6 +129,5 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: SCREEN_WIDTH * 0.05,
   },
-  textTitle2: { marginTop: 16, color: colors.bodyText },
   textCircle: { fontWeight: '600', color: colors.bodyText },
 });

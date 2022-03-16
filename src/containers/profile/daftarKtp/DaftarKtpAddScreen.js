@@ -37,7 +37,7 @@ const DaftarKtpAddScreen = () => {
     console.log(data);
     if (data) {
       dispatch(addKtpNumber(data.noKtp));
-      // navigation.goBack();
+      navigation.goBack();
     }
   };
 

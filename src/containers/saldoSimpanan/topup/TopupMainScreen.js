@@ -351,8 +351,8 @@ const styles = StyleSheet.create({
   textPilihJumlah: {
     color: colors.bodyTextGrey,
     fontSize: 17,
-    fontWeight: '700',
-    marginBottom: sizes.padding * 1.4,
+    fontFamily: 'Poppins-Bold',
+    marginBottom: sizes.padding,
   },
   ketikManualButton: {
     backgroundColor: colors.primaryWhite,
@@ -373,12 +373,12 @@ const styles = StyleSheet.create({
     borderRadius: sizes.padding,
   },
   textNominalContainer: { flexDirection: 'row', alignItems: 'center' },
-  textNominalButton: { fontSize: 24, fontWeight: '700' },
-  textRbButton: { marginLeft: 4, fontWeight: '500' },
+  textNominalButton: { fontSize: 24, fontFamily: 'Inter-Bold' },
+  textRbButton: { marginLeft: 4, fontFamily: 'Inter-Bold' },
   textNominal: {
     width: '70%',
     fontSize: 24,
-    fontWeight: '700',
+    fontFamily: 'Inter-Bold',
     color: colors.bodyText,
   },
   icon: { width: 40, height: 40 },
@@ -406,10 +406,10 @@ const styles = StyleSheet.create({
   },
   textJenisTopup: {
     color: colors.bodyTextGrey,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
     marginLeft: sizes.padding,
   },
-  textInputNominal: { fontSize: 34, fontWeight: '700' },
+  textInputNominal: { fontSize: 34, fontFamily: 'Inter-Bold' },
   inputNominalContainer: {
     borderWidth: 1,
     borderColor: colors.strokeGrey,
@@ -430,5 +430,6 @@ const styles = StyleSheet.create({
   textInputNominalBtn: {
     color: colors.bodyText,
     fontSize: 34,
+    fontFamily: 'Poppins-Regular',
   },
 });

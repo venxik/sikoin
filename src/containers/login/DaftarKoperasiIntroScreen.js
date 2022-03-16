@@ -62,14 +62,15 @@ const DaftarKoperasiIntroScreen = () => {
           <ButtonText
             onPress={() => setIndex(2)}
             buttonContainerStyle={styles.buttonLeftStyle}
+            secondary
             text={strings.belum}
-            textStyle={{ color: colors.primary }}
+            textStyle={styles.textButton}
           />
           <ButtonText
             onPress={navigateToStep1Screen}
             buttonContainerStyle={styles.buttonRightStyle}
             text={strings.sudah}
-            textStyle={{ color: colors.white }}
+            textStyle={styles.textButton}
           />
         </View>
       ) : (
@@ -78,7 +79,8 @@ const DaftarKoperasiIntroScreen = () => {
             onPress={() => setIndex(2)}
             buttonContainerStyle={styles.buttonStyle2}
             text={strings.ayo}
-            textStyle={{ color: colors.primary }}
+            secondary
+            textStyle={styles.textButton}
           />
         </View>
       )}
@@ -119,10 +121,11 @@ const styles = StyleSheet.create({
   textTitle: {
     position: 'absolute',
     bottom: SCREEN_HEIGHT * 0.4,
-    color: colors.white,
+    color: colors.tonalLightPrimary,
     fontSize: 24,
     paddingHorizontal: 40,
     zIndex: 200,
+    fontFamily: 'Poppins-Bold',
   },
   buttonContainer1: {
     flexDirection: 'row',
@@ -142,16 +145,17 @@ const styles = StyleSheet.create({
   },
   buttonLeftStyle: {
     width: '47%',
-    paddingVertical: SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.02,
     backgroundColor: colors.white,
   },
   buttonRightStyle: {
     width: '47%',
-    paddingVertical: SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.02,
   },
   buttonStyle2: {
     width: '100%',
-    paddingVertical: SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.02,
     backgroundColor: colors.white,
   },
+  textButton: { fontFamily: 'Poppins-SemiBold' },
 });

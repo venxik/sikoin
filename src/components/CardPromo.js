@@ -47,10 +47,15 @@ const styles = StyleSheet.create({
   bottomContainer: {
     padding: sizes.padding,
   },
-  textTitle: { fontSize: sizes.padding, color: colors.bodyText },
+  textTitle: {
+    fontSize: sizes.padding,
+    color: colors.bodyText,
+    fontFamily: 'Poppins-Medium',
+  },
   textContent: {
     marginVertical: sizes.padding,
     fontSize: 15,
     color: colors.bodyText,
+    fontFamily: 'Inter-Regular',
   },
 });

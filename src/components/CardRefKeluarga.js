@@ -22,7 +22,7 @@ const CardRefKeluarga = props => {
       <Text style={styles.textName}>{nama}</Text>
       <View style={{ marginTop: 10 }}>
         <View style={styles.textContainer}>
-          <Text style={styles.textRp}>TEL.</Text>
+          <Text style={styles.textTel}>TEL.</Text>
           <Text style={styles.textNumber}>{noTelp}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(noTelp)}>
             <Image
@@ -32,7 +32,7 @@ const CardRefKeluarga = props => {
           </TouchableOpacity>
         </View>
         <View style={[styles.textContainer, { marginTop: 10 }]}>
-          <Text style={styles.textRp}>KTP.</Text>
+          <Text style={styles.textTel}>KTP.</Text>
           <Text style={styles.textNumber}>{noKtp}</Text>
           <TouchableOpacity onPress={() => copyToClipboard(noKtp)}>
             <Image
@@ -93,22 +93,24 @@ const styles = StyleSheet.create({
   textJudul: {
     fontSize: 15,
     color: colors.bodyText,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
   textName: {
     fontSize: 16,
-    fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     color: colors.bodyText,
-    marginTop: sizes.padding,
+    marginTop: sizes.padding / 2,
   },
   textNumber: {
     marginLeft: 10,
     fontSize: 15,
     color: colors.bodyTextLightGrey,
+    fontFamily: 'Inter-Regular',
   },
-  textRp: {
+  textTel: {
     fontSize: 15,
     color: colors.bodyText,
+    fontFamily: 'Inter-Regular',
   },
   iconClipboard: { width: 20, height: 20, marginLeft: sizes.padding },
   textContainer: {

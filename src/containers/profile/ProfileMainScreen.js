@@ -92,12 +92,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: sizes.padding,
   },
   nameText: {
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: sizes.padding,
     color: colors.bodyText,
     marginTop: sizes.padding,
   },
   koperasiText: {
+    fontFamily: 'Poppins-Bold',
     fontWeight: '700',
     fontSize: 17,
     color: colors.bodyTextLightGrey,
@@ -105,11 +106,11 @@ const styles = StyleSheet.create({
   descText: {
     fontSize: 15,
     color: colors.bodyTextGrey,
+    fontFamily: 'Inter-Regular',
   },
   menuProfile: {
     color: colors.bodyTextLightGrey,
     fontSize: 17,
-    fontWeight: '700',
-    marginBottom: 10,
+    fontFamily: 'Poppins-Bold',
   },
 });

@@ -125,17 +125,17 @@ const styles = StyleSheet.create({
   },
   headerModalText: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: colors.bodyText,
     textAlign: 'center',
+    fontFamily: 'Poppins-Bold',
   },
   contentModalText: {
-    paddingHorizontal: 16,
-    fontSize: 14,
-    color: colors.bodyTextGrey,
-    paddingVertical: sizes.padding,
+    fontSize: 15,
+    color: colors.bodyText,
     textAlign: 'center',
+    paddingVertical: sizes.padding,
     lineHeight: sizes.padding,
+    fontFamily: 'Inter-Regular',
   },
   icon: {
     width: SCREEN_WIDTH * 0.2,

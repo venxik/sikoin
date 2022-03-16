@@ -97,18 +97,19 @@ const styles = StyleSheet.create({
   },
   textNamaToko: {
     color: colors.bodyText,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 20,
   },
   textSnk: {
     color: colors.bodyTextLightGrey,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 17,
   },
   textSnkContent: {
     color: colors.bodyTextGrey,
     fontSize: 15,
-    marginTop: sizes.padding,
+    marginTop: sizes.padding / 2,
+    fontFamily: 'Inter-Regular',
   },
   voucherContainer: {
     marginVertical: sizes.padding,
@@ -117,7 +118,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.strokeGrey,
     paddingVertical: sizes.padding,
-    // paddingLeft: sizes.padding,
-    // paddingRight: sizes.padding * 2,
   },
 });

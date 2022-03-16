@@ -33,6 +33,7 @@ const Button = props => {
       <Image source={icon} style={{ width: 50, height: 50 }} />
       <Text
         style={{
+          fontFamily: 'Poppins-Medium',
           color: colors.bodyText,
           textAlign: 'center',
         }}>
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
   textTitle: {
     color: colors.primaryLight,
     marginTop: sizes.padding,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
   saldoRowContainer: {
     flexDirection: 'row',
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     color: colors.white,
     marginLeft: 16,
-    fontWeight: '700',
+    fontFamily: 'Inter-Bold',
   },
   customPopupContainer: {
     alignItems: 'flex-start',

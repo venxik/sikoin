@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     color: colors.bodyText,
     fontSize: 15,
-    fontWeight: '500',
+    fontFamily: 'Inter-Medium',
   },
   defaultText: {
     fontSize: 14,

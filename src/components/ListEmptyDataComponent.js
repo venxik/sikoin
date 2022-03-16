@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: sizes.padding,
     fontSize: 20,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     color: colors.primary,
     width: '70%',
     textAlign: 'center',

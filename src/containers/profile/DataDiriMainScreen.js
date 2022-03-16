@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 17,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     color: colors.bodyTextLightGrey,
     marginTop: sizes.padding,
   },

@@ -112,12 +112,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.primary,
-    paddingVertical: SCREEN_WIDTH * 0.03,
+    paddingVertical: SCREEN_WIDTH * 0.02,
   },
   defaultText: {
     fontSize: 14,
     color: colors.white,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Medium',
   },
   innerContainer: {
     flexDirection: 'row',

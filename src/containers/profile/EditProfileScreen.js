@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ import { updateProfile } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { formatter } from '../../utils';
 import DocumentPicker from 'react-native-document-picker';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
@@ -64,6 +66,11 @@ const EditProfileScreen = () => {
     }
   };
 
+  const copyToClipboard = () => {
+    Clipboard.setString(code.toString());
+    ToastAndroid.show('Text Telah Disalin', 3000);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -99,8 +106,18 @@ const EditProfileScreen = () => {
             <View
               style={{ paddingHorizontal: 10, marginVertical: sizes.padding }}>
               <View
-                style={{ flexDirection: 'row', marginBottom: sizes.padding }}>
+                style={{
+                  flexDirection: 'row',
+                  marginBottom: sizes.padding,
+                  alignItems: 'center',
+                }}>
                 <Text style={styles.codeText}>{code}</Text>
+                <TouchableOpacity onPress={copyToClipboard}>
+                  <Image
+                    source={icons.icon_copy_clipboard}
+                    style={styles.iconClipboard}
+                  />
+                </TouchableOpacity>
               </View>
               <Controller
                 control={control}
@@ -202,7 +219,7 @@ const styles = StyleSheet.create({
   },
   codeText: {
     fontSize: 20,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
     color: colors.bodyTextLightGrey,
   },
   profilePicStyle: {
@@ -217,5 +234,10 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  iconClipboard: {
+    width: sizes.padding,
+    height: sizes.padding,
+    marginLeft: sizes.padding,
   },
 });

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginLeft: sizes.padding,
     color: colors.bodyText,
     fontSize: 15,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
   iconStyle: { width: sizes.padding, height: sizes.padding },
 });

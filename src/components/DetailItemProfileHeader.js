@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import { colors } from '../constants';
+import { colors, sizes } from '../constants';
 import ProfilePicture from './ProfilePicture';
 
 const DetailItemProfileHeader = () => {
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   nameText: {
-    marginBottom: 30,
+    marginBottom: sizes.padding,
     marginTop: 10,
-    fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 24,
     color: colors.bodyText,
   },

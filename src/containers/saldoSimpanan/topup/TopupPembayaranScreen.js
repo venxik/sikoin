@@ -16,16 +16,17 @@ const TopupPembayaranScreen = ({ route }) => {
   const renderBankList = () => (
     <View style={{ marginTop: sizes.padding }}>
       <Image source={images.img_bca} style={{ width: 100, height: 40 }} />
-      <Text style={{ color: colors.black, fontSize: 18, fontWeight: 'bold' }}>
-        1231312321
-      </Text>
-      <Text style={{ color: colors.black, fontSize: 18 }}>PT. XXXXXX</Text>
+      <Text style={styles.textBankNo}>1231312321</Text>
+      <Text style={styles.textBankName}>PT. XXXXXX</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack title={strings.pilih_pembayaran} />
+      <HeaderBack
+        title={strings.pilih_pembayaran}
+        textStyle={{ width: '100%' }}
+      />
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{strings.pembayaran_title_1}</Text>
         <Text style={styles.textNominal}>
@@ -64,11 +65,26 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: sizes.padding * 2,
   },
-  textTitle: { fontSize: 15, color: colors.bodyText, textAlign: 'center' },
+  textTitle: {
+    fontSize: 15,
+    color: colors.bodyText,
+    textAlign: 'center',
+    fontFamily: 'Poppins-Medium',
+  },
   textNominal: {
     fontSize: 38,
     color: colors.primary,
-    fontWeight: '700',
-    marginVertical: sizes.padding,
+    fontFamily: 'Poppins-Bold',
+    marginVertical: sizes.padding / 2,
+  },
+  textBankNo: {
+    color: colors.bodyText,
+    fontSize: 18,
+    fontFamily: 'Inter-Bold',
+  },
+  textBankName: {
+    color: colors.bodyText,
+    fontSize: 18,
+    fontFamily: 'Inter-Regular',
   },
 });

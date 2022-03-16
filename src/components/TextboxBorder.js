@@ -62,7 +62,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
   },
-  textInputStyle: { marginHorizontal: 10, color: colors.bodyText },
+  textInputStyle: {
+    marginHorizontal: 10,
+    color: colors.bodyText,
+    fontFamily: 'Inter-Regular',
+  },
   iconStyle: {
     width: sizes.icon_size,
     height: sizes.icon_size,

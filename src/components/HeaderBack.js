@@ -34,7 +34,9 @@ const HeaderBack = props => {
             source={leftIcon}
           />
         </TouchableOpacity>
-        <Text style={[Styles.title, { ...textStyle }]}>{title}</Text>
+        <Text style={[Styles.title, { ...textStyle }]} numberOfLines={1}>
+          {title}
+        </Text>
       </View>
       <View style={Styles.rightContainer}>{rightIcon}</View>
     </View>
@@ -72,8 +74,8 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    fontFamily: 'Poppins-Bold',
+    fontSize: 17,
     color: colors.black,
     marginLeft: 12,
   },
