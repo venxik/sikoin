@@ -6,7 +6,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as screens from '../../containers';
+import * as screens from '../../screens';
 import { navigationRef } from '../navigation/NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
@@ -29,6 +29,7 @@ const TransaksiStack = createNativeStackNavigator();
 const VoucherStack = createNativeStackNavigator();
 const PinjamanStack = createNativeStackNavigator();
 const ChatStack = createNativeStackNavigator();
+const DokumenStack = createNativeStackNavigator();
 
 const shouldShowBottomNavigation = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -60,6 +61,8 @@ const shouldShowBottomNavigation = route => {
     case 'DataKoperasiMainScreen':
       return false;
     case 'ChatDetailScreen':
+      return false;
+    case 'DokumenStackNavigator':
       return false;
     default:
       return true;
@@ -180,6 +183,25 @@ const DiskonStackNavigator = () => (
       component={screens.DiskonMainScreen}
     />
   </DiskonStack.Navigator>
+);
+
+const DokumenStackNavigator = () => (
+  <DokumenStack.Navigator
+    initialRouteName={'DokumenMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <DokumenStack.Screen
+      name="DokumenMainScreen"
+      component={screens.DokumenMainScreen}
+    />
+    <DokumenStack.Screen
+      name="DokumenDetailScreen"
+      component={screens.DokumenDetailScreen}
+    />
+  </DokumenStack.Navigator>
 );
 
 const ProfileStackNavigator = () => (
@@ -407,6 +429,10 @@ const HomeStackNavigator = () => (
     <MainStack.Screen
       name="PinjamanStackNavigator"
       component={PinjamanStackNavigator}
+    />
+    <MainStack.Screen
+      name="DokumenStackNavigator"
+      component={DokumenStackNavigator}
     />
   </MainStack.Navigator>
 );

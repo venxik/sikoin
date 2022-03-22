@@ -10,42 +10,42 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CardRefKeluarga,
   HeaderBack,
   ListEmptyDataComponent,
   Popup1Button,
   Popup2Button,
 } from '../../../components';
+import CardAlamat from '../../../components/CardAlamat';
 import { icons, sizes, strings } from '../../../constants';
-import { deleteKeluarga } from '../../../redux/reducers/RefKeluargaReducer';
+import { deleteAlamat } from '../../../redux/reducers/AlamatReducer';
 
-const DaftarRefKeluargaMainScreen = () => {
+const DaftarAlamatMainScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessDeletePopup, setShowSuccessDeletePopup] = useState(false);
   const [showFailedPopup, setShowFailedPopup] = useState(false);
-  const [selectKeluarga, setSelectKeluarga] = useState(null);
-  const { keluargaList } = useSelector(s => s.RefKeluargaReducer) || [];
+  const [selectAlamat, setSelectAlamat] = useState(null);
+  const { alamatList } = useSelector(s => s.AlamatReducer) || [];
 
   const navigateToAddScreen = (update, index, item) => {
-    navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
+    navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
   };
 
-  const onPressDelete = item => {
+  const onPressDeleteAlamat = item => {
     setShowDeletePopup(true);
-    setSelectKeluarga(item);
+    setSelectAlamat(item);
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(deleteKeluarga(selectKeluarga));
+    dispatch(deleteAlamat(selectAlamat));
     setShowDeletePopup(false);
     setShowSuccessDeletePopup(true);
   };
 
   const onPressAddIcon = () => {
-    if (keluargaList.length < 2) navigateToAddScreen(false);
+    if (alamatList.length < 5) navigateToAddScreen(false);
     else setShowFailedPopup(true);
   };
 
@@ -70,7 +70,7 @@ const DaftarRefKeluargaMainScreen = () => {
     <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.referensi_keluarga}
+        title={strings.daftar_alamat}
         rightIcon={renderRightButtonHeader()}
       />
       <Popup2Button
@@ -91,14 +91,13 @@ const DaftarRefKeluargaMainScreen = () => {
         headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       />
       <Popup1Button
-        headerText={'Maksimal Referensi Keluarga Adalah 2'}
+        headerText={'Maksimal Alamat adalah 5'}
         showPopup={showFailedPopup}
         onPress={() => setShowFailedPopup(false)}
         headerImage={icons.popup_failed}
-        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
       />
       <FlatList
-        data={keluargaList}
+        data={alamatList}
         contentContainerStyle={{
           paddingHorizontal: sizes.padding,
           flexGrow: 1,
@@ -108,7 +107,7 @@ const DaftarRefKeluargaMainScreen = () => {
           return (
             <View style={{ flex: 1 }}>
               <ListEmptyDataComponent
-                text={strings.tambah_ref_keluarga}
+                text={strings.tambah_alamat}
                 onPress={() => navigateToAddScreen(false)}
               />
             </View>
@@ -117,10 +116,10 @@ const DaftarRefKeluargaMainScreen = () => {
         renderItem={({ item, index }) => {
           return (
             <View>
-              <CardRefKeluarga
+              <CardAlamat
                 item={item}
                 onPressUbah={() => navigateToAddScreen(true, index, item)}
-                onPressDelete={() => onPressDelete(item)}
+                onPressDelete={() => onPressDeleteAlamat(item)}
               />
             </View>
           );
@@ -129,7 +128,7 @@ const DaftarRefKeluargaMainScreen = () => {
     </SafeAreaView>
   );
 };
-export default DaftarRefKeluargaMainScreen;
+export default DaftarAlamatMainScreen;
 
 const styles = StyleSheet.create({
   container: {

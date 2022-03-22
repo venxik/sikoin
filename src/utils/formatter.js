@@ -46,6 +46,9 @@ const validateEmail = email => {
     );
 };
 
+const objectMap = (obj, fn) =>
+  Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
+
 const NUMBER_REGEX = /^\d+$/;
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -56,4 +59,5 @@ export default {
   formatNumberToCurreny,
   EMAIL_REGEX,
   NUMBER_REGEX,
+  objectMap,
 };

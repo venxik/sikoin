@@ -14,6 +14,7 @@ import PekerjaanReducer from './PekerjaanReducer';
 import DiskonReducer from './DiskonReducer';
 import TransaksiReducer from './TransaksiReducer';
 import VoucherReducer from './VoucherReducer';
+import DokumenReducer from './DokumenReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
@@ -31,6 +32,7 @@ const rootReducers = combineReducers({
   DiskonReducer: DiskonReducer,
   TransaksiReducer: TransaksiReducer,
   VoucherReducer: VoucherReducer,
+  DokumenReducer: DokumenReducer,
 });
 
 export default rootReducers;

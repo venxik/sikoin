@@ -31,6 +31,8 @@ import CardVoucherItem from './CardVoucherItem';
 import HeaderPinjaman from './HeaderPinjaman';
 import CalendarPicker from './CalendarPicker';
 import TextboxCurrency from './TextboxCurrency';
+import DokumenItemList from './DokumenItemList';
+import DokumenMemberItem from './DokumenMemberItem';
 
 export {
   ButtonIcon,
@@ -66,4 +68,6 @@ export {
   HeaderPinjaman,
   CalendarPicker,
   TextboxCurrency,
+  DokumenItemList,
+  DokumenMemberItem,
 };

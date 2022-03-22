@@ -13,6 +13,8 @@ const MenuHeaderIcon = props => {
         return images.menu_transaksi;
       case strings.voucher_center:
         return images.menu_voucher;
+      case strings.dokumen:
+        return images.menu_dokumen;
       default:
         return 0;
     }

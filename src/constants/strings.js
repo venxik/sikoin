@@ -82,6 +82,25 @@ export default {
   /*PROMO*/
   promo: 'Promo',
 
+  /*PROMO*/
+  unduh_file: 'Unduh File',
+  buka_file: 'Buka File',
+  hapus_file: 'Hapus File',
+  hapus_file_popup_confirmation_title:
+    'Kamu akan menghapus salah satu file koperasimu',
+  hapus_file_popup_confirmation_content: 'Apa Kamu Yakin?',
+  hapus_file_popup_success_title: 'File sudah dihapus dari Dokumen koperasimu',
+  tipe: 'Tipe',
+  ukuran: 'Ukuran',
+  lokasi_file: 'Lokasi File',
+  pemilik: 'Pemilik',
+  dibuat: 'Dibuat',
+  izin: 'Izin',
+  yg_memiliki_akses: 'YANG MEMILIKI AKSES',
+  umum: 'Umum',
+  tertutup: 'Tertutup',
+  hapus_akses: 'Hapus Akses',
+
   /*SALDO SIMPANAN */
   totalSaldo: 'Total Saldo',
   totalSimpanan: 'Total Simpanan',

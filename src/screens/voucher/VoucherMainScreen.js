@@ -61,11 +61,7 @@ const VoucherMainScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <Menu>
           <MenuTrigger>
-            <Image
-              source={icons.icon_more_menu}
-              style={styles.icon}
-              resizeMode="contain"
-            />
+            <Image source={icons.icon_more_menu} style={styles.icon} />
           </MenuTrigger>
           <MenuOptions
             customStyles={{
@@ -73,34 +69,16 @@ const VoucherMainScreen = () => {
                 marginTop: 30,
               },
             }}
-            optionsContainerStyle={{
-              padding: sizes.padding / 2,
-              borderRadius: sizes.padding / 1.5,
-              width: '50%',
-            }}>
+            optionsContainerStyle={styles.optionsContainerStyle}>
             <MenuOption onSelect={() => alert(`Go to VoucherKu`)}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  borderBottomWidth: 1,
-                  borderBottomColor: colors.strokeDarkGrey,
-                  paddingBottom: 10,
-                }}>
-                <Image
-                  source={icons.icon_voucher_black}
-                  style={styles.icon}
-                  resizeMode="contain"
-                />
+              <View style={styles.menuOptionStyle}>
+                <Image source={icons.icon_voucher_black} style={styles.icon} />
                 <Text style={styles.textPopupMenu}>{strings.voucherku}</Text>
               </View>
             </MenuOption>
             <MenuOption onSelect={() => setshowInfoPopup(true)}>
               <View style={{ flexDirection: 'row' }}>
-                <Image
-                  source={icons.icon_info_black}
-                  style={styles.icon}
-                  resizeMode="contain"
-                />
+                <Image source={icons.icon_info_black} style={styles.icon} />
                 <Text style={styles.textPopupMenu}>
                   {strings.tentang_voucher}
                 </Text>
@@ -139,7 +117,7 @@ const VoucherMainScreen = () => {
                 style={styles.plusMinusContainer}>
                 <Image
                   source={icons.minus_shape}
-                  style={{ width: sizes.icon_size, height: sizes.icon_size }}
+                  style={styles.plusMinusIcon}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
@@ -153,7 +131,7 @@ const VoucherMainScreen = () => {
                 style={styles.plusMinusContainer}>
                 <Image
                   source={icons.plus_shape}
-                  style={{ width: sizes.icon_size, height: sizes.icon_size }}
+                  style={styles.plusMinusIcon}
                   resizeMode="contain"
                 />
               </TouchableOpacity>
@@ -355,6 +333,18 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     paddingHorizontal: 12,
     paddingVertical: 6,
+  },
+  plusMinusIcon: { width: sizes.icon_size, height: sizes.icon_size },
+  optionsContainerStyle: {
+    padding: sizes.padding / 2,
+    borderRadius: sizes.padding / 1.5,
+    width: '50%',
+  },
+  menuOptionStyle: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.strokeDarkGrey,
+    paddingBottom: 10,
   },
   textPopupTitle: {
     marginTop: sizes.padding,

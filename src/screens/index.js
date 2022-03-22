@@ -36,6 +36,8 @@ import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
 import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
 import ChatMainScreen from './chat/ChatMainScreen';
 import ChatDetailScreen from './chat/ChatDetailScreen';
+import DokumenMainScreen from './dokumen/DokumenMainScreen';
+import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 
 export {
   OnboardingScreen,
@@ -76,4 +78,6 @@ export {
   DaftarKtpCameraScreen,
   DaftarKtpSelfieScreen,
   ChatDetailScreen,
+  DokumenMainScreen,
+  DokumenDetailScreen,
 };

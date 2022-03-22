@@ -79,6 +79,21 @@ const icon_send_chat = require('assets/icons/icon_send_chat.png');
 const icon_attach_chat = require('assets/icons/icon_attach_chat.png');
 const arrow_down_black = require('assets/icons/arrow_down_black.png');
 const icon_chat_read = require('assets/icons/icon_chat_read.png');
+const icon_document_pdf = require('assets/icons/icon_document_pdf.png');
+const icon_document_jpg = require('assets/icons/icon_document_jpg.png');
+const icon_document_word = require('assets/icons/icon_document_word.png');
+const icon_document_xls = require('assets/icons/icon_document_xls.png');
+const icon_document_other = require('assets/icons/icon_document_other.png');
+const icon_three_dot = require('assets/icons/icon_three_dot.png');
+const icon_dokumen_open = require('assets/icons/icon_dokumen_open.png');
+const icon_dokumen_download = require('assets/icons/icon_dokumen_download.png');
+const icon_dokumen_delete = require('assets/icons/icon_dokumen_delete.png');
+const icon_dokumen_umum = require('assets/icons/icon_dokumen_umum.png');
+const icon_dokumen_tertutup = require('assets/icons/icon_dokumen_tertutup.png');
+const icon_checkmark = require('assets/icons/icon_checkmark.png');
+const icon_dropdown_up = require('assets/icons/icon_dropdown_up.png');
+const icon_hapus_akses = require('assets/icons/icon_hapus_akses.png');
+const icon_download_file = require('assets/icons/icon_download_file.png');
 
 export default {
   arrow_left_primary,
@@ -161,4 +176,19 @@ export default {
   icon_attach_chat,
   arrow_down_black,
   icon_chat_read,
+  icon_document_pdf,
+  icon_document_jpg,
+  icon_document_word,
+  icon_document_xls,
+  icon_document_other,
+  icon_three_dot,
+  icon_dokumen_open,
+  icon_dokumen_download,
+  icon_dokumen_delete,
+  icon_dokumen_umum,
+  icon_dokumen_tertutup,
+  icon_checkmark,
+  icon_dropdown_up,
+  icon_hapus_akses,
+  icon_download_file,
 };

@@ -67,7 +67,11 @@ const HomeScreen = () => {
       label: strings.voucher,
       navigateTo: 'VoucherStackNavigator',
     },
-    { image: images.menu_dokumen, label: strings.dokumen, navigateTo: '' },
+    {
+      image: images.menu_dokumen,
+      label: strings.dokumen,
+      navigateTo: 'DokumenStackNavigator',
+    },
   ];
 
   const { kabarDataList } = useSelector(state => state.KabarReducer) || {};

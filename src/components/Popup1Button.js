@@ -68,7 +68,11 @@ const Popup1Button = props => {
             )}
           </View>
           {customContent}
-          <View style={{ width: '100%' }}>
+          <View
+            style={{
+              width: '100%',
+              marginTop: isEmpty(contentText) ? sizes.padding : 0,
+            }}>
             <ButtonText
               text={customButtonText ? customButtonText : strings.tutup}
               onPress={closeModal}
