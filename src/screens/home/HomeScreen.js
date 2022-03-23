@@ -127,6 +127,8 @@ const HomeScreen = () => {
   const onClickMiniScrollButton = showSaldo => {
     if (showSaldo) {
       navigation.navigate('TopupStackNavigator');
+    } else {
+      navigation.navigate('TransaksiStackNavigator');
     }
   };
 

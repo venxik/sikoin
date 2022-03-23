@@ -15,7 +15,7 @@ import {
 } from 'react-native-popup-menu';
 import { useSelector } from 'react-redux';
 import {
-  DropdownForm,
+  CalendarPicker,
   FilterHorizontal,
   HeaderBack,
   MenuHeaderIcon,
@@ -35,11 +35,7 @@ const TransaksiMainScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <Menu>
           <MenuTrigger>
-            <Image
-              source={icons.icon_more_menu}
-              style={styles.icon}
-              resizeMode="contain"
-            />
+            <Image source={icons.icon_more_menu} style={styles.icon} />
           </MenuTrigger>
           <MenuOptions
             customStyles={{
@@ -47,26 +43,11 @@ const TransaksiMainScreen = () => {
                 marginTop: 30,
               },
             }}
-            optionsContainerStyle={{
-              padding: sizes.padding / 2,
-              borderRadius: sizes.padding / 1.5,
-              width: '45%',
-            }}>
+            optionsContainerStyle={styles.optionsContainerStyle}>
             <MenuOption onSelect={() => alert(`Save`)}>
               <View style={{ flexDirection: 'row' }}>
-                <Image
-                  source={icons.icon_unduh}
-                  style={styles.icon}
-                  resizeMode="contain"
-                />
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    width: '70%',
-                    color: colors.bodyText,
-                    lineHeight: 24,
-                    fontFamily: 'Poppins-Medium',
-                  }}>
+                <Image source={icons.icon_unduh} style={styles.icon} />
+                <Text style={styles.textPopupMenu}>
                   {strings.unduh_riwayat_transaksi}
                 </Text>
               </View>
@@ -86,11 +67,8 @@ const TransaksiMainScreen = () => {
         }}>
         <MenuHeaderIcon menu={strings.transaksi} />
         <View style={styles.mainContainer}>
-          <DropdownForm
-            value="01 Jan 2022 - 27 Jan 2022"
-            icon={icons.icon_calendar_small}
-          />
-          <ScrollView horizontal style={{ marginTop: sizes.padding }}>
+          <CalendarPicker value={Date.now()} title="" />
+          <ScrollView horizontal>
             {filter.map((item, index) => (
               <FilterHorizontal
                 key={index}
@@ -125,5 +103,17 @@ const styles = StyleSheet.create({
   icon: {
     width: sizes.icon_size,
     height: sizes.icon_size,
+  },
+  optionsContainerStyle: {
+    padding: sizes.padding / 2,
+    borderRadius: sizes.padding / 1.5,
+    width: '45%',
+  },
+  textPopupMenu: {
+    marginLeft: 10,
+    width: '70%',
+    color: colors.bodyText,
+    lineHeight: 24,
+    fontFamily: 'Poppins-Medium',
   },
 });

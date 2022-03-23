@@ -33,7 +33,7 @@ const CalendarPicker = props => {
 
   return (
     <View style={[styles.defaultContainer, style]}>
-      <Text style={styles.titleText}>{title}</Text>
+      {!isEmpty(title) && <Text style={styles.titleText}>{title}</Text>}
       <View style={styles.innerContainer}>
         <TouchableOpacity onPress={showDatepicker} style={styles.container}>
           <View
@@ -85,7 +85,7 @@ CalendarPicker.propTypes = {
 };
 
 CalendarPicker.defaultProps = {
-  title: 'Tanggal',
+  title: '',
   style: null,
   onChangeDate: null,
   value: null,

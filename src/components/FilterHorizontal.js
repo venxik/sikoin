@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: colors.primary,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-SemiBold',
   },
 });
