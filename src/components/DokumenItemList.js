@@ -12,7 +12,22 @@ import moment from 'moment';
 
 const DokumenItemList = props => {
   const { item, onPress, onPressDeleteFile } = props || {};
-  const { namaFile, pemilik, tglDibuat } = item || {};
+  const { namaFile, pemilik, tglDibuat, tipeFile } = item || {};
+
+  const renderTypeFileIcon = type => {
+    switch (type) {
+      case 'pdf':
+        return icons.icon_document_pdf;
+      case 'jpg':
+        return icons.icon_document_jpg;
+      case 'xls':
+        return icons.icon_document_xls;
+      case 'word':
+        return icons.icon_document_word;
+      default:
+        return icons.icon_document_other;
+    }
+  };
 
   const renderPopupMenu = () => {
     return (
@@ -63,7 +78,7 @@ const DokumenItemList = props => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={styles.icon} source={icons.icon_document_jpg} />
+      <Image style={styles.icon} source={renderTypeFileIcon(tipeFile)} />
       <View style={{ flex: 1, marginLeft: sizes.padding }}>
         <Text style={styles.textTitle} numberOfLines={1}>
           {namaFile}

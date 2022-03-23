@@ -1,14 +1,19 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SCREEN_HEIGHT, sizes } from '../constants';
 import PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
 
 const CardDiskon = props => {
   const { item, style, onPress } = props || null;
   const { image } = item || {};
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <Image source={image} style={styles.imageStyle} resizeMode="cover" />
+      <FastImage
+        source={{ uri: image }}
+        style={styles.imageStyle}
+        resizeMode={FastImage.resizeMode.cover}
+      />
     </TouchableOpacity>
   );
 };

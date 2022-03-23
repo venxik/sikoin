@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
-  ToastAndroid,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ButtonText, HeaderBack } from '../../../components';
@@ -34,7 +33,6 @@ const DaftarKtpMainScreen = () => {
 
   const copyToClipboard = () => {
     Clipboard.setString(noKtp.toString());
-    ToastAndroid.show('No KTP telah disalin', 3000);
   };
 
   const renderKtpCard = () => {

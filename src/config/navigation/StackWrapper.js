@@ -30,6 +30,7 @@ const VoucherStack = createNativeStackNavigator();
 const PinjamanStack = createNativeStackNavigator();
 const ChatStack = createNativeStackNavigator();
 const DokumenStack = createNativeStackNavigator();
+const MarketStack = createNativeStackNavigator();
 
 const shouldShowBottomNavigation = route => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -63,6 +64,8 @@ const shouldShowBottomNavigation = route => {
     case 'ChatDetailScreen':
       return false;
     case 'DokumenStackNavigator':
+      return false;
+    case 'MarketStackNavigator':
       return false;
     default:
       return true;
@@ -370,6 +373,21 @@ const VoucherStackNavigator = () => (
   </VoucherStack.Navigator>
 );
 
+const MarketStackNavigator = () => (
+  <MarketStack.Navigator
+    initialRouteName={'MarketMainScreen'}
+    screenOptions={{
+      headerMode: 'none',
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <MarketStack.Screen
+      name="MarketMainScreen"
+      component={screens.MarketMainScreen}
+    />
+  </MarketStack.Navigator>
+);
+
 const PinjamanStackNavigator = () => (
   <PinjamanStack.Navigator
     initialRouteName={'PinjamanStep1'}
@@ -433,6 +451,10 @@ const HomeStackNavigator = () => (
     <MainStack.Screen
       name="DokumenStackNavigator"
       component={DokumenStackNavigator}
+    />
+    <MainStack.Screen
+      name="MarketStackNavigator"
+      component={MarketStackNavigator}
     />
   </MainStack.Navigator>
 );

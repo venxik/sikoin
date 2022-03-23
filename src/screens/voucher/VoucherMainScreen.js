@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
   },
   menuOptionStyle: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: colors.strokeDarkGrey,
     paddingBottom: 10,
   },

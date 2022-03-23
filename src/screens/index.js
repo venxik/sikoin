@@ -38,6 +38,7 @@ import ChatMainScreen from './chat/ChatMainScreen';
 import ChatDetailScreen from './chat/ChatDetailScreen';
 import DokumenMainScreen from './dokumen/DokumenMainScreen';
 import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
+import MarketMainScreen from './market/MarketMainScreen';
 
 export {
   OnboardingScreen,
@@ -80,4 +81,5 @@ export {
   ChatDetailScreen,
   DokumenMainScreen,
   DokumenDetailScreen,
+  MarketMainScreen,
 };

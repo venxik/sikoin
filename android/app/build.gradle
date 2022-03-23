@@ -1,7 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 project.ext.envConfigFiles = [
-        dev: ".env",
+        debug: ".env",
+        release: ".env.prod"
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
@@ -180,11 +181,11 @@ android {
     }
 
     flavorDimensions "default"
-    productFlavors {
-        dev {
-            applicationId "com.sikoin"
-        }
-    }
+//    productFlavors {
+//        dev {
+//            applicationId "com.sikoin"
+//        }
+//    }
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->

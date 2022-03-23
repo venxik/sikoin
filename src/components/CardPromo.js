@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, SCREEN_WIDTH, sizes } from '../constants';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../constants';
 import PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
 
 const CardPromo = props => {
   const { item, onPress, style } = props || null;
   const { title, content, image } = item || {};
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <Image source={image} style={styles.imageStyle} />
+      <FastImage source={{ uri: image }} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
         <Text style={styles.textTitle}>{title}</Text>
         <Text style={styles.textContent}>{content}</Text>
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: '60%',
+    height: SCREEN_HEIGHT * 0.5,
     borderTopLeftRadius: sizes.padding,
     borderTopRightRadius: sizes.padding,
   },

@@ -15,19 +15,12 @@ const MenuHeaderIcon = props => {
         return images.menu_voucher;
       case strings.dokumen:
         return images.menu_dokumen;
+      case strings.market:
+        return images.menu_market;
       default:
         return 0;
     }
   };
-
-  // const renderText = () => {
-  //   switch (menu) {
-  //     case strings.diskon:
-  //       return strings.diskon;
-  //     default:
-  //       return 0;
-  //   }
-  // };
 
   return (
     <View style={styles.container}>

@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-circular-progress/src/CircularProgress.js b/node_modules/react-native-circular-progress/src/CircularProgress.js
+index 3de2d77..9e03fa1 100644
+--- a/node_modules/react-native-circular-progress/src/CircularProgress.js
++++ b/node_modules/react-native-circular-progress/src/CircularProgress.js
+@@ -100,7 +100,7 @@ export default class CircularProgress extends React.PureComponent {
+ 
+     return (
+       <View style={style}>
+-        <Svg width={size + padding} height={size + padding}>
++        <Svg width={size + padding + 1} height={size + padding + 1}>
+           <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
+             {backgroundColor && (
+               <Path

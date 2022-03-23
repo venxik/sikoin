@@ -13,6 +13,7 @@ import CardKabar from './CardKabar';
 import CardLastItem from './CardLastItem';
 import CardPromo from './CardPromo';
 import CardMarketLarge from './CardMarketLarge';
+import CardMarketSmall from './CardMarketSmall';
 import SaldoItemList from './SaldoItemList';
 import CustomBackdrop from './CustomBackdrop';
 import ProfilePicture from './ProfilePicture';
@@ -50,6 +51,7 @@ export {
   CardLastItem,
   CardPromo,
   CardMarketLarge,
+  CardMarketSmall,
   SaldoItemList,
   CustomBackdrop,
   ProfilePicture,

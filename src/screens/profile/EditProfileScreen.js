@@ -9,7 +9,6 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-  ToastAndroid,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,7 +67,6 @@ const EditProfileScreen = () => {
 
   const copyToClipboard = () => {
     Clipboard.setString(code.toString());
-    ToastAndroid.show('Text Telah Disalin', 3000);
   };
 
   return (

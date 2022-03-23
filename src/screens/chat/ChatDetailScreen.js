@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Bubble, GiftedChat, Send, Time } from 'react-native-gifted-chat/src';
 import { HeaderBack, TextboxBorder } from '../../components';
 import {
@@ -33,8 +33,8 @@ const ChatDetailScreen = () => {
 
   const onSend = useCallback((messages = []) => {
     var temp = messages[0];
-    temp.sent = true;
-    temp.received = true;
+    // temp.sent = true;
+    // temp.received = true;
     setMessages(previousMessages => GiftedChat.append(previousMessages, temp));
     // setTimeout(() => botSend(step), Math.round(Math.random() * 1000));
   }, []);
@@ -88,7 +88,7 @@ const ChatDetailScreen = () => {
 
   const renderAction = props => {
     return (
-      <View
+      <TouchableOpacity
         {...props}
         style={{
           justifyContent: 'center',
@@ -103,7 +103,7 @@ const ChatDetailScreen = () => {
             height: sizes.icon_size * 1.3,
           }}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -169,7 +169,6 @@ const ChatDetailScreen = () => {
   };
 
   const renderTicks = message => {
-    // console.log('tick', message);
     if (message?.user?._id !== 2) {
       return (
         (message.received || message.sent) && (
@@ -211,11 +210,10 @@ const ChatDetailScreen = () => {
         renderTime={props => renderTime(props)}
         scrollToBottom
         locale="id"
-        renderTicks={message => renderTicks(message)}
+        // renderTicks={message => renderTicks(message)}
         renderBubble={props => renderBubble(props)}
         renderComposer={props => renderComposer(props)}
         renderActions={props => renderAction(props)}
-        render={props => <View {...props} style={{ borderWidth: 0 }} />}
         renderSend={props => renderSend(props)}
         timeTextStyle={{
           left: {
@@ -229,7 +227,7 @@ const ChatDetailScreen = () => {
             fontFamily: 'Poppins-Medium',
           },
         }}
-        scrollToBottomComponent={props => (
+        scrollToBottomComponent={() => (
           <Image
             source={icons.arrow_down_black}
             style={{

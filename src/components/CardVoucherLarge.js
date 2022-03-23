@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
   },
   logoToko: {
-    width: 80,
-    height: 60,
+    width: 100,
+    height: 70,
   },
   iconPopup: {
     width: sizes.icon_size,

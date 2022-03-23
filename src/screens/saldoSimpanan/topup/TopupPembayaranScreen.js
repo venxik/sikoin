@@ -14,7 +14,7 @@ const TopupPembayaranScreen = ({ route }) => {
   };
 
   const renderBankList = () => (
-    <View style={{ marginTop: sizes.padding }}>
+    <View style={styles.bankContainer}>
       <Image source={images.img_bca} style={{ width: 100, height: 40 }} />
       <Text style={styles.textBankNo}>1231312321</Text>
       <Text style={styles.textBankName}>PT. XXXXXX</Text>
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     marginVertical: sizes.padding / 2,
   },
+  bankContainer: { marginTop: sizes.padding, alignItems: 'center' },
   textBankNo: {
     color: colors.bodyText,
     fontSize: 18,

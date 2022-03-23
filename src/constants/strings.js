@@ -82,7 +82,7 @@ export default {
   /*PROMO*/
   promo: 'Promo',
 
-  /*PROMO*/
+  /*DOKUMEN*/
   unduh_file: 'Unduh File',
   buka_file: 'Buka File',
   hapus_file: 'Hapus File',
@@ -141,6 +141,16 @@ export default {
   beli_dgn_voucher: 'Beli Dengan Voucher',
   email: 'Email',
   selengkapnya: 'Selengkapnya',
+  favorit: 'Favorit',
+  keranjang: 'Keranjang',
+  pesanan: 'Pesanan',
+  tentang_market: 'Tentang Market',
+  kategori: 'Kategori',
+  brand: 'Brand',
+  toko: 'Toko',
+  search_market_placeholder: 'Cari Produk...',
+  voucher_toko: 'Voucher Toko',
+  kunjungi_toko: 'Kunjungi Toko',
 
   /*VOUCHER*/
   voucher_center: 'Voucher Center',

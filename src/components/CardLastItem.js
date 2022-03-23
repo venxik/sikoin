@@ -3,9 +3,10 @@ import { View, StyleSheet, Image } from 'react-native';
 import { colors, images, SCREEN_WIDTH, sizes, strings } from '../constants';
 import ButtonText from './ButtonText';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 
 const CardLastItem = props => {
-  const { onPress, style, icon } = props || null;
+  const { onPress, style, icon, customText } = props || null;
   return (
     <View style={[styles.container, style]}>
       <Image
@@ -23,7 +24,7 @@ const CardLastItem = props => {
           width: '50%',
         }}
         textStyle={{ color: colors.white }}
-        text={strings.selengkapnya}
+        text={!isEmpty(customText) ? customText : strings.selengkapnya}
       />
     </View>
   );
@@ -33,12 +34,14 @@ CardLastItem.propTypes = {
   icon: PropTypes.any,
   onPress: PropTypes.func,
   style: PropTypes.object,
+  customText: PropTypes.string,
 };
 
 CardLastItem.defaultProps = {
   icon: null,
   onPress: null,
   style: null,
+  customText: '',
 };
 
 export default CardLastItem;
@@ -55,5 +58,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  iconStyle: { width: '30%', height: '30%', marginBottom: sizes.padding },
+  iconStyle: { width: 100, height: 100, marginBottom: sizes.padding },
 });

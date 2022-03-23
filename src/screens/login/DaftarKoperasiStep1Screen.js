@@ -35,7 +35,7 @@ const DaftarKoperasiStep1Screen = () => {
       <View style={styles.topContainer}>
         <View style={styles.topInnerContainer}>
           <AnimatedCircularProgress
-            size={SCREEN_WIDTH * 0.13}
+            size={SCREEN_WIDTH * 0.15}
             rotation={180}
             width={3}
             fill={2}
@@ -129,5 +129,8 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: SCREEN_WIDTH * 0.05,
   },
-  textCircle: { fontWeight: '600', color: colors.bodyText },
+  textCircle: {
+    fontFamily: 'Poppins-SemiBold',
+    color: colors.bodyText,
+  },
 });

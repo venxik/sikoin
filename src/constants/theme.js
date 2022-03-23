@@ -7,6 +7,8 @@ export const sizes = {
   padding: SCREEN_WIDTH * 0.05,
   icon_size: 24,
   profile_pic_size: SCREEN_WIDTH * 0.25,
+  cardKabarHeight: SCREEN_HEIGHT * 0.5,
+  cardPromoHeight: SCREEN_HEIGHT * 0.75,
 };
 
 export default { SCREEN_WIDTH, SCREEN_HEIGHT, sizes };

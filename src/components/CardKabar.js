@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 
 const CardKabar = props => {
   const { item, onPress, style } = props || null;
-  const { title, profile_pic, content, timestamp, name } = item || {};
+  const { title, profilePic, content, timestamp, name } = item || {};
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.textTitle}>{title}</Text>
       <View style={styles.rowStyle}>
-        <Image source={profile_pic} style={{ width: 60, height: 60 }} />
+        <Image
+          source={{ uri: profilePic }}
+          style={{ width: 60, height: 60, borderRadius: 50 }}
+        />
         <View style={styles.innerRowStyle}>
           <Text style={styles.textName}>{name}</Text>
           <Text style={styles.textDate}>{timestamp}</Text>
@@ -20,6 +23,7 @@ const CardKabar = props => {
       <Text style={styles.textContent}>{content}</Text>
 
       <ButtonText
+        shadow={false}
         secondary
         icon={icons.arrow_up_circle_primary}
         iconLocation="left"
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    paddingHorizontal: sizes.padding,
+    padding: sizes.padding,
     width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
     justifyContent: 'center',

@@ -19,28 +19,10 @@ const Popup1ButtonScroll = props => {
     iconStyle,
   } = props;
 
-  // const scaleValue = useRef(new Animated.Value(0)).current;
-
-  // useEffect(() => {
-  //   if (showPopup) {
-  //     Animated.spring(scaleValue, {
-  //       toValue: 1,
-  //       duration: 200,
-  //       useNativeDriver: true,
-  //     }).start();
-  //   }
-  // }, [showPopup]);
-
   const closeModal = () => {
-    // Animated.timing(scaleValue, {
-    //   toValue: 0,
-    //   duration: 200,
-    //   useNativeDriver: true,
-    // }).start(() => {
     if (onPress) {
       onPress();
     }
-    // });
   };
 
   return (
@@ -52,7 +34,6 @@ const Popup1ButtonScroll = props => {
             contentContainerStyle={{ alignItems: 'center' }}>
             {headerImage && (
               <Image
-                resizeMode="contain"
                 source={headerImage}
                 style={[styles.icon, { ...iconStyle }]}
               />
@@ -139,7 +120,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
   },
   icon: {
-    width: SCREEN_WIDTH * 0.2,
+    width: SCREEN_WIDTH * 0.3,
     height: SCREEN_WIDTH * 0.2,
     marginVertical: 30,
   },

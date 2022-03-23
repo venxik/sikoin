@@ -1,27 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { images } from '../../constants';
 
 const initialState = {
   marketDataList: [
     {
       productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
+      image: 'https://picsum.photos/id/121/400/400',
     },
     {
       productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
+      image: 'https://picsum.photos/id/1/400/400',
     },
     {
       productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
+      image: 'https://picsum.photos/id/11/400/400',
     },
     {
       productName: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       price: 'Rp 17.000.000',
-      image: images.daftar_koperasi_bg,
+      image: 'https://picsum.photos/id/34/400/400',
     },
   ],
   error: null,

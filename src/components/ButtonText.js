@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.white,
     fontFamily: 'Poppins-Medium',
+    textAlign: 'center',
   },
   innerContainer: {
     flexDirection: 'row',

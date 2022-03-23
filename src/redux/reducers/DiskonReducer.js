@@ -1,22 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { images } from '../../constants';
 
 const initialState = {
   diskonDataList: [
     {
-      image: images.dummy_ktp,
+      image: 'https://picsum.photos/id/121/400/400',
       content: 'This is content example',
     },
     {
-      image: images.dummy_ktp,
+      image: 'https://picsum.photos/id/11/400/400',
       content: 'This is content example',
     },
     {
-      image: images.dummy_ktp,
+      image: 'https://picsum.photos/id/77/400/400',
       content: 'This is content example',
     },
     {
-      image: images.dummy_ktp,
+      image: 'https://picsum.photos/id/5/400/400',
       content: 'This is content example',
     },
   ],

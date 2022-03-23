@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { images } from '../../constants';
 
 const initialState = {
   kabarDataList: [
     {
       title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       company: 'Jababeka & co',
-      profile_pic: images.dummy_profile_pic,
+      profilePic: 'https://picsum.photos/400/400',
       content:
         'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
       name: 'Achmad Ega',
@@ -17,7 +16,7 @@ const initialState = {
     {
       title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       company: 'Jababeka & co',
-      profile_pic: images.dummy_profile_pic,
+      profilePic: 'https://picsum.photos/400/400',
       content:
         'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
       name: 'Achmad Ega',
@@ -28,7 +27,7 @@ const initialState = {
     {
       title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
       company: 'Jababeka & co',
-      profile_pic: images.dummy_profile_pic,
+      profilePic: 'https://picsum.photos/400/400',
       content:
         'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
       name: 'Achmad Ega',

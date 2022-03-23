@@ -16,7 +16,9 @@ const TextboxBorder = props => {
           },
           style,
         ]}>
-        {icon ? <Image source={icon} style={styles.iconStyle} /> : null}
+        {icon ? (
+          <Image resizeMode="contain" source={icon} style={styles.iconStyle} />
+        ) : null}
         <TextInput
           {...props}
           style={[styles.textInputStyle, textBoxStyle]}
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   textInputStyle: {
+    flex: 1,
     marginHorizontal: 10,
     color: colors.bodyText,
     fontFamily: 'Inter-Regular',

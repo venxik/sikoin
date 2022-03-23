@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 
-const CardMarketLarge = props => {
+const CardMarketSmall = props => {
   const { item, onPress, style, onPressWishlist } = props || null;
   const { productName, price, image } = item || {};
   return (
@@ -19,7 +19,9 @@ const CardMarketLarge = props => {
       <FastImage source={{ uri: image }} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
         <View style={styles.containerStyle}>
-          <Text style={styles.titleStyle}>{productName}</Text>
+          <Text style={styles.titleStyle} numberOfLines={2}>
+            {productName}
+          </Text>
           <TouchableOpacity onPress={onPressWishlist}>
             <Image
               source={icons.icon_wishlist}
@@ -34,29 +36,11 @@ const CardMarketLarge = props => {
         <Text style={styles.priceContainer}>{price}</Text>
 
         <TouchableOpacity onPress={onPress} style={styles.touchableContainer}>
+          <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
+          <Text style={styles.textVoucher}>{strings.voucher_toko}</Text>
           <Image
-            source={icons.icon_voucher_small}
-            style={{
-              width: 30,
-              height: 30,
-              marginRight: sizes.padding,
-            }}
-          />
-          <Text
-            style={{
-              color: colors.primary,
-              fontSize: 13,
-              fontFamily: 'Poppins-SemiBold',
-            }}>
-            {strings.beli_dgn_voucher}
-          </Text>
-          <Image
-            source={icons.arrow_right_primary}
-            style={{
-              width: sizes.padding,
-              height: sizes.padding,
-              marginLeft: 6,
-            }}
+            source={icons.arrow_right_primary_2}
+            style={[styles.iconVoucher, { marginLeft: 4 }]}
           />
         </TouchableOpacity>
       </View>
@@ -64,32 +48,32 @@ const CardMarketLarge = props => {
   );
 };
 
-CardMarketLarge.propTypes = {
+CardMarketSmall.propTypes = {
   item: PropTypes.object,
   onPress: PropTypes.func,
   style: PropTypes.object,
   onPressWishlist: PropTypes.func,
 };
 
-CardMarketLarge.defaultProps = {
+CardMarketSmall.defaultProps = {
   item: null,
   onPress: null,
   style: null,
   onPressWishlist: null,
 };
 
-export default CardMarketLarge;
+export default CardMarketSmall;
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    width: SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.45,
     marginRight: sizes.padding,
   },
   imageStyle: {
     width: '100%',
-    height: SCREEN_HEIGHT * 0.5,
+    height: SCREEN_HEIGHT * 0.3,
     borderTopLeftRadius: sizes.padding,
     borderTopRightRadius: sizes.padding,
   },
@@ -100,15 +84,16 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   titleStyle: {
-    fontSize: 16,
+    fontSize: 13,
     color: colors.bodyText,
     flex: 0.8,
     fontFamily: 'Poppins-Medium',
   },
   priceContainer: {
-    fontSize: 24,
+    fontSize: 16,
     color: colors.bodyText,
     fontFamily: 'Inter-Bold',
+    marginTop: 4,
   },
   touchableContainer: {
     flexDirection: 'row',
@@ -118,5 +103,15 @@ const styles = StyleSheet.create({
   bottomContainer: {
     padding: sizes.padding,
     width: '100%',
+  },
+  iconVoucher: {
+    width: sizes.icon_size,
+    height: sizes.icon_size,
+    marginRight: 4,
+  },
+  textVoucher: {
+    color: colors.primary,
+    fontSize: 13,
+    fontFamily: 'Poppins-SemiBold',
   },
 });

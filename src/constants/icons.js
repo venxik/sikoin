@@ -94,6 +94,13 @@ const icon_checkmark = require('assets/icons/icon_checkmark.png');
 const icon_dropdown_up = require('assets/icons/icon_dropdown_up.png');
 const icon_hapus_akses = require('assets/icons/icon_hapus_akses.png');
 const icon_download_file = require('assets/icons/icon_download_file.png');
+const icon_favorit = require('assets/icons/icon_favorit.png');
+const icon_keranjang = require('assets/icons/icon_keranjang.png');
+const icon_pesanan = require('assets/icons/icon_pesanan.png');
+const icon_toko = require('assets/icons/icon_toko.png');
+const icon_brand = require('assets/icons/icon_brand.png');
+const icon_kategori = require('assets/icons/icon_kategori.png');
+const icon_search_market = require('assets/icons/icon_search_market.png');
 
 export default {
   arrow_left_primary,
@@ -191,4 +198,11 @@ export default {
   icon_dropdown_up,
   icon_hapus_akses,
   icon_download_file,
+  icon_favorit,
+  icon_pesanan,
+  icon_keranjang,
+  icon_toko,
+  icon_brand,
+  icon_kategori,
+  icon_search_market,
 };

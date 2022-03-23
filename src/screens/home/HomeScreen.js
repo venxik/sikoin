@@ -43,8 +43,6 @@ import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
 const menuSize = SCREEN_HEIGHT * 0.15;
-const cardKabarHeight = SCREEN_HEIGHT * 0.5;
-const cardPromoHeight = SCREEN_HEIGHT * 0.75;
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -61,7 +59,11 @@ const HomeScreen = () => {
       label: strings.pinjaman,
       navigateTo: 'PinjamanStackNavigator',
     },
-    { image: images.menu_market, label: strings.market, navigateTo: '' },
+    {
+      image: images.menu_market,
+      label: strings.market,
+      navigateTo: 'MarketStackNavigator',
+    },
     {
       image: images.menu_voucher,
       label: strings.voucher,
@@ -100,7 +102,7 @@ const HomeScreen = () => {
   }, []);
 
   // BOTTOMSHEET
-  const snapPoints = useMemo(() => ['10%', '90%'], []);
+  const snapPoints = useMemo(() => ['85%', '90%'], []);
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
@@ -154,16 +156,9 @@ const HomeScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardKabar
-                item={item}
-                // style={{ height: cardKabarHeight }}
-                onPress={() => selectKabarCard(item)}
-              />
+              <CardKabar item={item} onPress={() => selectKabarCard(item)} />
               {index === kabarDataList.length - 1 && (
-                <CardLastItem
-                  style={{ height: cardKabarHeight }}
-                  icon={icons.icon_kabar_white}
-                />
+                <CardLastItem icon={icons.icon_kabar_white} />
               )}
             </View>
           )}
@@ -184,7 +179,7 @@ const HomeScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} style={{ height: cardPromoHeight }} />
+              <CardPromo item={item} />
             </View>
           )}
         />
@@ -204,15 +199,9 @@ const HomeScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketLarge
-                item={item}
-                style={{ height: cardPromoHeight }}
-              />
+              <CardMarketLarge item={item} />
               {index === marketDataList.length - 1 && (
-                <CardLastItem
-                  style={{ height: cardPromoHeight }}
-                  icon={icons.icon_market_white}
-                />
+                <CardLastItem icon={icons.icon_market_white} />
               )}
             </View>
           )}
@@ -392,7 +381,7 @@ const HomeScreen = () => {
             </Text>
             <View style={styles.kabarSheetBottomContainer}>
               <Image
-                source={selectedKabar.profile_pic}
+                source={{ uri: selectedKabar.profilePic }}
                 style={styles.kabarSheetProfileImage}
               />
               <View style={styles.kabarSheetNameContainer}>
@@ -569,7 +558,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
   },
   kabarSheetBottomContainer: { flexDirection: 'row', marginVertical: 30 },
-  kabarSheetProfileImage: { width: 60, height: 60 },
+  kabarSheetProfileImage: { width: 60, height: 60, borderRadius: 60 },
   kabarSheetNameContainer: {
     justifyContent: 'space-evenly',
     marginLeft: 10,
