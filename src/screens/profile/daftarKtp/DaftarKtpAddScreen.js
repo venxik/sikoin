@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
+import { ButtonText, HeaderBack, TextInputForm } from '../../../components';
 import {
   colors,
   icons,
@@ -94,7 +94,7 @@ const DaftarKtpAddScreen = () => {
           control={control}
           name="noKtp"
           render={({ field: { onChange, value } }) => (
-            <TextboxForm
+            <TextInputForm
               error={errors.noKtp}
               errorText={errors.noKtp?.message}
               style={{ marginTop: sizes.padding }}

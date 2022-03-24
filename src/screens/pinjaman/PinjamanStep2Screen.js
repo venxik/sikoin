@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { ButtonText, HeaderPinjaman, TextboxForm } from '../../components';
+import { ButtonText, HeaderPinjaman, TextInputForm } from '../../components';
 import { colors, sizes, strings } from '../../constants';
 
 const PinjamanStep2 = () => {
@@ -46,17 +46,17 @@ const PinjamanStep2 = () => {
             backgroundColor: colors.white,
             borderRadius: sizes.padding,
           }}>
-          <TextboxForm
+          <TextInputForm
             value={nameValue}
             onChangeText={onChangeName}
             title={strings.nama}
           />
-          <TextboxForm
+          <TextInputForm
             value={phoneValue}
             onChangeText={onChangePhone}
             title={strings.no_telp}
           />
-          <TextboxForm
+          <TextInputForm
             value={emailValue}
             onChangeText={onChangeEmail}
             title={strings.email}

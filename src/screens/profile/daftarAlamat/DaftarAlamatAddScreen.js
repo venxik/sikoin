@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { ButtonText, HeaderBack, TextboxForm } from '../../../components';
+import { ButtonText, HeaderBack, TextInputForm } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { addAlamat, updateAlamat } from '../../../redux/reducers/AlamatReducer';
@@ -72,7 +72,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="judul"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -84,7 +84,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="alamatLengkap"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -99,7 +99,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
                 control={control}
                 name="rt"
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     textBoxStyle={{ width: '70%' }}
                     style={{ width: '45%' }}
                     value={value}
@@ -114,7 +114,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
                 control={control}
                 name="rw"
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     textBoxStyle={{ width: '70%' }}
                     style={{ width: '45%' }}
                     onBlur={onBlur}
@@ -130,7 +130,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="provinsi"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -142,7 +142,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="kabupaten"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -154,7 +154,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="kecamatan"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -167,7 +167,7 @@ const DaftarAlamatAddScreen = ({ route }) => {
               control={control}
               name="kodepos"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}

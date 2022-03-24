@@ -23,7 +23,7 @@ import {
   CardPromo,
   HeaderBack,
   MenuHeaderIcon,
-  TextboxBorder,
+  TextInputBorder,
 } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 
@@ -195,7 +195,7 @@ const MarketMainScreen = () => {
               <Text style={styles.textTopMenu}>{strings.toko}</Text>
             </View>
           </View>
-          <TextboxBorder
+          <TextInputBorder
             style={{ marginTop: 10 }}
             value={searchValue}
             onChangeText={e => setSearchValue(e)}

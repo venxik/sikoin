@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { ButtonText, HeaderBack, TextboxForm } from '../../components';
+import { ButtonText, HeaderBack, TextInputForm } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { updateProfile } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
@@ -121,7 +121,7 @@ const EditProfileScreen = () => {
                 control={control}
                 name="nama"
                 render={({ field: { onChange, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     error={errors.nama}
                     errorText={errors.nama?.message}
                     value={value}
@@ -140,7 +140,7 @@ const EditProfileScreen = () => {
                 control={control}
                 name="noTelp"
                 render={({ field: { onChange, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     error={errors.noTelp}
                     errorText={errors.noTelp?.message}
                     value={value}
@@ -165,7 +165,7 @@ const EditProfileScreen = () => {
                 control={control}
                 name="email"
                 render={({ field: { onChange, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     error={errors.email}
                     errorText={errors.email?.message}
                     value={value}

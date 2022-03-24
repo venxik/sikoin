@@ -12,7 +12,7 @@ import {
   ButtonText,
   DropdownForm,
   HeaderBack,
-  TextboxForm,
+  TextInputForm,
 } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
@@ -67,7 +67,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
               control={control}
               name="nama"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -82,7 +82,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
               control={control}
               name="noKtp"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -94,7 +94,7 @@ const DaftarRefKeluargaAddScreen = ({ route }) => {
               control={control}
               name="noTelp"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}

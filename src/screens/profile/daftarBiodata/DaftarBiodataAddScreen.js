@@ -13,7 +13,7 @@ import {
   CalendarPicker,
   DropdownForm,
   HeaderBack,
-  TextboxForm,
+  TextInputForm,
 } from '../../../components';
 import { colors, dropdownItems, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
@@ -90,7 +90,7 @@ const DaftarBiodataAddScreen = () => {
               control={control}
               name="tempatLahir"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -188,7 +188,7 @@ const DaftarBiodataAddScreen = () => {
               control={control}
               name="bank"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -200,7 +200,7 @@ const DaftarBiodataAddScreen = () => {
               control={control}
               name="noRek"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -225,7 +225,7 @@ const DaftarBiodataAddScreen = () => {
               control={control}
               name="jumlahAnak"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -250,7 +250,7 @@ const DaftarBiodataAddScreen = () => {
               control={control}
               name="detailPekerjaan"
               render={({ field: { onChange, onBlur, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}

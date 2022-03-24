@@ -3,8 +3,8 @@ import ButtonText from './ButtonText';
 import ErrorModal from './ErrorModal';
 import LoadingIndicator from './LoadingIndicator';
 import HeaderBack from './HeaderBack';
-import TextboxBorder from './TextboxBorder';
-import TextboxForm from './TextboxForm';
+import TextInputBorder from './TextInputBorder';
+import TextInputForm from './TextInputForm';
 import SubmenuItemList from './SubmenuItemList';
 import DropdownForm from './DropdownForm';
 import Popup1Button from './Popup1Button';
@@ -31,7 +31,7 @@ import CardVoucherLarge from './CardVoucherLarge';
 import CardVoucherItem from './CardVoucherItem';
 import HeaderPinjaman from './HeaderPinjaman';
 import CalendarPicker from './CalendarPicker';
-import TextboxCurrency from './TextboxCurrency';
+import TextInputCurrency from './TextInputCurrency';
 import DokumenItemList from './DokumenItemList';
 import DokumenMemberItem from './DokumenMemberItem';
 
@@ -41,8 +41,8 @@ export {
   ErrorModal,
   LoadingIndicator,
   HeaderBack,
-  TextboxBorder,
-  TextboxForm,
+  TextInputBorder,
+  TextInputForm,
   SubmenuItemList,
   DropdownForm,
   Popup1Button,
@@ -69,7 +69,7 @@ export {
   CardVoucherItem,
   HeaderPinjaman,
   CalendarPicker,
-  TextboxCurrency,
+  TextInputCurrency,
   DokumenItemList,
   DokumenMemberItem,
 };

@@ -11,13 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonText,
   HeaderBack,
-  TextboxCurrency,
-  TextboxForm,
+  TextInputCurrency,
+  TextInputForm,
 } from '../../../components';
 import { colors, sizes, strings } from '../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { addPekerjaan } from '../../../redux/reducers/PekerjaanReducer';
-import { formatter } from '../../../utils';
 
 const DaftarPekerjaanAddScreen = () => {
   const { pekerjaanData } = useSelector(s => s.PekerjaanReducer) || {};
@@ -86,7 +85,7 @@ const DaftarPekerjaanAddScreen = () => {
                 control={control}
                 name="masaKerjaTahun"
                 render={({ field: { onChange, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     error={errors.masaKerjaTahun}
                     errorText={errors.masaKerjaTahun?.message}
                     style={{ width: '45%' }}
@@ -102,7 +101,7 @@ const DaftarPekerjaanAddScreen = () => {
                 control={control}
                 name="masaKerjaBulan"
                 render={({ field: { onChange, value } }) => (
-                  <TextboxForm
+                  <TextInputForm
                     error={errors.masaKerjaBulan}
                     errorText={errors.masaKerjaBulan?.message}
                     style={{ width: '45%' }}
@@ -119,11 +118,11 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="gajiBulanan"
               render={({ field: { onChange, value } }) => (
-                <TextboxCurrency
+                <TextInputCurrency
                   error={errors.gajiBulanan}
                   errorText={errors.gajiBulanan?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeValue={value => onChange(value)}
                   title={strings.gaji_bulanan}
                   keyboardType="number-pad"
                 />
@@ -134,7 +133,7 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="jabatanTerakhir"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.jabatan_terakhir}
@@ -145,7 +144,7 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="namaPerusahaan"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.nama_perusahaan}
@@ -156,7 +155,7 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="alamatKantor"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.alamat_kantor}
@@ -167,7 +166,7 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="noTelpKantor"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   error={errors.noTelpKantor}
                   errorText={errors.noTelpKantor?.message}
                   value={value}
@@ -182,7 +181,7 @@ const DaftarPekerjaanAddScreen = () => {
               control={control}
               name="provinsiKota"
               render={({ field: { onChange, value } }) => (
-                <TextboxForm
+                <TextInputForm
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.provinsi_kota}

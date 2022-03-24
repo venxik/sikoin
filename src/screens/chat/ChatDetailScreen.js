@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import { Bubble, GiftedChat, Send, Time } from 'react-native-gifted-chat/src';
-import { HeaderBack, TextboxBorder } from '../../components';
+import { HeaderBack, TextInputBorder } from '../../components';
 import {
   colors,
   icons,
@@ -110,7 +110,7 @@ const ChatDetailScreen = () => {
   const renderComposer = props => {
     const { onTextChanged, text } = props || {};
     return (
-      <TextboxBorder
+      <TextInputBorder
         {...props}
         onChangeText={onTextChanged}
         value={text}
