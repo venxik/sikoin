@@ -29,7 +29,7 @@ import {
   TopupStackParamList,
   TransaksiStackParamList,
   VoucherStackParamList,
-} from '../types/NavigationTypes';
+} from './model';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack

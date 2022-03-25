@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack } from '../../components';
-import { DaftarKoperasiParamList } from '../../config/types/NavigationTypes';
+import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import {
   colors,
   icons,

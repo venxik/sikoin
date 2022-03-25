@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export type KoperasiData = {
+export type PromoData = {
   title?: string;
   image?: string;
   content?: string;
 };
 
 interface RootState {
-  promoDataList: KoperasiData[];
+  promoDataList: PromoData[];
   error: null;
 }
 

@@ -11,7 +11,7 @@ const defaultOptions: formatNumberToCurrenyOptions = {
 };
 
 const formatNumberToCurreny = (
-  value: number,
+  value: number | undefined,
   options?: formatNumberToCurrenyOptions,
 ) => {
   if (typeof value !== 'number') value = 0.0;

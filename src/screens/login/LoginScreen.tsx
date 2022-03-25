@@ -21,7 +21,7 @@ import {
 import { formatter } from '../../utils';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { LoginStackParamList } from '../../config/types/NavigationTypes';
+import { LoginStackParamList } from '../../config/navigation/model';
 
 type Props = NativeStackScreenProps<LoginStackParamList, 'LoginScreen'>;
 type FormValues = {

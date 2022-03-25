@@ -6,7 +6,7 @@ import { ButtonText, HeaderBack } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/types/NavigationTypes';
+import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config/store/ReduxStore';
 
 type Props = NativeStackScreenProps<

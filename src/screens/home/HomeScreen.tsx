@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, {
   useCallback,
   useEffect,
@@ -38,7 +39,7 @@ import {
 import { formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useAppSelector } from '../../config/store/ReduxStore';
-import { HomeTabScreenProps } from '../../config/types/NavigationTypes';
+import { HomeTabScreenProps } from '../../config/navigation/model';
 import { KabarData } from '../../redux/reducers/KabarReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
@@ -178,7 +179,10 @@ const HomeScreen = ({
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar item={item} onPress={() => selectKabarCard(item)} />
               {index === kabarDataList.length - 1 && (
-                <CardLastItem icon={icons.icon_kabar_white} />
+                <CardLastItem
+                  icon={icons.icon_kabar_white}
+                  onPress={() => {}}
+                />
               )}
             </View>
           )}
@@ -199,7 +203,7 @@ const HomeScreen = ({
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} />
+              <CardPromo item={item} onPress={() => {}} />
             </View>
           )}
         />
@@ -219,9 +223,16 @@ const HomeScreen = ({
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketLarge item={item} />
+              <CardMarketLarge
+                item={item}
+                onPress={() => {}}
+                onPressWishlist={() => {}}
+              />
               {index === marketDataList.length - 1 && (
-                <CardLastItem icon={icons.icon_market_white} />
+                <CardLastItem
+                  icon={icons.icon_market_white}
+                  onPress={() => {}}
+                />
               )}
             </View>
           )}
@@ -317,8 +328,8 @@ const HomeScreen = ({
                   <Text style={styles.textSaldo}>
                     Rp{' '}
                     {item.title === strings.simpanan
-                      ? formatter.formatNumberToCurreny(simpanan.total)
-                      : formatter.formatNumberToCurreny(saldo.total)}
+                      ? formatter.formatNumberToCurreny(simpanan?.total)
+                      : formatter.formatNumberToCurreny(saldo?.total)}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -353,7 +364,7 @@ const HomeScreen = ({
     return (
       <View style={styles.profileContainer}>
         <ProfilePicture
-          onPress={() => navigateToOtherScreen('ProfileStackNavigator')}
+          onPress={() => navigation.jumpTo('ProfileStackNavigator')}
         />
         <View style={styles.profileInnerContainer}>
           <Text style={styles.textProfileName}>Hi, {nama}!</Text>

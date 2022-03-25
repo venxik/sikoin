@@ -10,7 +10,7 @@ import {
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/types/NavigationTypes';
+import { DaftarKoperasiParamList } from '../../config/navigation/model';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -73,6 +73,9 @@ const DaftarKoperasiStep1Screen = ({ navigation }: Props) => {
           icon={icons.icon_number_textbox}
         />
         <DropdownForm
+          onChange={item => {
+            console.log(item);
+          }}
           maxHeight={120}
           errorText={''}
           data={[]}

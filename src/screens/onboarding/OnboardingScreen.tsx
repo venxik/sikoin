@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { ParentStackParamList } from '../../config/types/NavigationTypes';
+import { ParentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
 import AsyncStore from '../../utils/AsyncStore';
 
@@ -46,7 +46,7 @@ const OnboardingScreen: FC<Props> = ({ navigation }: Props) => {
 
   const navigateToLoginScreen = () => {
     AsyncStore.storeData('@onboardingComplete', 'true');
-    navigation.navigate('LoginStackNavigator');
+    navigation.replace('LoginStackNavigator');
   };
 
   const renderDots = () => {
