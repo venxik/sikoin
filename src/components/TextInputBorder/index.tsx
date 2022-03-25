@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { View, StyleSheet, Image, TextInput, Text } from 'react-native';
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { TextInputBorderProps } from './model';
 
-const TextInputBorder: FC<TextInputBorderProps> = props => {
+const TextInputBorder = (props: TextInputBorderProps) => {
   const { style, icon, textBoxStyle, error, errorText } = props || {};
 
   return (

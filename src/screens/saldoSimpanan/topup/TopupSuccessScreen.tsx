@@ -1,7 +1,9 @@
-import { CommonActions, useNavigation } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { ButtonText } from '../../../components';
+import { TopupStackParamList } from '../../../config/navigation/model';
 import {
   colors,
   icons,
@@ -10,16 +12,16 @@ import {
   strings,
 } from '../../../constants';
 
-const TopupSuccessScreen = () => {
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<TopupStackParamList, 'TopupSuccessScreen'>;
 
+const TopupSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
         routes: [
           {
-            name: 'HomeScreen',
+            name: 'HomeTab',
           },
         ],
       }),

@@ -1,7 +1,7 @@
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {
   colors,
@@ -14,7 +14,7 @@ import moment from 'moment';
 import { isEmpty } from 'lodash';
 import { CalendarPickerProps } from './model';
 
-const CalendarPicker: FC<CalendarPickerProps> = props => {
+const CalendarPicker = (props: CalendarPickerProps) => {
   const { title, style, onChangeDate, value } = props || {};
   const [date, setDate] = useState<Date>(
     value ? new Date(value as Date) : new Date(),

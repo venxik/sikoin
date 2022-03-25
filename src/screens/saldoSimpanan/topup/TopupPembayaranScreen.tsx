@@ -1,13 +1,18 @@
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { ButtonText, HeaderBack } from '../../../components';
+import { TopupStackParamList } from '../../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../../constants';
 import { formatter } from '../../../utils';
 
-const TopupPembayaranScreen = ({ route }) => {
-  const { nominal } = route.params || {};
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<
+  TopupStackParamList,
+  'TopupPembayaranScreen'
+>;
+
+const TopupPembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
+  const { nominal } = route.params;
 
   const navigateToSuccessScreen = () => {
     navigation.navigate('TopupSuccessScreen');

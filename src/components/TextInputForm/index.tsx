@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
 import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import { TextInputFormProps } from './model';
 
-const TextInputForm: FC<TextInputFormProps> = props => {
+const TextInputForm = (props: TextInputFormProps) => {
   const { style, textBoxStyle, title, error, errorText } = props || {};
   const [editable, setEditable] = useState(false);
 

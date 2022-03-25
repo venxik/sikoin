@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
 import { ButtonText } from '..';
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { isEmpty } from 'lodash';
 import { Popup2ButtonProps } from './model';
 
-const Popup2Button: FC<Popup2ButtonProps> = props => {
+const Popup2Button = (props: Popup2ButtonProps) => {
   const {
     iconStyle,
     style,

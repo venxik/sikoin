@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { dismissErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import { ErrorModalProps } from './model';
 
-const ErrorModal: React.FC<ErrorModalProps> = props => {
+const ErrorModal = (props: ErrorModalProps) => {
   const scaleValue = useRef(new Animated.Value(0)).current;
   const dispatch = useDispatch();
   const { isVisible } = props.options || {};

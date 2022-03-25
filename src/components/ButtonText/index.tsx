@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { colors, SCREEN_WIDTH } from '../../constants';
 import { ButtonTextProps } from './model';
 
-const ButtonText: FC<ButtonTextProps> = props => {
+const ButtonText = (props: ButtonTextProps) => {
   const {
     buttonContainerStyle,
     textStyle,

@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native-gesture-handler';
 import { TextInputCurrencyProps } from './model';
 
-const TextInputCurrency: FC<TextInputCurrencyProps> = props => {
+const TextInputCurrency = (props: TextInputCurrencyProps) => {
   const {
     style,
     textBoxStyle,

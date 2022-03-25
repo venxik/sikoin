@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Modal, Image, ScrollView } from 'react-native';
 import { ButtonText } from '..';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { isEmpty } from 'lodash';
 import { Popup1ScrollProps } from './model';
 
-const Popup1ButtonScroll: FC<Popup1ScrollProps> = props => {
+const Popup1ButtonScroll = (props: Popup1ScrollProps) => {
   const {
     style,
     showPopup,

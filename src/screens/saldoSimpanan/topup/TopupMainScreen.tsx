@@ -9,7 +9,6 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { useSelector } from 'react-redux';
 import { ButtonText, HeaderBack } from '../../../components';
 import {
   colors,
@@ -20,7 +19,9 @@ import {
 } from '../../../constants';
 import { formatter } from '../../../utils';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { TopupStackParamList } from '../../../config/navigation/model';
+import { useAppSelector } from '../../../config/store/ReduxStore';
 
 const defaultNominal = [
   { item: '10', value: '10000' },
@@ -48,18 +49,19 @@ const value = [
   'delete',
 ];
 
-const TopupMainScreen = () => {
-  const navigation = useNavigation();
-  const { topUpNominal } = useSelector(s => s.SaldoSimpananReducer) || {};
-  const [nominal, setNominal] = useState(topUpNominal);
-  const [nominalContainer, setNominalContainer] = useState('');
-  const [selectedNominal, setSelectedNominal] = useState();
-  const [selectedTopup, setSelectedTopup] = useState();
+type Props = NativeStackScreenProps<TopupStackParamList, 'TopupMainScreen'>;
+
+const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
+  const { topUpNominal } = useAppSelector(s => s.SaldoSimpananReducer) || {};
+  const [nominal, setNominal] = useState<string>(topUpNominal);
+  const [nominalContainer, setNominalContainer] = useState<string>('');
+  const [selectedNominal, setSelectedNominal] = useState<number>(-1);
+  const [selectedTopup, setSelectedTopup] = useState<string>('');
 
   //BottomSheet
-  const sheetRef = useRef(null);
+  const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
-  const handleSheetChange = useCallback(() => {}, []);
+  const handleSheetChange = useCallback(() => null, []);
 
   const navigateToDetailScreen = () => {
     if (!isEmpty(nominal) && !isEmpty(selectedTopup)) {
@@ -67,7 +69,7 @@ const TopupMainScreen = () => {
     }
   };
 
-  const selectDefaultNominal = (value, index) => {
+  const selectDefaultNominal = (value: string, index: number) => {
     if (selectedNominal === index) {
       deleteNominal();
     } else {
@@ -77,9 +79,9 @@ const TopupMainScreen = () => {
     }
   };
 
-  const selectJenisTopup = item => {
+  const selectJenisTopup = (item: string) => {
     if (selectedTopup === item) {
-      setSelectedTopup();
+      setSelectedTopup('');
     } else {
       setSelectedTopup(item);
     }
@@ -87,11 +89,10 @@ const TopupMainScreen = () => {
 
   const deleteNominal = () => {
     setNominal('');
-    setSelectedNominal();
+    setSelectedNominal(-1);
   };
 
   const showInputNominal = () => {
-    // deleteNominal();
     if (isEmpty(nominal)) {
       setNominalContainer('');
     } else {
@@ -100,7 +101,7 @@ const TopupMainScreen = () => {
     sheetRef.current?.expand();
   };
 
-  const onPressInputNominal = item => {
+  const onPressInputNominal = (item: string) => {
     if (item === 'delete') {
       if (!isEmpty(nominalContainer)) {
         setNominalContainer(e => e.slice(0, -1));
@@ -116,7 +117,7 @@ const TopupMainScreen = () => {
 
   const onPressOkInputNominal = () => {
     setNominal(nominalContainer);
-    setSelectedNominal();
+    setSelectedNominal(-1);
     sheetRef.current?.close();
   };
 
@@ -329,7 +330,7 @@ const TopupMainScreen = () => {
         snapPoints={snapPoints}
         enablePanDownToClose
         onChange={handleSheetChange}>
-        <View style={styles.bottomSheetContainer}>{renderInputManual()}</View>
+        {renderInputManual()}
       </BottomSheet>
     </SafeAreaView>
   );

@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import {
   View,
@@ -9,14 +9,16 @@ import {
   Image,
 } from 'react-native';
 import { ButtonText, HeaderBack, Popup1Button } from '../../../components';
+import { TopupStackParamList } from '../../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../../constants';
 import { formatter } from '../../../utils';
 
-const TopupDetailScreen = ({ route }) => {
-  const { selectedTopup, nominal } = route.params || {};
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<TopupStackParamList, 'TopupDetailScreen'>;
 
-  const [showPopup, setShowPopup] = useState(false);
+const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
+  const { selectedTopup, nominal } = route.params;
+
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const renderRightButtonHeader = () => {
     return (

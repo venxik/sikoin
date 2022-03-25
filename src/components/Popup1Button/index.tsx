@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Modal, Image } from 'react-native';
 import { ButtonText } from '..';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { isEmpty } from 'lodash';
 import { Popup1ButtonProps } from './model';
 
-const Popup1Button: FC<Popup1ButtonProps> = props => {
+const Popup1Button = (props: Popup1ButtonProps) => {
   const {
     showPopup,
     headerText,

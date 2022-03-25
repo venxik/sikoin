@@ -15,7 +15,7 @@ export type SaldoData = {
 interface RootState {
   simpanan: SimpananData;
   saldo: SaldoData;
-  topUpNominal?: number | string;
+  topUpNominal: string;
   error: null;
 }
 

@@ -131,13 +131,11 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
         }}
         renderItem={({ item, index }) => {
           return (
-            <View>
-              <CardAlamat
-                item={item}
-                onPressUbah={() => navigateToAddScreen(true, index, item)}
-                onPressDelete={() => onPressDeleteAlamat(item)}
-              />
-            </View>
+            <CardAlamat
+              item={item}
+              onPressUbah={() => navigateToAddScreen(true, index, item)}
+              onPressDelete={() => onPressDeleteAlamat(item)}
+            />
           );
         }}
       />

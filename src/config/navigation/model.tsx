@@ -125,8 +125,8 @@ export type SaldoSimpananStackParamList = {
 
 export type TopupStackParamList = {
   TopupMainScreen: undefined;
-  TopupDetailScreen: undefined;
-  TopupPembayaranScreen: undefined;
+  TopupDetailScreen: { selectedTopup: string; nominal: string };
+  TopupPembayaranScreen: { nominal: string };
   TopupSuccessScreen: undefined;
 };
 

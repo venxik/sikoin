@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { ButtonIconProps } from './model';
 
-const ButtonIcon: FC<ButtonIconProps> = props => {
+const ButtonIcon = (props: ButtonIconProps) => {
   const { buttonContainerStyle, disabled, icon, shadow, secondary } =
     props || {};
 
