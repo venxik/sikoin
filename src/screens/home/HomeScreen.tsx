@@ -13,7 +13,6 @@ import {
   Image,
   ScrollView,
   FlatList,
-  Animated,
   BackHandler,
   SafeAreaView,
 } from 'react-native';
@@ -40,6 +39,12 @@ import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useAppSelector } from '../../config/store/ReduxStore';
 import { HomeTabScreenProps } from '../../config/navigation/model';
 import { KabarData } from '../../redux/reducers/KabarReducer';
+import Animated, {
+  interpolateColor,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -260,7 +265,13 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   };
 
   const renderMiniScrollView = () => {
-    const scrollY = useRef(new Animated.Value(0)).current;
+    const scrollY = useSharedValue(0);
+
+    const scrollHandler = useAnimatedScrollHandler({
+      onScroll: event => {
+        scrollY.value = event.contentOffset.y;
+      },
+    });
 
     return (
       <View style={styles.miniScrollContainer}>
@@ -271,23 +282,20 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
               index * miniFlatlistSize,
               (index + 1) * miniFlatlistSize,
             ];
-            const color = scrollY.interpolate({
-              inputRange,
-              outputRange: [
-                colors.strokeDarkGrey,
-                colors.black,
-                colors.strokeDarkGrey,
-              ],
+
+            const animatedStyles = useAnimatedStyle(() => {
+              return {
+                backgroundColor: interpolateColor(scrollY.value, inputRange, [
+                  colors.strokeDarkGrey,
+                  colors.black,
+                  colors.strokeDarkGrey,
+                ]),
+              };
             });
             return (
               <Animated.View
                 key={index.toString()}
-                style={[
-                  styles.dotIndicator,
-                  {
-                    backgroundColor: color,
-                  },
-                ]}
+                style={[styles.dotIndicator, animatedStyles]}
               />
             );
           })}
@@ -299,12 +307,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           contentContainerStyle={{
             paddingHorizontal: 20,
           }}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: false },
-          )}
+          onScroll={scrollHandler}
           showsVerticalScrollIndicator={false}
-          decelerationRate="fast"
           scrollEventThrottle={16}>
           {saldoFlatlist.map((item, index) => {
             return (

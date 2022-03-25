@@ -5,15 +5,22 @@ import {
   Text,
   StyleSheet,
   SafeAreaView,
-  Animated,
   Image,
   TouchableOpacity,
 } from 'react-native';
 import { ParentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
 import AsyncStore from '../../utils/asyncStore';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  interpolateColor,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
-const dotSize = 4;
+const dotSize = 6;
 
 const onBoardings = [
   {
@@ -42,40 +49,46 @@ type Props = NativeStackScreenProps<
 >;
 
 const OnboardingScreen: FC<Props> = ({ navigation }: Props) => {
-  const scrollX = new Animated.Value(0);
+  const scrollX = useSharedValue(0);
 
   const navigateToLoginScreen = () => {
     AsyncStore.storeData('@onboardingComplete', 'true');
     navigation.replace('LoginStackNavigator');
   };
 
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: event => {
+      scrollX.value = event.contentOffset.x;
+    },
+  });
+
   const renderDots = () => {
-    const dotPosition = Animated.divide(scrollX, SCREEN_WIDTH);
     return (
       <View style={styles.dotContainer}>
         {onBoardings.map((item, index) => {
-          const dotChange = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [dotSize, dotSize + 40, dotSize],
-            extrapolate: 'clamp',
+          const inputRange = [
+            (index - 1) * SCREEN_WIDTH,
+            index * SCREEN_WIDTH,
+            (index + 1) * SCREEN_WIDTH,
+          ];
+          const animatedStyles = useAnimatedStyle(() => {
+            return {
+              width: interpolate(
+                scrollX.value,
+                inputRange,
+                [dotSize, dotSize + 40, dotSize],
+                Extrapolate.CLAMP,
+              ),
+              backgroundColor: interpolateColor(scrollX.value, inputRange, [
+                colors.tonalPrimary,
+                colors.primary,
+                colors.tonalPrimary,
+              ]),
+            };
           });
-
-          const colorChange = dotPosition.interpolate({
-            inputRange: [index - 1, index, index + 1],
-            outputRange: [
-              colors.tonalPrimary,
-              colors.primary,
-              colors.tonalPrimary,
-            ],
-            extrapolate: 'clamp',
-          });
-
           return (
             <Animated.View
-              style={[
-                styles.dot,
-                { width: dotChange, backgroundColor: colorChange },
-              ]}
+              style={[styles.dot, animatedStyles]}
               key={`dot-${index}`}
             />
           );
@@ -92,11 +105,7 @@ const OnboardingScreen: FC<Props> = ({ navigation }: Props) => {
         decelerationRate={0}
         scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
-        scrollEnabled
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: false },
-        )}>
+        onScroll={scrollHandler}>
         {onBoardings.map((item, index) => {
           return (
             <View key={index} style={styles.mainContainer}>
