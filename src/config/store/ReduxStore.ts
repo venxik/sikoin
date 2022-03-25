@@ -11,21 +11,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
 import logger from 'redux-logger';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const sagaMiddleware = createSagaMiddleware();
-const middleware = [
-  ...getDefaultMiddleware({
-    thunk: false,
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  sagaMiddleware,
-];
 
 const persistConfig = {
   key: 'root',
@@ -34,6 +25,7 @@ const persistConfig = {
 };
 
 const persistReducers = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
   reducer: persistReducers,
   middleware: getDefaultMiddleware =>

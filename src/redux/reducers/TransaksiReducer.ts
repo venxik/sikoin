@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export type TransaksiData = {
-  nominal?: string;
+  nominal?: number;
   title?: string;
   detail?: string;
   time?: string;
@@ -15,25 +15,25 @@ interface RootState {
 const initialState: RootState = {
   transaksiDataList: [
     {
-      nominal: '10000',
+      nominal: 10000,
       title: 'Voucher ACE Hardware',
       detail: 'Pembelian Voucher ACE Hardware Rp 50.000 + Biaya Admin',
       time: '19 Jan 2022, 10:39 WIB',
     },
     {
-      nominal: '721000',
+      nominal: 721000,
       title: 'Biaya pengiriman produk',
       detail: 'Pemotongan Ongkir via Gojek - INV/20220115/MPL/1951204385',
       time: '16 Jan 2022, 15:36 WIB',
     },
     {
-      nominal: '999999',
+      nominal: 999999,
       title: 'Voucher Tokopedia',
       detail: 'Pembelian Voucher tokopedia + Biaya Admin',
       time: '19 Jan 2022, 10:39 WIB',
     },
     {
-      nominal: '14 9s31231',
+      nominal: 2310021,
       title: 'Testing',
       detail: 'Pembelian Voucher - INV/20220115/MPL/1951204385',
       time: '19 Jan 2022, 10:39 WIB',

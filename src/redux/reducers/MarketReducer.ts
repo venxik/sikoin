@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export type MarketData = {
   productName: string;
-  price: string;
+  price: number;
   image: string;
 };
 
@@ -15,22 +15,22 @@ const initialState: RootState = {
   marketDataList: [
     {
       productName: 'Jababeka Bakal Terbitkan ',
-      price: 'Rp 17.000.000',
+      price: 17000000,
       image: 'https://picsum.photos/id/121/400/400',
     },
     {
       productName: '5,06 Triliun',
-      price: 'Rp 17.000.000',
+      price: 1121000,
       image: 'https://picsum.photos/id/1/400/400',
     },
     {
       productName: 'Jababeka Triliun',
-      price: 'Rp 17.000.000',
+      price: 9921210,
       image: 'https://picsum.photos/id/11/400/400',
     },
     {
       productName: 'Obligasi Global',
-      price: 'Rp 17.000.000',
+      price: 256324300,
       image: 'https://picsum.photos/id/34/400/400',
     },
   ],

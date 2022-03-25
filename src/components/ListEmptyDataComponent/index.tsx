@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
-import { colors, icons, SCREEN_WIDTH, sizes } from '../constants';
+import { colors, icons, SCREEN_WIDTH, sizes } from '../../constants';
+import { ListEmptyDataComponentProps } from './model';
 
-const ListEmptyDataComponent = props => {
+const ListEmptyDataComponent = (props: ListEmptyDataComponentProps) => {
   const { text, onPress } = props || {};
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -14,11 +14,6 @@ const ListEmptyDataComponent = props => {
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
-};
-
-ListEmptyDataComponent.propTypes = {
-  text: PropTypes.string,
-  onPress: PropTypes.func,
 };
 
 export default ListEmptyDataComponent;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors, icons, sizes } from '../constants';
-import { formatter } from '../utils';
-import PropTypes from 'prop-types';
+import { colors, icons, sizes } from '../../constants';
+import { formatter } from '../../utils';
+import { SaldoItemListProps } from './model';
 
-const SaldoItemList = props => {
+const SaldoItemList = (props: SaldoItemListProps) => {
   const { text, nominal, onPress } = props || {};
   return (
     <View style={{ marginBottom: sizes.padding }}>
@@ -17,7 +17,7 @@ const SaldoItemList = props => {
               <Text style={styles.nominalStyle}>Rp</Text>
               <View style={styles.nominalDotStyle} />
               <Text style={styles.nominalStyle}>
-                {formatter.formatStringToCurrencyNumber(nominal)}
+                {formatter.formatNumberToCurreny(nominal)}
               </Text>
             </View>
           </View>
@@ -35,18 +35,6 @@ const SaldoItemList = props => {
       <View style={styles.bottomLineStyle} />
     </View>
   );
-};
-
-SaldoItemList.propTypes = {
-  text: PropTypes.string,
-  nominal: PropTypes.number,
-  onPress: PropTypes.func,
-};
-
-SaldoItemList.defaultProps = {
-  text: null,
-  nominal: null,
-  onPress: null,
 };
 
 export default SaldoItemList;

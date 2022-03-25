@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { colors } from '../constants';
+import { colors } from '../../constants';
 
 const LoadingIndicator = () => (
   <View style={styles.loadingContainer}>
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.transparentGray,
+    backgroundColor: colors.bodyTextLightGrey,
   },
 });
 

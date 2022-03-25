@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { colors, icons, sizes } from '../constants';
-import { formatter } from '../utils';
+import { colors, icons, sizes } from '../../constants';
+import { formatter } from '../../utils';
+import { TransaksiItemListProps } from './model';
 
-const TransaksiItemList = props => {
+const TransaksiItemList = (props: TransaksiItemListProps) => {
   const { item, onPress } = props || {};
   const { nominal, title, detail, time } = item || {};
 
   return (
-    <View style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={icons.arrow_up_red} style={styles.iconArrow} />
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{title}</Text>
@@ -22,13 +23,13 @@ const TransaksiItemList = props => {
           <Text style={styles.textNominal}>Rp</Text>
           <View style={styles.dot} />
           <Text style={styles.textNominal}>
-            {formatter.formatStringToCurrencyNumber(nominal)}
+            {formatter.formatNumberToCurreny(nominal)}
           </Text>
         </View>
         <Text style={styles.textDetail}>{detail}</Text>
         <Text style={styles.textTime}>{time}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

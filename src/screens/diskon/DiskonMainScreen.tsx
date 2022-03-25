@@ -1,11 +1,15 @@
-import React from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { FC } from 'react';
 import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
 import { CardDiskon, HeaderBack, MenuHeaderIcon } from '../../components';
+import { DiskonStackParamList } from '../../config/navigation/model';
+import { useAppSelector } from '../../config/store/ReduxStore';
 import { sizes, strings } from '../../constants';
 
-const DiskonMainScreen = () => {
-  const { diskonDataList } = useSelector(s => s.DiskonReducer) || {};
+type Props = NativeStackScreenProps<DiskonStackParamList, 'DiskonMainScreen'>;
+
+const DiskonMainScreen: FC<Props> = () => {
+  const { diskonDataList } = useAppSelector(s => s.DiskonReducer) || {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -19,12 +23,20 @@ const DiskonMainScreen = () => {
         ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => {
-          return <CardDiskon item={item} />;
+          return (
+            <CardDiskon
+              item={item}
+              onPress={() => {
+                console.log(item);
+              }}
+            />
+          );
         }}
       />
     </SafeAreaView>
   );
 };
+
 export default DiskonMainScreen;
 
 const styles = StyleSheet.create({

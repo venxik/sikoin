@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { FC, useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -8,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from 'react-native';
 import {
   Menu,
@@ -15,7 +17,6 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import { useSelector } from 'react-redux';
 import {
   CardLastItem,
   CardMarketLarge,
@@ -25,11 +26,15 @@ import {
   MenuHeaderIcon,
   TextInputBorder,
 } from '../../components';
+import { MarketStackParamList } from '../../config/navigation/model';
+import { useAppSelector } from '../../config/store/ReduxStore';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 
-const MarketMainScreen = () => {
-  const { promoDataList } = useSelector(state => state.PromoReducer) || {};
-  const { marketDataList } = useSelector(state => state.MarketReducer) || {};
+type Props = NativeStackScreenProps<MarketStackParamList, 'MarketMainScreen'>;
+
+const MarketMainScreen: FC<Props> = () => {
+  const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
+  const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
 
   const [searchValue, setSearchValue] = useState('');
 
@@ -52,13 +57,13 @@ const MarketMainScreen = () => {
             },
           }}
           optionsContainerStyle={styles.optionsContainer}>
-          <MenuOption onSelect={() => alert('Favorit')}>
+          <MenuOption onSelect={() => Alert.alert('Favorit')}>
             <View style={styles.popupContainer}>
               <Image source={icons.icon_favorit} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => alert('Keranjang')}>
+          <MenuOption onSelect={() => Alert.alert('Keranjang')}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_keranjang}
@@ -67,13 +72,13 @@ const MarketMainScreen = () => {
               <Text style={styles.textPopupMenu}>{strings.keranjang}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => alert('Pesanan')}>
+          <MenuOption onSelect={() => Alert.alert('Pesanan')}>
             <View style={styles.popupContainer}>
               <Image source={icons.icon_pesanan} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.pesanan}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => alert('Tentang Market')}>
+          <MenuOption onSelect={() => Alert.alert('Tentang Market')}>
             <View style={{ flexDirection: 'row' }}>
               <Image
                 source={icons.icon_info_black}
@@ -87,7 +92,7 @@ const MarketMainScreen = () => {
     );
   };
 
-  const cardHeader = title => {
+  const cardHeader = (title: string) => {
     return (
       <View style={styles.cardHeaderContainer}>
         <Text style={styles.cardHeaderTitle}>{title}</Text>
@@ -113,7 +118,7 @@ const MarketMainScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} />
+              <CardPromo item={item} onPress={() => console.log(item)} />
             </View>
           )}
         />
@@ -133,9 +138,16 @@ const MarketMainScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketLarge item={item} />
+              <CardMarketLarge
+                item={item}
+                onPress={() => console.log(item)}
+                onPressWishlist={() => console.log(item)}
+              />
               {index === marketDataList.length - 1 && (
-                <CardLastItem icon={icons.icon_market_white} />
+                <CardLastItem
+                  icon={icons.icon_market_white}
+                  onPress={() => console.log(item)}
+                />
               )}
             </View>
           )}
@@ -156,7 +168,11 @@ const MarketMainScreen = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketSmall item={item} />
+              <CardMarketSmall
+                item={item}
+                onPress={() => console.log(item)}
+                onPressWishlist={() => console.log(item)}
+              />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
                   customText={strings.kunjungi_toko}
@@ -164,6 +180,7 @@ const MarketMainScreen = () => {
                     width: SCREEN_WIDTH * 0.45,
                   }}
                   icon={icons.arrow_right}
+                  onPress={() => console.log(item)}
                 />
               )}
             </View>

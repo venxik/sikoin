@@ -5,14 +5,14 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { SCREEN_WIDTH } from '../constants';
+import { SCREEN_WIDTH } from '../../constants';
+import { ProfilePictureProps } from './model';
+import { useAppSelector } from '../../config/store/ReduxStore';
 
-const ProfilePicture = props => {
-  const { onPress, style, disabled, showKoperasi } = props || {};
+const ProfilePicture = (props: ProfilePictureProps) => {
+  const { onPress, style, disabled = false, showKoperasi = true } = props || {};
   const { profileData, koperasiData } =
-    useSelector(state => state.ProfileReducer) || {};
+    useAppSelector(state => state.ProfileReducer) || {};
   const { profilePic } = profileData || {};
   const { koperasiPic } = koperasiData || {};
   return (
@@ -30,20 +30,6 @@ const ProfilePicture = props => {
       </ImageBackground>
     </TouchableOpacity>
   );
-};
-
-ProfilePicture.propTypes = {
-  onPress: PropTypes.func,
-  disabled: PropTypes.bool,
-  style: PropTypes.object,
-  showKoperasi: PropTypes.bool,
-};
-
-ProfilePicture.defaultProps = {
-  onPress: null,
-  disabled: false,
-  style: null,
-  showKoperasi: true,
 };
 
 export default ProfilePicture;

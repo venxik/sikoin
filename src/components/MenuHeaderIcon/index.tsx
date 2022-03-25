@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, images, SCREEN_WIDTH, sizes, strings } from '../constants';
-import PropTypes from 'prop-types';
+import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { MenuHeaderIconProps } from './model';
 
-const MenuHeaderIcon = props => {
-  const { menu } = props || {};
+const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
+  const { menu } = props;
   const renderIcon = () => {
     switch (menu) {
       case strings.diskon:
@@ -32,14 +32,6 @@ const MenuHeaderIcon = props => {
       <Text style={styles.textStyle}>{menu}</Text>
     </View>
   );
-};
-
-MenuHeaderIcon.propTypes = {
-  menu: PropTypes.string,
-};
-
-MenuHeaderIcon.defaultProps = {
-  menu: '',
 };
 
 export default MenuHeaderIcon;
