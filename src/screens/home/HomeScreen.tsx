@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, {
   useCallback,
   useEffect,
@@ -74,11 +73,9 @@ const menuList = [
   },
 ];
 
-const HomeScreen = ({
+const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   navigation,
-}: HomeTabScreenProps<'HomeStackNavigator'>) => {
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
+}) => {
   const { kabarDataList } = useAppSelector(state => state.KabarReducer) || {};
   const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
@@ -87,6 +84,8 @@ const HomeScreen = ({
   const { simpanan, saldo } = useAppSelector(
     state => state.SaldoSimpananReducer,
   );
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   useEffect(() => {
@@ -181,7 +180,7 @@ const HomeScreen = ({
               {index === kabarDataList.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() => {}}
+                  onPress={() => null}
                 />
               )}
             </View>
@@ -203,7 +202,7 @@ const HomeScreen = ({
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} onPress={() => {}} />
+              <CardPromo item={item} onPress={() => null} />
             </View>
           )}
         />
@@ -225,13 +224,13 @@ const HomeScreen = ({
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
                 item={item}
-                onPress={() => {}}
-                onPressWishlist={() => {}}
+                onPress={() => null}
+                onPressWishlist={() => null}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_market_white}
-                  onPress={() => {}}
+                  onPress={() => null}
                 />
               )}
             </View>

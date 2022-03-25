@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack, TextInputBorder } from '../../components';
@@ -12,7 +12,7 @@ type Props = NativeStackScreenProps<
   'DaftarKoperasiStep2Screen'
 >;
 
-const DaftarKoperasiStep2Screen = ({ navigation }: Props) => {
+const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState<string>('');
 
   const onChangeEmail = (value: string) => {

@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const arrow_left_primary = require('assets/icons/arrow_left_primary.png');
 const arrow_right = require('assets/icons/arrow_right.png');
 const bottom_chat_bold = require('assets/icons/bottom_chat_bold.png');

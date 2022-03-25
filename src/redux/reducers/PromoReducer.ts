@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type PromoData = {
   title?: string;
@@ -39,10 +39,10 @@ const promoSlice = createSlice({
   name: 'promoSlice',
   initialState,
   reducers: {
-    fetchPromoData: (state, { payload }) => {
+    fetchPromoData: (state, { payload }: PayloadAction<PromoData[]>) => {
       state.promoDataList = payload;
     },
-    fetchPromoDataSuccess: (state, { payload }) => {
+    fetchPromoDataSuccess: (state, { payload }: PayloadAction<PromoData[]>) => {
       state.promoDataList = payload;
     },
     fetchPromoDataFailed: (state, { payload }) => {

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type MemberDokumen = {
   id: number;
@@ -193,10 +193,10 @@ const dokumenSlice = createSlice({
   name: 'dokumenSlice',
   initialState,
   reducers: {
-    fetchDokumen: (state, { payload }) => {
+    fetchDokumen: (state, { payload }: PayloadAction<DokumenData[]>) => {
       state.dokumenDataList = payload;
     },
-    fetchDokumenSuccess: (state, { payload }) => {
+    fetchDokumenSuccess: (state, { payload }: PayloadAction<DokumenData[]>) => {
       state.dokumenDataList = payload;
     },
     fetchDokumenFailed: (state, { payload }) => {

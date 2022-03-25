@@ -15,10 +15,11 @@ import { DokumenData } from '../../redux/reducers/DokumenReducer';
 
 type Props = NativeStackScreenProps<DokumenStackParamList, 'DokumenMainScreen'>;
 
-const DokumenMainScreen = ({ navigation }: Props) => {
+const DokumenMainScreen: React.FC<Props> = ({ navigation }) => {
   const { dokumenDataList } = useAppSelector(s => s.DokumenReducer) || {};
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] =
+    useState<boolean>(false);
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState<boolean>(false);
 
   const navigateToDetail = (item: DokumenData) => {
     navigation.navigate('DokumenDetailScreen', { item });

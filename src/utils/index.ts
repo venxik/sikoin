@@ -1,4 +1,17 @@
 import formatter from './formatter';
-import AsyncStrore from './AsyncStore';
+import AsyncStrore from './asyncStore';
+import {
+  saveEncryptedStorage,
+  getEncryptedStorage,
+  removeItemEncryptedStorage,
+  clearEncryptedStorage,
+} from './encryptedStorage';
 
-export { formatter, AsyncStrore };
+export {
+  formatter,
+  AsyncStrore,
+  saveEncryptedStorage,
+  getEncryptedStorage,
+  removeItemEncryptedStorage,
+  clearEncryptedStorage,
+};

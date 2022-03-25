@@ -1,4 +1,4 @@
-export default [
+const messagesDummy = [
   {
     _id: 9,
     text: '#awesome 3',
@@ -50,7 +50,7 @@ export default [
   },
   {
     _id: 4,
-    text: '',
+    text: 'reas',
     createdAt: new Date(),
     user: {
       _id: 2,
@@ -96,25 +96,25 @@ export default [
     _id: 10,
     text: 'This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT',
     createdAt: new Date(),
-    quickReplies: {
-      type: 'radio', // or 'checkbox',
-      keepIt: true,
-      values: [
-        {
-          title: '😋 Yes',
-          value: 'yes',
-        },
-        {
-          title:
-            '📷 Yes, let me show you with a picture! Again let me show you with a picture!',
-          value: 'yes_picture',
-        },
-        {
-          title: '😞 Nope. What?',
-          value: 'no',
-        },
-      ],
-    },
+    // quickReplies: {
+    //   type: 'radio', // or 'checkbox',
+    //   // keepIt: true,
+    //   values: [
+    //     {
+    //       title: '😋 Yes',
+    //       value: 'yes',
+    //     },
+    //     {
+    //       title:
+    //         '📷 Yes, let me show you with a picture! Again let me show you with a picture!',
+    //       value: 'yes_picture',
+    //     },
+    //     {
+    //       title: '😞 Nope. What?',
+    //       value: 'no',
+    //     },
+    //   ],
+    // },
     user: {
       _id: 2,
       name: 'React Native',
@@ -124,45 +124,28 @@ export default [
     _id: 20,
     text: 'This is a quick reply. Do you love Gifted Chat? (checkbox)',
     createdAt: new Date(),
-    quickReplies: {
-      type: 'checkbox', // or 'checkbox',
-      values: [
-        {
-          title: 'Yes',
-          value: 'yes',
-        },
-        {
-          title: 'Yes, let me show you with a picture!',
-          value: 'yes_picture',
-        },
-        {
-          title: 'Nope. What?',
-          value: 'no',
-        },
-      ],
-    },
-    user: {
-      _id: 2,
-      name: 'React Native',
-    },
-  },
-  {
-    _id: 30,
-    createdAt: new Date(),
-    video: 'https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4',
-    user: {
-      _id: 2,
-      name: 'React Native',
-    },
-  },
-  {
-    _id: 31,
-    createdAt: new Date(),
-    audio:
-      'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3',
+    // quickReplies: {
+    //   type: 'checkbox', // or 'checkbox',
+    //   values: [
+    //     {
+    //       title: 'Yes',
+    //       value: 'yes',
+    //     },
+    //     {
+    //       title: 'Yes, let me show you with a picture!',
+    //       value: 'yes_picture',
+    //     },
+    //     {
+    //       title: 'Nope. What?',
+    //       value: 'no',
+    //     },
+    //   ],
+    // },
     user: {
       _id: 2,
       name: 'React Native',
     },
   },
 ];
+
+export default messagesDummy;

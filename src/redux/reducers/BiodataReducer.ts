@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type BiodataData = {
   tempatLahir?: string;
-  tanggalLahir?: string;
+  tanggalLahir?: string | number | Date;
   gender?: string;
   golDarah?: string;
   kewarganegaraan?: string;
@@ -44,10 +44,10 @@ const biodataSlice = createSlice({
   name: 'biodataSlice',
   initialState,
   reducers: {
-    addBiodata: (state, { payload }) => {
+    addBiodata: (state, { payload }: PayloadAction<BiodataData>) => {
       state.biodataData = payload;
     },
-    addBiodataSuccess: (state, { payload }) => {
+    addBiodataSuccess: (state, { payload }: PayloadAction<BiodataData>) => {
       state.biodataData = payload;
     },
     addBiodataFailed: (state, { payload }) => {

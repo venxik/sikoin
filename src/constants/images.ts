@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const onboarding_1 = require('assets/images/onboarding_1.png');
 const onboarding_2 = require('assets/images/onboarding_2.png');
 const onboarding_3 = require('assets/images/onboarding_3.png');

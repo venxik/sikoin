@@ -1,5 +1,5 @@
 import { CommonActions } from '@react-navigation/native';
-import React from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack } from '../../components';
@@ -14,7 +14,7 @@ type Props = NativeStackScreenProps<
   'DaftarKoperasiSuccessScreen'
 >;
 
-const DaftarKoperasiSuccessScreen = ({ navigation }: Props) => {
+const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation }) => {
   const { email } =
     useAppSelector(state => state.ProfileReducer.profileData) || {};
 

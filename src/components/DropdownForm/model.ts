@@ -1,10 +1,13 @@
 import { FieldError } from 'react-hook-form';
 import { ViewStyle } from 'react-native';
-import { DropdownProps } from 'react-native-element-dropdown/src/Dropdown/type';
 
-export interface DropdownFormProps extends DropdownProps {
+export interface DropdownFormProps {
   title?: string;
   style?: ViewStyle;
   error?: FieldError;
   errorText?: string;
+  data: { label: string; value: string }[];
+  onChange: (value: object) => void;
+  value?: string;
+  maxHeight?: number;
 }

@@ -29,7 +29,7 @@ type FormValues = {
   password: string;
 };
 
-const LoginScreen = ({ navigation }: Props) => {
+const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [resetEmail, setResetEmail] = useState<string>('');
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
   const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =

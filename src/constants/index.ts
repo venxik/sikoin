@@ -6,6 +6,7 @@ import icons from './icons';
 import { sizes, SCREEN_WIDTH, SCREEN_HEIGHT } from './theme';
 import dropdownItems from './dropdownItems';
 import messagesDummy from './messagesDummy';
+import storage from './storage';
 
 export {
   colors,
@@ -18,4 +19,5 @@ export {
   SCREEN_WIDTH,
   dropdownItems,
   messagesDummy,
+  storage,
 };

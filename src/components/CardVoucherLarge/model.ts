@@ -6,6 +6,6 @@ export interface CardVoucherLargeProps {
 }
 
 export type SelectedVoucherProps = {
-  data?: VoucherDetail;
-  voucher?: number;
+  data: VoucherDetail;
+  voucher: number;
 };

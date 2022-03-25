@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type KabarData = {
   title: string;
@@ -58,10 +58,10 @@ const kabarSlice = createSlice({
   name: 'kabarSlice',
   initialState,
   reducers: {
-    fetchKabar: (state, { payload }) => {
+    fetchKabar: (state, { payload }: PayloadAction<KabarData[]>) => {
       state.kabarDataList = payload;
     },
-    fetchKabarSuccess: (state, { payload }) => {
+    fetchKabarSuccess: (state, { payload }: PayloadAction<KabarData[]>) => {
       state.kabarDataList = payload;
     },
     fetchKabarFailed: (state, { payload }) => {

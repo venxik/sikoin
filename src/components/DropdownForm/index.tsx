@@ -5,7 +5,8 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { DropdownFormProps } from './model';
 
 const DropdownForm = (props: DropdownFormProps) => {
-  const { title, style, error, errorText } = props || {};
+  const { title, style, error, errorText, data, onChange, value, maxHeight } =
+    props || {};
 
   const dropdown = () => (
     <Dropdown
@@ -20,6 +21,10 @@ const DropdownForm = (props: DropdownFormProps) => {
           style={{ width: sizes.padding, height: sizes.padding }}
         />
       )}
+      data={data}
+      onChange={item => onChange(item?.value)}
+      value={value}
+      maxHeight={maxHeight ? maxHeight : 120}
       labelField="label"
       valueField="value"
       placeholder={strings.pilih_dot}

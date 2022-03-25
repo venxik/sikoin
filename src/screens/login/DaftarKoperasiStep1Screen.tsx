@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -17,7 +17,7 @@ type Props = NativeStackScreenProps<
   'DaftarKoperasiStep1Screen'
 >;
 
-const DaftarKoperasiStep1Screen = ({ navigation }: Props) => {
+const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const [koperasiName, setKoperasiName] = useState<string>('');
   const [noAnggota, setNoAnggota] = useState<string>('');
 

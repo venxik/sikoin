@@ -9,5 +9,5 @@ export interface TextInputCurrencyProps extends TextInputProps {
   error?: FieldError;
   errorText?: string;
   onChangeValue: (value: number) => void;
-  value: string;
+  value?: string;
 }

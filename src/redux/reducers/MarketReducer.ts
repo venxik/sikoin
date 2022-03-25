@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type MarketData = {
   productName: string;
@@ -42,10 +42,13 @@ const marketSlice = createSlice({
   name: 'marketSlice',
   initialState,
   reducers: {
-    fetchMarketData: (state, { payload }) => {
+    fetchMarketData: (state, { payload }: PayloadAction<MarketData[]>) => {
       state.marketDataList = payload;
     },
-    fetchMarketDataSuccess: (state, { payload }) => {
+    fetchMarketDataSuccess: (
+      state,
+      { payload }: PayloadAction<MarketData[]>,
+    ) => {
       state.marketDataList = payload;
     },
     fetchMarketDataFailed: (state, { payload }) => {

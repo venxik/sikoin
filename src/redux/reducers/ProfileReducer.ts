@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type ProfileData = {
   profilePic?: string;
@@ -48,7 +48,7 @@ const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    updateProfile: (state, { payload }) => {
+    updateProfile: (state, { payload }: PayloadAction<ProfileData>) => {
       state.profileData.email = payload.email;
       state.profileData.noTelp = payload.noTelp;
       state.profileData.nama = payload.nama;

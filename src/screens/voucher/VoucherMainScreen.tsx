@@ -1,5 +1,6 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -26,22 +27,20 @@ import {
   Popup1Button,
 } from '../../components';
 import { SelectedVoucherProps } from '../../components/CardVoucherLarge/model';
+import { VoucherStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config/store/ReduxStore';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-const VoucherMainScreen = () => {
+type Props = NativeStackScreenProps<VoucherStackParamList, 'VoucherMainScreen'>;
+
+const VoucherMainScreen: FC<Props> = () => {
   const { voucherDataList } = useAppSelector(s => s.VoucherReducer) || {};
   const [showInfoPopup, setshowInfoPopup] = useState(false);
   const [showVoucherPopup, setshowVoucherPopup] = useState(false);
-  const [selectedVoucher, setselectedVoucher] = useState<SelectedVoucherProps>(
-    {},
-  );
+  const [selectedVoucher, setselectedVoucher] =
+    useState<SelectedVoucherProps | null>(null);
   const [qty, setQty] = useState(1);
-
-  const onPressInfo = (item: any) => {
-    console.log(item);
-  };
 
   const onSelectVoucher = (data: SelectedVoucherProps) => {
     setselectedVoucher(data);
@@ -97,7 +96,10 @@ const VoucherMainScreen = () => {
   };
 
   const renderPopupBeli = () => {
-    const harga = selectedVoucher.voucher ?? 0 * qty;
+    const harga =
+      typeof selectedVoucher?.voucher === 'number'
+        ? selectedVoucher?.voucher * qty
+        : 0;
     const biayaAdmin = 3000;
     const total = harga + biayaAdmin;
     return (
@@ -107,10 +109,10 @@ const VoucherMainScreen = () => {
         visible={showVoucherPopup}>
         <View style={styles.modalMainView}>
           <View style={styles.modalView}>
-            <CardVoucherItem data={selectedVoucher.voucher} disabled />
+            <CardVoucherItem data={selectedVoucher?.voucher} disabled />
             <Text style={styles.textPopupTitle}>
               {!isEmpty(selectedVoucher) &&
-                `${strings.voucher} ${selectedVoucher.data?.namaToko}`}
+                `${strings.voucher} ${selectedVoucher?.data?.namaToko}`}
             </Text>
             {/* QTY CONTAINER */}
             <View
@@ -282,7 +284,6 @@ const VoucherMainScreen = () => {
           return (
             <CardVoucherLarge
               data={item}
-              onPressInfo={() => onPressInfo(item)}
               onPressVoucher={data => onSelectVoucher(data)}
             />
           );

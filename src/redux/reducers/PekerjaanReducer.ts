@@ -1,6 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+export type PekerjaanData = {
+  masaKerjaTahun?: string;
+  masaKerjaBulan?: string;
+  gajiBulanan?: string;
+  namaPerusahaan?: string;
+  alamatKantor?: string;
+  provinsiKota?: string;
+  jabatanTerakhir?: string;
+  noTelpKantor?: string;
+};
+
+interface RootState {
+  pekerjaanData: PekerjaanData | null;
+  error: null;
+}
+
+const initialState: RootState = {
   pekerjaanData: null,
   error: null,
 };
@@ -9,10 +25,10 @@ const pekerjaanSlice = createSlice({
   name: 'pekerjaanSlice',
   initialState,
   reducers: {
-    addPekerjaan: (state, { payload }) => {
+    addPekerjaan: (state, { payload }: PayloadAction<PekerjaanData>) => {
       state.pekerjaanData = payload;
     },
-    addPekerjaanSuccess: (state, { payload }) => {
+    addPekerjaanSuccess: (state, { payload }: PayloadAction<PekerjaanData>) => {
       state.pekerjaanData = payload;
     },
     addPekerjaanFailed: (state, { payload }) => {

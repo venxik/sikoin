@@ -29,7 +29,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const DokumenDetailScreen: FC<Props> = ({ route }) => {
-  const { item } = route.params || {};
+  const { item } = route.params;
   const {
     tipeFile,
     namaFile,
@@ -40,12 +40,11 @@ const DokumenDetailScreen: FC<Props> = ({ route }) => {
     izin,
     memberAkses,
   } = item || {};
-  const [izinValue, setIzinValue] = useState(izin);
-  const [showMember, setShowMember] = useState(false);
+  const [izinValue, setIzinValue] = useState<string>(izin);
+  const [showMember, setShowMember] = useState<boolean>(false);
 
   const onPressDeleteMember = (item: MemberDokumen) => {
-    console.log(item);
-    Alert.alert('Delete member');
+    Alert.alert(`Delete Member ${item.namaMember}`);
   };
 
   const renderIzin = () => (

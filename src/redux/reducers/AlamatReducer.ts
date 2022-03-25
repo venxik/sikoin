@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type AlamatData = {
   judul: string;
@@ -81,17 +81,20 @@ const alamatSlice = createSlice({
   name: 'alamatSlice',
   initialState,
   reducers: {
-    addAlamat: (state, { payload }) => {
+    addAlamat: (state, { payload }: PayloadAction<AlamatData>) => {
       state.alamatList.push(payload);
     },
-    deleteAlamat: (state, { payload }) => {
+    deleteAlamat: (state, { payload }: PayloadAction<AlamatData | null>) => {
       state.alamatList = state.alamatList.filter(
-        item => item.judul.toLowerCase() != payload.judul.toLowerCase(),
+        item => item.judul.toLowerCase() != payload?.judul?.toLowerCase(),
       );
     },
-    updateAlamat: (state, { payload }) => {
+    updateAlamat: (
+      state,
+      { payload }: PayloadAction<{ data: AlamatData; index?: number }>,
+    ) => {
       const { data, index } = payload || {};
-      state.alamatList[index] = data;
+      if (index !== undefined) state.alamatList[index] = data;
     },
     addAlamatSuccess: state => {
       state.error = null;

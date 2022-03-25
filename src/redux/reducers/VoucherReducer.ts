@@ -72,10 +72,13 @@ const voucherSlice = createSlice({
   name: 'voucherSlice',
   initialState,
   reducers: {
-    fetchVoucherData: (state, { payload }) => {
+    fetchVoucherData: (state, { payload }: PayloadAction<VoucherDetail[]>) => {
       state.voucherDataList = payload;
     },
-    fetchVoucherDataSuccess: (state, { payload }) => {
+    fetchVoucherDataSuccess: (
+      state,
+      { payload }: PayloadAction<VoucherDetail[]>,
+    ) => {
       state.voucherDataList = payload;
     },
     fetchVoucherDataFailed: (state, { payload }) => {

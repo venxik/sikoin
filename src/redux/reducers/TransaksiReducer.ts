@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TransaksiData = {
   nominal?: number;
@@ -46,10 +46,16 @@ const transaksiSlice = createSlice({
   name: 'transaksiSlice',
   initialState,
   reducers: {
-    fetchTransaksiData: (state, { payload }) => {
+    fetchTransaksiData: (
+      state,
+      { payload }: PayloadAction<TransaksiData[]>,
+    ) => {
       state.transaksiDataList = payload;
     },
-    fetchTransaksiDataSuccess: (state, { payload }) => {
+    fetchTransaksiDataSuccess: (
+      state,
+      { payload }: PayloadAction<TransaksiData[]>,
+    ) => {
       state.transaksiDataList = payload;
     },
     fetchTransaksiDataFailed: (state, { payload }) => {

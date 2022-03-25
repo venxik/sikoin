@@ -43,6 +43,7 @@
     "react-native-currency-input": "^1.0.1",
     "react-native-document-picker": "^8.0.0",
     "react-native-element-dropdown": "^1.8.0",
+    "react-native-encrypted-storage": "^4.0.2",
     "react-native-fast-image": "^8.5.11",
     "react-native-fs": "^2.19.0",
     "react-native-gesture-handler": "^2.3.0",

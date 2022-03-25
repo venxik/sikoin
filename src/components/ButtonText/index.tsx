@@ -8,12 +8,12 @@ const ButtonText: FC<ButtonTextProps> = props => {
     buttonContainerStyle,
     textStyle,
     onPress,
-    disabled = false,
+    disabled,
     text,
     icon,
     iconLocation,
-    shadow = true,
-    secondary = false,
+    shadow,
+    secondary,
   } = props || {};
 
   const buttonStyle = () => {

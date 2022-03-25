@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { colors } from '../../constants';
+import { colors, SCREEN_WIDTH } from '../../constants';
 import { HeaderPinjamanProps } from './model';
 
 const HeaderPinjaman = (props: HeaderPinjamanProps) => {
@@ -64,13 +64,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   dot: {
-    width: 20,
-    height: 20,
-    borderRadius: 20,
+    width: SCREEN_WIDTH * 0.05,
+    height: SCREEN_WIDTH * 0.05,
+    borderRadius: SCREEN_WIDTH * 0.05,
     backgroundColor: colors.primary,
   },
   line: {
-    width: 50,
+    width: SCREEN_WIDTH * 0.16,
     height: 4,
     backgroundColor: colors.primary,
   },

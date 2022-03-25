@@ -6,8 +6,15 @@ import { TextInput } from 'react-native-gesture-handler';
 import { TextInputCurrencyProps } from './model';
 
 const TextInputCurrency: FC<TextInputCurrencyProps> = props => {
-  const { style, textBoxStyle, value, onChangeValue, title, error, errorText } =
-    props || {};
+  const {
+    style,
+    textBoxStyle,
+    value = '0',
+    onChangeValue,
+    title,
+    error,
+    errorText,
+  } = props || {};
   const [editable, setEditable] = useState(false);
 
   const input = useRef<TextInput>(null);

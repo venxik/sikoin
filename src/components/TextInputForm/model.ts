@@ -5,7 +5,7 @@ export interface TextInputFormProps extends TextInputProps {
   title?: string;
   style?: ViewStyle;
   icon?: ImageSourcePropType;
-  textBoxStyle?: TextInputProps;
+  textBoxStyle?: ViewStyle;
   error?: FieldError;
   errorText?: string;
 }

@@ -17,7 +17,7 @@ import { CalendarPickerProps } from './model';
 const CalendarPicker: FC<CalendarPickerProps> = props => {
   const { title, style, onChangeDate, value } = props || {};
   const [date, setDate] = useState<Date>(
-    !isEmpty(value) ? new Date(value) : new Date(),
+    value ? new Date(value as Date) : new Date(),
   );
   const [show, setShow] = useState(false);
 
@@ -46,7 +46,7 @@ const CalendarPicker: FC<CalendarPickerProps> = props => {
           }}>
           <Image source={icons.icon_calendar_small} style={styles.icon} />
           <Text style={styles.valueText}>
-            {moment(date).format('DD/MM/YYYY')}
+            {moment(new Date(date)).format('DD/MM/YYYY')}
           </Text>
         </View>
         <Image
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   titleText: {
     color: colors.bodyTextGrey,
     marginBottom: sizes.padding / 2,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-Regular',
   },
   icon: {
     width: sizes.icon_size,
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
   },
   valueText: {
     color: colors.primary,
-    fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
 });

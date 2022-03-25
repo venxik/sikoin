@@ -44,6 +44,7 @@ const TextInputForm: FC<TextInputFormProps> = props => {
           autoCorrect={false}
           autoCapitalize="none"
           clearButtonMode="always"
+          editable={editable}
         />
         <TouchableOpacity onPress={() => setEditable(e => !e)}>
           <Image
@@ -72,10 +73,6 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     fontSize: 15,
     fontFamily: 'Inter-Medium',
-  },
-  defaultText: {
-    fontSize: 14,
-    color: colors.white,
   },
   innerContainer: {
     flexDirection: 'row',

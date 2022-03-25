@@ -10,7 +10,7 @@ import * as screens from '../../screens';
 import { navigationRef } from './NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
-import AsyncStore from '../../utils/AsyncStore';
+import AsyncStore from '../../utils/asyncStore';
 import {
   ChatStackParamList,
   DaftarKoperasiParamList,

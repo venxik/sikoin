@@ -1,15 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type SimpananData = {
-  pokok?: number;
-  wajib?: number;
-  sukarela?: number;
-  total?: number;
+  pokok: number;
+  wajib: number;
+  sukarela: number;
+  total: number;
 };
 
 export type SaldoData = {
   total?: number;
-  simpananSukarela?: number;
+  simpananSukarela: number;
 };
 
 interface RootState {
@@ -38,19 +38,22 @@ const saldoSimpananSlice = createSlice({
   name: 'saldoSimpananSlice',
   initialState,
   reducers: {
-    fetchSimpananData: (state, { payload }) => {
+    fetchSimpananData: (state, { payload }: PayloadAction<SimpananData>) => {
       state.simpanan = payload;
     },
-    fetchSimpananDataSuccess: (state, { payload }) => {
+    fetchSimpananDataSuccess: (
+      state,
+      { payload }: PayloadAction<SimpananData>,
+    ) => {
       state.simpanan = payload;
     },
     fetchSimpananDataFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchSaldoData: (state, { payload }) => {
+    fetchSaldoData: (state, { payload }: PayloadAction<SaldoData>) => {
       state.saldo = payload;
     },
-    fetchSaldoDataSuccess: (state, { payload }) => {
+    fetchSaldoDataSuccess: (state, { payload }: PayloadAction<SaldoData>) => {
       state.saldo = payload;
     },
     fetchSaldoDataFailed: (state, { payload }) => {

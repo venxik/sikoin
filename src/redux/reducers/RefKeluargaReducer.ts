@@ -43,14 +43,20 @@ const refKeluargaSlice = createSlice({
     addKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    deleteKeluarga: (state, { payload }: PayloadAction<KeluargaData>) => {
+    deleteKeluarga: (
+      state,
+      { payload }: PayloadAction<KeluargaData | null>,
+    ) => {
       state.keluargaList = state.keluargaList.filter(
-        item => item.status?.toLowerCase() != payload.status?.toLowerCase(),
+        item => item?.status?.toLowerCase() != payload?.status?.toLowerCase(),
       );
     },
-    updateKeluarga: (state, { payload }) => {
+    updateKeluarga: (
+      state,
+      { payload }: PayloadAction<{ data: KeluargaData; index?: number }>,
+    ) => {
       const { data, index } = payload || {};
-      state.keluargaList[index] = data;
+      if (index !== undefined) state.keluargaList[index] = data;
     },
   },
 });

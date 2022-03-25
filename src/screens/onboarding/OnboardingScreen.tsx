@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { ParentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
-import AsyncStore from '../../utils/AsyncStore';
+import AsyncStore from '../../utils/asyncStore';
 
 const dotSize = 4;
 

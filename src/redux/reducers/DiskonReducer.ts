@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type DiskonData = {
   image: string;
@@ -36,10 +36,10 @@ const diskonSlice = createSlice({
   name: 'diskonSlice',
   initialState,
   reducers: {
-    fetchDiskon: (state, { payload }) => {
+    fetchDiskon: (state, { payload }: PayloadAction<DiskonData[]>) => {
       state.diskonDataList = payload;
     },
-    fetchDiskonSuccess: (state, { payload }) => {
+    fetchDiskonSuccess: (state, { payload }: PayloadAction<DiskonData[]>) => {
       state.diskonDataList = payload;
     },
     fetchDiskonFailed: (state, { payload }) => {

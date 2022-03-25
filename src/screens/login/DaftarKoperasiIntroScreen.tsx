@@ -18,8 +18,8 @@ type Props = NativeStackScreenProps<
   'DaftarKoperasiIntroScreen'
 >;
 
-const DaftarKoperasiIntroScreen = ({ navigation }: Props) => {
-  const [index, setIndex] = useState(1);
+const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
+  const [index, setIndex] = useState<number>(1);
 
   const goBack = () => {
     if (index === 2) setIndex(1);

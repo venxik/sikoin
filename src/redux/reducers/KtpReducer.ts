@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type KtpData = {
   gambarKtp?: string;
+  gambarSelfie?: string;
   noKtp?: string;
 };
 
@@ -19,10 +20,10 @@ const ktpSlice = createSlice({
   name: 'ktpSlice',
   initialState,
   reducers: {
-    addKtpImage: (state, { payload }) => {
+    addKtpImage: (state, { payload }: PayloadAction<string>) => {
       state.ktpData.gambarKtp = payload;
     },
-    addKtpNumber: (state, { payload }) => {
+    addKtpNumber: (state, { payload }: PayloadAction<string>) => {
       state.ktpData.noKtp = payload;
     },
     addKtpSuccess: (state, { payload }) => {
@@ -31,10 +32,18 @@ const ktpSlice = createSlice({
     addKtpFailed: (state, { payload }) => {
       state.error = payload;
     },
+    addKtpSelfie: (state, { payload }: PayloadAction<string>) => {
+      state.ktpData.gambarSelfie = payload;
+    },
   },
 });
 
-export const { addKtpImage, addKtpNumber, addKtpFailed, addKtpSuccess } =
-  ktpSlice.actions;
+export const {
+  addKtpImage,
+  addKtpNumber,
+  addKtpFailed,
+  addKtpSuccess,
+  addKtpSelfie,
+} = ktpSlice.actions;
 
 export default ktpSlice.reducer;
