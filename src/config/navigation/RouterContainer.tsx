@@ -3,7 +3,7 @@ import { StackWrapper } from '.';
 import { ErrorModal, LoadingIndicator } from '../../components';
 import { useAppSelector } from '../store/ReduxStore';
 
-const RouterContainer = () => {
+const RouterContainer: React.FC = () => {
   const { isLoading } = useAppSelector(state => state.loading) || {};
 
   const renderErrorDialog = () => {

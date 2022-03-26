@@ -4,14 +4,14 @@ import { Platform } from 'react-native';
 
 // Must be outside of any component LifeCycle (such as `componentDidMount`).
 class LocalNotificationService {
-  configure = onOpenNotification => {
+  configure = (onOpenNotification: any) => {
     PushNotification.configure({
-      onRegister: function (token) {
+      onRegister: function (token: { os: string; token: string }) {
         // console.log('[LocalNotificationService] onRegister: ', token);
       },
 
       // (required) Called when a remote is received or opened, or local notification is opened
-      onNotification: function (notification) {
+      onNotification: function (notification: any) {
         // console.log('[LocalNotificationService] onNotification:', notification);
         if (!notification.data) {
           return;
@@ -28,14 +28,14 @@ class LocalNotificationService {
       },
 
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
-      onAction: function (notification) {
+      onAction: function (notification: any) {
         // console.log('ACTION:', notification.action);
         // console.log('NOTIFICATION:', notification);
         // process the action
       },
 
       // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
-      onRegistrationError: function (err) {
+      onRegistrationError: function (err: any) {
         console.error(err.message, err);
       },
 
@@ -65,21 +65,32 @@ class LocalNotificationService {
     PushNotification.unregister();
   };
 
-  showNotification = (id, title, message, data = {}, options = {}) => {
+  showNotification = (
+    id: string,
+    data: any,
+    title?: string,
+    message?: string,
+    options?: any,
+  ) => {
     PushNotification.localNotification({
       //Android only Properties
-      ...this.buildAndroidNotification(id, title, message, data, options),
+      ...this.buildAndroidNotification(id, data, title, message, options),
       //iOS and Android properties
-      ...this.buildIOSNotification(id, title, message, data, options),
+      ...this.buildIOSNotification(id, data, title, message, options),
       title: title || '',
       message: message || '',
       playSound: options.playSound || false,
       soundName: options.soundName || 'default',
-      userInteraction: false, //BOOLEAN: if the notification was opened by the user from the notification
     });
   };
 
-  buildAndroidNotification = (id, title, message, data = {}, options = {}) => {
+  buildAndroidNotification = (
+    id: string,
+    data: any,
+    title?: string,
+    message?: string,
+    options?: any,
+  ) => {
     return {
       channelId: 'my-channel',
       id: id,
@@ -96,7 +107,13 @@ class LocalNotificationService {
     };
   };
 
-  buildIOSNotification = (id, title, message, data = {}, options = {}) => {
+  buildIOSNotification = (
+    id: string,
+    data: any,
+    title?: string,
+    message?: string,
+    options?: any,
+  ) => {
     return {
       alertAction: options.alertAction || 'view',
       category: options.category || '',
@@ -115,8 +132,8 @@ class LocalNotificationService {
     }
   };
 
-  removeDeliveredNotificationByID = id => {
-    PushNotification.cancelLocalNotification({ id: `${id}` });
+  removeDeliveredNotificationByID = (id: string) => {
+    PushNotification.cancelLocalNotification(id);
   };
 }
 

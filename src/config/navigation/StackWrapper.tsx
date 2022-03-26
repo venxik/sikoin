@@ -3,7 +3,7 @@ import { Image, ImageSourcePropType, View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
   NavigationContainer,
-  RouteProp,
+  Route,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as screens from '../../screens';
@@ -52,7 +52,7 @@ const PinjamanStack = createNativeStackNavigator<PinjamanStackParamList>();
 const DokumenStack = createNativeStackNavigator<DokumenStackParamList>();
 const MarketStack = createNativeStackNavigator<MarketStackParamList>();
 
-const shouldShowBottomNavigation = (route: RouteProp<any, any>) => {
+const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
   switch (routeName) {
     case 'OnboardingStackNavigator':

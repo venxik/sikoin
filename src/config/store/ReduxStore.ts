@@ -11,9 +11,9 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
-import logger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -23,6 +23,18 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: ['AlamatReducer'],
 };
+
+let logger: Middleware;
+
+if (__DEV__) {
+  logger = createLogger({
+    collapsed: true,
+    duration: true,
+    timestamp: true,
+    logErrors: true,
+    diff: true,
+  });
+}
 
 const persistReducers = persistReducer(persistConfig, rootReducer);
 

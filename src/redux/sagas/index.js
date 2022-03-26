@@ -1,11 +1,13 @@
 // Imports: Dependencies
-import { all } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
+import { watchDummyList } from './DummySaga';
 
 // Imports: Redux Sagas
 
 // Redux Saga: Root Saga
 export function* rootSaga() {
   yield all([
+    fork(watchDummyList),
     //   fork(watchGetIndividualRank),
     //   fork(watchGetTeamRank),
     //   fork(watchGetFriendList),

@@ -36,7 +36,7 @@ import {
 } from '../../constants';
 import { formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
 import { HomeTabScreenProps } from '../../config/navigation/model';
 import { KabarData } from '../../redux/reducers/KabarReducer';
 import Animated, {
@@ -45,6 +45,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import { fetchDummyData } from '../../redux/reducers/MarketReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -81,6 +82,7 @@ const menuList = [
 const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   navigation,
 }) => {
+  const dispatch = useAppDispatch();
   const { kabarDataList } = useAppSelector(state => state.KabarReducer) || {};
   const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
@@ -89,11 +91,16 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const { simpanan, saldo } = useAppSelector(
     state => state.SaldoSimpananReducer,
   );
+  const { dummyList } = useAppSelector(state => state.MarketReducer);
+  console.log(dummyList);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   useEffect(() => {
+    //DUMMY API CALL
+    dispatch(fetchDummyData());
+
     const backAction = () => {
       if (navigation.canGoBack()) {
         return false;

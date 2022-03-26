@@ -18,6 +18,7 @@ import {
 } from '../../../../redux/reducers/AlamatReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -42,7 +43,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<AlamatData>({
     defaultValues: {
       judul: update ? judul : '',
@@ -182,8 +183,19 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                   onChangeText={value => onChange(value)}
                   title={strings.kodepos}
                   keyboardType="numeric"
+                  maxLength={5}
                 />
               )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+                minLength: {
+                  value: 5,
+                  message: 'Kode Pos harus 5 angka',
+                },
+              }}
             />
           </View>
         </ScrollView>

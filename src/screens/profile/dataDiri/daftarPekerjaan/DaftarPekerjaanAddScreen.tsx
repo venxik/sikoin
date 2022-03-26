@@ -24,6 +24,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../config/store/ReduxStore';
+import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -105,7 +106,12 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     keyboardType="number-pad"
                   />
                 )}
-                // rules={{ pattern: formatter.NUMBER_REGEX }}
+                rules={{
+                  pattern: {
+                    value: formatter.NUMBER_REGEX,
+                    message: 'Format harus dalam bentuk angka',
+                  },
+                }}
               />
               <Controller
                 control={control}
@@ -121,7 +127,12 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     keyboardType="number-pad"
                   />
                 )}
-                // rules={{ pattern: formatter.NUMBER_REGEX }}
+                rules={{
+                  pattern: {
+                    value: formatter.NUMBER_REGEX,
+                    message: 'Format harus dalam bentuk angka',
+                  },
+                }}
               />
             </View>
             <Controller
@@ -137,7 +148,12 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                   keyboardType="number-pad"
                 />
               )}
-              // rules={{ pattern: formatter.NUMBER_REGEX }}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
             />
             <Controller
               control={control}
@@ -185,7 +201,12 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                   keyboardType="number-pad"
                 />
               )}
-              // rules={{ pattern: formatter.NUMBER_REGEX }}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
             />
             <Controller
               control={control}

@@ -17,6 +17,7 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch } from '../../../../config/store/ReduxStore';
+import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -41,7 +42,6 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
       noKtp: update ? noKtp : '',
     },
   });
-
   const onSubmit = (data: KeluargaData) => {
     if (update) {
       dispatch(updateKeluarga({ index, data }));
@@ -83,24 +83,43 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
               name="noKtp"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
+                  error={errors.noKtp}
+                  errorText={errors.noKtp?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.no_ktp}
+                  maxLength={16}
                 />
               )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+                minLength: { value: 16, message: 'Nomor KTP harus 16 angka' },
+              }}
             />
             <Controller
               control={control}
               name="noTelp"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
+                  error={errors.noTelp}
+                  errorText={errors.noTelp?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.no_telp}
+                  maxLength={13}
                 />
               )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
             />
           </View>
         </ScrollView>

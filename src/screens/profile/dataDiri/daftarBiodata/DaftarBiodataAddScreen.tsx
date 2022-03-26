@@ -25,6 +25,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../config/store/ReduxStore';
+import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -129,8 +130,6 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 name="gender"
                 render={({ field: { onChange, value } }) => (
                   <DropdownForm
-                    error={errors.gender}
-                    errorText={errors.gender?.message}
                     style={{ width: '55%' }}
                     title={strings.jenis_kelamin}
                     data={dropdownItems.genderItem}
@@ -207,12 +206,20 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
               name="noRek"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
+                  error={errors.noRek}
+                  errorText={errors.noRek?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title={strings.no_rekening}
                 />
               )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
             />
             <Controller
               control={control}

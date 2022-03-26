@@ -1,7 +1,6 @@
 import { createNavigationContainerRef } from '@react-navigation/native';
-import { ParentStackParamList } from './model';
 
-const navigationRef = createNavigationContainerRef<ParentStackParamList>();
+const navigationRef = createNavigationContainerRef();
 
 // const navigate = (name, params: ) => {
 //   if (navigationRef.isReady()) {

@@ -1,5 +1,5 @@
 import AuthApi from './AuthApi';
 import BSLApi from './BSLApi';
-import DiagnosticApi from './DiagnosticApi';
+import DummyApi from './DummyApi';
 
-export { AuthApi, BSLApi, DiagnosticApi };
+export { AuthApi, BSLApi, DummyApi };

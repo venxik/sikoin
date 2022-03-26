@@ -2,7 +2,13 @@ import messaging from '@react-native-firebase/messaging';
 import { Platform } from 'react-native';
 
 class FCMService {
-  register = (onRegister, onNotification, onOpenNotification) => {
+  messageListener: any = null;
+
+  register = (
+    onRegister: any,
+    onNotification: any,
+    onOpenNotification: any,
+  ) => {
     this.checkPermission(onRegister);
     this.createNotificationListener(
       onRegister,
@@ -18,7 +24,7 @@ class FCMService {
     }
   };
 
-  checkPermission = onRegister => {
+  checkPermission = (onRegister: any) => {
     messaging()
       .hasPermission()
       .then(enabled => {
@@ -33,7 +39,7 @@ class FCMService {
       });
   };
 
-  getToken = onRegister => {
+  getToken = (onRegister: any) => {
     messaging()
       .getToken()
       .then(fcmToken => {
@@ -48,7 +54,7 @@ class FCMService {
       });
   };
 
-  requestPermission = onRegister => {
+  requestPermission = (onRegister: any) => {
     messaging()
       .requestPermission()
       .then(() => {
@@ -68,9 +74,9 @@ class FCMService {
   };
 
   createNotificationListener = (
-    onRegister,
-    onNotification,
-    onOpenNotification,
+    onRegister: any,
+    onNotification: any,
+    onOpenNotification: any,
   ) => {
     //When application is running, but in the background
     messaging().onNotificationOpenedApp(remoteMessage => {
@@ -104,9 +110,9 @@ class FCMService {
       if (remoteMessage) {
         let notification = null;
         if (Platform.OS == 'ios') {
-          notification = remoteMessage.data.notification;
+          notification = remoteMessage?.data?.notification;
         } else {
-          notification = remoteMessage.notification;
+          notification = remoteMessage?.notification;
         }
 
         onNotification(notification);

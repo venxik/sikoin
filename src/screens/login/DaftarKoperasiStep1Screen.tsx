@@ -79,8 +79,6 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
           maxHeight={120}
           errorText={''}
           data={[]}
-          labelField={''}
-          valueField={''}
         />
       </View>
 

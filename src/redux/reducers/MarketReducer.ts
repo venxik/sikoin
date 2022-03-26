@@ -8,7 +8,8 @@ export type MarketData = {
 
 interface RootState {
   marketDataList: MarketData[];
-  error: null;
+  dummyList?: any;
+  error?: string | null;
 }
 
 const initialState: RootState = {
@@ -34,8 +35,6 @@ const initialState: RootState = {
       image: 'https://picsum.photos/id/34/400/400',
     },
   ],
-
-  error: null,
 };
 
 const marketSlice = createSlice({
@@ -54,6 +53,15 @@ const marketSlice = createSlice({
     fetchMarketDataFailed: (state, { payload }) => {
       state.error = payload;
     },
+    fetchDummyData: () => {
+      null;
+    },
+    fetchDummyDataSuccess: (state, { payload }: PayloadAction<any>) => {
+      state.dummyList = payload;
+    },
+    fetchDummyDataFailed: (state, { payload }: PayloadAction<string>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -61,6 +69,9 @@ export const {
   fetchMarketData,
   fetchMarketDataFailed,
   fetchMarketDataSuccess,
+  fetchDummyData,
+  fetchDummyDataFailed,
+  fetchDummyDataSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

@@ -25,21 +25,21 @@ const App: FC = () => {
         channelId: 'my-channel', // (required)
         channelName: 'My channel', // (required)
       },
-      // created => console.log(`CreateChannel returned '${created}'`),
+      () => null,
     );
 
-    function onRegister(token) {
+    function onRegister(token: any) {
       // console.log('[App] onRegister: ', token);
     }
 
-    function onNotification(notify) {
+    function onNotification(notify: any) {
       // console.log('[App] onNotification: ', notify);
       const options = {
         soundName: 'default',
         playSound: true,
       };
       localNotificationService.showNotification(
-        0,
+        '0',
         notify.title,
         notify.body,
         notify,
@@ -47,7 +47,7 @@ const App: FC = () => {
       );
     }
 
-    function onOpenNotification(notify) {
+    function onOpenNotification(notify: any) {
       // console.log('[App] onOpenNotification: ', notify);
       Alert.alert('Open Notification: ' + notify.body);
     }

@@ -1,21 +1,14 @@
 import NetInfo from '@react-native-community/netinfo';
-import { apis, storage } from '../../constants';
-import axios from 'axios';
+import { apis } from '../../constants';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
-import { hideLoading } from '../../redux/reducers/LoadingReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../store/ReduxStore';
 
-let instance: any = null;
-
 class HttpService {
+  http: AxiosInstance = axios;
   constructor() {
-    if (instance) {
-      return instance;
-    }
-
-    instance = this;
     const http = axios.create({
       baseURL: apis.baseURL,
       // timeout: 1000,
@@ -34,19 +27,12 @@ class HttpService {
       // error response
       this.handleResponseInterceptor,
     );
-
     this.http = http;
-    this.inFlightAuthRequest = null;
-    this.apiMode = 'httpClient';
   }
 
-  setApiMode = mode => {
-    this.apiMode = mode;
-  };
-
   // Request interceptor to add auth bearer token to request header
-  handleRequestInterceptor = async request => {
-    const requestURL = request.url;
+  handleRequestInterceptor = async (request: AxiosRequestConfig) => {
+    // const requestURL = request.url;
     // apply only if the request needs an access token
     // if (apis.authPathArray.some((substring) => !requestURL.includes(substring))) {
     //   let accessToken = '';
@@ -60,8 +46,8 @@ class HttpService {
   };
 
   // Response interceptor to manage token refresh
-  handleResponseInterceptor = error => {
-    const responseURL = error.response.config.url; // holds full URL
+  handleResponseInterceptor = (response: AxiosResponse) => {
+    // const responseURL = response.config.url;
     // store.dispatch(hideLoading());
     // if (apis.authPathArray.some((substring) => !responseURL.includes(substring))) {
     //   store.dispatch(hideLoading());
@@ -73,30 +59,14 @@ class HttpService {
     //       // redirect to login screen
     //       this.showErrorDialogHandler(apis.errorTypes.unauthorized);
     //       return Promise.reject(new Error(1));
-    //     case 403:
-    //       this.showErrorDialogHandler(apis.errorTypes.forbidden);
-    //       return Promise.reject(new Error(1));
-    //     case 405:
-    //       this.showErrorDialogHandler(apis.errorTypes.methodNotAllowed);
-    //       return Promise.reject(new Error(1));
-    //     case 415:
-    //       this.showErrorDialogHandler(apis.errorTypes.unsupported);
-    //       return Promise.reject(new Error(1));
-    //     case 422:
-    //       this.showErrorDialogHandler(apis.errorTypes.unprocessable);
-    //       return Promise.reject(new Error(1));
-    //     case 500:
-    //       this.showErrorDialogHandler(apis.errorTypes.serverError);
-    //       return Promise.reject(new Error(1));
     //     default:
     //       return Promise.reject(error.response);
     //   }
     // }
-
-    return Promise.reject(error.response);
+    return Promise.reject(response);
   };
 
-  showErrorDialogHandler = errorType => {
+  showErrorDialogHandler = (errorType: string) => {
     store.dispatch(
       showErrorModal({
         options: {
@@ -107,12 +77,15 @@ class HttpService {
     );
   };
 
-  // Perform a get http call
-  get = (url, payload, conf = {}) => {
-    const config = {
+  get = (
+    url: string,
+    params?: AxiosRequestConfig,
+    conf?: AxiosRequestConfig,
+  ) => {
+    const config: AxiosRequestConfig = {
       method: 'get',
       url,
-      params: payload,
+      params,
       ...conf,
     };
     return NetInfo.fetch()
@@ -126,12 +99,15 @@ class HttpService {
       .catch(error => this.handleFailResponse(error));
   };
 
-  // Perform a post http call
-  post = (url, payload, conf = {}) => {
-    const config = {
+  post = (
+    url: string,
+    params?: AxiosRequestConfig['data'],
+    conf?: AxiosRequestConfig,
+  ) => {
+    const config: AxiosRequestConfig = {
       method: 'POST',
       url,
-      data: payload,
+      data: params,
       ...conf,
     };
 
@@ -146,11 +122,15 @@ class HttpService {
       .catch(error => this.handleFailResponse(error));
   };
 
-  put = (url, payload = {}, conf = {}) => {
-    const config = {
+  put = (
+    url: string,
+    params?: AxiosRequestConfig['data'],
+    conf?: AxiosRequestConfig,
+  ) => {
+    const config: AxiosRequestConfig = {
       method: 'PUT',
       url,
-      data: payload,
+      data: params,
       ...conf,
     };
 
@@ -165,11 +145,15 @@ class HttpService {
       .catch(error => this.handleFailResponse(error));
   };
 
-  delete = (url, payload = {}, conf = {}) => {
-    const config = {
+  delete = (
+    url: string,
+    params?: AxiosRequestConfig['data'],
+    conf?: AxiosRequestConfig,
+  ) => {
+    const config: AxiosRequestConfig = {
       method: 'DELETE',
       url,
-      data: payload,
+      data: params,
       ...conf,
     };
 
@@ -184,9 +168,9 @@ class HttpService {
       .catch(error => this.handleFailResponse(error));
   };
 
-  handleSuccessResponse = response => response;
+  handleSuccessResponse = (response: AxiosResponse) => response;
 
-  handleFailResponse = error => error;
+  handleFailResponse = (response: AxiosResponse) => response;
 }
 
 export default new HttpService();
