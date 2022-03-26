@@ -12,10 +12,9 @@ class DummyApi {
    * @param   { Object }    data    Contains
    * @returns { Object }            Promise either resolve or rejected
    */
-  static fetchDummy() {
-    return HttpService.get('https://reqres.in/api/users').then(
-      (resp: AxiosResponse) => resp,
-    );
+  static async fetchDummy(): Promise<AxiosResponse> {
+    const resp = await HttpService.get('https://reqres.in/api/users');
+    return resp;
   }
 }
 

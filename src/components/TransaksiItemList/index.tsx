@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { colors, icons, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { TransaksiItemListProps } from './model';
+import moment from 'moment';
+import { isEmpty } from 'lodash';
 
 const TransaksiItemList = (props: TransaksiItemListProps) => {
   const { item, onPress } = props || {};
@@ -27,7 +29,9 @@ const TransaksiItemList = (props: TransaksiItemListProps) => {
           </Text>
         </View>
         <Text style={styles.textDetail}>{detail}</Text>
-        <Text style={styles.textTime}>{time}</Text>
+        <Text style={styles.textTime}>
+          {!isEmpty(time) ? moment(time).format('DD/MM/YYYY') : '-'}
+        </Text>
       </View>
     </TouchableOpacity>
   );

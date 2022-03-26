@@ -56,7 +56,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
             title={strings.tgl_lahir}
             content={
               !isEmpty(tanggalLahir)
-                ? moment(new Date(tanggalLahir as Date)).format('DD/MM/YYYY')
+                ? moment(tanggalLahir).format('DD/MM/YYYY')
                 : ''
             }
           />

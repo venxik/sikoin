@@ -46,7 +46,7 @@ const CalendarPicker = (props: CalendarPickerProps) => {
           }}>
           <Image source={icons.icon_calendar_small} style={styles.icon} />
           <Text style={styles.valueText}>
-            {moment(new Date(date)).format('DD/MM/YYYY')}
+            {moment(date).format('DD/MM/YYYY')}
           </Text>
         </View>
         <Image

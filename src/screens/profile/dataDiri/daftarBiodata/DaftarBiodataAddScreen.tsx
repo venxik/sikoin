@@ -26,6 +26,7 @@ import {
   useAppSelector,
 } from '../../../../config/store/ReduxStore';
 import { formatter } from '../../../../utils';
+import moment from 'moment';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -79,7 +80,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     dispatch(
       addBiodata({
         ...data,
-        tanggalLahir: tanggalLahir?.toString(),
+        tanggalLahir: moment(tanggalLahir).format(),
       }),
     );
     navigation.goBack();
