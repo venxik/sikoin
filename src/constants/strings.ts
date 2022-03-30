@@ -36,6 +36,7 @@ export default {
     'Kamu dapat menggunakan Username & Password tersebut untuk masuk ke aplikasi CoopApp.',
   masukan_nama_koperasimu: 'Masukan nama koperasimu...',
   masukan_no_anggota: 'Masukan nomor anggotamu...',
+  masukan_email: 'Masukan emailmu...',
   cek_inbox: 'Cek Inboxmu ya!',
 
   /*BUTTON*/

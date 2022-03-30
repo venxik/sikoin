@@ -6,6 +6,7 @@ import icons from './icons';
 import { sizes, SCREEN_WIDTH, SCREEN_HEIGHT } from './theme';
 import dropdownItems from './dropdownItems';
 import messagesDummy from './messagesDummy';
+import namaKoperasiDummy from './namaKoperasiDummy';
 import storage from './storage';
 
 export {
@@ -19,5 +20,6 @@ export {
   SCREEN_WIDTH,
   dropdownItems,
   messagesDummy,
+  namaKoperasiDummy,
   storage,
 };

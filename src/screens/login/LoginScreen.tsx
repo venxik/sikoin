@@ -76,7 +76,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         style={styles.customPopupTextInput}
         value={resetEmail}
         onChangeText={e => onChangeResetPassEmailText(e)}
-        secureTextEntry={false}
         placeholder={strings.email_textbox_placeholder}
         keyboardType={'email-address'}
       />

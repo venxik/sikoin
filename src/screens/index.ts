@@ -1,6 +1,7 @@
 import OnboardingScreen from './onboarding/OnboardingScreen';
 import LoginScreen from './login/LoginScreen';
 import DaftarKoperasiIntroScreen from './login/DaftarKoperasiIntroScreen';
+import DaftarKoperasiSearchScreen from './login/DaftarKoperasiSearchScreen';
 import DaftarKoperasiStep1Screen from './login/DaftarKoperasiStep1Screen';
 import DaftarKoperasiStep2Screen from './login/DaftarKoperasiStep2Screen';
 import DaftarKoperasiSuccessScreen from './login/DaftarKoperasiSuccessScreen';
@@ -82,4 +83,5 @@ export {
   DokumenMainScreen,
   DokumenDetailScreen,
   MarketMainScreen,
+  DaftarKoperasiSearchScreen,
 };

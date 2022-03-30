@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonText, HeaderBack, TextInputBorder } from '../../components';
@@ -6,6 +6,8 @@ import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { Controller, useForm } from 'react-hook-form';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -13,15 +15,23 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
-  const [email, setEmail] = useState<string>('');
-
-  const onChangeEmail = (value: string) => {
-    setEmail(value);
+  const navigateToSuccessScreen = (email: string) => {
+    navigation.navigate('DaftarKoperasiSuccessScreen', { email: email });
   };
 
-  const navigateToSuccessScreen = () => {
-    navigation.navigate('DaftarKoperasiSuccessScreen');
+  const onSubmit = ({ email }: { email: string }) => {
+    navigateToSuccessScreen(email);
   };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+    },
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,20 +56,35 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>
-        <TextInputBorder
-          value={email}
-          onChangeText={e => onChangeEmail(e)}
-          secureTextEntry={false}
-          placeholder={strings.masukan_nama_koperasimu}
-          icon={icons.icon_email}
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <TextInputBorder
+              error={errors.email}
+              errorText={errors.email?.message}
+              value={value}
+              onChangeText={e => onChange(e)}
+              placeholder={strings.masukan_email}
+              icon={icons.icon_email}
+            />
+          )}
+          rules={{
+            required: { value: true, message: 'Mohon isi Email' },
+            pattern: {
+              value: formatter.EMAIL_REGEX,
+              message: 'Format Email Salah',
+            },
+          }}
         />
+
         <Text style={styles.textHint}>
           {strings.daftar_koperasi_isi_data_hint_2}
         </Text>
       </View>
 
       <ButtonText
-        onPress={navigateToSuccessScreen}
+        onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={styles.buttonContainer}
         text={strings.kirim_otp_ke_email}
         icon={icons.arrow_right_button_white}

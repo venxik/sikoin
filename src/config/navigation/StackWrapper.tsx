@@ -480,6 +480,10 @@ const DaftarKoperasiStackNavigator = () => (
       component={screens.DaftarKoperasiIntroScreen}
     />
     <DaftarKoperasiStack.Screen
+      name="DaftarKoperasiSearchScreen"
+      component={screens.DaftarKoperasiSearchScreen}
+    />
+    <DaftarKoperasiStack.Screen
       name="DaftarKoperasiStep1Screen"
       component={screens.DaftarKoperasiStep1Screen}
     />

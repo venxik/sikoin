@@ -1,16 +1,30 @@
-import React, { FC, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   ButtonText,
-  DropdownForm,
+  CalendarPicker,
   HeaderBack,
   TextInputBorder,
 } from '../../components';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import {
+  colors,
+  icons,
+  namaKoperasiDummy,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { Controller, useForm } from 'react-hook-form';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -19,19 +33,46 @@ type Props = NativeStackScreenProps<
 
 const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const [koperasiName, setKoperasiName] = useState<string>('');
-  const [noAnggota, setNoAnggota] = useState<string>('');
+  const [selected, setSelected] = useState<boolean>(false);
+  const [data, setData] = useState<Array<any> | null>(null);
 
   const onChangeKoperasiName = (value: string) => {
+    setValue('namaKoperasi', value);
     setKoperasiName(value);
   };
 
-  const onChangeNoAnggota = (value: string) => {
-    setNoAnggota(value);
-  };
+  useEffect(() => {
+    if (!selected) {
+      if (koperasiName.length > 2) {
+        const result = namaKoperasiDummy.filter(value =>
+          value.nama.includes(koperasiName),
+        );
+        setData(result);
+      } else setData(null);
+    }
+  }, [koperasiName, selected]);
 
   const navigateToStep2 = () => {
     navigation.navigate('DaftarKoperasiStep2Screen');
   };
+
+  const onSubmit = () => {
+    navigateToStep2();
+  };
+
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      namaKoperasi: '',
+      noAnggota: '',
+      tanggal: '',
+    },
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.daftar} />
@@ -55,41 +96,122 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>
-        <TextInputBorder
-          value={koperasiName}
-          onChangeText={e => onChangeKoperasiName(e)}
-          secureTextEntry={false}
-          placeholder={strings.masukan_nama_koperasimu}
-          icon={icons.icon_pencil_textbox}
-        />
-        <TextInputBorder
-          style={{
-            marginTop: sizes.padding / 2,
+        <View>
+          <Controller
+            control={control}
+            name="namaKoperasi"
+            render={({ field: { onChange, value } }) => (
+              <TextInputBorder
+                error={errors.namaKoperasi}
+                errorText={errors.namaKoperasi?.message}
+                value={value}
+                onChangeText={e => {
+                  onChangeKoperasiName(e);
+                  onChange(e);
+                  if (selected) setSelected(false);
+                }}
+                placeholder={strings.masukan_nama_koperasimu}
+                icon={icons.icon_pencil_textbox}
+              />
+            )}
+            rules={{
+              required: { value: true, message: 'Mohon isi Nama Koperasi' },
+            }}
+          />
+          {data && (
+            <FlatList
+              data={data}
+              style={{
+                position: 'absolute',
+                top: 60,
+                zIndex: 2,
+                width: '100%',
+              }}
+              contentContainerStyle={{
+                backgroundColor: colors.white,
+              }}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={{
+                    backgroundColor: colors.strokeDarkGrey,
+                    width: '100%',
+                    height: 1,
+                  }}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setSelected(true);
+                      setData(null);
+                      onChangeKoperasiName(item.nama);
+                    }}>
+                    <Text style={{ color: colors.bodyText }}>{item.nama}</Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          )}
+        </View>
+        <Controller
+          control={control}
+          name="noAnggota"
+          render={({ field: { onChange, value } }) => (
+            <TextInputBorder
+              error={errors.noAnggota}
+              errorText={errors.noAnggota?.message}
+              style={{
+                marginTop: sizes.padding / 2,
+              }}
+              value={value}
+              onChangeText={e => onChange(e)}
+              placeholder={strings.masukan_no_anggota}
+              icon={icons.icon_number_textbox}
+            />
+          )}
+          rules={{
+            required: { value: true, message: 'Mohon isi Nomor Anggota' },
           }}
-          value={noAnggota}
-          onChangeText={e => onChangeNoAnggota(e)}
-          secureTextEntry={false}
-          placeholder={strings.masukan_no_anggota}
-          icon={icons.icon_number_textbox}
         />
-        <DropdownForm
-          onChange={item => {
-            console.log(item);
+
+        <Controller
+          control={control}
+          name="tanggal"
+          render={({ field: { onChange, value } }) => (
+            <CalendarPicker
+              error={errors.tanggal}
+              errorText={errors.tanggal?.message}
+              onChangeDate={date => {
+                onChange(date);
+              }}
+              value={value}
+              style={{ marginTop: sizes.padding, marginBottom: 0 }}
+            />
+          )}
+          rules={{
+            required: { value: true, message: 'Mohon isi Tanggal' },
           }}
-          maxHeight={120}
-          errorText={''}
-          data={[]}
         />
       </View>
 
       <ButtonText
-        onPress={navigateToStep2}
+        onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={styles.buttonContainer}
         text={strings.selanjutnya}
         icon={icons.arrow_right_button_white}
         iconLocation="right"
         shadow
       />
+      {/* <ButtonText
+        onPress={() => navigation.navigate('DaftarKoperasiSearchScreen')}
+        // buttonContainerStyle={styles.buttonContainer}
+        text={strings.selanjutnya}
+        icon={icons.arrow_right_button_white}
+        iconLocation="right"
+        shadow
+      /> */}
     </SafeAreaView>
   );
 };

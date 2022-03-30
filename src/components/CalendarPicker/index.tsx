@@ -9,13 +9,14 @@ import {
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   sizes,
+  strings,
 } from '../../constants';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
 import { CalendarPickerProps } from './model';
 
 const CalendarPicker = (props: CalendarPickerProps) => {
-  const { title, style, onChangeDate, value } = props || {};
+  const { title, style, onChangeDate, value, error, errorText } = props || {};
   const [date, setDate] = useState<Date>(
     value ? new Date(value as Date) : new Date(),
   );
@@ -38,7 +39,12 @@ const CalendarPicker = (props: CalendarPickerProps) => {
   return (
     <View style={[styles.defaultContainer, style]}>
       {!isEmpty(title) && <Text style={styles.titleText}>{title}</Text>}
-      <TouchableOpacity onPress={showDatepicker} style={styles.container}>
+      <TouchableOpacity
+        onPress={showDatepicker}
+        style={[
+          styles.container,
+          error && { borderColor: 'red', borderWidth: 1 },
+        ]}>
         <View
           style={{
             flexDirection: 'row',
@@ -46,7 +52,7 @@ const CalendarPicker = (props: CalendarPickerProps) => {
           }}>
           <Image source={icons.icon_calendar_small} style={styles.icon} />
           <Text style={styles.valueText}>
-            {moment(date).format('DD/MM/YYYY')}
+            {value ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}
           </Text>
         </View>
         <Image
@@ -54,6 +60,8 @@ const CalendarPicker = (props: CalendarPickerProps) => {
           style={{ width: sizes.padding, height: sizes.padding }}
         />
       </TouchableOpacity>
+      {error && <Text style={styles.textError}>{errorText}</Text>}
+
       {show && (
         <DateTimePicker
           value={date}
@@ -97,5 +105,11 @@ const styles = StyleSheet.create({
   valueText: {
     color: colors.primary,
     fontFamily: 'Poppins-Medium',
+  },
+  textError: {
+    color: colors.red,
+    fontSize: 12,
+    marginTop: 2,
+    marginLeft: 10,
   },
 });

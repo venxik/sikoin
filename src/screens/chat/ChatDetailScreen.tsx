@@ -147,8 +147,7 @@ const ChatDetailScreen: FC<Props> = () => {
         {...props}
         containerStyle={{
           left: {
-            alignSelf: 'flex-end',
-            flex: 1,
+            maxWidth: SCREEN_WIDTH * 0.7,
           },
         }}
       />

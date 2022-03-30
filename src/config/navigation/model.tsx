@@ -54,9 +54,10 @@ export type LoginStackParamList = {
 
 export type DaftarKoperasiParamList = {
   DaftarKoperasiIntroScreen: undefined;
+  DaftarKoperasiSearchScreen: undefined;
   DaftarKoperasiStep1Screen: undefined;
   DaftarKoperasiStep2Screen: undefined;
-  DaftarKoperasiSuccessScreen: undefined;
+  DaftarKoperasiSuccessScreen: { email: string };
 };
 
 export type HomeTabParamList = {

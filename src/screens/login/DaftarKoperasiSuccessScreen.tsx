@@ -7,17 +7,14 @@ import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
   'DaftarKoperasiSuccessScreen'
 >;
 
-const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation }) => {
-  const { email } =
-    useAppSelector(state => state.ProfileReducer.profileData) || {};
-
+const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
+  const { email } = route.params;
   const navigateToLoginScreen = () => {
     navigation.dispatch(() => {
       return CommonActions.reset({

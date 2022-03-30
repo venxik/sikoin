@@ -22,19 +22,16 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   whitelist: ['AlamatReducer'],
+  blacklist: [],
 };
 
-let logger: Middleware;
-
-if (__DEV__) {
-  logger = createLogger({
-    collapsed: true,
-    duration: true,
-    timestamp: true,
-    logErrors: true,
-    diff: true,
-  });
-}
+const logger = createLogger({
+  collapsed: true,
+  duration: true,
+  timestamp: true,
+  logErrors: true,
+  diff: true,
+});
 
 const persistReducers = persistReducer(persistConfig, rootReducer);
 
