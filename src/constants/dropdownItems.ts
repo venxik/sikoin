@@ -39,8 +39,16 @@ const statusPernikahanItem = [
 ];
 
 const pekerjaanItem = [
-  { label: 'Karyawan', value: 'Karyawan' },
-  { label: 'Bos', value: 'Bos' },
+  { label: 'Pegawai', value: 'Pegawai' },
+  { label: 'Wiraswasta', value: 'Wiraswasta' },
+];
+
+const statusKeluarga = [
+  { label: 'Ayah', value: 'Ayah' },
+  { label: 'Ibu', value: 'Ibu' },
+  { label: 'Suami', value: 'Suami' },
+  { label: 'Istri', value: 'Istri' },
+  { label: 'Saudara Kandung', value: 'Saudara Kandung' },
 ];
 
 export default {
@@ -51,4 +59,5 @@ export default {
   agamaItem,
   statusPernikahanItem,
   pekerjaanItem,
+  statusKeluarga,
 };

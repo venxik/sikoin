@@ -10,7 +10,10 @@ import { ButtonText, HeaderPinjaman, TextInputForm } from '../../components';
 import { PinjamanStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<PinjamanStackParamList, 'PinjamanStep2'>;
+type Props = NativeStackScreenProps<
+  PinjamanStackParamList,
+  'PinjamanStep2Screen'
+>;
 
 const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
   const [emailValue, setEmailValue] = useState<string>('email');
@@ -30,7 +33,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToStep3 = () => {
-    navigation.navigate('PinjamanStep3');
+    navigation.navigate('PinjamanStep3Screen');
   };
 
   return (

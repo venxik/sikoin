@@ -144,8 +144,9 @@ export type MarketStackParamList = {
 };
 
 export type PinjamanStackParamList = {
-  PinjamanStep1: undefined;
-  PinjamanStep2: undefined;
-  PinjamanStep3: undefined;
-  PinjamanStep4: undefined;
+  PinjamanStep1Screen: undefined;
+  PinjamanStep2Screen: undefined;
+  PinjamanStep3Screen: undefined;
+  PinjamanStep4Screen: undefined;
+  PinjamanSucessScreen: undefined;
 };

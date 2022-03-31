@@ -401,25 +401,25 @@ const MarketStackNavigator = () => (
 
 const PinjamanStackNavigator = () => (
   <PinjamanStack.Navigator
-    initialRouteName={'PinjamanStep1'}
+    initialRouteName={'PinjamanStep1Screen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
     }}>
     <PinjamanStack.Screen
-      name="PinjamanStep1"
+      name="PinjamanStep1Screen"
       component={screens.PinjamanStep1}
     />
     <PinjamanStack.Screen
-      name="PinjamanStep2"
+      name="PinjamanStep2Screen"
       component={screens.PinjamanStep2}
     />
     <PinjamanStack.Screen
-      name="PinjamanStep3"
+      name="PinjamanStep3Screen"
       component={screens.PinjamanStep3}
     />
     <PinjamanStack.Screen
-      name="PinjamanStep4"
+      name="PinjamanStep4Screen"
       component={screens.PinjamanStep4}
     />
   </PinjamanStack.Navigator>

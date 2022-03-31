@@ -11,7 +11,10 @@ import { ButtonText, HeaderPinjaman, TextInputForm } from '../../components';
 import { PinjamanStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<PinjamanStackParamList, 'PinjamanStep4'>;
+type Props = NativeStackScreenProps<
+  PinjamanStackParamList,
+  'PinjamanStep4Screen'
+>;
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const [emailValue, setEmailValue] = useState<string>('email');

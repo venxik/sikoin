@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:78154163643:android:63d3c12220b6d7b62f909e",
+        "mobilesdk_app_id": "1:78154163643:android:d2c732107ad1a92f2f909e",
         "android_client_info": {
-          "package_name": "com.sikoin"
+          "package_name": "com.virtek.sikoin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "78154163643-nhh9s64o1vkr3ofdbki406nfbk2b4ahl.apps.googleusercontent.com",
+          "client_id": "78154163643-m62nvbnpnkqlailf772qrljv172p3h1j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.sikoin",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "package_name": "com.virtek.sikoin",
+            "certificate_hash": "20ea19c15c57074947e87fc13222a527513526b0"
           }
         },
         {
