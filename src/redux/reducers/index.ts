@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import ErrorModalReducer from './ErrorModalReducer';
 import LoadingReducer from './LoadingReducer';
+import LoginReducer from './LoginReducer';
 import KabarReducer from './KabarReducer';
 import PromoReducer from './PromoReducer';
 import MarketReducer from './MarketReducer';
@@ -19,6 +20,7 @@ import DokumenReducer from './DokumenReducer';
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
   loading: LoadingReducer,
+  LoginReducer: LoginReducer,
   KabarReducer: KabarReducer,
   PromoReducer: PromoReducer,
   MarketReducer: MarketReducer,

@@ -3,7 +3,15 @@ import Config from 'react-native-config';
 const constant = {
   acceptHeader: '*/*',
   endpoints: {
-    comments: 'comments',
+    login: {
+      koperasi: '/api/koperasi',
+      emailAnggota: '/api/email-anggota',
+      forgotPassword: '/api/lupa-password',
+      login: '/api/login',
+    },
+    alamat: {
+      alamat: '/api/daftar-alamat',
+    },
   },
   errorTypes: {
     generic: 'Error',
@@ -19,11 +27,16 @@ const constant = {
     unprocessable: 'Unprocessable Entity', // 422
     serverError: 'Internal server error', // 500
   },
+  authPathArray: [
+    '/api/koperasi',
+    '/api/email-anggota',
+    '/api/lupa-password',
+    '/api/login',
+  ],
 };
 
 const API = {
-  baseURL: 'https://jsonplaceholder.typicode.com/',
-  test: Config.API_URL,
+  baseURL: Config.BASE_API_URL,
   ...constant,
 };
 

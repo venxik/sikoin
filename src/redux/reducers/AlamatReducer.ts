@@ -1,79 +1,40 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type AlamatData = {
+export type AlamatDataResponse = {
+  id?: number;
   judul: string;
-  alamatLengkap: string;
+  detail: string;
+  no_rt: string;
+  no_rw: string;
+  provinsi: string;
+  kabupaten: string;
+  kecamatan: string;
+  kode_pos: string;
+  lati: number;
+  lang: number;
+  member_koperasi_id: number;
+  created_at: number;
+  updated_at: number;
+};
+
+export type AlamatDataRequest = {
+  judul: string;
+  alamat: string;
   rt: string;
   rw: string;
   provinsi: string;
   kabupaten: string;
   kecamatan: string;
-  kodepos: string;
+  kode_pos: string;
 };
 
 interface RootState {
-  alamatList: AlamatData[];
+  alamatList: AlamatDataResponse[];
   error: null;
 }
 
 const initialState: RootState = {
-  alamatList: [
-    {
-      judul: 'Rumah',
-      alamatLengkap:
-        '50/F, Menara BCA Grand Indonesia JI.MH. Thamrin No.1 Jakarta, RT.1/RW.5, Menteng, Central Jakarta City, Jakarta 10310',
-      rt: '01',
-      rw: '02',
-      provinsi: 'jakarta',
-      kabupaten: 'sdsadasdas',
-      kecamatan: 'Test',
-      kodepos: '123123',
-    },
-    {
-      judul: 'Apart',
-      alamatLengkap:
-        '50/F, Menara BCA Grand Indonesia JI.MH. Thamrin No.1 Jakarta, RT.1/RW.5, Menteng, Central Jakarta City, Jakarta 10310',
-      rt: '01',
-      rw: '02',
-      provinsi: 'jakarta',
-      kabupaten: 'sdsadasdas',
-      kecamatan: 'Test',
-      kodepos: '123123',
-    },
-    {
-      judul: 'Test',
-      alamatLengkap:
-        '50/F, Menara BCA Grand Indonesia JI.MH. Thamrin No.1 Jakarta, RT.1/RW.5, Menteng, Central Jakarta City, Jakarta 10310',
-      rt: '01',
-      rw: '02',
-      provinsi: 'jakarta',
-      kabupaten: 'sdsadasdas',
-      kecamatan: 'Test',
-      kodepos: '123123',
-    },
-    {
-      judul: 'Heheheh',
-      alamatLengkap:
-        '50/F, Menara BCA Grand Indonesia JI.MH. Thamrin No.1 Jakarta, RT.1/RW.5, Menteng, Central Jakarta City, Jakarta 10310',
-      rt: '01',
-      rw: '02',
-      provinsi: 'jakarta',
-      kabupaten: 'sdsadasdas',
-      kecamatan: 'Test',
-      kodepos: '123123',
-    },
-    {
-      judul: 'Rumah ke 2',
-      alamatLengkap:
-        '50/F, Menara BCA Grand Indonesia JI.MH. Thamrin No.1 Jakarta, RT.1/RW.5, Menteng, Central Jakarta City, Jakarta 10310',
-      rt: '01',
-      rw: '02',
-      provinsi: 'jakarta',
-      kabupaten: 'sdsadasdas',
-      kecamatan: 'Test',
-      kodepos: '123123',
-    },
-  ],
+  alamatList: [],
   error: null,
 };
 
@@ -81,20 +42,71 @@ const alamatSlice = createSlice({
   name: 'alamatSlice',
   initialState,
   reducers: {
-    addAlamat: (state, { payload }: PayloadAction<AlamatData>) => {
-      state.alamatList.push(payload);
+    fetchGetAlamatSuccess: (
+      state,
+      { payload }: PayloadAction<AlamatDataResponse[]>,
+    ) => {
+      state.alamatList = payload;
     },
-    deleteAlamat: (state, { payload }: PayloadAction<AlamatData | null>) => {
+    fetchGetAlamatFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    fetchSubmitAlamatSuccess: (
+      state,
+      { payload }: PayloadAction<AlamatDataResponse[]>,
+    ) => {
+      state.alamatList = payload;
+    },
+    fetchSubmitAlamatFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    fetchUpdateAlamatSuccess: (
+      state,
+      { payload }: PayloadAction<AlamatDataResponse[]>,
+    ) => {
+      state.alamatList = payload;
+    },
+    fetchUpdateAlamatFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    addAlamat: (state, { payload }: PayloadAction<AlamatDataRequest>) => {
+      state.alamatList.push({
+        ...payload,
+        detail: payload.alamat,
+        no_rt: payload.rt,
+        no_rw: payload.rw,
+        lati: 0,
+        lang: 0,
+        member_koperasi_id: 1,
+        created_at: Date.now(),
+        updated_at: Date.now(),
+      });
+    },
+    deleteAlamat: (
+      state,
+      { payload }: PayloadAction<AlamatDataResponse | null>,
+    ) => {
       state.alamatList = state.alamatList.filter(
         item => item.judul.toLowerCase() != payload?.judul?.toLowerCase(),
       );
     },
     updateAlamat: (
       state,
-      { payload }: PayloadAction<{ data: AlamatData; index?: number }>,
+      { payload }: PayloadAction<{ data: AlamatDataRequest; index?: number }>,
     ) => {
       const { data, index } = payload || {};
-      if (index !== undefined) state.alamatList[index] = data;
+      if (index !== undefined)
+        state.alamatList[index] = {
+          ...data,
+          detail: data.alamat,
+          no_rt: data.rt,
+          no_rw: data.rw,
+          lati: 0,
+          lang: 0,
+          member_koperasi_id: 1,
+          created_at: Date.now(),
+          updated_at: Date.now(),
+        };
     },
     addAlamatSuccess: state => {
       state.error = null;
@@ -105,12 +117,24 @@ const alamatSlice = createSlice({
   },
 });
 
+export const fetchGetAlamat = createAction('fetchGetAlamat');
+export const fetchUpdateAlamat =
+  createAction<AlamatDataRequest>('fetchUpdateAlamat');
+export const fetchSubmitAlamat =
+  createAction<AlamatDataRequest>('fetchSubmitAlamat');
+
 export const {
   addAlamat,
   addAlamatSuccess,
   addAlamatFailed,
   deleteAlamat,
   updateAlamat,
+  fetchGetAlamatFailed,
+  fetchGetAlamatSuccess,
+  fetchUpdateAlamatFailed,
+  fetchUpdateAlamatSuccess,
+  fetchSubmitAlamatFailed,
+  fetchSubmitAlamatSuccess,
 } = alamatSlice.actions;
 
 export default alamatSlice.reducer;

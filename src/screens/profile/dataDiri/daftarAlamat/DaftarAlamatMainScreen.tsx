@@ -1,5 +1,6 @@
+import { useIsFocused } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -22,8 +23,9 @@ import {
 } from '../../../../config/store/ReduxStore';
 import { icons, sizes, strings } from '../../../../constants';
 import {
-  AlamatData,
+  AlamatDataResponse,
   deleteAlamat,
+  fetchGetAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
 
 type Props = NativeStackScreenProps<
@@ -33,23 +35,30 @@ type Props = NativeStackScreenProps<
 
 const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
+  const isFocused = useIsFocused();
 
   const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
   const [showSuccessDeletePopup, setShowSuccessDeletePopup] =
     useState<boolean>(false);
   const [showFailedPopup, setShowFailedPopup] = useState<boolean>(false);
-  const [selectAlamat, setSelectAlamat] = useState<AlamatData | null>(null);
+  const [selectAlamat, setSelectAlamat] = useState<AlamatDataResponse | null>(
+    null,
+  );
   const { alamatList } = useAppSelector(s => s.AlamatReducer) || [];
+
+  useEffect(() => {
+    isFocused ? dispatch(fetchGetAlamat()) : null;
+  }, [isFocused]);
 
   const navigateToAddScreen = (
     update: boolean,
     index?: number,
-    item?: AlamatData,
+    item?: AlamatDataResponse,
   ) => {
     navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
   };
 
-  const onPressDeleteAlamat = (item: AlamatData) => {
+  const onPressDeleteAlamat = (item: AlamatDataResponse) => {
     setShowDeletePopup(true);
     setSelectAlamat(item);
   };

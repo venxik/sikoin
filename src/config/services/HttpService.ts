@@ -1,52 +1,80 @@
 import NetInfo from '@react-native-community/netinfo';
-import { apis } from '../../constants';
+import { apis, storage } from '../../constants';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../store/ReduxStore';
+import { EncryptedStorage } from '../../utils';
+
+let instance: HttpService | null = null;
 
 class HttpService {
+  instance = null;
   http: AxiosInstance = axios;
   constructor() {
+    if (instance) {
+      return instance;
+    }
+
+    instance = this;
+
     const http = axios.create({
+      transitional: {
+        silentJSONParsing: false,
+      },
       baseURL: apis.baseURL,
       // timeout: 1000,
       headers: {
         Accept: apis.acceptHeader,
+        'Content-Type': 'application/json',
       },
     });
 
     // setup interceptor for http request
-    http.interceptors.request.use(this.handleRequestInterceptor);
+    http.interceptors.request.use(
+      this.handleRequestInterceptor,
+      this.handleErrorInterceptor,
+    );
 
     // setup interceptor for http response
     http.interceptors.response.use(
       // success response
       response => response,
       // error response
-      this.handleResponseInterceptor,
+      this.handleErrorInterceptor,
     );
+
     this.http = http;
   }
 
   // Request interceptor to add auth bearer token to request header
   handleRequestInterceptor = async (request: AxiosRequestConfig) => {
-    // const requestURL = request.url;
+    const requestURL = request.url;
     // apply only if the request needs an access token
-    // if (apis.authPathArray.some((substring) => !requestURL.includes(substring))) {
-    //   let accessToken = '';
-    //   accessToken = await getEncryptedStorage(storage.accessTokenKey);
-    //   if (accessToken !== '' || accessToken !== null) {
-    //     request.headers.Authorization = `Bearer ${accessToken}`;
-    //   }
-    //   return request;
-    // }
+    if (
+      apis.authPathArray.some(substring => !requestURL?.includes(substring))
+    ) {
+      let accessToken: null | string = null;
+      accessToken = await EncryptedStorage.getEncryptedStorage(
+        storage.authCode,
+      );
+      if (!request?.headers) {
+        throw new Error(
+          `Expected 'config' and 'config.headers' not to be undefined`,
+        );
+      }
+      // if (accessToken !== '' || accessToken !== null) {
+      //   request.headers.Authorization = `Bearer ${accessToken}`;
+      // }
+      request.headers.Authorization = `Bearer 29|aY3hod3ysYVboKPDQUe9PFAthnsBMpuEAUWkADYB`;
+      return request;
+    }
     return request;
   };
 
   // Response interceptor to manage token refresh
-  handleResponseInterceptor = (response: AxiosResponse) => {
+  handleErrorInterceptor = (response: AxiosResponse) => {
     // const responseURL = response.config.url;
     // store.dispatch(hideLoading());
     // if (apis.authPathArray.some((substring) => !responseURL.includes(substring))) {
@@ -86,6 +114,10 @@ class HttpService {
       method: 'get',
       url,
       params,
+      responseType: 'json',
+      transitional: {
+        silentJSONParsing: false,
+      },
       ...conf,
     };
     return NetInfo.fetch()
@@ -105,9 +137,40 @@ class HttpService {
     conf?: AxiosRequestConfig,
   ) => {
     const config: AxiosRequestConfig = {
-      method: 'POST',
+      method: 'post',
       url,
       data: params,
+      responseType: 'json',
+      transitional: {
+        silentJSONParsing: false,
+      },
+      ...conf,
+    };
+
+    return NetInfo.fetch()
+      .then(state => {
+        if (state.isConnected) {
+          return this.http.request(config);
+        }
+        return Promise.reject(new Error('Network Error'));
+      })
+      .then(response => this.handleSuccessResponse(response))
+      .catch(error => this.handleFailResponse(error));
+  };
+
+  patch = (
+    url: string,
+    params?: AxiosRequestConfig['data'],
+    conf?: AxiosRequestConfig,
+  ) => {
+    const config: AxiosRequestConfig = {
+      method: 'patch',
+      url,
+      data: params,
+      responseType: 'json',
+      transitional: {
+        silentJSONParsing: false,
+      },
       ...conf,
     };
 
@@ -128,7 +191,7 @@ class HttpService {
     conf?: AxiosRequestConfig,
   ) => {
     const config: AxiosRequestConfig = {
-      method: 'PUT',
+      method: 'put',
       url,
       data: params,
       ...conf,
@@ -151,7 +214,7 @@ class HttpService {
     conf?: AxiosRequestConfig,
   ) => {
     const config: AxiosRequestConfig = {
-      method: 'DELETE',
+      method: 'delete',
       url,
       data: params,
       ...conf,

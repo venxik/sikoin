@@ -1,7 +1,7 @@
-import { AlamatData } from '../../redux/reducers/AlamatReducer';
+import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 
 export interface CardAlamatProps {
-  item: AlamatData;
+  item: AlamatDataResponse;
   onPressUbah: () => void;
   onPressDelete: () => void;
 }

@@ -541,10 +541,7 @@ const ParentStackNavigator = () => {
             component={screens.OnboardingScreen}
           />
         )}
-        <ParentStack.Screen
-          name={'LoginStackNavigator'}
-          component={LoginStackNavigator}
-        />
+        <ParentStack.Screen name={'HomeTab'} component={HomeTab} />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

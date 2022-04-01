@@ -9,7 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AlamatData } from '../../redux/reducers/AlamatReducer';
+import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 import { BiodataData } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
 import { KeluargaData } from '../../redux/reducers/RefKeluargaReducer';
@@ -17,23 +17,12 @@ import { KeluargaData } from '../../redux/reducers/RefKeluargaReducer';
 declare global {
   namespace ReactNavigation {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface RootParamList extends ParentStackParamList {}
+    interface RootParamList
+      extends ParentStackParamList,
+        DaftarKoperasiParamList,
+        DataDiriStackParamList {}
   }
 }
-
-export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
-  NotFound: undefined;
-};
-
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;
-
-export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
-};
 
 export type HomeTabScreenProps<Screen extends keyof HomeTabParamList> =
   CompositeScreenProps<
@@ -93,7 +82,11 @@ export type ProfileStackParamList = {
 
 export type DataDiriStackParamList = {
   DataDiriMainScreen: undefined;
-  DaftarAlamatAddScreen: { update: boolean; item?: AlamatData; index?: number };
+  DaftarAlamatAddScreen: {
+    update: boolean;
+    item?: AlamatDataResponse;
+    index?: number;
+  };
   DaftarAlamatMainScreen: undefined;
   DaftarRefKeluargaAddScreen: {
     update: boolean;

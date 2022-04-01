@@ -13,18 +13,19 @@ import {
   HeaderBack,
   TextInputBorder,
 } from '../../components';
-import {
-  colors,
-  icons,
-  namaKoperasiDummy,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import {
+  fetchKoperasiList,
+  fetchUserKoperasi,
+  KoperasiListResponse,
+} from '../../redux/reducers/LoginReducer';
+import { sendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -32,32 +33,41 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const [koperasiName, setKoperasiName] = useState<string>('');
   const [selected, setSelected] = useState<boolean>(false);
-  const [data, setData] = useState<Array<any> | null>(null);
+  const { koperasiListData } = useAppSelector(s => s.LoginReducer);
+  const [data, setData] = useState<KoperasiListResponse[] | null>(null);
 
   const onChangeKoperasiName = (value: string) => {
-    setValue('namaKoperasi', value);
+    setValue('nama_koperasi', value);
     setKoperasiName(value);
   };
 
   useEffect(() => {
+    dispatch(fetchKoperasiList());
+  }, []);
+
+  useEffect(() => {
     if (!selected) {
       if (koperasiName.length > 2) {
-        const result = namaKoperasiDummy.filter(value =>
-          value.nama.includes(koperasiName),
+        const result: KoperasiListResponse[] = koperasiListData?.filter(value =>
+          value.nama.toLowerCase().includes(koperasiName.toLowerCase()),
         );
         setData(result);
       } else setData(null);
     }
   }, [koperasiName, selected]);
 
-  const navigateToStep2 = () => {
-    navigation.navigate('DaftarKoperasiStep2Screen');
-  };
-
-  const onSubmit = () => {
-    navigateToStep2();
+  const onSubmit = (data: sendUserKoperasiResponseParams) => {
+    const { tanggal_lahir } = data;
+    dispatch(
+      fetchUserKoperasi({
+        ...data,
+        // tanggal_lahir: formatter.trimDate(tanggal_lahir),
+        tanggal_lahir: '1994-03-25',
+      }),
+    );
   };
 
   const {
@@ -67,9 +77,9 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      namaKoperasi: '',
-      noAnggota: '',
-      tanggal: '',
+      nama_koperasi: '',
+      no_anggota: '',
+      tanggal_lahir: '',
     },
   });
 
@@ -99,11 +109,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         <View>
           <Controller
             control={control}
-            name="namaKoperasi"
+            name="nama_koperasi"
             render={({ field: { onChange, value } }) => (
               <TextInputBorder
-                error={errors.namaKoperasi}
-                errorText={errors.namaKoperasi?.message}
+                error={errors.nama_koperasi}
+                errorText={errors.nama_koperasi?.message}
                 value={value}
                 onChangeText={e => {
                   onChangeKoperasiName(e);
@@ -157,11 +167,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         </View>
         <Controller
           control={control}
-          name="noAnggota"
+          name="no_anggota"
           render={({ field: { onChange, value } }) => (
             <TextInputBorder
-              error={errors.noAnggota}
-              errorText={errors.noAnggota?.message}
+              error={errors.no_anggota}
+              errorText={errors.no_anggota?.message}
               style={{
                 marginTop: sizes.padding / 2,
               }}
@@ -178,11 +188,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
 
         <Controller
           control={control}
-          name="tanggal"
+          name="tanggal_lahir"
           render={({ field: { onChange, value } }) => (
             <CalendarPicker
-              error={errors.tanggal}
-              errorText={errors.tanggal?.message}
+              error={errors.tanggal_lahir}
+              errorText={errors.tanggal_lahir?.message}
               onChangeDate={date => {
                 onChange(date);
               }}
@@ -191,7 +201,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
             />
           )}
           rules={{
-            required: { value: true, message: 'Mohon isi Tanggal' },
+            required: { value: true, message: 'Mohon isi Tanggal Lahir' },
           }}
         />
       </View>

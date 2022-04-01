@@ -8,6 +8,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
 import { formatter } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { fetchUserKoperasiEmail } from '../../redux/reducers/LoginReducer';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -15,12 +17,17 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
-  const navigateToSuccessScreen = (email: string) => {
-    navigation.navigate('DaftarKoperasiSuccessScreen', { email: email });
-  };
+  const dispatch = useAppDispatch();
+  const { userKoperasiData } = useAppSelector(s => s.LoginReducer);
 
   const onSubmit = ({ email }: { email: string }) => {
-    navigateToSuccessScreen(email);
+    dispatch(
+      fetchUserKoperasiEmail({
+        // user_id: userKoperasiData.id,
+        user_id: 2,
+        email: email,
+      }),
+    );
   };
 
   const {

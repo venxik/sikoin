@@ -8,7 +8,7 @@ import { CardAlamatProps } from './model';
 
 const CardAlamat = (props: CardAlamatProps) => {
   const { item, onPressUbah, onPressDelete } = props || {};
-  const { judul, alamatLengkap } = item;
+  const { judul, detail } = item;
   const { nama } =
     useAppSelector(state => state.ProfileReducer.profileData) || {};
   return (
@@ -18,7 +18,7 @@ const CardAlamat = (props: CardAlamatProps) => {
         <Text style={styles.textJudul}>{judul}</Text>
       </View>
       <Text style={styles.textName}>{nama}</Text>
-      <Text style={styles.textAlamat}>{alamatLengkap}</Text>
+      <Text style={styles.textAlamat}>{detail}</Text>
       <View style={styles.bottomContainer}>
         <ButtonText
           shadow={false}

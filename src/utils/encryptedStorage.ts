@@ -46,7 +46,7 @@ async function clearEncryptedStorage() {
   }
 }
 
-export {
+export default {
   saveEncryptedStorage,
   getEncryptedStorage,
   removeItemEncryptedStorage,

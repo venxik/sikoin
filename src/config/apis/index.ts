@@ -1,5 +1,6 @@
 import AuthApi from './AuthApi';
-import BSLApi from './BSLApi';
 import DummyApi from './DummyApi';
+import LoginApi from './LoginApi';
+import AlamatApi from './AlamatApi';
 
-export { AuthApi, BSLApi, DummyApi };
+export { AuthApi, DummyApi, LoginApi, AlamatApi };

@@ -45,7 +45,6 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import { fetchDummyData } from '../../redux/reducers/MarketReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -91,16 +90,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const { simpanan, saldo } = useAppSelector(
     state => state.SaldoSimpananReducer,
   );
-  const { dummyList } = useAppSelector(state => state.MarketReducer);
-  console.log(dummyList);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   useEffect(() => {
-    //DUMMY API CALL
-    dispatch(fetchDummyData());
-
     const backAction = () => {
       if (navigation.canGoBack()) {
         return false;

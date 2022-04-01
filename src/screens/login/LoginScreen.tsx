@@ -1,6 +1,5 @@
-import { CommonActions } from '@react-navigation/native';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -22,6 +21,12 @@ import { formatter } from '../../utils';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LoginStackParamList } from '../../config/navigation/model';
+import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import {
+  fetchForgotPassword,
+  fetchLogin,
+  setForgotPasswordStatus,
+} from '../../redux/reducers/LoginReducer';
 
 type Props = NativeStackScreenProps<LoginStackParamList, 'LoginScreen'>;
 type FormValues = {
@@ -30,10 +35,21 @@ type FormValues = {
 };
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const [resetEmail, setResetEmail] = useState<string>('');
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
   const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =
     useState(false);
+  const { forgotPasswordStatus } = useAppSelector(s => s.LoginReducer);
+
+  useEffect(() => {
+    if (forgotPasswordStatus === 'success') {
+      setResetEmail('');
+      setShowForgetPassModal(false);
+      setShowForgetPassSuccessModal(true);
+      dispatch(setForgotPasswordStatus('idle'));
+    }
+  }, [forgotPasswordStatus]);
 
   const onChangeResetPassEmailText = (value: string) => {
     setResetEmail(value);
@@ -43,19 +59,13 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     navigation.navigate('DaftarKoperasiStackNavigator');
   };
 
-  const navigateToHomeScreen = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'HomeTab' }],
-      }),
-    );
+  const doLogin = (data: FormValues) => {
+    dispatch(fetchLogin({ email: data.email, password: data.password }));
   };
 
   const resetPassword = () => {
-    if (isEmpty(resetEmail)) {
-      setShowForgetPassModal(false);
-      setShowForgetPassSuccessModal(true);
+    if (!isEmpty(resetEmail)) {
+      dispatch(fetchForgotPassword(resetEmail));
     }
   };
 
@@ -65,8 +75,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      email: 'sads@dsa.com',
-      password: 'sadsa',
+      email: 'anggota0@sikoin.id',
+      password: 'password',
     },
   });
 
@@ -156,7 +166,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         <View style={{ width: '100%', marginTop: sizes.padding }}>
           <ButtonText
             shadow={false}
-            onPress={handleSubmit(navigateToHomeScreen)}
+            onPress={handleSubmit(doLogin)}
             text={strings.masuk}
           />
           <ButtonText

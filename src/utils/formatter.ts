@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 type formatNumberToCurrenyOptions = {
   significantDigits: number;
   thousandsSeparator: string;
@@ -45,6 +47,10 @@ const validateEmail = (email: string) => {
     );
 };
 
+const trimDate = (data: string) => {
+  return moment(data).toISOString().substring(0, 10);
+};
+
 // const objectMap = (obj:object, fn) =>
 //   Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
 
@@ -56,6 +62,7 @@ export default {
   formatStringToCurrencyNumber,
   validateEmail,
   formatNumberToCurreny,
+  trimDate,
   EMAIL_REGEX,
   NUMBER_REGEX,
 };

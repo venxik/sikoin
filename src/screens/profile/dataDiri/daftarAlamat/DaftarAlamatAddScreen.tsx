@@ -13,7 +13,9 @@ import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
   addAlamat,
-  AlamatData,
+  AlamatDataRequest,
+  fetchSubmitAlamat,
+  fetchUpdateAlamat,
   updateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -29,13 +31,13 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const { update, item, index } = route.params;
   const {
     judul,
-    alamatLengkap,
-    rt,
-    rw,
+    detail,
+    no_rt,
+    no_rw,
     provinsi,
     kabupaten,
     kecamatan,
-    kodepos,
+    kode_pos,
   } = item || {};
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -44,26 +46,28 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
     control,
     handleSubmit,
     // formState: { errors },
-  } = useForm<AlamatData>({
+  } = useForm<AlamatDataRequest>({
     defaultValues: {
       judul: update ? judul : '',
-      alamatLengkap: update ? alamatLengkap : '',
+      alamat: update ? detail : '',
       provinsi: update ? provinsi : '',
       kabupaten: update ? kabupaten : '',
       kecamatan: update ? kecamatan : '',
-      kodepos: update ? kodepos : '',
-      rt: update ? rt : '',
-      rw: update ? rw : '',
+      kode_pos: update ? kode_pos : '',
+      rt: update ? no_rt : '',
+      rw: update ? no_rw : '',
     },
   });
 
-  const onSubmit = (data: AlamatData) => {
+  const onSubmit = (data: AlamatDataRequest) => {
     if (update) {
+      dispatch(fetchUpdateAlamat(data));
       dispatch(updateAlamat({ index, data }));
     } else {
+      dispatch(fetchSubmitAlamat(data));
       dispatch(addAlamat(data));
     }
-    navigation.goBack();
+    // navigation.goBack();
   };
 
   return (
@@ -92,7 +96,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
             />
             <Controller
               control={control}
-              name="alamatLengkap"
+              name="alamat"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
@@ -175,7 +179,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
 
             <Controller
               control={control}
-              name="kodepos"
+              name="kode_pos"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}

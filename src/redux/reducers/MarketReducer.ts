@@ -8,7 +8,6 @@ export type MarketData = {
 
 interface RootState {
   marketDataList: MarketData[];
-  dummyList?: any;
   error?: string | null;
 }
 
@@ -53,15 +52,6 @@ const marketSlice = createSlice({
     fetchMarketDataFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchDummyData: () => {
-      null;
-    },
-    fetchDummyDataSuccess: (state, { payload }: PayloadAction<any>) => {
-      state.dummyList = payload;
-    },
-    fetchDummyDataFailed: (state, { payload }: PayloadAction<string>) => {
-      state.error = payload;
-    },
   },
 });
 
@@ -69,9 +59,6 @@ export const {
   fetchMarketData,
   fetchMarketDataFailed,
   fetchMarketDataSuccess,
-  fetchDummyData,
-  fetchDummyDataFailed,
-  fetchDummyDataSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;
