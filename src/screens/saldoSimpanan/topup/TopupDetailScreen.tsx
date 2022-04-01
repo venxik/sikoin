@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { ButtonText, HeaderBack, Popup1Button } from '../../../components';
+import { Button, HeaderBack, Popup1Button } from '../../../components';
 import { TopupStackParamList } from '../../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../../constants';
 import { formatter } from '../../../utils';
@@ -110,7 +110,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         </View>
       </View>
 
-      <ButtonText
+      <Button
         buttonContainerStyle={{
           position: 'absolute',
           bottom: 20,

@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ButtonText, HeaderBack, TextInputForm } from '../../components';
+import { Button, HeaderBack, TextInputForm } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import {
   ProfileData,
@@ -194,7 +194,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <ButtonText
+      <Button
         shadow
         onPress={handleSubmit(saveProfile)}
         buttonContainerStyle={{

@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, icons, sizes, strings } from '../../constants';
-import ButtonText from '../ButtonText';
-import ButtonIcon from '../ButtonIcon';
+import Button from '../Button';
 import { useAppSelector } from '../../config/store/ReduxStore';
 import { CardAlamatProps } from './model';
 
@@ -20,7 +19,7 @@ const CardAlamat = (props: CardAlamatProps) => {
       <Text style={styles.textName}>{nama}</Text>
       <Text style={styles.textAlamat}>{detail}</Text>
       <View style={styles.bottomContainer}>
-        <ButtonText
+        <Button
           shadow={false}
           secondary
           text={strings.ubah}
@@ -29,9 +28,10 @@ const CardAlamat = (props: CardAlamatProps) => {
             width: '70%',
           }}
         />
-        <ButtonIcon
+        <Button
           onPress={onPressDelete}
           icon={icons.icon_delete}
+          iconLocation={'center'}
           buttonContainerStyle={{
             width: '25%',
           }}

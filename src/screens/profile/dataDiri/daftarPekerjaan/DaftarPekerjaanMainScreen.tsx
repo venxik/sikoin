@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash';
 import React from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
-  ButtonText,
+  Button,
   DetailItemList,
   DetailItemProfileHeader,
   HeaderBack,
@@ -84,7 +84,7 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
             title={strings.provinsi_kota}
             content={provinsiKota}
           />
-          <ButtonText
+          <Button
             shadow={false}
             onPress={() => navigateToAddScreen()}
             text={strings.edit_pekerjaan}

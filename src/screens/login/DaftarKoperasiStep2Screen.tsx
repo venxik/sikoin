@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ButtonText, HeaderBack, TextInputBorder } from '../../components';
+import { Button, HeaderBack, TextInputBorder } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -90,7 +90,7 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
         </Text>
       </View>
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={styles.buttonContainer}
         text={strings.kirim_otp_ke_email}

@@ -1,7 +1,7 @@
-import { KeluargaData } from '../../redux/reducers/RefKeluargaReducer';
+import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 
 export interface CardRefKeluargaProps {
-  item: KeluargaData;
+  item: RefKeluargaResponse;
   onPressUbah: () => void;
   onPressDelete: () => void;
 }

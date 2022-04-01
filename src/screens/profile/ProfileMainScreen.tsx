@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
-  ButtonText,
+  Button,
   HeaderBack,
   ProfilePicture,
   SubmenuItemList,
@@ -42,7 +42,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
               <Text style={styles.descText}>{code}</Text>
             </View>
           </View>
-          <ButtonText
+          <Button
             icon={icons.icon_edit_profile}
             iconLocation="right"
             onPress={navigateToEditProfile}

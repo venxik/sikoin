@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
-import { ButtonText } from '..';
+import { Button } from '..';
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { isEmpty } from 'lodash';
 import { Popup2ButtonProps } from './model';
@@ -49,7 +49,7 @@ const Popup2Button = (props: Popup2ButtonProps) => {
           </View>
           {customContent}
           <View style={styles.buttonContainer}>
-            <ButtonText
+            <Button
               text={buttonLeftTitle}
               onPress={buttonLeftOnPress}
               buttonContainerStyle={{
@@ -60,7 +60,7 @@ const Popup2Button = (props: Popup2ButtonProps) => {
               }}
               textStyle={{ color: colors.primary }}
             />
-            <ButtonText
+            <Button
               text={buttonRightTitle}
               onPress={buttonRightOnPress}
               buttonContainerStyle={{ width: '47%' }}

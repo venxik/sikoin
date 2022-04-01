@@ -5,7 +5,6 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-
 export interface Popup1ButtonProps {
   style?: ViewStyle;
   showPopup: boolean;
@@ -18,4 +17,5 @@ export interface Popup1ButtonProps {
   contentTextStyle?: TextStyle;
   customButtonText?: string;
   iconStyle?: ImageStyle;
+  scrollable?: boolean;
 }

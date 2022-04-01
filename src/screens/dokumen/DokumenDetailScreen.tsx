@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { ButtonText, DokumenMemberItem, HeaderBack } from '../../components';
+import { Button, DokumenMemberItem, HeaderBack } from '../../components';
 import DokumenDetailItem from '../../components/DokumenDetailItem';
 import { colors, icons, sizes, strings } from '../../constants';
 import moment from 'moment';
@@ -188,13 +188,13 @@ const DokumenDetailScreen: FC<Props> = ({ route }) => {
           justifyContent: 'space-between',
           width: '100%',
         }}>
-        <ButtonText
+        <Button
           onPress={() => Alert.alert('Buka File')}
           text={strings.buka_file}
           secondary
           buttonContainerStyle={{ width: '47%' }}
         />
-        <ButtonText
+        <Button
           onPress={() => Alert.alert('Unduh File')}
           text={strings.unduh_file}
           icon={icons.icon_download_file}

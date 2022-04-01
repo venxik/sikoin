@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
-  ButtonText,
+  Button,
   CalendarPicker,
   HeaderBack,
   TextInputBorder,
@@ -206,7 +206,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         />
       </View>
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={styles.buttonContainer}
         text={strings.selanjutnya}
@@ -214,7 +214,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         iconLocation="right"
         shadow
       />
-      {/* <ButtonText
+      {/* <Button
         onPress={() => navigation.navigate('DaftarKoperasiSearchScreen')}
         // buttonContainerStyle={styles.buttonContainer}
         text={strings.selanjutnya}

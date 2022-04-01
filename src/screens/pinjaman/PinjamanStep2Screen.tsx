@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { ButtonText, HeaderPinjaman, TextInputForm } from '../../components';
+import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { PinjamanStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
@@ -74,14 +74,14 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
             bottom: sizes.padding,
             width: '100%',
           }}>
-          <ButtonText
+          <Button
             onPress={() => navigation.goBack()}
             shadow
             secondary
             text={strings.kembali}
             buttonContainerStyle={{ width: '48%' }}
           />
-          <ButtonText
+          <Button
             onPress={navigateToStep3}
             shadow
             text={strings.simpan}

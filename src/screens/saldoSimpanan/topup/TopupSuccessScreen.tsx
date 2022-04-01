@@ -2,7 +2,7 @@ import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { ButtonText } from '../../../components';
+import { Button } from '../../../components';
 import { TopupStackParamList } from '../../../config/navigation/model';
 import {
   colors,
@@ -40,7 +40,7 @@ const TopupSuccessScreen: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.textContent}>{strings.topup_success_content}</Text>
       </View>
       <View style={{ alignItems: 'center', marginTop: sizes.padding }}>
-        <ButtonText
+        <Button
           buttonContainerStyle={{
             marginHorizontal: sizes.padding,
             width: '40%',

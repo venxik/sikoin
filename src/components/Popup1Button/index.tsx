@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, Image } from 'react-native';
-import { ButtonText } from '..';
+import { View, Text, StyleSheet, Modal, Image, ScrollView } from 'react-native';
+import { Button } from '..';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { isEmpty } from 'lodash';
 import { Popup1ButtonProps } from './model';
@@ -18,37 +18,83 @@ const Popup1Button = (props: Popup1ButtonProps) => {
     customButtonText,
     iconStyle,
     style,
+    scrollable = false,
   } = props;
+
+  const renderScroll = () => {
+    return (
+      <ScrollView
+        style={{ height: '50%', marginBottom: sizes.padding }}
+        contentContainerStyle={{ alignItems: 'center' }}>
+        {renderContent()}
+      </ScrollView>
+    );
+  };
+
+  const renderContent = () => {
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+        }}>
+        {headerImage && (
+          <Image source={headerImage} style={[styles.icon, { ...iconStyle }]} />
+        )}
+        <View style={{ alignItems: 'center' }}>
+          {!isEmpty(headerText) && (
+            <Text style={[styles.headerModalText, headerTextStyle]}>
+              {headerText}
+            </Text>
+          )}
+          {!isEmpty(contentText) && (
+            <Text style={[styles.contentModalText, contentTextStyle]}>
+              {contentText}
+            </Text>
+          )}
+        </View>
+        {customContent && customContent}
+      </View>
+    );
+  };
 
   return (
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={styles.modalMainView}>
         <View style={[styles.modalView, style]}>
-          {headerImage && (
-            <Image
-              source={headerImage}
-              style={[styles.icon, { ...iconStyle }]}
-            />
+          {scrollable ? (
+            renderScroll()
+          ) : (
+            <View
+              style={{
+                alignItems: 'center',
+              }}>
+              {headerImage && (
+                <Image
+                  source={headerImage}
+                  style={[styles.icon, { ...iconStyle }]}
+                />
+              )}
+              <View style={{ alignItems: 'center' }}>
+                {!isEmpty(headerText) && (
+                  <Text style={[styles.headerModalText, headerTextStyle]}>
+                    {headerText}
+                  </Text>
+                )}
+                {!isEmpty(contentText) && (
+                  <Text style={[styles.contentModalText, contentTextStyle]}>
+                    {contentText}
+                  </Text>
+                )}
+              </View>
+              {customContent}
+            </View>
           )}
-          <View style={{ alignItems: 'center' }}>
-            {!isEmpty(headerText) && (
-              <Text style={[styles.headerModalText, headerTextStyle]}>
-                {headerText}
-              </Text>
-            )}
-            {!isEmpty(contentText) && (
-              <Text style={[styles.contentModalText, contentTextStyle]}>
-                {contentText}
-              </Text>
-            )}
-          </View>
-          {customContent}
           <View
             style={{
               width: '100%',
               marginTop: isEmpty(contentText) ? sizes.padding : 0,
             }}>
-            <ButtonText
+            <Button
               text={customButtonText ? customButtonText : strings.tutup}
               onPress={onPress}
             />

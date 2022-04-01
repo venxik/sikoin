@@ -2,7 +2,7 @@ import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { ButtonText } from '../../components';
+import { Button } from '../../components';
 import { PinjamanStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
@@ -37,7 +37,7 @@ const PinjamanSuccessScreen: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.textContent}>{strings.topup_success_content}</Text>
       </View>
       <View style={{ alignItems: 'center', marginTop: sizes.padding }}>
-        <ButtonText
+        <Button
           buttonContainerStyle={{
             marginHorizontal: sizes.padding,
             width: '40%',

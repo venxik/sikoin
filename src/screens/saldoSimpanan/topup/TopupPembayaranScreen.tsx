@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { ButtonText, HeaderBack } from '../../../components';
+import { Button, HeaderBack } from '../../../components';
 import { TopupStackParamList } from '../../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../../constants';
 import { formatter } from '../../../utils';
@@ -41,7 +41,7 @@ const TopupPembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
         {renderBankList()}
         {renderBankList()}
         {renderBankList()}
-        <ButtonText
+        <Button
           buttonContainerStyle={{
             position: 'absolute',
             bottom: 20,

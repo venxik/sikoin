@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
-  ButtonText,
+  Button,
   DetailItemList,
   DetailItemProfileHeader,
   HeaderBack,
@@ -84,7 +84,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
             title={strings.detail_pekerjaan}
             content={detailPekerjaan}
           />
-          <ButtonText
+          <Button
             onPress={() => navigateToAddScreen(true)}
             text={strings.edit_biodata}
             icon={icons.icon_edit_profile}

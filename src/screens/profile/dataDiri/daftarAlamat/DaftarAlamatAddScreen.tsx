@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { ButtonText, HeaderBack, TextInputForm } from '../../../../components';
+import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -205,7 +205,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={{
           position: 'absolute',

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { colors, SCREEN_WIDTH } from '../../constants';
+import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { ButtonTextProps } from './model';
 
-const ButtonText = (props: ButtonTextProps) => {
+const Button = (props: ButtonTextProps) => {
   const {
     buttonContainerStyle,
     textStyle,
@@ -61,11 +61,8 @@ const ButtonText = (props: ButtonTextProps) => {
     return defaultStyle;
   };
 
-  return (
-    <TouchableOpacity
-      style={buttonStyle()}
-      onPress={onPress}
-      disabled={disabled}>
+  const renderWithText = () => {
+    return (
       <View style={styles.innerContainer}>
         {iconLocation === 'left' && icon ? (
           <Image
@@ -78,6 +75,31 @@ const ButtonText = (props: ButtonTextProps) => {
           <Image source={icon} style={[styles.iconStyle, { marginLeft: 10 }]} />
         ) : null}
       </View>
+    );
+  };
+
+  const renderIconOnly = () => {
+    return (
+      <View>
+        {icon && iconLocation === 'center' ? (
+          <Image
+            source={icon}
+            style={[
+              styles.iconStyle,
+              { justifyContent: 'center', alignItems: 'center' },
+            ]}
+          />
+        ) : null}
+      </View>
+    );
+  };
+
+  return (
+    <TouchableOpacity
+      style={buttonStyle()}
+      onPress={onPress}
+      disabled={disabled}>
+      {iconLocation === 'center' ? renderIconOnly() : renderWithText()}
     </TouchableOpacity>
   );
 };
@@ -102,9 +124,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconStyle: {
-    width: SCREEN_WIDTH * 0.05,
-    height: SCREEN_WIDTH * 0.05,
+    width: sizes.padding,
+    height: sizes.padding,
   },
 });
 
-export default ButtonText;
+export default Button;

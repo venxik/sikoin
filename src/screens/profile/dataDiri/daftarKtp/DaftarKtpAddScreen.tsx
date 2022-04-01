@@ -8,7 +8,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { ButtonText, HeaderBack, TextInputForm } from '../../../../components';
+import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import {
   colors,
   icons,
@@ -116,7 +116,7 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
 
       {renderKtpCard()}
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(submitKtp)}
         buttonContainerStyle={{
           position: 'absolute',

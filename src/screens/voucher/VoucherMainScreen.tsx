@@ -19,7 +19,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import {
-  ButtonText,
+  Button,
   CardVoucherItem,
   CardVoucherLarge,
   HeaderBack,
@@ -230,7 +230,7 @@ const VoucherMainScreen: FC<Props> = () => {
               </View>
             </View>
             <View style={styles.buttonContainer}>
-              <ButtonText
+              <Button
                 text={strings.batal}
                 onPress={() => setshowVoucherPopup(e => !e)}
                 buttonContainerStyle={{
@@ -242,7 +242,7 @@ const VoucherMainScreen: FC<Props> = () => {
                 textStyle={{ color: colors.primary }}
                 shadow={false}
               />
-              <ButtonText
+              <Button
                 text={strings.beli}
                 onPress={onPressBeliVoucher}
                 buttonContainerStyle={{ width: '47%' }}

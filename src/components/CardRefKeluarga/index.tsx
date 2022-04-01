@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, sizes, strings } from '../../constants';
-import ButtonText from '../ButtonText';
-import ButtonIcon from '../ButtonIcon';
+import Button from '../Button';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { CardRefKeluargaProps } from './model';
 
@@ -44,7 +43,7 @@ const CardRefKeluarga = (props: CardRefKeluargaProps) => {
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <ButtonText
+        <Button
           secondary
           text={strings.ubah}
           onPress={onPressUbah}
@@ -52,9 +51,10 @@ const CardRefKeluarga = (props: CardRefKeluargaProps) => {
             width: '70%',
           }}
         />
-        <ButtonIcon
+        <Button
           onPress={onPressDelete}
           icon={icons.icon_delete}
+          iconLocation={'center'}
           buttonContainerStyle={{
             width: '25%',
           }}

@@ -9,7 +9,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { ButtonText, HeaderBack } from '../../../components';
+import { Button, HeaderBack } from '../../../components';
 import {
   colors,
   icons,
@@ -179,7 +179,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
       <View style={styles.topupMainContainer}>
         <Text style={styles.textPilihJumlah}>{strings.pilih_jumlah}</Text>
         {renderDefaultNominal()}
-        <ButtonText
+        <Button
           onPress={showInputNominal}
           icon={icons.icon_ketik_manual}
           iconLocation="left"
@@ -253,7 +253,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
           ))}
         </View>
-        <ButtonText
+        <Button
           buttonContainerStyle={{
             position: 'absolute',
             bottom: sizes.padding,
@@ -310,7 +310,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
         {renderSelectNominal()}
         {renderJenisTopup()}
       </ScrollView>
-      <ButtonText
+      <Button
         buttonContainerStyle={{
           position: 'absolute',
           bottom: 20,

@@ -9,7 +9,7 @@ import {
   Image,
   SafeAreaView,
 } from 'react-native';
-import { ButtonText, HeaderBack } from '../../../../components';
+import { Button, HeaderBack } from '../../../../components';
 import {
   colors,
   icons,
@@ -80,20 +80,20 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
           )}
         </View>
-        <ButtonText
+        <Button
           shadow={false}
           onPress={() => navigateToAddScreen()}
           text={strings.ubah_data_ktp}
           buttonContainerStyle={{ marginBottom: sizes.padding }}
         />
-        <ButtonText
+        <Button
           shadow={false}
           onPress={openDocumentPicker}
           text={'Tambah Dokumen Pendukung'}
           secondary
           buttonContainerStyle={{ marginBottom: sizes.padding }}
         />
-        <ButtonText
+        <Button
           shadow={false}
           text={'Tambah Selfie'}
           secondary

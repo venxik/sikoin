@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors, icons, sizes, strings } from '../../constants';
-import Popup1ButtonScroll from '../Popup1ButtonScroll';
 import CardVoucherItem from '../CardVoucherItem';
+import Popup1Button from '../Popup1Button';
 import { CardVoucherLargeProps } from './model';
 
 const CardVoucherLarge = (props: CardVoucherLargeProps) => {
@@ -20,7 +20,8 @@ const CardVoucherLarge = (props: CardVoucherLargeProps) => {
 
   return (
     <View style={styles.container}>
-      <Popup1ButtonScroll
+      <Popup1Button
+        scrollable={true}
         headerImage={logoToko}
         headerText={namaToko}
         showPopup={showInfoPopup}

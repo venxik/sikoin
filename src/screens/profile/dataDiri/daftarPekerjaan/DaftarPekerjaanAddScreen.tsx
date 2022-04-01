@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {
-  ButtonText,
+  Button,
   HeaderBack,
   TextInputCurrency,
   TextInputForm,
@@ -223,7 +223,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(submitData)}
         buttonContainerStyle={{
           position: 'absolute',

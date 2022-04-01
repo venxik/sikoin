@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import ButtonText from '../ButtonText';
+import Button from '../Button';
 import { CardKabarProps } from './model';
 
 const CardKabar = (props: CardKabarProps) => {
@@ -22,7 +22,7 @@ const CardKabar = (props: CardKabarProps) => {
       </View>
       <Text style={styles.textContent}>{content}</Text>
 
-      <ButtonText
+      <Button
         shadow={false}
         secondary
         icon={icons.arrow_up_circle_primary}

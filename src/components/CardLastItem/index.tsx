@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import ButtonText from '../ButtonText';
+import Button from '../Button';
 import { CardLastItemProps } from './model';
 
 const CardLastItem = (props: CardLastItemProps) => {
@@ -16,7 +16,7 @@ const CardLastItem = (props: CardLastItemProps) => {
 
       <Image source={icon} style={styles.iconStyle} resizeMode="contain" />
 
-      <ButtonText
+      <Button
         onPress={onPress}
         buttonContainerStyle={{
           backgroundColor: colors.primaryLight,

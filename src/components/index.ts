@@ -1,5 +1,4 @@
-import ButtonIcon from './ButtonIcon';
-import ButtonText from './ButtonText';
+import Button from './Button';
 import ErrorModal from './ErrorModal';
 import LoadingIndicator from './LoadingIndicator';
 import HeaderBack from './HeaderBack';
@@ -21,7 +20,6 @@ import SubmenuItemListCustom from './SubmenuItemListCustom';
 import ListEmptyDataComponent from './ListEmptyDataComponent';
 import CardRefKeluarga from './CardRefKeluarga';
 import DetailItemList from './DetailItemList';
-import Popup1ButtonScroll from './Popup1ButtonScroll';
 import DetailItemProfileHeader from './DetailItemProfileHeader';
 import MenuHeaderIcon from './MenuHeaderIcon';
 import CardDiskon from './CardDiskon';
@@ -36,8 +34,7 @@ import DokumenItemList from './DokumenItemList';
 import DokumenMemberItem from './DokumenMemberItem';
 
 export {
-  ButtonIcon,
-  ButtonText,
+  Button,
   ErrorModal,
   LoadingIndicator,
   HeaderBack,
@@ -59,7 +56,6 @@ export {
   ListEmptyDataComponent,
   CardRefKeluarga,
   DetailItemList,
-  Popup1ButtonScroll,
   DetailItemProfileHeader,
   MenuHeaderIcon,
   CardDiskon,

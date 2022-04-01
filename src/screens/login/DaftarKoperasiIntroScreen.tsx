@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ButtonText, HeaderBack } from '../../components';
+import { Button, HeaderBack } from '../../components';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import {
   colors,
@@ -64,14 +64,14 @@ const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
 
       {index === 1 ? (
         <View style={styles.buttonContainer1}>
-          <ButtonText
+          <Button
             onPress={() => setIndex(2)}
             buttonContainerStyle={styles.buttonLeftStyle}
             secondary
             text={strings.belum}
             textStyle={styles.textButton}
           />
-          <ButtonText
+          <Button
             onPress={navigateToStep1Screen}
             buttonContainerStyle={styles.buttonRightStyle}
             text={strings.sudah}
@@ -80,7 +80,7 @@ const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
         </View>
       ) : (
         <View style={styles.buttonContainer2}>
-          <ButtonText
+          <Button
             onPress={() => setIndex(2)}
             buttonContainerStyle={styles.buttonStyle2}
             text={strings.ayo}

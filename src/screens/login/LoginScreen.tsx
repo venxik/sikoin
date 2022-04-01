@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
-  ButtonText,
+  Button,
   Popup1Button,
   Popup2Button,
   TextInputBorder,
@@ -164,12 +164,12 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         />
 
         <View style={{ width: '100%', marginTop: sizes.padding }}>
-          <ButtonText
+          <Button
             shadow={false}
             onPress={handleSubmit(doLogin)}
             text={strings.masuk}
           />
-          <ButtonText
+          <Button
             shadow={false}
             onPress={navigateToDaftarKoperasi}
             buttonContainerStyle={{
@@ -179,7 +179,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             textStyle={{ color: colors.primary }}
             text={strings.daftar_ke_koperasimu}
           />
-          <ButtonText
+          <Button
             shadow={false}
             onPress={() => setShowForgetPassModal(true)}
             buttonContainerStyle={{

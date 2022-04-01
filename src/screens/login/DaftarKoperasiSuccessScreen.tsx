@@ -2,7 +2,7 @@ import { CommonActions } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ButtonText, HeaderBack } from '../../components';
+import { Button, HeaderBack } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -50,7 +50,7 @@ const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
         </Text>
       </View>
 
-      <ButtonText
+      <Button
         onPress={navigateToLoginScreen}
         buttonContainerStyle={styles.buttonContainer}
         text={strings.kembali_ke_login}

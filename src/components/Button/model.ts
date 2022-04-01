@@ -10,9 +10,9 @@ export interface ButtonTextProps extends TouchableOpacityProps {
   textStyle?: TextStyle;
   onPress: () => void;
   disabled?: boolean;
-  text: string;
+  text?: string;
   icon?: ImageSourcePropType;
-  iconLocation?: 'left' | 'right';
+  iconLocation?: 'left' | 'right' | 'center';
   shadow?: boolean;
   secondary?: boolean;
 }

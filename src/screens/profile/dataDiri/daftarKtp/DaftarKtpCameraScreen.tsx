@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { useCamera } from 'react-native-camera-hooks';
-import { ButtonText } from '../../../../components';
+import { Button } from '../../../../components';
 import {
   colors,
   SCREEN_HEIGHT,
@@ -52,7 +52,7 @@ const DaftarKtpCameraScreen: React.FC<Props> = ({ navigation }) => {
 
       <View style={styles.ktpFrame} />
 
-      <ButtonText
+      <Button
         onPress={() => takePic()}
         text="Ambil Gambar"
         buttonContainerStyle={{
