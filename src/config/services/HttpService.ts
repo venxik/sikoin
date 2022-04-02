@@ -64,10 +64,10 @@ class HttpService {
           `Expected 'config' and 'config.headers' not to be undefined`,
         );
       }
-      // if (accessToken !== '' || accessToken !== null) {
-      //   request.headers.Authorization = `Bearer ${accessToken}`;
-      // }
-      request.headers.Authorization = `Bearer 29|aY3hod3ysYVboKPDQUe9PFAthnsBMpuEAUWkADYB`;
+      if (accessToken !== '' || accessToken !== null) {
+        request.headers.Authorization = `Bearer ${accessToken}`;
+      }
+      // request.headers.Authorization = `Bearer 1|PnzpfYVUQCK6gaYwbKnKankUgtAWMf8D0D5tkkDy`;
       return request;
     }
     return request;
@@ -114,10 +114,10 @@ class HttpService {
       method: 'get',
       url,
       params,
-      responseType: 'json',
-      transitional: {
-        silentJSONParsing: false,
-      },
+      // responseType: 'json',
+      // transitional: {
+      //   silentJSONParsing: false,
+      // },
       ...conf,
     };
     return NetInfo.fetch()
@@ -140,10 +140,10 @@ class HttpService {
       method: 'post',
       url,
       data: params,
-      responseType: 'json',
-      transitional: {
-        silentJSONParsing: false,
-      },
+      // responseType: 'json',
+      // transitional: {
+      //   silentJSONParsing: false,
+      // },
       ...conf,
     };
 
@@ -167,10 +167,10 @@ class HttpService {
       method: 'patch',
       url,
       data: params,
-      responseType: 'json',
-      transitional: {
-        silentJSONParsing: false,
-      },
+      // responseType: 'json',
+      // transitional: {
+      //   silentJSONParsing: false,
+      // },
       ...conf,
     };
 

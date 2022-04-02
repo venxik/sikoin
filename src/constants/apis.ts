@@ -12,6 +12,18 @@ const constant = {
     alamat: {
       alamat: '/api/daftar-alamat',
     },
+    home: {
+      beranda: '/api/beranda-user',
+    },
+    keluarga: {
+      keluarga: '/api/ref-keluarga',
+    },
+    profile: {
+      profile: '/api/profile-user',
+    },
+    biodata: {
+      biodata: '/api/biodata',
+    },
   },
   errorTypes: {
     generic: 'Error',

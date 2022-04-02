@@ -51,6 +51,18 @@ const trimDate = (data: string) => {
   return moment(data).toISOString().substring(0, 10);
 };
 
+const addMissingBracketJSON = (data: any): any => {
+  let temp;
+  let tempObj;
+
+  if (typeof data === 'string') {
+    temp = data.concat('}');
+    tempObj = JSON.parse(temp);
+    return tempObj;
+  }
+  return data;
+};
+
 // const objectMap = (obj:object, fn) =>
 //   Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
 
@@ -65,4 +77,5 @@ export default {
   trimDate,
   EMAIL_REGEX,
   NUMBER_REGEX,
+  addMissingBracketJSON,
 };
