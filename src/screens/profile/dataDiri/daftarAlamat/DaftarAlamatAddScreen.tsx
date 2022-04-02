@@ -30,6 +30,7 @@ type Props = NativeStackScreenProps<
 const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const { update, item, index } = route.params;
   const {
+    id,
     judul,
     detail,
     no_rt,
@@ -61,8 +62,8 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
 
   const onSubmit = (data: AlamatDataRequest) => {
     if (update) {
-      dispatch(fetchUpdateAlamat(data));
-      dispatch(updateAlamat({ index, data }));
+      dispatch(fetchUpdateAlamat({ data, id: id as number }));
+      // dispatch(updateAlamat({ index, data }));
     } else {
       dispatch(fetchSubmitAlamat(data));
       dispatch(addAlamat(data));

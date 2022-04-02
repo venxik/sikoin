@@ -6,7 +6,7 @@ import {
 import { storage } from '../../constants';
 import encryptedStorage from '../../utils/encryptedStorage';
 
-export type KoperasiListResponse = {
+export interface KoperasiListResponse {
   id: string;
   nama: string;
   logo_koperasi: string;
@@ -18,9 +18,9 @@ export type KoperasiListResponse = {
   durasi_subscription: string;
   created_at: string;
   updated_at: string;
-};
+}
 
-export type UserKoperasiResponse = {
+export interface UserKoperasiResponse {
   id: number;
   no_anggota: string;
   nama: string;
@@ -34,7 +34,13 @@ export type UserKoperasiResponse = {
   data_diri_id: number;
   created_at: string;
   updated_at: string;
-};
+}
+
+export interface LoginResponse {
+  message: string;
+  user: object;
+  token: string;
+}
 
 type ForgotPasswordStatusState = 'idle' | 'success' | 'failed';
 
@@ -73,6 +79,12 @@ const loginSlice = createSlice({
     fetchUserKoperasiFailed: (state, { payload }) => {
       state.error = payload;
     },
+    fetchUserKoperasiEmailSuccess: (
+      state,
+      { payload }: PayloadAction<UserKoperasiResponse>,
+    ) => {
+      state.userKoperasiData = payload;
+    },
     fetchUserKoperasiEmailFailed: (state, { payload }) => {
       state.error = payload;
     },
@@ -82,8 +94,9 @@ const loginSlice = createSlice({
     ) => {
       state.forgotPasswordStatus = payload;
     },
-    fetchLoginSuccess: (_, { payload }) => {
-      encryptedStorage.saveEncryptedStorage(storage.authCode, payload);
+    fetchLoginSuccess: (_, { payload }: PayloadAction<LoginResponse>) => {
+      console.log('fetchLoginSuccess', payload);
+      encryptedStorage.saveEncryptedStorage(storage.authCode, payload.token);
     },
     fetchLoginFailed: (state, { payload }) => {
       state.error = payload;

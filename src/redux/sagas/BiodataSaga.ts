@@ -1,0 +1,69 @@
+import { AxiosResponse } from 'axios';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { BiodataApi } from '../../config/apis';
+import { goBack } from '../../config/navigation';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
+import { isEmpty } from 'lodash';
+import { formatter } from '../../utils';
+import {
+  BiodataResponse,
+  fetchBiodata,
+  fetchBiodataFailed,
+  fetchBiodataSuccess,
+  fetchUpdateBiodata,
+  updateBiodataFailed,
+  updateBiodataSuccess,
+} from '../reducers/BiodataReducer';
+
+function* getBiodata() {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
+      BiodataApi.getBiodata,
+    );
+    console.log('getBiodata response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchBiodataSuccess(data?.data));
+    } else {
+      yield put(fetchBiodataFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchBiodataFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* updateBiodata(action: ReturnType<typeof fetchUpdateBiodata>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
+      BiodataApi.updateBiodata,
+      action.payload,
+    );
+    console.log('updateBiodata response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(updateBiodataSuccess(data?.data));
+      if (!isEmpty(data?.data)) {
+        goBack();
+      }
+    } else {
+      yield put(updateBiodataFailed('Error'));
+    }
+  } catch (error) {
+    yield put(updateBiodataFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+export function* watchGetBiodata() {
+  yield takeLatest(fetchBiodata, getBiodata);
+}
+
+export function* watchUpdateBiodata() {
+  yield takeLatest(fetchUpdateBiodata, updateBiodata);
+}

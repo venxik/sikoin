@@ -10,9 +10,9 @@ import {
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
-import { BiodataData } from '../../redux/reducers/BiodataReducer';
+import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
-import { KeluargaData } from '../../redux/reducers/RefKeluargaReducer';
+import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 
 declare global {
   namespace ReactNavigation {
@@ -90,7 +90,7 @@ export type DataDiriStackParamList = {
   DaftarAlamatMainScreen: undefined;
   DaftarRefKeluargaAddScreen: {
     update: boolean;
-    item?: KeluargaData;
+    item?: RefKeluargaResponse;
     index?: number;
   };
   DaftarRefKeluargaMainScreen: undefined;
@@ -99,7 +99,7 @@ export type DataDiriStackParamList = {
   DaftarKtpCameraScreen: undefined;
   DaftarKtpSelfieScreen: undefined;
   DaftarBiodataMainScreen: undefined;
-  DaftarBiodataAddScreen: { update: boolean; data?: BiodataData };
+  DaftarBiodataAddScreen: { update: boolean; data?: BiodataResponse };
   DaftarPekerjaanMainScreen: undefined;
   DaftarPekerjaanAddScreen: undefined;
 };

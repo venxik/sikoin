@@ -1,6 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import moment from 'moment';
+import React, { useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  ImageSourcePropType,
+} from 'react-native';
 import {
   Button,
   HeaderBack,
@@ -8,14 +16,28 @@ import {
   SubmenuItemList,
 } from '../../components';
 import { ProfileStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
 import { colors, icons, sizes, strings } from '../../constants';
+import { fetchProfile } from '../../redux/reducers/ProfileReducer';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
 const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
-  const { nama, code, koperasiName } = profileData || {};
+  const {
+    nama,
+    email,
+    logo_koperasi,
+    member_sejak,
+    no_anggota,
+    no_telp,
+    profile_pic,
+  } = profileData || {};
+
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, []);
 
   const navigateToEditProfile = () => {
     navigation.navigate('EditProfileScreen');
@@ -31,15 +53,21 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
       />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>
-          <ProfilePicture disabled={true} />
+          <ProfilePicture
+            disabled={true}
+            koperasiUri={logo_koperasi}
+            profilUri={profile_pic as string | ImageSourcePropType}
+          />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{nama}</Text>
-            <Text style={styles.koperasiText}>{koperasiName}</Text>
+            {/* <Text style={styles.koperasiText}>{koperasiName}</Text> */}
             <View style={{ marginTop: 10 }}>
-              <Text style={styles.descText}>{code}</Text>
-              <Text style={styles.descText}>{code}</Text>
-              <Text style={styles.descText}>{code}</Text>
-              <Text style={styles.descText}>{code}</Text>
+              <Text style={styles.descText}>{no_anggota}</Text>
+              <Text style={styles.descText}>{`Member Sejak ${moment(
+                member_sejak,
+              ).format('Do MMMM YYYY')}`}</Text>
+              <Text style={styles.descText}>{email}</Text>
+              <Text style={styles.descText}>{no_telp}</Text>
             </View>
           </View>
           <Button

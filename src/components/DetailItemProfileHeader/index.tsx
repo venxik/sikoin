@@ -5,11 +5,12 @@ import { colors, sizes } from '../../constants';
 import ProfilePicture from '../ProfilePicture';
 
 const DetailItemProfileHeader = () => {
-  const { nama } = useAppSelector(s => s.ProfileReducer.profileData) || {};
+  const { profile_pic, nama } =
+    useAppSelector(s => s.ProfileReducer.profileData) || {};
 
   return (
     <View style={styles.container}>
-      <ProfilePicture disabled showKoperasi={false} />
+      <ProfilePicture disabled showKoperasi={false} profilUri={profile_pic} />
       <Text style={styles.nameText}>{nama}</Text>
     </View>
   );

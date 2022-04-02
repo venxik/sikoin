@@ -8,12 +8,14 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, HeaderBack, TextInputForm } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import {
-  ProfileData,
+  fetchUpdateProfile,
+  ProfileRequest,
   updateProfile,
 } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
@@ -29,48 +31,56 @@ type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
-  const { nama, code, email, noTelp, profilePic } = profileData || {};
-  const [profilePicture, setProfilePicture] = useState(profilePic);
+  const { nama, no_anggota, email, no_telp, profile_pic } = profileData || {};
+  const [profilePicture, setProfilePicture] = useState(profile_pic);
   const documentPickerOptions = {
     type: [DocumentPicker.types.images],
   };
 
-  const saveProfile = (data: ProfileData) => {
-    const { email, nama, noTelp } = data || {};
+  const saveProfile = (data: ProfileRequest) => {
+    const { email, nama, no_telp } = data || {};
     dispatch(
-      updateProfile({
+      fetchUpdateProfile({
         email,
         nama,
-        noTelp,
-        profilePic: profilePicture,
+        no_telp: no_telp as string,
+        profile_pic: profilePicture as string | ImageSourcePropType,
       }),
     );
-    navigation.goBack();
+    // dispatch(
+    //   updateProfile({
+    //     email,
+    //     nama,
+    //     no_telp: no_telp as string,
+    //     profile_pic: profilePicture as string | ImageSourcePropType,
+    //   }),
+    // );
+    // navigation.goBack();
   };
 
   const openDocumentPicker = async () => {
     try {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
-      console.log('Dokumen Pendukung :', data);
+      console.log('Profile pic :', data);
       setProfilePicture(data.uri);
     } catch {
-      (e: any) => console.log('Document picker error! ', e);
+      (e: unknown) => console.log('Document picker error! ', e);
     }
   };
 
   const copyToClipboard = () => {
-    Clipboard.setString(code?.toString() ?? '');
+    Clipboard.setString(no_anggota.toString());
   };
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProfileData>({
+  } = useForm<ProfileRequest>({
     defaultValues: {
       email: email ? email : '',
       nama: nama ? nama : '',
-      noTelp: noTelp ? noTelp : '',
+      no_telp: no_telp ? no_telp : '',
     },
   });
 
@@ -114,7 +124,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                   marginBottom: sizes.padding,
                   alignItems: 'center',
                 }}>
-                <Text style={styles.codeText}>{code}</Text>
+                <Text style={styles.codeText}>{no_anggota}</Text>
                 <TouchableOpacity onPress={copyToClipboard}>
                   <Image
                     source={icons.icon_copy_clipboard}
@@ -143,11 +153,11 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
               />
               <Controller
                 control={control}
-                name="noTelp"
+                name="no_telp"
                 render={({ field: { onChange, value } }) => (
                   <TextInputForm
-                    error={errors.noTelp}
-                    errorText={errors.noTelp?.message}
+                    error={errors.no_telp}
+                    errorText={errors.no_telp?.message}
                     value={value}
                     onChangeText={value => onChange(value)}
                     title={strings.no_telp}

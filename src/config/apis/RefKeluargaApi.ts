@@ -1,20 +1,20 @@
 import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
 import { apis } from '../../constants';
-import { AlamatDataRequest } from '../../redux/reducers/AlamatReducer';
+import { RefKeluargaRequest } from '../../redux/reducers/RefKeluargaReducer';
 
 /**
  * Handles API call related to diagnostic
  * @class
  */
-class AlamatApi {
+class RefKeluargaApi {
   /**
    * Retrieve Alamat List
    *
    * @returns { Object } Promise either resolve or rejected
    */
-  static async getAlamatList(): Promise<AxiosResponse> {
-    const resp = await HttpService.get(apis.endpoints.alamat.alamat);
+  static async getRefKeluargaList(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.keluarga.keluarga);
     return resp;
   }
 
@@ -24,8 +24,10 @@ class AlamatApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async submitAlamat(data: AlamatDataRequest): Promise<AxiosResponse> {
-    const resp = await HttpService.post(apis.endpoints.alamat.alamat, data);
+  static async submitRefKeluarga(
+    data: RefKeluargaRequest,
+  ): Promise<AxiosResponse> {
+    const resp = await HttpService.post(apis.endpoints.keluarga.keluarga, data);
     return resp;
   }
 
@@ -35,19 +37,19 @@ class AlamatApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async updateAlamat({
+  static async updateRefKeluarga({
     data,
     id,
   }: {
-    data: AlamatDataRequest;
+    data: RefKeluargaRequest;
     id: number;
   }): Promise<AxiosResponse> {
     const resp = await HttpService.patch(
-      `${apis.endpoints.alamat.alamat}/${id}`,
+      `${apis.endpoints.keluarga.keluarga}/${id}`,
       data,
     );
     return resp;
   }
 }
 
-export default AlamatApi;
+export default RefKeluargaApi;

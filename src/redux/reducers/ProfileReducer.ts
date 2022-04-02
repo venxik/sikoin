@@ -1,12 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ImageSourcePropType } from 'react-native';
 
-export type ProfileData = {
-  profilePic?: string;
-  nama?: string;
-  code?: string;
-  koperasiName?: string;
-  email?: string;
-  noTelp?: string;
+export type ProfileResponse = {
+  profile_pic: string;
+  logo_koperasi: string;
+  nama: string;
+  no_telp: string;
+  email: string;
+  member_sejak: string;
+  no_anggota: string;
+};
+
+export type ProfileRequest = {
+  profile_pic: string | ImageSourcePropType;
+  nama: string;
+  no_telp: string;
+  email: string;
 };
 
 export type KoperasiData = {
@@ -19,18 +28,20 @@ export type KoperasiData = {
 };
 
 interface RootState {
-  profileData: ProfileData;
+  profileData: ProfileResponse;
   koperasiData: KoperasiData;
-  error: null;
+  error?: string | null;
 }
 
 const initialState: RootState = {
   profileData: {
-    profilePic: 'https://picsum.photos/200/300',
-    nama: 'Test 12321321',
-    code: 'JBC-0001',
-    email: 'test@test.com',
-    noTelp: '081312321321',
+    profile_pic: '',
+    logo_koperasi: '',
+    nama: '',
+    no_telp: '',
+    email: '',
+    member_sejak: '',
+    no_anggota: '',
   },
   koperasiData: {
     koperasiPic: 'https://picsum.photos/id/237/200/300',
@@ -48,15 +59,40 @@ const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    updateProfile: (state, { payload }: PayloadAction<ProfileData>) => {
+    fetchProfileSuccess: (
+      state,
+      { payload }: PayloadAction<ProfileResponse>,
+    ) => {
+      state.profileData = payload;
+    },
+    fetchProfileFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    updateProfileSuccess: (
+      state,
+      { payload }: PayloadAction<ProfileResponse>,
+    ) => {
+      state.profileData = payload;
+    },
+    updateProfileFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    updateProfile: (state, { payload }: PayloadAction<ProfileRequest>) => {
       state.profileData.email = payload.email;
-      state.profileData.noTelp = payload.noTelp;
-      state.profileData.nama = payload.nama;
-      state.profileData.profilePic = payload.profilePic;
     },
   },
 });
 
-export const { updateProfile } = profileSlice.actions;
+export const fetchProfile = createAction('fetchProfile');
+export const fetchUpdateProfile =
+  createAction<ProfileRequest>('fetchUpdateProfile');
+
+export const {
+  updateProfile,
+  fetchProfileFailed,
+  fetchProfileSuccess,
+  updateProfileFailed,
+  updateProfileSuccess,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;

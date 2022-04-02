@@ -1,62 +1,82 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type BiodataData = {
-  tempatLahir?: string;
-  tanggalLahir?: string | number | Date;
-  gender?: string;
-  golDarah?: string;
-  kewarganegaraan?: string;
-  pendidikanTerakhir?: string;
-  agama?: string;
-  jumlahAnak?: string;
-  pekerjaan?: string;
-  detailPekerjaan?: string;
-  statusPernikahan?: string;
-  bank?: string;
-  noRek?: string;
+export type BiodataResponse = {
+  profie_pic: string;
+  nama: string;
+  tempat_lahir: string;
+  tanggal_lahir: string;
+  jenis_kelamin: string;
+  gol_darah: string;
+  kewarganegaraan: string;
+  pendidikan_terakhir: string;
+  agama: string;
+  bank: string;
+  no_rek: string;
+  status_pernkahan: string;
+  jumlah_anak: number;
+  pekerjaan: string;
+  detail_pekerjaan: string;
 };
 
 interface RootState {
-  biodataData: BiodataData;
-  error: null;
+  biodataData: BiodataResponse;
+  error?: string | null;
 }
 
 const initialState: RootState = {
   biodataData: {
-    // tempatLahir: 'Jakarta',
-    // tanggalLahir: '10 Sep 1999',
-    // gender: 'Pria',
-    // golDarah: 'A',
-    // kewarganegaraan: 'Indonesia',
-    // pendidikanTerakhir: 'S1',
-    // agama: 'Kristen',
-    // statusPernikahan: 'Single',
-    // jumlahAnak: '4',
-    // pekerjaan: 'Main kuda',
-    // detailPekerjaan: 'Halo ini detail',
-    // bank: 'BCA',
-    // noRek: '1312321321',
+    profie_pic: '',
+    nama: '',
+    tempat_lahir: '',
+    tanggal_lahir: '',
+    jenis_kelamin: '',
+    gol_darah: '',
+    kewarganegaraan: '',
+    pendidikan_terakhir: '',
+    agama: '',
+    bank: '',
+    no_rek: '',
+    status_pernkahan: '',
+    jumlah_anak: 0,
+    pekerjaan: '',
+    detail_pekerjaan: '',
   },
-  error: null,
 };
 
 const biodataSlice = createSlice({
   name: 'biodataSlice',
   initialState,
   reducers: {
-    addBiodata: (state, { payload }: PayloadAction<BiodataData>) => {
+    fetchBiodataSuccess: (
+      state,
+      { payload }: PayloadAction<BiodataResponse>,
+    ) => {
       state.biodataData = payload;
     },
-    addBiodataSuccess: (state, { payload }: PayloadAction<BiodataData>) => {
+    fetchBiodataFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    updateBiodataSuccess: (
+      state,
+      { payload }: PayloadAction<BiodataResponse>,
+    ) => {
       state.biodataData = payload;
     },
-    addBiodataFailed: (state, { payload }) => {
+    updateBiodataFailed: (state, { payload }) => {
       state.error = payload;
     },
   },
 });
 
-export const { addBiodata, addBiodataFailed, addBiodataSuccess } =
-  biodataSlice.actions;
+export const fetchBiodata = createAction('fetchBiodata');
+export const fetchUpdateBiodata =
+  createAction<BiodataResponse>('fetchUpdateBiodata');
+
+export const {
+  fetchBiodataFailed,
+  fetchBiodataSuccess,
+  updateBiodataFailed,
+  updateBiodataSuccess,
+} = biodataSlice.actions;
 
 export default biodataSlice.reducer;

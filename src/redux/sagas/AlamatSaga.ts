@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { AlamatApi } from '../../config/apis';
-import { navigate, navigationRef, goBack } from '../../config/navigation';
+import { goBack } from '../../config/navigation';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   AlamatDataResponse,
@@ -16,6 +16,7 @@ import {
   fetchUpdateAlamatSuccess,
 } from '../reducers/AlamatReducer';
 import { isEmpty } from 'lodash';
+import { formatter } from '../../utils';
 
 function* getAlamat() {
   yield put(showLoading());
@@ -25,9 +26,12 @@ function* getAlamat() {
       AlamatApi.getAlamatList,
     );
     console.log('getAlamatList response: ', response);
-
     if (response.status === 200) {
-      yield put(fetchGetAlamatSuccess(response.data?.data));
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchGetAlamatSuccess(data));
+      if (!isEmpty(data)) {
+        goBack();
+      }
     } else {
       yield put(fetchGetAlamatFailed('Error'));
     }
@@ -48,8 +52,9 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
     console.log('updateAlamat response: ', response);
 
     if (response.status === 200) {
-      yield put(fetchUpdateAlamatSuccess(response.data?.data));
-      if (!isEmpty(response.data?.data)) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchUpdateAlamatSuccess(data));
+      if (!isEmpty(data)) {
         goBack();
       }
     } else {
@@ -72,8 +77,9 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
     console.log('submitAlamat response: ', response);
 
     if (response.status === 200) {
-      yield put(fetchSubmitAlamatSuccess(response.data?.data));
-      if (!isEmpty(response.data?.data)) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchSubmitAlamatSuccess(data));
+      if (!isEmpty(data)) {
         goBack();
       }
     } else {

@@ -45,6 +45,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+import { fetchBerandaUser } from '../../redux/reducers/HomeReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -82,19 +83,25 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   navigation,
 }) => {
   const dispatch = useAppDispatch();
-  const { kabarDataList } = useAppSelector(state => state.KabarReducer) || {};
-  const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
-  const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
-  const { nama, code, koperasiName } = profileData || {};
-  const { simpanan, saldo } = useAppSelector(
-    state => state.SaldoSimpananReducer,
-  );
+  const {
+    nama,
+    logo_koperasi,
+    nama_koperasi,
+    no_anggota,
+    profile_pic,
+    saldo_belanja,
+    simpanan,
+    kabar,
+    promo,
+  } = useAppSelector(state => state.HomeReducer);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   useEffect(() => {
+    dispatch(fetchBerandaUser());
+
     const backAction = () => {
       if (navigation.canGoBack()) {
         return false;
@@ -176,14 +183,14 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         {cardHeader(strings.kabar)}
         <FlatList
           horizontal
-          data={kabarDataList}
+          data={kabar}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar item={item} onPress={() => selectKabarCard(item)} />
-              {index === kabarDataList.length - 1 && (
+              {index === kabar?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
                   onPress={() => null}
@@ -198,11 +205,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
   const renderPromoCard = () => {
     return (
-      <View style={{ marginBottom: 40 }}>
+      <View>
         {cardHeader(strings.promo)}
         <FlatList
           horizontal
-          data={promoDataList}
+          data={promo}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
@@ -218,7 +225,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
   const renderMarketCard = () => {
     return (
-      <View style={{ marginBottom: 40 }}>
+      <View>
         {cardHeader(strings.market)}
         <FlatList
           horizontal
@@ -332,8 +339,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
                   <Text style={styles.textSaldo}>
                     Rp{' '}
                     {item.title === strings.simpanan
-                      ? formatter.formatNumberToCurreny(simpanan?.total)
-                      : formatter.formatNumberToCurreny(saldo?.total)}
+                      ? formatter.formatNumberToCurreny(simpanan)
+                      : formatter.formatNumberToCurreny(saldo_belanja)}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -368,13 +375,15 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     return (
       <View style={styles.profileContainer}>
         <ProfilePicture
+          profilUri={profile_pic}
+          koperasiUri={logo_koperasi}
           onPress={() => navigation.jumpTo('ProfileStackNavigator')}
         />
         <View style={styles.profileInnerContainer}>
           <Text style={styles.textProfileName}>Hi, {nama}!</Text>
           <View>
-            <Text style={styles.textProfileCode}>{code}</Text>
-            <Text style={styles.textProfileKoperasi}>{koperasiName}</Text>
+            <Text style={styles.textProfileCode}>{no_anggota}</Text>
+            <Text style={styles.textProfileKoperasi}>{nama_koperasi}</Text>
           </View>
         </View>
       </View>
@@ -463,8 +472,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           style={{
             marginHorizontal: SCREEN_WIDTH * 0.05,
           }}>
-          {renderKabarCard()}
-          {renderPromoCard()}
+          {kabar.length > 0 && renderKabarCard()}
+          {promo.length > 0 && renderPromoCard()}
           {renderMarketCard()}
         </View>
       </ScrollView>
@@ -478,7 +487,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  cardHeaderContainer: { flexDirection: 'row', width: '100%' },
+  cardHeaderContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    marginTop: sizes.padding,
+  },
   cardHeaderTitle: {
     fontSize: 17,
     color: colors.bodyText,

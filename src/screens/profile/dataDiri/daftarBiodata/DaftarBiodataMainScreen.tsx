@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
   Button,
@@ -11,7 +11,11 @@ import moment from 'moment';
 import { isEmpty } from 'lodash';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppSelector } from '../../../../config/store/ReduxStore';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../config/store/ReduxStore';
+import { fetchBiodata } from '../../../../redux/reducers/BiodataReducer';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -19,22 +23,27 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const { biodataData } = useAppSelector(s => s.BiodataReducer) || {};
   const {
-    tempatLahir,
-    tanggalLahir,
-    gender,
-    golDarah,
-    kewarganegaraan,
-    pendidikanTerakhir,
     agama,
-    statusPernikahan,
-    jumlahAnak,
-    pekerjaan,
-    detailPekerjaan,
     bank,
-    noRek,
-  } = biodataData || {};
+    detail_pekerjaan,
+    gol_darah,
+    jenis_kelamin,
+    jumlah_anak,
+    kewarganegaraan,
+    no_rek,
+    pekerjaan,
+    pendidikan_terakhir,
+    status_pernkahan,
+    tanggal_lahir,
+    tempat_lahir,
+  } = biodataData;
+
+  useEffect(() => {
+    dispatch(fetchBiodata());
+  }, []);
 
   const navigateToAddScreen = (update: boolean) => {
     navigation.navigate('DaftarBiodataAddScreen', {
@@ -51,38 +60,44 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
         }}>
         <View style={styles.cardContainer}>
           <DetailItemProfileHeader />
-          <DetailItemList title={strings.tempat_lahir} content={tempatLahir} />
+          <DetailItemList title={strings.tempat_lahir} content={tempat_lahir} />
           <DetailItemList
             title={strings.tgl_lahir}
             content={
-              !isEmpty(tanggalLahir)
-                ? moment(tanggalLahir).format('DD/MM/YYYY')
+              !isEmpty(tanggal_lahir)
+                ? moment(tanggal_lahir).format('DD/MM/YYYY')
                 : ''
             }
           />
-          <DetailItemList title={strings.jenis_kelamin} content={gender} />
-          <DetailItemList title={strings.golongan_darah} content={golDarah} />
+          <DetailItemList
+            title={strings.jenis_kelamin}
+            content={jenis_kelamin}
+          />
+          <DetailItemList title={strings.golongan_darah} content={gol_darah} />
           <DetailItemList
             title={strings.kewarganegaraan}
             content={kewarganegaraan}
           />
           <DetailItemList
             title={strings.pendidikan_terakhir}
-            content={pendidikanTerakhir}
+            content={pendidikan_terakhir}
           />
           <DetailItemList title={strings.agama} content={agama} />
           <DetailItemList title={strings.bank} content={bank} />
-          <DetailItemList title={strings.no_rekening} content={noRek} />
+          <DetailItemList title={strings.no_rekening} content={no_rek} />
           <DetailItemList
             title={strings.status_pernikahan}
-            content={statusPernikahan}
+            content={status_pernkahan}
           />
-          <DetailItemList title={strings.jumlah_anak} content={jumlahAnak} />
+          <DetailItemList
+            title={strings.jumlah_anak}
+            content={jumlah_anak.toString()}
+          />
           <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
           <DetailItemList
             showBorder={false}
             title={strings.detail_pekerjaan}
-            content={detailPekerjaan}
+            content={detail_pekerjaan}
           />
           <Button
             onPress={() => navigateToAddScreen(true)}

@@ -1,0 +1,70 @@
+import { AxiosResponse } from 'axios';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { ProfileApi } from '../../config/apis';
+import { goBack } from '../../config/navigation';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
+import { isEmpty } from 'lodash';
+import { formatter } from '../../utils';
+import {
+  fetchProfile,
+  fetchProfileFailed,
+  fetchProfileSuccess,
+  fetchUpdateProfile,
+  ProfileResponse,
+  updateProfileFailed,
+  updateProfileSuccess,
+} from '../reducers/ProfileReducer';
+
+function* getProfile() {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
+      ProfileApi.getProfile,
+    );
+    console.log('getProfile response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchProfileSuccess(data?.data));
+    } else {
+      yield put(fetchProfileFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchProfileFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
+      ProfileApi.updateProfile,
+      action.payload,
+    );
+    console.log('updateProfile response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(updateProfileSuccess(data?.data));
+      if (!isEmpty(data?.data)) {
+        goBack();
+      }
+    } else {
+      yield put(updateProfileFailed('Error'));
+    }
+  } catch (error) {
+    yield put(updateProfileFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+export function* watchGetProfile() {
+  yield takeLatest(fetchProfile, getProfile);
+}
+
+export function* watchUpdateProfile() {
+  yield takeLatest(fetchUpdateProfile, updateProfile);
+}

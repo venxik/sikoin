@@ -6,12 +6,14 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import { ButtonText, HeaderBack, TextInputForm } from '../../../../components';
+import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
   addKeluarga,
-  KeluargaData,
+  fetchSubmitRefKeluarga,
+  fetchUpdateRefKeluarga,
+  RefKeluargaRequest,
   updateKeluarga,
 } from '../../../../redux/reducers/RefKeluargaReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -26,7 +28,7 @@ type Props = NativeStackScreenProps<
 
 const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
   const { update, item, index } = route.params;
-  const { status, noTelp, nama, noKtp } = item || {};
+  const { status, noTelp, nama, noKtp, id } = item || {};
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +36,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<KeluargaData>({
+  } = useForm<RefKeluargaRequest>({
     defaultValues: {
       status: update ? status : '',
       noTelp: update ? noTelp : '',
@@ -42,10 +44,13 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
       noKtp: update ? noKtp : '',
     },
   });
-  const onSubmit = (data: KeluargaData) => {
+
+  const onSubmit = (data: RefKeluargaRequest) => {
     if (update) {
+      dispatch(fetchUpdateRefKeluarga({ data, id: id as number }));
       dispatch(updateKeluarga({ index, data }));
     } else {
+      dispatch(fetchSubmitRefKeluarga(data));
       dispatch(addKeluarga(data));
     }
     navigation.goBack();
@@ -125,7 +130,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <ButtonText
+      <Button
         onPress={handleSubmit(onSubmit)}
         buttonContainerStyle={{
           position: 'absolute',

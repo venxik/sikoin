@@ -1,30 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
   Image,
 } from 'react-native';
-import { SCREEN_WIDTH } from '../../constants';
+import { icons, SCREEN_WIDTH } from '../../constants';
 import { ProfilePictureProps } from './model';
-import { useAppSelector } from '../../config/store/ReduxStore';
 
 const ProfilePicture = (props: ProfilePictureProps) => {
-  const { onPress, style, disabled = false, showKoperasi = true } = props || {};
-  const { profileData, koperasiData } =
-    useAppSelector(state => state.ProfileReducer) || {};
-  const { profilePic } = profileData || {};
-  const { koperasiPic } = koperasiData || {};
+  const {
+    onPress,
+    style,
+    disabled = false,
+    showKoperasi = true,
+    profilUri,
+    koperasiUri,
+  } = props || {};
+  const [profileSource] = useState({ uri: profilUri || null });
+  const [koperasiSource] = useState({ uri: koperasiUri || null });
+  const [loadingSource] = useState(icons.popup_failed);
+  const [errorSource] = useState(icons.popup_failed);
+  const [isDefault, setIsDefault] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const profileImage = isDefault
+    ? loadingSource
+    : isError
+    ? errorSource
+    : profileSource;
+  const koperasiImage = isDefault
+    ? loadingSource
+    : isError
+    ? errorSource
+    : koperasiSource;
+
+  const onErrorProfile = () => {
+    setIsError(true);
+  };
+
+  const onLoadEndProfile = () => {
+    setIsDefault(false);
+  };
+
+  const onErrorKoperasi = () => {
+    setIsError(true);
+  };
+
+  const onLoadEndKoperasi = () => {
+    setIsDefault(false);
+  };
+
   return (
     <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
       <ImageBackground
+        onLoadEnd={onLoadEndProfile}
+        onError={onErrorProfile}
         imageStyle={styles.profilePicStyle}
-        source={{ uri: profilePic }}
+        source={profileImage}
         style={styles.profilePicStyle}>
         {showKoperasi && (
           <Image
-            source={{ uri: koperasiPic }}
+            source={koperasiImage}
             style={styles.koperasiPicStyle}
+            onLoadEnd={onLoadEndKoperasi}
+            onError={onErrorKoperasi}
           />
         )}
       </ImageBackground>

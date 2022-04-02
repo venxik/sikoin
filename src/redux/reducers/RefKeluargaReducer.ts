@@ -1,32 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { uniqueId } from 'lodash';
 
-export type KeluargaData = {
-  status?: string;
-  noTelp?: string;
-  nama?: string;
-  noKtp?: string;
+export type RefKeluargaResponse = {
+  id: number;
+  status: string;
+  noTelp: string;
+  nama: string;
+  noKtp: string;
+  member_koperasi_id: number;
+  created_at: number;
+  updated_at: number;
+};
+
+export type RefKeluargaRequest = {
+  status: string;
+  noTelp: string;
+  nama: string;
+  noKtp: string;
 };
 
 interface RootState {
-  keluargaList: KeluargaData[];
+  keluargaList: RefKeluargaResponse[];
   error: null;
 }
 
 const initialState: RootState = {
-  keluargaList: [
-    {
-      status: 'Ayah',
-      noTelp: '0802121212',
-      nama: 'Testing 12',
-      noKtp: '313213213211321',
-    },
-    {
-      status: 'Ibu',
-      noTelp: '21321312',
-      nama: 'Halo ini Ibu',
-      noKtp: '123456789012',
-    },
-  ],
+  keluargaList: [],
   error: null,
 };
 
@@ -34,18 +33,54 @@ const refKeluargaSlice = createSlice({
   name: 'refKeluargaSlice',
   initialState,
   reducers: {
-    addKeluarga: (state, { payload }: PayloadAction<KeluargaData>) => {
-      state.keluargaList.push(payload);
+    fetchGetRefKeluargaSuccess: (
+      state,
+      { payload }: PayloadAction<RefKeluargaResponse[]>,
+    ) => {
+      state.keluargaList = payload;
     },
-    addKeluargaSuccess: state => {
-      state.error = null;
-    },
-    addKeluargaFailed: (state, { payload }) => {
+    fetchGetRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
+    },
+    fetchSubmitRefKeluargaSuccess: (
+      state,
+      { payload }: PayloadAction<RefKeluargaResponse[]>,
+    ) => {
+      state.keluargaList = payload;
+    },
+    fetchSubmitRefKeluargaFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    fetchUpdateRefKeluargaSuccess: (
+      state,
+      { payload }: PayloadAction<RefKeluargaResponse[]>,
+    ) => {
+      state.keluargaList = payload;
+    },
+    fetchUpdateRefKeluargaFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    fetchDeleteRefKeluargaSuccess: (
+      state,
+      { payload }: PayloadAction<RefKeluargaResponse[]>,
+    ) => {
+      state.keluargaList = payload;
+    },
+    fetchDeleteRefKeluargaFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    addKeluarga: (state, { payload }: PayloadAction<RefKeluargaRequest>) => {
+      state.keluargaList.push({
+        ...payload,
+        member_koperasi_id: 1,
+        created_at: Date.now(),
+        updated_at: Date.now(),
+        id: Number.parseInt(uniqueId()),
+      });
     },
     deleteKeluarga: (
       state,
-      { payload }: PayloadAction<KeluargaData | null>,
+      { payload }: PayloadAction<RefKeluargaRequest | null>,
     ) => {
       state.keluargaList = state.keluargaList.filter(
         item => item?.status?.toLowerCase() != payload?.status?.toLowerCase(),
@@ -53,20 +88,42 @@ const refKeluargaSlice = createSlice({
     },
     updateKeluarga: (
       state,
-      { payload }: PayloadAction<{ data: KeluargaData; index?: number }>,
+      { payload }: PayloadAction<{ data: RefKeluargaRequest; index?: number }>,
     ) => {
       const { data, index } = payload || {};
-      if (index !== undefined) state.keluargaList[index] = data;
+      if (index !== undefined)
+        state.keluargaList[index] = {
+          ...data,
+          member_koperasi_id: 1,
+          created_at: Date.now(),
+          updated_at: Date.now(),
+          id: Number.parseInt(uniqueId()),
+        };
     },
   },
 });
 
+export const fetchGetRefKeluarga = createAction('fetchGetRefKeluarga');
+export const fetchUpdateRefKeluarga = createAction<{
+  data: RefKeluargaRequest;
+  id: number;
+}>('fetchUpdateRefKeluarga');
+export const fetchSubmitRefKeluarga = createAction<RefKeluargaRequest>(
+  'fetchSubmitRefKeluarga',
+);
+
 export const {
   addKeluarga,
-  addKeluargaFailed,
-  addKeluargaSuccess,
   deleteKeluarga,
   updateKeluarga,
+  fetchDeleteRefKeluargaFailed,
+  fetchDeleteRefKeluargaSuccess,
+  fetchGetRefKeluargaFailed,
+  fetchGetRefKeluargaSuccess,
+  fetchSubmitRefKeluargaFailed,
+  fetchSubmitRefKeluargaSuccess,
+  fetchUpdateRefKeluargaFailed,
+  fetchUpdateRefKeluargaSuccess,
 } = refKeluargaSlice.actions;
 
 export default refKeluargaSlice.reducer;

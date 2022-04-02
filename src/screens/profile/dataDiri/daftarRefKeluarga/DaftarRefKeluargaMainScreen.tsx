@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -23,7 +23,8 @@ import {
 import { icons, sizes, strings } from '../../../../constants';
 import {
   deleteKeluarga,
-  KeluargaData,
+  fetchGetRefKeluarga,
+  RefKeluargaResponse,
 } from '../../../../redux/reducers/RefKeluargaReducer';
 
 type Props = NativeStackScreenProps<
@@ -37,20 +38,23 @@ const DaftarRefKeluargaMainScreen: React.FC<Props> = ({ navigation }) => {
   const [showSuccessDeletePopup, setShowSuccessDeletePopup] =
     useState<boolean>(false);
   const [showFailedPopup, setShowFailedPopup] = useState<boolean>(false);
-  const [selectKeluarga, setSelectKeluarga] = useState<KeluargaData | null>(
-    null,
-  );
+  const [selectKeluarga, setSelectKeluarga] =
+    useState<RefKeluargaResponse | null>(null);
   const { keluargaList } = useAppSelector(s => s.RefKeluargaReducer) || [];
+
+  useEffect(() => {
+    dispatch(fetchGetRefKeluarga());
+  }, []);
 
   const navigateToAddScreen = (
     update: boolean,
     index?: number,
-    item?: KeluargaData,
+    item?: RefKeluargaResponse,
   ) => {
     navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
   };
 
-  const onPressDelete = (item: KeluargaData) => {
+  const onPressDelete = (item: RefKeluargaResponse) => {
     setShowDeletePopup(true);
     setSelectKeluarga(item);
   };

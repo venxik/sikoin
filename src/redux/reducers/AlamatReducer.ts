@@ -1,7 +1,8 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { uniqueId } from 'lodash';
 
 export type AlamatDataResponse = {
-  id?: number;
+  id: number;
   judul: string;
   detail: string;
   no_rt: string;
@@ -80,6 +81,7 @@ const alamatSlice = createSlice({
         member_koperasi_id: 1,
         created_at: Date.now(),
         updated_at: Date.now(),
+        id: Number.parseInt(uniqueId()),
       });
     },
     deleteAlamat: (
@@ -106,27 +108,22 @@ const alamatSlice = createSlice({
           member_koperasi_id: 1,
           created_at: Date.now(),
           updated_at: Date.now(),
+          id: Number.parseInt(uniqueId()),
         };
-    },
-    addAlamatSuccess: state => {
-      state.error = null;
-    },
-    addAlamatFailed: (state, { payload }) => {
-      state.error = payload;
     },
   },
 });
 
 export const fetchGetAlamat = createAction('fetchGetAlamat');
-export const fetchUpdateAlamat =
-  createAction<AlamatDataRequest>('fetchUpdateAlamat');
+export const fetchUpdateAlamat = createAction<{
+  data: AlamatDataRequest;
+  id: number;
+}>('fetchUpdateAlamat');
 export const fetchSubmitAlamat =
   createAction<AlamatDataRequest>('fetchSubmitAlamat');
 
 export const {
   addAlamat,
-  addAlamatSuccess,
-  addAlamatFailed,
   deleteAlamat,
   updateAlamat,
   fetchGetAlamatFailed,

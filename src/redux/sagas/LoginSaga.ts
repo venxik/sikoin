@@ -22,6 +22,7 @@ import {
 } from '../reducers/LoginReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import { CommonActions } from '@react-navigation/native';
+import { formatter } from '../../utils';
 
 function* getKoperasiList() {
   yield put(showLoading());
@@ -32,7 +33,8 @@ function* getKoperasiList() {
     console.log('getKoperasiList response: ', response);
 
     if (response.status === 200) {
-      yield put(fetchKoperasiListSuccess(response.data?.data));
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchKoperasiListSuccess(data?.data));
     } else {
       yield put(fetchKoperasiListFailed('Error'));
     }
@@ -51,8 +53,9 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
     );
     console.log('sendUserKoperasi response: ', response.data);
     if (response.status === 200) {
-      yield put(fetchUserKoperasiSuccess(response.data?.data));
-      if (!isEmpty(response.data.data)) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchUserKoperasiSuccess(data?.data));
+      if (!isEmpty(data?.data)) {
         navigate('DaftarKoperasiStep2Screen');
       }
     } else {
@@ -75,7 +78,9 @@ function* sendUserKoperasiEmail(
     );
     console.log('sendUserKoperasiEmail response: ', response);
     if (response.status === 200) {
-      if (!isEmpty(response.data)) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchUserKoperasiSuccess(data?.data));
+      if (!isEmpty(data)) {
         navigate('DaftarKoperasiSuccessScreen', {
           email: action.payload.email,
         });
@@ -96,7 +101,7 @@ function* forgotPassword(action: ReturnType<typeof fetchForgotPassword>) {
       LoginApi.forgotPassword,
       action.payload,
     );
-    console.log(response);
+    console.log('forgotPassword', response);
     if (response.status === 200) {
       yield put(setForgotPasswordStatus('success'));
     } else {
@@ -112,22 +117,23 @@ function* login(action: ReturnType<typeof fetchLogin>) {
   yield put(showLoading());
   try {
     const response: AxiosResponse = yield call(LoginApi.login, action.payload);
-    console.log(response);
+    console.log('login', response);
     if (response.status === 200) {
-      yield put(fetchLoginSuccess(response.data));
-      // if (navigationRef.isReady()) {
-      //   navigationRef.dispatch(
-      //     CommonActions.reset({
-      //       index: 0,
-      //       routes: [{ name: 'HomeTab' }],
-      //     }),
-      //   );
-      // }
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchLoginSuccess(data));
+      if (navigationRef.isReady()) {
+        navigationRef.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: 'HomeTab' }],
+          }),
+        );
+      }
     } else {
       yield put(fetchLoginFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchLoginFailed('Error'));
+    yield put(fetchLoginFailed(error));
   }
   yield put(hideLoading());
 }
