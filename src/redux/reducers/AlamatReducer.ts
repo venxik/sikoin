@@ -43,31 +43,31 @@ const alamatSlice = createSlice({
   name: 'alamatSlice',
   initialState,
   reducers: {
-    fetchGetAlamatSuccess: (
+    getAlamatListSuccess: (
       state,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    fetchGetAlamatFailed: (state, { payload }) => {
+    getAlamatListFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchSubmitAlamatSuccess: (
+    submitAlamatSuccess: (
       state,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    fetchSubmitAlamatFailed: (state, { payload }) => {
+    submitAlamatFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchUpdateAlamatSuccess: (
+    updateAlamatSuccess: (
       state,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    fetchUpdateAlamatFailed: (state, { payload }) => {
+    updateAlamatFailed: (state, { payload }) => {
       state.error = payload;
     },
     addAlamat: (state, { payload }: PayloadAction<AlamatDataRequest>) => {
@@ -114,7 +114,7 @@ const alamatSlice = createSlice({
   },
 });
 
-export const fetchGetAlamat = createAction('fetchGetAlamat');
+export const fetchAlamatList = createAction('fetchAlamatList');
 export const fetchUpdateAlamat = createAction<{
   data: AlamatDataRequest;
   id: number;
@@ -126,12 +126,12 @@ export const {
   addAlamat,
   deleteAlamat,
   updateAlamat,
-  fetchGetAlamatFailed,
-  fetchGetAlamatSuccess,
-  fetchUpdateAlamatFailed,
-  fetchUpdateAlamatSuccess,
-  fetchSubmitAlamatFailed,
-  fetchSubmitAlamatSuccess,
+  getAlamatListFailed,
+  getAlamatListSuccess,
+  updateAlamatFailed,
+  updateAlamatSuccess,
+  submitAlamatFailed,
+  submitAlamatSuccess,
 } = alamatSlice.actions;
 
 export default alamatSlice.reducer;

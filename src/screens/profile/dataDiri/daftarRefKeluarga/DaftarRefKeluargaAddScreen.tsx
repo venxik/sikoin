@@ -53,7 +53,6 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
       dispatch(fetchSubmitRefKeluarga(data));
       dispatch(addKeluarga(data));
     }
-    navigation.goBack();
   };
 
   return (

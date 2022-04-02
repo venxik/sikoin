@@ -46,12 +46,8 @@ const DaftarRefKeluargaMainScreen: React.FC<Props> = ({ navigation }) => {
     dispatch(fetchGetRefKeluarga());
   }, []);
 
-  const navigateToAddScreen = (
-    update: boolean,
-    index?: number,
-    item?: RefKeluargaResponse,
-  ) => {
-    navigation.navigate('DaftarRefKeluargaAddScreen', { update, index, item });
+  const navigateToAddScreen = (update: boolean, item?: RefKeluargaResponse) => {
+    navigation.navigate('DaftarRefKeluargaAddScreen', { update, item });
   };
 
   const onPressDelete = (item: RefKeluargaResponse) => {
@@ -134,12 +130,12 @@ const DaftarRefKeluargaMainScreen: React.FC<Props> = ({ navigation }) => {
             </View>
           );
         }}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (
             <View>
               <CardRefKeluarga
                 item={item}
-                onPressUbah={() => navigateToAddScreen(true, index, item)}
+                onPressUbah={() => navigateToAddScreen(true, item)}
                 onPressDelete={() => onPressDelete(item)}
               />
             </View>

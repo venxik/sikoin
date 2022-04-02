@@ -85,13 +85,11 @@ export type DataDiriStackParamList = {
   DaftarAlamatAddScreen: {
     update: boolean;
     item?: AlamatDataResponse;
-    index?: number;
   };
   DaftarAlamatMainScreen: undefined;
   DaftarRefKeluargaAddScreen: {
     update: boolean;
     item?: RefKeluargaResponse;
-    index?: number;
   };
   DaftarRefKeluargaMainScreen: undefined;
   DaftarKtpMainScreen: undefined;

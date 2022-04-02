@@ -8,8 +8,8 @@ import { formatter } from '../../utils';
 import {
   BiodataResponse,
   fetchBiodata,
-  fetchBiodataFailed,
-  fetchBiodataSuccess,
+  getBiodataFailed,
+  getBiodataSuccess,
   fetchUpdateBiodata,
   updateBiodataFailed,
   updateBiodataSuccess,
@@ -25,12 +25,12 @@ function* getBiodata() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchBiodataSuccess(data?.data));
+      yield put(getBiodataSuccess(data?.data));
     } else {
-      yield put(fetchBiodataFailed('Error'));
+      yield put(getBiodataFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchBiodataFailed(error));
+    yield put(getBiodataFailed(error));
   }
   yield put(hideLoading());
 }

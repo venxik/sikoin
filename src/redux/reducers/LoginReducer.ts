@@ -61,31 +61,31 @@ const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
   reducers: {
-    fetchKoperasiListSuccess: (
+    getKoperasiListSuccess: (
       state,
       { payload }: PayloadAction<KoperasiListResponse[]>,
     ) => {
       state.koperasiListData = payload;
     },
-    fetchKoperasiListFailed: (state, { payload }) => {
+    getKoperasiListFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchUserKoperasiSuccess: (
+    getUserKoperasiSuccess: (
       state,
       { payload }: PayloadAction<UserKoperasiResponse>,
     ) => {
       state.userKoperasiData = payload;
     },
-    fetchUserKoperasiFailed: (state, { payload }) => {
+    getUserKoperasiFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchUserKoperasiEmailSuccess: (
+    updateUserKoperasiEmailSuccess: (
       state,
       { payload }: PayloadAction<UserKoperasiResponse>,
     ) => {
       state.userKoperasiData = payload;
     },
-    fetchUserKoperasiEmailFailed: (state, { payload }) => {
+    updateUserKoperasiEmailFailed: (state, { payload }) => {
       state.error = payload;
     },
     setForgotPasswordStatus: (
@@ -115,11 +115,11 @@ export const fetchLogin = createAction<{ email: string; password: string }>(
   'fetchLogin',
 );
 export const {
-  fetchKoperasiListSuccess,
-  fetchKoperasiListFailed,
-  fetchUserKoperasiEmailFailed,
-  fetchUserKoperasiFailed,
-  fetchUserKoperasiSuccess,
+  getKoperasiListSuccess,
+  getKoperasiListFailed,
+  updateUserKoperasiEmailFailed,
+  getUserKoperasiFailed,
+  getUserKoperasiSuccess,
   setForgotPasswordStatus,
   fetchLoginFailed,
   fetchLoginSuccess,

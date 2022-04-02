@@ -6,14 +6,14 @@ import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import { isEmpty } from 'lodash';
 import {
   fetchGetRefKeluarga,
-  fetchGetRefKeluargaFailed,
-  fetchGetRefKeluargaSuccess,
+  getRefKeluargaFailed,
+  getRefKeluargaSuccess,
   fetchSubmitRefKeluarga,
-  fetchSubmitRefKeluargaFailed,
-  fetchSubmitRefKeluargaSuccess,
+  submitRefKeluargaFailed,
+  submitRefKeluargaSuccess,
   fetchUpdateRefKeluarga,
-  fetchUpdateRefKeluargaFailed,
-  fetchUpdateRefKeluargaSuccess,
+  updateRefKeluargaFailed,
+  updateRefKeluargaSuccess,
   RefKeluargaResponse,
 } from '../reducers/RefKeluargaReducer';
 import { formatter } from '../../utils';
@@ -29,12 +29,12 @@ function* getRefKeluarga() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchGetRefKeluargaSuccess(data?.data));
+      yield put(getRefKeluargaSuccess(data?.data));
     } else {
-      yield put(fetchGetRefKeluargaFailed('Error'));
+      yield put(getRefKeluargaFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchGetRefKeluargaFailed(error));
+    yield put(getRefKeluargaFailed(error));
   }
   yield put(hideLoading());
 }
@@ -51,15 +51,15 @@ function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchUpdateRefKeluargaSuccess(data?.data));
+      yield put(updateRefKeluargaSuccess(data?.data));
       if (!isEmpty(data?.data)) {
         goBack();
       }
     } else {
-      yield put(fetchUpdateRefKeluargaFailed('Error'));
+      yield put(updateRefKeluargaFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchUpdateRefKeluargaFailed(error));
+    yield put(updateRefKeluargaFailed(error));
   }
   yield put(hideLoading());
 }
@@ -76,15 +76,15 @@ function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchSubmitRefKeluargaSuccess(data?.data));
+      yield put(submitRefKeluargaSuccess(data?.data));
       if (!isEmpty(data?.data)) {
         goBack();
       }
     } else {
-      yield put(fetchSubmitRefKeluargaFailed('Error'));
+      yield put(submitRefKeluargaFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchSubmitRefKeluargaFailed(error));
+    yield put(submitRefKeluargaFailed(error));
   }
   yield put(hideLoading());
 }

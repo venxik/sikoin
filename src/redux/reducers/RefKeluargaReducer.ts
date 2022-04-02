@@ -33,40 +33,40 @@ const refKeluargaSlice = createSlice({
   name: 'refKeluargaSlice',
   initialState,
   reducers: {
-    fetchGetRefKeluargaSuccess: (
+    getRefKeluargaSuccess: (
       state,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    fetchGetRefKeluargaFailed: (state, { payload }) => {
+    getRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchSubmitRefKeluargaSuccess: (
+    submitRefKeluargaSuccess: (
       state,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    fetchSubmitRefKeluargaFailed: (state, { payload }) => {
+    submitRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchUpdateRefKeluargaSuccess: (
+    updateRefKeluargaSuccess: (
       state,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    fetchUpdateRefKeluargaFailed: (state, { payload }) => {
+    updateRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    fetchDeleteRefKeluargaSuccess: (
+    deleteRefKeluargaSuccess: (
       state,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    fetchDeleteRefKeluargaFailed: (state, { payload }) => {
+    deleteRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
     addKeluarga: (state, { payload }: PayloadAction<RefKeluargaRequest>) => {
@@ -116,14 +116,14 @@ export const {
   addKeluarga,
   deleteKeluarga,
   updateKeluarga,
-  fetchDeleteRefKeluargaFailed,
-  fetchDeleteRefKeluargaSuccess,
-  fetchGetRefKeluargaFailed,
-  fetchGetRefKeluargaSuccess,
-  fetchSubmitRefKeluargaFailed,
-  fetchSubmitRefKeluargaSuccess,
-  fetchUpdateRefKeluargaFailed,
-  fetchUpdateRefKeluargaSuccess,
+  deleteRefKeluargaSuccess,
+  deleteRefKeluargaFailed,
+  getRefKeluargaFailed,
+  getRefKeluargaSuccess,
+  submitRefKeluargaFailed,
+  submitRefKeluargaSuccess,
+  updateRefKeluargaFailed,
+  updateRefKeluargaSuccess,
 } = refKeluargaSlice.actions;
 
 export default refKeluargaSlice.reducer;

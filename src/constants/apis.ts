@@ -24,6 +24,9 @@ const constant = {
     biodata: {
       biodata: '/api/biodata',
     },
+    pekerjaan: {
+      pekerjaan: '/api/biodata',
+    },
   },
   errorTypes: {
     generic: 'Error',

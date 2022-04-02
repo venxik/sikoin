@@ -20,7 +20,8 @@ type Props = NativeStackScreenProps<
 
 const DaftarKoperasiSearchScreen: FC<Props> = ({ navigation }) => {
   const [koperasi, setKoperasi] = useState<string>('');
-  const [data, setData] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<any>();
 
   const onChangeKoperasi = (value: string) => {
     setKoperasi(value);

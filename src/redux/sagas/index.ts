@@ -5,6 +5,7 @@ import {
   watchSubmitAlamat,
   watchUpdateAlamat,
 } from './AlamatSaga';
+import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
 import { watchGetBerandaUser } from './HomeSaga';
 import {
   watchForgotPassword,
@@ -13,6 +14,7 @@ import {
   watchSendKoperasiData,
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
+import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
 import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import {
   watchGetRefKeluarga,
@@ -37,5 +39,9 @@ export function* rootSaga() {
     fork(watchGetBerandaUser),
     fork(watchGetProfile),
     fork(watchUpdateProfile),
+    fork(watchGetBiodata),
+    fork(watchUpdateBiodata),
+    fork(watchGetPekerjaan),
+    fork(watchUpdatePekerjaan),
   ]);
 }

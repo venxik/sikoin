@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type PekerjaanData = {
+export type PekerjaanResponse = {
   masaKerjaTahun?: string;
   masaKerjaBulan?: string;
   gajiBulanan?: string;
@@ -12,32 +12,52 @@ export type PekerjaanData = {
 };
 
 interface RootState {
-  pekerjaanData: PekerjaanData | null;
-  error: null;
+  pekerjaanData: PekerjaanResponse | null;
+  error?: string | null;
 }
 
 const initialState: RootState = {
   pekerjaanData: null,
-  error: null,
 };
 
 const pekerjaanSlice = createSlice({
   name: 'pekerjaanSlice',
   initialState,
   reducers: {
-    addPekerjaan: (state, { payload }: PayloadAction<PekerjaanData>) => {
+    addPekerjaan: (state, { payload }: PayloadAction<PekerjaanResponse>) => {
       state.pekerjaanData = payload;
     },
-    addPekerjaanSuccess: (state, { payload }: PayloadAction<PekerjaanData>) => {
+    getPekerjaanSuccess: (
+      state,
+      { payload }: PayloadAction<PekerjaanResponse>,
+    ) => {
       state.pekerjaanData = payload;
     },
-    addPekerjaanFailed: (state, { payload }) => {
+    getPekerjaanFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    updatePekerjaanSuccess: (
+      state,
+      { payload }: PayloadAction<PekerjaanResponse>,
+    ) => {
+      state.pekerjaanData = payload;
+    },
+    updatePekerjaanFailed: (state, { payload }) => {
       state.error = payload;
     },
   },
 });
 
-export const { addPekerjaan, addPekerjaanFailed, addPekerjaanSuccess } =
-  pekerjaanSlice.actions;
+export const fetchPekerjaan = createAction('fetchPekerjaan');
+export const fetchUpdatePekerjaan = createAction<PekerjaanResponse>(
+  'fetchUpdatePekerjaan',
+);
+export const {
+  addPekerjaan,
+  getPekerjaanFailed,
+  getPekerjaanSuccess,
+  updatePekerjaanFailed,
+  updatePekerjaanSuccess,
+} = pekerjaanSlice.actions;
 
 export default pekerjaanSlice.reducer;

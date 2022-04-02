@@ -19,6 +19,7 @@ import { ProfileStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
+import 'moment/locale/id';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
@@ -37,6 +38,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(fetchProfile());
+    moment.locale('id');
   }, []);
 
   const navigateToEditProfile = () => {

@@ -7,8 +7,8 @@ import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
 import {
   fetchProfile,
-  fetchProfileFailed,
-  fetchProfileSuccess,
+  getProfileFailed,
+  getProfileSuccess,
   fetchUpdateProfile,
   ProfileResponse,
   updateProfileFailed,
@@ -26,12 +26,12 @@ function* getProfile() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchProfileSuccess(data?.data));
+      yield put(getProfileSuccess(data?.data));
     } else {
-      yield put(fetchProfileFailed('Error'));
+      yield put(getProfileFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchProfileFailed(error));
+    yield put(getProfileFailed(error));
   }
   yield put(hideLoading());
 }

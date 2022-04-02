@@ -5,12 +5,12 @@ import { LoginApi } from '../../config/apis';
 import { navigate, navigationRef } from '../../config/navigation';
 import {
   fetchKoperasiList,
-  fetchKoperasiListFailed,
-  fetchKoperasiListSuccess,
+  getKoperasiListFailed,
+  getKoperasiListSuccess,
   fetchUserKoperasi,
-  fetchUserKoperasiEmailFailed,
-  fetchUserKoperasiFailed,
-  fetchUserKoperasiSuccess,
+  updateUserKoperasiEmailFailed,
+  getUserKoperasiFailed,
+  getUserKoperasiSuccess,
   fetchUserKoperasiEmail,
   fetchForgotPassword,
   setForgotPasswordStatus,
@@ -34,12 +34,12 @@ function* getKoperasiList() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchKoperasiListSuccess(data?.data));
+      yield put(getKoperasiListSuccess(data?.data));
     } else {
-      yield put(fetchKoperasiListFailed('Error'));
+      yield put(getKoperasiListFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchKoperasiListFailed(error));
+    yield put(getKoperasiListFailed(error));
   }
   yield put(hideLoading());
 }
@@ -54,15 +54,15 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
     console.log('sendUserKoperasi response: ', response.data);
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchUserKoperasiSuccess(data?.data));
+      yield put(getUserKoperasiSuccess(data?.data));
       if (!isEmpty(data?.data)) {
         navigate('DaftarKoperasiStep2Screen');
       }
     } else {
-      yield put(fetchUserKoperasiFailed('Error'));
+      yield put(getUserKoperasiFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchUserKoperasiFailed('Error'));
+    yield put(getUserKoperasiFailed('Error'));
   }
   yield put(hideLoading());
 }
@@ -79,17 +79,17 @@ function* sendUserKoperasiEmail(
     console.log('sendUserKoperasiEmail response: ', response);
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchUserKoperasiSuccess(data?.data));
+      yield put(getUserKoperasiSuccess(data?.data));
       if (!isEmpty(data)) {
         navigate('DaftarKoperasiSuccessScreen', {
           email: action.payload.email,
         });
       }
     } else {
-      yield put(fetchUserKoperasiEmailFailed('Error'));
+      yield put(updateUserKoperasiEmailFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchUserKoperasiEmailFailed('Error'));
+    yield put(updateUserKoperasiEmailFailed('Error'));
   }
   yield put(hideLoading());
 }

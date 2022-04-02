@@ -59,13 +59,10 @@ const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    fetchProfileSuccess: (
-      state,
-      { payload }: PayloadAction<ProfileResponse>,
-    ) => {
+    getProfileSuccess: (state, { payload }: PayloadAction<ProfileResponse>) => {
       state.profileData = payload;
     },
-    fetchProfileFailed: (state, { payload }) => {
+    getProfileFailed: (state, { payload }) => {
       state.error = payload;
     },
     updateProfileSuccess: (
@@ -89,8 +86,8 @@ export const fetchUpdateProfile =
 
 export const {
   updateProfile,
-  fetchProfileFailed,
-  fetchProfileSuccess,
+  getProfileFailed,
+  getProfileSuccess,
   updateProfileFailed,
   updateProfileSuccess,
 } = profileSlice.actions;

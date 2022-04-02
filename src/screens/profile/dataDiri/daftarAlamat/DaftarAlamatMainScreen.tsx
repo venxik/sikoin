@@ -25,7 +25,7 @@ import { icons, sizes, strings } from '../../../../constants';
 import {
   AlamatDataResponse,
   deleteAlamat,
-  fetchGetAlamat,
+  fetchAlamatList,
 } from '../../../../redux/reducers/AlamatReducer';
 
 type Props = NativeStackScreenProps<
@@ -47,15 +47,11 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const { alamatList } = useAppSelector(s => s.AlamatReducer) || [];
 
   useEffect(() => {
-    isFocused ? dispatch(fetchGetAlamat()) : null;
+    isFocused ? dispatch(fetchAlamatList()) : null;
   }, [isFocused]);
 
-  const navigateToAddScreen = (
-    update: boolean,
-    index?: number,
-    item?: AlamatDataResponse,
-  ) => {
-    navigation.navigate('DaftarAlamatAddScreen', { update, index, item });
+  const navigateToAddScreen = (update: boolean, item?: AlamatDataResponse) => {
+    navigation.navigate('DaftarAlamatAddScreen', { update, item });
   };
 
   const onPressDeleteAlamat = (item: AlamatDataResponse) => {
@@ -138,11 +134,11 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
             </View>
           );
         }}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (
             <CardAlamat
               item={item}
-              onPressUbah={() => navigateToAddScreen(true, index, item)}
+              onPressUbah={() => navigateToAddScreen(true, item)}
               onPressDelete={() => onPressDeleteAlamat(item)}
             />
           );

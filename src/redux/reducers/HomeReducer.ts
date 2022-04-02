@@ -29,7 +29,7 @@ const homeSlice = createSlice({
   name: 'homeSlice',
   initialState,
   reducers: {
-    fetchBerandaUserSuccess: (
+    getBerandaUserSuccess: (
       state,
       { payload }: PayloadAction<BerandaUserResponse>,
     ) => {
@@ -54,7 +54,7 @@ const homeSlice = createSlice({
       state.profile_pic = profile_pic;
       state.promo = promo;
     },
-    fetchBerandaUserFailed: (state, { payload }) => {
+    getBerandaUserFailed: (state, { payload }) => {
       state.error = payload;
     },
   },
@@ -62,7 +62,7 @@ const homeSlice = createSlice({
 
 export const fetchBerandaUser = createAction('fetchBerandaUser');
 
-export const { fetchBerandaUserFailed, fetchBerandaUserSuccess } =
+export const { getBerandaUserFailed, getBerandaUserSuccess } =
   homeSlice.actions;
 
 export default homeSlice.reducer;

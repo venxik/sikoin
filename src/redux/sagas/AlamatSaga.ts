@@ -5,15 +5,15 @@ import { goBack } from '../../config/navigation';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   AlamatDataResponse,
-  fetchGetAlamat,
-  fetchGetAlamatFailed,
-  fetchGetAlamatSuccess,
+  fetchAlamatList,
+  getAlamatListFailed,
+  getAlamatListSuccess,
   fetchSubmitAlamat,
-  fetchSubmitAlamatFailed,
-  fetchSubmitAlamatSuccess,
+  submitAlamatFailed,
+  submitAlamatSuccess,
   fetchUpdateAlamat,
-  fetchUpdateAlamatFailed,
-  fetchUpdateAlamatSuccess,
+  updateAlamatFailed,
+  updateAlamatSuccess,
 } from '../reducers/AlamatReducer';
 import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
@@ -28,15 +28,15 @@ function* getAlamat() {
     console.log('getAlamatList response: ', response);
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchGetAlamatSuccess(data));
+      yield put(getAlamatListSuccess(data));
       if (!isEmpty(data)) {
         goBack();
       }
     } else {
-      yield put(fetchGetAlamatFailed('Error'));
+      yield put(getAlamatListFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchGetAlamatFailed(error));
+    yield put(getAlamatListFailed(error));
   }
   yield put(hideLoading());
 }
@@ -53,15 +53,15 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchUpdateAlamatSuccess(data));
+      yield put(updateAlamatSuccess(data));
       if (!isEmpty(data)) {
         goBack();
       }
     } else {
-      yield put(fetchUpdateAlamatFailed('Error'));
+      yield put(updateAlamatFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchUpdateAlamatFailed(error));
+    yield put(updateAlamatFailed(error));
   }
   yield put(hideLoading());
 }
@@ -78,21 +78,21 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchSubmitAlamatSuccess(data));
+      yield put(submitAlamatSuccess(data));
       if (!isEmpty(data)) {
         goBack();
       }
     } else {
-      yield put(fetchSubmitAlamatFailed('Error'));
+      yield put(submitAlamatFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchSubmitAlamatFailed(error));
+    yield put(submitAlamatFailed(error));
   }
   yield put(hideLoading());
 }
 
 export function* watchGetAlamat() {
-  yield takeLatest(fetchGetAlamat, getAlamat);
+  yield takeLatest(fetchAlamatList, getAlamat);
 }
 
 export function* watchUpdateAlamat() {

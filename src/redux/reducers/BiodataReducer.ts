@@ -47,13 +47,12 @@ const biodataSlice = createSlice({
   name: 'biodataSlice',
   initialState,
   reducers: {
-    fetchBiodataSuccess: (
-      state,
-      { payload }: PayloadAction<BiodataResponse>,
-    ) => {
+    getBiodataSuccess: (state, { payload }: PayloadAction<BiodataResponse>) => {
+      console.log('getBiodataSuccess', payload);
+
       state.biodataData = payload;
     },
-    fetchBiodataFailed: (state, { payload }) => {
+    getBiodataFailed: (state, { payload }) => {
       state.error = payload;
     },
     updateBiodataSuccess: (
@@ -73,8 +72,8 @@ export const fetchUpdateBiodata =
   createAction<BiodataResponse>('fetchUpdateBiodata');
 
 export const {
-  fetchBiodataFailed,
-  fetchBiodataSuccess,
+  getBiodataFailed,
+  getBiodataSuccess,
   updateBiodataFailed,
   updateBiodataSuccess,
 } = biodataSlice.actions;

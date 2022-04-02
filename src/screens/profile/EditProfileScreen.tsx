@@ -16,7 +16,6 @@ import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import {
   fetchUpdateProfile,
   ProfileRequest,
-  updateProfile,
 } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { formatter } from '../../utils';
@@ -47,15 +46,6 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
         profile_pic: profilePicture as string | ImageSourcePropType,
       }),
     );
-    // dispatch(
-    //   updateProfile({
-    //     email,
-    //     nama,
-    //     no_telp: no_telp as string,
-    //     profile_pic: profilePicture as string | ImageSourcePropType,
-    //   }),
-    // );
-    // navigation.goBack();
   };
 
   const openDocumentPicker = async () => {

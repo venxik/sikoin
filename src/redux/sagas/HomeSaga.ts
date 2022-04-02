@@ -5,8 +5,8 @@ import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   BerandaUserResponse,
   fetchBerandaUser,
-  fetchBerandaUserFailed,
-  fetchBerandaUserSuccess,
+  getBerandaUserFailed,
+  getBerandaUserSuccess,
 } from '../reducers/HomeReducer';
 import { formatter } from '../../utils';
 
@@ -21,12 +21,12 @@ function* getBerandaUser() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchBerandaUserSuccess(data.data));
+      yield put(getBerandaUserSuccess(data.data));
     } else {
-      yield put(fetchBerandaUserFailed('Error'));
+      yield put(getBerandaUserFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchBerandaUserFailed(error));
+    yield put(getBerandaUserFailed(error));
   }
   yield put(hideLoading());
 }

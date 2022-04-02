@@ -12,11 +12,9 @@ import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
-  addAlamat,
   AlamatDataRequest,
   fetchSubmitAlamat,
   fetchUpdateAlamat,
-  updateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
@@ -28,7 +26,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
-  const { update, item, index } = route.params;
+  const { update, item } = route.params;
   const {
     id,
     judul,
@@ -66,9 +64,8 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
       // dispatch(updateAlamat({ index, data }));
     } else {
       dispatch(fetchSubmitAlamat(data));
-      dispatch(addAlamat(data));
+      // dispatch(addAlamat(data));
     }
-    // navigation.goBack();
   };
 
   return (

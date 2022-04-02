@@ -83,7 +83,6 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
         tanggal_lahir: moment(tanggal_lahir).format(),
       }),
     );
-    navigation.goBack();
   };
 
   return (
