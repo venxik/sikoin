@@ -18,7 +18,7 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchKoperasiList,
   fetchUserKoperasi,

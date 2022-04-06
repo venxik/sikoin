@@ -28,10 +28,7 @@ function* getAlamat() {
     console.log('getAlamatList response: ', response);
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getAlamatListSuccess(data));
-      if (!isEmpty(data)) {
-        goBack();
-      }
+      yield put(getAlamatListSuccess(data?.data));
     } else {
       yield put(getAlamatListFailed('Error'));
     }
@@ -53,7 +50,9 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updateAlamatSuccess(data));
+      console.log('data ', data);
+
+      yield put(updateAlamatSuccess(data?.data));
       if (!isEmpty(data)) {
         goBack();
       }
@@ -78,7 +77,7 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(submitAlamatSuccess(data));
+      yield put(submitAlamatSuccess(data?.data));
       if (!isEmpty(data)) {
         goBack();
       }

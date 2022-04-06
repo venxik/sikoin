@@ -10,15 +10,13 @@ import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
-  addKeluarga,
   fetchSubmitRefKeluarga,
   fetchUpdateRefKeluarga,
   RefKeluargaRequest,
-  updateKeluarga,
 } from '../../../../redux/reducers/RefKeluargaReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppDispatch } from '../../../../config/store/ReduxStore';
+import { useAppDispatch } from '../../../../config';
 import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
@@ -27,7 +25,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
-  const { update, item, index } = route.params;
+  const { update, item } = route.params;
   const { status, noTelp, nama, noKtp, id } = item || {};
 
   const dispatch = useAppDispatch();
@@ -48,10 +46,10 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
   const onSubmit = (data: RefKeluargaRequest) => {
     if (update) {
       dispatch(fetchUpdateRefKeluarga({ data, id: id as number }));
-      dispatch(updateKeluarga({ index, data }));
+      // dispatch(updateKeluarga({ index, data }));
     } else {
       dispatch(fetchSubmitRefKeluarga(data));
-      dispatch(addKeluarga(data));
+      // dispatch(addKeluarga(data));
     }
   };
 
@@ -94,6 +92,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                   onChangeText={value => onChange(value)}
                   title={strings.no_ktp}
                   maxLength={16}
+                  keyboardType="number-pad"
                 />
               )}
               rules={{
@@ -116,6 +115,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                   onChangeText={value => onChange(value)}
                   title={strings.no_telp}
                   maxLength={13}
+                  keyboardType="number-pad"
                 />
               )}
               rules={{

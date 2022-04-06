@@ -16,7 +16,7 @@ import {
   SubmenuItemList,
 } from '../../components';
 import { ProfileStackParamList } from '../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
 import 'moment/locale/id';

@@ -23,7 +23,7 @@ import DocumentPicker from 'react-native-document-picker';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 

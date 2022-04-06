@@ -16,7 +16,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderBack, SaldoItemList } from '../../components';
 import { SaldoSimpananStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import {
   colors,
   icons,

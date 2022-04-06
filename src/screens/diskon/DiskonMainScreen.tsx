@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { CardDiskon, HeaderBack, MenuHeaderIcon } from '../../components';
 import { DiskonStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<DiskonStackParamList, 'DiskonMainScreen'>;

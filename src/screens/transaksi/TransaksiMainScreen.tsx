@@ -23,7 +23,7 @@ import {
   TransaksiItemList,
 } from '../../components';
 import { TransaksiStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
 
 const filter = ['Semua', 'Pembelian', 'Topup'];

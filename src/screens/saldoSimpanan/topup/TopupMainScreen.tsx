@@ -21,7 +21,7 @@ import { formatter } from '../../../utils';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TopupStackParamList } from '../../../config/navigation/model';
-import { useAppSelector } from '../../../config/store/ReduxStore';
+import { useAppSelector } from '../../../config';
 
 const defaultNominal = [
   { item: '10', value: '10000' },

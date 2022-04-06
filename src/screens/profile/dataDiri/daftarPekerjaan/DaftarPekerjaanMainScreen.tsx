@@ -9,7 +9,7 @@ import {
   HeaderBack,
 } from '../../../../components';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppSelector } from '../../../../config/store/ReduxStore';
+import { useAppSelector } from '../../../../config';
 import { colors, icons, sizes, strings } from '../../../../constants';
 import { formatter } from '../../../../utils';
 

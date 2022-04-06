@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useEffect } from 'react';
 import { RouterContainer } from './config/navigation';
-import { store, persist } from './config/store/ReduxStore';
+import { store, persist } from './config';
 import { fcmService } from './utils/FCMService';
 import { localNotificationService } from './utils/LocalNotificationService';
 import { Alert } from 'react-native';

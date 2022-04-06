@@ -13,7 +13,7 @@ import { addKtpImage } from '../../../../redux/reducers/KtpReducer';
 import RNFS from 'react-native-fs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppDispatch } from '../../../../config/store/ReduxStore';
+import { useAppDispatch } from '../../../../config';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,

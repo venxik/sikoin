@@ -4,7 +4,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
-import { store } from '../store/ReduxStore';
+import { store } from '../store';
 import { EncryptedStorage } from '../../utils';
 
 let instance: HttpService | null = null;

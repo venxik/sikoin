@@ -16,10 +16,7 @@ import {
   Popup2Button,
 } from '../../../../components';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../../../config';
 import { icons, sizes, strings } from '../../../../constants';
 import {
   deleteKeluarga,

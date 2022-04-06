@@ -36,7 +36,7 @@ import {
 } from '../../constants';
 import { formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeTabScreenProps } from '../../config/navigation/model';
 import { KabarData } from '../../redux/reducers/KabarReducer';
 import Animated, {
@@ -455,6 +455,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
       <ScrollView
         nestedScrollEnabled={true}
+        contentContainerStyle={{ paddingBottom: sizes.padding }}
         style={{ width: '100%', height: '100%' }}>
         {/* BODY */}
         <View

@@ -27,7 +27,7 @@ import {
   TextInputBorder,
 } from '../../components';
 import { MarketStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<MarketStackParamList, 'MarketMainScreen'>;

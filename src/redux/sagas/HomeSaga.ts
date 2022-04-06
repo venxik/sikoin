@@ -21,7 +21,7 @@ function* getBerandaUser() {
 
     if (response.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getBerandaUserSuccess(data.data));
+      yield put(getBerandaUserSuccess(data?.data));
     } else {
       yield put(getBerandaUserFailed('Error'));
     }

@@ -21,7 +21,7 @@ import {
 import DocumentPicker from 'react-native-document-picker';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppSelector } from '../../../../config/store/ReduxStore';
+import { useAppSelector } from '../../../../config';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,

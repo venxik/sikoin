@@ -20,10 +20,7 @@ import {
 } from '../../../../redux/reducers/PekerjaanReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../../../config';
 import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<

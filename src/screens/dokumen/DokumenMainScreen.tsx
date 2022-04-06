@@ -8,7 +8,7 @@ import {
   Popup1Button,
   Popup2Button,
 } from '../../components';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { DokumenStackParamList } from '../../config/navigation/model';
 import { icons, sizes, strings } from '../../constants';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { DetailItemList, HeaderBack } from '../../components';
 import { ProfileStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { colors, SCREEN_WIDTH, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<

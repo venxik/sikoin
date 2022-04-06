@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { colors, icons, sizes, strings } from '../../constants';
 import Button from '../Button';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { CardAlamatProps } from './model';
 
 const CardAlamat = (props: CardAlamatProps) => {

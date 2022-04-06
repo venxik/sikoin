@@ -21,7 +21,7 @@ import { formatter } from '../../utils';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { LoginStackParamList } from '../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchForgotPassword,
   fetchLogin,

@@ -8,7 +8,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DaftarKoperasiParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
 import { formatter } from '../../utils';
-import { useAppDispatch, useAppSelector } from '../../config/store/ReduxStore';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { fetchUserKoperasiEmail } from '../../redux/reducers/LoginReducer';
 
 type Props = NativeStackScreenProps<

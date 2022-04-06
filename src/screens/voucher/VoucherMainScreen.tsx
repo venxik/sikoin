@@ -28,7 +28,7 @@ import {
 } from '../../components';
 import { SelectedVoucherProps } from '../../components/CardVoucherLarge/model';
 import { VoucherStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config/store/ReduxStore';
+import { useAppSelector } from '../../config';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
