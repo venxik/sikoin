@@ -52,7 +52,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     if (!selected) {
       if (koperasiName.length > 2) {
         const result: KoperasiListResponse[] = koperasiListData?.filter(value =>
-          value.nama.toLowerCase().includes(koperasiName.toLowerCase()),
+          value.namaKoperasi.toLowerCase().includes(koperasiName.toLowerCase()),
         );
         setData(result);
       } else setData(null);
@@ -156,9 +156,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
                     onPress={() => {
                       setSelected(true);
                       setData(null);
-                      onChangeKoperasiName(item.nama);
+                      onChangeKoperasiName(item.namaKoperasi);
                     }}>
-                    <Text style={{ color: colors.bodyText }}>{item.nama}</Text>
+                    <Text style={{ color: colors.bodyText }}>
+                      {item.namaKoperasi}
+                    </Text>
                   </TouchableOpacity>
                 );
               }}

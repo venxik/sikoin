@@ -1,9 +1,10 @@
 import { ViewStyle } from 'react-native';
-import { MarketData } from '../../redux/reducers/MarketReducer';
+import { MarketDataResponse } from '../../redux/reducers/MarketReducer';
 
 export interface CardMarketLargeProps {
-  item: MarketData;
+  item: MarketDataResponse;
   onPress: () => void;
   onPressWishlist: () => void;
+  onPressVoucher: () => void;
   style?: ViewStyle;
 }

@@ -78,11 +78,13 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             onPress={() => navigation.goBack()}
             secondary
             text={strings.kembali}
+            shadow
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
             onPress={navigateToStep2}
-            text={strings.simpan}
+            text={strings.lanjutkan}
+            shadow
             buttonContainerStyle={{ width: '48%' }}
           />
         </View>

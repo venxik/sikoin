@@ -1,14 +1,14 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type PekerjaanResponse = {
+  pekerjaan?: string;
+  detailPekerjaan?: string;
   masaKerjaTahun?: string;
   masaKerjaBulan?: string;
   gajiBulanan?: string;
   namaPerusahaan?: string;
   alamatKantor?: string;
   provinsiKota?: string;
-  jabatanTerakhir?: string;
-  noTelpKantor?: string;
 };
 
 interface RootState {

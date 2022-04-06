@@ -21,14 +21,14 @@ type Props = NativeStackScreenProps<
 const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
   const { pekerjaanData } = useAppSelector(s => s.PekerjaanReducer) || {};
   const {
+    pekerjaan,
+    detailPekerjaan,
     masaKerjaTahun,
     masaKerjaBulan,
     gajiBulanan,
     namaPerusahaan,
     alamatKantor,
     provinsiKota,
-    jabatanTerakhir,
-    noTelpKantor,
   } = pekerjaanData || {};
 
   const navigateToAddScreen = () => {
@@ -43,13 +43,14 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
         }}>
         <View style={styles.cardContainer}>
           <DetailItemProfileHeader />
+          <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
           <DetailItemList
-            title={strings.gaji_bulanan}
-            content={
-              gajiBulanan
-                ? `Rp ${formatter.formatStringToCurrencyNumber(gajiBulanan)}`
-                : ''
-            }
+            title={strings.detail_pekerjaan}
+            content={detailPekerjaan}
+          />
+          <DetailItemList
+            title={strings.nama_perusahaan}
+            content={namaPerusahaan}
           />
           <DetailItemList
             title={strings.masa_kerja}
@@ -60,7 +61,7 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
             }
           />
           <DetailItemList
-            title={strings.gaji_pokok}
+            title={strings.gaji_penghasilan_bulanan}
             content={
               gajiBulanan
                 ? `Rp ${formatter.formatStringToCurrencyNumber(gajiBulanan)}`
@@ -68,18 +69,9 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
             }
           />
           <DetailItemList
-            title={strings.nama_perusahaan}
-            content={namaPerusahaan}
-          />
-          <DetailItemList
-            title={strings.jabatan_terakhir}
-            content={jabatanTerakhir}
-          />
-          <DetailItemList
             title={strings.alamat_kantor}
             content={alamatKantor}
           />
-          <DetailItemList title={strings.no_telp} content={noTelpKantor} />
           <DetailItemList
             title={strings.provinsi_kota}
             content={provinsiKota}

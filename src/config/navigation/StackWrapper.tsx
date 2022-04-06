@@ -396,6 +396,15 @@ const MarketStackNavigator = () => (
       name="MarketMainScreen"
       component={screens.MarketMainScreen}
     />
+    <MarketStack.Screen
+      name="MarketItemDetailsScreen"
+      component={screens.MarketItemDetailsScreen}
+    />
+    <MarketStack.Screen name="CartScreen" component={screens.CartScreen} />
+    <MarketStack.Screen
+      name="CheckoutScreen"
+      component={screens.MarketMainScreen}
+    />
   </MarketStack.Navigator>
 );
 

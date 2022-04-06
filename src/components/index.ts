@@ -32,6 +32,7 @@ import CalendarPicker from './CalendarPicker';
 import TextInputCurrency from './TextInputCurrency';
 import DokumenItemList from './DokumenItemList';
 import DokumenMemberItem from './DokumenMemberItem';
+import QtyButton from './QtyButton';
 
 export {
   Button,
@@ -68,4 +69,5 @@ export {
   TextInputCurrency,
   DokumenItemList,
   DokumenMemberItem,
+  QtyButton,
 };

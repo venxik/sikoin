@@ -10,32 +10,40 @@ import {
 } from '../../constants';
 import FastImage from 'react-native-fast-image';
 import { CardMarketSmallProps } from './model';
+import { formatter } from '../../utils';
 
 const CardMarketSmall = (props: CardMarketSmallProps) => {
-  const { item, onPress, style, onPressWishlist } = props || null;
+  const { item, onPress, style, onPressWishlist, onPressVoucher } =
+    props || null;
   const { productName, price, image } = item || {};
   return (
-    <View style={[styles.container, style]}>
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <FastImage source={{ uri: image }} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
-        <View style={styles.containerStyle}>
-          <Text style={styles.titleStyle} numberOfLines={2}>
-            {productName}
+        <View style={{ flex: 0.7 }}>
+          <View style={styles.containerStyle}>
+            <Text style={styles.titleStyle} numberOfLines={2}>
+              {productName}
+            </Text>
+            <TouchableOpacity onPress={onPressWishlist}>
+              <Image
+                source={icons.icon_wishlist}
+                style={{
+                  width: sizes.icon_size,
+                  height: sizes.icon_size,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.priceContainer}>
+            {`Rp ${formatter.formatNumberToCurreny(price)}`}
           </Text>
-          <TouchableOpacity onPress={onPressWishlist}>
-            <Image
-              source={icons.icon_wishlist}
-              style={{
-                width: sizes.icon_size,
-                height: sizes.icon_size,
-              }}
-            />
-          </TouchableOpacity>
         </View>
 
-        <Text style={styles.priceContainer}>{price}</Text>
-
-        <TouchableOpacity onPress={onPress} style={styles.touchableContainer}>
+        <TouchableOpacity
+          onPress={onPressVoucher}
+          style={styles.touchableContainer}>
           <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
           <Text style={styles.textVoucher}>{strings.voucher_toko}</Text>
           <Image
@@ -44,7 +52,7 @@ const CardMarketSmall = (props: CardMarketSmallProps) => {
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -62,6 +70,11 @@ const styles = StyleSheet.create({
     height: SCREEN_HEIGHT * 0.3,
     borderTopLeftRadius: sizes.padding,
     borderTopRightRadius: sizes.padding,
+  },
+  bottomContainer: {
+    flex: 1,
+    padding: sizes.padding,
+    width: '100%',
   },
   containerStyle: {
     flexDirection: 'row',
@@ -82,14 +95,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   touchableContainer: {
+    flex: 0.3,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
   },
-  bottomContainer: {
-    padding: sizes.padding,
-    width: '100%',
-  },
+
   iconVoucher: {
     width: sizes.icon_size,
     height: sizes.icon_size,

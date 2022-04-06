@@ -40,6 +40,8 @@ import ChatDetailScreen from './chat/ChatDetailScreen';
 import DokumenMainScreen from './dokumen/DokumenMainScreen';
 import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
+import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
+import CartScreen from './market/CartScreen';
 
 export {
   OnboardingScreen,
@@ -84,4 +86,6 @@ export {
   DokumenDetailScreen,
   MarketMainScreen,
   DaftarKoperasiSearchScreen,
+  MarketItemDetailsScreen,
+  CartScreen,
 };

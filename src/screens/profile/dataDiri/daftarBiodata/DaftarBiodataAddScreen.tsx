@@ -40,10 +40,8 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     kewarganegaraan,
     pendidikan_terakhir,
     agama,
-    status_pernkahan,
+    status_pernikahan,
     jumlah_anak,
-    pekerjaan,
-    detail_pekerjaan,
     bank,
     no_rek,
   } = biodataData || {};
@@ -59,7 +57,6 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
       tempat_lahir: tempat_lahir ? tempat_lahir : '',
       tanggal_lahir: tanggal_lahir ? tanggal_lahir : '',
       jumlah_anak: jumlah_anak ? jumlah_anak : 0,
-      detail_pekerjaan: detail_pekerjaan ? detail_pekerjaan : '',
       bank: bank ? bank : '',
       no_rek: no_rek ? no_rek : '',
       jenis_kelamin: jenis_kelamin ? jenis_kelamin : '',
@@ -67,8 +64,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
       kewarganegaraan: kewarganegaraan ? kewarganegaraan : '',
       pendidikan_terakhir: pendidikan_terakhir ? pendidikan_terakhir : '',
       agama: agama ? agama : '',
-      status_pernkahan: status_pernkahan ? status_pernkahan : '',
-      pekerjaan: pekerjaan ? pekerjaan : '',
+      status_pernikahan: status_pernikahan ? status_pernikahan : '',
     },
   });
 
@@ -188,13 +184,25 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="bank"
+              name="status_pernikahan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.status_pernikahan}
+                  data={dropdownItems.statusPernikahanItem}
+                  onChange={value => onChange(value)}
+                  value={value}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="jumlah_anak"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
-                  value={value}
+                  value={value.toString()}
                   onChangeText={value => onChange(value)}
-                  title={strings.bank}
+                  title={strings.jumlah_anak}
                 />
               )}
             />
@@ -220,49 +228,13 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="status_pernkahan"
-              render={({ field: { onChange, value } }) => (
-                <DropdownForm
-                  title={strings.status_pernikahan}
-                  data={dropdownItems.statusPernikahanItem}
-                  onChange={value => onChange(value)}
-                  value={value}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="jumlah_anak"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInputForm
-                  onBlur={onBlur}
-                  value={value.toString()}
-                  onChangeText={value => onChange(value)}
-                  title={strings.jumlah_anak}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="pekerjaan"
-              render={({ field: { onChange, value } }) => (
-                <DropdownForm
-                  title={strings.pekerjaan}
-                  data={dropdownItems.pekerjaanItem}
-                  onChange={value => onChange(value)}
-                  value={value}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="detail_pekerjaan"
+              name="bank"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.detail_pekerjaan}
+                  title={strings.bank}
                 />
               )}
             />

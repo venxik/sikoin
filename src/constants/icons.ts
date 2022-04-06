@@ -101,6 +101,8 @@ const icon_toko = require('assets/icons/icon_toko.png');
 const icon_brand = require('assets/icons/icon_brand.png');
 const icon_kategori = require('assets/icons/icon_kategori.png');
 const icon_search_market = require('assets/icons/icon_search_market.png');
+const icon_diskon = require('assets/icons/icon_diskon.png');
+const icon_checkout = require('assets/icons/icon_checkout.png');
 
 export default {
   arrow_left_primary,
@@ -205,4 +207,6 @@ export default {
   icon_brand,
   icon_kategori,
   icon_search_market,
+  icon_diskon,
+  icon_checkout,
 };

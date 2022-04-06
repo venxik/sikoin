@@ -84,7 +84,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
           <Button
             onPress={navigateToStep3}
             shadow
-            text={strings.simpan}
+            text={strings.lanjutkan}
             buttonContainerStyle={{ width: '48%' }}
           />
         </View>

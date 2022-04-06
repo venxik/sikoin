@@ -8,15 +8,16 @@ import {
 } from 'react-native';
 import {
   Button,
+  DropdownForm,
   HeaderBack,
   TextInputCurrency,
   TextInputForm,
 } from '../../../../components';
-import { colors, sizes, strings } from '../../../../constants';
+import { colors, dropdownItems, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
   addPekerjaan,
-  PekerjaanData,
+  PekerjaanResponse,
 } from '../../../../redux/reducers/PekerjaanReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
@@ -32,34 +33,34 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { pekerjaanData } = useAppSelector(s => s.PekerjaanReducer) || {};
   const {
+    pekerjaan,
+    detailPekerjaan,
     masaKerjaTahun,
     masaKerjaBulan,
     gajiBulanan,
     namaPerusahaan,
     alamatKantor,
     provinsiKota,
-    jabatanTerakhir,
-    noTelpKantor,
   } = pekerjaanData || {};
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<PekerjaanData>({
+  } = useForm<PekerjaanResponse>({
     defaultValues: {
+      pekerjaan: pekerjaan ? pekerjaan : '',
+      detailPekerjaan: detailPekerjaan ? detailPekerjaan : '',
       masaKerjaTahun: masaKerjaTahun ? masaKerjaTahun : '',
       masaKerjaBulan: masaKerjaBulan ? masaKerjaBulan : '',
       gajiBulanan: gajiBulanan ? gajiBulanan : '',
       namaPerusahaan: namaPerusahaan ? namaPerusahaan : '',
       alamatKantor: alamatKantor ? alamatKantor : '',
       provinsiKota: provinsiKota ? provinsiKota : '',
-      jabatanTerakhir: jabatanTerakhir ? jabatanTerakhir : '',
-      noTelpKantor: noTelpKantor ? noTelpKantor : '',
     },
   });
 
-  const submitData = (data: PekerjaanData) => {
+  const submitData = (data: PekerjaanResponse) => {
     const { masaKerjaTahun, masaKerjaBulan, gajiBulanan } = data;
     dispatch(
       addPekerjaan({
@@ -84,6 +85,40 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
         />
         <ScrollView>
           <View style={styles.innerContainer}>
+            <Controller
+              control={control}
+              name="pekerjaan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.pekerjaan}
+                  data={dropdownItems.pekerjaanItem}
+                  onChange={value => onChange(value)}
+                  value={value}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="detailPekerjaan"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.detail_pekerjaan}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="namaPerusahaan"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.nama_perusahaan}
+                />
+              )}
+            />
             <View
               style={{
                 flexDirection: 'row',
@@ -154,28 +189,6 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="jabatanTerakhir"
-              render={({ field: { onChange, value } }) => (
-                <TextInputForm
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.jabatan_terakhir}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="namaPerusahaan"
-              render={({ field: { onChange, value } }) => (
-                <TextInputForm
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.nama_perusahaan}
-                />
-              )}
-            />
-            <Controller
-              control={control}
               name="alamatKantor"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
@@ -184,26 +197,6 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                   title={strings.alamat_kantor}
                 />
               )}
-            />
-            <Controller
-              control={control}
-              name="noTelpKantor"
-              render={({ field: { onChange, value } }) => (
-                <TextInputForm
-                  error={errors.noTelpKantor}
-                  errorText={errors.noTelpKantor?.message}
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.no_telp}
-                  keyboardType="number-pad"
-                />
-              )}
-              rules={{
-                pattern: {
-                  value: formatter.NUMBER_REGEX,
-                  message: 'Format harus dalam bentuk angka',
-                },
-              }}
             />
             <Controller
               control={control}

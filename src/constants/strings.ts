@@ -27,16 +27,16 @@ export default {
   daftar_koperasi_isi_data_title_1:
     'Dapatkan akses masuk CoopApp mu hanya dengan mengikuti 2 langkah saja',
   daftar_koperasi_isi_data_title_2:
-    'Masukan emailmu untuk mendapatkan Username & Password sementara',
+    'Masukkan emailmu untuk mendapatkan Username & Password sementara',
   daftar_koperasi_isi_data_hint_2:
     'Kamu dapat mengganti Username & Password sewaktu-waktu dari dalam aplikasi CoopApp.',
   isi_data: 'Isi Data',
   daftar_koperasi_success_1: 'Username & Password sudah dikirim ke',
   daftar_koperasi_success_2:
     'Kamu dapat menggunakan Username & Password tersebut untuk masuk ke aplikasi CoopApp.',
-  masukan_nama_koperasimu: 'Masukan nama koperasimu...',
-  masukan_no_anggota: 'Masukan nomor anggotamu...',
-  masukan_email: 'Masukan emailmu...',
+  masukan_nama_koperasimu: 'Masukkan nama koperasimu...',
+  masukan_no_anggota: 'Masukkan nomor anggotamu...',
+  masukan_email: 'Masukkan emailmu...',
   cek_inbox: 'Cek Inboxmu ya!',
 
   /*BUTTON*/
@@ -82,6 +82,10 @@ export default {
 
   /*PROMO*/
   promo: 'Promo',
+
+  // PINJAMAN
+  lanjutkan: 'Lanjutkan',
+  ajukan: 'Ajukan',
 
   /*DOKUMEN*/
   unduh_file: 'Unduh File',
@@ -152,6 +156,14 @@ export default {
   search_market_placeholder: 'Cari Produk...',
   voucher_toko: 'Voucher Toko',
   kunjungi_toko: 'Kunjungi Toko',
+  terbaru: 'Terbaru',
+  checkout: 'Checkout',
+  variasi: 'Variasi',
+  ubah_variasi: 'Ubah Variasi',
+  voucher_toko_tersedia: 'Voucher Toko Tersedia',
+  catatan_placeholder: 'Catatan...',
+  market_info_popup:
+    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi CoopApp.\n\nSelamat berkoperasi! ☀️',
 
   /*VOUCHER*/
   voucher_center: 'Voucher Center',
@@ -235,6 +247,7 @@ export default {
   tambah_pekerjaan: 'Tambah Data Pekerjaan',
   edit_pekerjaan: 'Edit Data Pekerjaan',
   gaji_bulanan: 'Gaji Bulanan',
+  gaji_penghasilan_bulanan: 'Gaji / Penghasilan Bulanan',
   masa_kerja: 'Masa Kerja',
   gaji_pokok: 'Gaji Pokok',
   rekening: 'Rekening',

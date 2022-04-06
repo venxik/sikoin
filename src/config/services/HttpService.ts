@@ -27,7 +27,6 @@ class HttpService {
       // timeout: 1000,
       headers: {
         Accept: apis.acceptHeader,
-        'Content-Type': 'application/json',
       },
     });
 

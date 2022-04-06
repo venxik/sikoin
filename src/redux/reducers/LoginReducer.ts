@@ -7,33 +7,17 @@ import { storage } from '../../constants';
 import encryptedStorage from '../../utils/encryptedStorage';
 
 export interface KoperasiListResponse {
-  id: string;
-  nama: string;
-  logo_koperasi: string;
-  nomor_induk: string;
-  alamat: string;
-  no_telepon: string;
-  email: string;
-  website: string;
-  durasi_subscription: string;
-  created_at: string;
-  updated_at: string;
+  namaKoperasi: string;
 }
 
 export interface UserKoperasiResponse {
-  id: number;
-  no_anggota: string;
+  noAnggota: string;
   nama: string;
-  profile_pic: string;
-  slug: string;
+  profilePic: string;
   email: string;
-  tanggal_lahir: string;
-  member_sejak: string;
-  no_telp: string;
-  koperasi_id: number;
-  data_diri_id: number;
-  created_at: string;
-  updated_at: string;
+  tanggalLahir: string;
+  memberSejak: string;
+  noTelp: string;
 }
 
 export interface LoginResponse {

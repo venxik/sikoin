@@ -9,7 +9,6 @@ import {
   Text,
   FlatList,
   Modal,
-  TouchableOpacity,
   Alert,
 } from 'react-native';
 import {
@@ -25,6 +24,7 @@ import {
   HeaderBack,
   MenuHeaderIcon,
   Popup1Button,
+  QtyButton,
 } from '../../components';
 import { SelectedVoucherProps } from '../../components/CardVoucherLarge/model';
 import { VoucherStackParamList } from '../../config/navigation/model';
@@ -115,35 +115,12 @@ const VoucherMainScreen: FC<Props> = () => {
                 `${strings.voucher} ${selectedVoucher?.data?.namaToko}`}
             </Text>
             {/* QTY CONTAINER */}
-            <View
-              style={{
-                flexDirection: 'row',
-                marginVertical: sizes.padding * 1.5,
-              }}>
-              <TouchableOpacity
-                onPress={onPressMinus}
-                style={styles.plusMinusContainer}>
-                <Image
-                  source={icons.minus_shape}
-                  style={styles.plusMinusIcon}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-              <View style={styles.textQtyContainer}>
-                <Text style={[styles.textJumlahHarga, { marginLeft: 0 }]}>
-                  {qty}
-                </Text>
-              </View>
-              <TouchableOpacity
-                onPress={onPressPlus}
-                style={styles.plusMinusContainer}>
-                <Image
-                  source={icons.plus_shape}
-                  style={styles.plusMinusIcon}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            </View>
+            <QtyButton
+              style={{ marginVertical: sizes.padding }}
+              onPressMinus={onPressMinus}
+              onPressPlus={onPressPlus}
+              qty={qty}
+            />
             <View style={styles.popupContentContainer}>
               <Text style={styles.textTitle}>{strings.rincian}</Text>
               {/* JUMLAH VOUCHER */}
@@ -332,16 +309,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  plusMinusContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-  },
-  plusMinusIcon: { width: sizes.icon_size, height: sizes.icon_size },
   optionsContainerStyle: {
     padding: sizes.padding / 2,
     borderRadius: sizes.padding / 1.5,
@@ -358,16 +325,6 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     fontSize: 17,
     fontFamily: 'Poppins-Bold',
-  },
-  textQtyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 16,
-    borderWidth: 1,
-    paddingVertical: 6,
-    borderColor: colors.strokeDarkGrey,
-    paddingHorizontal: sizes.padding * 1.5,
-    marginHorizontal: sizes.padding / 2,
   },
   textTitle: {
     fontFamily: 'Poppins-SemiBold',

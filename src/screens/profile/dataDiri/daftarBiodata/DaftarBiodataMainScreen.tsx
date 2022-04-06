@@ -25,15 +25,13 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
   const {
     agama,
     bank,
-    detail_pekerjaan,
     gol_darah,
     jenis_kelamin,
     jumlah_anak,
     kewarganegaraan,
     no_rek,
-    pekerjaan,
     pendidikan_terakhir,
-    status_pernkahan,
+    status_pernikahan,
     tanggal_lahir,
     tempat_lahir,
   } = biodataData;
@@ -80,22 +78,16 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
             content={pendidikan_terakhir}
           />
           <DetailItemList title={strings.agama} content={agama} />
-          <DetailItemList title={strings.bank} content={bank} />
-          <DetailItemList title={strings.no_rekening} content={no_rek} />
           <DetailItemList
             title={strings.status_pernikahan}
-            content={status_pernkahan}
+            content={status_pernikahan}
           />
           <DetailItemList
             title={strings.jumlah_anak}
             content={jumlah_anak.toString()}
           />
-          <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
-          <DetailItemList
-            showBorder={false}
-            title={strings.detail_pekerjaan}
-            content={detail_pekerjaan}
-          />
+          <DetailItemList title={strings.no_rekening} content={no_rek} />
+          <DetailItemList title={strings.bank} content={bank} />
           <Button
             onPress={() => navigateToAddScreen(true)}
             text={strings.edit_biodata}

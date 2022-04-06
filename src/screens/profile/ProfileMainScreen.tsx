@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
 import 'moment/locale/id';
+import { isEmpty } from 'lodash';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
@@ -45,6 +46,11 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
     navigation.navigate('EditProfileScreen');
   };
 
+  const checkIsEmpty = <T,>(text: T) => {
+    if (isEmpty(text)) return '-';
+    return text;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack
@@ -64,12 +70,16 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
             <Text style={styles.nameText}>{nama}</Text>
             {/* <Text style={styles.koperasiText}>{koperasiName}</Text> */}
             <View style={{ marginTop: 10 }}>
-              <Text style={styles.descText}>{no_anggota}</Text>
-              <Text style={styles.descText}>{`Member Sejak ${moment(
-                member_sejak,
-              ).format('Do MMMM YYYY')}`}</Text>
-              <Text style={styles.descText}>{email}</Text>
-              <Text style={styles.descText}>{no_telp}</Text>
+              <Text style={styles.descText}>{checkIsEmpty(no_anggota)}</Text>
+              <Text style={styles.descText}>
+                {!isEmpty(member_sejak)
+                  ? `Member Sejak ${moment(member_sejak).format(
+                      'Do MMMM YYYY',
+                    )}`
+                  : '-'}
+              </Text>
+              <Text style={styles.descText}>{checkIsEmpty(email)}</Text>
+              <Text style={styles.descText}>{checkIsEmpty(no_telp)}</Text>
             </View>
           </View>
           <Button

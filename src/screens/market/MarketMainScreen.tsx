@@ -24,19 +24,51 @@ import {
   CardPromo,
   HeaderBack,
   MenuHeaderIcon,
+  Popup1Button,
   TextInputBorder,
 } from '../../components';
 import { MarketStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import {
+  colors,
+  icons,
+  images,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
+import { StackActions } from '@react-navigation/native';
 
 type Props = NativeStackScreenProps<MarketStackParamList, 'MarketMainScreen'>;
 
-const MarketMainScreen: FC<Props> = () => {
+const MarketMainScreen: FC<Props> = ({ navigation }) => {
   const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
 
+  const [showPopupInfo, setShowPopupInfo] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  const navigateToVoucherScreen = () => {
+    navigation.dispatch(
+      StackActions.push('HomeTab', {
+        screen: 'HomeStackNavigator',
+        params: {
+          screen: 'VoucherStackNavigator',
+        },
+      }),
+    );
+  };
+
+  const navigateToDiskonScreen = () => {
+    navigation.dispatch(
+      StackActions.push('HomeTab', {
+        screen: 'HomeStackNavigator',
+        params: {
+          screen: 'DiskonStackNavigator',
+        },
+      }),
+    );
+  };
 
   const renderHeaderIcon = () => {
     return (
@@ -63,7 +95,7 @@ const MarketMainScreen: FC<Props> = () => {
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => Alert.alert('Keranjang')}>
+          <MenuOption onSelect={() => navigation.navigate('CartScreen')}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_keranjang}
@@ -78,7 +110,7 @@ const MarketMainScreen: FC<Props> = () => {
               <Text style={styles.textPopupMenu}>{strings.pesanan}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => Alert.alert('Tentang Market')}>
+          <MenuOption onSelect={() => setShowPopupInfo(true)}>
             <View style={{ flexDirection: 'row' }}>
               <Image
                 source={icons.icon_info_black}
@@ -96,12 +128,12 @@ const MarketMainScreen: FC<Props> = () => {
     return (
       <View style={styles.cardHeaderContainer}>
         <Text style={styles.cardHeaderTitle}>{title}</Text>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Image
             source={icons.arrow_right_circle_primary}
             style={styles.icon}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
@@ -129,7 +161,7 @@ const MarketMainScreen: FC<Props> = () => {
   const renderMarketCard = () => {
     return (
       <View style={{ marginBottom: 40 }}>
-        {cardHeader(strings.market)}
+        {cardHeader(strings.terbaru)}
         <FlatList
           horizontal
           data={marketDataList}
@@ -142,6 +174,7 @@ const MarketMainScreen: FC<Props> = () => {
                 item={item}
                 onPress={() => console.log(item)}
                 onPressWishlist={() => console.log(item)}
+                onPressVoucher={navigateToVoucherScreen}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
@@ -159,7 +192,7 @@ const MarketMainScreen: FC<Props> = () => {
   const renderMarketCardSmall = () => {
     return (
       <View style={{ marginBottom: 40 }}>
-        {cardHeader(strings.market)}
+        {cardHeader(strings.diskon)}
         <FlatList
           horizontal
           data={marketDataList}
@@ -172,6 +205,7 @@ const MarketMainScreen: FC<Props> = () => {
                 item={item}
                 onPress={() => console.log(item)}
                 onPressWishlist={() => console.log(item)}
+                onPressVoucher={() => navigateToVoucherScreen}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
@@ -193,6 +227,14 @@ const MarketMainScreen: FC<Props> = () => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack rightIcon={renderHeaderIcon()} />
+      <Popup1Button
+        iconStyle={{ width: 150, height: 150, marginBottom: -sizes.padding }}
+        contentText={strings.market_info_popup}
+        headerText={strings.market}
+        showPopup={showPopupInfo}
+        onPress={() => setShowPopupInfo(false)}
+        headerImage={images.menu_market}
+      />
       <ScrollView style={{ paddingHorizontal: sizes.padding }}>
         <MenuHeaderIcon menu={strings.market} />
         {/* TOP MENU */}
@@ -203,14 +245,21 @@ const MarketMainScreen: FC<Props> = () => {
               <Image source={icons.icon_kategori} style={styles.topMenuIcon} />
               <Text style={styles.textTopMenu}>{strings.kategori}</Text>
             </View>
-            <View style={styles.topMenuIconContainer}>
-              <Image source={icons.icon_brand} style={styles.topMenuIcon} />
-              <Text style={styles.textTopMenu}>{strings.brand}</Text>
-            </View>
-            <View style={styles.topMenuIconContainer}>
-              <Image source={icons.icon_toko} style={styles.topMenuIcon} />
-              <Text style={styles.textTopMenu}>{strings.toko}</Text>
-            </View>
+            <TouchableOpacity
+              style={styles.topMenuIconContainer}
+              onPress={navigateToVoucherScreen}>
+              <Image
+                source={icons.icon_voucher_small}
+                style={styles.topMenuIcon}
+              />
+              <Text style={styles.textTopMenu}>{strings.voucher}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.topMenuIconContainer}
+              onPress={navigateToDiskonScreen}>
+              <Image source={icons.icon_diskon} style={styles.topMenuIcon} />
+              <Text style={styles.textTopMenu}>{strings.diskon}</Text>
+            </TouchableOpacity>
           </View>
           <TextInputBorder
             style={{ marginTop: 10 }}

@@ -1,37 +1,105 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export type MarketData = {
+export interface MarketDataResponse {
+  id: number;
   productName: string;
   price: number;
   image: string;
-};
+}
+
+export interface CartItemData {
+  id: number;
+  productName: string;
+  price: number;
+  previousPrice: number;
+  image: string;
+  qty: number;
+  variasi: string[];
+  namaToko: string;
+  catatan?: string;
+}
+
+export interface MarketItemDetailsResponse {
+  id: number;
+  price: number;
+  photos: string[];
+  name: string;
+  terjual: number;
+  kondisi: string;
+  rating: string;
+  berat: string;
+  deskripsi: string;
+  asuransi: string;
+  ukuran: string[];
+  warna: string[];
+  namaToko: string;
+  stok: number;
+}
 
 interface RootState {
-  marketDataList: MarketData[];
+  marketDataList: MarketDataResponse[];
+  marketItemDetails?: MarketItemDetailsResponse;
+  cartItemDataList: CartItemData[];
   error?: string | null;
 }
 
 const initialState: RootState = {
   marketDataList: [
     {
+      id: 1,
       productName: 'Jababeka Bakal Terbitkan ',
       price: 17000000,
       image: 'https://picsum.photos/id/121/400/400',
     },
     {
+      id: 2,
       productName: '5,06 Triliun',
       price: 1121000,
       image: 'https://picsum.photos/id/1/400/400',
     },
     {
+      id: 3,
       productName: 'Jababeka Triliun',
       price: 9921210,
       image: 'https://picsum.photos/id/11/400/400',
     },
     {
+      id: 4,
       productName: 'Obligasi Global',
       price: 256324300,
       image: 'https://picsum.photos/id/34/400/400',
+    },
+  ],
+  cartItemDataList: [
+    {
+      price: 5000000,
+      id: 1,
+      image: 'https://picsum.photos/id/34/400/400',
+      namaToko: 'Test 1',
+      previousPrice: 7000000,
+      productName: 'Product 1',
+      qty: 2,
+      variasi: ['Merah', 'Xl'],
+    },
+    {
+      price: 50000,
+      id: 2,
+      image: 'https://picsum.photos/id/34/400/400',
+      namaToko: 'Test 2',
+      previousPrice: 890000,
+      productName: 'Product 2',
+      qty: 5,
+      variasi: ['Hijau', 'S'],
+    },
+    {
+      price: 1231123,
+      id: 3,
+      image: 'https://picsum.photos/id/34/400/400',
+      namaToko: 'Test 3',
+      previousPrice: 6667454,
+      productName: 'Product 3',
+      qty: 7,
+      variasi: ['Putih', 'XXXLL'],
     },
   ],
 };
@@ -40,25 +108,55 @@ const marketSlice = createSlice({
   name: 'marketSlice',
   initialState,
   reducers: {
-    fetchMarketData: (state, { payload }: PayloadAction<MarketData[]>) => {
-      state.marketDataList = payload;
-    },
-    fetchMarketDataSuccess: (
+    getMarketDataSuccess: (
       state,
-      { payload }: PayloadAction<MarketData[]>,
+      { payload }: PayloadAction<MarketDataResponse[]>,
     ) => {
       state.marketDataList = payload;
     },
-    fetchMarketDataFailed: (state, { payload }) => {
+    getMarketDataFailed: (state, { payload }) => {
       state.error = payload;
+    },
+    addCartQty: (state, { payload }: PayloadAction<number>) => {
+      const index = state.cartItemDataList.findIndex(
+        item => item.id === payload,
+      );
+      state.cartItemDataList[index].qty += 1;
+    },
+    substartCartQty: (state, { payload }: PayloadAction<number>) => {
+      const index = state.cartItemDataList.findIndex(
+        item => item.id === payload,
+      );
+      state.cartItemDataList[index].qty -= 1;
+    },
+    deleteCartItem: (state, { payload }: PayloadAction<number>) => {
+      state.cartItemDataList = state.cartItemDataList.filter(
+        item => item.id !== payload,
+      );
+    },
+    addCartItem: (state, { payload }: PayloadAction<CartItemData>) => {
+      const index = state.cartItemDataList.findIndex(
+        item => item.id === payload.id,
+      );
+
+      if (index < 0) {
+        state.cartItemDataList.push(payload);
+      } else {
+        state.cartItemDataList[index].qty += 1;
+      }
     },
   },
 });
 
+export const fetchMarketData = createAction('fetchMarketData');
+
 export const {
-  fetchMarketData,
-  fetchMarketDataFailed,
-  fetchMarketDataSuccess,
+  getMarketDataFailed,
+  getMarketDataSuccess,
+  addCartItem,
+  addCartQty,
+  deleteCartItem,
+  substartCartQty,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

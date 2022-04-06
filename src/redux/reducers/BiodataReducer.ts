@@ -12,10 +12,8 @@ export type BiodataResponse = {
   agama: string;
   bank: string;
   no_rek: string;
-  status_pernkahan: string;
+  status_pernikahan: string;
   jumlah_anak: number;
-  pekerjaan: string;
-  detail_pekerjaan: string;
 };
 
 interface RootState {
@@ -36,11 +34,10 @@ const initialState: RootState = {
     agama: '',
     bank: '',
     no_rek: '',
-    status_pernkahan: '',
+    status_pernikahan: '',
     jumlah_anak: 0,
-    pekerjaan: '',
-    detail_pekerjaan: '',
   },
+  error: null,
 };
 
 const biodataSlice = createSlice({
