@@ -1,7 +1,4 @@
-import BottomSheet, {
-  BottomSheetModal,
-  BottomSheetScrollView,
-} from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useCallback, useMemo, useRef } from 'react';
 import {
@@ -61,7 +58,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
   const { simpanan, saldo } =
     useAppSelector(state => state.SaldoSimpananReducer) || {};
 
-  const sheetRef = useRef<BottomSheetModal>(null);
+  const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['40%', '70%'], []);
   // callbacks
   const handleSheetChange = useCallback(() => {

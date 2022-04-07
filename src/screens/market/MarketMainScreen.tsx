@@ -70,6 +70,10 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
     );
   };
 
+  const navigateToDetailsScreen = () => {
+    navigation.navigate('MarketItemDetailsScreen');
+  };
+
   const renderHeaderIcon = () => {
     return (
       <Menu>
@@ -172,7 +176,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
                 item={item}
-                onPress={() => console.log(item)}
+                onPress={navigateToDetailsScreen}
                 onPressWishlist={() => console.log(item)}
                 onPressVoucher={navigateToVoucherScreen}
               />
@@ -203,9 +207,9 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketSmall
                 item={item}
-                onPress={() => console.log(item)}
+                onPress={navigateToDetailsScreen}
                 onPressWishlist={() => console.log(item)}
-                onPressVoucher={() => navigateToVoucherScreen}
+                onPressVoucher={navigateToVoucherScreen}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem

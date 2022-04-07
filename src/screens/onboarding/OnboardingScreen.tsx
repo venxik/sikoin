@@ -48,7 +48,7 @@ type Props = NativeStackScreenProps<
   'OnboardingStackNavigator'
 >;
 
-const OnboardingScreen: FC<Props> = ({ navigation }: Props) => {
+const OnboardingScreen: FC<Props> = ({ navigation }) => {
   const scrollX = useSharedValue(0);
 
   const navigateToLoginScreen = () => {

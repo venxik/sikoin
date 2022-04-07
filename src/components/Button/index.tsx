@@ -14,6 +14,7 @@ const Button = (props: ButtonTextProps) => {
     iconLocation,
     shadow,
     secondary,
+    iconStyle,
   } = props || {};
 
   const buttonStyle = () => {
@@ -67,12 +68,15 @@ const Button = (props: ButtonTextProps) => {
         {iconLocation === 'left' && icon ? (
           <Image
             source={icon}
-            style={[styles.iconStyle, { marginRight: 10 }]}
+            style={[styles.iconStyle, { marginRight: 10 }, iconStyle]}
           />
         ) : null}
         <Text style={updateTextStyle()}>{text}</Text>
         {iconLocation === 'right' && icon ? (
-          <Image source={icon} style={[styles.iconStyle, { marginLeft: 10 }]} />
+          <Image
+            source={icon}
+            style={[styles.iconStyle, { marginLeft: 10 }, iconStyle]}
+          />
         ) : null}
       </View>
     );
@@ -87,6 +91,7 @@ const Button = (props: ButtonTextProps) => {
             style={[
               styles.iconStyle,
               { justifyContent: 'center', alignItems: 'center' },
+              iconStyle,
             ]}
           />
         ) : null}

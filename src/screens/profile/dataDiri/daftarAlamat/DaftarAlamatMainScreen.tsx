@@ -69,18 +69,16 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
 
   const renderRightButtonHeader = () => {
     return (
-      <View style={{ flexDirection: 'row' }}>
-        <TouchableOpacity onPress={onPressAddIcon}>
-          <Image
-            source={icons.icon_add_data}
-            style={{
-              width: sizes.icon_size * 0.8,
-              height: sizes.icon_size * 0.8,
-            }}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={onPressAddIcon}>
+        <Image
+          source={icons.icon_add_data}
+          style={{
+            width: sizes.icon_size * 0.8,
+            height: sizes.icon_size * 0.8,
+          }}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
     );
   };
 

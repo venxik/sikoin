@@ -39,7 +39,9 @@ const CartItem = (props: CartItemProps) => {
   };
 
   const onPressMinus = () => {
-    dispatch(substartCartQty(id));
+    if (qty > 1) {
+      dispatch(substartCartQty(id));
+    }
   };
 
   const onPressDelete = () => {

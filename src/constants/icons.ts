@@ -103,6 +103,15 @@ const icon_kategori = require('assets/icons/icon_kategori.png');
 const icon_search_market = require('assets/icons/icon_search_market.png');
 const icon_diskon = require('assets/icons/icon_diskon.png');
 const icon_checkout = require('assets/icons/icon_checkout.png');
+const icon_cart = require('assets/icons/icon_cart.png');
+const icon_home_outline = require('assets/icons/icon_home_outline.png');
+const icon_pusat_bantuan = require('assets/icons/icon_pusat_bantuan.png');
+const icon_info_outline = require('assets/icons/icon_info_outline.png');
+const icon_terjual = require('assets/icons/icon_terjual.png');
+const icon_kondisi = require('assets/icons/icon_kondisi.png');
+const icon_rating = require('assets/icons/icon_rating.png');
+const icon_berat = require('assets/icons/icon_berat.png');
+const cross_shape = require('assets/icons/cross_shape.png');
 
 export default {
   arrow_left_primary,
@@ -209,4 +218,13 @@ export default {
   icon_search_market,
   icon_diskon,
   icon_checkout,
+  icon_cart,
+  icon_home_outline,
+  icon_pusat_bantuan,
+  icon_info_outline,
+  icon_terjual,
+  icon_kondisi,
+  icon_rating,
+  icon_berat,
+  cross_shape,
 };

@@ -33,6 +33,7 @@ import TextInputCurrency from './TextInputCurrency';
 import DokumenItemList from './DokumenItemList';
 import DokumenMemberItem from './DokumenMemberItem';
 import QtyButton from './QtyButton';
+import FilterVariasi from './FilterVariasi';
 
 export {
   Button,
@@ -70,4 +71,5 @@ export {
   DokumenItemList,
   DokumenMemberItem,
   QtyButton,
+  FilterVariasi,
 };

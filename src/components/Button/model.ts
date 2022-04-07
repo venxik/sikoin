@@ -1,5 +1,6 @@
 import {
   ImageSourcePropType,
+  ImageStyle,
   TextStyle,
   TouchableOpacityProps,
   ViewStyle,
@@ -8,6 +9,7 @@ import {
 export interface ButtonTextProps extends TouchableOpacityProps {
   buttonContainerStyle?: ViewStyle;
   textStyle?: TextStyle;
+  iconStyle?: ImageStyle;
   onPress: () => void;
   disabled?: boolean;
   text?: string;

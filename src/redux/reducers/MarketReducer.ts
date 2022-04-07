@@ -34,11 +34,13 @@ export interface MarketItemDetailsResponse {
   warna: string[];
   namaToko: string;
   stok: number;
+  logoToko: string;
+  lokasiToko: string;
 }
 
 interface RootState {
   marketDataList: MarketDataResponse[];
-  marketItemDetails?: MarketItemDetailsResponse;
+  marketItemDetails: MarketItemDetailsResponse;
   cartItemDataList: CartItemData[];
   error?: string | null;
 }
@@ -70,6 +72,29 @@ const initialState: RootState = {
       image: 'https://picsum.photos/id/34/400/400',
     },
   ],
+  marketItemDetails: {
+    id: 1,
+    asuransi: 'Optional',
+    berat: '4.9 Gram',
+    deskripsi:
+      'Tejs t saded edad ed ADdadawdwa Lora reamda dcofnijfy fneiaFd lbewiFE8asf fulef ASD dIASDNIdBADBKASdkjlASKLJDSAJDN akldnalskd askldn asldaildiow qnwd.q',
+    kondisi: 'Baru',
+    name: 'Test Nama ini 1',
+    photos: [
+      'https://picsum.photos/id/34/400/400',
+      'https://picsum.photos/id/24/400/400',
+      'https://picsum.photos/id/14/400/400',
+    ],
+    price: 700000,
+    rating: '4.5',
+    stok: 12,
+    terjual: 16,
+    ukuran: ['X', 'L', 'S', 'M', 'XL'],
+    warna: ['Hijau', 'Merah', 'Putih'],
+    namaToko: 'Testing 1',
+    logoToko: 'https://picsum.photos/id/82/400/400',
+    lokasiToko: 'Jakarta, Indonesia',
+  },
   cartItemDataList: [
     {
       price: 5000000,

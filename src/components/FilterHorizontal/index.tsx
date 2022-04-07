@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: sizes.padding / 2,
     borderColor: colors.tonalPrimary,
-    marginRight: sizes.padding,
   },
   textStyle: {
     color: colors.primary,
