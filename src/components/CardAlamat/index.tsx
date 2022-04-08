@@ -6,11 +6,12 @@ import { useAppSelector } from '../../config';
 import { CardAlamatProps } from './model';
 
 const CardAlamat = (props: CardAlamatProps) => {
-  const { item, onPressUbah, onPressDelete } = props || {};
+  const { item, onPressUbah, onPressDelete, isCheckout = false } = props || {};
   const { judul, detail } = item;
   const { nama } =
     useAppSelector(state => state.ProfileReducer.profileData) || {};
-  return (
+
+  return !isCheckout ? (
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Image source={icons.icon_pin} style={styles.pinIcon} />
@@ -29,7 +30,7 @@ const CardAlamat = (props: CardAlamatProps) => {
           }}
         />
         <Button
-          onPress={onPressDelete}
+          onPress={onPressDelete as () => void}
           icon={icons.icon_delete}
           iconLocation={'center'}
           buttonContainerStyle={{
@@ -37,6 +38,29 @@ const CardAlamat = (props: CardAlamatProps) => {
           }}
         />
       </View>
+    </View>
+  ) : (
+    <View
+      style={[
+        styles.container,
+        { borderWidth: 1, borderColor: colors.strokeGrey },
+      ]}>
+      <View style={styles.topContainer}>
+        <Image source={icons.icon_pin} style={styles.pinIcon} />
+        <Text style={styles.textJudul}>{judul}</Text>
+      </View>
+      <Text style={styles.textName}>{nama}</Text>
+      <Text style={styles.textAlamat}>{detail}</Text>
+      <Button
+        shadow={false}
+        secondary
+        text={strings.ubah}
+        onPress={onPressUbah}
+        buttonContainerStyle={{
+          flex: 1,
+          marginTop: sizes.padding,
+        }}
+      />
     </View>
   );
 };

@@ -21,8 +21,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['AlamatReducer'],
-  blacklist: [],
+  whitelist: [],
 };
 
 const logger = createLogger({

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { ParentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
-import AsyncStore from '../../utils/asyncStore';
+import { AsyncStore } from '../../utils';
 import Animated, {
   Extrapolate,
   interpolate,

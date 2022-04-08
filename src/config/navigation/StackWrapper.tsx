@@ -10,7 +10,7 @@ import * as screens from '../../screens';
 import { navigationRef } from './NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
-import AsyncStore from '../../utils/asyncStore';
+import { AsyncStore } from '../../utils';
 import {
   ChatStackParamList,
   DaftarKoperasiParamList,
@@ -400,10 +400,17 @@ const MarketStackNavigator = () => (
       name="MarketItemDetailsScreen"
       component={screens.MarketItemDetailsScreen}
     />
-    <MarketStack.Screen name="CartScreen" component={screens.CartScreen} />
     <MarketStack.Screen
-      name="CheckoutScreen"
-      component={screens.MarketMainScreen}
+      name="MarketCartScreen"
+      component={screens.MarketCartScreen}
+    />
+    <MarketStack.Screen
+      name="MarketCheckoutScreen"
+      component={screens.MarketCheckoutScreen}
+    />
+    <MarketStack.Screen
+      name="MarketSelectPaymentScreen"
+      component={screens.MarketSelectPaymentScreen}
     />
   </MarketStack.Navigator>
 );

@@ -13,9 +13,6 @@ export type AlamatDataResponse = {
   kode_pos: string;
   lati: number;
   lang: number;
-  member_koperasi_id: number;
-  created_at: number;
-  updated_at: number;
 };
 
 export type AlamatDataRequest = {
@@ -35,7 +32,21 @@ interface RootState {
 }
 
 const initialState: RootState = {
-  alamatList: [],
+  alamatList: [
+    {
+      id: 1,
+      judul: 'Test',
+      detail: 'Lorem Ipsum adasdsa dsa das de Dne djheADHbaiudQ DB',
+      no_rt: '02',
+      no_rw: '04',
+      provinsi: 'Jakarta',
+      kabupaten: 'Jakarta',
+      kecamatan: 'Jakarta',
+      kode_pos: '12321',
+      lang: 123213,
+      lati: 131312,
+    },
+  ],
   error: null,
 };
 
@@ -78,9 +89,6 @@ const alamatSlice = createSlice({
         no_rw: payload.rw,
         lati: 0,
         lang: 0,
-        member_koperasi_id: 1,
-        created_at: Date.now(),
-        updated_at: Date.now(),
         id: Number.parseInt(uniqueId()),
       });
     },
@@ -105,9 +113,6 @@ const alamatSlice = createSlice({
           no_rw: data.rw,
           lati: 0,
           lang: 0,
-          member_koperasi_id: 1,
-          created_at: Date.now(),
-          updated_at: Date.now(),
           id: Number.parseInt(uniqueId()),
         };
     },

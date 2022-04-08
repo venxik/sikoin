@@ -236,6 +236,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
+                onPressVoucher={() => null}
                 item={item}
                 onPress={() => null}
                 onPressWishlist={() => null}

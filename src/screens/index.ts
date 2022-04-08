@@ -41,7 +41,9 @@ import DokumenMainScreen from './dokumen/DokumenMainScreen';
 import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
 import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
-import CartScreen from './market/CartScreen';
+import MarketCartScreen from './market/MarketCartScreen';
+import MarketCheckoutScreen from './market/MarketCheckoutScreen';
+import MarketSelectPaymentScreen from './market/MarketSelectPaymentScreen';
 
 export {
   OnboardingScreen,
@@ -87,5 +89,7 @@ export {
   MarketMainScreen,
   DaftarKoperasiSearchScreen,
   MarketItemDetailsScreen,
-  CartScreen,
+  MarketCartScreen,
+  MarketCheckoutScreen,
+  MarketSelectPaymentScreen,
 };

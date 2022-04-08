@@ -8,13 +8,13 @@ import { useAppSelector } from '../../config';
 import { MarketStackParamList } from '../../config/navigation/model';
 import { icons, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<MarketStackParamList, 'CartScreen'>;
+type Props = NativeStackScreenProps<MarketStackParamList, 'MarketCartScreen'>;
 
-const CartScreen: React.FC<Props> = ({ navigation }) => {
+const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
   const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
 
   const navigateToCheckout = () => {
-    navigation.navigate('CheckoutScreen');
+    navigation.navigate('MarketCheckoutScreen');
   };
 
   const navigateToVoucher = () => {
@@ -22,7 +22,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
       StackActions.push('HomeTab', {
         screen: 'HomeStackNavigator',
         params: {
-          screen: 'VoucherStackNavigator',
+          screen: 'VoucherSta ckNavigator',
         },
       }),
     );
@@ -57,7 +57,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default CartScreen;
+export default MarketCartScreen;
 
 const styles = StyleSheet.create({
   container: {

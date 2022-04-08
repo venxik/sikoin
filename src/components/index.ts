@@ -34,6 +34,7 @@ import DokumenItemList from './DokumenItemList';
 import DokumenMemberItem from './DokumenMemberItem';
 import QtyButton from './QtyButton';
 import FilterVariasi from './FilterVariasi';
+import CheckoutItem from './CheckoutItem';
 
 export {
   Button,
@@ -72,4 +73,5 @@ export {
   DokumenMemberItem,
   QtyButton,
   FilterVariasi,
+  CheckoutItem,
 };

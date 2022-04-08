@@ -99,7 +99,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => navigation.navigate('CartScreen')}>
+          <MenuOption onSelect={() => navigation.navigate('MarketCartScreen')}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_keranjang}

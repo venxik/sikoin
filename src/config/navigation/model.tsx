@@ -133,8 +133,9 @@ export type VoucherStackParamList = {
 export type MarketStackParamList = {
   MarketMainScreen: undefined;
   MarketItemDetailsScreen: undefined;
-  CartScreen: undefined;
-  CheckoutScreen: undefined;
+  MarketCartScreen: undefined;
+  MarketCheckoutScreen: undefined;
+  MarketSelectPaymentScreen: undefined;
 };
 
 export type PinjamanStackParamList = {

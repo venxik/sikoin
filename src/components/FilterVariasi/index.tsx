@@ -19,7 +19,9 @@ const FilterVariasi = (props: FilterVariasiProps) => {
         {item.map((item, i) => (
           <TouchableOpacity
             key={i}
-            onPress={() => setSelectedItem(item)}
+            onPress={() => {
+              setSelectedItem(selectedItem !== item ? item : '');
+            }}
             style={[
               styles.container,
               {

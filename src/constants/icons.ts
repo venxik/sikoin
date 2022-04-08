@@ -112,6 +112,7 @@ const icon_kondisi = require('assets/icons/icon_kondisi.png');
 const icon_rating = require('assets/icons/icon_rating.png');
 const icon_berat = require('assets/icons/icon_berat.png');
 const cross_shape = require('assets/icons/cross_shape.png');
+const icon_proses_pesanan = require('assets/icons/icon_proses_pesanan.png');
 
 export default {
   arrow_left_primary,
@@ -227,4 +228,5 @@ export default {
   icon_rating,
   icon_berat,
   cross_shape,
+  icon_proses_pesanan,
 };

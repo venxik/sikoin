@@ -23,7 +23,7 @@ const HeaderBack = (props: HeaderBackProps) => {
   const leftIcon = customLeftIcon ? customLeftIcon : icons.arrow_left_primary;
   return (
     <View style={[Styles.container, { ...style }]}>
-      <View style={Styles.innerContainer}>
+      <View style={[Styles.innerContainer, { flex: rightIcon ? 0.7 : 0 }]}>
         <TouchableOpacity onPress={validatePress} disabled={disabled}>
           <Image
             style={{
@@ -59,7 +59,6 @@ const Styles = StyleSheet.create({
   },
   innerContainer: {
     flexDirection: 'row',
-    flex: 0.7,
     alignItems: 'center',
   },
   rightContainer: {
