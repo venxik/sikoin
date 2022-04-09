@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isEmpty } from 'lodash';
 import { images } from '../../constants';
 
 export type VoucherDetail = {

@@ -35,7 +35,7 @@ const DaftarKtpSelfieScreen: React.FC<Props> = ({ navigation }) => {
         navigation.goBack();
       }
     } catch {
-      (e: any) => {
+      (e: unknown) => {
         console.log(e);
       };
     }

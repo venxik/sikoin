@@ -49,7 +49,7 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       console.log('Dokumen Pendukung :', data);
     } catch {
-      (e: any) => console.log('Document picker error! ', e);
+      (e: unknown) => console.log('Document picker error! ', e);
     }
   };
 

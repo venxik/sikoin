@@ -9,6 +9,7 @@
 
 # Add any project specific keep options here:
 
+-keep class com.virtek.sikoin.BuildConfig { *; }
 -keep public class com.horcrux.svg.** {*;}
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
