@@ -40,6 +40,8 @@ const pekerjaanSlice = createSlice({
       state,
       { payload }: PayloadAction<PekerjaanResponse>,
     ) => {
+      console.log('updatePekerjaanSuccess', payload);
+
       state.pekerjaanData = payload;
     },
     updatePekerjaanFailed: (state, { payload }) => {
@@ -52,6 +54,7 @@ export const fetchPekerjaan = createAction('fetchPekerjaan');
 export const fetchUpdatePekerjaan = createAction<PekerjaanResponse>(
   'fetchUpdatePekerjaan',
 );
+
 export const {
   addPekerjaan,
   getPekerjaanFailed,

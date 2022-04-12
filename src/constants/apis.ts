@@ -25,7 +25,7 @@ const constant = {
       biodata: '/api/biodata',
     },
     pekerjaan: {
-      pekerjaan: '/api/biodata',
+      pekerjaan: '/api/pekerjaan',
     },
   },
   errorTypes: {

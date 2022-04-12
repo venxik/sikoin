@@ -81,7 +81,7 @@ const TransaksiMainScreen: FC<Props> = () => {
             value={selectedDate}
             onChangeDate={value => setSelectedDate(value)}
           />
-          <ScrollView horizontal>
+          <View style={styles.tabContainer}>
             {filter.map((item, index) => (
               <FilterHorizontal
                 key={index}
@@ -90,7 +90,7 @@ const TransaksiMainScreen: FC<Props> = () => {
                 onPress={() => setSelectedFilter(item)}
               />
             ))}
-          </ScrollView>
+          </View>
           <View style={{ marginTop: sizes.padding }}>
             {transaksiDataList.map((item, i) => (
               <TransaksiItemList item={item} key={i} />
@@ -106,6 +106,12 @@ export default TransaksiMainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tabContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: sizes.padding,
   },
   mainContainer: {
     backgroundColor: colors.white,

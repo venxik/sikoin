@@ -33,7 +33,10 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   };
 
   const navigateToPembayaranScreen = () => {
-    navigation.navigate('TopupPembayaranScreen', { nominal });
+    navigation.navigate('TopupPembayaran', {
+      screen: 'PembayaranScreen',
+      params: { nominal: parseInt(nominal) },
+    });
   };
 
   return (

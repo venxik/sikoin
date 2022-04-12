@@ -33,17 +33,17 @@ type Props = NativeStackScreenProps<
 const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
   const { biodataData } = useAppSelector(s => s.BiodataReducer) || {};
   const {
-    tempat_lahir,
-    tanggal_lahir,
-    jenis_kelamin,
-    gol_darah,
+    tempatLahir,
+    tanggalLahir,
+    jenisKelamin,
+    golDarah,
     kewarganegaraan,
-    pendidikan_terakhir,
+    pendidikanTerakhir,
     agama,
-    status_pernikahan,
-    jumlah_anak,
+    statusPernkahan,
+    jumlahAnak,
     bank,
-    no_rek,
+    noRek,
   } = biodataData || {};
 
   const dispatch = useAppDispatch();
@@ -54,26 +54,26 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<BiodataResponse>({
     defaultValues: {
-      tempat_lahir: tempat_lahir ? tempat_lahir : '',
-      tanggal_lahir: tanggal_lahir ? tanggal_lahir : '',
-      jumlah_anak: jumlah_anak ? jumlah_anak : 0,
+      tempatLahir: tempatLahir ? tempatLahir : '',
+      tanggalLahir: tanggalLahir ? tanggalLahir : '',
+      jumlahAnak: jumlahAnak ? jumlahAnak : 0,
       bank: bank ? bank : '',
-      no_rek: no_rek ? no_rek : '',
-      jenis_kelamin: jenis_kelamin ? jenis_kelamin : '',
-      gol_darah: gol_darah ? gol_darah : '',
+      noRek: noRek ? noRek : '',
+      jenisKelamin: jenisKelamin ? jenisKelamin : '',
+      golDarah: golDarah ? golDarah : '',
       kewarganegaraan: kewarganegaraan ? kewarganegaraan : '',
-      pendidikan_terakhir: pendidikan_terakhir ? pendidikan_terakhir : '',
+      pendidikanTerakhir: pendidikanTerakhir ? pendidikanTerakhir : '',
       agama: agama ? agama : '',
-      status_pernikahan: status_pernikahan ? status_pernikahan : '',
+      statusPernkahan: statusPernkahan ? statusPernkahan : '',
     },
   });
 
   const submitData = (data: BiodataResponse) => {
-    const { tanggal_lahir } = data || {};
+    const { tanggalLahir } = data || {};
     dispatch(
       fetchUpdateBiodata({
         ...data,
-        tanggal_lahir: moment(tanggal_lahir).format(),
+        tanggalLahir: moment(tanggalLahir).format(),
       }),
     );
   };
@@ -92,7 +92,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
           <View style={styles.innerContainer}>
             <Controller
               control={control}
-              name="tempat_lahir"
+              name="tempatLahir"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
@@ -104,7 +104,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="tanggal_lahir"
+              name="tanggalLahir"
               render={({ field: { onChange, value } }) => (
                 <CalendarPicker
                   title={strings.tgl_lahir}
@@ -120,7 +120,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
-                name="jenis_kelamin"
+                name="jenisKelamin"
                 render={({ field: { onChange, value } }) => (
                   <DropdownForm
                     style={{ width: '55%' }}
@@ -133,7 +133,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
               />
               <Controller
                 control={control}
-                name="gol_darah"
+                name="golDarah"
                 render={({ field: { onChange, value } }) => (
                   <DropdownForm
                     style={{ width: '40%' }}
@@ -160,7 +160,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="pendidikan_terakhir"
+              name="pendidikanTerakhir"
               render={({ field: { onChange, value } }) => (
                 <DropdownForm
                   title={strings.pendidikan_terakhir}
@@ -184,7 +184,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="status_pernikahan"
+              name="statusPernkahan"
               render={({ field: { onChange, value } }) => (
                 <DropdownForm
                   title={strings.status_pernikahan}
@@ -196,7 +196,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="jumlah_anak"
+              name="jumlahAnak"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
@@ -208,11 +208,11 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="no_rek"
+              name="noRek"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
-                  error={errors.no_rek}
-                  errorText={errors.no_rek?.message}
+                  error={errors.noRek}
+                  errorText={errors.noRek?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}

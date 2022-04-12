@@ -49,6 +49,7 @@ const statusKeluarga = [
   { label: 'Suami', value: 'Suami' },
   { label: 'Istri', value: 'Istri' },
   { label: 'Saudara Kandung', value: 'Saudara Kandung' },
+  { label: 'Saudara Sepupu', value: 'Saudara Sepupu' },
 ];
 
 export default {

@@ -6,13 +6,18 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-import { Button, HeaderBack, TextInputForm } from '../../../../components';
-import { colors, sizes, strings } from '../../../../constants';
+import {
+  Button,
+  DropdownForm,
+  HeaderBack,
+  TextInputForm,
+} from '../../../../components';
+import { colors, dropdownItems, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
   fetchSubmitRefKeluarga,
   fetchUpdateRefKeluarga,
-  RefKeluargaRequest,
+  RefKeluargaResponse,
 } from '../../../../redux/reducers/RefKeluargaReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
@@ -26,7 +31,7 @@ type Props = NativeStackScreenProps<
 
 const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
   const { update, item } = route.params;
-  const { status, noTelp, nama, noKtp, id } = item || {};
+  const { status, telp, nama, ktp, id } = item || {};
 
   const dispatch = useAppDispatch();
 
@@ -34,16 +39,16 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<RefKeluargaRequest>({
+  } = useForm<RefKeluargaResponse>({
     defaultValues: {
       status: update ? status : '',
-      noTelp: update ? noTelp : '',
+      telp: update ? telp : '',
       nama: update ? nama : '',
-      noKtp: update ? noKtp : '',
+      ktp: update ? ktp : '',
     },
   });
 
-  const onSubmit = (data: RefKeluargaRequest) => {
+  const onSubmit = (data: RefKeluargaResponse) => {
     if (update) {
       dispatch(fetchUpdateRefKeluarga({ data, id: id as number }));
       // dispatch(updateKeluarga({ index, data }));
@@ -77,16 +82,26 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                 />
               )}
             />
-
-            {/* <DropdownForm value={'Profile'} title={strings.status_ref} /> */}
-
             <Controller
               control={control}
-              name="noKtp"
+              name="status"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.status_ref}
+                  data={dropdownItems.statusKeluarga}
+                  onChange={value => onChange(value)}
+                  value={value}
+                  maxHeight={200}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="ktp"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
-                  error={errors.noKtp}
-                  errorText={errors.noKtp?.message}
+                  error={errors.ktp}
+                  errorText={errors.ktp?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
@@ -105,11 +120,11 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
             />
             <Controller
               control={control}
-              name="noTelp"
+              name="telp"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
-                  error={errors.noTelp}
-                  errorText={errors.noTelp?.message}
+                  error={errors.telp}
+                  errorText={errors.telp?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}

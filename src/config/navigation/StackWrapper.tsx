@@ -23,6 +23,7 @@ import {
   LoginStackParamList,
   MarketStackParamList,
   ParentStackParamList,
+  PembayaranStackParamList,
   PinjamanStackParamList,
   ProfileStackParamList,
   SaldoSimpananStackParamList,
@@ -51,6 +52,7 @@ const VoucherStack = createNativeStackNavigator<VoucherStackParamList>();
 const PinjamanStack = createNativeStackNavigator<PinjamanStackParamList>();
 const DokumenStack = createNativeStackNavigator<DokumenStackParamList>();
 const MarketStack = createNativeStackNavigator<MarketStackParamList>();
+const PembayaranStack = createNativeStackNavigator<PembayaranStackParamList>();
 
 const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -331,6 +333,23 @@ const SaldoSimpananStackNavigator = () => (
   </SaldoSimpananStack.Navigator>
 );
 
+const PembayaranStackNavigator = () => (
+  <PembayaranStack.Navigator
+    screenOptions={{
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <PembayaranStack.Screen
+      name="PembayaranScreen"
+      component={screens.PembayaranScreen}
+    />
+    <PembayaranStack.Screen
+      name="PembayaranSuccessScreen"
+      component={screens.PembayaranSuccessScreen}
+    />
+  </PembayaranStack.Navigator>
+);
+
 const TopupStackNavigator = () => (
   <TopupStack.Navigator
     initialRouteName={'TopupMainScreen'}
@@ -347,13 +366,17 @@ const TopupStackNavigator = () => (
       component={screens.TopupDetailScreen}
     />
     <TopupStack.Screen
+      name="TopupPembayaran"
+      component={PembayaranStackNavigator}
+    />
+    {/* <TopupStack.Screen
       name="TopupPembayaranScreen"
-      component={screens.TopupPembayaranScreen}
+      component={screens.PembayaranScreen}
     />
     <TopupStack.Screen
       name="TopupSuccessScreen"
-      component={screens.TopupSuccessScreen}
-    />
+      component={screens.PembayaranSuccessScreen}
+    /> */}
   </TopupStack.Navigator>
 );
 
@@ -411,6 +434,10 @@ const MarketStackNavigator = () => (
     <MarketStack.Screen
       name="MarketSelectPaymentScreen"
       component={screens.MarketSelectPaymentScreen}
+    />
+    <MarketStack.Screen
+      name="MarketPembayaran"
+      component={PembayaranStackNavigator}
     />
   </MarketStack.Navigator>
 );

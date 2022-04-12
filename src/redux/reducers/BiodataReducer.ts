@@ -1,19 +1,19 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type BiodataResponse = {
-  profie_pic: string;
+  profiePic: string;
   nama: string;
-  tempat_lahir: string;
-  tanggal_lahir: string;
-  jenis_kelamin: string;
-  gol_darah: string;
+  tempatLahir: string;
+  tanggalLahir: string;
+  jenisKelamin: string;
+  golDarah: string;
   kewarganegaraan: string;
-  pendidikan_terakhir: string;
+  pendidikanTerakhir: string;
   agama: string;
   bank: string;
-  no_rek: string;
-  status_pernikahan: string;
-  jumlah_anak: number;
+  noRek: string;
+  statusPernkahan: string;
+  jumlahAnak: number;
 };
 
 interface RootState {
@@ -23,19 +23,19 @@ interface RootState {
 
 const initialState: RootState = {
   biodataData: {
-    profie_pic: '',
+    profiePic: '',
     nama: '',
-    tempat_lahir: '',
-    tanggal_lahir: '',
-    jenis_kelamin: '',
-    gol_darah: '',
+    tempatLahir: '',
+    tanggalLahir: '',
+    jenisKelamin: '',
+    golDarah: '',
     kewarganegaraan: '',
-    pendidikan_terakhir: '',
+    pendidikanTerakhir: '',
     agama: '',
     bank: '',
-    no_rek: '',
-    status_pernikahan: '',
-    jumlah_anak: 0,
+    noRek: '',
+    statusPernkahan: '',
+    jumlahAnak: 0,
   },
   error: null,
 };

@@ -1,4 +1,3 @@
-import { useIsFocused } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import {
@@ -32,7 +31,6 @@ type Props = NativeStackScreenProps<
 
 const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const isFocused = useIsFocused();
 
   const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
   const [showSuccessDeletePopup, setShowSuccessDeletePopup] =
@@ -44,8 +42,8 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const { alamatList } = useAppSelector(s => s.AlamatReducer) || [];
 
   useEffect(() => {
-    isFocused ? dispatch(fetchAlamatList()) : null;
-  }, [isFocused]);
+    dispatch(fetchAlamatList());
+  }, []);
 
   const navigateToAddScreen = (update: boolean, item?: AlamatDataResponse) => {
     navigation.navigate('DaftarAlamatAddScreen', { update, item });

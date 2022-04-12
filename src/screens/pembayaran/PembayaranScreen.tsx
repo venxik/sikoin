@@ -1,21 +1,21 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { Button, HeaderBack } from '../../../components';
-import { TopupStackParamList } from '../../../config/navigation/model';
-import { colors, icons, images, sizes, strings } from '../../../constants';
-import { formatter } from '../../../utils';
+import { Button, HeaderBack } from '../../components';
+import { PembayaranStackParamList } from '../../config/navigation/model';
+import { colors, icons, images, sizes, strings } from '../../constants';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
-  TopupStackParamList,
-  'TopupPembayaranScreen'
+  PembayaranStackParamList,
+  'PembayaranScreen'
 >;
 
-const TopupPembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
+const PembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
   const { nominal } = route.params;
 
   const navigateToSuccessScreen = () => {
-    navigation.navigate('TopupSuccessScreen');
+    navigation.navigate('PembayaranSuccessScreen');
   };
 
   const renderBankList = () => (
@@ -35,7 +35,7 @@ const TopupPembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{strings.pembayaran_title_1}</Text>
         <Text style={styles.textNominal}>
-          Rp. {formatter.formatStringToCurrencyNumber(nominal)}
+          Rp. {formatter.formatNumberToCurreny(nominal)}
         </Text>
         <Text style={styles.textTitle}>{strings.pembayaran_title_2}</Text>
         {renderBankList()}
@@ -58,7 +58,7 @@ const TopupPembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
     </SafeAreaView>
   );
 };
-export default TopupPembayaranScreen;
+export default PembayaranScreen;
 
 const styles = StyleSheet.create({
   container: {

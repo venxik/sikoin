@@ -40,7 +40,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const [data, setData] = useState<KoperasiListResponse[] | null>(null);
 
   const onChangeKoperasiName = (value: string) => {
-    setValue('nama_koperasi', value);
+    setValue('namaKoperasi', value);
     setKoperasiName(value);
   };
 
@@ -60,12 +60,12 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   }, [koperasiName, selected]);
 
   const onSubmit = (data: sendUserKoperasiResponseParams) => {
-    const { tanggal_lahir } = data;
+    const { tanggalLahir } = data;
     dispatch(
       fetchUserKoperasi({
         ...data,
-        // tanggal_lahir: formatter.trimDate(tanggal_lahir),
-        tanggal_lahir: '1994-03-25',
+        // tanggalLahir: formatter.trimDate(tanggal_lahir),
+        tanggalLahir: '1994-03-25',
       }),
     );
   };
@@ -75,11 +75,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<sendUserKoperasiResponseParams>({
     defaultValues: {
-      nama_koperasi: '',
-      no_anggota: '',
-      tanggal_lahir: '',
+      namaKoperasi: '',
+      noAnggota: '',
+      tanggalLahir: '',
     },
   });
 
@@ -109,11 +109,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         <View>
           <Controller
             control={control}
-            name="nama_koperasi"
+            name="namaKoperasi"
             render={({ field: { onChange, value } }) => (
               <TextInputBorder
-                error={errors.nama_koperasi}
-                errorText={errors.nama_koperasi?.message}
+                error={errors.namaKoperasi}
+                errorText={errors.namaKoperasi?.message}
                 value={value}
                 onChangeText={e => {
                   onChangeKoperasiName(e);
@@ -169,11 +169,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
         </View>
         <Controller
           control={control}
-          name="no_anggota"
+          name="noAnggota"
           render={({ field: { onChange, value } }) => (
             <TextInputBorder
-              error={errors.no_anggota}
-              errorText={errors.no_anggota?.message}
+              error={errors.noAnggota}
+              errorText={errors.noAnggota?.message}
               style={{
                 marginTop: sizes.padding / 2,
               }}
@@ -190,11 +190,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
 
         <Controller
           control={control}
-          name="tanggal_lahir"
+          name="tanggalLahir"
           render={({ field: { onChange, value } }) => (
             <CalendarPicker
-              error={errors.tanggal_lahir}
-              errorText={errors.tanggal_lahir?.message}
+              error={errors.tanggalLahir}
+              errorText={errors.tanggalLahir?.message}
               onChangeDate={date => {
                 onChange(date);
               }}

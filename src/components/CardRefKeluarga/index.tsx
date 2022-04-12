@@ -4,10 +4,11 @@ import { colors, icons, sizes, strings } from '../../constants';
 import Button from '../Button';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { CardRefKeluargaProps } from './model';
+import { isEmpty } from 'lodash';
 
 const CardRefKeluarga = (props: CardRefKeluargaProps) => {
   const { item, onPressUbah, onPressDelete } = props || {};
-  const { status, noTelp, nama, noKtp } = item;
+  const { status, telp, nama, ktp } = item;
 
   const copyToClipboard = (text?: string) => {
     Clipboard.setString(text ?? '');
@@ -23,23 +24,27 @@ const CardRefKeluarga = (props: CardRefKeluargaProps) => {
       <View style={{ marginTop: 10 }}>
         <View style={styles.textContainer}>
           <Text style={styles.textTel}>TEL.</Text>
-          <Text style={styles.textNumber}>{noTelp}</Text>
-          <TouchableOpacity onPress={() => copyToClipboard(noTelp)}>
-            <Image
-              source={icons.icon_copy_clipboard}
-              style={styles.iconClipboard}
-            />
-          </TouchableOpacity>
+          <Text style={styles.textNumber}>{telp}</Text>
+          {!isEmpty(telp) && (
+            <TouchableOpacity onPress={() => copyToClipboard(telp)}>
+              <Image
+                source={icons.icon_copy_clipboard}
+                style={styles.iconClipboard}
+              />
+            </TouchableOpacity>
+          )}
         </View>
         <View style={[styles.textContainer, { marginTop: 10 }]}>
           <Text style={styles.textTel}>KTP.</Text>
-          <Text style={styles.textNumber}>{noKtp}</Text>
-          <TouchableOpacity onPress={() => copyToClipboard(noKtp)}>
-            <Image
-              source={icons.icon_copy_clipboard}
-              style={styles.iconClipboard}
-            />
-          </TouchableOpacity>
+          <Text style={styles.textNumber}>{ktp}</Text>
+          {!isEmpty(ktp) && (
+            <TouchableOpacity onPress={() => copyToClipboard(ktp)}>
+              <Image
+                source={icons.icon_copy_clipboard}
+                style={styles.iconClipboard}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       <View style={styles.bottomContainer}>

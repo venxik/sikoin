@@ -111,6 +111,11 @@ export type DokumenStackParamList = {
   DokumenDetailScreen: { item: DokumenData };
 };
 
+export type PembayaranStackParamList = {
+  PembayaranScreen: { nominal: number };
+  PembayaranSuccessScreen: undefined;
+};
+
 export type SaldoSimpananStackParamList = {
   SaldoSimpananMainScreen: { showSaldo: boolean };
 };
@@ -118,8 +123,9 @@ export type SaldoSimpananStackParamList = {
 export type TopupStackParamList = {
   TopupMainScreen: undefined;
   TopupDetailScreen: { selectedTopup: string; nominal: string };
-  TopupPembayaranScreen: { nominal: string };
-  TopupSuccessScreen: undefined;
+  TopupPembayaran: NavigatorScreenParams<PembayaranStackParamList>;
+  // TopupPembayaranScreen: { nominal: string };
+  // TopupSuccessScreen: undefined;
 };
 
 export type TransaksiStackParamList = {
@@ -136,6 +142,7 @@ export type MarketStackParamList = {
   MarketCartScreen: undefined;
   MarketCheckoutScreen: undefined;
   MarketSelectPaymentScreen: undefined;
+  MarketPembayaran: NavigatorScreenParams<PembayaranStackParamList>;
 };
 
 export type PinjamanStackParamList = {

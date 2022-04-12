@@ -23,7 +23,7 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
   const onSubmit = ({ email }: { email: string }) => {
     dispatch(
       fetchUserKoperasiEmail({
-        user_id: 1,
+        userId: 2,
         email: email,
       }),
     );

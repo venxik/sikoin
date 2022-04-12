@@ -3,13 +3,13 @@ import { AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 
 export type sendUserKoperasiResponseParams = {
-  nama_koperasi: string;
-  no_anggota: string;
-  tanggal_lahir: string;
+  namaKoperasi: string;
+  noAnggota: string;
+  tanggalLahir: string;
 };
 
 export type sendUserEmailKoperasiParams = {
-  user_id: number;
+  userId: number;
   email: string;
 };
 

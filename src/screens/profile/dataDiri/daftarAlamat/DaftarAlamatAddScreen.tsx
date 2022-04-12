@@ -12,7 +12,7 @@ import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { colors, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
-  AlamatDataRequest,
+  AlamatDataResponse,
   fetchSubmitAlamat,
   fetchUpdateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
@@ -27,17 +27,8 @@ type Props = NativeStackScreenProps<
 
 const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const { update, item } = route.params;
-  const {
-    id,
-    judul,
-    detail,
-    no_rt,
-    no_rw,
-    provinsi,
-    kabupaten,
-    kecamatan,
-    kode_pos,
-  } = item || {};
+  const { id, judul, alamat, rt, rw, provinsi, kabupaten, kecamatan, kodePos } =
+    item || {};
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -45,20 +36,20 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
     control,
     handleSubmit,
     // formState: { errors },
-  } = useForm<AlamatDataRequest>({
+  } = useForm<AlamatDataResponse>({
     defaultValues: {
       judul: update ? judul : '',
-      alamat: update ? detail : '',
+      alamat: update ? alamat : '',
       provinsi: update ? provinsi : '',
       kabupaten: update ? kabupaten : '',
       kecamatan: update ? kecamatan : '',
-      kode_pos: update ? kode_pos : '',
-      rt: update ? no_rt : '',
-      rw: update ? no_rw : '',
+      kodePos: update ? kodePos : '',
+      rt: update ? rt : '',
+      rw: update ? rw : '',
     },
   });
 
-  const onSubmit = (data: AlamatDataRequest) => {
+  const onSubmit = (data: AlamatDataResponse) => {
     if (update) {
       dispatch(fetchUpdateAlamat({ data, id: id as number }));
       // dispatch(updateAlamat({ index, data }));
@@ -177,7 +168,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
 
             <Controller
               control={control}
-              name="kode_pos"
+              name="kodePos"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}

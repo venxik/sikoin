@@ -26,8 +26,6 @@ import DaftarPekerjaanAddScreen from './profile/dataDiri/daftarPekerjaan/DaftarP
 import DiskonMainScreen from './diskon/DiskonMainScreen';
 import TopupMainScreen from './saldoSimpanan/topup/TopupMainScreen';
 import TopupDetailScreen from './saldoSimpanan/topup/TopupDetailScreen';
-import TopupPembayaranScreen from './saldoSimpanan/topup/TopupPembayaranScreen';
-import TopupSuccessScreen from './saldoSimpanan/topup/TopupSuccessScreen';
 import TransaksiMainScreen from './transaksi/TransaksiMainScreen';
 import VoucherMainScreen from './voucher/VoucherMainScreen';
 import DataKoperasiMainScreen from './profile/DataKoperasiMainScreen';
@@ -44,6 +42,8 @@ import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
 import MarketCartScreen from './market/MarketCartScreen';
 import MarketCheckoutScreen from './market/MarketCheckoutScreen';
 import MarketSelectPaymentScreen from './market/MarketSelectPaymentScreen';
+import PembayaranScreen from './pembayaran/PembayaranScreen';
+import PembayaranSuccessScreen from './pembayaran/PembayaranSuccessScreen';
 
 export {
   OnboardingScreen,
@@ -71,8 +71,6 @@ export {
   DiskonMainScreen,
   TopupMainScreen,
   TopupDetailScreen,
-  TopupPembayaranScreen,
-  TopupSuccessScreen,
   TransaksiMainScreen,
   VoucherMainScreen,
   DataKoperasiMainScreen,
@@ -92,4 +90,6 @@ export {
   MarketCartScreen,
   MarketCheckoutScreen,
   MarketSelectPaymentScreen,
+  PembayaranScreen,
+  PembayaranSuccessScreen,
 };

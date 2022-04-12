@@ -24,26 +24,27 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { isEmpty } from 'lodash';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 
 const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
-  const { nama, no_anggota, email, no_telp, profile_pic } = profileData || {};
-  const [profilePicture, setProfilePicture] = useState(profile_pic);
+  const { nama, noAnggota, email, noTelp, profilePic } = profileData || {};
+  const [profilePicture, setProfilePicture] = useState(profilePic);
   const documentPickerOptions = {
     type: [DocumentPicker.types.images],
   };
 
   const saveProfile = (data: ProfileRequest) => {
-    const { email, nama, no_telp } = data || {};
+    const { email, nama, noTelp } = data || {};
     dispatch(
       fetchUpdateProfile({
         email,
         nama,
-        no_telp: no_telp as string,
-        profile_pic: profilePicture as string | ImageSourcePropType,
+        noTelp: noTelp as string,
+        profilePic: profilePicture as string | ImageSourcePropType,
       }),
     );
   };
@@ -59,7 +60,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const copyToClipboard = () => {
-    Clipboard.setString(no_anggota.toString());
+    Clipboard.setString(noAnggota.toString());
   };
 
   const {
@@ -70,7 +71,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     defaultValues: {
       email: email ? email : '',
       nama: nama ? nama : '',
-      no_telp: no_telp ? no_telp : '',
+      noTelp: noTelp ? noTelp : '',
     },
   });
 
@@ -114,14 +115,17 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                   marginBottom: sizes.padding,
                   alignItems: 'center',
                 }}>
-                <Text style={styles.codeText}>{no_anggota}</Text>
-                <TouchableOpacity onPress={copyToClipboard}>
-                  <Image
-                    source={icons.icon_copy_clipboard}
-                    style={styles.iconClipboard}
-                  />
-                </TouchableOpacity>
+                <Text style={styles.codeText}>{noAnggota}</Text>
+                {!isEmpty(noAnggota) && (
+                  <TouchableOpacity onPress={copyToClipboard}>
+                    <Image
+                      source={icons.icon_copy_clipboard}
+                      style={styles.iconClipboard}
+                    />
+                  </TouchableOpacity>
+                )}
               </View>
+
               <Controller
                 control={control}
                 name="nama"
@@ -143,11 +147,11 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
               />
               <Controller
                 control={control}
-                name="no_telp"
+                name="noTelp"
                 render={({ field: { onChange, value } }) => (
                   <TextInputForm
-                    error={errors.no_telp}
-                    errorText={errors.no_telp?.message}
+                    error={errors.noTelp}
+                    errorText={errors.noTelp?.message}
                     value={value}
                     onChangeText={value => onChange(value)}
                     title={strings.no_telp}

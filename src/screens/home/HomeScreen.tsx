@@ -86,11 +86,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
   const {
     nama,
-    logo_koperasi,
-    nama_koperasi,
-    no_anggota,
-    profile_pic,
-    saldo_belanja,
+    logoKoperasi,
+    namaKoperasi,
+    noAnggota,
+    profilePic,
+    saldoBelanja,
     simpanan,
     kabar,
     promo,
@@ -341,7 +341,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
                     Rp{' '}
                     {item.title === strings.simpanan
                       ? formatter.formatNumberToCurreny(simpanan)
-                      : formatter.formatNumberToCurreny(saldo_belanja)}
+                      : formatter.formatNumberToCurreny(saldoBelanja)}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -376,15 +376,15 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     return (
       <View style={styles.profileContainer}>
         <ProfilePicture
-          profilUri={profile_pic}
-          koperasiUri={logo_koperasi}
+          profilUri={profilePic}
+          koperasiUri={logoKoperasi}
           onPress={() => navigation.jumpTo('ProfileStackNavigator')}
         />
         <View style={styles.profileInnerContainer}>
           <Text style={styles.textProfileName}>Hi, {nama}!</Text>
           <View>
-            <Text style={styles.textProfileCode}>{no_anggota}</Text>
-            <Text style={styles.textProfileKoperasi}>{nama_koperasi}</Text>
+            <Text style={styles.textProfileCode}>{noAnggota}</Text>
+            <Text style={styles.textProfileKoperasi}>{namaKoperasi}</Text>
           </View>
         </View>
       </View>

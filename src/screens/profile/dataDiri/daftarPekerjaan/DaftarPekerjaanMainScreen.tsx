@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
   Button,
@@ -9,9 +9,10 @@ import {
   HeaderBack,
 } from '../../../../components';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppSelector } from '../../../../config';
+import { useAppDispatch, useAppSelector } from '../../../../config';
 import { colors, icons, sizes, strings } from '../../../../constants';
 import { formatter } from '../../../../utils';
+import { fetchPekerjaan } from '../../../../redux/reducers/PekerjaanReducer';
 
 type Props = NativeStackScreenProps<
   DataDiriStackParamList,
@@ -19,6 +20,7 @@ type Props = NativeStackScreenProps<
 >;
 
 const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useAppDispatch();
   const { pekerjaanData } = useAppSelector(s => s.PekerjaanReducer) || {};
   const {
     pekerjaan,
@@ -34,6 +36,10 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToAddScreen = () => {
     navigation.navigate('DaftarPekerjaanAddScreen');
   };
+
+  useEffect(() => {
+    dispatch(fetchPekerjaan());
+  }, []);
 
   const renderPekerjaan = () => {
     return (

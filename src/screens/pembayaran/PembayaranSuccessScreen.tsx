@@ -2,19 +2,13 @@ import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
-import { Button } from '../../../components';
-import { TopupStackParamList } from '../../../config/navigation/model';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  sizes,
-  strings,
-} from '../../../constants';
+import { Button } from '../../components';
+import { TopupStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<TopupStackParamList, 'TopupSuccessScreen'>;
 
-const TopupSuccessScreen: React.FC<Props> = ({ navigation }) => {
+const PembayaranSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {
     navigation.dispatch(
       CommonActions.reset({
@@ -52,7 +46,7 @@ const TopupSuccessScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default TopupSuccessScreen;
+export default PembayaranSuccessScreen;
 
 const styles = StyleSheet.create({
   container: {

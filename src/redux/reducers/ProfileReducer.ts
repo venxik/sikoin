@@ -2,19 +2,19 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ImageSourcePropType } from 'react-native';
 
 export type ProfileResponse = {
-  profile_pic: string;
-  logo_koperasi: string;
+  profilePic: string;
+  logoKoperasi: string;
   nama: string;
-  no_telp: string;
+  noTelp: string;
   email: string;
-  member_sejak: string;
-  no_anggota: string;
+  memberSejak: string;
+  noAnggota: string;
 };
 
 export type ProfileRequest = {
-  profile_pic: string | ImageSourcePropType;
+  profilePic: string | ImageSourcePropType;
   nama: string;
-  no_telp: string;
+  noTelp: string;
   email: string;
 };
 
@@ -35,13 +35,13 @@ interface RootState {
 
 const initialState: RootState = {
   profileData: {
-    profile_pic: '',
-    logo_koperasi: '',
+    profilePic: '',
+    logoKoperasi: '',
     nama: '',
-    no_telp: '',
+    noTelp: '',
     email: '',
-    member_sejak: '',
-    no_anggota: '',
+    memberSejak: '',
+    noAnggota: '',
   },
   koperasiData: {
     koperasiPic: 'https://picsum.photos/id/237/200/300',

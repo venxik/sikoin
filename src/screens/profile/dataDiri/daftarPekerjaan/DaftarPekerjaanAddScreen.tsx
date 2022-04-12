@@ -16,7 +16,7 @@ import {
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import {
-  addPekerjaan,
+  fetchUpdatePekerjaan,
   PekerjaanResponse,
 } from '../../../../redux/reducers/PekerjaanReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -61,16 +61,17 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
   });
 
   const submitData = (data: PekerjaanResponse) => {
-    const { masaKerjaTahun, masaKerjaBulan, gajiBulanan } = data;
-    dispatch(
-      addPekerjaan({
-        ...data,
-        gajiBulanan: gajiBulanan,
-        masaKerjaTahun: masaKerjaTahun,
-        masaKerjaBulan: masaKerjaBulan,
-      }),
-    );
-    navigation.goBack();
+    // const { masaKerjaTahun, masaKerjaBulan, gajiBulanan } = data;
+    dispatch(fetchUpdatePekerjaan(data));
+    // dispatch(
+    //   addPekerjaan({
+    //     ...data,
+    //     gajiBulanan: gajiBulanan,
+    //     masaKerjaTahun: masaKerjaTahun,
+    //     masaKerjaBulan: masaKerjaBulan,
+    //   }),
+    // );
+    // navigation.goBack();
   };
 
   return (

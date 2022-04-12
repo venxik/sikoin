@@ -2,21 +2,11 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { uniqueId } from 'lodash';
 
 export type RefKeluargaResponse = {
-  id: number;
+  id?: number;
   status: string;
-  noTelp: string;
+  telp: string;
   nama: string;
-  noKtp: string;
-  member_koperasi_id: number;
-  created_at: number;
-  updated_at: number;
-};
-
-export type RefKeluargaRequest = {
-  status: string;
-  noTelp: string;
-  nama: string;
-  noKtp: string;
+  ktp: string;
 };
 
 interface RootState {
@@ -69,18 +59,15 @@ const refKeluargaSlice = createSlice({
     deleteRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    addKeluarga: (state, { payload }: PayloadAction<RefKeluargaRequest>) => {
+    addKeluarga: (state, { payload }: PayloadAction<RefKeluargaResponse>) => {
       state.keluargaList.push({
         ...payload,
-        member_koperasi_id: 1,
-        created_at: Date.now(),
-        updated_at: Date.now(),
         id: Number.parseInt(uniqueId()),
       });
     },
     deleteKeluarga: (
       state,
-      { payload }: PayloadAction<RefKeluargaRequest | null>,
+      { payload }: PayloadAction<RefKeluargaResponse | null>,
     ) => {
       state.keluargaList = state.keluargaList.filter(
         item => item?.status?.toLowerCase() != payload?.status?.toLowerCase(),
@@ -88,15 +75,12 @@ const refKeluargaSlice = createSlice({
     },
     updateKeluarga: (
       state,
-      { payload }: PayloadAction<{ data: RefKeluargaRequest; index?: number }>,
+      { payload }: PayloadAction<{ data: RefKeluargaResponse; index?: number }>,
     ) => {
       const { data, index } = payload || {};
       if (index !== undefined)
         state.keluargaList[index] = {
           ...data,
-          member_koperasi_id: 1,
-          created_at: Date.now(),
-          updated_at: Date.now(),
           id: Number.parseInt(uniqueId()),
         };
     },
@@ -105,10 +89,10 @@ const refKeluargaSlice = createSlice({
 
 export const fetchGetRefKeluarga = createAction('fetchGetRefKeluarga');
 export const fetchUpdateRefKeluarga = createAction<{
-  data: RefKeluargaRequest;
+  data: RefKeluargaResponse;
   id: number;
 }>('fetchUpdateRefKeluarga');
-export const fetchSubmitRefKeluarga = createAction<RefKeluargaRequest>(
+export const fetchSubmitRefKeluarga = createAction<RefKeluargaResponse>(
   'fetchSubmitRefKeluarga',
 );
 

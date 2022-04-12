@@ -30,11 +30,11 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
   const {
     nama,
     email,
-    logo_koperasi,
-    member_sejak,
-    no_anggota,
-    no_telp,
-    profile_pic,
+    logoKoperasi,
+    memberSejak,
+    noAnggota,
+    noTelp,
+    profilePic,
   } = profileData || {};
 
   useEffect(() => {
@@ -63,23 +63,21 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.topContainer}>
           <ProfilePicture
             disabled={true}
-            koperasiUri={logo_koperasi}
-            profilUri={profile_pic as string | ImageSourcePropType}
+            koperasiUri={logoKoperasi}
+            profilUri={profilePic as string | ImageSourcePropType}
           />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{nama}</Text>
             {/* <Text style={styles.koperasiText}>{koperasiName}</Text> */}
             <View style={{ marginTop: 10 }}>
-              <Text style={styles.descText}>{checkIsEmpty(no_anggota)}</Text>
+              <Text style={styles.descText}>{checkIsEmpty(noAnggota)}</Text>
               <Text style={styles.descText}>
-                {!isEmpty(member_sejak)
-                  ? `Member Sejak ${moment(member_sejak).format(
-                      'Do MMMM YYYY',
-                    )}`
+                {!isEmpty(memberSejak)
+                  ? `Member Sejak ${moment(memberSejak).format('Do MMMM YYYY')}`
                   : '-'}
               </Text>
               <Text style={styles.descText}>{checkIsEmpty(email)}</Text>
-              <Text style={styles.descText}>{checkIsEmpty(no_telp)}</Text>
+              <Text style={styles.descText}>{checkIsEmpty(noTelp)}</Text>
             </View>
           </View>
           <Button

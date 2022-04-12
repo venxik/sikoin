@@ -2,20 +2,7 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { uniqueId } from 'lodash';
 
 export type AlamatDataResponse = {
-  id: number;
-  judul: string;
-  detail: string;
-  no_rt: string;
-  no_rw: string;
-  provinsi: string;
-  kabupaten: string;
-  kecamatan: string;
-  kode_pos: string;
-  lati: number;
-  lang: number;
-};
-
-export type AlamatDataRequest = {
+  id?: number;
   judul: string;
   alamat: string;
   rt: string;
@@ -23,7 +10,7 @@ export type AlamatDataRequest = {
   provinsi: string;
   kabupaten: string;
   kecamatan: string;
-  kode_pos: string;
+  kodePos: string;
 };
 
 interface RootState {
@@ -36,15 +23,13 @@ const initialState: RootState = {
     {
       id: 1,
       judul: 'Test',
-      detail: 'Lorem Ipsum adasdsa dsa das de Dne djheADHbaiudQ DB',
-      no_rt: '02',
-      no_rw: '04',
+      alamat: 'Lorem Ipsum adasdsa dsa das de Dne djheADHbaiudQ DB',
+      rt: '02',
+      rw: '04',
       provinsi: 'Jakarta',
       kabupaten: 'Jakarta',
       kecamatan: 'Jakarta',
-      kode_pos: '12321',
-      lang: 123213,
-      lati: 131312,
+      kodePos: '12321',
     },
   ],
   error: null,
@@ -81,14 +66,9 @@ const alamatSlice = createSlice({
     updateAlamatFailed: (state, { payload }) => {
       state.error = payload;
     },
-    addAlamat: (state, { payload }: PayloadAction<AlamatDataRequest>) => {
+    addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {
       state.alamatList.push({
         ...payload,
-        detail: payload.alamat,
-        no_rt: payload.rt,
-        no_rw: payload.rw,
-        lati: 0,
-        lang: 0,
         id: Number.parseInt(uniqueId()),
       });
     },
@@ -102,17 +82,12 @@ const alamatSlice = createSlice({
     },
     updateAlamat: (
       state,
-      { payload }: PayloadAction<{ data: AlamatDataRequest; index?: number }>,
+      { payload }: PayloadAction<{ data: AlamatDataResponse; index?: number }>,
     ) => {
       const { data, index } = payload || {};
       if (index !== undefined)
         state.alamatList[index] = {
           ...data,
-          detail: data.alamat,
-          no_rt: data.rt,
-          no_rw: data.rw,
-          lati: 0,
-          lang: 0,
           id: Number.parseInt(uniqueId()),
         };
     },
@@ -121,11 +96,11 @@ const alamatSlice = createSlice({
 
 export const fetchAlamatList = createAction('fetchAlamatList');
 export const fetchUpdateAlamat = createAction<{
-  data: AlamatDataRequest;
+  data: AlamatDataResponse;
   id: number;
 }>('fetchUpdateAlamat');
 export const fetchSubmitAlamat =
-  createAction<AlamatDataRequest>('fetchSubmitAlamat');
+  createAction<AlamatDataResponse>('fetchSubmitAlamat');
 
 export const {
   addAlamat,
