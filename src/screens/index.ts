@@ -39,11 +39,11 @@ import DokumenMainScreen from './dokumen/DokumenMainScreen';
 import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
 import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
-import MarketCartScreen from './market/MarketCartScreen';
-import MarketCheckoutScreen from './market/MarketCheckoutScreen';
-import MarketSelectPaymentScreen from './market/MarketSelectPaymentScreen';
-import PembayaranScreen from './pembayaran/PembayaranScreen';
-import PembayaranSuccessScreen from './pembayaran/PembayaranSuccessScreen';
+import CartScreen from './paymentCartCheckout/CartScreen';
+import CheckoutScreen from './paymentCartCheckout/CheckoutScreen';
+import SelectPaymentScreen from './paymentCartCheckout/SelectPaymentScreen';
+import PaymentScreen from './paymentCartCheckout/PaymentScreen';
+import PaymentSuccessScreen from './paymentCartCheckout/PaymentSuccessScreen';
 
 export {
   OnboardingScreen,
@@ -87,9 +87,9 @@ export {
   MarketMainScreen,
   DaftarKoperasiSearchScreen,
   MarketItemDetailsScreen,
-  MarketCartScreen,
-  MarketCheckoutScreen,
-  MarketSelectPaymentScreen,
-  PembayaranScreen,
-  PembayaranSuccessScreen,
+  CartScreen,
+  CheckoutScreen,
+  SelectPaymentScreen,
+  PaymentScreen,
+  PaymentSuccessScreen,
 };

@@ -2,12 +2,12 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import { Button, HeaderBack, PaymentItem } from '../../components';
-import { MarketStackParamList } from '../../config/navigation/model';
+import { PaymentStackParamList } from '../../config/navigation/model';
 import { icons, images, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<
-  MarketStackParamList,
-  'MarketSelectPaymentScreen'
+  PaymentStackParamList,
+  'SelectPaymentScreen'
 >;
 
 const data = [
@@ -38,13 +38,12 @@ const data = [
   },
 ];
 
-const MarketSelectPaymentScreen: React.FC<Props> = ({ navigation }) => {
+const SelectPaymentScreen: React.FC<Props> = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = useState<string>('');
 
   const navigateToSuccessScreen = () => {
-    navigation.navigate('MarketPembayaran', {
-      screen: 'PembayaranScreen',
-      params: { nominal: 1000000 },
+    navigation.navigate('PaymentScreen', {
+      nominal: 1000000,
     });
   };
 
@@ -73,7 +72,7 @@ const MarketSelectPaymentScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default MarketSelectPaymentScreen;
+export default SelectPaymentScreen;
 
 const styles = StyleSheet.create({
   container: {

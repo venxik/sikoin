@@ -5,16 +5,16 @@ import { SafeAreaView, StyleSheet, FlatList, Text, View } from 'react-native';
 import { Button, HeaderBack } from '../../components';
 import CartItem from '../../components/CartItem';
 import { useAppSelector } from '../../config';
-import { MarketStackParamList } from '../../config/navigation/model';
+import { PaymentStackParamList } from '../../config/navigation/model';
 import { icons, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<MarketStackParamList, 'MarketCartScreen'>;
+type Props = NativeStackScreenProps<PaymentStackParamList, 'CartScreen'>;
 
-const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
+const CartScreen: React.FC<Props> = ({ navigation }) => {
   const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
 
   const navigateToCheckout = () => {
-    navigation.navigate('MarketCheckoutScreen');
+    navigation.navigate('CheckoutScreen');
   };
 
   const navigateToVoucher = () => {
@@ -57,7 +57,7 @@ const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default MarketCartScreen;
+export default CartScreen;
 
 const styles = StyleSheet.create({
   container: {

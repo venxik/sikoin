@@ -23,7 +23,7 @@ import {
   LoginStackParamList,
   MarketStackParamList,
   ParentStackParamList,
-  PembayaranStackParamList,
+  PaymentStackParamList,
   PinjamanStackParamList,
   ProfileStackParamList,
   SaldoSimpananStackParamList,
@@ -52,7 +52,7 @@ const VoucherStack = createNativeStackNavigator<VoucherStackParamList>();
 const PinjamanStack = createNativeStackNavigator<PinjamanStackParamList>();
 const DokumenStack = createNativeStackNavigator<DokumenStackParamList>();
 const MarketStack = createNativeStackNavigator<MarketStackParamList>();
-const PembayaranStack = createNativeStackNavigator<PembayaranStackParamList>();
+const PaymentStack = createNativeStackNavigator<PaymentStackParamList>();
 
 const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
@@ -333,21 +333,30 @@ const SaldoSimpananStackNavigator = () => (
   </SaldoSimpananStack.Navigator>
 );
 
-const PembayaranStackNavigator = () => (
-  <PembayaranStack.Navigator
+const PaymentStackNavigator = () => (
+  <PaymentStack.Navigator
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <PembayaranStack.Screen
-      name="PembayaranScreen"
-      component={screens.PembayaranScreen}
+    <PaymentStack.Screen name="CartScreen" component={screens.CartScreen} />
+    <PaymentStack.Screen
+      name="CheckoutScreen"
+      component={screens.CheckoutScreen}
     />
-    <PembayaranStack.Screen
-      name="PembayaranSuccessScreen"
-      component={screens.PembayaranSuccessScreen}
+    <PaymentStack.Screen
+      name="SelectPaymentScreen"
+      component={screens.SelectPaymentScreen}
     />
-  </PembayaranStack.Navigator>
+    <PaymentStack.Screen
+      name="PaymentScreen"
+      component={screens.PaymentScreen}
+    />
+    <PaymentStack.Screen
+      name="PaymentSuccessScreen"
+      component={screens.PaymentSuccessScreen}
+    />
+  </PaymentStack.Navigator>
 );
 
 const TopupStackNavigator = () => (
@@ -365,18 +374,7 @@ const TopupStackNavigator = () => (
       name="TopupDetailScreen"
       component={screens.TopupDetailScreen}
     />
-    <TopupStack.Screen
-      name="TopupPembayaran"
-      component={PembayaranStackNavigator}
-    />
-    {/* <TopupStack.Screen
-      name="TopupPembayaranScreen"
-      component={screens.PembayaranScreen}
-    />
-    <TopupStack.Screen
-      name="TopupSuccessScreen"
-      component={screens.PembayaranSuccessScreen}
-    /> */}
+    <TopupStack.Screen name="TopupPayment" component={PaymentStackNavigator} />
   </TopupStack.Navigator>
 );
 
@@ -405,6 +403,10 @@ const VoucherStackNavigator = () => (
       name="VoucherMainScreen"
       component={screens.VoucherMainScreen}
     />
+    <VoucherStack.Screen
+      name="VoucherPayment"
+      component={PaymentStackNavigator}
+    />
   </VoucherStack.Navigator>
 );
 
@@ -424,20 +426,8 @@ const MarketStackNavigator = () => (
       component={screens.MarketItemDetailsScreen}
     />
     <MarketStack.Screen
-      name="MarketCartScreen"
-      component={screens.MarketCartScreen}
-    />
-    <MarketStack.Screen
-      name="MarketCheckoutScreen"
-      component={screens.MarketCheckoutScreen}
-    />
-    <MarketStack.Screen
-      name="MarketSelectPaymentScreen"
-      component={screens.MarketSelectPaymentScreen}
-    />
-    <MarketStack.Screen
-      name="MarketPembayaran"
-      component={PembayaranStackNavigator}
+      name="MarketPayment"
+      component={PaymentStackNavigator}
     />
   </MarketStack.Navigator>
 );

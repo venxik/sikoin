@@ -34,7 +34,7 @@ import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<VoucherStackParamList, 'VoucherMainScreen'>;
 
-const VoucherMainScreen: FC<Props> = () => {
+const VoucherMainScreen: FC<Props> = ({ navigation }) => {
   const { voucherDataList } = useAppSelector(s => s.VoucherReducer) || {};
   const [showInfoPopup, setshowInfoPopup] = useState(false);
   const [showVoucherPopup, setshowVoucherPopup] = useState(false);
@@ -48,7 +48,8 @@ const VoucherMainScreen: FC<Props> = () => {
   };
 
   const onPressBeliVoucher = () => {
-    setshowInfoPopup(false);
+    setshowVoucherPopup(false);
+    navigation.navigate('VoucherPayment', { screen: 'CartScreen' });
   };
 
   const onPressMinus = () => {

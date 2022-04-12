@@ -2,20 +2,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Button, HeaderBack } from '../../components';
-import { PembayaranStackParamList } from '../../config/navigation/model';
+import { PaymentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  PembayaranStackParamList,
-  'PembayaranScreen'
->;
+type Props = NativeStackScreenProps<PaymentStackParamList, 'PaymentScreen'>;
 
-const PembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
+const PaymentScreen: React.FC<Props> = ({ route, navigation }) => {
   const { nominal } = route.params;
 
   const navigateToSuccessScreen = () => {
-    navigation.navigate('PembayaranSuccessScreen');
+    navigation.navigate('PaymentSuccessScreen');
   };
 
   const renderBankList = () => (
@@ -58,7 +55,7 @@ const PembayaranScreen: React.FC<Props> = ({ route, navigation }) => {
     </SafeAreaView>
   );
 };
-export default PembayaranScreen;
+export default PaymentScreen;
 
 const styles = StyleSheet.create({
   container: {

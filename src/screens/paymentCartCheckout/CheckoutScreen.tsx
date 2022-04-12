@@ -6,14 +6,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Button, CheckoutItem, HeaderBack } from '../../components';
 import CardAlamat from '../../components/CardAlamat';
 import { useAppSelector } from '../../config';
-import { MarketStackParamList } from '../../config/navigation/model';
+import { PaymentStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  MarketStackParamList,
-  'MarketCheckoutScreen'
->;
+type Props = NativeStackScreenProps<PaymentStackParamList, 'CheckoutScreen'>;
 
 const Section = ({
   title,
@@ -30,7 +27,7 @@ const Section = ({
   );
 };
 
-const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
+const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
   let totalPrice = 0;
   const { alamatList } = useAppSelector(s => s.AlamatReducer);
   const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
@@ -48,7 +45,7 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToSelectPayment = () => {
-    navigation.navigate('MarketSelectPaymentScreen');
+    navigation.navigate('SelectPaymentScreen');
   };
 
   const renderPengiriman = () => {
@@ -156,7 +153,7 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default MarketCheckoutScreen;
+export default CheckoutScreen;
 
 const styles = StyleSheet.create({
   container: {

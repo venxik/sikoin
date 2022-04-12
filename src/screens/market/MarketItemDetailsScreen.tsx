@@ -106,7 +106,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToCartScreen = () => {
-    navigation.push('MarketCartScreen');
+    navigation.push('MarketPayment', { screen: 'CartScreen' });
   };
 
   const onPressMinusQty = () => {

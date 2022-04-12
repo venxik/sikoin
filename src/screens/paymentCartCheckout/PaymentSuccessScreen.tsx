@@ -3,10 +3,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Button } from '../../components';
-import { TopupStackParamList } from '../../config/navigation/model';
+import { PaymentStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<TopupStackParamList, 'TopupSuccessScreen'>;
+type Props = NativeStackScreenProps<PaymentStackParamList, 'PaymentScreen'>;
 
 const PembayaranSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {

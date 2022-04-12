@@ -111,9 +111,12 @@ export type DokumenStackParamList = {
   DokumenDetailScreen: { item: DokumenData };
 };
 
-export type PembayaranStackParamList = {
-  PembayaranScreen: { nominal: number };
-  PembayaranSuccessScreen: undefined;
+export type PaymentStackParamList = {
+  CartScreen: undefined;
+  CheckoutScreen: undefined;
+  SelectPaymentScreen: undefined;
+  PaymentScreen: { nominal: number };
+  PaymentSuccessScreen: undefined;
 };
 
 export type SaldoSimpananStackParamList = {
@@ -123,8 +126,8 @@ export type SaldoSimpananStackParamList = {
 export type TopupStackParamList = {
   TopupMainScreen: undefined;
   TopupDetailScreen: { selectedTopup: string; nominal: string };
-  TopupPembayaran: NavigatorScreenParams<PembayaranStackParamList>;
-  // TopupPembayaranScreen: { nominal: string };
+  TopupPayment: NavigatorScreenParams<PaymentStackParamList>;
+  // TopupPaymentScreen: { nominal: string };
   // TopupSuccessScreen: undefined;
 };
 
@@ -134,15 +137,13 @@ export type TransaksiStackParamList = {
 
 export type VoucherStackParamList = {
   VoucherMainScreen: undefined;
+  VoucherPayment: NavigatorScreenParams<PaymentStackParamList>;
 };
 
 export type MarketStackParamList = {
   MarketMainScreen: undefined;
   MarketItemDetailsScreen: undefined;
-  MarketCartScreen: undefined;
-  MarketCheckoutScreen: undefined;
-  MarketSelectPaymentScreen: undefined;
-  MarketPembayaran: NavigatorScreenParams<PembayaranStackParamList>;
+  MarketPayment: NavigatorScreenParams<PaymentStackParamList>;
 };
 
 export type PinjamanStackParamList = {
