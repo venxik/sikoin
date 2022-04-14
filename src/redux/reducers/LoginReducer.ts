@@ -26,13 +26,13 @@ export interface LoginResponse {
   token: string;
 }
 
-type ForgotPasswordStatusState = 'idle' | 'success' | 'failed';
+type ForgotPasswordStatus = 'idle' | 'success' | 'failed';
 
 interface RootState {
   koperasiListData: KoperasiListResponse[];
   userKoperasiData: UserKoperasiResponse;
   error?: object;
-  forgotPasswordStatus: ForgotPasswordStatusState;
+  forgotPasswordStatus: ForgotPasswordStatus;
 }
 
 const initialState: RootState = {
@@ -74,7 +74,7 @@ const loginSlice = createSlice({
     },
     setForgotPasswordStatus: (
       state,
-      { payload }: PayloadAction<ForgotPasswordStatusState>,
+      { payload }: PayloadAction<ForgotPasswordStatus>,
     ) => {
       state.forgotPasswordStatus = payload;
     },

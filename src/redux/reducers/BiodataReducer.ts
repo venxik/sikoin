@@ -12,7 +12,7 @@ export type BiodataResponse = {
   agama: string;
   bank: string;
   noRek: string;
-  statusPernkahan: string;
+  statusPernikahan: string;
   jumlahAnak: number;
 };
 
@@ -34,7 +34,7 @@ const initialState: RootState = {
     agama: '',
     bank: '',
     noRek: '',
-    statusPernkahan: '',
+    statusPernikahan: '',
     jumlahAnak: 0,
   },
   error: null,

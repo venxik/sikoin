@@ -1,17 +1,19 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { uniqueId } from 'lodash';
 
 export type RefKeluargaResponse = {
-  id?: number;
+  id: number;
   status: string;
   telp: string;
   nama: string;
   ktp: string;
 };
 
+type DeleteRefKeluargaStatus = 'idle' | 'success' | 'failed';
+
 interface RootState {
   keluargaList: RefKeluargaResponse[];
   error: null;
+  deleteRefKeluargaStatus?: DeleteRefKeluargaStatus;
 }
 
 const initialState: RootState = {
@@ -50,6 +52,12 @@ const refKeluargaSlice = createSlice({
     updateRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
+    setDeleteRefKeluargaStatus: (
+      state,
+      { payload }: PayloadAction<DeleteRefKeluargaStatus>,
+    ) => {
+      state.deleteRefKeluargaStatus = payload;
+    },
     deleteRefKeluargaSuccess: (
       state,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
@@ -59,35 +67,38 @@ const refKeluargaSlice = createSlice({
     deleteRefKeluargaFailed: (state, { payload }) => {
       state.error = payload;
     },
-    addKeluarga: (state, { payload }: PayloadAction<RefKeluargaResponse>) => {
-      state.keluargaList.push({
-        ...payload,
-        id: Number.parseInt(uniqueId()),
-      });
-    },
-    deleteKeluarga: (
-      state,
-      { payload }: PayloadAction<RefKeluargaResponse | null>,
-    ) => {
-      state.keluargaList = state.keluargaList.filter(
-        item => item?.status?.toLowerCase() != payload?.status?.toLowerCase(),
-      );
-    },
-    updateKeluarga: (
-      state,
-      { payload }: PayloadAction<{ data: RefKeluargaResponse; index?: number }>,
-    ) => {
-      const { data, index } = payload || {};
-      if (index !== undefined)
-        state.keluargaList[index] = {
-          ...data,
-          id: Number.parseInt(uniqueId()),
-        };
-    },
+    // addKeluarga: (state, { payload }: PayloadAction<RefKeluargaResponse>) => {
+    //   state.keluargaList.push({
+    //     ...payload,
+    //     id: Number.parseInt(uniqueId()),
+    //   });
+    // },
+    // deleteKeluarga: (
+    //   state,
+    //   { payload }: PayloadAction<RefKeluargaResponse | null>,
+    // ) => {
+    //   state.keluargaList = state.keluargaList.filter(
+    //     item => item?.status?.toLowerCase() != payload?.status?.toLowerCase(),
+    //   );
+    // },
+    // updateKeluarga: (
+    //   state,
+    //   { payload }: PayloadAction<{ data: RefKeluargaResponse; index?: number }>,
+    // ) => {
+    //   const { data, index } = payload || {};
+    //   if (index !== undefined)
+    //     state.keluargaList[index] = {
+    //       ...data,
+    //       id: Number.parseInt(uniqueId()),
+    //     };
+    // },
   },
 });
 
 export const fetchGetRefKeluarga = createAction('fetchGetRefKeluarga');
+export const fetchDeleteRefKeluarga = createAction<number>(
+  'fetchDeleteRefKeluarga',
+);
 export const fetchUpdateRefKeluarga = createAction<{
   data: RefKeluargaResponse;
   id: number;
@@ -97,9 +108,6 @@ export const fetchSubmitRefKeluarga = createAction<RefKeluargaResponse>(
 );
 
 export const {
-  addKeluarga,
-  deleteKeluarga,
-  updateKeluarga,
   deleteRefKeluargaSuccess,
   deleteRefKeluargaFailed,
   getRefKeluargaFailed,
@@ -108,6 +116,7 @@ export const {
   submitRefKeluargaSuccess,
   updateRefKeluargaFailed,
   updateRefKeluargaSuccess,
+  setDeleteRefKeluargaStatus,
 } = refKeluargaSlice.actions;
 
 export default refKeluargaSlice.reducer;

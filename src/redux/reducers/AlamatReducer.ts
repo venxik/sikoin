@@ -1,8 +1,7 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { uniqueId } from 'lodash';
 
 export type AlamatDataResponse = {
-  id?: number;
+  id: number;
   judul: string;
   alamat: string;
   rt: string;
@@ -13,9 +12,12 @@ export type AlamatDataResponse = {
   kodePos: string;
 };
 
+type DeleteAlamatStatus = 'idle' | 'success' | 'failed';
+
 interface RootState {
   alamatList: AlamatDataResponse[];
   error: null;
+  deleteAlamatStatus?: DeleteAlamatStatus;
 }
 
 const initialState: RootState = {
@@ -66,35 +68,51 @@ const alamatSlice = createSlice({
     updateAlamatFailed: (state, { payload }) => {
       state.error = payload;
     },
-    addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {
-      state.alamatList.push({
-        ...payload,
-        id: Number.parseInt(uniqueId()),
-      });
-    },
-    deleteAlamat: (
+    setDeleteAlamatStatus: (
       state,
-      { payload }: PayloadAction<AlamatDataResponse | null>,
+      { payload }: PayloadAction<DeleteAlamatStatus>,
     ) => {
-      state.alamatList = state.alamatList.filter(
-        item => item.judul.toLowerCase() != payload?.judul?.toLowerCase(),
-      );
+      state.deleteAlamatStatus = payload;
     },
-    updateAlamat: (
+    deleteAlamatSuccess: (
       state,
-      { payload }: PayloadAction<{ data: AlamatDataResponse; index?: number }>,
+      { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
-      const { data, index } = payload || {};
-      if (index !== undefined)
-        state.alamatList[index] = {
-          ...data,
-          id: Number.parseInt(uniqueId()),
-        };
+      state.alamatList = payload;
     },
+    deleteAlamatFailed: (state, { payload }) => {
+      state.error = payload;
+    },
+    // addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {
+    //   state.alamatList.push({
+    //     ...payload,
+    //     id: Number.parseInt(uniqueId()),
+    //   });
+    // },
+    // deleteAlamat: (
+    //   state,
+    //   { payload }: PayloadAction<AlamatDataResponse | null>,
+    // ) => {
+    //   state.alamatList = state.alamatList.filter(
+    //     item => item.judul.toLowerCase() != payload?.judul?.toLowerCase(),
+    //   );
+    // },
+    // updateAlamat: (
+    //   state,
+    //   { payload }: PayloadAction<{ data: AlamatDataResponse; index?: number }>,
+    // ) => {
+    //   const { data, index } = payload || {};
+    //   if (index !== undefined)
+    //     state.alamatList[index] = {
+    //       ...data,
+    //       id: Number.parseInt(uniqueId()),
+    //     };
+    // },
   },
 });
 
 export const fetchAlamatList = createAction('fetchAlamatList');
+export const fetchDeleteAlamat = createAction<number>('deleteAlamatList');
 export const fetchUpdateAlamat = createAction<{
   data: AlamatDataResponse;
   id: number;
@@ -103,15 +121,15 @@ export const fetchSubmitAlamat =
   createAction<AlamatDataResponse>('fetchSubmitAlamat');
 
 export const {
-  addAlamat,
-  deleteAlamat,
-  updateAlamat,
   getAlamatListFailed,
   getAlamatListSuccess,
   updateAlamatFailed,
   updateAlamatSuccess,
   submitAlamatFailed,
   submitAlamatSuccess,
+  deleteAlamatFailed,
+  deleteAlamatSuccess,
+  setDeleteAlamatStatus,
 } = alamatSlice.actions;
 
 export default alamatSlice.reducer;

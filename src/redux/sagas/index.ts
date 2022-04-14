@@ -4,6 +4,7 @@ import {
   watchGetAlamat,
   watchSubmitAlamat,
   watchUpdateAlamat,
+  watchDeleteAlamat,
 } from './AlamatSaga';
 import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
 import { watchGetBerandaUser } from './HomeSaga';
@@ -20,6 +21,7 @@ import {
   watchGetRefKeluarga,
   watchSubmitRefKeluarga,
   watchUpdateRefKeluarga,
+  watchDeleteRefKeluarga,
 } from './RefKeluargaSaga';
 
 // Redux Saga: Root Saga
@@ -43,5 +45,7 @@ export function* rootSaga() {
     fork(watchUpdateBiodata),
     fork(watchGetPekerjaan),
     fork(watchUpdatePekerjaan),
+    fork(watchDeleteAlamat),
+    fork(watchDeleteRefKeluarga),
   ]);
 }

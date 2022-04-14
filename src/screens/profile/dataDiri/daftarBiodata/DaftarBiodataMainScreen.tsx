@@ -31,7 +31,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
     kewarganegaraan,
     noRek,
     pendidikanTerakhir,
-    statusPernkahan,
+    statusPernikahan,
     tanggalLahir,
     tempatLahir,
   } = biodataData;
@@ -80,7 +80,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
           <DetailItemList title={strings.agama} content={agama} />
           <DetailItemList
             title={strings.status_pernikahan}
-            content={statusPernkahan}
+            content={statusPernikahan}
           />
           <DetailItemList
             title={strings.jumlah_anak}

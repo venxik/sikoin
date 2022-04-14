@@ -51,10 +51,8 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
   const onSubmit = (data: RefKeluargaResponse) => {
     if (update) {
       dispatch(fetchUpdateRefKeluarga({ data, id: id as number }));
-      // dispatch(updateKeluarga({ index, data }));
     } else {
       dispatch(fetchSubmitRefKeluarga(data));
-      // dispatch(addKeluarga(data));
     }
   };
 

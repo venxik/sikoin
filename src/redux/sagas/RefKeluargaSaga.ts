@@ -15,6 +15,8 @@ import {
   updateRefKeluargaFailed,
   updateRefKeluargaSuccess,
   RefKeluargaResponse,
+  fetchDeleteRefKeluarga,
+  setDeleteRefKeluargaStatus,
 } from '../reducers/RefKeluargaReducer';
 import { formatter } from '../../utils';
 
@@ -89,6 +91,31 @@ function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
   yield put(hideLoading());
 }
 
+function* deleteRefKeluarga(action: ReturnType<typeof fetchDeleteRefKeluarga>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
+      RefKeluargaApi.deleteRefKeluarga,
+      action.payload,
+    );
+    console.log('deleteRefKeluarga response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(submitRefKeluargaSuccess(data?.data));
+      yield put(setDeleteRefKeluargaStatus('success'));
+    } else {
+      yield put(submitRefKeluargaFailed('Error'));
+      yield put(setDeleteRefKeluargaStatus('failed'));
+    }
+  } catch (error) {
+    yield put(submitRefKeluargaFailed(error));
+    yield put(setDeleteRefKeluargaStatus('failed'));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetRefKeluarga() {
   yield takeLatest(fetchGetRefKeluarga, getRefKeluarga);
 }
@@ -99,4 +126,8 @@ export function* watchUpdateRefKeluarga() {
 
 export function* watchSubmitRefKeluarga() {
   yield takeLatest(fetchSubmitRefKeluarga, submitRefKeluarga);
+}
+
+export function* watchDeleteRefKeluarga() {
+  yield takeLatest(fetchDeleteRefKeluarga, deleteRefKeluarga);
 }

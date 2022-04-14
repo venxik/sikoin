@@ -20,8 +20,9 @@ import { useAppDispatch, useAppSelector } from '../../../../config';
 import { icons, sizes, strings } from '../../../../constants';
 import {
   AlamatDataResponse,
-  deleteAlamat,
   fetchAlamatList,
+  fetchDeleteAlamat,
+  setDeleteAlamatStatus,
 } from '../../../../redux/reducers/AlamatReducer';
 
 type Props = NativeStackScreenProps<
@@ -39,11 +40,20 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const [selectAlamat, setSelectAlamat] = useState<AlamatDataResponse | null>(
     null,
   );
-  const { alamatList } = useAppSelector(s => s.AlamatReducer) || [];
+  const { alamatList, deleteAlamatStatus } =
+    useAppSelector(s => s.AlamatReducer) || [];
 
   useEffect(() => {
     dispatch(fetchAlamatList());
   }, []);
+
+  useEffect(() => {
+    if (deleteAlamatStatus === 'success') {
+      setShowDeletePopup(false);
+      setShowSuccessDeletePopup(true);
+      dispatch(setDeleteAlamatStatus('idle'));
+    }
+  }, [deleteAlamatStatus]);
 
   const navigateToAddScreen = (update: boolean, item?: AlamatDataResponse) => {
     navigation.navigate('DaftarAlamatAddScreen', { update, item });
@@ -55,9 +65,7 @@ const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const confirmDeleteAlamat = () => {
-    dispatch(deleteAlamat(selectAlamat));
-    setShowDeletePopup(false);
-    setShowSuccessDeletePopup(true);
+    dispatch(fetchDeleteAlamat(selectAlamat?.id as number));
   };
 
   const onPressAddIcon = () => {

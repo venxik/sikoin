@@ -40,7 +40,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     kewarganegaraan,
     pendidikanTerakhir,
     agama,
-    statusPernkahan,
+    statusPernikahan,
     jumlahAnak,
     bank,
     noRek,
@@ -64,7 +64,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
       kewarganegaraan: kewarganegaraan ? kewarganegaraan : '',
       pendidikanTerakhir: pendidikanTerakhir ? pendidikanTerakhir : '',
       agama: agama ? agama : '',
-      statusPernkahan: statusPernkahan ? statusPernkahan : '',
+      statusPernikahan: statusPernikahan ? statusPernikahan : '',
     },
   });
 
@@ -184,7 +184,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="statusPernkahan"
+              name="statusPernikahan"
               render={({ field: { onChange, value } }) => (
                 <DropdownForm
                   title={strings.status_pernikahan}

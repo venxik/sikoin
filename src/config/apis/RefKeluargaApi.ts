@@ -1,7 +1,7 @@
 import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
 import { apis } from '../../constants';
-import { RefKeluargaRequest } from '../../redux/reducers/RefKeluargaReducer';
+import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 
 /**
  * Handles API call related to diagnostic
@@ -9,7 +9,7 @@ import { RefKeluargaRequest } from '../../redux/reducers/RefKeluargaReducer';
  */
 class RefKeluargaApi {
   /**
-   * Retrieve Alamat List
+   * Retrieve Referensi Keluarga List
    *
    * @returns { Object } Promise either resolve or rejected
    */
@@ -19,20 +19,20 @@ class RefKeluargaApi {
   }
 
   /**
-   * Submit new alamat
+   * Submit new Referensi Keluarga
    *
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
   static async submitRefKeluarga(
-    data: RefKeluargaRequest,
+    data: RefKeluargaResponse,
   ): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.keluarga.keluarga, data);
     return resp;
   }
 
   /**
-   * Update existing alamat
+   * Update existing Referensi Keluarga
    *
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
@@ -41,12 +41,25 @@ class RefKeluargaApi {
     data,
     id,
   }: {
-    data: RefKeluargaRequest;
+    data: RefKeluargaResponse;
     id: number;
   }): Promise<AxiosResponse> {
     const resp = await HttpService.patch(
       `${apis.endpoints.keluarga.keluarga}/${id}`,
       data,
+    );
+    return resp;
+  }
+
+  /**
+   * Delete existing Referensi Keluarga
+   *
+   * @param data Contains
+   * @returns { Object } Promise either resolve or rejected
+   */
+  static async deleteRefKeluarga(id: number): Promise<AxiosResponse> {
+    const resp = await HttpService.delete(
+      `${apis.endpoints.keluarga.keluarga}/${id}`,
     );
     return resp;
   }

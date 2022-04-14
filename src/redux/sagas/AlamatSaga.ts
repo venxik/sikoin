@@ -14,6 +14,10 @@ import {
   fetchUpdateAlamat,
   updateAlamatFailed,
   updateAlamatSuccess,
+  fetchDeleteAlamat,
+  deleteAlamatSuccess,
+  deleteAlamatFailed,
+  setDeleteAlamatStatus,
 } from '../reducers/AlamatReducer';
 import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
@@ -90,6 +94,31 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
   yield put(hideLoading());
 }
 
+function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
+      AlamatApi.deleteAlamat,
+      action.payload,
+    );
+    console.log('deleteAlamat response: ', response);
+
+    if (response.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(deleteAlamatSuccess(data?.data));
+      yield put(setDeleteAlamatStatus('success'));
+    } else {
+      yield put(deleteAlamatFailed('Error'));
+      yield put(setDeleteAlamatStatus('failed'));
+    }
+  } catch (error) {
+    yield put(deleteAlamatFailed(error));
+    yield put(setDeleteAlamatStatus('failed'));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetAlamat() {
   yield takeLatest(fetchAlamatList, getAlamat);
 }
@@ -100,4 +129,8 @@ export function* watchUpdateAlamat() {
 
 export function* watchSubmitAlamat() {
   yield takeLatest(fetchSubmitAlamat, submitAlamat);
+}
+
+export function* watchDeleteAlamat() {
+  yield takeLatest(fetchDeleteAlamat, deleteAlamat);
 }
