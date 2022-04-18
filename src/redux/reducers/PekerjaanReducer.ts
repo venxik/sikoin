@@ -3,8 +3,8 @@ import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type PekerjaanResponse = {
   pekerjaan?: string;
   detailPekerjaan?: string;
-  masaKerjaTahun?: string;
-  masaKerjaBulan?: string;
+  masaKerjaTahun?: number;
+  masaKerjaBulan?: number;
   gajiBulanan?: string;
   namaPerusahaan?: string;
   alamatKantor?: string;

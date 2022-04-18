@@ -51,8 +51,8 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
     defaultValues: {
       pekerjaan: pekerjaan ? pekerjaan : '',
       detailPekerjaan: detailPekerjaan ? detailPekerjaan : '',
-      masaKerjaTahun: masaKerjaTahun ? masaKerjaTahun : '',
-      masaKerjaBulan: masaKerjaBulan ? masaKerjaBulan : '',
+      masaKerjaTahun: masaKerjaTahun ? masaKerjaTahun : 0,
+      masaKerjaBulan: masaKerjaBulan ? masaKerjaBulan : 0,
       gajiBulanan: gajiBulanan ? gajiBulanan : '',
       namaPerusahaan: namaPerusahaan ? namaPerusahaan : '',
       alamatKantor: alamatKantor ? alamatKantor : '',
@@ -133,7 +133,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     error={errors.masaKerjaTahun}
                     errorText={errors.masaKerjaTahun?.message}
                     style={{ width: '45%' }}
-                    value={value}
+                    value={value?.toString()}
                     onChangeText={value => onChange(value)}
                     title={strings.masa_kerja_tahun}
                     keyboardType="number-pad"
@@ -154,7 +154,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     error={errors.masaKerjaBulan}
                     errorText={errors.masaKerjaBulan?.message}
                     style={{ width: '45%' }}
-                    value={value}
+                    value={value?.toString()}
                     onChangeText={value => onChange(value)}
                     title={strings.masa_kerja_bulan}
                     keyboardType="number-pad"

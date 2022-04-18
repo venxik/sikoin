@@ -21,19 +21,7 @@ interface RootState {
 }
 
 const initialState: RootState = {
-  alamatList: [
-    {
-      id: 1,
-      judul: 'Test',
-      alamat: 'Lorem Ipsum adasdsa dsa das de Dne djheADHbaiudQ DB',
-      rt: '02',
-      rw: '04',
-      provinsi: 'Jakarta',
-      kabupaten: 'Jakarta',
-      kecamatan: 'Jakarta',
-      kodePos: '12321',
-    },
-  ],
+  alamatList: [],
   error: null,
 };
 

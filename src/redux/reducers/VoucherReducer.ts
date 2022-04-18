@@ -3,7 +3,7 @@ import { images } from '../../constants';
 
 export type VoucherDetail = {
   namaToko?: string;
-  logoToko?: any;
+  logoToko?: unknown;
   detail?: string;
   SnK?: string;
   detailToko?: string;
@@ -12,7 +12,7 @@ export type VoucherDetail = {
 
 interface RootState {
   voucherDataList: VoucherDetail[];
-  myVoucherList: any[];
+  myVoucherList: unknown[];
   error: null;
 }
 
