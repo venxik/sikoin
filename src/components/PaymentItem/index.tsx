@@ -35,7 +35,7 @@ export default PaymentItem;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: sizes.padding,
+    padding: sizes.padding / 2,
     borderRadius: sizes.padding * 1.5,
     marginBottom: sizes.padding,
   },
@@ -49,5 +49,5 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     flex: 0.6,
   },
-  iconStyle: { width: 100, height: 20, flex: 0.3 },
+  iconStyle: { width: 160, height: 50, flex: 0.3 },
 });
