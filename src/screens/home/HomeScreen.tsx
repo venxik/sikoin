@@ -86,10 +86,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
   const {
     nama,
-    logoKoperasi,
     namaKoperasi,
     noAnggota,
-    profilePic,
     saldoBelanja,
     simpanan,
     kabar,
@@ -376,8 +374,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     return (
       <View style={styles.profileContainer}>
         <ProfilePicture
-          profilUri={profilePic}
-          koperasiUri={logoKoperasi}
           onPress={() => navigation.jumpTo('ProfileStackNavigator')}
         />
         <View style={styles.profileInnerContainer}>

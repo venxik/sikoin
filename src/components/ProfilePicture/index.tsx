@@ -1,28 +1,34 @@
-import React, { useState } from 'react';
+import { isEmpty } from 'lodash';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
   Image,
 } from 'react-native';
+import { useAppSelector } from '../../config';
 import { icons, SCREEN_WIDTH } from '../../constants';
 import { ProfilePictureProps } from './model';
 
 const ProfilePicture = (props: ProfilePictureProps) => {
-  const {
-    onPress,
-    style,
-    disabled = false,
-    showKoperasi = true,
-    profilUri,
-    koperasiUri,
-  } = props || {};
-  const [profileSource] = useState({ uri: profilUri || null });
-  const [koperasiSource] = useState({ uri: koperasiUri || null });
+  const { onPress, style, disabled = false, showKoperasi = true } = props || {};
+
+  const { profilePic, logoKoperasi } = useAppSelector(s => s.HomeReducer) || {};
+
+  const [profileSource, setProfileSource] = useState({ uri: profilePic });
+  const [koperasiSource, setKoperasiSource] = useState({ uri: logoKoperasi });
+
   const [loadingSource] = useState(icons.popup_failed);
   const [errorSource] = useState(icons.popup_failed);
+
   const [isDefault, setIsDefault] = useState(true);
   const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (!isEmpty(profilePic)) setProfileSource({ uri: profilePic });
+    if (!isEmpty(logoKoperasi)) setKoperasiSource({ uri: logoKoperasi });
+  }, [profilePic, logoKoperasi]);
+
   const profileImage = isDefault
     ? loadingSource
     : isError

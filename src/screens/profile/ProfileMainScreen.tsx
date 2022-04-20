@@ -1,14 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
 import React, { useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  SafeAreaView,
-  ImageSourcePropType,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import {
   Button,
   HeaderBack,
@@ -27,15 +20,7 @@ type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
-  const {
-    nama,
-    email,
-    logoKoperasi,
-    memberSejak,
-    noAnggota,
-    noTelp,
-    profilePic,
-  } = profileData || {};
+  const { nama, email, memberSejak, noAnggota, noTelp } = profileData || {};
 
   useEffect(() => {
     dispatch(fetchProfile());
@@ -61,11 +46,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
       />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>
-          <ProfilePicture
-            disabled={true}
-            koperasiUri={logoKoperasi}
-            profilUri={profilePic as string | ImageSourcePropType}
-          />
+          <ProfilePicture disabled={true} />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{nama}</Text>
             {/* <Text style={styles.koperasiText}>{koperasiName}</Text> */}
@@ -73,7 +54,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
               <Text style={styles.descText}>{checkIsEmpty(noAnggota)}</Text>
               <Text style={styles.descText}>
                 {!isEmpty(memberSejak)
-                  ? `Member Sejak ${moment(memberSejak).format('Do MMMM YYYY')}`
+                  ? `Member Sejak ${moment(memberSejak).format('DD MMMM YYYY')}`
                   : '-'}
               </Text>
               <Text style={styles.descText}>{checkIsEmpty(email)}</Text>

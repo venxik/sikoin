@@ -8,7 +8,6 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
-  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, HeaderBack, TextInputForm } from '../../components';
@@ -32,9 +31,33 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
   const { nama, noAnggota, email, noTelp, profilePic } = profileData || {};
-  const [profilePicture, setProfilePicture] = useState(profilePic);
+
+  const [profilePicture, setProfilePicture] = useState({ uri: profilePic });
+
+  const [isDefault, setIsDefault] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const [loadingSource] = useState(icons.popup_failed);
+  const [errorSource] = useState(icons.popup_failed);
+
   const documentPickerOptions = {
     type: [DocumentPicker.types.images],
+  };
+
+  const profileImage = isDefault
+    ? loadingSource
+    : isError
+    ? errorSource
+    : profilePicture;
+
+  const onErrorProfile = () => {
+    console.log('onErrorProfile');
+    setIsError(true);
+  };
+
+  const onLoadEndProfile = () => {
+    console.log('onLoadEndProfile');
+    setIsDefault(false);
   };
 
   const saveProfile = (data: ProfileRequest) => {
@@ -43,8 +66,8 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
       fetchUpdateProfile({
         email,
         nama,
-        noTelp: noTelp as string,
-        profilePic: profilePicture as string | ImageSourcePropType,
+        noTelp,
+        profilePic: profilePicture.uri as string,
       }),
     );
   };
@@ -53,7 +76,8 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     try {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       console.log('Profile pic :', data);
-      setProfilePicture(data.uri);
+      setIsError(false);
+      setProfilePicture({ uri: data.uri });
     } catch {
       (e: unknown) => console.log('Document picker error! ', e);
     }
@@ -91,9 +115,11 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
               onPress={openDocumentPicker}
               style={styles.profilePicStyle}>
               <ImageBackground
+                onError={onErrorProfile}
+                onLoadEnd={onLoadEndProfile}
                 imageStyle={styles.profilePicStyle}
                 resizeMode="cover"
-                source={{ uri: profilePicture }}>
+                source={profileImage}>
                 <View style={styles.iconContainer}>
                   <Image
                     resizeMode="cover"
