@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   ktpFrame: {
-    borderRadius: 20,
+    borderRadius: 200,
     borderColor: colors.primary,
     borderWidth: 3,
-    width: SCREEN_WIDTH * 0.8,
+    width: SCREEN_WIDTH * 0.5,
     height: SCREEN_HEIGHT * 0.3,
   },
 });

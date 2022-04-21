@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ImageSourcePropType, View } from 'react-native';
+import { ImageBackground, ImageSourcePropType, View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
   NavigationContainer,
@@ -94,13 +94,18 @@ const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
   }
 };
 
-const IconBottom = (props: {
+const IconBottom = ({
+  focused,
+  image,
+  badge = false,
+}: {
   focused: boolean;
   image: ImageSourcePropType;
+  badge?: boolean;
 }) => (
   <View
     style={
-      props.focused
+      focused
         ? {
             backgroundColor: colors.tonalPrimary,
             paddingHorizontal: SCREEN_WIDTH * 0.04,
@@ -109,11 +114,24 @@ const IconBottom = (props: {
           }
         : null
     }>
-    <Image
-      source={props.image}
+    <ImageBackground
+      source={image}
       style={{ width: SCREEN_WIDTH * 0.07, height: SCREEN_WIDTH * 0.07 }}
-      resizeMode={'contain'}
-    />
+      resizeMode={'contain'}>
+      {badge && (
+        <View
+          style={{
+            width: 14,
+            height: 14,
+            borderRadius: 14,
+            backgroundColor: colors.red,
+            position: 'absolute',
+            top: -2,
+            right: -2,
+          }}
+        />
+      )}
+    </ImageBackground>
   </View>
 );
 
@@ -149,6 +167,7 @@ const HomeTab = () => {
             <IconBottom
               focused={focused}
               image={focused ? icons.bottom_chat_bold : icons.bottom_chat}
+              badge
             />
           ),
           tabBarStyle: {
