@@ -14,43 +14,107 @@ import {
 } from 'react-native-gifted-chat/src';
 import { HeaderBack, TextInputBorder } from '../../components';
 import {
+  apis,
   colors,
   icons,
   messagesDummy,
   SCREEN_WIDTH,
   sizes,
+  storage,
 } from '../../constants';
 import 'dayjs/locale/id';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ChatStackParamList } from '../../config/navigation/model';
+import { EncryptedStorage, formatter } from '../../utils';
+import { useAppSelector } from '../../config';
+import axios from 'axios';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatDetailScreen'>;
 
 const ChatDetailScreen: FC<Props> = () => {
   const findStep = (step: any) => (message: any) => message._id === step;
-  const [messages, setMessages] = useState<IMessage[]>(messagesDummy);
+  const { conversationId, userId } = useAppSelector(s => s.HomeReducer);
+  const [messages, setMessages] = useState<IMessage[]>();
   const [step, setStep] = useState<number>(1);
 
   useEffect(() => {
+    const fetchChat = async () => {
+      let accessToken: null | string = null;
+      accessToken = await EncryptedStorage.getEncryptedStorage(
+        storage.authCode,
+      );
+
+      axios(`${apis.baseURL}${apis.endpoints.chat}/${conversationId}`, {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${accessToken}`, // notice the Bearer before your token
+        },
+      }).then(response => {
+        const data = formatter.addMissingBracketJSON(response.data);
+        console.log('chat response: ', data);
+        setMessages(data?.pesan);
+      });
+    };
     // setMessages([
-    //   {
-    //     _id: 1,
-    //     text: 'Hello developerHello developerHello developerHello developer',
-    //     createdAt: new Date(),
-    //     user: {
-    //       _id: 2,
-    //       name: 'React Native',
-    //       avatar: 'https://placeimg.com/140/140/any',
-    //     },
+    // {
+    //   _id: 1,
+    //   text: 'Hello developerHello developerHello developerHello developer',
+    //   createdAt: new Date(),
+    //   user: {
+    //     _id: 2,
+    //     name: 'React Native',
+    //     avatar: 'https://placeimg.com/140/140/any',
     //   },
+    // },
     // ]);
+    fetchChat();
   }, []);
 
+  const sendChat = async (messages: { text: string }[]) => {
+    let accessToken: null | string = null;
+    accessToken = await EncryptedStorage.getEncryptedStorage(storage.authCode);
+
+    const data = {
+      isi: messages[0].text,
+      conversationId: conversationId,
+    };
+
+    console.log('DATA', data);
+
+    axios(`${apis.baseURL}${apis.endpoints.chat}`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${accessToken}`, // notice the Bearer before your token
+      },
+      data: JSON.stringify(data),
+    })
+      .then(response => {
+        const data = formatter.addMissingBracketJSON(response.data);
+        console.log('chat response: ', data);
+        // setMessages(data?.pesan);
+        return Promise.resolve();
+      })
+      .catch(() => {
+        return Promise.reject();
+      });
+  };
+
   const onSend = useCallback((messages = []) => {
+    console.log('TEST', messages);
+
     const temp = messages[0];
     // temp.sent = true;
     // temp.received = true;
-    setMessages(previousMessages => GiftedChat.append(previousMessages, temp));
+    sendChat(messages)
+      .then(() => {
+        setMessages(previousMessages =>
+          GiftedChat.append(previousMessages, temp),
+        );
+      })
+      .catch(err => console.error(err));
+    // setMessages(previousMessages => GiftedChat.append(previousMessages, temp));
     // setTimeout(() => botSend(step), Math.round(Math.random() * 1000));
   }, []);
 
@@ -211,13 +275,13 @@ const ChatDetailScreen: FC<Props> = () => {
         placeholder="Ketik Sesuatu ..."
         messages={messages}
         alwaysShowSend
-        //renderAvatar props doesnt accept null, just leave it like this
+        //renderAvatar types doesnt accept null, just leave it like this
         renderAvatar={null}
         showUserAvatar={false}
         showAvatarForEveryMessage={false}
         onSend={messages => onSend(messages)}
         user={{
-          _id: 1,
+          id: userId,
         }}
         messagesContainerStyle={{
           backgroundColor: colors.white,

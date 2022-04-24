@@ -1,11 +1,17 @@
 import NetInfo from '@react-native-community/netinfo';
 import { apis, storage } from '../../constants';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError,
+} from 'axios';
 
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../store';
 import { EncryptedStorage } from '../../utils';
+import { hideLoading } from '../../redux/reducers/LoadingReducer';
 
 let instance: HttpService | null = null;
 
@@ -20,21 +26,17 @@ class HttpService {
     instance = this;
 
     const http = axios.create({
-      transitional: {
-        silentJSONParsing: false,
-      },
+      transitional: { forcedJSONParsing: true },
       baseURL: apis.baseURL,
       // timeout: 1000,
       headers: {
         Accept: apis.acceptHeader,
+        'Content-Type': 'application/json',
       },
     });
 
     // setup interceptor for http request
-    http.interceptors.request.use(
-      this.handleRequestInterceptor,
-      this.handleErrorInterceptor,
-    );
+    http.interceptors.request.use(this.handleRequestInterceptor);
 
     // setup interceptor for http response
     http.interceptors.response.use(
@@ -73,24 +75,26 @@ class HttpService {
   };
 
   // Response interceptor to manage token refresh
-  handleErrorInterceptor = (response: AxiosResponse) => {
-    // const responseURL = response.config.url;
-    // store.dispatch(hideLoading());
-    // if (apis.authPathArray.some((substring) => !responseURL.includes(substring))) {
-    //   store.dispatch(hideLoading());
-    //   switch (error.response.status) {
-    //     case 400:
-    //       this.showErrorDialogHandler(apis.errorTypes.badRequest);
-    //       return Promise.reject(new Error(1));
-    //     case 401:
-    //       // redirect to login screen
-    //       this.showErrorDialogHandler(apis.errorTypes.unauthorized);
-    //       return Promise.reject(new Error(1));
-    //     default:
-    //       return Promise.reject(error.response);
-    //   }
+  handleErrorInterceptor = (error: AxiosError) => {
+    // const responseURL = error.response?.config.url;
+    store.dispatch(hideLoading());
+    // if (
+    //   apis.authPathArray.some(substring => !responseURL?.includes(substring))
+    // ) {
+    store.dispatch(hideLoading());
+    switch (error.response?.status) {
+      case 400:
+        this.showErrorDialogHandler(apis.errorTypes.badRequest);
+        return Promise.reject(new Error());
+      case 401:
+        // redirect to login screen
+        this.showErrorDialogHandler(apis.errorTypes.unauthorized);
+        return Promise.reject(new Error());
+      default:
+        return Promise.reject(error.response);
+    }
     // }
-    return Promise.reject(response);
+    // return Promise.reject(response);
   };
 
   showErrorDialogHandler = (errorType: string) => {

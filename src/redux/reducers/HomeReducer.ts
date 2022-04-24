@@ -10,6 +10,8 @@ export interface BerandaUserResponse {
   saldoBelanja: number;
   kabar: [];
   promo: [];
+  conversationId: number;
+  userId: number;
   error?: string | null;
 }
 
@@ -21,6 +23,8 @@ const initialState: BerandaUserResponse = {
   namaKoperasi: '',
   simpanan: 0,
   saldoBelanja: 0,
+  conversationId: 0,
+  userId: 0,
   kabar: [],
   promo: [],
 };
@@ -43,6 +47,8 @@ const homeSlice = createSlice({
         promo,
         saldoBelanja,
         simpanan,
+        conversationId,
+        userId,
       } = payload;
       state.kabar = kabar;
       state.logoKoperasi = logoKoperasi;
@@ -53,6 +59,8 @@ const homeSlice = createSlice({
       state.simpanan = simpanan;
       state.profilePic = profilePic;
       state.promo = promo;
+      state.conversationId = conversationId;
+      state.userId = userId;
     },
     getBerandaUserFailed: (state, { payload }) => {
       state.error = payload;

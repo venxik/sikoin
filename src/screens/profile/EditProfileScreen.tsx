@@ -24,6 +24,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { isEmpty } from 'lodash';
+import RNFS from 'react-native-fs';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 
@@ -62,14 +63,16 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   const saveProfile = (data: ProfileRequest) => {
     const { email, nama, noTelp } = data || {};
-    dispatch(
-      fetchUpdateProfile({
-        email,
-        nama,
-        noTelp,
-        profilePic: profilePicture.uri as string,
-      }),
-    );
+    RNFS.readFile(profilePicture.uri, 'base64').then(res => {
+      dispatch(
+        fetchUpdateProfile({
+          email,
+          nama,
+          noTelp,
+          profilePic: res,
+        }),
+      );
+    });
   };
 
   const openDocumentPicker = async () => {

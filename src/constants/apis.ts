@@ -27,6 +27,7 @@ const constant = {
     pekerjaan: {
       pekerjaan: '/api/pekerjaan',
     },
+    chat: '/api/kirim-pesan',
   },
   errorTypes: {
     generic: 'Error',

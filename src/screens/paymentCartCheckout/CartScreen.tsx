@@ -22,7 +22,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
       StackActions.push('HomeTab', {
         screen: 'HomeStackNavigator',
         params: {
-          screen: 'VoucherSta ckNavigator',
+          screen: 'VoucherStackNavigator',
         },
       }),
     );

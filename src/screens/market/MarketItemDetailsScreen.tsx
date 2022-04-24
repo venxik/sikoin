@@ -389,7 +389,6 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
               <CardMarketSmall
                 item={item}
                 onPress={navigateToDetailsScreen}
-                onPressWishlist={() => console.log(item)}
                 onPressVoucher={navigateToVoucherScreen}
               />
               {index === marketDataList.length - 1 && (

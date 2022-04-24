@@ -1,6 +1,6 @@
 export interface ErrorModalProps {
   options: {
-    isVisible: boolean;
-    errorType: string;
+    isVisible?: boolean;
+    errorType?: string;
   };
 }

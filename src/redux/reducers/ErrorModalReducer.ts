@@ -2,7 +2,18 @@ import { apis } from '../../constants';
 import { createSlice } from '@reduxjs/toolkit';
 import { isEmpty } from 'lodash';
 
-const initialState = {
+interface ErrorState {
+  title: string;
+  message: string;
+}
+
+interface OptionsState {
+  isVisible?: boolean;
+  screenSource?: string;
+  errorType?: string;
+}
+
+const initialState: { error?: ErrorState; options: OptionsState } = {
   error: {
     title: 'Error',
     message: 'Error Occured',
@@ -18,7 +29,10 @@ const errorModalSlice = createSlice({
   name: 'errorModal',
   initialState,
   reducers: {
-    showErrorModal: (state, { payload }) => {
+    showErrorModal: (
+      state,
+      { payload }: { payload: { options: OptionsState; error?: ErrorState } },
+    ) => {
       const { options } = payload;
 
       state.error = isEmpty(payload.error) ? initialState.error : payload.error;

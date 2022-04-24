@@ -162,16 +162,30 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   };
 
   const cardHeader = (title: string) => {
+    let stack = '';
+    switch (title) {
+      case strings.market:
+        stack = 'MarketStackNavigator';
+        break;
+      case strings.kabar:
+        stack = '';
+        break;
+      case strings.promo:
+        stack = '';
+        break;
+    }
     return (
-      <View style={styles.cardHeaderContainer}>
+      <TouchableOpacity
+        style={styles.cardHeaderContainer}
+        onPress={() => navigateToOtherScreen(stack)}>
         <Text style={styles.cardHeaderTitle}>{title}</Text>
-        <TouchableOpacity>
+        <View>
           <Image
             source={icons.arrow_right_circle_primary}
             style={styles.icon}
           />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -191,7 +205,9 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
               {index === kabar?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() => null}
+                  onPress={() =>
+                    navigateToOtherScreen('PinjamanStackNavigator')
+                  }
                 />
               )}
             </View>
@@ -230,19 +246,26 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           data={marketDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
-                onPressVoucher={() => null}
+                onPressVoucher={() => {
+                  navigateToOtherScreen('VoucherStackNavigator');
+                }}
                 item={item}
-                onPress={() => null}
-                onPressWishlist={() => null}
+                onPress={() => {
+                  navigation.navigate('MarketStackNavigator', {
+                    screen: 'MarketItemDetailsScreen',
+                  });
+                }}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_market_white}
-                  onPress={() => null}
+                  onPress={() => {
+                    navigateToOtherScreen('MarketStackNavigator');
+                  }}
                 />
               )}
             </View>
@@ -487,8 +510,8 @@ const styles = StyleSheet.create({
   },
   cardHeaderContainer: {
     flexDirection: 'row',
-    width: '100%',
     marginTop: sizes.padding,
+    width: '30%',
   },
   cardHeaderTitle: {
     fontSize: 17,

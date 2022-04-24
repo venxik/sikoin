@@ -13,9 +13,13 @@ import { CardMarketLargeProps } from './model';
 import { formatter } from '../../utils';
 
 const CardMarketLarge = (props: CardMarketLargeProps) => {
-  const { item, onPress, style, onPressWishlist, onPressVoucher } =
-    props || null;
+  const { item, onPress, style, onPressVoucher } = props || null;
   const { productName, price, image } = item || {};
+
+  const onPressWishlist = () => {
+    console.log(item);
+  };
+
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <FastImage source={{ uri: image }} style={styles.imageStyle} />

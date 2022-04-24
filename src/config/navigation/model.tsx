@@ -57,14 +57,18 @@ export type HomeTabParamList = {
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  SaldoSimpananStackNavigator: NavigatorScreenParams<SaldoSimpananStackParamList>;
+  SaldoSimpananStackNavigator:
+    | NavigatorScreenParams<SaldoSimpananStackParamList>
+    | undefined;
   DiskonStackNavigator: DiskonStackParamList | undefined;
   TopupStackNavigator: TopupStackParamList | undefined;
   TransaksiStackNavigator: TransaksiStackParamList | undefined;
-  VoucherStackNavigator: VoucherStackParamList | undefined;
+  VoucherStackNavigator:
+    | NavigatorScreenParams<VoucherStackParamList>
+    | undefined;
   PinjamanStackNavigator: PinjamanStackParamList | undefined;
   DokumenStackNavigator: DokumenStackParamList | undefined;
-  MarketStackNavigator: MarketStackParamList | undefined;
+  MarketStackNavigator: NavigatorScreenParams<MarketStackParamList> | undefined;
 };
 
 export type ChatStackParamList = {
@@ -126,7 +130,7 @@ export type SaldoSimpananStackParamList = {
 export type TopupStackParamList = {
   TopupMainScreen: undefined;
   TopupDetailScreen: { selectedTopup: string; nominal: string };
-  TopupPayment: NavigatorScreenParams<PaymentStackParamList>;
+  TopupPayment: NavigatorScreenParams<PaymentStackParamList> | undefined;
   // TopupPaymentScreen: { nominal: string };
   // TopupSuccessScreen: undefined;
 };
@@ -137,13 +141,13 @@ export type TransaksiStackParamList = {
 
 export type VoucherStackParamList = {
   VoucherMainScreen: undefined;
-  VoucherPayment: NavigatorScreenParams<PaymentStackParamList>;
+  VoucherPayment: NavigatorScreenParams<PaymentStackParamList> | undefined;
 };
 
 export type MarketStackParamList = {
   MarketMainScreen: undefined;
   MarketItemDetailsScreen: undefined;
-  MarketPayment: NavigatorScreenParams<PaymentStackParamList>;
+  MarketPayment: NavigatorScreenParams<PaymentStackParamList> | undefined;
 };
 
 export type PinjamanStackParamList = {
