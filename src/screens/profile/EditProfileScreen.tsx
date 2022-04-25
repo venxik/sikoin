@@ -18,13 +18,14 @@ import {
 } from '../../redux/reducers/ProfileReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { formatter } from '../../utils';
-import DocumentPicker from 'react-native-document-picker';
+import DocumentPicker, {
+  DocumentPickerResponse,
+} from 'react-native-document-picker';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { isEmpty } from 'lodash';
-import RNFS from 'react-native-fs';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 
@@ -33,7 +34,10 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
   const { nama, noAnggota, email, noTelp, profilePic } = profileData || {};
 
-  const [profilePicture, setProfilePicture] = useState({ uri: profilePic });
+  const [profilePicture, setProfilePicture] = useState<{
+    uri: string;
+    data: DocumentPickerResponse | null;
+  }>({ uri: profilePic, data: null });
 
   const [isDefault, setIsDefault] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -49,7 +53,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     ? loadingSource
     : isError
     ? errorSource
-    : profilePicture;
+    : { uri: profilePicture.uri };
 
   const onErrorProfile = () => {
     console.log('onErrorProfile');
@@ -63,13 +67,14 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   const saveProfile = (data: ProfileRequest) => {
     const { email, nama, noTelp } = data || {};
-    RNFS.readFile(profilePicture.uri, 'base64').then(res => {
+    formatter.convertToBase64(profilePicture.uri).then(res => {
+      const base64string = `data:${profilePicture.data?.type};base64,${res}`;
       dispatch(
         fetchUpdateProfile({
           email,
           nama,
           noTelp,
-          profilePic: res,
+          profilePic: base64string,
         }),
       );
     });
@@ -78,9 +83,15 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const openDocumentPicker = async () => {
     try {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
-      console.log('Profile pic :', data);
-      setIsError(false);
-      setProfilePicture({ uri: data.uri });
+      formatter
+        .resizeImage(data)
+        .then(res => {
+          setIsError(false);
+          setProfilePicture({ uri: res.uri, data: data });
+        })
+        .catch(err => {
+          console.log('Image resizer error', err);
+        });
     } catch {
       (e: unknown) => console.log('Document picker error! ', e);
     }

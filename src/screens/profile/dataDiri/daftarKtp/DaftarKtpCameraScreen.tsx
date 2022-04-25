@@ -10,7 +10,6 @@ import {
   sizes,
 } from '../../../../constants';
 import { addKtpImage } from '../../../../redux/reducers/KtpReducer';
-import RNFS from 'react-native-fs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { DataDiriStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch } from '../../../../config';
@@ -27,10 +26,8 @@ const DaftarKtpCameraScreen: React.FC<Props> = ({ navigation }) => {
   const takePic = async () => {
     try {
       const data = await takePicture();
-      RNFS.readFile(data.uri, 'base64').then(res => {
-        dispatch(addKtpImage(res));
-        navigation.goBack();
-      });
+      dispatch(addKtpImage(data.uri));
+      navigation.goBack();
     } catch {
       (e: unknown) => {
         console.log(e);

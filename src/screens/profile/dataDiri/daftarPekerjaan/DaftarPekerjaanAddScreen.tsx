@@ -179,6 +179,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                   onChangeValue={value => onChange(value)}
                   title={strings.gaji_bulanan}
                   keyboardType="number-pad"
+                  placeholder="Rp"
                 />
               )}
               rules={{

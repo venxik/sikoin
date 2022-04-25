@@ -36,6 +36,7 @@ const TextInputCurrency = (props: TextInputCurrencyProps) => {
           prefix="Rp "
           delimiter="."
           precision={0}
+          minValue={0}
           style={[
             styles.textBox,
             {

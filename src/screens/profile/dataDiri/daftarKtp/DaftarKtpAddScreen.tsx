@@ -34,7 +34,6 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
   const { noKtp, gambarKtp } = ktpData || {};
 
   const submitKtp = (data: { noKtp: string }) => {
-    console.log(data);
     if (data) {
       dispatch(addKtpNumber(data.noKtp));
       navigation.goBack();
@@ -63,7 +62,7 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
             imageStyle={styles.imageKtp}
             source={
               !isEmpty(gambarKtp)
-                ? { uri: `data:image/jpg;base64,${gambarKtp}` }
+                ? { uri: gambarKtp }
                 : icons.icon_edit_profle_picture
             }
             style={styles.imageKtp}

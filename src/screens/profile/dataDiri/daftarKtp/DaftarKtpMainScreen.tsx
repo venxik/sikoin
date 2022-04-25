@@ -57,11 +57,7 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View style={styles.cardContainer}>
         <Image
-          source={
-            !isEmpty(gambarKtp)
-              ? { uri: `data:image/jpg;base64,${gambarKtp}` }
-              : images.dummy_ktp
-          }
+          source={!isEmpty(gambarKtp) ? { uri: gambarKtp } : images.dummy_ktp}
           style={styles.imageKtp}
         />
         <View

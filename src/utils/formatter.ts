@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from 'moment';
+import RNFS from 'react-native-fs';
+import ImageResizer, { Response } from 'react-native-image-resizer';
 
 type formatNumberToCurrenyOptions = {
   significantDigits: number;
@@ -64,6 +66,34 @@ const addMissingBracketJSON = (data: any): any => {
   return data;
 };
 
+const resizeImage = async (data: any): Promise<Response> => {
+  try {
+    const response = await ImageResizer.createResizedImage(
+      data.uri,
+      800,
+      800,
+      'JPEG',
+      80,
+      0,
+      undefined,
+      false,
+      { onlyScaleDown: true },
+    );
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+const convertToBase64 = async (data: any): Promise<string> => {
+  try {
+    const response = await RNFS.readFile(data, 'base64');
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
 // const objectMap = (obj:object, fn) =>
 //   Object.fromEntries(Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)]));
 
@@ -79,4 +109,6 @@ export default {
   EMAIL_REGEX,
   NUMBER_REGEX,
   addMissingBracketJSON,
+  resizeImage,
+  convertToBase64,
 };
