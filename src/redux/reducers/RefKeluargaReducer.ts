@@ -12,8 +12,8 @@ type DeleteRefKeluargaStatus = 'idle' | 'success' | 'failed';
 
 interface RootState {
   keluargaList: RefKeluargaResponse[];
-  error: null;
   deleteRefKeluargaStatus?: DeleteRefKeluargaStatus;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -26,45 +26,57 @@ const refKeluargaSlice = createSlice({
   initialState,
   reducers: {
     getRefKeluargaSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    getRefKeluargaFailed: (state, { payload }) => {
+    getRefKeluargaFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     submitRefKeluargaSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    submitRefKeluargaFailed: (state, { payload }) => {
+    submitRefKeluargaFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     updateRefKeluargaSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    updateRefKeluargaFailed: (state, { payload }) => {
+    updateRefKeluargaFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     setDeleteRefKeluargaStatus: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<DeleteRefKeluargaStatus>,
     ) => {
       state.deleteRefKeluargaStatus = payload;
     },
     deleteRefKeluargaSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<RefKeluargaResponse[]>,
     ) => {
       state.keluargaList = payload;
     },
-    deleteRefKeluargaFailed: (state, { payload }) => {
+    deleteRefKeluargaFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     // addKeluarga: (state, { payload }: PayloadAction<RefKeluargaResponse>) => {

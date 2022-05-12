@@ -1,14 +1,23 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import {
   View,
   StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
-import { Button, HeaderPinjaman, TextInputForm } from '../../components';
+import {
+  Button,
+  DropdownForm,
+  HeaderPinjaman,
+  TextInputForm,
+} from '../../components';
 import { PinjamanStackParamList } from '../../config/navigation/model';
-import { colors, sizes, strings } from '../../constants';
+import { colors, dropdownItems, sizes, strings } from '../../constants';
+import { PekerjaanResponse } from '../../redux/reducers/PekerjaanReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
   PinjamanStackParamList,
@@ -16,25 +25,29 @@ type Props = NativeStackScreenProps<
 >;
 
 const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
-  const [emailValue, setEmailValue] = useState<string>('email');
-  const [nameValue, setNameValue] = useState<string>('nama');
-  const [phoneValue, setPhoneValue] = useState<string>('noTelp');
-
-  const onChangeEmail = (e: string) => {
-    setEmailValue(e);
-  };
-
-  const onChangeName = (e: string) => {
-    setNameValue(e);
-  };
-
-  const onChangePhone = (e: string) => {
-    setPhoneValue(e);
-  };
-
-  const navigateToStep3 = () => {
+  const navigateToStep4 = (data: PekerjaanResponse) => {
+    console.log('navigateToStep4: ', data);
     navigation.navigate('PinjamanStep4Screen');
   };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PekerjaanResponse>({
+    defaultValues: {
+      pekerjaan: '',
+      detailPekerjaan: '',
+      masaKerjaTahun: 0,
+      masaKerjaBulan: 0,
+      gajiBulanan: '',
+      namaPerusahaan: '',
+      alamatKantor: '',
+      provinsiKota: '',
+    },
+  });
+
+  console.log('test');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,35 +56,149 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
         style={{ flex: 1 }}
         keyboardVerticalOffset={50}>
         <HeaderPinjaman index={3} />
-        <View
-          style={{
-            padding: sizes.padding,
-            marginVertical: sizes.padding,
-            backgroundColor: colors.white,
-            borderRadius: sizes.padding,
-          }}>
-          <TextInputForm
-            value={nameValue}
-            onChangeText={onChangeName}
-            title={strings.nama}
-          />
-          <TextInputForm
-            value={phoneValue}
-            onChangeText={onChangePhone}
-            title={strings.no_telp}
-          />
-          <TextInputForm
-            value={emailValue}
-            onChangeText={onChangeEmail}
-            title={strings.email}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.innerContainer}>
+            <Controller
+              control={control}
+              name="pekerjaan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.pekerjaan}
+                  data={dropdownItems.pekerjaanItem}
+                  onChange={value => onChange(value)}
+                  value={value}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="detailPekerjaan"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.detail_pekerjaan}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="namaPerusahaan"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.nama_perusahaan}
+                />
+              )}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <Controller
+                control={control}
+                name="masaKerjaTahun"
+                render={({ field: { onChange, value } }) => (
+                  <TextInputForm
+                    error={errors.masaKerjaTahun}
+                    errorText={errors.masaKerjaTahun?.message}
+                    style={{ width: '45%' }}
+                    value={value?.toString()}
+                    onChangeText={value => onChange(value)}
+                    title={strings.masa_kerja_tahun}
+                    keyboardType="number-pad"
+                  />
+                )}
+                rules={{
+                  pattern: {
+                    value: formatter.NUMBER_REGEX,
+                    message: 'Format harus dalam bentuk angka',
+                  },
+                }}
+              />
+              <Controller
+                control={control}
+                name="masaKerjaBulan"
+                render={({ field: { onChange, value } }) => (
+                  <TextInputForm
+                    error={errors.masaKerjaBulan}
+                    errorText={errors.masaKerjaBulan?.message}
+                    style={{ width: '45%' }}
+                    value={value?.toString()}
+                    onChangeText={value => onChange(value)}
+                    title={strings.masa_kerja_bulan}
+                    keyboardType="number-pad"
+                  />
+                )}
+                rules={{
+                  pattern: {
+                    value: formatter.NUMBER_REGEX,
+                    message: 'Format harus dalam bentuk angka',
+                  },
+                }}
+              />
+            </View>
+            <Controller
+              control={control}
+              name="gajiBulanan"
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
+                  title={strings.gaji_bulanan}
+                  data={dropdownItems.gajiBualanan}
+                  onChange={value => onChange(value)}
+                  value={value}
+                  maxHeight={200}
+                />
+                // <TextInputCurrency
+                //   error={errors.gajiBulanan}
+                //   errorText={errors.gajiBulanan?.message}
+                //   value={value}
+                //   onChangeValue={value => onChange(value)}
+                //   title={strings.gaji_bulanan}
+                //   keyboardType="number-pad"
+                //   placeholder="Rp"
+                // />
+              )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
+            />
+            <Controller
+              control={control}
+              name="alamatKantor"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.alamat_kantor}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="provinsiKota"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.provinsi_kota}
+                />
+              )}
+            />
+          </View>
+        </ScrollView>
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             position: 'absolute',
             bottom: sizes.padding,
+            paddingHorizontal: sizes.padding,
             width: '100%',
           }}>
           <Button
@@ -82,7 +209,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
-            onPress={navigateToStep3}
+            onPress={handleSubmit(navigateToStep4)}
             shadow
             text={strings.lanjutkan}
             buttonContainerStyle={{ width: '48%' }}
@@ -97,8 +224,14 @@ export default PinjamanStep3;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    paddingHorizontal: sizes.padding,
     marginTop: sizes.padding,
+  },
+  innerContainer: {
+    borderRadius: sizes.padding,
+    backgroundColor: colors.white,
+    paddingTop: sizes.padding * 1.3,
+    padding: sizes.padding,
+    marginHorizontal: sizes.padding,
+    marginBottom: 80,
   },
 });

@@ -7,7 +7,7 @@ export type DiskonData = {
 
 interface RootState {
   diskonDataList: DiskonData[];
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -29,20 +29,28 @@ const initialState: RootState = {
       content: 'This is content example',
     },
   ],
-  error: null,
 };
 
 const diskonSlice = createSlice({
   name: 'diskonSlice',
   initialState,
   reducers: {
-    fetchDiskon: (state, { payload }: PayloadAction<DiskonData[]>) => {
+    fetchDiskon: (
+      state: RootState,
+      { payload }: PayloadAction<DiskonData[]>,
+    ) => {
       state.diskonDataList = payload;
     },
-    fetchDiskonSuccess: (state, { payload }: PayloadAction<DiskonData[]>) => {
+    fetchDiskonSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<DiskonData[]>,
+    ) => {
       state.diskonDataList = payload;
     },
-    fetchDiskonFailed: (state, { payload }) => {
+    fetchDiskonFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

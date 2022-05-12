@@ -36,9 +36,10 @@ const TransaksiMainScreen: FC<Props> = () => {
   const { transaksiDataList } = useAppSelector(s => s.TransaksiReducer) || {};
 
   const [selectedFilter, setSelectedFilter] = useState(filter[0]);
-  const [selectedDate, setSelectedDate] = useState<Date | number | string>(
+  const [startDate, setStartDate] = useState<Date | number | string>(
     Date.now(),
   );
+  const [endDate, setEndDate] = useState<Date | number | string>(Date.now());
 
   const renderRightButtonHeader = () => {
     return (
@@ -75,12 +76,36 @@ const TransaksiMainScreen: FC<Props> = () => {
         style={{
           padding: sizes.padding,
         }}>
-        <MenuHeaderIcon menu={strings.transaksi} />
+        <MenuHeaderIcon menu={strings.mutasi} />
         <View style={styles.mainContainer}>
-          <CalendarPicker
-            value={selectedDate}
-            onChangeDate={value => setSelectedDate(value)}
-          />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <CalendarPicker
+              style={{ width: '47%' }}
+              value={startDate}
+              onChangeDate={value => setStartDate(value)}
+              showIcon={false}
+            />
+            <View
+              style={{
+                width: 4,
+                height: 1,
+                backgroundColor: colors.bodyText,
+                marginBottom: sizes.padding,
+              }}
+            />
+            <CalendarPicker
+              style={{ width: '47%' }}
+              value={endDate}
+              onChangeDate={value => setEndDate(value)}
+              showIcon={false}
+            />
+          </View>
+
           <View style={styles.tabContainer}>
             {filter.map((item, index) => (
               <FilterHorizontal
@@ -111,7 +136,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: sizes.padding,
   },
   mainContainer: {
     backgroundColor: colors.white,

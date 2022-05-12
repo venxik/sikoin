@@ -30,7 +30,7 @@ export type KoperasiData = {
 interface RootState {
   profileData: ProfileResponse;
   koperasiData: KoperasiData;
-  error?: string | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -59,23 +59,29 @@ const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    getProfileSuccess: (state, { payload }: PayloadAction<ProfileResponse>) => {
-      state.profileData = payload;
-    },
-    getProfileFailed: (state, { payload }) => {
-      state.error = payload;
-    },
-    updateProfileSuccess: (
-      state,
+    getProfileSuccess: (
+      state: RootState,
       { payload }: PayloadAction<ProfileResponse>,
     ) => {
       state.profileData = payload;
     },
-    updateProfileFailed: (state, { payload }) => {
+    getProfileFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
-    updateProfile: (state, { payload }: PayloadAction<ProfileRequest>) => {
-      state.profileData.email = payload.email;
+    updateProfileSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<ProfileResponse>,
+    ) => {
+      state.profileData = payload;
+    },
+    updateProfileFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
     },
   },
 });
@@ -85,7 +91,6 @@ export const fetchUpdateProfile =
   createAction<ProfileRequest>('fetchUpdateProfile');
 
 export const {
-  updateProfile,
   getProfileFailed,
   getProfileSuccess,
   updateProfileFailed,

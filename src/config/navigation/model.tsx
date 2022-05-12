@@ -125,6 +125,10 @@ export type PaymentStackParamList = {
 
 export type SaldoSimpananStackParamList = {
   SaldoSimpananMainScreen: { showSaldo: boolean };
+  TransaksiStackNavigator:
+    | NavigatorScreenParams<TransaksiStackParamList>
+    | undefined;
+  TopupStackNavigator: NavigatorScreenParams<TopupStackParamList> | undefined;
 };
 
 export type TopupStackParamList = {

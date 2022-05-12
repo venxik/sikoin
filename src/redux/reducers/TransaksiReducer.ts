@@ -9,7 +9,7 @@ export type TransaksiData = {
 
 interface RootState {
   transaksiDataList: TransaksiData[];
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -47,18 +47,21 @@ const transaksiSlice = createSlice({
   initialState,
   reducers: {
     fetchTransaksiData: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<TransaksiData[]>,
     ) => {
       state.transaksiDataList = payload;
     },
     fetchTransaksiDataSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<TransaksiData[]>,
     ) => {
       state.transaksiDataList = payload;
     },
-    fetchTransaksiDataFailed: (state, { payload }) => {
+    fetchTransaksiDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

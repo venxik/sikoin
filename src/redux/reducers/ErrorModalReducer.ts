@@ -13,7 +13,12 @@ interface OptionsState {
   errorType?: string;
 }
 
-const initialState: { error?: ErrorState; options: OptionsState } = {
+interface RootState {
+  error?: ErrorState;
+  options: OptionsState;
+}
+
+const initialState: RootState = {
   error: {
     title: 'Error',
     message: 'Error Occured',
@@ -30,7 +35,7 @@ const errorModalSlice = createSlice({
   initialState,
   reducers: {
     showErrorModal: (
-      state,
+      state: RootState,
       { payload }: { payload: { options: OptionsState; error?: ErrorState } },
     ) => {
       const { options } = payload;

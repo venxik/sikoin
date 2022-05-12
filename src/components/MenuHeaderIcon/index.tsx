@@ -9,7 +9,7 @@ const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
     switch (menu) {
       case strings.diskon:
         return images.menu_diskon;
-      case strings.transaksi:
+      case strings.mutasi:
         return images.menu_transaksi;
       case strings.voucher_center:
         return images.menu_voucher;

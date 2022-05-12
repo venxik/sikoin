@@ -13,7 +13,7 @@ export type PekerjaanResponse = {
 
 interface RootState {
   pekerjaanData: PekerjaanResponse | null;
-  error?: string | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -24,27 +24,34 @@ const pekerjaanSlice = createSlice({
   name: 'pekerjaanSlice',
   initialState,
   reducers: {
-    addPekerjaan: (state, { payload }: PayloadAction<PekerjaanResponse>) => {
+    addPekerjaan: (
+      state: RootState,
+      { payload }: PayloadAction<PekerjaanResponse>,
+    ) => {
       state.pekerjaanData = payload;
     },
     getPekerjaanSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<PekerjaanResponse>,
     ) => {
       state.pekerjaanData = payload;
     },
-    getPekerjaanFailed: (state, { payload }) => {
+    getPekerjaanFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     updatePekerjaanSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<PekerjaanResponse>,
     ) => {
-      console.log('updatePekerjaanSuccess', payload);
-
       state.pekerjaanData = payload;
     },
-    updatePekerjaanFailed: (state, { payload }) => {
+    updatePekerjaanFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

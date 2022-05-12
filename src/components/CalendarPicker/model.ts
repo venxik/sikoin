@@ -8,4 +8,5 @@ export interface CalendarPickerProps {
   value?: Date | number | string;
   error?: FieldError;
   errorText?: string;
+  showIcon?: boolean;
 }

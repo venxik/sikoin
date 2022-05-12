@@ -42,7 +42,7 @@ interface RootState {
   marketDataList: MarketDataResponse[];
   marketItemDetails: MarketItemDetailsResponse;
   cartItemDataList: CartItemData[];
-  error?: string | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -134,34 +134,40 @@ const marketSlice = createSlice({
   initialState,
   reducers: {
     getMarketDataSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<MarketDataResponse[]>,
     ) => {
       state.marketDataList = payload;
     },
-    getMarketDataFailed: (state, { payload }) => {
+    getMarketDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
-    addCartQty: (state, { payload }: PayloadAction<number>) => {
+    addCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
       const index = state.cartItemDataList.findIndex(
-        item => item.id === payload,
+        (item: { id: number }) => item.id === payload,
       );
       state.cartItemDataList[index].qty += 1;
     },
-    substartCartQty: (state, { payload }: PayloadAction<number>) => {
+    substartCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
       const index = state.cartItemDataList.findIndex(
-        item => item.id === payload,
+        (item: { id: number }) => item.id === payload,
       );
       state.cartItemDataList[index].qty -= 1;
     },
-    deleteCartItem: (state, { payload }: PayloadAction<number>) => {
+    deleteCartItem: (state: RootState, { payload }: PayloadAction<number>) => {
       state.cartItemDataList = state.cartItemDataList.filter(
-        item => item.id !== payload,
+        (item: { id: number }) => item.id !== payload,
       );
     },
-    addCartItem: (state, { payload }: PayloadAction<CartItemData>) => {
+    addCartItem: (
+      state: RootState,
+      { payload }: PayloadAction<CartItemData>,
+    ) => {
       const index = state.cartItemDataList.findIndex(
-        item => item.id === payload.id,
+        (item: { id: number }) => item.id === payload.id,
       );
 
       if (index < 0) {

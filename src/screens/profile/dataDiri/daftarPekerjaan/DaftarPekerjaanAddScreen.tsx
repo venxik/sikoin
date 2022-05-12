@@ -10,7 +10,6 @@ import {
   Button,
   DropdownForm,
   HeaderBack,
-  TextInputCurrency,
   TextInputForm,
 } from '../../../../components';
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
@@ -172,15 +171,22 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               control={control}
               name="gajiBulanan"
               render={({ field: { onChange, value } }) => (
-                <TextInputCurrency
-                  error={errors.gajiBulanan}
-                  errorText={errors.gajiBulanan?.message}
-                  value={value}
-                  onChangeValue={value => onChange(value)}
+                <DropdownForm
                   title={strings.gaji_bulanan}
-                  keyboardType="number-pad"
-                  placeholder="Rp"
+                  data={dropdownItems.gajiBualanan}
+                  onChange={value => onChange(value)}
+                  value={value}
+                  maxHeight={200}
                 />
+                // <TextInputCurrency
+                //   error={errors.gajiBulanan}
+                //   errorText={errors.gajiBulanan?.message}
+                //   value={value}
+                //   onChangeValue={value => onChange(value)}
+                //   title={strings.gaji_bulanan}
+                //   keyboardType="number-pad"
+                //   placeholder="Rp"
+                // />
               )}
               rules={{
                 pattern: {

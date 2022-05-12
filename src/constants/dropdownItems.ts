@@ -52,6 +52,16 @@ const statusKeluarga = [
   { label: 'Saudara Sepupu', value: 'Saudara Sepupu' },
 ];
 
+const gajiBualanan = [
+  { label: '0 - 1.500.000', value: '0 - 1.500.000' },
+  { label: '1.500.000 - 3.500.000', value: '1.500.000 - 3.500.000' },
+  { label: '3.500.000 - 5.000.000', value: '3.500.000 - 5.000.000' },
+  { label: '5.000.000 - 7.500.000', value: '5.000.000 - 7.500.000' },
+  { label: '7.500.000 - 10.000.000', value: '7.500.000 - 10.000.000' },
+  { label: '10.000.000 - 15.000.000', value: '10.000.000 - 15.000.000' },
+  { label: '> 15.000.000', value: '> 15.000.000' },
+];
+
 export default {
   genderItem,
   golDarahItem,
@@ -61,4 +71,5 @@ export default {
   statusPernikahanItem,
   pekerjaanItem,
   statusKeluarga,
+  gajiBualanan,
 };

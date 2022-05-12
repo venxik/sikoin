@@ -113,6 +113,7 @@ const icon_rating = require('assets/icons/icon_rating.png');
 const icon_berat = require('assets/icons/icon_berat.png');
 const cross_shape = require('assets/icons/cross_shape.png');
 const icon_proses_pesanan = require('assets/icons/icon_proses_pesanan.png');
+const icon_topup_penarikan = require('assets/icons/icon_topup_penarikan.png');
 
 export default {
   arrow_left_primary,
@@ -229,4 +230,5 @@ export default {
   icon_berat,
   cross_shape,
   icon_proses_pesanan,
+  icon_topup_penarikan,
 };

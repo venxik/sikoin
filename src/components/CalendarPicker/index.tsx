@@ -16,7 +16,15 @@ import { isEmpty } from 'lodash';
 import { CalendarPickerProps } from './model';
 
 const CalendarPicker = (props: CalendarPickerProps) => {
-  const { title, style, onChangeDate, value, error, errorText } = props || {};
+  const {
+    title,
+    style,
+    onChangeDate,
+    value,
+    error,
+    errorText,
+    showIcon = true,
+  } = props || {};
   const [date, setDate] = useState<Date>(
     value ? new Date(value as Date) : new Date(),
   );
@@ -55,10 +63,12 @@ const CalendarPicker = (props: CalendarPickerProps) => {
             {value ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}
           </Text>
         </View>
-        <Image
-          source={icons.icon_dropdown}
-          style={{ width: sizes.padding, height: sizes.padding }}
-        />
+        {showIcon && (
+          <Image
+            source={icons.icon_dropdown}
+            style={{ width: sizes.padding, height: sizes.padding }}
+          />
+        )}
       </TouchableOpacity>
       {error && <Text style={styles.textError}>{errorText}</Text>}
 

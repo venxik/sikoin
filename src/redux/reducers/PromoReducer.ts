@@ -8,7 +8,7 @@ export type PromoData = {
 
 interface RootState {
   promoDataList: PromoData[];
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -39,13 +39,22 @@ const promoSlice = createSlice({
   name: 'promoSlice',
   initialState,
   reducers: {
-    fetchPromoData: (state, { payload }: PayloadAction<PromoData[]>) => {
+    fetchPromoData: (
+      state: RootState,
+      { payload }: PayloadAction<PromoData[]>,
+    ) => {
       state.promoDataList = payload;
     },
-    fetchPromoDataSuccess: (state, { payload }: PayloadAction<PromoData[]>) => {
+    fetchPromoDataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<PromoData[]>,
+    ) => {
       state.promoDataList = payload;
     },
-    fetchPromoDataFailed: (state, { payload }) => {
+    fetchPromoDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

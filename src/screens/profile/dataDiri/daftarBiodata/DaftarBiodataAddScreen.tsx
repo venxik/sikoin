@@ -260,8 +260,6 @@ export default DaftarBiodataAddScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   innerContainer: {
     borderRadius: sizes.padding,

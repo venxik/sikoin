@@ -16,7 +16,7 @@ interface RootState {
   simpanan: SimpananData;
   saldo: SaldoData;
   topUpNominal: string;
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -38,31 +38,46 @@ const saldoSimpananSlice = createSlice({
   name: 'saldoSimpananSlice',
   initialState,
   reducers: {
-    fetchSimpananData: (state, { payload }: PayloadAction<SimpananData>) => {
-      state.simpanan = payload;
-    },
-    fetchSimpananDataSuccess: (
-      state,
+    fetchSimpananData: (
+      state: RootState,
       { payload }: PayloadAction<SimpananData>,
     ) => {
       state.simpanan = payload;
     },
-    fetchSimpananDataFailed: (state, { payload }) => {
+    fetchSimpananDataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<SimpananData>,
+    ) => {
+      state.simpanan = payload;
+    },
+    fetchSimpananDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
-    fetchSaldoData: (state, { payload }: PayloadAction<SaldoData>) => {
+    fetchSaldoData: (
+      state: RootState,
+      { payload }: PayloadAction<SaldoData>,
+    ) => {
       state.saldo = payload;
     },
-    fetchSaldoDataSuccess: (state, { payload }: PayloadAction<SaldoData>) => {
+    fetchSaldoDataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<SaldoData>,
+    ) => {
       state.saldo = payload;
     },
-    fetchSaldoDataFailed: (state, { payload }) => {
+    fetchSaldoDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
-    setTopupNominal: (state, { payload }) => {
+    setTopupNominal: (state: RootState, { payload }: PayloadAction<string>) => {
       state.topUpNominal = payload;
     },
-    resetTopupNominal: state => {
+    resetTopupNominal: (state: RootState) => {
       state.topUpNominal = '';
     },
   },

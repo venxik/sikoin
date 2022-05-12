@@ -277,8 +277,8 @@ export default {
   nama_perusahaan: 'Nama Perusahaan / PT',
   alamat_kantor: 'Alamat Kantor / Perusahaan',
   provinsi_kota: 'Provinsi / Kota',
-  masa_kerja_tahun: 'Masa Kerja Tahun',
-  masa_kerja_bulan: 'Masa Kerja Bulan',
+  masa_kerja_tahun: 'Masa Kerja (Tahun)',
+  masa_kerja_bulan: 'Masa Kerja (Bulan)',
   bank: 'Bank',
   jabatan_terakhir: 'Jabatan Terakhir',
 

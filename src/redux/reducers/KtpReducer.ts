@@ -8,7 +8,7 @@ export type KtpData = {
 
 interface RootState {
   ktpData: KtpData;
-  error: object | undefined | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -20,19 +20,19 @@ const ktpSlice = createSlice({
   name: 'ktpSlice',
   initialState,
   reducers: {
-    addKtpImage: (state, { payload }: PayloadAction<string>) => {
+    addKtpImage: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.gambarKtp = payload;
     },
-    addKtpNumber: (state, { payload }: PayloadAction<string>) => {
+    addKtpNumber: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.noKtp = payload;
     },
-    addKtpSuccess: (state, { payload }) => {
+    addKtpSuccess: (state: RootState, { payload }: PayloadAction<KtpData>) => {
       state.ktpData = payload;
     },
-    addKtpFailed: (state, { payload }) => {
+    addKtpFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    addKtpSelfie: (state, { payload }: PayloadAction<string>) => {
+    addKtpSelfie: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.gambarSelfie = payload;
     },
   },

@@ -20,7 +20,7 @@ export type DokumenData = {
 
 interface RootState {
   dokumenDataList: DokumenData[];
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -186,20 +186,28 @@ const initialState: RootState = {
       ],
     },
   ],
-  error: null,
 };
 
 const dokumenSlice = createSlice({
   name: 'dokumenSlice',
   initialState,
   reducers: {
-    fetchDokumen: (state, { payload }: PayloadAction<DokumenData[]>) => {
+    fetchDokumen: (
+      state: RootState,
+      { payload }: PayloadAction<DokumenData[]>,
+    ) => {
       state.dokumenDataList = payload;
     },
-    fetchDokumenSuccess: (state, { payload }: PayloadAction<DokumenData[]>) => {
+    fetchDokumenSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<DokumenData[]>,
+    ) => {
       state.dokumenDataList = payload;
     },
-    fetchDokumenFailed: (state, { payload }) => {
+    fetchDokumenFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

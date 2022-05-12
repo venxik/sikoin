@@ -31,7 +31,7 @@ type ForgotPasswordStatus = 'idle' | 'success' | 'failed';
 interface RootState {
   koperasiListData: KoperasiListResponse[];
   userKoperasiData: UserKoperasiResponse;
-  error?: object;
+  error?: unknown;
   forgotPasswordStatus: ForgotPasswordStatus;
 }
 
@@ -46,43 +46,57 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     getKoperasiListSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<KoperasiListResponse[]>,
     ) => {
       state.koperasiListData = payload;
     },
-    getKoperasiListFailed: (state, { payload }) => {
+    getKoperasiListFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     getUserKoperasiSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<UserKoperasiResponse>,
     ) => {
       state.userKoperasiData = payload;
     },
-    getUserKoperasiFailed: (state, { payload }) => {
+    getUserKoperasiFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     updateUserKoperasiEmailSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<UserKoperasiResponse>,
     ) => {
       state.userKoperasiData = payload;
     },
-    updateUserKoperasiEmailFailed: (state, { payload }) => {
+    updateUserKoperasiEmailFailed: (
+      state: RootState,
+      { payload }: PayloadAction<string>,
+    ) => {
       state.error = payload;
     },
     setForgotPasswordStatus: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<ForgotPasswordStatus>,
     ) => {
       state.forgotPasswordStatus = payload;
     },
-    fetchLoginSuccess: (_, { payload }: PayloadAction<LoginResponse>) => {
-      console.log('fetchLoginSuccess', payload);
+    fetchLoginSuccess: (
+      _: unknown,
+      { payload }: PayloadAction<LoginResponse>,
+    ) => {
       EncryptedStorage.saveEncryptedStorage(storage.authCode, payload.token);
     },
-    fetchLoginFailed: (state, { payload }) => {
+    fetchLoginFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

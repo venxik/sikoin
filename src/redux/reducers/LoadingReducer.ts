@@ -9,7 +9,7 @@ const loadingModalSlice = createSlice({
   name: 'loadingModal',
   initialState,
   reducers: {
-    showLoading: state => {
+    showLoading: (state: { isLoading: boolean }) => {
       state.isLoading = true;
     },
     hideLoading: () => initialState,

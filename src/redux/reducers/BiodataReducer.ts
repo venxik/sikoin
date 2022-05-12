@@ -18,7 +18,7 @@ export type BiodataResponse = {
 
 interface RootState {
   biodataData: BiodataResponse;
-  error?: string | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -37,28 +37,34 @@ const initialState: RootState = {
     statusPernikahan: '',
     jumlahAnak: 0,
   },
-  error: null,
 };
 
 const biodataSlice = createSlice({
   name: 'biodataSlice',
   initialState,
   reducers: {
-    getBiodataSuccess: (state, { payload }: PayloadAction<BiodataResponse>) => {
-      console.log('getBiodataSuccess', payload);
-
-      state.biodataData = payload;
-    },
-    getBiodataFailed: (state, { payload }) => {
-      state.error = payload;
-    },
-    updateBiodataSuccess: (
-      state,
+    getBiodataSuccess: (
+      state: RootState,
       { payload }: PayloadAction<BiodataResponse>,
     ) => {
       state.biodataData = payload;
     },
-    updateBiodataFailed: (state, { payload }) => {
+    getBiodataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
+    updateBiodataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<BiodataResponse>,
+    ) => {
+      state.biodataData = payload;
+    },
+    updateBiodataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

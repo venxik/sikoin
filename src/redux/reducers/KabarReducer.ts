@@ -12,7 +12,7 @@ export type KabarData = {
 
 interface RootState {
   kabarDataList: KabarData[];
-  error: object | undefined | null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -58,13 +58,19 @@ const kabarSlice = createSlice({
   name: 'kabarSlice',
   initialState,
   reducers: {
-    fetchKabar: (state, { payload }: PayloadAction<KabarData[]>) => {
+    fetchKabar: (state: RootState, { payload }: PayloadAction<KabarData[]>) => {
       state.kabarDataList = payload;
     },
-    fetchKabarSuccess: (state, { payload }: PayloadAction<KabarData[]>) => {
+    fetchKabarSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<KabarData[]>,
+    ) => {
       state.kabarDataList = payload;
     },
-    fetchKabarFailed: (state, { payload }) => {
+    fetchKabarFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

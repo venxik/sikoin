@@ -16,13 +16,12 @@ type DeleteAlamatStatus = 'idle' | 'success' | 'failed';
 
 interface RootState {
   alamatList: AlamatDataResponse[];
-  error: null;
+  error?: unknown;
   deleteAlamatStatus?: DeleteAlamatStatus;
 }
 
 const initialState: RootState = {
   alamatList: [],
-  error: null,
 };
 
 const alamatSlice = createSlice({
@@ -30,45 +29,57 @@ const alamatSlice = createSlice({
   initialState,
   reducers: {
     getAlamatListSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    getAlamatListFailed: (state, { payload }) => {
+    getAlamatListFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     submitAlamatSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    submitAlamatFailed: (state, { payload }) => {
+    submitAlamatFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     updateAlamatSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    updateAlamatFailed: (state, { payload }) => {
+    updateAlamatFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     setDeleteAlamatStatus: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<DeleteAlamatStatus>,
     ) => {
       state.deleteAlamatStatus = payload;
     },
     deleteAlamatSuccess: (
-      state,
+      state: RootState,
       { payload }: PayloadAction<AlamatDataResponse[]>,
     ) => {
       state.alamatList = payload;
     },
-    deleteAlamatFailed: (state, { payload }) => {
+    deleteAlamatFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     // addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {

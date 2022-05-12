@@ -13,7 +13,7 @@ export type VoucherDetail = {
 interface RootState {
   voucherDataList: VoucherDetail[];
   myVoucherList: unknown[];
-  error: null;
+  error?: unknown;
 }
 
 const initialState: RootState = {
@@ -71,16 +71,22 @@ const voucherSlice = createSlice({
   name: 'voucherSlice',
   initialState,
   reducers: {
-    fetchVoucherData: (state, { payload }: PayloadAction<VoucherDetail[]>) => {
-      state.voucherDataList = payload;
-    },
-    fetchVoucherDataSuccess: (
-      state,
+    fetchVoucherData: (
+      state: RootState,
       { payload }: PayloadAction<VoucherDetail[]>,
     ) => {
       state.voucherDataList = payload;
     },
-    fetchVoucherDataFailed: (state, { payload }) => {
+    fetchVoucherDataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<VoucherDetail[]>,
+    ) => {
+      state.voucherDataList = payload;
+    },
+    fetchVoucherDataFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     // addToMyVoucher: (state, { payload }: PayloadAction<VoucherDetail>) => {

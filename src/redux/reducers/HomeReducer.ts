@@ -12,7 +12,7 @@ export interface BerandaUserResponse {
   promo: [];
   conversationId: number;
   userId: number;
-  error?: string | null;
+  error?: unknown;
 }
 
 const initialState: BerandaUserResponse = {
@@ -34,7 +34,7 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     getBerandaUserSuccess: (
-      state,
+      state: BerandaUserResponse,
       { payload }: PayloadAction<BerandaUserResponse>,
     ) => {
       const {
@@ -62,7 +62,10 @@ const homeSlice = createSlice({
       state.conversationId = conversationId;
       state.userId = userId;
     },
-    getBerandaUserFailed: (state, { payload }) => {
+    getBerandaUserFailed: (
+      state: BerandaUserResponse,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
   },

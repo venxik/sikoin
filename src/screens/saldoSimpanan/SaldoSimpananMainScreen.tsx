@@ -70,14 +70,22 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
       <View>
         <View style={styles.saldoContainer}>
           <Button
-            icon={icons.icon_penarikan_primary}
-            text={strings.penarikan}
-            onPress={() => null}
+            icon={icons.icon_topup_penarikan}
+            text={strings.top_up}
+            onPress={() =>
+              navigation.navigate('TopupStackNavigator', {
+                screen: 'TopupMainScreen',
+              })
+            }
           />
           <Button
             icon={icons.icon_mutasi_primary}
             text={strings.mutasi}
-            onPress={() => null}
+            onPress={() =>
+              navigation.navigate('TransaksiStackNavigator', {
+                screen: 'TransaksiMainScreen',
+              })
+            }
           />
           <Button
             icon={icons.icon_transaksi_primary}
@@ -107,9 +115,22 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           />
           <Button
             icon={icons.icon_mutasi_primary}
-            text={strings.transfer_antar_simpanan}
-            onPress={() => null}
+            text={strings.mutasi}
+            onPress={() =>
+              navigation.navigate('TransaksiStackNavigator', {
+                screen: 'TransaksiMainScreen',
+              })
+            }
           />
+          {/* <Button
+            icon={icons.icon_mutasi_primary}
+            text={strings.transfer_antar_simpanan}
+            onPress={() =>
+              navigation.navigate('TransaksiStackNavigator', {
+                screen: 'TransaksiMainScreen',
+              })
+            }
+          /> */}
         </View>
         <View style={{ marginTop: 40 }}>
           <SaldoItemList
@@ -195,7 +216,6 @@ const styles = StyleSheet.create({
     borderRadius: sizes.padding,
     backgroundColor: colors.white,
     paddingVertical: sizes.padding,
-    paddingHorizontal: 40,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',

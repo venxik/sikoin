@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import {
   View,
   StyleSheet,
@@ -16,25 +17,26 @@ type Props = NativeStackScreenProps<
 >;
 
 const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
-  const [emailValue, setEmailValue] = useState<string>('email');
-  const [nameValue, setNameValue] = useState<string>('nama');
-  const [phoneValue, setPhoneValue] = useState<string>('noTelp');
-
-  const onChangeEmail = (e: string) => {
-    setEmailValue(e);
-  };
-
-  const onChangeName = (e: string) => {
-    setNameValue(e);
-  };
-
-  const onChangePhone = (e: string) => {
-    setPhoneValue(e);
-  };
-
-  const navigateToStep2 = () => {
+  const navigateToStep2 = (data: {
+    email: string;
+    nama: string;
+    noTelp: string;
+  }) => {
+    console.log('navigateToStep2: ', data);
     navigation.navigate('PinjamanStep2Screen');
   };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      nama: '',
+      noTelp: '',
+    },
+  });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,20 +52,44 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             backgroundColor: colors.white,
             borderRadius: sizes.padding,
           }}>
-          <TextInputForm
-            value={nameValue}
-            onChangeText={onChangeName}
-            title={strings.nama}
+          <Controller
+            control={control}
+            name="nama"
+            render={({ field: { onChange, value } }) => (
+              <TextInputForm
+                error={errors.nama}
+                errorText={errors.nama?.message}
+                value={value}
+                onChangeText={onChange}
+                title={strings.nama}
+              />
+            )}
           />
-          <TextInputForm
-            value={phoneValue}
-            onChangeText={onChangePhone}
-            title={strings.no_telp}
+          <Controller
+            control={control}
+            name="noTelp"
+            render={({ field: { onChange, value } }) => (
+              <TextInputForm
+                error={errors.noTelp}
+                errorText={errors.noTelp?.message}
+                value={value}
+                onChangeText={onChange}
+                title={strings.no_telp}
+              />
+            )}
           />
-          <TextInputForm
-            value={emailValue}
-            onChangeText={onChangeEmail}
-            title={strings.email}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, value } }) => (
+              <TextInputForm
+                error={errors.email}
+                errorText={errors.email?.message}
+                value={value}
+                onChangeText={onChange}
+                title={strings.email}
+              />
+            )}
           />
         </View>
         <View
@@ -82,7 +108,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
-            onPress={navigateToStep2}
+            onPress={handleSubmit(navigateToStep2)}
             text={strings.lanjutkan}
             shadow
             buttonContainerStyle={{ width: '48%' }}
