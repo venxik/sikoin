@@ -1,15 +1,22 @@
 import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import { isEmpty } from 'lodash';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import {
   View,
   StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+  Image,
 } from 'react-native';
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
+import { useAppSelector } from '../../config';
 import { PinjamanStackParamList } from '../../config/navigation/model';
-import { colors, sizes, strings } from '../../constants';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<
   PinjamanStackParamList,
@@ -17,29 +24,81 @@ type Props = NativeStackScreenProps<
 >;
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
-  const [emailValue, setEmailValue] = useState<string>('email');
-  const [nameValue, setNameValue] = useState<string>('nama');
-  const [phoneValue, setPhoneValue] = useState<string>('noTelp');
+  const { ktpData } = useAppSelector(s => s.KtpReducer) || {};
+  const { noKtp, gambarKtp } = ktpData || {};
 
-  const onChangeEmail = (e: string) => {
-    setEmailValue(e);
-  };
-
-  const onChangeName = (e: string) => {
-    setNameValue(e);
-  };
-
-  const onChangePhone = (e: string) => {
-    setPhoneValue(e);
-  };
-
-  const navigateToStep3 = () => {
+  const submitKtp = (data: { noKtp: string }) => {
+    // if (data) {
     navigation.dispatch(() => {
       return CommonActions.reset({
         index: 1,
         routes: [{ name: 'HomeTab' }],
       });
     });
+    // }
+  };
+
+  const changeKtpImage = () => {
+    navigation.navigate('DaftarKtpCameraScreen');
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ noKtp: string }>({
+    defaultValues: {
+      noKtp: noKtp ? noKtp : '',
+    },
+  });
+
+  const renderKtpCard = () => {
+    return (
+      <View style={styles.cardContainer}>
+        <TouchableOpacity onPress={changeKtpImage}>
+          <ImageBackground
+            imageStyle={styles.imageKtp}
+            source={
+              !isEmpty(gambarKtp)
+                ? { uri: gambarKtp }
+                : icons.icon_edit_profle_picture
+            }
+            style={styles.imageKtp}
+            resizeMode="cover">
+            <View style={styles.iconContainer}>
+              <Image
+                resizeMode="cover"
+                source={icons.icon_edit_profle_picture}
+                style={{
+                  width: sizes.icon_size * 2,
+                  height: sizes.icon_size * 2,
+                }}
+              />
+            </View>
+          </ImageBackground>
+        </TouchableOpacity>
+        <Controller
+          control={control}
+          name="noKtp"
+          render={({ field: { onChange, value } }) => (
+            <TextInputForm
+              error={errors.noKtp}
+              errorText={errors.noKtp?.message}
+              style={{ marginTop: sizes.padding }}
+              value={value}
+              onChangeText={onChange}
+              title={strings.no_ktp}
+              keyboardType={'numeric'}
+              maxLength={16}
+            />
+          )}
+          // rules={{
+          //   required: { value: true, message: 'KTP Harus Diisi' },
+          //   minLength: { value: 16, message: 'KTP Harus 16 Digit' },
+          // }}
+        />
+      </View>
+    );
   };
 
   return (
@@ -49,29 +108,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
         style={{ flex: 1 }}
         keyboardVerticalOffset={50}>
         <HeaderPinjaman index={4} />
-        <View
-          style={{
-            padding: sizes.padding,
-            marginVertical: sizes.padding,
-            backgroundColor: colors.white,
-            borderRadius: sizes.padding,
-          }}>
-          <TextInputForm
-            value={nameValue}
-            onChangeText={onChangeName}
-            title={strings.nama}
-          />
-          <TextInputForm
-            value={phoneValue}
-            onChangeText={onChangePhone}
-            title={strings.no_telp}
-          />
-          <TextInputForm
-            value={emailValue}
-            onChangeText={onChangeEmail}
-            title={strings.email}
-          />
-        </View>
+        <ScrollView>{renderKtpCard()}</ScrollView>
         <View
           style={{
             flexDirection: 'row',
@@ -88,7 +125,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
-            onPress={navigateToStep3}
+            onPress={handleSubmit(submitKtp)}
             shadow
             text={strings.ajukan}
             buttonContainerStyle={{ width: '48%' }}
@@ -106,5 +143,23 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: sizes.padding,
     marginTop: sizes.padding,
+  },
+  imageKtp: {
+    width: '100%',
+    height: SCREEN_HEIGHT * 0.25,
+    borderRadius: sizes.padding,
+  },
+  cardContainer: {
+    padding: sizes.padding,
+    backgroundColor: colors.white,
+    borderRadius: sizes.padding,
+  },
+  iconContainer: {
+    borderRadius: sizes.padding,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

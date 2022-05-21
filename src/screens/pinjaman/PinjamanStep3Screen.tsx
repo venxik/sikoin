@@ -47,8 +47,6 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     },
   });
 
-  console.log('test');
-
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView

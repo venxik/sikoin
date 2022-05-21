@@ -160,4 +160,5 @@ export type PinjamanStackParamList = {
   PinjamanStep3Screen: undefined;
   PinjamanStep4Screen: undefined;
   PinjamanSucessScreen: undefined;
+  DaftarKtpCameraScreen: undefined;
 };

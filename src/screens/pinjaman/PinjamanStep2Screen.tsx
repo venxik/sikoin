@@ -85,7 +85,6 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 />
               )}
             />
-
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller

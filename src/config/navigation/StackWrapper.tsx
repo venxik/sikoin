@@ -474,6 +474,10 @@ const PinjamanStackNavigator = () => (
       name="PinjamanStep4Screen"
       component={screens.PinjamanStep4}
     />
+    <PinjamanStack.Screen
+      name="DaftarKtpCameraScreen"
+      component={screens.DaftarKtpCameraScreen}
+    />
   </PinjamanStack.Navigator>
 );
 
