@@ -222,7 +222,6 @@ export default PinjamanStep3;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: sizes.padding,
   },
   innerContainer: {
     borderRadius: sizes.padding,

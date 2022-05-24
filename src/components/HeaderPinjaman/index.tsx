@@ -46,6 +46,18 @@ const HeaderPinjaman = (props: HeaderPinjamanProps) => {
             { backgroundColor: index > 3 ? colors.primary : colors.white },
           ]}
         />
+        <View
+          style={[
+            styles.line,
+            { backgroundColor: index > 4 ? colors.primary : colors.white },
+          ]}
+        />
+        <View
+          style={[
+            styles.dot,
+            { backgroundColor: index > 4 ? colors.primary : colors.white },
+          ]}
+        />
       </View>
     </View>
   );
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   line: {
-    width: SCREEN_WIDTH * 0.16,
+    width: SCREEN_WIDTH * 0.12,
     height: 4,
     backgroundColor: colors.primary,
   },

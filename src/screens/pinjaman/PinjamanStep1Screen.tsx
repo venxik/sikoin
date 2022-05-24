@@ -125,6 +125,5 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     paddingHorizontal: sizes.padding,
-    marginTop: sizes.padding,
   },
 });

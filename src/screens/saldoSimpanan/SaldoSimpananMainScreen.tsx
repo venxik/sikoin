@@ -73,8 +73,9 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
             onPress={() =>
-              navigation.navigate('TopupStackNavigator', {
-                screen: 'TopupMainScreen',
+              navigation.navigate('TopupPenarikanStackNavigator', {
+                screen: 'TopupPenarikanMainScreen',
+                params: { isTopup: true },
               })
             }
           />
@@ -111,7 +112,12 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
-            onPress={() => null}
+            onPress={() =>
+              navigation.navigate('TopupPenarikanStackNavigator', {
+                screen: 'TopupPenarikanMainScreen',
+                params: { isTopup: false },
+              })
+            }
           />
           <Button
             icon={icons.icon_mutasi_primary}

@@ -8,17 +8,31 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Button, HeaderBack, Popup1Button } from '../../../components';
-import { TopupStackParamList } from '../../../config/navigation/model';
-import { colors, icons, images, sizes, strings } from '../../../constants';
-import { formatter } from '../../../utils';
+import { Button, HeaderBack, Popup1Button } from '../../components';
+import { TopupPenarikanStackParamList } from '../../config/navigation/model';
+import { colors, icons, images, sizes, strings } from '../../constants';
+import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<TopupStackParamList, 'TopupDetailScreen'>;
+type Props = NativeStackScreenProps<
+  TopupPenarikanStackParamList,
+  'TopupPenarikanDetailScreen'
+>;
 
 const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
-  const { selectedTopup, nominal } = route.params;
+  const { selectedTopupPenarikan, nominal, isTopup } = route.params;
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  const navigateToPembayaranScreen = () => {
+    navigation.navigate('TopupPayment', {
+      screen: 'PaymentScreen',
+      params: { nominal: parseInt(nominal) },
+    });
+  };
+
+  const navigateToPenarikanSuccess = () => {
+    navigation.navigate('PenarikanSuccessScreen');
+  };
 
   const renderRightButtonHeader = () => {
     return (
@@ -32,12 +46,60 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     );
   };
 
-  const navigateToPembayaranScreen = () => {
-    navigation.navigate('TopupPayment', {
-      screen: 'PaymentScreen',
-      params: { nominal: parseInt(nominal) },
-    });
-  };
+  const renderTopupDetail = () => (
+    <View>
+      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
+        {strings.rincian}
+      </Text>
+      <View
+        style={[
+          styles.rowContainer,
+          {
+            paddingBottom: sizes.padding * 0.5,
+            borderStyle: 'dashed',
+            justifyContent: 'space-between',
+            width: '100%',
+          },
+        ]}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View
+            style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]}
+          />
+          <Text style={styles.textJumlahTopup}>{strings.jumlah_topup}</Text>
+        </View>
+        <Text style={styles.textJumlahTopup}>
+          Rp {formatter.formatStringToCurrencyNumber(nominal)}
+        </Text>
+      </View>
+    </View>
+  );
+
+  const renderPenarikanDetail = () => (
+    <View
+      style={[
+        {
+          borderBottomWidth: 1,
+          borderBottomColor: colors.strokeGrey,
+          paddingBottom: sizes.padding,
+          marginBottom: 10,
+          borderStyle: 'dashed',
+          justifyContent: 'space-between',
+          width: '100%',
+        },
+      ]}>
+      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
+        {strings.bank_tujuan}
+      </Text>
+      <Text
+        style={[
+          styles.textTitle,
+          { marginTop: sizes.padding, marginBottom: 0 },
+        ]}>
+        12321321321
+      </Text>
+      <Text style={[styles.textTitle, { marginBottom: 0 }]}>Bank BCA</Text>
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -71,31 +133,9 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         </Text>
         <View style={styles.rowContainer}>
           <View style={styles.dot} />
-          <Text style={styles.textSelectedTopup}>{selectedTopup}</Text>
+          <Text style={styles.textSelectedTopup}>{selectedTopupPenarikan}</Text>
         </View>
-        <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
-          {strings.rincian}
-        </Text>
-        <View
-          style={[
-            styles.rowContainer,
-            {
-              paddingBottom: sizes.padding * 0.5,
-              borderStyle: 'dashed',
-              justifyContent: 'space-between',
-              width: '100%',
-            },
-          ]}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View
-              style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]}
-            />
-            <Text style={styles.textJumlahTopup}>{strings.jumlah_topup}</Text>
-          </View>
-          <Text style={styles.textJumlahTopup}>
-            Rp {formatter.formatStringToCurrencyNumber(nominal)}
-          </Text>
-        </View>
+        {isTopup ? renderTopupDetail() : renderPenarikanDetail()}
         <View
           style={[
             styles.rowContainerBorderless,
@@ -120,11 +160,13 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           marginHorizontal: sizes.padding,
           width: '90%',
         }}
-        text={strings.pilih_pembayaran}
+        text={isTopup ? strings.pilih_pembayaran : strings.ajukan_penarikan}
         icon={icons.arrow_right_button_white}
         iconLocation={'right'}
         shadow={false}
-        onPress={navigateToPembayaranScreen}
+        onPress={
+          isTopup ? navigateToPembayaranScreen : navigateToPenarikanSuccess
+        }
       />
     </SafeAreaView>
   );

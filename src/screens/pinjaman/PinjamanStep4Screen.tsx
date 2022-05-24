@@ -1,4 +1,3 @@
-import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
 import React from 'react';
@@ -28,14 +27,9 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const { noKtp, gambarKtp } = ktpData || {};
 
   const submitKtp = (data: { noKtp: string }) => {
-    // if (data) {
-    navigation.dispatch(() => {
-      return CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'HomeTab' }],
-      });
-    });
-    // }
+    if (data) {
+      navigation.navigate('PinjamanStep5Screen');
+    }
   };
 
   const changeKtpImage = () => {
@@ -127,7 +121,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
           <Button
             onPress={handleSubmit(submitKtp)}
             shadow
-            text={strings.ajukan}
+            text={strings.lanjutkan}
             buttonContainerStyle={{ width: '48%' }}
           />
         </View>
@@ -142,7 +136,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     paddingHorizontal: sizes.padding,
-    marginTop: sizes.padding,
   },
   imageKtp: {
     width: '100%',

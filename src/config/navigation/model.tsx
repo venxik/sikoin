@@ -47,6 +47,7 @@ export type DaftarKoperasiParamList = {
   DaftarKoperasiStep1Screen: undefined;
   DaftarKoperasiStep2Screen: undefined;
   DaftarKoperasiSuccessScreen: { email: string };
+  DaftarKoperasiFailedScreen: undefined;
 };
 
 export type HomeTabParamList = {
@@ -61,7 +62,9 @@ export type HomeStackParamList = {
     | NavigatorScreenParams<SaldoSimpananStackParamList>
     | undefined;
   DiskonStackNavigator: DiskonStackParamList | undefined;
-  TopupStackNavigator: TopupStackParamList | undefined;
+  TopupPenarikanStackNavigator:
+    | NavigatorScreenParams<TopupPenarikanStackParamList>
+    | undefined;
   TransaksiStackNavigator: TransaksiStackParamList | undefined;
   VoucherStackNavigator:
     | NavigatorScreenParams<VoucherStackParamList>
@@ -128,13 +131,20 @@ export type SaldoSimpananStackParamList = {
   TransaksiStackNavigator:
     | NavigatorScreenParams<TransaksiStackParamList>
     | undefined;
-  TopupStackNavigator: NavigatorScreenParams<TopupStackParamList> | undefined;
+  TopupPenarikanStackNavigator:
+    | NavigatorScreenParams<TopupPenarikanStackParamList>
+    | undefined;
 };
 
-export type TopupStackParamList = {
-  TopupMainScreen: undefined;
-  TopupDetailScreen: { selectedTopup: string; nominal: string };
+export type TopupPenarikanStackParamList = {
+  TopupPenarikanMainScreen: { isTopup: boolean };
+  TopupPenarikanDetailScreen: {
+    selectedTopupPenarikan: string;
+    nominal: string;
+    isTopup: boolean;
+  };
   TopupPayment: NavigatorScreenParams<PaymentStackParamList> | undefined;
+  PenarikanSuccessScreen: undefined;
   // TopupPaymentScreen: { nominal: string };
   // TopupSuccessScreen: undefined;
 };
@@ -159,6 +169,8 @@ export type PinjamanStackParamList = {
   PinjamanStep2Screen: undefined;
   PinjamanStep3Screen: undefined;
   PinjamanStep4Screen: undefined;
+  PinjamanStep5Screen: undefined;
   PinjamanSucessScreen: undefined;
+  PinjamanReviewScreen: undefined;
   DaftarKtpCameraScreen: undefined;
 };

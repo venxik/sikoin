@@ -84,6 +84,8 @@ function* sendUserKoperasiEmail(
         navigate('DaftarKoperasiSuccessScreen', {
           email: action.payload.email,
         });
+      } else {
+        navigate('DaftarKoperasiFailedScreen');
       }
     } else {
       yield put(updateUserKoperasiEmailFailed('Error'));

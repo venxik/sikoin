@@ -9,19 +9,12 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { Button, HeaderBack } from '../../../components';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  sizes,
-  strings,
-} from '../../../constants';
-import { formatter } from '../../../utils';
+import { Button, HeaderBack } from '../../components';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
+import { formatter } from '../../utils';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { TopupStackParamList } from '../../../config/navigation/model';
-import { useAppSelector } from '../../../config';
+import { TopupPenarikanStackParamList } from '../../config/navigation/model';
 
 const defaultNominal = [
   { item: '10', value: '10000' },
@@ -33,6 +26,7 @@ const defaultNominal = [
 ];
 
 const jenisTopup = [strings.simpanan_sukarela, strings.voucher_belanja];
+const jenisPenarikan = [strings.simpanan_sukarela];
 
 const value = [
   '1',
@@ -49,14 +43,18 @@ const value = [
   'delete',
 ];
 
-type Props = NativeStackScreenProps<TopupStackParamList, 'TopupMainScreen'>;
+type Props = NativeStackScreenProps<
+  TopupPenarikanStackParamList,
+  'TopupPenarikanMainScreen'
+>;
 
-const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
-  const { topUpNominal } = useAppSelector(s => s.SaldoSimpananReducer) || {};
-  const [nominal, setNominal] = useState<string>(topUpNominal);
+const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
+  const { isTopup } = route.params;
+  const [nominal, setNominal] = useState<string>('');
   const [nominalContainer, setNominalContainer] = useState<string>('');
   const [selectedNominal, setSelectedNominal] = useState<number>(-1);
-  const [selectedTopup, setSelectedTopup] = useState<string>('');
+  const [selectedTopupPenarikan, setSelectedTopupPenarikan] =
+    useState<string>('');
 
   //BottomSheet
   const sheetRef = useRef<BottomSheet>(null);
@@ -64,8 +62,12 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
   const handleSheetChange = useCallback(() => null, []);
 
   const navigateToDetailScreen = () => {
-    if (!isEmpty(nominal) && !isEmpty(selectedTopup)) {
-      navigation.navigate('TopupDetailScreen', { selectedTopup, nominal });
+    if (!isEmpty(nominal) && !isEmpty(selectedTopupPenarikan)) {
+      navigation.navigate('TopupPenarikanDetailScreen', {
+        selectedTopupPenarikan,
+        nominal,
+        isTopup,
+      });
     }
   };
 
@@ -79,11 +81,11 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
     }
   };
 
-  const selectJenisTopup = (item: string) => {
-    if (selectedTopup === item) {
-      setSelectedTopup('');
+  const selectJenisTopupPenarikan = (item: string) => {
+    if (selectedTopupPenarikan === item) {
+      setSelectedTopupPenarikan('');
     } else {
-      setSelectedTopup(item);
+      setSelectedTopupPenarikan(item);
     }
   };
 
@@ -281,31 +283,56 @@ const TopupMainScreen: React.FC<Props> = ({ navigation }) => {
           ]}>
           {strings.pilih_saldo}
         </Text>
-        {jenisTopup.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={{
-              borderBottomColor: colors.strokeDarkGrey,
-              borderBottomWidth: 0.5,
-              paddingVertical: sizes.padding,
-              paddingLeft: 10,
-            }}
-            onPress={() => selectJenisTopup(item)}>
-            <View style={styles.textNominalContainer}>
-              <View style={styles.radioOuter}>
-                {item === selectedTopup && <View style={styles.radioInner} />}
-              </View>
-              <Text style={styles.textJenisTopup}>{item}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        {isTopup
+          ? jenisTopup.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  borderBottomColor: colors.strokeDarkGrey,
+                  borderBottomWidth: 0.5,
+                  paddingVertical: sizes.padding,
+                  paddingLeft: 10,
+                }}
+                onPress={() => selectJenisTopupPenarikan(item)}>
+                <View style={styles.textNominalContainer}>
+                  <View style={styles.radioOuter}>
+                    {item === selectedTopupPenarikan && (
+                      <View style={styles.radioInner} />
+                    )}
+                  </View>
+                  <Text style={styles.textJenisTopup}>{item}</Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          : jenisPenarikan.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  borderBottomColor: colors.strokeDarkGrey,
+                  borderBottomWidth: 0.5,
+                  paddingVertical: sizes.padding,
+                  paddingLeft: 10,
+                }}
+                onPress={() => selectJenisTopupPenarikan(item)}>
+                <View style={styles.textNominalContainer}>
+                  <View style={styles.radioOuter}>
+                    {item === selectedTopupPenarikan && (
+                      <View style={styles.radioInner} />
+                    )}
+                  </View>
+                  <Text style={styles.textJenisTopup}>{item}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
       </View>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack title={strings.top_up} />
+      <HeaderBack
+        title={isTopup ? strings.top_up : strings.penarikan_simpanan}
+      />
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
         {renderSelectNominal()}
         {renderJenisTopup()}

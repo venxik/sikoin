@@ -38,6 +38,8 @@ export default {
   masukan_no_anggota: 'Masukkan nomor anggotamu...',
   masukan_email: 'Masukkan emailmu...',
   cek_inbox: 'Cek Inboxmu ya!',
+  daftar_koperasi_failed_title:
+    '“Ups, sepertinya koperasimu belum terdaftar, yuk lihat bagaimana Sikoin bisa membawa koperasimu lebih maju',
 
   /*BUTTON*/
   kembali_ke_login: 'Kembali Ke Login',
@@ -86,6 +88,11 @@ export default {
   // PINJAMAN
   lanjutkan: 'Lanjutkan',
   ajukan: 'Ajukan',
+  masukkan_nominal: 'Masukkan Nominal Pengajuan',
+  nominal_pengajuan: 'Nominal Pengajuan Pinjaman',
+  nama_lengkap: 'Nama Lengkap',
+  nomor_rekening: 'Nomor Rekening',
+  nomor_ktp: 'Nomor KTP',
 
   /*DOKUMEN*/
   unduh_file: 'Unduh File',
@@ -126,7 +133,7 @@ export default {
   voucher_belanja: 'Voucher Belanja',
   pilih_saldo: 'Pilih saldo yang akan ditop-up',
   konfirmasi: 'Konfirmasi',
-  ok: 'OK',
+  ok: 'Ok 👍',
   popup_topup_title: 'Tenang... semuanya aman!',
   popup_topup_content:
     'Teknologi cloud computing CoopApp selalu menjaga transaksi & kegiatan berkoperasimu secara real time.',
@@ -141,6 +148,10 @@ export default {
   topup_success_content:
     'Tim kami akan memverifikasi pembayaran Kamu. Dalam waktu 1x24 Jam tim kami akan menghubungi kamu melalui nomor terdaftar dan atau email.',
   kembali: 'Kembali',
+  penarikan_simpanan: 'Penarikan Simpanan',
+  bank_tujuan: 'Bank Tujuan:',
+  ajukan_penarikan: 'Ajukan Penarikan',
+  penarikan_success_title: 'Selamat, Kamu berhasil mengajukan pinjaman!',
 
   /*MARKET*/
   beli_dgn_voucher: 'Beli Dengan Voucher',

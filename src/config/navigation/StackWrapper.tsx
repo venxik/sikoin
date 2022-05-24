@@ -27,7 +27,7 @@ import {
   PinjamanStackParamList,
   ProfileStackParamList,
   SaldoSimpananStackParamList,
-  TopupStackParamList,
+  TopupPenarikanStackParamList,
   TransaksiStackParamList,
   VoucherStackParamList,
 } from './model';
@@ -46,7 +46,8 @@ const DataDiriStack = createNativeStackNavigator<DataDiriStackParamList>();
 const SaldoSimpananStack =
   createNativeStackNavigator<SaldoSimpananStackParamList>();
 const DiskonStack = createNativeStackNavigator<DiskonStackParamList>();
-const TopupStack = createNativeStackNavigator<TopupStackParamList>();
+const TopupPenarikanStack =
+  createNativeStackNavigator<TopupPenarikanStackParamList>();
 const TransaksiStack = createNativeStackNavigator<TransaksiStackParamList>();
 const VoucherStack = createNativeStackNavigator<VoucherStackParamList>();
 const PinjamanStack = createNativeStackNavigator<PinjamanStackParamList>();
@@ -73,7 +74,7 @@ const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
       return false;
     case 'DiskonStackNavigator':
       return false;
-    case 'TopupStackNavigator':
+    case 'TopupPenarikanStackNavigator':
       return false;
     case 'VoucherStackNavigator':
       return false;
@@ -378,23 +379,30 @@ const PaymentStackNavigator = () => (
   </PaymentStack.Navigator>
 );
 
-const TopupStackNavigator = () => (
-  <TopupStack.Navigator
-    initialRouteName={'TopupMainScreen'}
+const TopupPenarikanStackNavigator = () => (
+  <TopupPenarikanStack.Navigator
+    initialRouteName={'TopupPenarikanMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
     }}>
-    <TopupStack.Screen
-      name="TopupMainScreen"
-      component={screens.TopupMainScreen}
+    <TopupPenarikanStack.Screen
+      name="TopupPenarikanMainScreen"
+      component={screens.TopupPenarikanMainScreen}
     />
-    <TopupStack.Screen
-      name="TopupDetailScreen"
-      component={screens.TopupDetailScreen}
+    <TopupPenarikanStack.Screen
+      name="TopupPenarikanDetailScreen"
+      component={screens.TopupPenarikanDetailScreen}
     />
-    <TopupStack.Screen name="TopupPayment" component={PaymentStackNavigator} />
-  </TopupStack.Navigator>
+    <TopupPenarikanStack.Screen
+      name="TopupPayment"
+      component={PaymentStackNavigator}
+    />
+    <TopupPenarikanStack.Screen
+      name="PenarikanSuccessScreen"
+      component={screens.PenarikanSuccessScreen}
+    />
+  </TopupPenarikanStack.Navigator>
 );
 
 const TransaksiStackNavigator = () => (
@@ -475,6 +483,18 @@ const PinjamanStackNavigator = () => (
       component={screens.PinjamanStep4}
     />
     <PinjamanStack.Screen
+      name="PinjamanStep5Screen"
+      component={screens.PinjamanStep5}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanReviewScreen"
+      component={screens.PinjamanReviewScreen}
+    />
+    <PinjamanStack.Screen
+      name="PinjamanSucessScreen"
+      component={screens.PinjamanSuccessScreen}
+    />
+    <PinjamanStack.Screen
       name="DaftarKtpCameraScreen"
       component={screens.DaftarKtpCameraScreen}
     />
@@ -498,8 +518,8 @@ const HomeStackNavigator = () => (
       component={SaldoSimpananStackNavigator}
     />
     <HomeStack.Screen
-      name="TopupStackNavigator"
-      component={TopupStackNavigator}
+      name="TopupPenarikanStackNavigator"
+      component={TopupPenarikanStackNavigator}
     />
     <HomeStack.Screen
       name="TransaksiStackNavigator"
@@ -526,7 +546,7 @@ const HomeStackNavigator = () => (
 
 const DaftarKoperasiStackNavigator = () => (
   <DaftarKoperasiStack.Navigator
-    initialRouteName={'DaftarKoperasiIntroScreen'}
+    initialRouteName={'DaftarKoperasiStep1Screen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -550,6 +570,10 @@ const DaftarKoperasiStackNavigator = () => (
     <DaftarKoperasiStack.Screen
       name="DaftarKoperasiSuccessScreen"
       component={screens.DaftarKoperasiSuccessScreen}
+    />
+    <DaftarKoperasiStack.Screen
+      name="DaftarKoperasiFailedScreen"
+      component={screens.DaftarKoperasiFailedScreen}
     />
   </DaftarKoperasiStack.Navigator>
 );

@@ -155,7 +155,10 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
   const onClickMiniScrollButton = (showSaldo: boolean) => {
     if (showSaldo) {
-      navigation.navigate('TopupStackNavigator');
+      navigation.navigate('TopupPenarikanStackNavigator', {
+        screen: 'TopupPenarikanMainScreen',
+        params: { isTopup: true },
+      });
     } else {
       navigation.navigate('TransaksiStackNavigator');
     }
