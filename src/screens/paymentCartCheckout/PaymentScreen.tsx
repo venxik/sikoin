@@ -2,17 +2,29 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Button, HeaderBack } from '../../components';
+import { useAppDispatch } from '../../config';
 import { PaymentStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
+import { fetchSubmitTopup } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<PaymentStackParamList, 'PaymentScreen'>;
 
 const PaymentScreen: React.FC<Props> = ({ route, navigation }) => {
-  const { nominal } = route.params;
+  const { nominal, isTopup = false, selectedTopupPenarikan } = route.params;
+  const dispatch = useAppDispatch();
 
   const navigateToSuccessScreen = () => {
-    navigation.navigate('PaymentSuccessScreen');
+    isTopup ? submitTopup() : navigation.navigate('PaymentSuccessScreen');
+  };
+
+  const submitTopup = () => {
+    dispatch(
+      fetchSubmitTopup({
+        jenisSimpananId: selectedTopupPenarikan?.id as number,
+        nominal: nominal,
+      }),
+    );
   };
 
   const renderBankList = () => (

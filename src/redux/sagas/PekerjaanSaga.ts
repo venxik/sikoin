@@ -21,9 +21,7 @@ function* getPekerjaan() {
     const response: AxiosResponse<{ data: PekerjaanResponse }> = yield call(
       PekerjaanApi.getPekerjaan,
     );
-    console.log('getPekerjaan response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getPekerjaanSuccess(data?.data));
     } else {
@@ -43,9 +41,7 @@ function* updatePekerjaan(action: ReturnType<typeof fetchUpdatePekerjaan>) {
       PekerjaanApi.updatePekerjaan,
       action.payload,
     );
-    console.log('updatePekerjaan response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(updatePekerjaanSuccess(data?.data));
       if (!isEmpty(data?.data)) {

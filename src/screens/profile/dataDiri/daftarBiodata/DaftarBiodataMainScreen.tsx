@@ -84,7 +84,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
           />
           <DetailItemList
             title={strings.jumlah_anak}
-            content={jumlahAnak.toString()}
+            content={jumlahAnak?.toString()}
           />
           <DetailItemList title={strings.no_rekening} content={noRek} />
           <DetailItemList title={strings.bank} content={bank} />

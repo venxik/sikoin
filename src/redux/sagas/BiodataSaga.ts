@@ -21,9 +21,7 @@ function* getBiodata() {
     const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
       BiodataApi.getBiodata,
     );
-    console.log('getBiodata response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getBiodataSuccess(data?.data));
     } else {
@@ -43,9 +41,7 @@ function* updateBiodata(action: ReturnType<typeof fetchUpdateBiodata>) {
       BiodataApi.updateBiodata,
       action.payload,
     );
-    console.log('updateBiodata response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(updateBiodataSuccess(data?.data));
       if (!isEmpty(data?.data)) {

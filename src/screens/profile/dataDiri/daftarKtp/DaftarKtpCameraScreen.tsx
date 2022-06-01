@@ -30,7 +30,7 @@ const DaftarKtpCameraScreen: React.FC<Props> = ({ navigation }) => {
       navigation.goBack();
     } catch {
       (e: unknown) => {
-        console.log(e);
+        console.error(e);
       };
     }
   };

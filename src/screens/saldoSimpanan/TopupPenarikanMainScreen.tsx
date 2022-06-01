@@ -1,5 +1,11 @@
 import { isEmpty } from 'lodash';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   View,
   Text,
@@ -15,8 +21,13 @@ import { formatter } from '../../utils';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TopupPenarikanStackParamList } from '../../config/navigation/model';
+import { useAppDispatch, useAppSelector } from '../../config';
+import {
+  fetchCreateSaldoList,
+  fetchCreateSimpananList,
+} from '../../redux/reducers/SaldoSimpananReducer';
 
-const defaultNominal = [
+const topupDefaultNominal = [
   { item: '10', value: '10000' },
   { item: '25', value: '25000' },
   { item: '50', value: '50000' },
@@ -24,9 +35,6 @@ const defaultNominal = [
   { item: '250', value: '250000' },
   { item: '500', value: '500000' },
 ];
-
-const jenisTopup = [strings.simpanan_sukarela, strings.voucher_belanja];
-const jenisPenarikan = [strings.simpanan_sukarela];
 
 const value = [
   '1',
@@ -48,18 +56,31 @@ type Props = NativeStackScreenProps<
   'TopupPenarikanMainScreen'
 >;
 
+type JenisTopupPenarikan = { nama: string; id: number };
+
 const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
   const { isTopup } = route.params;
   const [nominal, setNominal] = useState<string>('');
   const [nominalContainer, setNominalContainer] = useState<string>('');
   const [selectedNominal, setSelectedNominal] = useState<number>(-1);
   const [selectedTopupPenarikan, setSelectedTopupPenarikan] =
-    useState<string>('');
+    useState<JenisTopupPenarikan | null>(null);
 
   //BottomSheet
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
   const handleSheetChange = useCallback(() => null, []);
+
+  const { createSaldoList, createSimpananList } = useAppSelector(
+    s => s.SaldoSimpananReducer,
+  );
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    isTopup
+      ? dispatch(fetchCreateSaldoList())
+      : dispatch(fetchCreateSimpananList());
+  }, []);
 
   const navigateToDetailScreen = () => {
     if (!isEmpty(nominal) && !isEmpty(selectedTopupPenarikan)) {
@@ -81,9 +102,9 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
     }
   };
 
-  const selectJenisTopupPenarikan = (item: string) => {
-    if (selectedTopupPenarikan === item) {
-      setSelectedTopupPenarikan('');
+  const selectJenisTopupPenarikan = (item: JenisTopupPenarikan) => {
+    if (selectedTopupPenarikan?.id === item.id) {
+      setSelectedTopupPenarikan(null);
     } else {
       setSelectedTopupPenarikan(item);
     }
@@ -126,7 +147,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
   const renderDefaultNominal = () => {
     return (
       <View style={styles.nominalButtonContainer}>
-        {defaultNominal.map((item, index) => (
+        {topupDefaultNominal.map((item, index) => (
           <TouchableOpacity
             key={index}
             style={[
@@ -281,9 +302,50 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
             styles.textPilihJumlah,
             { marginLeft: 10, marginBottom: 10 },
           ]}>
-          {strings.pilih_saldo}
+          {isTopup ? strings.pilih_saldo : strings.pilih_saldo_penarikan}
         </Text>
         {isTopup
+          ? createSaldoList?.simpananBelanja?.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  borderBottomColor: colors.strokeDarkGrey,
+                  borderBottomWidth: 0.5,
+                  paddingVertical: sizes.padding,
+                  paddingLeft: 10,
+                }}
+                onPress={() => selectJenisTopupPenarikan(item)}>
+                <View style={styles.textNominalContainer}>
+                  <View style={styles.radioOuter}>
+                    {item.id === selectedTopupPenarikan?.id && (
+                      <View style={styles.radioInner} />
+                    )}
+                  </View>
+                  <Text style={styles.textJenisTopup}>{item.nama}</Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          : createSimpananList?.simpananDapatDitarik.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                style={{
+                  borderBottomColor: colors.strokeDarkGrey,
+                  borderBottomWidth: 0.5,
+                  paddingVertical: sizes.padding,
+                  paddingLeft: 10,
+                }}
+                onPress={() => selectJenisTopupPenarikan(item)}>
+                <View style={styles.textNominalContainer}>
+                  <View style={styles.radioOuter}>
+                    {item.id === selectedTopupPenarikan?.id && (
+                      <View style={styles.radioInner} />
+                    )}
+                  </View>
+                  <Text style={styles.textJenisTopup}>{item.nama}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+        {/* {isTopup
           ? jenisTopup.map((item, index) => (
               <TouchableOpacity
                 key={index}
@@ -323,7 +385,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                   <Text style={styles.textJenisTopup}>{item}</Text>
                 </View>
               </TouchableOpacity>
-            ))}
+            ))} */}
       </View>
     );
   };

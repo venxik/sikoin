@@ -26,13 +26,11 @@ import { formatter } from '../../utils';
 
 function* getKoperasiList() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: KoperasiListResponse[] }> =
       yield call(LoginApi.getKoperasiList);
-    console.log('getKoperasiList response: ', response);
 
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getKoperasiListSuccess(data?.data));
     } else {
@@ -51,8 +49,7 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
       LoginApi.sendUserKoperasi,
       action.payload,
     );
-    console.log('sendUserKoperasi response: ', response.data);
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getUserKoperasiSuccess(data?.data));
       if (!isEmpty(data?.data)) {
@@ -76,8 +73,7 @@ function* sendUserKoperasiEmail(
       LoginApi.sendUserEmailKoperasiParams,
       action.payload,
     );
-    console.log('sendUserKoperasiEmail response: ', response);
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getUserKoperasiSuccess(data?.data));
       if (!isEmpty(data)) {
@@ -103,8 +99,7 @@ function* forgotPassword(action: ReturnType<typeof fetchForgotPassword>) {
       LoginApi.forgotPassword,
       action.payload,
     );
-    console.log('forgotPassword', response);
-    if (response.status === 200) {
+    if (response?.status === 200) {
       yield put(setForgotPasswordStatus('success'));
     } else {
       yield put(setForgotPasswordStatus('failed'));
@@ -119,8 +114,7 @@ function* login(action: ReturnType<typeof fetchLogin>) {
   yield put(showLoading());
   try {
     const response: AxiosResponse = yield call(LoginApi.login, action.payload);
-    console.log('login', response);
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(fetchLoginSuccess(data));
       if (navigationRef.isReady()) {

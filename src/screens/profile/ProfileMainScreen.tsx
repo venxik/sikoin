@@ -46,7 +46,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
       />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>
-          <ProfilePicture disabled={true} />
+          <ProfilePicture disabled={true} isProfile />
           <View style={{ paddingHorizontal: 10, marginBottom: sizes.padding }}>
             <Text style={styles.nameText}>{nama}</Text>
             {/* <Text style={styles.koperasiText}>{koperasiName}</Text> */}

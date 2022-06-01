@@ -5,6 +5,7 @@ import HomeApi from './HomeApi';
 import ProfileApi from './ProfileApi';
 import BiodataApi from './BiodataApi';
 import PekerjaanApi from './PekerjaanApi';
+import SaldoSimpananApi from './SaldoSimpananApi';
 
 export {
   LoginApi,
@@ -14,4 +15,5 @@ export {
   ProfileApi,
   BiodataApi,
   PekerjaanApi,
+  SaldoSimpananApi,
 };

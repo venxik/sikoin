@@ -22,9 +22,7 @@ function* getProfile() {
     const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
       ProfileApi.getProfile,
     );
-    console.log('getProfile response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getProfileSuccess(data?.data));
     } else {
@@ -44,9 +42,7 @@ function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
       ProfileApi.updateProfile,
       action.payload,
     );
-    console.log('updateProfile response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(updateProfileSuccess(data?.data));
       if (!isEmpty(data?.data)) {

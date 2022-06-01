@@ -5,6 +5,7 @@ export interface ProfilePictureProps {
   onPress?: () => void;
   style?: ViewStyle;
   showKoperasi?: boolean;
+  isProfile?: boolean;
   // profilUri: ImageSourcePropType | string;
   // koperasiUri?: ImageSourcePropType | string;
 }

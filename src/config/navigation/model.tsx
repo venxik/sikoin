@@ -20,7 +20,8 @@ declare global {
     interface RootParamList
       extends ParentStackParamList,
         DaftarKoperasiParamList,
-        DataDiriStackParamList {}
+        DataDiriStackParamList,
+        PaymentStackParamList {}
   }
 }
 
@@ -122,7 +123,11 @@ export type PaymentStackParamList = {
   CartScreen: undefined;
   CheckoutScreen: undefined;
   SelectPaymentScreen: undefined;
-  PaymentScreen: { nominal: number };
+  PaymentScreen: {
+    nominal: number;
+    isTopup?: boolean;
+    selectedTopupPenarikan?: { nama: string; id: number } | null;
+  };
   PaymentSuccessScreen: undefined;
 };
 
@@ -139,7 +144,7 @@ export type SaldoSimpananStackParamList = {
 export type TopupPenarikanStackParamList = {
   TopupPenarikanMainScreen: { isTopup: boolean };
   TopupPenarikanDetailScreen: {
-    selectedTopupPenarikan: string;
+    selectedTopupPenarikan: { nama: string; id: number } | null;
     nominal: string;
     isTopup: boolean;
   };

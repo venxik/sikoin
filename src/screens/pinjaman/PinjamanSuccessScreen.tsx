@@ -33,7 +33,7 @@ const PinjamanSuccessScreen: React.FC<Props> = ({ navigation }) => {
           style={styles.icon}
           resizeMode="contain"
         />
-        <Text style={styles.textTitle}>{strings.topup_success_title}</Text>
+        <Text style={styles.textTitle}>{strings.pinjaman_success_title}</Text>
         <Text style={styles.textContent}>{strings.topup_success_content}</Text>
       </View>
       <View style={{ alignItems: 'center', marginTop: sizes.padding }}>

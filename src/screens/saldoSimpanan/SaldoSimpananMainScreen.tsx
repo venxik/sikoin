@@ -1,6 +1,6 @@
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { FC, useCallback, useMemo, useRef } from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderBack, SaldoItemList } from '../../components';
 import { SaldoSimpananStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config';
+import { useAppDispatch, useAppSelector } from '../../config';
 import {
   colors,
   icons,
@@ -24,6 +24,10 @@ import {
   strings,
 } from '../../constants';
 import { formatter } from '../../utils';
+import {
+  fetchSaldoData,
+  fetchSimpananData,
+} from '../../redux/reducers/SaldoSimpananReducer';
 
 type Props = NativeStackScreenProps<
   SaldoSimpananStackParamList,
@@ -60,9 +64,10 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
 
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['40%', '70%'], []);
-  // callbacks
-  const handleSheetChange = useCallback(() => {
-    // console.log('handleSheetChange', index);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    showSaldo ? dispatch(fetchSaldoData()) : dispatch(fetchSimpananData());
   }, []);
 
   const renderSaldoContent = () => {
@@ -95,11 +100,14 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           />
         </View>
         <View style={{ marginTop: 40 }}>
-          <SaldoItemList
-            text={strings.pokok}
-            nominal={saldo.simpananSukarela}
-            onPress={() => null}
-          />
+          {saldo.simpananBelanja?.map((item, i) => (
+            <SaldoItemList
+              key={i}
+              text={item.nama}
+              nominal={item.saldo}
+              onPress={() => null}
+            />
+          ))}
         </View>
       </View>
     );
@@ -139,21 +147,14 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           /> */}
         </View>
         <View style={{ marginTop: 40 }}>
-          <SaldoItemList
-            text={strings.pokok}
-            nominal={simpanan.pokok}
-            onPress={() => null}
-          />
-          <SaldoItemList
-            text={strings.wajib}
-            nominal={simpanan.wajib}
-            onPress={() => null}
-          />
-          <SaldoItemList
-            text={strings.sukarela}
-            nominal={simpanan.sukarela}
-            onPress={() => null}
-          />
+          {simpanan.simpananTerlihat?.map((item, i) => (
+            <SaldoItemList
+              key={i}
+              text={item.nama}
+              nominal={item.saldo}
+              onPress={() => null}
+            />
+          ))}
         </View>
       </View>
     );
@@ -175,8 +176,8 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Image source={icons.icon_rp} style={{ width: 34, height: 34 }} />
           <Text style={styles.textSaldo}>
             {showSaldo
-              ? formatter.formatNumberToCurreny(saldo.total)
-              : formatter.formatNumberToCurreny(simpanan.total)}
+              ? formatter.formatNumberToCurreny(saldo.totalSaldoBelanja)
+              : formatter.formatNumberToCurreny(simpanan.totalSaldoTerlihat)}
           </Text>
         </View>
       </View>
@@ -197,8 +198,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
         backgroundStyle={{ backgroundColor: colors.primaryWhite }}
         ref={sheetRef}
         index={0}
-        snapPoints={snapPoints}
-        onChange={handleSheetChange}>
+        snapPoints={snapPoints}>
         <BottomSheetScrollView>
           <View style={styles.bottomSheetContainer}>
             {showSaldo ? renderSaldoContent() : renderSimpananContent()}

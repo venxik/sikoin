@@ -11,18 +11,31 @@ import { icons, SCREEN_WIDTH } from '../../constants';
 import { ProfilePictureProps } from './model';
 
 const ProfilePicture = (props: ProfilePictureProps) => {
-  const { onPress, style, disabled = false, showKoperasi = true } = props || {};
+  const {
+    onPress,
+    style,
+    disabled = false,
+    showKoperasi = true,
+    isProfile = false,
+  } = props || {};
 
   const { profilePic, logoKoperasi } = useAppSelector(s => s.HomeReducer) || {};
+  const { profilePic: profilePic2, logoKoperasi: logoKoperasi2 } =
+    useAppSelector(s => s.ProfileReducer.profileData) || {};
 
-  const [profileSource, setProfileSource] = useState({ uri: profilePic });
-  const [koperasiSource, setKoperasiSource] = useState({ uri: logoKoperasi });
+  const [profileSource, setProfileSource] = useState({
+    uri: isProfile ? profilePic2 : profilePic,
+  });
+  const [koperasiSource, setKoperasiSource] = useState({
+    uri: isProfile ? logoKoperasi2 : logoKoperasi,
+  });
 
   const [loadingSource] = useState(icons.popup_failed);
   const [errorSource] = useState(icons.popup_failed);
 
   const [isDefault, setIsDefault] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [isErrorProfile, setIsErrorProfile] = useState(false);
+  const [isErrorKoperasi, setIsErrorKoperasi] = useState(false);
 
   useEffect(() => {
     if (!isEmpty(profilePic)) setProfileSource({ uri: profilePic });
@@ -31,17 +44,17 @@ const ProfilePicture = (props: ProfilePictureProps) => {
 
   const profileImage = isDefault
     ? loadingSource
-    : isError
+    : isErrorProfile
     ? errorSource
     : profileSource;
   const koperasiImage = isDefault
     ? loadingSource
-    : isError
+    : isErrorKoperasi
     ? errorSource
     : koperasiSource;
 
   const onErrorProfile = () => {
-    setIsError(true);
+    setIsErrorProfile(true);
   };
 
   const onLoadEndProfile = () => {
@@ -49,7 +62,7 @@ const ProfilePicture = (props: ProfilePictureProps) => {
   };
 
   const onErrorKoperasi = () => {
-    setIsError(true);
+    setIsErrorKoperasi(true);
   };
 
   const onLoadEndKoperasi = () => {

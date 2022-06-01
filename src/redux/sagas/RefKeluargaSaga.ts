@@ -27,9 +27,7 @@ function* getRefKeluarga() {
     const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
       RefKeluargaApi.getRefKeluargaList,
     );
-    console.log('getRefKeluarga response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getRefKeluargaSuccess(data?.data));
     } else {
@@ -49,9 +47,7 @@ function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
       RefKeluargaApi.updateRefKeluarga,
       action.payload,
     );
-    console.log('updateRefKeluarga response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(updateRefKeluargaSuccess(data?.data));
       if (!isEmpty(data?.data)) {
@@ -74,9 +70,7 @@ function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
       RefKeluargaApi.submitRefKeluarga,
       action.payload,
     );
-    console.log('submitRefKeluarga response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(submitRefKeluargaSuccess(data?.data));
       if (!isEmpty(data?.data)) {
@@ -99,9 +93,7 @@ function* deleteRefKeluarga(action: ReturnType<typeof fetchDeleteRefKeluarga>) {
       RefKeluargaApi.deleteRefKeluarga,
       action.payload,
     );
-    console.log('deleteRefKeluarga response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(submitRefKeluargaSuccess(data?.data));
       yield put(setDeleteRefKeluargaStatus('success'));

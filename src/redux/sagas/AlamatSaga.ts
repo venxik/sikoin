@@ -29,8 +29,7 @@ function* getAlamat() {
     const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
       AlamatApi.getAlamatList,
     );
-    console.log('getAlamatList response: ', response);
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getAlamatListSuccess(data?.data));
     } else {
@@ -50,12 +49,8 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
       AlamatApi.updateAlamat,
       action.payload,
     );
-    console.log('updateAlamat response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      console.log('data ', data);
-
       yield put(updateAlamatSuccess(data?.data));
       if (!isEmpty(data)) {
         goBack();
@@ -77,9 +72,7 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
       AlamatApi.submitAlamat,
       action.payload,
     );
-    console.log('submitAlamat response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(submitAlamatSuccess(data?.data));
       if (!isEmpty(data)) {
@@ -102,9 +95,7 @@ function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
       AlamatApi.deleteAlamat,
       action.payload,
     );
-    console.log('deleteAlamat response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(deleteAlamatSuccess(data?.data));
       yield put(setDeleteAlamatStatus('success'));

@@ -56,12 +56,10 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     : { uri: profilePicture.uri };
 
   const onErrorProfile = () => {
-    console.log('onErrorProfile');
     setIsError(true);
   };
 
   const onLoadEndProfile = () => {
-    console.log('onLoadEndProfile');
     setIsDefault(false);
   };
 
@@ -90,10 +88,10 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
           setProfilePicture({ uri: res.uri, data: data });
         })
         .catch(err => {
-          console.log('Image resizer error', err);
+          console.error('Image resizer error', err);
         });
     } catch {
-      (e: unknown) => console.log('Document picker error! ', e);
+      (e: unknown) => console.error('Document picker error! ', e);
     }
   };
 

@@ -93,6 +93,7 @@ export default {
   nama_lengkap: 'Nama Lengkap',
   nomor_rekening: 'Nomor Rekening',
   nomor_ktp: 'Nomor KTP',
+  pinjaman_success_title: 'Selamat, Kamu berhasil mengajukan pinjaman!',
 
   /*DOKUMEN*/
   unduh_file: 'Unduh File',
@@ -132,8 +133,10 @@ export default {
   simpanan_sukarela: 'Simpanan Sukarela',
   voucher_belanja: 'Voucher Belanja',
   pilih_saldo: 'Pilih saldo yang akan ditop-up',
+  pilih_saldo_penarikan: 'Pilih Simpanan yang akan ditarik',
   konfirmasi: 'Konfirmasi',
-  ok: 'Ok 👍',
+  ok: 'Ok',
+  ok_thumbs: 'Ok 👍',
   popup_topup_title: 'Tenang... semuanya aman!',
   popup_topup_content:
     'Teknologi cloud computing CoopApp selalu menjaga transaksi & kegiatan berkoperasimu secara real time.',
@@ -151,7 +154,7 @@ export default {
   penarikan_simpanan: 'Penarikan Simpanan',
   bank_tujuan: 'Bank Tujuan:',
   ajukan_penarikan: 'Ajukan Penarikan',
-  penarikan_success_title: 'Selamat, Kamu berhasil mengajukan pinjaman!',
+  penarikan_success_title: 'Terima kasih atas permohonan penarikan Anda',
 
   /*MARKET*/
   beli_dgn_voucher: 'Beli Dengan Voucher',

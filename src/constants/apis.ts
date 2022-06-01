@@ -28,6 +28,14 @@ const constant = {
       pekerjaan: '/api/pekerjaan',
     },
     chat: '/api/kirim-pesan',
+    saldo: {
+      saldo: '/api/saldo-belanja',
+      createSaldoList: '/api/saldo-belanja/create',
+    },
+    simpanan: {
+      simpanan: '/api/simpanan',
+      createSimpananList: '/api/simpanan/create',
+    },
   },
   errorTypes: {
     generic: 'Error',

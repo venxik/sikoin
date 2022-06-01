@@ -73,7 +73,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     dispatch(
       fetchUpdateBiodata({
         ...data,
-        tanggalLahir: moment(tanggalLahir).format(),
+        tanggalLahir: tanggalLahir ?? moment(tanggalLahir).format(),
       }),
     );
   };

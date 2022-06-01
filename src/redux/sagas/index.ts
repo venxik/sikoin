@@ -23,6 +23,14 @@ import {
   watchUpdateRefKeluarga,
   watchDeleteRefKeluarga,
 } from './RefKeluargaSaga';
+import {
+  watchGetCreateSaldoList,
+  watchGetCreateSimpananList,
+  watchGetSaldoData,
+  watchGetSimpananData,
+  watchSubmitTopup,
+  watchSubmitPenarikan,
+} from './SaldoSimpananSaga';
 
 // Redux Saga: Root Saga
 export function* rootSaga() {
@@ -47,5 +55,11 @@ export function* rootSaga() {
     fork(watchUpdatePekerjaan),
     fork(watchDeleteAlamat),
     fork(watchDeleteRefKeluarga),
+    fork(watchGetSaldoData),
+    fork(watchGetCreateSaldoList),
+    fork(watchSubmitTopup),
+    fork(watchGetSimpananData),
+    fork(watchGetCreateSimpananList),
+    fork(watchSubmitPenarikan),
   ]);
 }

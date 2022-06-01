@@ -29,8 +29,6 @@ const DaftarKoperasiSearchScreen: FC<Props> = ({ navigation }) => {
       const result = namaKoperasiDummy.filter(value =>
         value.nama.includes(koperasi),
       );
-      console.log(result);
-
       setData(result);
     }
   };

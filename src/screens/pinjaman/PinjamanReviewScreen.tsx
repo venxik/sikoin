@@ -39,7 +39,7 @@ const PinjamanReviewScreen: React.FC<Props> = ({ navigation }) => {
         showPopup={showPopup}
         onPress={() => setShowPopup(e => !e)}
         headerImage={images.img_topup_popup}
-        customButtonText={strings.ok}
+        customButtonText={strings.ok_thumbs}
       />
       <HeaderBack
         title={strings.kembali}

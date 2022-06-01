@@ -17,9 +17,7 @@ function* getBerandaUser() {
     const response: AxiosResponse<{ data: BerandaUserResponse }> = yield call(
       HomeApi.getBerandaData,
     );
-    console.log('getBerandaUser response: ', response);
-
-    if (response.status === 200) {
+    if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(getBerandaUserSuccess(data?.data));
     } else {

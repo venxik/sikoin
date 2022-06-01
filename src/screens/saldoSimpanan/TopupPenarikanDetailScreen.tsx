@@ -9,8 +9,10 @@ import {
   Image,
 } from 'react-native';
 import { Button, HeaderBack, Popup1Button } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { TopupPenarikanStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
+import { fetchSubmitPenarikan } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
@@ -23,15 +25,29 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
+  const { createSimpananList } = useAppSelector(s => s.SaldoSimpananReducer);
+
+  const dispatch = useAppDispatch();
+
   const navigateToPembayaranScreen = () => {
     navigation.navigate('TopupPayment', {
       screen: 'PaymentScreen',
-      params: { nominal: parseInt(nominal) },
+      params: {
+        nominal: parseInt(nominal),
+        isTopup: true,
+        selectedTopupPenarikan,
+      },
     });
   };
 
   const navigateToPenarikanSuccess = () => {
-    navigation.navigate('PenarikanSuccessScreen');
+    dispatch(
+      fetchSubmitPenarikan({
+        jenisSimpananId: selectedTopupPenarikan?.id as number,
+        nominal: parseInt(nominal),
+      }),
+    );
+    // navigation.navigate('PenarikanSuccessScreen');
   };
 
   const renderRightButtonHeader = () => {
@@ -95,9 +111,11 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           styles.textTitle,
           { marginTop: sizes.padding, marginBottom: 0 },
         ]}>
-        12321321321
+        {createSimpananList?.noRek}
       </Text>
-      <Text style={[styles.textTitle, { marginBottom: 0 }]}>Bank BCA</Text>
+      <Text style={[styles.textTitle, { marginBottom: 0 }]}>
+        {createSimpananList?.bank}
+      </Text>
     </View>
   );
 
@@ -110,7 +128,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         showPopup={showPopup}
         onPress={() => setShowPopup(e => !e)}
         headerImage={images.img_topup_popup}
-        customButtonText={strings.ok}
+        customButtonText={strings.ok_thumbs}
       />
       <HeaderBack
         title={strings.konfirmasi}
@@ -133,7 +151,9 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         </Text>
         <View style={styles.rowContainer}>
           <View style={styles.dot} />
-          <Text style={styles.textSelectedTopup}>{selectedTopupPenarikan}</Text>
+          <Text style={styles.textSelectedTopup}>
+            {selectedTopupPenarikan?.nama}
+          </Text>
         </View>
         {isTopup ? renderTopupDetail() : renderPenarikanDetail()}
         <View
