@@ -1,0 +1,1076 @@
+{
+	"info": {
+		"_postman_id": "0722ce17-48bd-40e1-b3e0-ed05e5792131",
+		"name": "sikoin-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19658798"
+	},
+	"item": [
+		{
+			"name": "1. api/koperasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/koperasi",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"koperasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. api/koperasi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"namaKoperasi\": \"sikoin\",\r\n    \"noAnggota\": \"2022-03-25-1\",\r\n    \"tanggalLahir\": \"1994-03-25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/koperasi",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"koperasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. api/email-anggota",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : 2,\r\n    \"email\" : \"ward@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/email-anggota",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"email-anggota"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"asd@asd.com\",\r\n    \"password\":\"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/login",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|5ch3MCSX5PnAnJwTSowEw9jmLfn0HFI2kt2O3dDu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/logout",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. api/lupa-password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"wardtabi@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/lupa-password",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"lupa-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. api/beranda-user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/beranda-user",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"beranda-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. api/profile-user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|CNYPQ7Xxj7cQxkx6hcNFL83RshPzA3XmpzRgSHOF",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/profile-user",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"profile-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. api/profile-user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|I0rRYXCis3n0V6uTcZFeBQO8dv6bodXYnqcQOuJz",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"profilePic\": \"default_user1.png\",\r\n    \"nama\": \"Edward\",\r\n    \"noTelp\": \"021-1234\",\r\n    \"email\": \"wardtabi@gmail.com\",\r\n    \"memberSejak\": \"2021-03-13\",\r\n    \"noAnggota\": \"71923767131\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/profile-user",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"profile-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. api/daftar-alamat",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/daftar-alamat",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"daftar-alamat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. api/daftar-alamat",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"judul\": \"Apartemen\",\r\n    \"alamat\": \"Centro city 22/07\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"11520\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/daftar-alamat",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"daftar-alamat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. api/daftar-alamat/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"judul\": \"Apartemen 2\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/daftar-alamat/1",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"daftar-alamat",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19. api/daftar-alamat/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"judul\": \"Apartemen 2\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/daftar-alamat/1",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"daftar-alamat",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. api/biodata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "2|XYRsiTA90y5jhBXLKRTNetULzu7otRP3WjBbRAz5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/biodata",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"biodata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13. api/biodata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|dZuOM9ZGLjE0p1ejibMCfP77i3R8tIdpxAlmarVR",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tempatLahir\": \"Jakarta\",\r\n    \"tanggalLahir\": \"1994-03-13\",\r\n    \"jenisKelamin\": \"Laki-laki\",\r\n    \"golDarah\": \"A\",\r\n    \"kewarganegaraan\": \"WNI\",\r\n    \"pendidikanTerakhir\": \"S1\",\r\n    \"agama\": \"KRISTEN PROTESTAN\",\r\n    \"bank\": \"BCA\",\r\n    \"noRek\": \"123\",\r\n    \"statusPernikahan\": \"MENIKAH\",\r\n    \"jumlahAnak\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/biodata",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"biodata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14. api/ref-keluarga",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/ref-keluarga",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ref-keluarga"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "15. api/ref-keluarga",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Ibu\",\r\n    \"nama\": \"nama Ibu\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ref-keluarga",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ref-keluarga"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16. api/ref-keluarga/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|yUy1rkf4pM5su3dAVxg5EfUEJ7mYrIRaEd8FR5sv",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 2\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ref-keluarga/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ref-keluarga",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20. api/ref-keluarga/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 2\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ref-keluarga/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ref-keluarga",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17. api/pekerjaan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|SaEQLa0bVp70AUILmFGCQ2nPbrDK4iIXBLsRxfDE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/pekerjaan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pekerjaan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18. api/pekerjaan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4|dZuOM9ZGLjE0p1ejibMCfP77i3R8tIdpxAlmarVR",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pekerjaan\": \"freelancer\",\r\n    \"detailPekerjaan\": \"PALU GADA\",\r\n    \"gajiBulanan\": 7100000,\r\n    \"masaKerjaTahun\": 7,\r\n    \"masaKerjaBulan\": 4,\r\n    \"namaPerusahaan\": \"BTC\",\r\n    \"jabatanTerakhir\": \"FREELANCER\",\r\n    \"alamatKantor\": \"Jelambar\",\r\n    \"noTelp\": \"021-1231231312\",\r\n    \"provinsiKota\": \"DKI Jakarta\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pekerjaan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pekerjaan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21. api/kirim-pesan/conversationId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "6|x8QXbXH33u5Af6HYvyG6eITxdjQ1mbRXJyp2Oa4u",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/kirim-pesan/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"kirim-pesan",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "22. api/kirim-pesan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "6|x8QXbXH33u5Af6HYvyG6eITxdjQ1mbRXJyp2Oa4u",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"isi\" : \"testing isi pesan,\r\n    \"conversationId\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/kirim-pesan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"kirim-pesan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "23. api/ktp-dokumen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9|fKrYwyKPoxVvaWzv531mPh3N58CwQzIeivbsJ0Nu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/ktp-dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ktp-dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24. api/ktp-dokumen",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9|fKrYwyKPoxVvaWzv531mPh3N58CwQzIeivbsJ0Nu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gambarKtp",
+							"type": "file",
+							"src": "/C:/Users/EDWARD/Pictures/dummy_ktp.png"
+						},
+						{
+							"key": "dokumenPendukung",
+							"type": "file",
+							"src": "/C:/Users/EDWARD/Pictures/WhatsApp Image 2022-05-12 at 4.42.12 PM (1).jpeg"
+						},
+						{
+							"key": "noKtp",
+							"value": "012345678912345s",
+							"type": "text"
+						},
+						{
+							"key": "selfieKtp",
+							"type": "file",
+							"src": "/C:/Users/EDWARD/Pictures/bg 3.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ktp-dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ktp-dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "25. api/saldo-belanja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/saldo-belanja",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"saldo-belanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "26. api/saldo-belanja/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/saldo-belanja/create",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"saldo-belanja",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "27. api/saldo-belanja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jenisSimpananId\" : 4,\r\n    \"nominal\" : 50000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/saldo-belanja",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"saldo-belanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "28. api/simpanan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/simpanan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"simpanan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "29. api/simpanan/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/simpanan/create",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"simpanan",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "30. api/simpanan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jenisSimpananId\" : 4,\r\n    \"nominal\" : 30000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/simpanan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"simpanan"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8000"
+		}
+	]
+}

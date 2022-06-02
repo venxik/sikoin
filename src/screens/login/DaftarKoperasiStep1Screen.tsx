@@ -26,6 +26,7 @@ import {
 } from '../../redux/reducers/LoginReducer';
 import { sendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
 import { formatter } from '../../utils';
+import { useGetKoperasiListQuery } from '../../redux/api/LoginApi';
 
 type Props = NativeStackScreenProps<
   DaftarKoperasiParamList,
@@ -38,6 +39,10 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const [selected, setSelected] = useState<boolean>(false);
   const { koperasiListData } = useAppSelector(s => s.LoginReducer);
   const [data, setData] = useState<KoperasiListResponse[] | null>(null);
+
+  // // Using a query hook automatically fetches data and returns query values
+  // const { data: dataKoperasi } = useGetKoperasiListQuery();
+  // console.log('dataKoperasi: ', dataKoperasi);
 
   const onChangeKoperasiName = (value: string) => {
     setValue('namaKoperasi', value);
