@@ -29,10 +29,13 @@ function* getKoperasiList() {
   try {
     const response: AxiosResponse<{ data: KoperasiListResponse[] }> =
       yield call(LoginApi.getKoperasiList);
-
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getKoperasiListSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getKoperasiListSuccess(data?.data));
+      } else {
+        yield put(getKoperasiListFailed('Error'));
+      }
     } else {
       yield put(getKoperasiListFailed('Error'));
     }
@@ -51,9 +54,13 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getUserKoperasiSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        navigate('DaftarKoperasiStep2Screen');
+      if (data?.error == null) {
+        yield put(getUserKoperasiSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          navigate('DaftarKoperasiStep2Screen');
+        }
+      } else {
+        yield put(getUserKoperasiFailed('Error'));
       }
     } else {
       yield put(getUserKoperasiFailed('Error'));
@@ -75,13 +82,17 @@ function* sendUserKoperasiEmail(
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getUserKoperasiSuccess(data?.data));
-      if (!isEmpty(data)) {
-        navigate('DaftarKoperasiSuccessScreen', {
-          email: action.payload.email,
-        });
+      if (data?.error == null) {
+        yield put(getUserKoperasiSuccess(data?.data));
+        if (!isEmpty(data)) {
+          navigate('DaftarKoperasiSuccessScreen', {
+            email: action.payload.email,
+          });
+        } else {
+          navigate('DaftarKoperasiFailedScreen');
+        }
       } else {
-        navigate('DaftarKoperasiFailedScreen');
+        yield put(updateUserKoperasiEmailFailed('Error'));
       }
     } else {
       yield put(updateUserKoperasiEmailFailed('Error'));
@@ -116,14 +127,18 @@ function* login(action: ReturnType<typeof fetchLogin>) {
     const response: AxiosResponse = yield call(LoginApi.login, action.payload);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchLoginSuccess(data));
-      if (navigationRef.isReady()) {
-        navigationRef.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: 'HomeTab' }],
-          }),
-        );
+      if (data?.error == null) {
+        yield put(fetchLoginSuccess(data));
+        if (navigationRef.isReady()) {
+          navigationRef.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: 'HomeTab' }],
+            }),
+          );
+        }
+      } else {
+        yield put(fetchLoginFailed('Error'));
       }
     } else {
       yield put(fetchLoginFailed('Error'));

@@ -7,9 +7,9 @@ const RouterContainer: React.FC = () => {
   const { isLoading } = useAppSelector(state => state.loading) || {};
 
   const renderErrorDialog = () => {
-    const { options } = useAppSelector(state => state.errorModal);
+    const { options, error } = useAppSelector(state => state.errorModal);
 
-    return <ErrorModal options={options} />;
+    return <ErrorModal options={options} error={error} />;
   };
 
   return (

@@ -22,14 +22,17 @@ import { formatter } from '../../utils';
 
 function* getRefKeluarga() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
       RefKeluargaApi.getRefKeluargaList,
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getRefKeluargaSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getRefKeluargaSuccess(data?.data));
+      } else {
+        yield put(getRefKeluargaFailed('Error'));
+      }
     } else {
       yield put(getRefKeluargaFailed('Error'));
     }
@@ -41,7 +44,6 @@ function* getRefKeluarga() {
 
 function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
       RefKeluargaApi.updateRefKeluarga,
@@ -49,9 +51,13 @@ function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updateRefKeluargaSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(updateRefKeluargaSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(updateRefKeluargaFailed('Error'));
       }
     } else {
       yield put(updateRefKeluargaFailed('Error'));
@@ -64,7 +70,6 @@ function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
 
 function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
       RefKeluargaApi.submitRefKeluarga,
@@ -72,9 +77,13 @@ function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(submitRefKeluargaSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(submitRefKeluargaSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(submitRefKeluargaFailed('Error'));
       }
     } else {
       yield put(submitRefKeluargaFailed('Error'));

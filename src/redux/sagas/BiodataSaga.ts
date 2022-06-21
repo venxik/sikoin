@@ -23,7 +23,11 @@ function* getBiodata() {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getBiodataSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getBiodataSuccess(data?.data));
+      } else {
+        yield put(getBiodataFailed('Error'));
+      }
     } else {
       yield put(getBiodataFailed('Error'));
     }
@@ -35,7 +39,6 @@ function* getBiodata() {
 
 function* updateBiodata(action: ReturnType<typeof fetchUpdateBiodata>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
       BiodataApi.updateBiodata,
@@ -43,9 +46,13 @@ function* updateBiodata(action: ReturnType<typeof fetchUpdateBiodata>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updateBiodataSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(updateBiodataSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(updateBiodataFailed('Error'));
       }
     } else {
       yield put(updateBiodataFailed('Error'));

@@ -32,14 +32,17 @@ import { navigate } from '../../config/navigation';
 
 function* getSaldoData() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: SaldoDataResponse }> = yield call(
       SaldoSimpananApi.getSaldoData,
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchSaldoDataSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(fetchSaldoDataSuccess(data?.data));
+      } else {
+        yield put(fetchSaldoDataFailed('Error'));
+      }
     } else {
       yield put(fetchSaldoDataFailed('Error'));
     }
@@ -51,14 +54,17 @@ function* getSaldoData() {
 
 function* getCreateSaldoList() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: CreateSaldoListResponse }> =
       yield call(SaldoSimpananApi.getCreateSaldoList);
 
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchCreateSaldoListSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(fetchCreateSaldoListSuccess(data?.data));
+      } else {
+        yield put(fetchCreateSaldoListFailed('Error'));
+      }
     } else {
       yield put(fetchCreateSaldoListFailed('Error'));
     }
@@ -70,7 +76,6 @@ function* getCreateSaldoList() {
 
 function* submitTopup(action: ReturnType<typeof fetchSubmitTopup>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: SubmitTopupResponse }> = yield call(
       SaldoSimpananApi.submitTopup,
@@ -78,10 +83,14 @@ function* submitTopup(action: ReturnType<typeof fetchSubmitTopup>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      if (data != null) {
-        navigate('PaymentSuccessScreen');
+      if (data?.error == null) {
+        if (data.data != null) {
+          yield put(fetchSubmitTopupSuccess(data?.data));
+          navigate('PaymentSuccessScreen');
+        }
+      } else {
+        yield put(fetchSubmitTopupFailed('Error'));
       }
-      yield put(fetchSubmitTopupSuccess(data?.data));
     } else {
       yield put(fetchSubmitTopupFailed('Error'));
     }
@@ -93,14 +102,17 @@ function* submitTopup(action: ReturnType<typeof fetchSubmitTopup>) {
 
 function* getSimpananData() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: SimpananDataResponse }> = yield call(
       SaldoSimpananApi.getSimpananData,
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchSimpananDataSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(fetchSimpananDataSuccess(data?.data));
+      } else {
+        yield put(fetchSimpananDataFailed('Error'));
+      }
     } else {
       yield put(fetchSimpananDataFailed('Error'));
     }
@@ -112,14 +124,16 @@ function* getSimpananData() {
 
 function* getCreateSimpananList() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: CreateSimpananListResponse }> =
       yield call(SaldoSimpananApi.getCreateSimpananList);
-
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchCreateSimpananListSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(fetchCreateSimpananListSuccess(data?.data));
+      } else {
+        yield put(fetchCreateSimpananListFailed('Error'));
+      }
     } else {
       yield put(fetchCreateSimpananListFailed('Error'));
     }
@@ -131,16 +145,18 @@ function* getCreateSimpananList() {
 
 function* submitPenarikan(action: ReturnType<typeof fetchSubmitPenarikan>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: SubmitTopupResponse }> = yield call(
       SaldoSimpananApi.submitPenarikan,
       action.payload,
     );
-    console.log('submitPenarikan reponse', response);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(fetchSubmitPenarikanSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(fetchSubmitPenarikanSuccess(data?.data));
+      } else {
+        yield put(fetchSubmitPenarikanFailed('Error'));
+      }
     } else {
       yield put(fetchSubmitPenarikanFailed('Error'));
     }

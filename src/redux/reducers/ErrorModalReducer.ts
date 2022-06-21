@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 
 interface ErrorState {
   title: string;
-  message: string;
+  message?: string;
 }
 
 interface OptionsState {

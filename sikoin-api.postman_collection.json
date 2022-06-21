@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"namaKoperasi\": \"sikoin\",\r\n    \"noAnggota\": \"2022-03-25-1\",\r\n    \"tanggalLahir\": \"1994-03-25\"\r\n}",
+					"raw": "{\r\n    \"namaKoperasi\": \"SIKOIN Testing\",\r\n    \"noAnggota\": \"QWERTY123\",\r\n    \"tanggalLahir\": \"1994-03-13\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\" : 2,\r\n    \"email\" : \"ward@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"userId\" : 26,\r\n    \"email\" : \"wt@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"asd@asd.com\",\r\n    \"password\":\"pass\"\r\n}",
+					"raw": "{\r\n    \"email\":\"Osborn@koperasi.com\",\r\n    \"password\":\"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -174,7 +174,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -203,7 +203,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "1|CNYPQ7Xxj7cQxkx6hcNFL83RshPzA3XmpzRgSHOF",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -232,21 +232,37 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "1|I0rRYXCis3n0V6uTcZFeBQO8dv6bodXYnqcQOuJz",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
 				},
-				"method": "PATCH",
+				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"profilePic\": \"default_user1.png\",\r\n    \"nama\": \"Edward\",\r\n    \"noTelp\": \"021-1234\",\r\n    \"email\": \"wardtabi@gmail.com\",\r\n    \"memberSejak\": \"2021-03-13\",\r\n    \"noAnggota\": \"71923767131\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePic",
+							"type": "file",
+							"src": "/C:/Users/EDWARD/Pictures/default surveyor.jpg"
+						},
+						{
+							"key": "nama",
+							"value": "Norman Osborn",
+							"type": "text"
+						},
+						{
+							"key": "noTelp",
+							"value": "+62819-0893-154",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "osborn@koperasi.com",
+							"type": "text"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://{{base_url}}/api/profile-user",
@@ -273,7 +289,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -311,7 +327,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -349,7 +365,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -358,7 +374,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"judul\": \"Apartemen 2\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
+					"raw": "{\r\n    \"judul\": \"Apartemen 3\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -366,7 +382,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/daftar-alamat/1",
+					"raw": "http://{{base_url}}/api/daftar-alamat/3",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -374,7 +390,7 @@
 					"path": [
 						"api",
 						"daftar-alamat",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -427,7 +443,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|XYRsiTA90y5jhBXLKRTNetULzu7otRP3WjBbRAz5",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -456,7 +472,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4|dZuOM9ZGLjE0p1ejibMCfP77i3R8tIdpxAlmarVR",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -494,7 +510,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -523,7 +539,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -561,7 +577,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "1|yUy1rkf4pM5su3dAVxg5EfUEJ7mYrIRaEd8FR5sv",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -570,7 +586,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 2\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
+					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 5\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -578,7 +594,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/ref-keluarga/2",
+					"raw": "http://{{base_url}}/api/ref-keluarga/7",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -586,7 +602,7 @@
 					"path": [
 						"api",
 						"ref-keluarga",
-						"2"
+						"7"
 					]
 				}
 			},
@@ -600,7 +616,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "3|j9Sp5QyZDjDoabGXO8mZyXxBhkR3BPKRQcSSb50Q",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -639,7 +655,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "1|SaEQLa0bVp70AUILmFGCQ2nPbrDK4iIXBLsRxfDE",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -668,7 +684,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4|dZuOM9ZGLjE0p1ejibMCfP77i3R8tIdpxAlmarVR",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -706,7 +722,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "6|x8QXbXH33u5Af6HYvyG6eITxdjQ1mbRXJyp2Oa4u",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -714,7 +730,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/kirim-pesan/2",
+					"raw": "http://{{base_url}}/api/kirim-pesan/15",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -722,7 +738,7 @@
 					"path": [
 						"api",
 						"kirim-pesan",
-						"2"
+						"15"
 					]
 				}
 			},
@@ -736,7 +752,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "6|x8QXbXH33u5Af6HYvyG6eITxdjQ1mbRXJyp2Oa4u",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -745,7 +761,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"isi\" : \"testing isi pesan,\r\n    \"conversationId\" : 2\r\n}",
+					"raw": "{\r\n    \"isi\" : \"testing isi pesan\",\r\n    \"conversationId\" : 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -860,7 +876,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -889,7 +905,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
 							"type": "string"
 						}
 					]
@@ -919,7 +935,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "12|OJltvZiOAp7H00jinSL9MoWNhJs3rselbwsScmU9",
 							"type": "string"
 						}
 					]
@@ -928,7 +944,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisSimpananId\" : 4,\r\n    \"nominal\" : 50000\r\n}",
+					"raw": "{\r\n    \"jenisSimpananId\" : 3,\r\n    \"nominal\" : 500000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -957,7 +973,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "176|PbirKqPU4EBtb3N0FO2d20ZfX4qn9VXj1LPq8Q51",
 							"type": "string"
 						}
 					]
@@ -1070,7 +1086,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "localhost:8000"
+			"value": "54.169.249.120"
 		}
 	]
 }

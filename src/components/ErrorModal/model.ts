@@ -3,4 +3,8 @@ export interface ErrorModalProps {
     isVisible?: boolean;
     errorType?: string;
   };
+  error?: {
+    title: string;
+    message?: string;
+  };
 }

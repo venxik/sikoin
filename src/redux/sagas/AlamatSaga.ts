@@ -31,7 +31,11 @@ function* getAlamat() {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getAlamatListSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getAlamatListSuccess(data?.data));
+      } else {
+        yield put(getAlamatListFailed('Error'));
+      }
     } else {
       yield put(getAlamatListFailed('Error'));
     }
@@ -43,7 +47,6 @@ function* getAlamat() {
 
 function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
       AlamatApi.updateAlamat,
@@ -51,9 +54,13 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updateAlamatSuccess(data?.data));
-      if (!isEmpty(data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(updateAlamatSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(updateAlamatFailed('Error'));
       }
     } else {
       yield put(updateAlamatFailed('Error'));
@@ -66,7 +73,6 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
 
 function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
       AlamatApi.submitAlamat,
@@ -74,9 +80,13 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(submitAlamatSuccess(data?.data));
-      if (!isEmpty(data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(submitAlamatSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(submitAlamatFailed('Error'));
       }
     } else {
       yield put(submitAlamatFailed('Error'));
@@ -89,7 +99,6 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
 
 function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
       AlamatApi.deleteAlamat,
@@ -97,8 +106,13 @@ function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(deleteAlamatSuccess(data?.data));
-      yield put(setDeleteAlamatStatus('success'));
+      if (data?.error == null) {
+        yield put(deleteAlamatSuccess(data?.data));
+        yield put(setDeleteAlamatStatus('success'));
+      } else {
+        yield put(deleteAlamatFailed('Error'));
+        yield put(setDeleteAlamatStatus('failed'));
+      }
     } else {
       yield put(deleteAlamatFailed('Error'));
       yield put(setDeleteAlamatStatus('failed'));

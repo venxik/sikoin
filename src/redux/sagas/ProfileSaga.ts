@@ -17,14 +17,17 @@ import {
 
 function* getProfile() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
       ProfileApi.getProfile,
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getProfileSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getProfileSuccess(data?.data));
+      } else {
+        yield put(getProfileFailed('Error'));
+      }
     } else {
       yield put(getProfileFailed('Error'));
     }
@@ -36,7 +39,6 @@ function* getProfile() {
 
 function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
       ProfileApi.updateProfile,
@@ -44,9 +46,13 @@ function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updateProfileSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(updateProfileSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(updateProfileFailed('Error'));
       }
     } else {
       yield put(updateProfileFailed('Error'));

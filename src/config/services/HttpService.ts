@@ -41,7 +41,7 @@ class HttpService {
     // setup interceptor for http response
     http.interceptors.response.use(
       // success response
-      response => response,
+      this.handleResponseInterceptor,
       // error response
       this.handleErrorInterceptor,
     );
@@ -74,10 +74,18 @@ class HttpService {
     return request;
   };
 
+  // Response interceptor to manage error message
+  handleResponseInterceptor = (response: AxiosResponse) => {
+    store.dispatch(hideLoading());
+    const error = response.data.error;
+    if (error != null) {
+      this.showErrorDialogHandler(apis.errorTypes.badRequest, error);
+    }
+  };
+
   // Response interceptor to manage token refresh
   handleErrorInterceptor = (error: AxiosError) => {
     // const responseURL = error.response?.config.url;
-    store.dispatch(hideLoading());
     // if (
     //   apis.authPathArray.some(substring => !responseURL?.includes(substring))
     // ) {
@@ -97,12 +105,15 @@ class HttpService {
     // return Promise.reject(response);
   };
 
-  showErrorDialogHandler = (errorType: string) => {
+  showErrorDialogHandler = (errorType: string, errorMessage?: string) => {
     store.dispatch(
       showErrorModal({
         options: {
           screenSource: 'HttpService',
           errorType,
+        },
+        error: {
+          title: errorMessage as string,
         },
       }),
     );

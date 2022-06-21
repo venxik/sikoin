@@ -12,14 +12,17 @@ import { formatter } from '../../utils';
 
 function* getBerandaUser() {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: BerandaUserResponse }> = yield call(
       HomeApi.getBerandaData,
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getBerandaUserSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getBerandaUserSuccess(data?.data));
+      } else {
+        yield put(getBerandaUserFailed('Error'));
+      }
     } else {
       yield put(getBerandaUserFailed('Error'));
     }

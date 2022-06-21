@@ -23,7 +23,11 @@ function* getPekerjaan() {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(getPekerjaanSuccess(data?.data));
+      if (data?.error == null) {
+        yield put(getPekerjaanSuccess(data?.data));
+      } else {
+        yield put(getPekerjaanFailed('Error'));
+      }
     } else {
       yield put(getPekerjaanFailed('Error'));
     }
@@ -35,7 +39,6 @@ function* getPekerjaan() {
 
 function* updatePekerjaan(action: ReturnType<typeof fetchUpdatePekerjaan>) {
   yield put(showLoading());
-
   try {
     const response: AxiosResponse<{ data: PekerjaanResponse }> = yield call(
       PekerjaanApi.updatePekerjaan,
@@ -43,9 +46,13 @@ function* updatePekerjaan(action: ReturnType<typeof fetchUpdatePekerjaan>) {
     );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
-      yield put(updatePekerjaanSuccess(data?.data));
-      if (!isEmpty(data?.data)) {
-        goBack();
+      if (data?.error == null) {
+        yield put(updatePekerjaanSuccess(data?.data));
+        if (!isEmpty(data?.data)) {
+          goBack();
+        }
+      } else {
+        yield put(updatePekerjaanFailed('Error'));
       }
     } else {
       yield put(updatePekerjaanFailed('Error'));
