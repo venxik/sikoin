@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { HeaderBack, SaldoItemList } from '../../components';
-import { SaldoSimpananStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
   colors,
@@ -30,7 +30,7 @@ import {
 } from '../../redux/reducers/SaldoSimpananReducer';
 
 type Props = NativeStackScreenProps<
-  SaldoSimpananStackParamList,
+  HomeStackParamList,
   'SaldoSimpananMainScreen'
 >;
 
@@ -78,20 +78,13 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
             onPress={() =>
-              navigation.navigate('TopupPenarikanStackNavigator', {
-                screen: 'TopupPenarikanMainScreen',
-                params: { isTopup: true },
-              })
+              navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })
             }
           />
           <Button
             icon={icons.icon_mutasi_primary}
             text={strings.mutasi}
-            onPress={() =>
-              navigation.navigate('TransaksiStackNavigator', {
-                screen: 'TransaksiMainScreen',
-              })
-            }
+            onPress={() => navigation.navigate('TransaksiMainScreen')}
           />
           <Button
             icon={icons.icon_transaksi_primary}
@@ -121,20 +114,15 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
             onPress={() =>
-              navigation.navigate('TopupPenarikanStackNavigator', {
-                screen: 'TopupPenarikanMainScreen',
-                params: { isTopup: false },
+              navigation.navigate('TopupPenarikanMainScreen', {
+                isTopup: false,
               })
             }
           />
           <Button
             icon={icons.icon_mutasi_primary}
             text={strings.mutasi}
-            onPress={() =>
-              navigation.navigate('TransaksiStackNavigator', {
-                screen: 'TransaksiMainScreen',
-              })
-            }
+            onPress={() => navigation.navigate('TransaksiMainScreen')}
           />
           {/* <Button
             icon={icons.icon_mutasi_primary}

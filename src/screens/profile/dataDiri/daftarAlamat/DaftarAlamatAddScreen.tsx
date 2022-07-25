@@ -17,11 +17,11 @@ import {
   fetchUpdateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarAlamatAddScreen'
 >;
 

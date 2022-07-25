@@ -15,15 +15,12 @@ import {
   HeaderPinjaman,
   TextInputForm,
 } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
 import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanStep2Screen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep2Screen'>;
 
 const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
   const navigateToStep3 = (data: BiodataResponse) => {

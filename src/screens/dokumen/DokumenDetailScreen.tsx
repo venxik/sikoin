@@ -20,13 +20,10 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DokumenStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { MemberDokumen } from '../../redux/reducers/DokumenReducer';
 
-type Props = NativeStackScreenProps<
-  DokumenStackParamList,
-  'DokumenDetailScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'DokumenDetailScreen'>;
 
 const DokumenDetailScreen: FC<Props> = ({ route }) => {
   const { item } = route.params;

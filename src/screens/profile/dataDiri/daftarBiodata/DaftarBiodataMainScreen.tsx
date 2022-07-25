@@ -10,12 +10,12 @@ import { colors, icons, sizes, strings } from '../../../../constants';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
 import { fetchBiodata } from '../../../../redux/reducers/BiodataReducer';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarBiodataMainScreen'
 >;
 

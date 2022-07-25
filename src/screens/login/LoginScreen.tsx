@@ -20,7 +20,7 @@ import {
 import { formatter } from '../../utils';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { LoginStackParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchForgotPassword,
@@ -28,7 +28,7 @@ import {
   setForgotPasswordStatus,
 } from '../../redux/reducers/LoginReducer';
 
-type Props = NativeStackScreenProps<LoginStackParamList, 'LoginScreen'>;
+type Props = NativeStackScreenProps<ParentStackParamList, 'LoginScreen'>;
 type FormValues = {
   email: string;
   password: string;
@@ -56,7 +56,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToDaftarKoperasi = () => {
-    navigation.navigate('DaftarKoperasiStackNavigator');
+    navigation.navigate('DaftarKoperasiStep1Screen');
   };
 
   const doLogin = (data: FormValues) => {

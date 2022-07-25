@@ -3,12 +3,12 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Button, HeaderBack } from '../../components';
 import { useAppDispatch } from '../../config';
-import { PaymentStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { fetchSubmitTopup } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<PaymentStackParamList, 'PaymentScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PaymentScreen'>;
 
 const PaymentScreen: React.FC<Props> = ({ route, navigation }) => {
   const { nominal, isTopup = false, selectedTopupPenarikan } = route.params;

@@ -6,11 +6,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Button, CheckoutItem, HeaderBack } from '../../components';
 import CardAlamat from '../../components/CardAlamat';
 import { useAppSelector } from '../../config';
-import { PaymentStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<PaymentStackParamList, 'CheckoutScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'CheckoutScreen'>;
 
 const Section = ({
   title,
@@ -126,11 +126,16 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
           paddingHorizontal: sizes.padding,
         }}>
         <Section title={strings.alamat_tujuan}>
-          <CardAlamat
-            item={alamatList[0]}
-            onPressUbah={navigateToAlamatScreen}
-            isCheckout
-          />
+          {/**TODO ALAMAT IS EMPTY NEED VALIDATION TELL DIMAS */}
+          {alamatList.length > 1 ? (
+            <CardAlamat
+              item={alamatList[0]}
+              onPressUbah={navigateToAlamatScreen}
+              isCheckout
+            />
+          ) : (
+            <Text>Daftar Alamat Terlebih Dahulu</Text>
+          )}
         </Section>
         <Section>
           {cartItemDataList.map((item, index) => (

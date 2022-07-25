@@ -11,11 +11,11 @@ import {
 } from '../../../../constants';
 import { addKtpImage } from '../../../../redux/reducers/KtpReducer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch } from '../../../../config';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarKtpCameraScreen'
 >;
 

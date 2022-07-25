@@ -53,7 +53,7 @@ const OnboardingScreen: FC<Props> = ({ navigation }) => {
 
   const navigateToLoginScreen = () => {
     AsyncStore.storeData('@onboardingComplete', 'true');
-    navigation.replace('LoginStackNavigator');
+    navigation.replace('LoginScreen');
   };
 
   const scrollHandler = useAnimatedScrollHandler({

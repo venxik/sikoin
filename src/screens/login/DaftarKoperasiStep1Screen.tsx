@@ -16,7 +16,7 @@ import {
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
@@ -26,10 +26,9 @@ import {
 } from '../../redux/reducers/LoginReducer';
 import { sendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
 import { formatter } from '../../utils';
-import { useGetKoperasiListQuery } from '../../redux/api/LoginApi';
 
 type Props = NativeStackScreenProps<
-  DaftarKoperasiParamList,
+  ParentStackParamList,
   'DaftarKoperasiStep1Screen'
 >;
 
@@ -69,8 +68,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     dispatch(
       fetchUserKoperasi({
         ...data,
-        // tanggalLahir: formatter.trimDate(tanggal_lahir),
-        tanggalLahir: '1994-03-25',
+        tanggalLahir: formatter.trimDate(tanggalLahir),
       }),
     );
   };

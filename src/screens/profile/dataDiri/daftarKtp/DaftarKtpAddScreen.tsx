@@ -19,11 +19,11 @@ import {
 import { addKtpNumber } from '../../../../redux/reducers/KtpReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarKtpAddScreen'
 >;
 

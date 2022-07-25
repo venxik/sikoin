@@ -8,14 +8,14 @@ import {
   DetailItemProfileHeader,
   HeaderBack,
 } from '../../../../components';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
 import { colors, icons, sizes, strings } from '../../../../constants';
 import { formatter } from '../../../../utils';
 import { fetchPekerjaan } from '../../../../redux/reducers/PekerjaanReducer';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarPekerjaanMainScreen'
 >;
 

@@ -14,15 +14,12 @@ import {
   HeaderPinjaman,
   TextInputForm,
 } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
 import { PekerjaanResponse } from '../../redux/reducers/PekerjaanReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanStep3Screen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 
 const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
   const navigateToStep4 = (data: PekerjaanResponse) => {

@@ -8,13 +8,10 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanStep1Screen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep1Screen'>;
 
 const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
   const navigateToStep2 = (data: {

@@ -1,4 +1,3 @@
-import { CommonActions } from '@react-navigation/native';
 import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -6,21 +5,19 @@ import { Button, HeaderBack } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 
 type Props = NativeStackScreenProps<
-  DaftarKoperasiParamList,
+  ParentStackParamList,
   'DaftarKoperasiSuccessScreen'
 >;
 
 const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
   const { email } = route.params;
   const navigateToLoginScreen = () => {
-    navigation.dispatch(() => {
-      return CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'LoginScreen' }],
-      });
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'LoginScreen' }],
     });
   };
 

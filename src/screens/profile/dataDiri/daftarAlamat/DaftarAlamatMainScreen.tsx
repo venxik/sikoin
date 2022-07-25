@@ -15,7 +15,7 @@ import {
   Popup2Button,
 } from '../../../../components';
 import CardAlamat from '../../../../components/CardAlamat';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
 import { icons, sizes, strings } from '../../../../constants';
 import {
@@ -26,7 +26,7 @@ import {
 } from '../../../../redux/reducers/AlamatReducer';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarAlamatMainScreen'
 >;
 

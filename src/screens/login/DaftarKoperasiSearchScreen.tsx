@@ -11,10 +11,10 @@ import {
   strings,
 } from '../../constants';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 
 type Props = NativeStackScreenProps<
-  DaftarKoperasiParamList,
+  ParentStackParamList,
   'DaftarKoperasiSearchScreen'
 >;
 

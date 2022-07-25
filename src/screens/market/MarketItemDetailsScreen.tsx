@@ -1,4 +1,3 @@
-import { CommonActions, StackActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useMemo, useRef, useState } from 'react';
 import {
@@ -38,7 +37,7 @@ import {
   QtyButton,
 } from '../../components';
 import { useAppSelector } from '../../config';
-import { MarketStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import {
   colors,
   icons,
@@ -51,7 +50,7 @@ import { formatter } from '../../utils';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 type Props = NativeStackScreenProps<
-  MarketStackParamList,
+  HomeStackParamList,
   'MarketItemDetailsScreen'
 >;
 const dotSize = 6;
@@ -91,14 +90,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   const [qtyValue, setQtyValue] = useState<number>(1);
 
   const navigateToVoucherScreen = () => {
-    navigation.dispatch(
-      StackActions.push('HomeTab', {
-        screen: 'HomeStackNavigator',
-        params: {
-          screen: 'VoucherStackNavigator',
-        },
-      }),
-    );
+    navigation.navigate('VoucherMainScreen');
   };
 
   const navigateToDetailsScreen = () => {
@@ -106,7 +98,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToCartScreen = () => {
-    navigation.push('MarketPayment', { screen: 'CartScreen' });
+    navigation.push('CartScreen');
   };
 
   const onPressMinusQty = () => {
@@ -132,12 +124,10 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         <MenuOptions optionsContainerStyle={styles.optionsContainer}>
           <MenuOption
             onSelect={() =>
-              navigation.dispatch(
-                CommonActions.reset({
-                  index: 0,
-                  routes: [{ name: 'HomeTab' }],
-                }),
-              )
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'HomeScreen' }],
+              })
             }>
             <View style={styles.popupContainer}>
               <Image
@@ -390,6 +380,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
                 item={item}
                 onPress={navigateToDetailsScreen}
                 onPressVoucher={navigateToVoucherScreen}
+                onPressWishlist={() => console.log(item)}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, HeaderBack } from '../../components';
-import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 import {
   colors,
   icons,
@@ -14,7 +14,7 @@ import {
 } from '../../constants';
 
 type Props = NativeStackScreenProps<
-  DaftarKoperasiParamList,
+  ParentStackParamList,
   'DaftarKoperasiIntroScreen'
 >;
 

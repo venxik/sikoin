@@ -128,25 +128,24 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   };
 
   const navigateToSaldoSimpanan = (showSaldo: boolean) => {
-    navigation.navigate('SaldoSimpananStackNavigator', {
-      screen: 'SaldoSimpananMainScreen',
-      params: { showSaldo: showSaldo },
+    navigation.navigate('SaldoSimpananMainScreen', {
+      showSaldo: showSaldo,
     });
   };
 
   const navigateToOtherScreen = (screen: string) => {
     switch (screen) {
       case 'PinjamanStackNavigator':
-        navigation.navigate('PinjamanStackNavigator');
+        navigation.navigate('PinjamanStep1Screen');
         return;
       case 'MarketStackNavigator':
-        navigation.navigate('MarketStackNavigator');
+        navigation.navigate('MarketMainScreen');
         return;
       case 'VoucherStackNavigator':
-        navigation.navigate('VoucherStackNavigator');
+        navigation.navigate('VoucherMainScreen');
         return;
       case 'DokumenStackNavigator':
-        navigation.navigate('DokumenStackNavigator');
+        navigation.navigate('DokumenMainScreen');
         return;
       default:
         return;
@@ -155,12 +154,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
   const onClickMiniScrollButton = (showSaldo: boolean) => {
     if (showSaldo) {
-      navigation.navigate('TopupPenarikanStackNavigator', {
-        screen: 'TopupPenarikanMainScreen',
-        params: { isTopup: true },
+      navigation.navigate('TopupPenarikanMainScreen', {
+        isTopup: true,
       });
     } else {
-      navigation.navigate('TransaksiStackNavigator');
+      navigation.navigate('TransaksiMainScreen');
     }
   };
 
@@ -258,9 +256,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
                 }}
                 item={item}
                 onPress={() => {
-                  navigation.navigate('MarketStackNavigator', {
-                    screen: 'MarketItemDetailsScreen',
-                  });
+                  navigation.navigate('MarketItemDetailsScreen');
                 }}
               />
               {index === marketDataList.length - 1 && (

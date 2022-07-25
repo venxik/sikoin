@@ -2,14 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Button, HeaderBack, Popup1Button } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanReviewScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanReviewScreen'>;
 
 const PinjamanReviewScreen: React.FC<Props> = ({ navigation }) => {
   const [showPopup, setShowPopup] = useState(false);

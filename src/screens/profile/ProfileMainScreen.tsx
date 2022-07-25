@@ -75,7 +75,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
           <SubmenuItemList
             icon={icons.icon_data_diri}
             title={strings.data_diri}
-            onPress={() => navigation.navigate('DataDiriStackNavigator')}
+            onPress={() => navigation.navigate('DataDiriMainScreen')}
           />
           <SubmenuItemList
             icon={icons.icon_data_koperasi}

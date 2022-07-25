@@ -2,11 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
 import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { CardDiskon, HeaderBack, MenuHeaderIcon } from '../../components';
-import { DiskonStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
 import { sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<DiskonStackParamList, 'DiskonMainScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'DiskonMainScreen'>;
 
 const DiskonMainScreen: FC<Props> = () => {
   const { diskonDataList } = useAppSelector(s => s.DiskonReducer) || {};

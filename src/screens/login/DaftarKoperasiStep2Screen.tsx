@@ -5,14 +5,14 @@ import { Button, HeaderBack, TextInputBorder } from '../../components';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DaftarKoperasiParamList } from '../../config/navigation/model';
+import { ParentStackParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
 import { formatter } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { fetchUserKoperasiEmail } from '../../redux/reducers/LoginReducer';
 
 type Props = NativeStackScreenProps<
-  DaftarKoperasiParamList,
+  ParentStackParamList,
   'DaftarKoperasiStep2Screen'
 >;
 

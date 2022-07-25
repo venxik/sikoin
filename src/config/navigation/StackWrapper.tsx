@@ -13,85 +13,34 @@ import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 import { AsyncStore } from '../../utils';
 import {
   ChatStackParamList,
-  DaftarKoperasiParamList,
-  DataDiriStackParamList,
-  DiskonStackParamList,
-  DokumenStackParamList,
   HomeStackParamList,
   HomeTabParamList,
   HomeTabScreenProps,
-  LoginStackParamList,
-  MarketStackParamList,
   ParentStackParamList,
-  PaymentStackParamList,
-  PinjamanStackParamList,
   ProfileStackParamList,
-  SaldoSimpananStackParamList,
-  TopupPenarikanStackParamList,
-  TransaksiStackParamList,
-  VoucherStackParamList,
 } from './model';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
 const ParentStack = createNativeStackNavigator<ParentStackParamList>();
-const LoginStack = createNativeStackNavigator<LoginStackParamList>();
-const DaftarKoperasiStack =
-  createNativeStackNavigator<DaftarKoperasiParamList>();
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 const ChatStack = createNativeStackNavigator<ChatStackParamList>();
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
-const DataDiriStack = createNativeStackNavigator<DataDiriStackParamList>();
-const SaldoSimpananStack =
-  createNativeStackNavigator<SaldoSimpananStackParamList>();
-const DiskonStack = createNativeStackNavigator<DiskonStackParamList>();
-const TopupPenarikanStack =
-  createNativeStackNavigator<TopupPenarikanStackParamList>();
-const TransaksiStack = createNativeStackNavigator<TransaksiStackParamList>();
-const VoucherStack = createNativeStackNavigator<VoucherStackParamList>();
-const PinjamanStack = createNativeStackNavigator<PinjamanStackParamList>();
-const DokumenStack = createNativeStackNavigator<DokumenStackParamList>();
-const MarketStack = createNativeStackNavigator<MarketStackParamList>();
-const PaymentStack = createNativeStackNavigator<PaymentStackParamList>();
 
 const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeStackNavigator';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'HomeTab';
   switch (routeName) {
-    case 'OnboardingStackNavigator':
-      return false;
-    case 'LoginStackNavigator':
-      return false;
-    case 'DaftarKoperasiStackNavigator':
-      return false;
-    case 'SaldoSimpananStackNavigator':
-      return false;
-    case 'EditProfileScreen':
-      return false;
-    case 'PengaturanScreen':
-      return false;
-    case 'DataDiriStackNavigator':
-      return false;
-    case 'DiskonStackNavigator':
-      return false;
-    case 'TopupPenarikanStackNavigator':
-      return false;
-    case 'VoucherStackNavigator':
-      return false;
-    case 'TransaksiStackNavigator':
-      return false;
-    case 'PinjamanStackNavigator':
-      return false;
-    case 'DataKoperasiMainScreen':
-      return false;
-    case 'ChatDetailScreen':
-      return false;
-    case 'DokumenStackNavigator':
-      return false;
-    case 'MarketStackNavigator':
-      return false;
-    default:
+    case 'HomeTab':
       return true;
+    case 'HomeScreen':
+      return true;
+    case 'ChatMainScreen':
+      return true;
+    case 'ProfileMainScreen':
+      return true;
+    default:
+      return false;
   }
 };
 
@@ -197,6 +146,107 @@ const HomeTab = () => {
   );
 };
 
+const HomeStackNavigator = () => (
+  <HomeStack.Navigator
+    initialRouteName={'HomeScreen'}
+    screenOptions={{
+      headerShown: false,
+      gestureEnabled: false,
+    }}>
+    <HomeStack.Screen name="HomeScreen" component={screens.HomeScreen} />
+    <HomeStack.Screen
+      name="DokumenMainScreen"
+      component={screens.DokumenMainScreen}
+    />
+    <HomeStack.Screen
+      name="DokumenDetailScreen"
+      component={screens.DokumenDetailScreen}
+    />
+    <HomeStack.Screen
+      name="DiskonMainScreen"
+      component={screens.DiskonMainScreen}
+    />
+    <HomeStack.Screen
+      name="SaldoSimpananMainScreen"
+      component={screens.SaldoSimpananMainScreen}
+    />
+    <HomeStack.Screen name="CartScreen" component={screens.CartScreen} />
+    <HomeStack.Screen
+      name="CheckoutScreen"
+      component={screens.CheckoutScreen}
+    />
+    <HomeStack.Screen
+      name="SelectPaymentScreen"
+      component={screens.SelectPaymentScreen}
+    />
+    <HomeStack.Screen name="PaymentScreen" component={screens.PaymentScreen} />
+    <HomeStack.Screen
+      name="PaymentSuccessScreen"
+      component={screens.PaymentSuccessScreen}
+    />
+    <HomeStack.Screen
+      name="TopupPenarikanMainScreen"
+      component={screens.TopupPenarikanMainScreen}
+    />
+    <HomeStack.Screen
+      name="TopupPenarikanDetailScreen"
+      component={screens.TopupPenarikanDetailScreen}
+    />
+    <HomeStack.Screen
+      name="PenarikanSuccessScreen"
+      component={screens.PenarikanSuccessScreen}
+    />
+    <HomeStack.Screen
+      name="TransaksiMainScreen"
+      component={screens.TransaksiMainScreen}
+    />
+    <HomeStack.Screen
+      name="VoucherMainScreen"
+      component={screens.VoucherMainScreen}
+    />
+    <HomeStack.Screen
+      name="MarketMainScreen"
+      component={screens.MarketMainScreen}
+    />
+    <HomeStack.Screen
+      name="MarketItemDetailsScreen"
+      component={screens.MarketItemDetailsScreen}
+    />
+    <HomeStack.Screen
+      name="PinjamanStep1Screen"
+      component={screens.PinjamanStep1}
+    />
+    <HomeStack.Screen
+      name="PinjamanStep2Screen"
+      component={screens.PinjamanStep2}
+    />
+    <HomeStack.Screen
+      name="PinjamanStep3Screen"
+      component={screens.PinjamanStep3}
+    />
+    <HomeStack.Screen
+      name="PinjamanStep4Screen"
+      component={screens.PinjamanStep4}
+    />
+    <HomeStack.Screen
+      name="PinjamanStep5Screen"
+      component={screens.PinjamanStep5}
+    />
+    <HomeStack.Screen
+      name="PinjamanReviewScreen"
+      component={screens.PinjamanReviewScreen}
+    />
+    <HomeStack.Screen
+      name="PinjamanSucessScreen"
+      component={screens.PinjamanSuccessScreen}
+    />
+    <HomeStack.Screen
+      name="DaftarKtpCameraScreen"
+      component={screens.DaftarKtpCameraScreen}
+    />
+  </HomeStack.Navigator>
+);
+
 const ChatStackNavigator = () => (
   <ChatStack.Navigator
     initialRouteName={'ChatMainScreen'}
@@ -215,38 +265,6 @@ const ChatStackNavigator = () => (
   </ChatStack.Navigator>
 );
 
-const DiskonStackNavigator = () => (
-  <DiskonStack.Navigator
-    initialRouteName={'DiskonMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <DiskonStack.Screen
-      name="DiskonMainScreen"
-      component={screens.DiskonMainScreen}
-    />
-  </DiskonStack.Navigator>
-);
-
-const DokumenStackNavigator = () => (
-  <DokumenStack.Navigator
-    initialRouteName={'DokumenMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <DokumenStack.Screen
-      name="DokumenMainScreen"
-      component={screens.DokumenMainScreen}
-    />
-    <DokumenStack.Screen
-      name="DokumenDetailScreen"
-      component={screens.DokumenDetailScreen}
-    />
-  </DokumenStack.Navigator>
-);
-
 const ProfileStackNavigator = () => (
   <ProfileStack.Navigator
     initialRouteName={'ProfileMainScreen'}
@@ -263,10 +281,6 @@ const ProfileStackNavigator = () => (
       component={screens.EditProfileScreen}
     />
     <ProfileStack.Screen
-      name="DataDiriStackNavigator"
-      component={DataDiriStackNavigator}
-    />
-    <ProfileStack.Screen
       name="PengaturanScreen"
       component={screens.PengaturanScreen}
     />
@@ -274,324 +288,59 @@ const ProfileStackNavigator = () => (
       name="DataKoperasiMainScreen"
       component={screens.DataKoperasiMainScreen}
     />
-  </ProfileStack.Navigator>
-);
-
-const DataDiriStackNavigator = () => (
-  <DataDiriStack.Navigator
-    initialRouteName={'DataDiriMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DataDiriMainScreen"
       component={screens.DataDiriMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarAlamatMainScreen"
       component={screens.DaftarAlamatMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarAlamatAddScreen"
       component={screens.DaftarAlamatAddScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarRefKeluargaAddScreen"
       component={screens.DaftarRefKeluargaAddScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarRefKeluargaMainScreen"
       component={screens.DaftarRefKeluargaMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarKtpMainScreen"
       component={screens.DaftarKtpMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarKtpAddScreen"
       component={screens.DaftarKtpAddScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarKtpCameraScreen"
       component={screens.DaftarKtpCameraScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarKtpSelfieScreen"
       component={screens.DaftarKtpSelfieScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarBiodataMainScreen"
       component={screens.DaftarBiodataMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarBiodataAddScreen"
       component={screens.DaftarBiodataAddScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarPekerjaanMainScreen"
       component={screens.DaftarPekerjaanMainScreen}
     />
-    <DataDiriStack.Screen
+    <ProfileStack.Screen
       name="DaftarPekerjaanAddScreen"
       component={screens.DaftarPekerjaanAddScreen}
     />
-  </DataDiriStack.Navigator>
-);
-
-const SaldoSimpananStackNavigator = () => (
-  <SaldoSimpananStack.Navigator
-    initialRouteName={'SaldoSimpananMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <SaldoSimpananStack.Screen
-      name="SaldoSimpananMainScreen"
-      component={screens.SaldoSimpananMainScreen}
-    />
-  </SaldoSimpananStack.Navigator>
-);
-
-const PaymentStackNavigator = () => (
-  <PaymentStack.Navigator
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <PaymentStack.Screen name="CartScreen" component={screens.CartScreen} />
-    <PaymentStack.Screen
-      name="CheckoutScreen"
-      component={screens.CheckoutScreen}
-    />
-    <PaymentStack.Screen
-      name="SelectPaymentScreen"
-      component={screens.SelectPaymentScreen}
-    />
-    <PaymentStack.Screen
-      name="PaymentScreen"
-      component={screens.PaymentScreen}
-    />
-    <PaymentStack.Screen
-      name="PaymentSuccessScreen"
-      component={screens.PaymentSuccessScreen}
-    />
-  </PaymentStack.Navigator>
-);
-
-const TopupPenarikanStackNavigator = () => (
-  <TopupPenarikanStack.Navigator
-    initialRouteName={'TopupPenarikanMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <TopupPenarikanStack.Screen
-      name="TopupPenarikanMainScreen"
-      component={screens.TopupPenarikanMainScreen}
-    />
-    <TopupPenarikanStack.Screen
-      name="TopupPenarikanDetailScreen"
-      component={screens.TopupPenarikanDetailScreen}
-    />
-    <TopupPenarikanStack.Screen
-      name="TopupPayment"
-      component={PaymentStackNavigator}
-    />
-    <TopupPenarikanStack.Screen
-      name="PenarikanSuccessScreen"
-      component={screens.PenarikanSuccessScreen}
-    />
-  </TopupPenarikanStack.Navigator>
-);
-
-const TransaksiStackNavigator = () => (
-  <TransaksiStack.Navigator
-    initialRouteName={'TransaksiMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <TransaksiStack.Screen
-      name="TransaksiMainScreen"
-      component={screens.TransaksiMainScreen}
-    />
-  </TransaksiStack.Navigator>
-);
-
-const VoucherStackNavigator = () => (
-  <VoucherStack.Navigator
-    initialRouteName={'VoucherMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <VoucherStack.Screen
-      name="VoucherMainScreen"
-      component={screens.VoucherMainScreen}
-    />
-    <VoucherStack.Screen
-      name="VoucherPayment"
-      component={PaymentStackNavigator}
-    />
-  </VoucherStack.Navigator>
-);
-
-const MarketStackNavigator = () => (
-  <MarketStack.Navigator
-    initialRouteName={'MarketMainScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <MarketStack.Screen
-      name="MarketMainScreen"
-      component={screens.MarketMainScreen}
-    />
-    <MarketStack.Screen
-      name="MarketItemDetailsScreen"
-      component={screens.MarketItemDetailsScreen}
-    />
-    <MarketStack.Screen
-      name="MarketPayment"
-      component={PaymentStackNavigator}
-    />
-  </MarketStack.Navigator>
-);
-
-const PinjamanStackNavigator = () => (
-  <PinjamanStack.Navigator
-    initialRouteName={'PinjamanStep1Screen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <PinjamanStack.Screen
-      name="PinjamanStep1Screen"
-      component={screens.PinjamanStep1}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanStep2Screen"
-      component={screens.PinjamanStep2}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanStep3Screen"
-      component={screens.PinjamanStep3}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanStep4Screen"
-      component={screens.PinjamanStep4}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanStep5Screen"
-      component={screens.PinjamanStep5}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanReviewScreen"
-      component={screens.PinjamanReviewScreen}
-    />
-    <PinjamanStack.Screen
-      name="PinjamanSucessScreen"
-      component={screens.PinjamanSuccessScreen}
-    />
-    <PinjamanStack.Screen
-      name="DaftarKtpCameraScreen"
-      component={screens.DaftarKtpCameraScreen}
-    />
-  </PinjamanStack.Navigator>
-);
-
-const HomeStackNavigator = () => (
-  <HomeStack.Navigator
-    initialRouteName={'HomeScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <HomeStack.Screen name="HomeScreen" component={screens.HomeScreen} />
-    <HomeStack.Screen
-      name="DiskonStackNavigator"
-      component={DiskonStackNavigator}
-    />
-    <HomeStack.Screen
-      name="SaldoSimpananStackNavigator"
-      component={SaldoSimpananStackNavigator}
-    />
-    <HomeStack.Screen
-      name="TopupPenarikanStackNavigator"
-      component={TopupPenarikanStackNavigator}
-    />
-    <HomeStack.Screen
-      name="TransaksiStackNavigator"
-      component={TransaksiStackNavigator}
-    />
-    <HomeStack.Screen
-      name="VoucherStackNavigator"
-      component={VoucherStackNavigator}
-    />
-    <HomeStack.Screen
-      name="PinjamanStackNavigator"
-      component={PinjamanStackNavigator}
-    />
-    <HomeStack.Screen
-      name="DokumenStackNavigator"
-      component={DokumenStackNavigator}
-    />
-    <HomeStack.Screen
-      name="MarketStackNavigator"
-      component={MarketStackNavigator}
-    />
-  </HomeStack.Navigator>
-);
-
-const DaftarKoperasiStackNavigator = () => (
-  <DaftarKoperasiStack.Navigator
-    initialRouteName={'DaftarKoperasiStep1Screen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiIntroScreen"
-      component={screens.DaftarKoperasiIntroScreen}
-    />
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiSearchScreen"
-      component={screens.DaftarKoperasiSearchScreen}
-    />
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiStep1Screen"
-      component={screens.DaftarKoperasiStep1Screen}
-    />
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiStep2Screen"
-      component={screens.DaftarKoperasiStep2Screen}
-    />
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiSuccessScreen"
-      component={screens.DaftarKoperasiSuccessScreen}
-    />
-    <DaftarKoperasiStack.Screen
-      name="DaftarKoperasiFailedScreen"
-      component={screens.DaftarKoperasiFailedScreen}
-    />
-  </DaftarKoperasiStack.Navigator>
-);
-
-const LoginStackNavigator = () => (
-  <LoginStack.Navigator
-    initialRouteName={'LoginScreen'}
-    screenOptions={{
-      headerShown: false,
-      gestureEnabled: false,
-    }}>
-    <LoginStack.Screen name="LoginScreen" component={screens.LoginScreen} />
-    <LoginStack.Screen
-      name="DaftarKoperasiStackNavigator"
-      component={DaftarKoperasiStackNavigator}
-    />
-    <LoginStack.Screen name="HomeTab" component={HomeTab} />
-  </LoginStack.Navigator>
+  </ProfileStack.Navigator>
 );
 
 const ParentStackNavigator = () => {
@@ -622,10 +371,34 @@ const ParentStackNavigator = () => {
           />
         )}
         <ParentStack.Screen
-          name={'LoginStackNavigator'}
-          component={LoginStackNavigator}
+          name={'LoginScreen'}
+          component={screens.LoginScreen}
         />
-        {/* <ParentStack.Screen name={'HomeTab'} component={HomeTab} /> */}
+        <ParentStack.Screen
+          name="DaftarKoperasiIntroScreen"
+          component={screens.DaftarKoperasiIntroScreen}
+        />
+        <ParentStack.Screen
+          name="DaftarKoperasiSearchScreen"
+          component={screens.DaftarKoperasiSearchScreen}
+        />
+        <ParentStack.Screen
+          name="DaftarKoperasiStep1Screen"
+          component={screens.DaftarKoperasiStep1Screen}
+        />
+        <ParentStack.Screen
+          name="DaftarKoperasiStep2Screen"
+          component={screens.DaftarKoperasiStep2Screen}
+        />
+        <ParentStack.Screen
+          name="DaftarKoperasiSuccessScreen"
+          component={screens.DaftarKoperasiSuccessScreen}
+        />
+        <ParentStack.Screen
+          name="DaftarKoperasiFailedScreen"
+          component={screens.DaftarKoperasiFailedScreen}
+        />
+        <ParentStack.Screen name="HomeTab" component={HomeTab} />
       </ParentStack.Navigator>
     </NavigationContainer>
   );

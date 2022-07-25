@@ -16,7 +16,7 @@ import {
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
 import { formatter } from '../../../../utils';
 import moment from 'moment';
@@ -26,7 +26,7 @@ import {
 } from '../../../../redux/reducers/BiodataReducer';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarBiodataAddScreen'
 >;
 

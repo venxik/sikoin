@@ -2,11 +2,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
 import { HeaderBack, SubmenuItemList } from '../../../components';
-import { DataDiriStackParamList } from '../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../../constants';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DataDiriMainScreen'
 >;
 

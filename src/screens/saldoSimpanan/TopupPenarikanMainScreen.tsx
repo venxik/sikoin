@@ -20,7 +20,7 @@ import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { TopupPenarikanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchCreateSaldoList,
@@ -52,7 +52,7 @@ const value = [
 ];
 
 type Props = NativeStackScreenProps<
-  TopupPenarikanStackParamList,
+  HomeStackParamList,
   'TopupPenarikanMainScreen'
 >;
 

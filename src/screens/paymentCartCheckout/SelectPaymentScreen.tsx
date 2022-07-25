@@ -2,13 +2,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
 import { Button, HeaderBack, PaymentItem } from '../../components';
-import { PaymentStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, images, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  PaymentStackParamList,
-  'SelectPaymentScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'SelectPaymentScreen'>;
 
 const data = [
   {

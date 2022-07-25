@@ -9,11 +9,11 @@ import {
   Popup2Button,
 } from '../../components';
 import { useAppSelector } from '../../config';
-import { DokumenStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, sizes, strings } from '../../constants';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
 
-type Props = NativeStackScreenProps<DokumenStackParamList, 'DokumenMainScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'DokumenMainScreen'>;
 
 const DokumenMainScreen: React.FC<Props> = ({ navigation }) => {
   const { dokumenDataList } = useAppSelector(s => s.DokumenReducer) || {};

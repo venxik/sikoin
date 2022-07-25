@@ -20,11 +20,11 @@ import {
 } from '../../../../constants';
 import DocumentPicker from 'react-native-document-picker';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppSelector } from '../../../../config';
 
 type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
+  ProfileStackParamList,
   'DaftarKtpMainScreen'
 >;
 

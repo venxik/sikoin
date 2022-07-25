@@ -1,14 +1,13 @@
-import { StackActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { SafeAreaView, StyleSheet, FlatList, Text, View } from 'react-native';
 import { Button, HeaderBack } from '../../components';
 import CartItem from '../../components/CartItem';
 import { useAppSelector } from '../../config';
-import { PaymentStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<PaymentStackParamList, 'CartScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'CartScreen'>;
 
 const CartScreen: React.FC<Props> = ({ navigation }) => {
   const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
@@ -18,14 +17,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToVoucher = () => {
-    navigation.dispatch(
-      StackActions.push('HomeTab', {
-        screen: 'HomeStackNavigator',
-        params: {
-          screen: 'VoucherStackNavigator',
-        },
-      }),
-    );
+    navigation.navigate('VoucherMainScreen');
   };
 
   return (

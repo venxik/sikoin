@@ -27,7 +27,7 @@ import {
   Popup1Button,
   TextInputBorder,
 } from '../../components';
-import { MarketStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
 import {
   colors,
@@ -37,9 +37,8 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { StackActions } from '@react-navigation/native';
 
-type Props = NativeStackScreenProps<MarketStackParamList, 'MarketMainScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketMainScreen'>;
 
 const MarketMainScreen: FC<Props> = ({ navigation }) => {
   const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
@@ -49,25 +48,11 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const navigateToVoucherScreen = () => {
-    navigation.dispatch(
-      StackActions.push('HomeTab', {
-        screen: 'HomeStackNavigator',
-        params: {
-          screen: 'VoucherStackNavigator',
-        },
-      }),
-    );
+    navigation.navigate('VoucherMainScreen');
   };
 
   const navigateToDiskonScreen = () => {
-    navigation.dispatch(
-      StackActions.push('HomeTab', {
-        screen: 'HomeStackNavigator',
-        params: {
-          screen: 'DiskonStackNavigator',
-        },
-      }),
-    );
+    navigation.navigate('DiskonMainScreen');
   };
 
   const navigateToDetailsScreen = () => {
@@ -99,7 +84,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => navigation.navigate('MarketCartScreen')}>
+          <MenuOption onSelect={() => navigation.navigate('CartScreen')}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_keranjang}

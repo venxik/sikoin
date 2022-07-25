@@ -21,7 +21,6 @@ import {
   UserKoperasiResponse,
 } from '../reducers/LoginReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
-import { CommonActions } from '@react-navigation/native';
 import { formatter } from '../../utils';
 
 function* getKoperasiList() {
@@ -130,12 +129,10 @@ function* login(action: ReturnType<typeof fetchLogin>) {
       if (data?.error == null) {
         yield put(fetchLoginSuccess(data));
         if (navigationRef.isReady()) {
-          navigationRef.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'HomeTab' }],
-            }),
-          );
+          navigationRef.current?.resetRoot({
+            index: 0,
+            routes: [{ name: 'HomeTab' }],
+          });
         }
       } else {
         yield put(fetchLoginFailed('Error'));

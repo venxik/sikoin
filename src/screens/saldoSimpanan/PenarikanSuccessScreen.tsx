@@ -1,28 +1,22 @@
-import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
 import { Button } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanSucessScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSucessScreen'>;
 
 const PenarikanSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [
-          {
-            name: 'HomeTab',
-          },
-        ],
-      }),
-    );
+    navigation.reset({
+      index: 0,
+      routes: [
+        {
+          name: 'HomeScreen',
+        },
+      ],
+    });
   };
 
   return (

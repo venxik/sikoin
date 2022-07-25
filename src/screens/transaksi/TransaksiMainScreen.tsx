@@ -22,15 +22,12 @@ import {
   MenuHeaderIcon,
   TransaksiItemList,
 } from '../../components';
-import { TransaksiStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
 
 const filter = ['Semua', 'Pembelian', 'Topup'];
-type Props = NativeStackScreenProps<
-  TransaksiStackParamList,
-  'TransaksiMainScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'TransaksiMainScreen'>;
 
 const TransaksiMainScreen: FC<Props> = () => {
   const { transaksiDataList } = useAppSelector(s => s.TransaksiReducer) || {};

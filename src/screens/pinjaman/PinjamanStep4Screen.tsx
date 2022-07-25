@@ -14,13 +14,10 @@ import {
 } from 'react-native';
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppSelector } from '../../config';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanStep4Screen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep4Screen'>;
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const { ktpData } = useAppSelector(s => s.KtpReducer) || {};

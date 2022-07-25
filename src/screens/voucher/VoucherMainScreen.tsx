@@ -27,12 +27,12 @@ import {
   QtyButton,
 } from '../../components';
 import { SelectedVoucherProps } from '../../components/CardVoucherLarge/model';
-import { VoucherStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<VoucherStackParamList, 'VoucherMainScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'VoucherMainScreen'>;
 
 const VoucherMainScreen: FC<Props> = ({ navigation }) => {
   const { voucherDataList } = useAppSelector(s => s.VoucherReducer) || {};
@@ -49,7 +49,7 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
 
   const onPressBeliVoucher = () => {
     setshowVoucherPopup(false);
-    navigation.navigate('VoucherPayment', { screen: 'CartScreen' });
+    navigation.navigate('CartScreen');
   };
 
   const onPressMinus = () => {

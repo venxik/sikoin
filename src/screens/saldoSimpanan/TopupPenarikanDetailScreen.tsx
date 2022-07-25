@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import { Button, HeaderBack, Popup1Button } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
-import { TopupPenarikanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { fetchSubmitPenarikan } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
-  TopupPenarikanStackParamList,
+  HomeStackParamList,
   'TopupPenarikanDetailScreen'
 >;
 
@@ -30,13 +30,10 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const dispatch = useAppDispatch();
 
   const navigateToPembayaranScreen = () => {
-    navigation.navigate('TopupPayment', {
-      screen: 'PaymentScreen',
-      params: {
-        nominal: parseInt(nominal),
-        isTopup: true,
-        selectedTopupPenarikan,
-      },
+    navigation.navigate('PaymentScreen', {
+      nominal: parseInt(nominal),
+      isTopup: true,
+      selectedTopupPenarikan,
     });
   };
 

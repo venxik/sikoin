@@ -10,16 +10,13 @@ import {
   Text,
 } from 'react-native';
 import { Button, HeaderPinjaman } from '../../components';
-import { PinjamanStackParamList } from '../../config/navigation/model';
+import { HomeStackParamList } from '../../config/navigation/model';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  PinjamanStackParamList,
-  'PinjamanStep3Screen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 
 const defaultNominal = [
   { item: '250', value: '250000' },
