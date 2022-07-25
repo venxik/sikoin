@@ -4,17 +4,20 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "run_android_dd": "react-native run-android --variant=debug --appId=com.virtek.sikoin",
-    "run_android_dr": "react-native run-android --variant=release --appId=com.virtek.sikoin",
+    "run_android_dd": "react-native run-android --variant=debug",
+    "run_android_dr": "react-native run-android --variant=release",
     "build_android_dr": "cd android && .\\gradlew assembleRelease && cd ..",
+    "android:local": "adb reverse tcp:8081 tcp:8081",
+    "android:clean-gradle": "cd android; ./gradlew clean; cd ..",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint .",
     "postinstall": "patch-package"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "4",
+    "@notifee/react-native": "^5.4.1",
     "@react-native-async-storage/async-storage": "^1.16.1",
     "@react-native-clipboard/clipboard": "^1.8.5",
     "@react-native-community/datetimepicker": "^6.0.1",

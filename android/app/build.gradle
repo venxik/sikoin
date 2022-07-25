@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 project.ext.envConfigFiles = [
-        debug: ".env",
+        debug: ".env.dev",
         release: ".env.prod"
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -137,12 +137,12 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId project.env.get("APP_ID")
+        resValue "string", "build_config_package", "com.virtek.sikoin"
+        applicationId "com.virtek.sikoin"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        resValue "string", "build_config_package", "com.virtek.sikoin"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
     }
@@ -190,13 +190,6 @@ android {
         }
     }
 
-    flavorDimensions "default"
-//    productFlavors {
-//        dev {
-//            applicationId "com.sikoin"
-//        }
-//    }
-
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -241,6 +234,12 @@ dependencies {
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
         implementation jscFlavor
+    }
+
+    api(group: "androidx.work", name: "work-runtime") {
+        version {
+            strictly "2.7.0-alpha04"
+        }
     }
 }
 
