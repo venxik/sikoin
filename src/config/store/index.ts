@@ -14,7 +14,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { koperasiApi } from '../../redux/api/LoginApi';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -30,13 +29,11 @@ const store = configureStore({
   reducer: persistReducers,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      thunk: true,
+      // thunk: true,
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(sagaMiddleware)
-      .concat(koperasiApi.middleware),
+    }).concat(sagaMiddleware),
 });
 
 const persist = persistStore(store);
