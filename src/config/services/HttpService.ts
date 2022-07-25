@@ -81,6 +81,7 @@ class HttpService {
     if (error != null) {
       this.showErrorDialogHandler(apis.errorTypes.badRequest, error);
     }
+    return response;
   };
 
   // Response interceptor to manage token refresh
