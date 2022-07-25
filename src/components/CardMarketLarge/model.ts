@@ -5,5 +5,6 @@ export interface CardMarketLargeProps {
   item: MarketDataResponse;
   onPress: () => void;
   onPressVoucher: () => void;
+  onPressWishlist?: () => void;
   style?: ViewStyle;
 }
