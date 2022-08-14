@@ -114,6 +114,8 @@ const icon_berat = require('assets/icons/icon_berat.png');
 const cross_shape = require('assets/icons/cross_shape.png');
 const icon_proses_pesanan = require('assets/icons/icon_proses_pesanan.png');
 const icon_topup_penarikan = require('assets/icons/icon_topup_penarikan.png');
+const icon_tick_square = require('assets/icons/icon_tick_square.png');
+const icon_document_outline = require('assets/icons/icon_document_outline.png');
 
 export default {
   arrow_left_primary,
@@ -231,4 +233,6 @@ export default {
   cross_shape,
   icon_proses_pesanan,
   icon_topup_penarikan,
+  icon_tick_square,
+  icon_document_outline,
 };

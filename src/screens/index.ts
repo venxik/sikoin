@@ -49,6 +49,9 @@ import CheckoutScreen from './paymentCartCheckout/CheckoutScreen';
 import SelectPaymentScreen from './paymentCartCheckout/SelectPaymentScreen';
 import PaymentScreen from './paymentCartCheckout/PaymentScreen';
 import PaymentSuccessScreen from './paymentCartCheckout/PaymentSuccessScreen';
+import DokumenPendukungMainScreen from './profile/dataDiri/dokumenPendukung/DokumenPendukungMainScreen';
+import PinjamanMainScreen from './pinjaman/PinjamanMainScreen';
+import PinjamanListScreen from './pinjaman/PinjamanListScreen';
 
 export {
   OnboardingScreen,
@@ -102,4 +105,7 @@ export {
   PaymentScreen,
   PaymentSuccessScreen,
   DaftarKoperasiFailedScreen,
+  DokumenPendukungMainScreen,
+  PinjamanMainScreen,
+  PinjamanListScreen,
 };

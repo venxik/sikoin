@@ -36,6 +36,8 @@ import QtyButton from './QtyButton';
 import FilterVariasi from './FilterVariasi';
 import CheckoutItem from './CheckoutItem';
 import PaymentItem from './PaymentItem';
+import PinjamanListItem from './PinjamanListItem';
+import PinjamanHorizontalListItem from './PinjamanHorizontalListItem';
 
 export {
   Button,
@@ -76,4 +78,6 @@ export {
   FilterVariasi,
   CheckoutItem,
   PaymentItem,
+  PinjamanListItem,
+  PinjamanHorizontalListItem,
 };

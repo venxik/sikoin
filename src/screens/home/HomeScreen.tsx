@@ -136,7 +136,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const navigateToOtherScreen = (screen: string) => {
     switch (screen) {
       case 'PinjamanStackNavigator':
-        navigation.navigate('PinjamanStep1Screen');
+        navigation.navigate('PinjamanStep4Screen');
         return;
       case 'MarketStackNavigator':
         navigation.navigate('MarketMainScreen');

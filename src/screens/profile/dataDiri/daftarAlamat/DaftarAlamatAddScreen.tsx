@@ -149,7 +149,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.kabupaten}
+                  title={strings.kabupaten_kota}
                 />
               )}
             />

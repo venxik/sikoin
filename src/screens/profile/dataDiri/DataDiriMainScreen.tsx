@@ -40,6 +40,11 @@ const DataDiriMainScreen: React.FC<Props> = ({ navigation }) => {
           onPress={() => navigation.navigate('DaftarRefKeluargaMainScreen')}
         />
         <SubmenuItemList
+          icon={icons.icon_tanda_tangan}
+          title={strings.dokumen_pendukung}
+          onPress={() => navigation.navigate('DokumenPendukungMainScreen')}
+        />
+        <SubmenuItemList
           icon={icons.icon_pekerjaan}
           title={strings.pekerjaan}
           onPress={() => navigation.navigate('DaftarPekerjaanMainScreen')}

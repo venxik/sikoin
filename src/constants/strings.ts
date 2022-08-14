@@ -236,6 +236,7 @@ export default {
   ubah: 'Ubah',
   tidak_jadi: 'Tidak Jadi',
   hapus: 'Hapus',
+  dokumen_pendukung: 'Dokumen Pendukung',
 
   // ALAMAT
   yakin_hapus_alamat: 'Apakah kamu yakin ingin menghapus alamat ini?',
@@ -249,6 +250,7 @@ export default {
   rw: 'RW',
   provinsi: 'Provinsi',
   kabupaten: 'Kabupaten',
+  kabupaten_kota: 'Kabupaten / Kota',
   kecamatan: 'Kecamatan',
   kodepos: 'Kode Pos',
 

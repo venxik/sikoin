@@ -185,6 +185,17 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                 />
               )}
             />
+            <Controller
+              control={control}
+              name="provinsiKota"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.provinsi_kota}
+                />
+              )}
+            />
           </View>
         </ScrollView>
         <View

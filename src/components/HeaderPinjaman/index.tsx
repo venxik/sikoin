@@ -67,7 +67,8 @@ export default HeaderPinjaman;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: '5%',
+    marginTop: '5%',
+    marginBottom: '10%',
     paddingHorizontal: '8%',
   },
   innerContainer: {

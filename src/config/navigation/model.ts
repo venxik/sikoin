@@ -71,6 +71,8 @@ export type HomeStackParamList = {
     selectedTopupPenarikan?: { nama: string; id: number } | null;
   };
   PaymentSuccessScreen: undefined;
+  PinjamanMainScreen: undefined;
+  PinjamanListScreen: undefined;
   PinjamanStep1Screen: undefined;
   PinjamanStep2Screen: undefined;
   PinjamanStep3Screen: undefined;
@@ -111,4 +113,5 @@ export type ProfileStackParamList = {
   DaftarBiodataAddScreen: { update: boolean; data?: BiodataResponse };
   DaftarPekerjaanMainScreen: undefined;
   DaftarPekerjaanAddScreen: undefined;
+  DokumenPendukungMainScreen: undefined;
 };

@@ -213,6 +213,14 @@ const HomeStackNavigator = () => (
       component={screens.MarketItemDetailsScreen}
     />
     <HomeStack.Screen
+      name="PinjamanMainScreen"
+      component={screens.PinjamanMainScreen}
+    />
+    <HomeStack.Screen
+      name="PinjamanListScreen"
+      component={screens.PinjamanListScreen}
+    />
+    <HomeStack.Screen
       name="PinjamanStep1Screen"
       component={screens.PinjamanStep1}
     />
@@ -340,6 +348,10 @@ const ProfileStackNavigator = () => (
       name="DaftarPekerjaanAddScreen"
       component={screens.DaftarPekerjaanAddScreen}
     />
+    <ProfileStack.Screen
+      name="DokumenPendukungMainScreen"
+      component={screens.DokumenPendukungMainScreen}
+    />
   </ProfileStack.Navigator>
 );
 
@@ -360,6 +372,7 @@ const ParentStackNavigator = () => {
       // linking={Linking}
       ref={navigationRef}>
       <ParentStack.Navigator
+        initialRouteName="HomeTab"
         screenOptions={{
           headerShown: false,
           gestureEnabled: false,
