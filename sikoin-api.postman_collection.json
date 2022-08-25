@@ -32,7 +32,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"namaKoperasi\": \"SIKOIN Testing\",\r\n    \"noAnggota\": \"QWERTY123\",\r\n    \"tanggalLahir\": \"1994-03-13\"\r\n}",
+					"raw": "{\r\n    \"namaKoperasi\": \"Testing Koperasi\",\r\n    \"noAnggota\": \"TESTING-002\",\r\n    \"tanggalLahir\": \"2000-05-30\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"Osborn@koperasi.com\",\r\n    \"password\":\"pass\"\r\n}",
+					"raw": "{\r\n    \"email\":\"didik@gmail.com\",\r\n    \"password\":\"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -812,7 +812,7 @@
 			"response": []
 		},
 		{
-			"name": "24. api/ktp-dokumen",
+			"name": "24a. api/upload-gambar-ktp",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
@@ -822,7 +822,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "9|fKrYwyKPoxVvaWzv531mPh3N58CwQzIeivbsJ0Nu",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
 							"type": "string"
 						}
 					]
@@ -835,24 +835,134 @@
 						{
 							"key": "gambarKtp",
 							"type": "file",
-							"src": "/C:/Users/EDWARD/Pictures/dummy_ktp.png"
-						},
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-agent-and-client-shake-hands-after-good-deal-to-buy-house-1.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/upload-gambar-ktp",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"upload-gambar-ktp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24b. api/upload-selfie-ktp",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
 						{
-							"key": "dokumenPendukung",
-							"type": "file",
-							"src": "/C:/Users/EDWARD/Pictures/WhatsApp Image 2022-05-12 at 4.42.12 PM (1).jpeg"
-						},
-						{
-							"key": "noKtp",
-							"value": "012345678912345s",
-							"type": "text"
-						},
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "selfieKtp",
 							"type": "file",
-							"src": "/C:/Users/EDWARD/Pictures/bg 3.png"
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-boy-thinking-about-the-question.png"
 						}
 					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/upload-selfie-ktp",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"upload-selfie-ktp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24c. api/upload-dokumen",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dokumenPendukung",
+							"type": "file",
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/casual-life-3d-brown-wallet-with-money.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/upload-dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"upload-dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24d. api/ktp-dokumen",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"noKtp\" : \"55567890123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://{{base_url}}/api/ktp-dokumen",
@@ -1032,7 +1142,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
 							"type": "string"
 						}
 					]
@@ -1057,6 +1167,571 @@
 					"path": [
 						"api",
 						"simpanan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "31. api/pinjaman",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "32. api/pengajuan-pinjaman-data-pengguna",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idJenisPinjaman\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman-data-pengguna",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman-data-pengguna"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "33. api/pengajuan-pinjaman-biodata",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idJenisPinjaman\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman-biodata",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman-biodata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "34. api/pengajuan-pinjaman-pekerjaan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tempatLahir\" : \"Jakarta\",\r\n    \"tanggalLahir\" : \"2022-08-09\",\r\n    \"gender\" : \"Laki-laki\",\r\n    \"golDarah\" : \"A\",\r\n    \"kewarganegaraan\" : \"WNI\",\r\n    \"pendidikanTerakhir\" : \"Diploma IV/Strata I\", \r\n    \"agama\" : \"Islam\",\r\n    \"statusPernikahan\" : \"BELUM MENIKAH\",\r\n    \"jumlahAnak\" : 0,\r\n    \"pekerjaan\" : \"Manager\",\r\n    \"detailPekerjaan\" : \"HRD\",\r\n    \"idJenisPinjaman\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman-pekerjaan",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman-pekerjaan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "35. api/pengajuan-pinjaman-ktp-dokumen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"masaKerjaTahun\" : 2,\r\n    \"masaKerjaBulan\" : 4,\r\n    \"gajiBulanan\" : \"5.000.000 - 7.500.000\",\r\n    \"jabatan\" : \"Manager\",\r\n    \"namaPt\" : \"PT Sentra Maju\",\r\n    \"alamatPt\" : \"jalan jalan\",\r\n    \"kota\" : \"JAKARTA Barat\",\r\n    \"provinsi\" : \"DKI JAKARTA\",\r\n    \"noTelpPt\" : \"0123456789\",\r\n    \"bank\" : \"Bank BCA\",\r\n    \"noRek\" : \"1234567890\",\r\n    \"namaPemilik\" : \"Martin\",\r\n    \"namaKantorCabang\" : \"jakarta\",\r\n    \"idJenisPinjaman\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman-ktp-dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman-ktp-dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "35a. api/pinjaman-upload-gambar-ktp",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "gambarKtp",
+							"type": "file",
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-agent-and-client-shake-hands-after-good-deal-to-buy-house-1.png"
+						},
+						{
+							"key": "idJenisPinjaman",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman-upload-gambar-ktp",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman-upload-gambar-ktp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "35b. api/pinjaman-upload-selfie-ktp",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "selfieKtp",
+							"type": "file",
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-boy-thinking-about-the-question.png"
+						},
+						{
+							"key": "idJenisPinjaman",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman-upload-selfie-ktp",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman-upload-selfie-ktp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "35c. api/pinjaman-upload-dokumen",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "dokumenPendukung",
+							"type": "file",
+							"src": "/D:/GGC/Khotbah 31 Juli 2022/casual-life-3d-brown-wallet-with-money.png"
+						},
+						{
+							"key": "idJenisPinjaman",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman-upload-dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman-upload-dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "36. api/pengajuan-pinjaman/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"noKtp\" : \"000123456789\",\r\n    \"idJenisPinjaman\" : 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman/create",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "37. api/pengajuan-pinjaman/summary",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idJenisPinjaman\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman/summary",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman",
+						"summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "38. api/pengajuan-pinjaman/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idJenisPinjaman\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman/create",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pengajuan-pinjaman",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "39. api/pinjaman-ditolak/id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman-ditolak/1",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman-ditolak",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "40. api/pinjaman-disetujui/id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/pinjaman-disetujui/3",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"pinjaman-disetujui",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "41. api/detail-pinjaman-disetujui/id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/detail-pinjaman-disetujui/4",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"detail-pinjaman-disetujui",
+						"4"
 					]
 				}
 			},

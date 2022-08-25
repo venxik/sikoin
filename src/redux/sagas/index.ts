@@ -8,6 +8,7 @@ import {
 } from './AlamatSaga';
 import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
 import { watchGetBerandaUser } from './HomeSaga';
+import { watchGetKtpDokumen } from './KtpDokumenSaga';
 import {
   watchForgotPassword,
   watchGetKoperasiList,
@@ -61,5 +62,6 @@ export function* rootSaga() {
     fork(watchGetSimpananData),
     fork(watchGetCreateSimpananList),
     fork(watchSubmitPenarikan),
+    fork(watchGetKtpDokumen),
   ]);
 }

@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { isEmpty } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -21,7 +21,8 @@ import {
 import DocumentPicker from 'react-native-document-picker';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../../../config/navigation/model';
-import { useAppSelector } from '../../../../config';
+import { useAppDispatch, useAppSelector } from '../../../../config';
+import { fetchKtpDokumen } from '../../../../redux/reducers/KtpReducer';
 
 type Props = NativeStackScreenProps<
   ProfileStackParamList,
@@ -33,8 +34,18 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
     type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
   };
 
-  const { ktpData } = useAppSelector(s => s.KtpReducer) || {};
+  const { ktpData, ktpDokumen } = useAppSelector(s => s.KtpReducer);
   const { noKtp, gambarKtp } = ktpData || {};
+  const { linkDokumen, linkGambarKtp, linkSelfieKtp, namaDokumen } =
+    ktpDokumen || {};
+
+  console.log(ktpDokumen);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchKtpDokumen());
+  }, []);
 
   const navigateToAddScreen = () => {
     navigation.navigate('DaftarKtpAddScreen');
@@ -57,7 +68,13 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View style={styles.cardContainer}>
         <Image
-          source={!isEmpty(gambarKtp) ? { uri: gambarKtp } : images.dummy_ktp}
+          source={
+            !isEmpty(linkGambarKtp)
+              ? { uri: linkGambarKtp }
+              : !isEmpty(gambarKtp)
+              ? { uri: gambarKtp }
+              : images.dummy_ktp
+          }
           style={styles.imageKtp}
         />
         <View

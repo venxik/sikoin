@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type KtpData = {
   gambarKtp?: string;
@@ -6,8 +6,17 @@ export type KtpData = {
   noKtp?: string;
 };
 
+export type KtpDokumenResponse = {
+  linkGambarKtp: string;
+  linkSelfieKtp: string;
+  linkDokumen: string;
+  namaDokumen: string;
+  noKtp: string;
+};
+
 interface RootState {
   ktpData: KtpData;
+  ktpDokumen?: KtpDokumenResponse;
   error?: unknown;
 }
 
@@ -26,10 +35,16 @@ const ktpSlice = createSlice({
     addKtpNumber: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.noKtp = payload;
     },
-    addKtpSuccess: (state: RootState, { payload }: PayloadAction<KtpData>) => {
-      state.ktpData = payload;
+    fetchKtpDokumenSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<KtpDokumenResponse>,
+    ) => {
+      state.ktpDokumen = payload;
     },
-    addKtpFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+    fetchKtpDokumenFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
       state.error = payload;
     },
     addKtpSelfie: (state: RootState, { payload }: PayloadAction<string>) => {
@@ -38,11 +53,13 @@ const ktpSlice = createSlice({
   },
 });
 
+export const fetchKtpDokumen = createAction('fetchKtpDokumen');
+
 export const {
+  fetchKtpDokumenFailed,
+  fetchKtpDokumenSuccess,
   addKtpImage,
   addKtpNumber,
-  addKtpFailed,
-  addKtpSuccess,
   addKtpSelfie,
 } = ktpSlice.actions;
 

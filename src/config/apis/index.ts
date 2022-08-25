@@ -6,6 +6,7 @@ import ProfileApi from './ProfileApi';
 import BiodataApi from './BiodataApi';
 import PekerjaanApi from './PekerjaanApi';
 import SaldoSimpananApi from './SaldoSimpananApi';
+import KtpDokumenApi from './KtpDokumenApi';
 
 export {
   LoginApi,
@@ -16,4 +17,5 @@ export {
   BiodataApi,
   PekerjaanApi,
   SaldoSimpananApi,
+  KtpDokumenApi,
 };

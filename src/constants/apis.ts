@@ -36,6 +36,12 @@ const constant = {
       simpanan: '/api/simpanan',
       createSimpananList: '/api/simpanan/create',
     },
+    ktpDokumen: {
+      ktpDokumen: '/api/ktp-dokumen',
+      uploadGambarKtp: '/api/upload-gambar-ktp',
+      uploadSelfieKtp: '/api/upload-selfie-ktp',
+      uploadDokumen: '/api/upload-dokumen',
+    },
   },
   errorTypes: {
     generic: 'Error',
