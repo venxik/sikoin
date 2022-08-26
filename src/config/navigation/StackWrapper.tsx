@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, ImageSourcePropType, View } from 'react-native';
+import { View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
   NavigationContainer,
@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as screens from '../../screens';
 import { navigationRef } from './NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
+import { colors, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 import { AsyncStore } from '../../utils';
 import {
   ChatStackParamList,
@@ -19,6 +19,7 @@ import {
   ParentStackParamList,
   ProfileStackParamList,
 } from './model';
+import { Chat, Home, User } from 'react-native-iconly';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
@@ -46,12 +47,12 @@ const shouldShowBottomNavigation = (route: Partial<Route<string>>) => {
 
 const IconBottom = ({
   focused,
-  image,
   badge = false,
+  icon,
 }: {
   focused: boolean;
-  image: ImageSourcePropType;
   badge?: boolean;
+  icon: JSX.Element;
 }) => (
   <View
     style={
@@ -64,10 +65,8 @@ const IconBottom = ({
           }
         : null
     }>
-    <ImageBackground
-      source={image}
-      style={{ width: SCREEN_WIDTH * 0.07, height: SCREEN_WIDTH * 0.07 }}
-      resizeMode={'contain'}>
+    <View>
+      {icon}
       {badge && (
         <View
           style={{
@@ -76,12 +75,12 @@ const IconBottom = ({
             borderRadius: 14,
             backgroundColor: colors.red,
             position: 'absolute',
-            top: -2,
-            right: -2,
+            top: -4,
+            right: -4,
           }}
         />
       )}
-    </ImageBackground>
+    </View>
   </View>
 );
 
@@ -100,7 +99,9 @@ const HomeTab = () => {
           tabBarIcon: ({ focused }) => (
             <IconBottom
               focused={focused}
-              image={focused ? icons.bottom_home_bold : icons.bottom_home}
+              icon={
+                <Home color={colors.primary} filled={focused ? true : false} />
+              }
             />
           ),
           tabBarStyle: {
@@ -116,7 +117,9 @@ const HomeTab = () => {
           tabBarIcon: ({ focused }) => (
             <IconBottom
               focused={focused}
-              image={focused ? icons.bottom_chat_bold : icons.bottom_chat}
+              icon={
+                <Chat color={colors.primary} filled={focused ? true : false} />
+              }
               badge
             />
           ),
@@ -133,7 +136,9 @@ const HomeTab = () => {
           tabBarIcon: ({ focused }) => (
             <IconBottom
               focused={focused}
-              image={focused ? icons.bottom_profile_bold : icons.bottom_profile}
+              icon={
+                <User color={colors.primary} filled={focused ? true : false} />
+              }
             />
           ),
           tabBarStyle: {
@@ -249,8 +254,12 @@ const HomeStackNavigator = () => (
       component={screens.PinjamanSuccessScreen}
     />
     <HomeStack.Screen
-      name="DaftarKtpCameraScreen"
-      component={screens.DaftarKtpCameraScreen}
+      name="PinjamanDetailScreen"
+      component={screens.PinjamanDetailScreen}
+    />
+    <HomeStack.Screen
+      name="PinjamanRincianScreen"
+      component={screens.PinjamanRincianScreen}
     />
   </HomeStack.Navigator>
 );
