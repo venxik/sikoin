@@ -1,15 +1,6 @@
 import rootReducer from '../../redux/reducers';
 import createSagaMiddleware from 'redux-saga';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
@@ -29,10 +20,7 @@ const store = configureStore({
   reducer: persistReducers,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      // thunk: true,
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }).concat(sagaMiddleware),
 });
 

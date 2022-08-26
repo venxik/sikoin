@@ -29,7 +29,7 @@ const DokumenPendukungMainScreen: React.FC<Props> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <HeaderBack
         onPress={() => navigation.goBack()}
-        title={strings.daftar_alamat}
+        title={'Dokumen Pendukung'}
       />
       <FlatList
         data={alamatList}

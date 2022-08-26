@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
+import { PinjamanHorizontalListItemProps } from './model';
 
-const PinjamanHorizontalListItem = () => {
+const PinjamanHorizontalListItem = (props: PinjamanHorizontalListItemProps) => {
+  const { onPress, item } = props;
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Pinjaman Umum</Text>
-    </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Text style={styles.text}>{item.nama}</Text>
+    </TouchableOpacity>
   );
 };
 

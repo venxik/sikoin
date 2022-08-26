@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { colors, icons, sizes } from '../../constants';
+import { formatter } from '../../utils';
+import { PinjamanListItemProps } from './model';
 
-const PinjamanListItem = () => {
+const PinjamanListItem = (props: PinjamanListItemProps) => {
+  const { item } = props;
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -11,14 +14,16 @@ const PinjamanListItem = () => {
           style={styles.iconStyle}
           resizeMode="cover"
         />
-        <Text style={styles.textTitle}>Peminjaman Kredit Motor</Text>
+        <Text style={styles.textTitle}>{item.namaJenisPinjaman}</Text>
       </View>
       <View
         style={{
           marginLeft: 8 + sizes.padding,
         }}>
-        <Text style={styles.textContent}>Test</Text>
-        <Text style={styles.textNominal}>Rp. 1212121</Text>
+        <Text style={styles.textContent}>{item.tanggal}</Text>
+        <Text style={styles.textNominal}>
+          Rp. {formatter.formatNumberToCurreny(item.nominal)}
+        </Text>
       </View>
     </View>
   );

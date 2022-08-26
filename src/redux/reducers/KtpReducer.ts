@@ -35,6 +35,9 @@ const ktpSlice = createSlice({
     addKtpNumber: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.noKtp = payload;
     },
+    addKtpSelfie: (state: RootState, { payload }: PayloadAction<string>) => {
+      state.ktpData.gambarSelfie = payload;
+    },
     fetchKtpDokumenSuccess: (
       state: RootState,
       { payload }: PayloadAction<KtpDokumenResponse>,
@@ -47,13 +50,25 @@ const ktpSlice = createSlice({
     ) => {
       state.error = payload;
     },
-    addKtpSelfie: (state: RootState, { payload }: PayloadAction<string>) => {
-      state.ktpData.gambarSelfie = payload;
+    fetchUploadGambarKtpSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<KtpDokumenResponse>,
+    ) => {
+      state.ktpData = payload;
+    },
+    fetchUploadGambarKtpFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
     },
   },
 });
 
 export const fetchKtpDokumen = createAction('fetchKtpDokumen');
+export const fetchUploadGambarKtp = createAction<FormData>(
+  'fetchUploadGambarKtp',
+);
 
 export const {
   fetchKtpDokumenFailed,
@@ -61,6 +76,8 @@ export const {
   addKtpImage,
   addKtpNumber,
   addKtpSelfie,
+  fetchUploadGambarKtpFailed,
+  fetchUploadGambarKtpSuccess,
 } = ktpSlice.actions;
 
 export default ktpSlice.reducer;

@@ -7,8 +7,12 @@ import {
   fetchKtpDokumen,
   fetchKtpDokumenFailed,
   fetchKtpDokumenSuccess,
+  fetchUploadGambarKtp,
+  fetchUploadGambarKtpFailed,
+  fetchUploadGambarKtpSuccess,
   KtpDokumenResponse,
 } from '../reducers/KtpReducer';
+import { navigation } from '../../config';
 
 function* getKtpDokumen() {
   yield put(showLoading());
@@ -29,33 +33,31 @@ function* getKtpDokumen() {
   yield put(hideLoading());
 }
 
-// function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
-//   yield put(showLoading());
+function* uploadGambarKtp(action: ReturnType<typeof fetchUploadGambarKtp>) {
+  yield put(showLoading());
 
-//   try {
-//     const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
-//       AlamatApi.updateAlamat,
-//       action.payload,
-//     );
-//     if (response?.status === 200) {
-//       const data = formatter.addMissingBracketJSON(response.data);
-//       yield put(updateAlamatSuccess(data?.data));
-//       if (!isEmpty(data)) {
-//         goBack();
-//       }
-//     } else {
-//       yield put(updateAlamatFailed('Error'));
-//     }
-//   } catch (error) {
-//     yield put(updateAlamatFailed(error));
-//   }
-//   yield put(hideLoading());
-// }
+  try {
+    const response: AxiosResponse<{ data: KtpDokumenResponse }> = yield call(
+      KtpDokumenApi.uploadGambarKtp,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      yield put(fetchUploadGambarKtpSuccess(data?.data));
+      navigation.goBack();
+    } else {
+      yield put(fetchUploadGambarKtpFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchUploadGambarKtpFailed(error));
+  }
+  yield put(hideLoading());
+}
 
 export function* watchGetKtpDokumen() {
   yield takeLatest(fetchKtpDokumen, getKtpDokumen);
 }
 
-// export function* watchUpdateAlamat() {
-//   yield takeLatest(fetchUpdateAlamat, updateAlamat);
-// }
+export function* watchUploadGambarKtp() {
+  yield takeLatest(fetchUploadGambarKtp, uploadGambarKtp);
+}

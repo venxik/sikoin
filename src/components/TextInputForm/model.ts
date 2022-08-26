@@ -8,4 +8,5 @@ export interface TextInputFormProps extends TextInputProps {
   textBoxStyle?: ViewStyle;
   error?: FieldError;
   errorText?: string;
+  disableEdit?: boolean;
 }

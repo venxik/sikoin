@@ -8,7 +8,7 @@ import {
 } from './AlamatSaga';
 import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
 import { watchGetBerandaUser } from './HomeSaga';
-import { watchGetKtpDokumen } from './KtpDokumenSaga';
+import { watchGetKtpDokumen, watchUploadGambarKtp } from './KtpDokumenSaga';
 import {
   watchForgotPassword,
   watchGetKoperasiList,
@@ -17,6 +17,7 @@ import {
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
 import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
+import { watchGetPinjamanInitialData } from './PinjamanSaga';
 import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import {
   watchGetRefKeluarga,
@@ -63,5 +64,7 @@ export function* rootSaga() {
     fork(watchGetCreateSimpananList),
     fork(watchSubmitPenarikan),
     fork(watchGetKtpDokumen),
+    fork(watchUploadGambarKtp),
+    fork(watchGetPinjamanInitialData),
   ]);
 }

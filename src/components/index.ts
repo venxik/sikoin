@@ -38,6 +38,7 @@ import CheckoutItem from './CheckoutItem';
 import PaymentItem from './PaymentItem';
 import PinjamanListItem from './PinjamanListItem';
 import PinjamanHorizontalListItem from './PinjamanHorizontalListItem';
+import PinjamanItemModal from './PinjamanItemModal';
 
 export {
   Button,
@@ -80,4 +81,5 @@ export {
   PaymentItem,
   PinjamanListItem,
   PinjamanHorizontalListItem,
+  PinjamanItemModal,
 };

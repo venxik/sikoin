@@ -37,7 +37,10 @@ import {
 import { formatter } from '../../utils';
 import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useAppDispatch, useAppSelector } from '../../config';
-import { HomeTabScreenProps } from '../../config/navigation/model';
+import {
+  HomeStackParamList,
+  HomeTabScreenProps,
+} from '../../config/navigation/model';
 import { KabarData } from '../../redux/reducers/KabarReducer';
 import Animated, {
   interpolateColor,
@@ -60,22 +63,22 @@ const menuList = [
   {
     image: images.menu_pinjaman,
     label: strings.pinjaman,
-    navigateTo: 'PinjamanStackNavigator',
+    navigateTo: 'PinjamanMainScreen',
   },
   {
     image: images.menu_market,
     label: strings.market,
-    navigateTo: 'MarketStackNavigator',
+    navigateTo: 'MarketMainScreen',
   },
   {
     image: images.menu_voucher,
     label: strings.voucher,
-    navigateTo: 'VoucherStackNavigator',
+    navigateTo: 'VoucherMainScreen',
   },
   {
     image: images.menu_dokumen,
     label: strings.dokumen,
-    navigateTo: 'DokumenStackNavigator',
+    navigateTo: 'DokumenMainScreen',
   },
 ];
 
@@ -134,22 +137,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   };
 
   const navigateToOtherScreen = (screen: string) => {
-    switch (screen) {
-      case 'PinjamanStackNavigator':
-        navigation.navigate('PinjamanStep4Screen');
-        return;
-      case 'MarketStackNavigator':
-        navigation.navigate('MarketMainScreen');
-        return;
-      case 'VoucherStackNavigator':
-        navigation.navigate('VoucherMainScreen');
-        return;
-      case 'DokumenStackNavigator':
-        navigation.navigate('DokumenMainScreen');
-        return;
-      default:
-        return;
-    }
+    navigation.navigate(screen as keyof HomeStackParamList);
   };
 
   const onClickMiniScrollButton = (showSaldo: boolean) => {
@@ -166,7 +154,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     let stack = '';
     switch (title) {
       case strings.market:
-        stack = 'MarketStackNavigator';
+        stack = 'MarketMainScreen';
         break;
       case strings.kabar:
         stack = '';
@@ -206,9 +194,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
               {index === kabar?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() =>
-                    navigateToOtherScreen('PinjamanStackNavigator')
-                  }
+                  onPress={() => navigateToOtherScreen('PinjamanMainScreen')}
                 />
               )}
             </View>
@@ -252,7 +238,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
                 onPressVoucher={() => {
-                  navigateToOtherScreen('VoucherStackNavigator');
+                  navigateToOtherScreen('VoucherMainScreen');
                 }}
                 item={item}
                 onPress={() => {
@@ -263,7 +249,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
                 <CardLastItem
                   icon={icons.icon_market_white}
                   onPress={() => {
-                    navigateToOtherScreen('MarketStackNavigator');
+                    navigateToOtherScreen('MarketMainScreen');
                   }}
                 />
               )}

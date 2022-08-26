@@ -257,7 +257,6 @@ const HomeStackNavigator = () => (
 
 const ChatStackNavigator = () => (
   <ChatStack.Navigator
-    initialRouteName={'ChatMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -275,7 +274,6 @@ const ChatStackNavigator = () => (
 
 const ProfileStackNavigator = () => (
   <ProfileStack.Navigator
-    initialRouteName={'ProfileMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -372,7 +370,6 @@ const ParentStackNavigator = () => {
       // linking={Linking}
       ref={navigationRef}>
       <ParentStack.Navigator
-        initialRouteName="HomeTab"
         screenOptions={{
           headerShown: false,
           gestureEnabled: false,

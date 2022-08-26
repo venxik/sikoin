@@ -42,6 +42,9 @@ const constant = {
       uploadSelfieKtp: '/api/upload-selfie-ktp',
       uploadDokumen: '/api/upload-dokumen',
     },
+    pinjaman: {
+      getPinjaman: '/api/pinjaman',
+    },
   },
   errorTypes: {
     generic: 'Error',

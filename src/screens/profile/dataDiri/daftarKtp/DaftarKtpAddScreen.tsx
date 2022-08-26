@@ -16,7 +16,10 @@ import {
   sizes,
   strings,
 } from '../../../../constants';
-import { addKtpNumber } from '../../../../redux/reducers/KtpReducer';
+import {
+  addKtpNumber,
+  fetchUploadGambarKtp,
+} from '../../../../redux/reducers/KtpReducer';
 import { useForm, Controller } from 'react-hook-form';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../../../config/navigation/model';
@@ -34,10 +37,10 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
   const { noKtp, gambarKtp } = ktpData || {};
 
   const submitKtp = (data: { noKtp: string }) => {
-    if (data) {
-      dispatch(addKtpNumber(data.noKtp));
-      navigation.goBack();
-    }
+    dispatch(addKtpNumber(data.noKtp));
+    const formData = new FormData();
+    formData.append('gambarKtp', gambarKtp);
+    dispatch(fetchUploadGambarKtp(formData));
   };
 
   const changeKtpImage = () => {

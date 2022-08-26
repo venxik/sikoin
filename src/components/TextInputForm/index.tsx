@@ -11,7 +11,14 @@ import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import { TextInputFormProps } from './model';
 
 const TextInputForm = (props: TextInputFormProps) => {
-  const { style, textBoxStyle, title, error, errorText } = props || {};
+  const {
+    style,
+    textBoxStyle,
+    title,
+    error,
+    errorText,
+    disableEdit = false,
+  } = props || {};
   const [editable, setEditable] = useState(false);
 
   const input = useRef<TextInput>(null);
@@ -32,6 +39,7 @@ const TextInputForm = (props: TextInputFormProps) => {
             styles.textBox,
             {
               ...textBoxStyle,
+              width: disableEdit ? '100%' : '85%',
               color: editable ? colors.bodyText : colors.bodyTextLightGrey,
               borderBottomColor: error
                 ? colors.red
@@ -46,15 +54,17 @@ const TextInputForm = (props: TextInputFormProps) => {
           clearButtonMode="always"
           editable={editable}
         />
-        <TouchableOpacity onPress={() => setEditable(e => !e)}>
-          <Image
-            source={icons.edit_textbox}
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-            }}
-          />
-        </TouchableOpacity>
+        {!disableEdit && (
+          <TouchableOpacity onPress={() => setEditable(e => !e)}>
+            <Image
+              source={icons.edit_textbox}
+              style={{
+                width: sizes.icon_size,
+                height: sizes.icon_size,
+              }}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       {error && <Text style={styles.textError}>{errorText}</Text>}
     </View>
@@ -68,7 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: sizes.padding,
   },
   textBox: {
-    width: '85%',
     borderBottomWidth: 1,
     color: colors.bodyText,
     fontSize: 15,

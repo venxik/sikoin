@@ -39,8 +39,6 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
   const { linkDokumen, linkGambarKtp, linkSelfieKtp, namaDokumen } =
     ktpDokumen || {};
 
-  console.log(ktpDokumen);
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -58,7 +56,7 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
   const openDocumentPicker = async () => {
     try {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
-      console.log('Dokumen Pendukung :', data);
+      console.warn('Dokumen Pendukung :', data);
     } catch {
       (e: unknown) => console.error('Document picker error! ', e);
     }

@@ -85,6 +85,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
                 value={value}
                 onChangeText={onChange}
                 title={strings.email}
+                disableEdit
               />
             )}
           />
