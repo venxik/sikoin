@@ -1,19 +1,19 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import { colors, icons, sizes } from '../../constants';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { colors, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { PinjamanListItemProps } from './model';
+import { TickSquare } from 'react-native-iconly';
 
 const PinjamanListItem = (props: PinjamanListItemProps) => {
-  const { item } = props;
+  const { item, onPress, disabled = false } = props;
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      disabled={disabled}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Image
-          source={icons.icon_tick_square}
-          style={styles.iconStyle}
-          resizeMode="cover"
-        />
+        <TickSquare color={colors.primary} size={sizes.padding} />
         <Text style={styles.textTitle}>{item.namaJenisPinjaman}</Text>
       </View>
       <View
@@ -25,7 +25,7 @@ const PinjamanListItem = (props: PinjamanListItemProps) => {
           Rp. {formatter.formatNumberToCurreny(item.nominal)}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -5,7 +5,7 @@ import { HeaderBack, PinjamanListItem } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSucessScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanListScreen'>;
 
 const PinjamanListScreen: React.FC<Props> = ({ navigation }) => {
   return (
@@ -20,9 +20,9 @@ const PinjamanListScreen: React.FC<Props> = ({ navigation }) => {
           paddingHorizontal: sizes.padding,
         }}>
         <View style={styles.mainContainer}>
+          {/* <PinjamanListItem />
           <PinjamanListItem />
-          <PinjamanListItem />
-          <PinjamanListItem />
+          <PinjamanListItem /> */}
         </View>
       </ScrollView>
     </SafeAreaView>

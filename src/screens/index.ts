@@ -52,6 +52,8 @@ import PaymentSuccessScreen from './paymentCartCheckout/PaymentSuccessScreen';
 import DokumenPendukungMainScreen from './profile/dataDiri/dokumenPendukung/DokumenPendukungMainScreen';
 import PinjamanMainScreen from './pinjaman/PinjamanMainScreen';
 import PinjamanListScreen from './pinjaman/PinjamanListScreen';
+import PinjamanDetailScreen from './pinjaman/PinjamanDetailScreen';
+import PinjamanRincianScreen from './pinjaman/PinjamanRincianScreen';
 
 export {
   OnboardingScreen,
@@ -108,4 +110,6 @@ export {
   DokumenPendukungMainScreen,
   PinjamanMainScreen,
   PinjamanListScreen,
+  PinjamanDetailScreen,
+  PinjamanRincianScreen,
 };
