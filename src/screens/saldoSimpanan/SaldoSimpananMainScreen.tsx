@@ -28,6 +28,7 @@ import {
   fetchSaldoData,
   fetchSimpananData,
 } from '../../redux/reducers/SaldoSimpananReducer';
+import { ArrowLeft } from 'react-native-iconly';
 
 type Props = NativeStackScreenProps<
   HomeStackParamList,
@@ -178,7 +179,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
         style={{ position: 'absolute', top: 0, zIndex: 2 }}
         onPress={() => navigation.goBack()}
         title={showSaldo ? strings.saldo : strings.simpanan}
-        customLeftIcon={icons.arrow_left_white}
+        customLeftIcon={<ArrowLeft color={colors.white} />}
         textStyle={{ color: colors.white }}
       />
       {renderBackgroundItem()}

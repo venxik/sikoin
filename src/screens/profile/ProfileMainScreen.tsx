@@ -14,6 +14,7 @@ import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
 import 'moment/locale/id';
 import { isEmpty } from 'lodash';
+import { User } from 'react-native-iconly';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
@@ -42,7 +43,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
         onPress={() => navigation.goBack()}
         disabled={true}
         title={strings.profile}
-        customLeftIcon={icons.icon_profile}
+        customLeftIcon={<User color={colors.bodyText} filled />}
       />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topContainer}>

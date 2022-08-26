@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { ArrowLeft } from 'react-native-iconly';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, HeaderBack } from '../../components';
 import { ParentStackParamList } from '../../config/navigation/model';
 import {
   colors,
-  icons,
   images,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
@@ -28,7 +28,7 @@ const DaftarKoperasiFailedScreen: React.FC<Props> = ({ navigation }) => {
       <HeaderBack
         onPress={() => navigation.goBack()}
         style={{ zIndex: 2, width: '100%' }}
-        customLeftIcon={icons.arrow_left_white}
+        customLeftIcon={<ArrowLeft color={colors.white} />}
       />
       <Image
         style={styles.background}

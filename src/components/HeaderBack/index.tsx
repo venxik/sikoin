@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { colors, icons, sizes } from '../../constants';
+import { colors } from '../../constants';
 import { HeaderBackProps } from './model';
+import { ArrowLeft } from 'react-native-iconly';
+import { isEmpty } from 'lodash';
 
 const HeaderBack = (props: HeaderBackProps) => {
   const {
@@ -20,19 +22,18 @@ const HeaderBack = (props: HeaderBackProps) => {
     if (onPress) onPress();
     else navigation.goBack();
   };
-  const leftIcon = customLeftIcon ? customLeftIcon : icons.arrow_left_primary;
+
+  const renderIcon = () => {
+    if (!isEmpty(customLeftIcon)) {
+      return customLeftIcon;
+    }
+    return <ArrowLeft color={colors.primary} />;
+  };
   return (
     <View style={[Styles.container, { ...style }]}>
       <View style={[Styles.innerContainer, { flex: rightIcon ? 0.7 : 0 }]}>
         <TouchableOpacity onPress={validatePress} disabled={disabled}>
-          <Image
-            style={{
-              width: sizes.icon_size,
-              height: sizes.icon_size,
-            }}
-            resizeMode={'stretch'}
-            source={leftIcon}
-          />
+          {renderIcon()}
         </TouchableOpacity>
         <Text style={[Styles.title, { ...textStyle }]} numberOfLines={1}>
           {title}

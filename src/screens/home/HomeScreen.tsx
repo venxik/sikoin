@@ -49,6 +49,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 import { fetchBerandaUser } from '../../redux/reducers/HomeReducer';
+import { Home } from 'react-native-iconly';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -453,7 +454,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         onPress={() => navigation.goBack()}
         disabled={true}
         title={strings.beranda}
-        customLeftIcon={icons.icon_home_header}
+        customLeftIcon={<Home color={colors.bodyText} filled />}
         rightIcon={renderRightButtonHeader()}
       />
       {renderBottomSheet()}

@@ -3,7 +3,8 @@ import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderBack } from '../../components';
 import { ChatStackParamList } from '../../config/navigation/model';
-import { colors, icons, sizes, strings } from '../../constants';
+import { colors, sizes, strings } from '../../constants';
+import { Chat } from 'react-native-iconly';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatMainScreen'>;
 
@@ -12,7 +13,7 @@ const ChatMainScreen: FC<Props> = ({ navigation }) => {
     <View style={styles.container}>
       <HeaderBack
         disabled
-        customLeftIcon={icons.icon_chat}
+        customLeftIcon={<Chat filled color={colors.bodyText} />}
         title={strings.chat}
       />
       <TouchableOpacity

@@ -1,9 +1,9 @@
-import { ImageSourcePropType, TextStyle, ViewStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
 export interface HeaderBackProps {
   title?: string;
   rightIcon?: Element;
-  customLeftIcon?: ImageSourcePropType;
+  customLeftIcon?: JSX.Element;
   onPress?: () => void;
   style?: ViewStyle;
   disabled?: boolean;

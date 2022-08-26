@@ -7,7 +7,6 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
-  Image,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -18,15 +17,16 @@ import {
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { colors, icons, sizes, strings } from '../../constants';
+import { colors, sizes, strings } from '../../constants';
 import {
   fetchGetPinjamanInitialData,
   JenisPinjaman,
   PengajuanPinjaman,
 } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
+import { Document } from 'react-native-iconly';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSucessScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanMainScreen'>;
 
 const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
@@ -51,7 +51,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const onPressPengajuanDetail = (item: PengajuanPinjaman) => {
-    navigation.navigate('PinjamanStep3Screen');
+    navigation.navigate('PinjamanDetailScreen');
   };
 
   const onPressPinjamanHorizontal = (item: JenisPinjaman) => {
@@ -62,14 +62,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   const renderRightButtonHeader = () => {
     return (
       <TouchableOpacity onPress={onPressHeaderButton}>
-        <Image
-          source={icons.icon_document_outline}
-          style={{
-            width: sizes.icon_size * 0.8,
-            height: sizes.icon_size * 0.8,
-          }}
-          resizeMode="contain"
-        />
+        <Document color={colors.primary} />
       </TouchableOpacity>
     );
   };
