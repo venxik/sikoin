@@ -1,6 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
 import {
   View,
   StyleSheet,
@@ -8,32 +7,22 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
+import { fetchPinjamanStep2 } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep1Screen'>;
 
 const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
-  const navigateToStep2 = (data: {
-    email: string;
-    nama: string;
-    noTelp: string;
-  }) => {
-    console.log('navigateToStep2: ', data);
-    navigation.navigate('PinjamanStep2Screen');
-  };
+  const dispatch = useAppDispatch();
+  const { email, noHp, nama, idJenisPinjaman } = useAppSelector(
+    s => s.PinjamanReducer.pinjamanStep1Data,
+  );
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: '',
-      nama: '',
-      noTelp: '',
-    },
-  });
+  const navigateToStep2 = () => {
+    dispatch(fetchPinjamanStep2({ idJenisPinjaman: idJenisPinjaman }));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -49,46 +38,9 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             backgroundColor: colors.white,
             borderRadius: sizes.padding,
           }}>
-          <Controller
-            control={control}
-            name="nama"
-            render={({ field: { onChange, value } }) => (
-              <TextInputForm
-                error={errors.nama}
-                errorText={errors.nama?.message}
-                value={value}
-                onChangeText={onChange}
-                title={strings.nama}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="noTelp"
-            render={({ field: { onChange, value } }) => (
-              <TextInputForm
-                error={errors.noTelp}
-                errorText={errors.noTelp?.message}
-                value={value}
-                onChangeText={onChange}
-                title={strings.no_telp}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="email"
-            render={({ field: { onChange, value } }) => (
-              <TextInputForm
-                error={errors.email}
-                errorText={errors.email?.message}
-                value={value}
-                onChangeText={onChange}
-                title={strings.email}
-                disableEdit
-              />
-            )}
-          />
+          <TextInputForm value={nama} title={strings.nama} disableEdit />
+          <TextInputForm value={noHp} title={strings.no_telp} disableEdit />
+          <TextInputForm value={email} title={strings.email} disableEdit />
         </View>
         <View
           style={{
@@ -106,7 +58,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
-            onPress={handleSubmit(navigateToStep2)}
+            onPress={navigateToStep2}
             text={strings.lanjutkan}
             shadow
             buttonContainerStyle={{ width: '48%' }}
@@ -116,6 +68,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
 export default PinjamanStep1;
 
 const styles = StyleSheet.create({

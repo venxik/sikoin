@@ -1,15 +1,44 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
 import { HeaderBack } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 import { Search } from 'react-native-iconly';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useAppDispatch, useAppSelector } from '../../config';
+import {
+  fetchPinjamanDisetujuiData,
+  fetchPinjamanDitolakData,
+} from '../../redux/reducers/PinjamanReducer';
+import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSucessScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanDetailScreen'>;
 
-const PinjamanDetailScreen: React.FC<Props> = ({ navigation }) => {
+const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
+  const { id, status } = route.params;
+
+  const dispatch = useAppDispatch();
+  const {
+    nominal,
+    nominalPinjamanDiterima,
+    jenisPinjaman,
+    lamaPinjaman,
+    namaBankTujuan,
+    nomorKtp,
+    nomorRekeningBank,
+    alasan,
+    sisaAngsuran,
+    totalAngsuran,
+    totalAngsuranBunga,
+    totalAngsuranPokok,
+  } = useAppSelector(s => s.PinjamanReducer.pinjamanDetailData);
+
+  useEffect(() => {
+    if (status === 'DISETUJUI') dispatch(fetchPinjamanDisetujuiData(id));
+    else dispatch(fetchPinjamanDitolakData(id));
+  }, []);
+
   const navigateToRincian = () => {
     navigation.navigate('PinjamanRincianScreen');
   };
@@ -40,13 +69,17 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={[styles.textItemContent, { flex: 0.7 }]}>
             {'Total Angsuran Pokok : '}
           </Text>
-          <Text style={styles.textItemContent}>Rp. 60.000</Text>
+          <Text style={styles.textItemContent}>
+            Rp. {formatter.formatNumberToCurreny(totalAngsuranPokok)}
+          </Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={[styles.textItemContent, { flex: 0.7 }]}>
-            {'Total Angsuran Pokok : '}
+            {'Total Angsuran Bunga : '}
           </Text>
-          <Text style={styles.textItemContent}>Rp. 60.000</Text>
+          <Text style={styles.textItemContent}>
+            Rp. {formatter.formatNumberToCurreny(totalAngsuranBunga)}
+          </Text>
         </View>
         <View
           style={{
@@ -61,7 +94,9 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={[styles.textItemContent, { flex: 0.7 }]}>
             {'Total : '}
           </Text>
-          <Text style={styles.textItemContent}>Rp. 60.000</Text>
+          <Text style={styles.textItemContent}>
+            Rp. {formatter.formatNumberToCurreny(totalAngsuran)}
+          </Text>
         </View>
       </View>
     );
@@ -77,14 +112,29 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation }) => {
         }}>
         <View style={styles.mainContainer}>
           <Text style={styles.textTitle}>Total Jumlah Pinjaman</Text>
-          <Text style={styles.textSubtitle}>Rp. 10.000.000</Text>
-          <Item content="Test" title="Nama lengkap" />
-          <Item content="Test" title="Nama lengkap" />
-          <Item content="Test" title="Nama lengkap" />
-          <Item content="Test" title="Nama lengkap" />
-          <Item content="Test" title="Nama lengkap" />
-          <SimulasiPinjaman />
-          <Item content="Test" title="Sisa bulan pembayaran" />
+          <Text style={styles.textSubtitle}>
+            {'Rp. '}
+            {formatter.formatNumberToCurreny(
+              nominal ? nominal : nominalPinjamanDiterima,
+            )}
+          </Text>
+          {/* <Item title="Nama Lengkap" content={} /> */}
+          <Item title="Nama Bank Tujuan" content={namaBankTujuan} />
+          <Item title="Nomor Rekening Bank" content={nomorRekeningBank} />
+          <Item title="Nomor KTP" content={nomorKtp} />
+          <Item title="Jenis Pinjaman" content={jenisPinjaman} />
+          <Item title="Lama Pinjaman" content={lamaPinjaman.toString()} />
+          {status !== 'DITOLAK' ? (
+            <View>
+              <SimulasiPinjaman />
+              <Item
+                title="Sisa Bulan Pembayaran"
+                content={sisaAngsuran as string}
+              />
+            </View>
+          ) : (
+            <Item title="Alasan Ditolak" content={alasan as string} />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

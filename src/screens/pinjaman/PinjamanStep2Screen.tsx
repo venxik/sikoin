@@ -15,36 +15,54 @@ import {
   HeaderPinjaman,
   TextInputForm,
 } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
-import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
-import { formatter } from '../../utils';
+import {
+  fetchPinjamanStep3,
+  PinjamanStep2Data,
+} from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep2Screen'>;
 
 const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
-  const navigateToStep3 = (data: BiodataResponse) => {
-    console.log('navigateToStep3', data);
-    navigation.navigate('PinjamanStep3Screen');
+  const dispatch = useAppDispatch();
+  const {
+    agama,
+    detailPekerjaan,
+    gender,
+    golDarah,
+    jumlahAnak,
+    kewarganegaraan,
+    pekerjaan,
+    pendidikanTerakhir,
+    statusPernikahan,
+    tanggalLahir,
+    tempatLahir,
+    idJenisPinjaman,
+  } = useAppSelector(s => s.PinjamanReducer.pinjamanStep2Data);
+
+  const navigateToStep3 = (data: PinjamanStep2Data) => {
+    dispatch(fetchPinjamanStep3({ ...data, idJenisPinjaman }));
   };
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<BiodataResponse>({
+  } = useForm<PinjamanStep2Data>({
     defaultValues: {
-      tempatLahir: '',
-      tanggalLahir: '',
-      jumlahAnak: 0,
-      bank: '',
-      noRek: '',
-      jenisKelamin: '',
-      golDarah: '',
-      kewarganegaraan: '',
-      pendidikanTerakhir: '',
-      agama: '',
-      statusPernikahan: '',
+      tempatLahir,
+      tanggalLahir,
+      jumlahAnak,
+      gender,
+      golDarah,
+      kewarganegaraan,
+      pendidikanTerakhir,
+      agama,
+      statusPernikahan,
+      pekerjaan,
+      detailPekerjaan,
     },
   });
 
@@ -86,7 +104,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
-                name="jenisKelamin"
+                name="gender"
                 render={({ field: { onChange, value } }) => (
                   <DropdownForm
                     style={{ width: '55%' }}
@@ -166,7 +184,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
-                  value={value.toString()}
+                  value={value?.toString()}
                   onChangeText={value => onChange(value)}
                   title={strings.jumlah_anak}
                 />
@@ -174,33 +192,29 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="noRek"
+              name="pekerjaan"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
-                  error={errors.noRek}
-                  errorText={errors.noRek?.message}
+                  error={errors.pekerjaan}
+                  errorText={errors.pekerjaan?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.no_rekening}
+                  title={strings.pekerjaan}
                 />
               )}
-              rules={{
-                pattern: {
-                  value: formatter.NUMBER_REGEX,
-                  message: 'Format harus dalam bentuk angka',
-                },
-              }}
             />
             <Controller
               control={control}
-              name="bank"
+              name="detailPekerjaan"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
+                  error={errors.detailPekerjaan}
+                  errorText={errors.detailPekerjaan?.message}
                   onBlur={onBlur}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.bank}
+                  title={strings.detail_pekerjaan}
                 />
               )}
             />

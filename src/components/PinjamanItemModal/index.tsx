@@ -80,7 +80,10 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
           <Button
             disabled={!checked}
             buttonContainerStyle={{ marginTop: 20, marginHorizontal: -26 }}
-            onPress={onPress}
+            onPress={() => {
+              setChecked(false);
+              onPress();
+            }}
             text={'Ajukan Pinjaman'}
           />
         </View>

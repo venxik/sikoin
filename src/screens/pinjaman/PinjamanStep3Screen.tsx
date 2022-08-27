@@ -14,33 +14,59 @@ import {
   HeaderPinjaman,
   TextInputForm,
 } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
-import { PekerjaanResponse } from '../../redux/reducers/PekerjaanReducer';
+import {
+  fetchPinjamanStep4,
+  PinjamanStep3Data,
+} from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 
 const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
-  const navigateToStep4 = (data: PekerjaanResponse) => {
-    console.log('navigateToStep4: ', data);
-    navigation.navigate('PinjamanStep4Screen');
+  const dispatch = useAppDispatch();
+  const {
+    alamatPt,
+    bank,
+    gajiBulanan,
+    jabatan,
+    kota,
+    masaKerjaBulan,
+    masaKerjaTahun,
+    namaKantorCabang,
+    namaPemilik,
+    namaPt,
+    noRek,
+    noTelpPt,
+    provinsi,
+    idJenisPinjaman,
+  } = useAppSelector(s => s.PinjamanReducer.pinjamanStep3Data);
+
+  const navigateToStep4 = (data: PinjamanStep3Data) => {
+    dispatch(fetchPinjamanStep4({ ...data, idJenisPinjaman: idJenisPinjaman }));
   };
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<PekerjaanResponse>({
+  } = useForm<PinjamanStep3Data>({
     defaultValues: {
-      pekerjaan: '',
-      detailPekerjaan: '',
-      masaKerjaTahun: 0,
-      masaKerjaBulan: 0,
-      gajiBulanan: '',
-      namaPerusahaan: '',
-      alamatKantor: '',
-      provinsiKota: '',
+      alamatPt,
+      bank,
+      masaKerjaTahun,
+      masaKerjaBulan,
+      gajiBulanan,
+      jabatan,
+      kota,
+      namaKantorCabang,
+      namaPemilik,
+      namaPt,
+      noRek,
+      noTelpPt,
+      provinsi,
     },
   });
 
@@ -53,40 +79,6 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
         <HeaderPinjaman index={3} />
         <ScrollView>
           <View style={styles.innerContainer}>
-            <Controller
-              control={control}
-              name="pekerjaan"
-              render={({ field: { onChange, value } }) => (
-                <DropdownForm
-                  title={strings.pekerjaan}
-                  data={dropdownItems.pekerjaanItem}
-                  onChange={value => onChange(value)}
-                  value={value}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="detailPekerjaan"
-              render={({ field: { onChange, value } }) => (
-                <TextInputForm
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.detail_pekerjaan}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="namaPerusahaan"
-              render={({ field: { onChange, value } }) => (
-                <TextInputForm
-                  value={value}
-                  onChangeText={value => onChange(value)}
-                  title={strings.nama_perusahaan}
-                />
-              )}
-            />
             <View
               style={{
                 flexDirection: 'row',
@@ -146,53 +138,122 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   value={value}
                   maxHeight={200}
                 />
-                // <TextInputCurrency
-                //   error={errors.gajiBulanan}
-                //   errorText={errors.gajiBulanan?.message}
-                //   value={value}
-                //   onChangeValue={value => onChange(value)}
-                //   title={strings.gaji_bulanan}
-                //   keyboardType="number-pad"
-                //   placeholder="Rp"
-                // />
               )}
-              rules={{
-                pattern: {
-                  value: formatter.NUMBER_REGEX,
-                  message: 'Format harus dalam bentuk angka',
-                },
-              }}
             />
             <Controller
               control={control}
-              name="alamatKantor"
+              name="bank"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
+                  error={errors?.bank}
+                  errorText={errors?.bank?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.alamat_kantor}
+                  title="Nama Bank"
                 />
               )}
             />
             <Controller
               control={control}
-              name="provinsiKota"
+              name="namaKantorCabang"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
+                  error={errors?.namaKantorCabang}
+                  errorText={errors?.namaKantorCabang?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.provinsi_kota}
+                  title="Kantor Cabang"
                 />
               )}
             />
             <Controller
               control={control}
-              name="provinsiKota"
+              name="noRek"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
+                  error={errors?.noRek}
+                  errorText={errors?.noRek?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title={strings.provinsi_kota}
+                  title="No Rekening"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="namaPt"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.namaPt}
+                  errorText={errors?.namaPt?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="No Perusahaan / PT"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="jabatan"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.jabatan}
+                  errorText={errors?.jabatan?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="Jabatan"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="noTelpPt"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.noTelpPt}
+                  errorText={errors?.noTelpPt?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="No Telepon Kantor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="alamatPt"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.alamatPt}
+                  errorText={errors?.alamatPt?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="Alamat Kantor"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="provinsi"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.provinsi}
+                  errorText={errors?.provinsi?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="Provinsi"
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="kota"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  error={errors?.kota}
+                  errorText={errors?.kota?.message}
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title="Kabupaten / Kota"
                 />
               )}
             />

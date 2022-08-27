@@ -20,6 +20,7 @@ import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 import {
   fetchGetPinjamanInitialData,
+  fetchPinjamanStep1,
   JenisPinjaman,
   PengajuanPinjaman,
 } from '../../redux/reducers/PinjamanReducer';
@@ -42,16 +43,20 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   }, []);
 
   const onPressHeaderButton = () => {
-    // navigation.navigate('PinjamanListScreen');
+    navigation.navigate('PinjamanListScreen');
   };
 
   const onPressAjukanPinjaman = () => {
     setShowModal(e => !e);
+    dispatch(fetchPinjamanStep1({ idJenisPinjaman: selectedItem?.id }));
     navigation.navigate('PinjamanStep1Screen');
   };
 
-  const onPressPengajuanDetail = (item: PengajuanPinjaman) => {
-    navigation.navigate('PinjamanDetailScreen');
+  const onPressPinjamanDetail = (item: PengajuanPinjaman) => {
+    navigation.navigate('PinjamanDetailScreen', {
+      id: item.id,
+      status: item.status,
+    });
   };
 
   const onPressPinjamanHorizontal = (item: JenisPinjaman) => {
@@ -81,7 +86,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
         }}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {!isEmpty(jenisPinjaman) &&
-            jenisPinjaman.map((item, i) => (
+            jenisPinjaman.map((item: JenisPinjaman, i: number) => (
               <PinjamanHorizontalListItem
                 item={item}
                 key={i}
@@ -96,13 +101,17 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
             Rp. {formatter.formatNumberToCurreny(totalJumlahPinjamanDisetujui)}
           </Text>
           {!isEmpty(pengajuanPinjaman) &&
-            pengajuanPinjaman.map((item, i) => (
-              <PinjamanListItem
-                item={item}
-                key={i}
-                onPress={() => onPressPengajuanDetail(item)}
-              />
-            ))}
+            pengajuanPinjaman.map((item: PengajuanPinjaman, i: number) => {
+              if (item.status === 'PENGAJUAN' || item.status === 'DISETUJUI')
+                return (
+                  <PinjamanListItem
+                    item={item}
+                    key={i}
+                    disabled={item.status === 'PENGAJUAN'}
+                    onPress={() => onPressPinjamanDetail(item)}
+                  />
+                );
+            })}
         </View>
       </ScrollView>
       {selectedItem && (

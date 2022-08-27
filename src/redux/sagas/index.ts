@@ -1,4 +1,3 @@
-// Imports: Dependencies
 import { all, fork } from 'redux-saga/effects';
 import {
   watchGetAlamat,
@@ -17,7 +16,15 @@ import {
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
 import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
-import { watchGetPinjamanInitialData } from './PinjamanSaga';
+import {
+  watchGetPinjamanDataStep1,
+  watchGetPinjamanDataStep2,
+  watchGetPinjamanDataStep3,
+  watchGetPinjamanDataStep4,
+  watchGetPinjamanDisetujui,
+  watchGetPinjamanDitolak,
+  watchGetPinjamanInitialData,
+} from './PinjamanSaga';
 import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import {
   watchGetRefKeluarga,
@@ -66,5 +73,11 @@ export function* rootSaga() {
     fork(watchGetKtpDokumen),
     fork(watchUploadGambarKtp),
     fork(watchGetPinjamanInitialData),
+    fork(watchGetPinjamanDataStep1),
+    fork(watchGetPinjamanDataStep2),
+    fork(watchGetPinjamanDataStep3),
+    fork(watchGetPinjamanDataStep4),
+    fork(watchGetPinjamanDisetujui),
+    fork(watchGetPinjamanDitolak),
   ]);
 }
