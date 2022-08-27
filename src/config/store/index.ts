@@ -1,12 +1,21 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import rootReducer from '../../redux/reducers';
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from '../../redux/sagas';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import Reactotron from '../../../ReactotronConfig';
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMonitor = Reactotron.createSagaMonitor!();
+let sagaMiddleware: SagaMiddleware;
+
+if (!__DEV__) {
+  sagaMiddleware = createSagaMiddleware();
+} else {
+  sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+}
 
 const persistConfig = {
   key: 'root',
@@ -22,6 +31,7 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(sagaMiddleware),
+  enhancers: e => e.concat(__DEV__ ? Reactotron.createEnhancer!() : []),
 });
 
 const persist = persistStore(store);
