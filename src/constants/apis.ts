@@ -4,46 +4,52 @@ const constant = {
   acceptHeader: '*/*',
   endpoints: {
     login: {
-      koperasi: '/api/koperasi',
-      emailAnggota: '/api/email-anggota',
-      forgotPassword: '/api/lupa-password',
-      login: '/api/login',
+      koperasi: 'koperasi',
+      emailAnggota: 'email-anggota',
+      forgotPassword: 'lupa-password',
+      login: 'login',
     },
     alamat: {
-      alamat: '/api/daftar-alamat',
+      alamat: 'daftar-alamat',
     },
     home: {
-      beranda: '/api/beranda-user',
+      beranda: 'beranda-user',
     },
     keluarga: {
-      keluarga: '/api/ref-keluarga',
+      keluarga: 'ref-keluarga',
     },
     profile: {
-      profile: '/api/profile-user',
+      profile: 'profile-user',
     },
     biodata: {
-      biodata: '/api/biodata',
+      biodata: 'biodata',
     },
     pekerjaan: {
-      pekerjaan: '/api/pekerjaan',
+      pekerjaan: 'pekerjaan',
     },
-    chat: '/api/kirim-pesan',
+    chat: 'kirim-pesan',
     saldo: {
-      saldo: '/api/saldo-belanja',
-      createSaldoList: '/api/saldo-belanja/create',
+      saldo: 'saldo-belanja',
+      createSaldoList: 'saldo-belanja/create',
     },
     simpanan: {
-      simpanan: '/api/simpanan',
-      createSimpananList: '/api/simpanan/create',
+      simpanan: 'simpanan',
+      createSimpananList: 'simpanan/create',
     },
     ktpDokumen: {
-      ktpDokumen: '/api/ktp-dokumen',
-      uploadGambarKtp: '/api/upload-gambar-ktp',
-      uploadSelfieKtp: '/api/upload-selfie-ktp',
-      uploadDokumen: '/api/upload-dokumen',
+      ktpDokumen: 'ktp-dokumen',
+      uploadGambarKtp: 'upload-gambar-ktp',
+      uploadSelfieKtp: 'upload-selfie-ktp',
+      uploadDokumen: 'upload-dokumen',
     },
     pinjaman: {
-      getPinjaman: '/api/pinjaman',
+      getPinjaman: 'pinjaman',
+      disetujui: 'pinjaman-disetujui',
+      ditolak: 'pinjaman-ditolak',
+      step1: 'pengajuan-pinjaman-data-pengguna',
+      step2: 'pengajuan-pinjaman-biodata',
+      step3: 'pengajuan-pinjaman-pekerjaan',
+      step4: 'pengajuan-pinjaman-ktp-dokumen',
     },
   },
   errorTypes: {
@@ -60,12 +66,7 @@ const constant = {
     unprocessable: 'Unprocessable Entity', // 422
     serverError: 'Internal server error', // 500
   },
-  authPathArray: [
-    '/api/koperasi',
-    '/api/email-anggota',
-    '/api/lupa-password',
-    '/api/login',
-  ],
+  authPathArray: ['koperasi', 'email-anggota', 'lupa-password', 'login'],
 };
 
 const API = {
