@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors } from '../../constants';
 
-const PinjamanDetailItem = (props: { title: string; content: string }) => {
+const PinjamanDetailItem = (props: { title?: string; content?: string }) => {
   const { title, content } = props;
   return (
     <View style={{ marginTop: 30 }}>
-      <Text style={styles.textItemTitle}>{title}</Text>
-      <Text style={styles.textItemContent}>{content}</Text>
+      <Text style={styles.textItemTitle}>{title && title}</Text>
+      <Text style={styles.textItemContent}>{content && content}</Text>
     </View>
   );
 };

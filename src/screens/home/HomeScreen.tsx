@@ -57,7 +57,7 @@ const menuSize = SCREEN_HEIGHT * 0.15;
 
 const saldoFlatlist = [
   { title: strings.simpanan, button: strings.mutasi },
-  { title: strings.saldo_belanja, button: strings.topup },
+  // { title: strings.saldo_belanja, button: strings.topup },
 ];
 
 const menuList = [

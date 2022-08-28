@@ -1,20 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { colors } from '../../constants';
+import { View, StyleSheet, Modal, ActivityIndicator } from 'react-native';
+import { colors, sizes } from '../../constants';
 
 const LoadingIndicator = () => (
-  <View style={styles.loadingContainer}>
-    <Text>Loading Indicator</Text>
-  </View>
+  <Modal style={styles.loadingContainer} animationType="fade" transparent>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <View
+        style={{
+          width: '20%',
+          height: '10%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: colors.primaryWhite,
+          borderRadius: sizes.padding,
+        }}>
+        <ActivityIndicator color={colors.primary} size="large" />
+      </View>
+    </View>
+  </Modal>
 );
 
 const styles = StyleSheet.create({
   loadingContainer: {
-    ...StyleSheet.absoluteFillObject,
-    flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.bodyTextLightGrey,
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
 });
 

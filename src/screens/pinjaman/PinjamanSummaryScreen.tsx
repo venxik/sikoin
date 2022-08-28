@@ -1,9 +1,23 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Button, HeaderBack, Popup1Button } from '../../components';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {
+  Button,
+  HeaderBack,
+  PinjamanDetailItem,
+  Popup1Button,
+} from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
+import { fetchPostCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<
@@ -14,8 +28,26 @@ type Props = NativeStackScreenProps<
 const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
   const [showPopup, setShowPopup] = useState(false);
 
+  //redux dispatch and selector
+  const dispatch = useAppDispatch();
+  const { pinjamanInfo } = useAppSelector(s => s.PinjamanReducer);
+  const {
+    bungaJenisPinjaman,
+    namaBank,
+    namaJenisPinjaman,
+    namaKantorCabang,
+    namaLengkap,
+    namaPemilik,
+    noKTP,
+    noRek,
+    nominal,
+    rumusJenisPinjaman,
+    tenor,
+    tujuan,
+  } = useAppSelector(s => s.PinjamanReducer.pinjamanSummaryData);
+
   const navigateToSuccess = () => {
-    navigation.navigate('PinjamanSucessScreen');
+    dispatch(fetchPostCreatePinjaman({ ...pinjamanInfo }));
   };
 
   const renderRightButtonHeader = () => {
@@ -45,39 +77,45 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
         title={strings.kembali}
         rightIcon={renderRightButtonHeader()}
       />
-      <View style={styles.innerContainer}>
-        <Text style={styles.textTitle}>{strings.nominal_pengajuan}</Text>
-        <View style={styles.textNominalContainer}>
-          <Image
-            source={icons.icon_rp_dark}
-            style={styles.icon}
-            resizeMode="cover"
+      <ScrollView>
+        <View style={styles.innerContainer}>
+          <Text style={styles.textTitle}>{strings.nominal_pengajuan}</Text>
+          <View style={styles.textNominalContainer}>
+            <Image
+              source={icons.icon_rp_dark}
+              style={styles.icon}
+              resizeMode="cover"
+            />
+            <Text style={styles.textNominal} numberOfLines={1}>
+              {formatter.formatNumberToCurreny(nominal)}
+            </Text>
+          </View>
+          <PinjamanDetailItem title="Nama Lengkap" content={namaLengkap} />
+          <PinjamanDetailItem title="No KTP" content={noKTP} />
+          <PinjamanDetailItem title="Nama Pemilik" content={namaPemilik} />
+          <PinjamanDetailItem
+            title="Nama Jenis Pinjaman"
+            content={namaJenisPinjaman}
           />
-          <Text style={styles.textNominal} numberOfLines={1}>
-            {formatter.formatStringToCurrencyNumber('123123123')}
-          </Text>
+          <PinjamanDetailItem title="Nama Bank" content={namaBank} />
+          <PinjamanDetailItem
+            title="Nama Kantor Cabang"
+            content={namaKantorCabang}
+          />
+          <PinjamanDetailItem title="Nomor Rekening" content={noRek} />
+          <PinjamanDetailItem
+            title="Rumus Jenis Pinjaman"
+            content={rumusJenisPinjaman}
+          />
+          <PinjamanDetailItem
+            title="Bunga Jenis Pinjaman"
+            content={bungaJenisPinjaman}
+          />
+          <PinjamanDetailItem title="Tenor" content={tenor?.toString()} />
+          <PinjamanDetailItem title="Tujuan" content={tujuan} />
         </View>
-        <View style={{ marginBottom: sizes.padding }}>
-          <Text style={styles.textTitle}>{strings.nama_lengkap}</Text>
-          <Text style={styles.textContent}>Lorem Ipsum Doir</Text>
-        </View>
-        <View style={{ marginBottom: sizes.padding }}>
-          <Text style={styles.textTitle}>{strings.nomor_rekening}</Text>
-          <Text style={styles.textContent}>21312321</Text>
-        </View>
-        <Text style={styles.textTitle}>{strings.nomor_ktp}</Text>
-        <Text style={styles.textContent}>1234567087</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          position: 'absolute',
-          bottom: sizes.padding,
-          paddingHorizontal: sizes.padding,
-          width: '100%',
-          zIndex: 1,
-        }}>
+      </ScrollView>
+      <View style={styles.buttonContainer}>
         <Button
           onPress={() => navigation.goBack()}
           shadow
@@ -113,10 +151,6 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     fontFamily: 'Poppins-Medium',
   },
-  textContent: {
-    color: colors.primary,
-    fontFamily: 'Inter-Bold',
-  },
   textNominalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -132,5 +166,14 @@ const styles = StyleSheet.create({
   headerIcon: {
     width: sizes.icon_size,
     height: sizes.icon_size,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: sizes.padding,
+    paddingHorizontal: sizes.padding,
+    width: '100%',
+    zIndex: 1,
   },
 });
