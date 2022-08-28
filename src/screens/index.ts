@@ -54,6 +54,7 @@ import PinjamanMainScreen from './pinjaman/PinjamanMainScreen';
 import PinjamanListScreen from './pinjaman/PinjamanListScreen';
 import PinjamanDetailScreen from './pinjaman/PinjamanDetailScreen';
 import PinjamanRincianScreen from './pinjaman/PinjamanRincianScreen';
+import PinjamanSimulasiScreen from './pinjaman/PinjamansSimulasiScreen';
 
 export {
   OnboardingScreen,
@@ -112,4 +113,5 @@ export {
   PinjamanListScreen,
   PinjamanDetailScreen,
   PinjamanRincianScreen,
+  PinjamanSimulasiScreen,
 };

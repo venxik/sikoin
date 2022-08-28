@@ -16,12 +16,12 @@ type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep1Screen'>;
 
 const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { email, noHp, nama, idJenisPinjaman } = useAppSelector(
+  const { email, noTelp, nama } = useAppSelector(
     s => s.PinjamanReducer.pinjamanStep1Data,
   );
 
   const navigateToStep2 = () => {
-    dispatch(fetchPinjamanStep2({ idJenisPinjaman: idJenisPinjaman }));
+    dispatch(fetchPinjamanStep2());
   };
 
   return (
@@ -39,7 +39,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             borderRadius: sizes.padding,
           }}>
           <TextInputForm value={nama} title={strings.nama} disableEdit />
-          <TextInputForm value={noHp} title={strings.no_telp} disableEdit />
+          <TextInputForm value={noTelp} title={strings.no_telp} disableEdit />
           <TextInputForm value={email} title={strings.email} disableEdit />
         </View>
         <View

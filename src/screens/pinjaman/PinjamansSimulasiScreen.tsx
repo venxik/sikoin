@@ -1,28 +1,20 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
 import { HeaderBack, PinjamanRincianSimulasiItem } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../config';
+import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
-import { fetchPinjamanDisetujuiDetailData } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<
   HomeStackParamList,
-  'PinjamanRincianScreen'
+  'PinjamanSimulasiScreen'
 >;
 
-const PinjamanRincianScreen: React.FC<Props> = ({ navigation, route }) => {
-  const { id } = route.params;
-
-  const dispatch = useAppDispatch();
-  const { rincianAngsuran } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanDisetujuiDetail,
+const PinjamanSimulasiScreen: React.FC<Props> = ({ navigation }) => {
+  const { simulasi } = useAppSelector(
+    s => s.PinjamanReducer.pinjamanSummaryData,
   );
-
-  useEffect(() => {
-    dispatch(fetchPinjamanDisetujuiDetailData(id));
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,17 +28,17 @@ const PinjamanRincianScreen: React.FC<Props> = ({ navigation, route }) => {
           paddingHorizontal: sizes.padding,
         }}>
         <View style={styles.mainContainer}>
-          <Text style={styles.textTitle}>Rincian Angsuran</Text>
-          {rincianAngsuran &&
-            rincianAngsuran.map((item, i) => (
-              <PinjamanRincianSimulasiItem key={i} item={item} />
+          <Text style={styles.textTitle}>Simulasi Pinjaman</Text>
+          {simulasi &&
+            simulasi.map((item, i) => (
+              <PinjamanRincianSimulasiItem item={item} key={i} />
             ))}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-export default PinjamanRincianScreen;
+export default PinjamanSimulasiScreen;
 
 const styles = StyleSheet.create({
   container: {

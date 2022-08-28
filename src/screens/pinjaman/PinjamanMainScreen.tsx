@@ -49,7 +49,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
 
   const onPressAjukanPinjaman = () => {
     setShowModal(e => !e);
-    dispatch(fetchPinjamanStep1({ idJenisPinjaman: selectedItem?.id }));
+    dispatch(fetchPinjamanStep1());
     dispatch(setPinjamanInfo({ idJenisPinjaman: selectedItem?.id }));
     navigation.navigate('PinjamanStep1Screen');
   };

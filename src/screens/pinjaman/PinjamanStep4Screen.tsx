@@ -27,12 +27,12 @@ const documentPickerOptions = {
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { gambarKTP, noKTP, idJenisPinjaman } = useAppSelector(
+  const { linkGambarKtp, noKtp } = useAppSelector(
     s => s.PinjamanReducer.pinjamanStep4Data,
   );
 
-  const submitKtp = (data: { noKTP: string }) => {
-    dispatch(fetchPatchCreatePinjaman({ noKtp: data.noKTP, idJenisPinjaman }));
+  const submitKtp = (data: { noKtp: string }) => {
+    dispatch(fetchPatchCreatePinjaman({ noKtp: data.noKtp }));
   };
 
   const changeKtpImage = () => {
@@ -52,9 +52,9 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ noKTP: string }>({
+  } = useForm<{ noKtp: string }>({
     defaultValues: {
-      noKTP,
+      noKtp,
     },
   });
 
@@ -65,8 +65,8 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
           <ImageBackground
             imageStyle={styles.imageKtp}
             source={
-              !isEmpty(gambarKTP)
-                ? { uri: gambarKTP }
+              !isEmpty(linkGambarKtp)
+                ? { uri: linkGambarKtp }
                 : icons.icon_edit_profle_picture
             }
             style={styles.imageKtp}
@@ -85,11 +85,11 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <Controller
           control={control}
-          name="noKTP"
+          name="noKtp"
           render={({ field: { onChange, value } }) => (
             <TextInputForm
-              error={errors.noKTP}
-              errorText={errors.noKTP?.message}
+              error={errors.noKtp}
+              errorText={errors.noKtp?.message}
               style={{ marginTop: sizes.padding }}
               value={value}
               onChangeText={onChange}
@@ -107,8 +107,8 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
           <ImageBackground
             imageStyle={styles.imageSelfie}
             source={
-              !isEmpty(gambarKTP)
-                ? { uri: gambarKTP }
+              !isEmpty(linkGambarKtp)
+                ? { uri: linkGambarKtp }
                 : icons.icon_edit_profle_picture
             }
             style={styles.imageSelfie}

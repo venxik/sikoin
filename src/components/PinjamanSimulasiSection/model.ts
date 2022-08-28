@@ -5,4 +5,5 @@ export type PinjamanSimulasiSectionProps = {
     totalAngsuranBunga: number;
     totalAngsuran: number;
   };
+  simulasi?: boolean;
 };

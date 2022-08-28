@@ -6,14 +6,14 @@ export type IdJenisPinjaman = {
 
 export type PinjamanStep1Data = {
   nama?: string;
-  noHp?: string;
+  noTelp?: string;
   email?: string;
 } & IdJenisPinjaman;
 
 export type PinjamanStep2Data = {
   tempatLahir?: string;
   tanggalLahir?: string;
-  gender?: string;
+  jenisKelamin?: string;
   golDarah?: string;
   kewarganegaraan?: string;
   pendidikanTerakhir?: string;
@@ -22,15 +22,15 @@ export type PinjamanStep2Data = {
   jumlahAnak?: number;
   pekerjaan?: string;
   detailPekerjaan?: string;
-} & IdJenisPinjaman;
+};
 
 export type PinjamanStep3Data = {
   masaKerjaTahun?: number;
   masaKerjaBulan?: number;
   gajiBulanan?: string;
-  jabatan?: string;
-  namaPt?: string;
-  alamatPt?: string;
+  jabatanTerakhir?: string;
+  namaPerusahaan?: string;
+  alamatKantor?: string;
   kota?: string;
   provinsi?: string;
   noTelpPt?: string;
@@ -38,43 +38,36 @@ export type PinjamanStep3Data = {
   noRek?: string;
   namaPemilik?: string;
   namaKantorCabang?: string;
-} & IdJenisPinjaman;
+};
 
 export type PinjamanStep4Data = {
-  gambarKTP?: string;
-  noKTP?: string;
-  selfieKTP?: string;
-  dokumenPendukung?: string;
+  noKtp?: string;
+  linkGambarKtp?: string;
+  linkSelfieKtp?: string;
+  linkDokumen?: string;
   namaDokumen?: string;
-} & IdJenisPinjaman;
+};
 
 export type CreatePinjamanRequest = {
   noKtp?: string;
-} & IdJenisPinjaman;
+};
 
 export type PinjamanSummaryResponse = {
   nominal?: number;
   tenor?: number;
   tujuan?: string;
-  namaLengkap?: string;
+  nama?: string;
   noRek?: string;
   namaBank?: string;
   namaPemilik?: string;
   namaKantorCabang?: string;
-  noKTP?: string;
+  noKtp?: string;
   namaJenisPinjaman?: string;
-  rumusJenisPinjaman?: string;
   bungaJenisPinjaman?: string;
-  simulasi?: PinjamanSummarySimulasi[];
-} & IdJenisPinjaman;
-
-export type PinjamanSummarySimulasi = {
-  bulan: number;
-  saldo: number;
-  angsuran_pokok: number;
-  angsuran_bunga: number;
-  jumlah_angsuran: number;
-  saldo_setelah_bayar: number;
+  totalAngsuranPokok?: number;
+  totalAngsuranBunga?: number;
+  totalAngsuran?: number;
+  simulasi?: RincianSimulasi[];
 };
 
 export type GetPinjamanInitialDataResponse = {
@@ -84,18 +77,32 @@ export type GetPinjamanInitialDataResponse = {
 };
 
 export type PinjamanDetailResponse = {
+  nama?: string;
+  nominal?: number;
   namaBankTujuan: string;
   nomorRekeningBank: string;
   nomorKtp: string;
   jenisPinjaman: string;
   lamaPinjaman: number;
-  nominalPinjamanDiterima?: number;
-  nominal?: number;
   totalAngsuranPokok?: number;
   totalAngsuranBunga?: number;
   totalAngsuran?: number;
   sisaAngsuran?: string;
   alasan?: string;
+};
+
+export type RincianSimulasi = {
+  bulan?: string;
+  tanggalJatuhTempo?: string;
+  saldo?: number;
+  angsuranPokok?: number;
+  angsuranBunga?: number;
+  jumlahAngsuran?: number;
+  statusBayar?: boolean;
+};
+
+export type PinjamanDisetujuiDetailResponse = {
+  rincianAngsuran: RincianSimulasi[];
 };
 
 export type JenisPinjaman = {
@@ -136,6 +143,7 @@ interface RootState {
   pinjamanStep3Data: PinjamanStep3Data;
   pinjamanStep4Data: PinjamanStep4Data;
   pinjamanSummaryData: PinjamanSummaryResponse;
+  pinjamanDisetujuiDetail: PinjamanDisetujuiDetailResponse;
   error?: unknown;
 }
 
@@ -168,6 +176,9 @@ const initialState: RootState = {
   pinjamanStep4Data: {},
   pinjamanInfo: {},
   pinjamanSummaryData: {},
+  pinjamanDisetujuiDetail: {
+    rincianAngsuran: [],
+  },
 };
 
 const pinjamanSlice = createSlice({
@@ -211,6 +222,18 @@ const pinjamanSlice = createSlice({
       state.pinjamanDetailData = payload;
     },
     getPinjamanDitolakFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
+    getPinjamanDisetujuiDetailSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<PinjamanDisetujuiDetailResponse>,
+    ) => {
+      state.pinjamanDisetujuiDetail = payload;
+    },
+    getPinjamanDisetujuiDetailFailed: (
       state: RootState,
       { payload }: PayloadAction<unknown>,
     ) => {
@@ -306,10 +329,11 @@ export const fetchPinjamanDisetujuiData = createAction<number>(
 export const fetchPinjamanDitolakData = createAction<number>(
   'fetchPinjamanDitolakData',
 );
-export const fetchPinjamanStep1 =
-  createAction<IdJenisPinjaman>('fetchPinjamanStep1');
-export const fetchPinjamanStep2 =
-  createAction<IdJenisPinjaman>('fetchPinjamanStep2');
+export const fetchPinjamanDisetujuiDetailData = createAction<number>(
+  'fetchPinjamanDisetujuiDetailData',
+);
+export const fetchPinjamanStep1 = createAction('fetchPinjamanStep1');
+export const fetchPinjamanStep2 = createAction('fetchPinjamanStep2');
 export const fetchPinjamanStep3 =
   createAction<PinjamanStep2Data>('fetchPinjamanStep3');
 export const fetchPinjamanStep4 =
@@ -332,6 +356,8 @@ export const {
   getPinjamanDisetujuiSuccess,
   getPinjamanDitolakFailed,
   getPinjamanDitolakSuccess,
+  getPinjamanDisetujuiDetailFailed,
+  getPinjamanDisetujuiDetailSuccess,
   fetchPinjamanStep1Failed,
   fetchPinjamanStep1Success,
   fetchPinjamanStep2Failed,

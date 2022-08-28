@@ -22,6 +22,7 @@ import {
   watchGetPinjamanDataStep3,
   watchGetPinjamanDataStep4,
   watchGetPinjamanDisetujui,
+  watchGetPinjamanDisetujuiDetail,
   watchGetPinjamanDitolak,
   watchGetPinjamanInitialData,
   watchGetPinjamanSummaryData,
@@ -85,5 +86,6 @@ export function* rootSaga() {
     fork(watchPatchCreatePinjaman),
     fork(watchGetPinjamanSummaryData),
     fork(watchPostCreatePinjaman),
+    fork(watchGetPinjamanDisetujuiDetail),
   ]);
 }

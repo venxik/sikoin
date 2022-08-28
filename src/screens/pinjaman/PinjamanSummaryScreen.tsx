@@ -14,6 +14,7 @@ import {
   PinjamanDetailItem,
   Popup1Button,
 } from '../../components';
+import PinjamanSimulasiSection from '../../components/PinjamanSimulasiSection';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
@@ -36,18 +37,24 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
     namaBank,
     namaJenisPinjaman,
     namaKantorCabang,
-    namaLengkap,
+    nama,
     namaPemilik,
-    noKTP,
+    noKtp,
     noRek,
     nominal,
-    rumusJenisPinjaman,
     tenor,
     tujuan,
+    totalAngsuran,
+    totalAngsuranBunga,
+    totalAngsuranPokok,
   } = useAppSelector(s => s.PinjamanReducer.pinjamanSummaryData);
 
-  const navigateToSuccess = () => {
+  const onPressAjukan = () => {
     dispatch(fetchPostCreatePinjaman({ ...pinjamanInfo }));
+  };
+
+  const navigateToSimulasi = () => {
+    navigation.navigate('PinjamanSimulasiScreen');
   };
 
   const renderRightButtonHeader = () => {
@@ -90,8 +97,8 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
               {formatter.formatNumberToCurreny(nominal)}
             </Text>
           </View>
-          <PinjamanDetailItem title="Nama Lengkap" content={namaLengkap} />
-          <PinjamanDetailItem title="No KTP" content={noKTP} />
+          <PinjamanDetailItem title="Nama Lengkap" content={nama} />
+          <PinjamanDetailItem title="No KTP" content={noKtp} />
           <PinjamanDetailItem title="Nama Pemilik" content={namaPemilik} />
           <PinjamanDetailItem
             title="Nama Jenis Pinjaman"
@@ -104,15 +111,23 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
           />
           <PinjamanDetailItem title="Nomor Rekening" content={noRek} />
           <PinjamanDetailItem
-            title="Rumus Jenis Pinjaman"
-            content={rumusJenisPinjaman}
-          />
-          <PinjamanDetailItem
             title="Bunga Jenis Pinjaman"
             content={bungaJenisPinjaman}
           />
-          <PinjamanDetailItem title="Tenor" content={tenor?.toString()} />
+          <PinjamanDetailItem
+            title="Lama Pinjaman"
+            content={tenor?.toString()}
+          />
           <PinjamanDetailItem title="Tujuan" content={tujuan} />
+          <PinjamanSimulasiSection
+            simulasi
+            onPress={navigateToSimulasi}
+            item={{
+              totalAngsuran: totalAngsuran as number,
+              totalAngsuranBunga: totalAngsuranBunga as number,
+              totalAngsuranPokok: totalAngsuranPokok as number,
+            }}
+          />
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
@@ -124,7 +139,7 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
           buttonContainerStyle={{ width: '48%' }}
         />
         <Button
-          onPress={navigateToSuccess}
+          onPress={onPressAjukan}
           shadow
           text={strings.ajukan}
           buttonContainerStyle={{ width: '48%' }}

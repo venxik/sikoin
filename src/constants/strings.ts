@@ -315,7 +315,7 @@ export default {
     'Oh no! Seems like you have a\npoor network connection.\nPlease check your connectivity.',
   retry: 'RETRY',
   error_generic_title: 'Oops!',
-  error_generic_message: 'Something went wrong.\nPlease try again',
+  error_generic_message: 'Ada Kesalaham.\nMohon dicoba kembali',
   error_unreachable_title: 'Server Unreachable',
   error_unreachable_message:
     'The server is currently unavailable. Please try again.',

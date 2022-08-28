@@ -39,7 +39,8 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
     gajiBulanan,
     namaPerusahaan,
     alamatKantor,
-    provinsiKota,
+    provinsi,
+    kota,
   } = pekerjaanData || {};
 
   const {
@@ -55,22 +56,13 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
       gajiBulanan: gajiBulanan ? gajiBulanan : '',
       namaPerusahaan: namaPerusahaan ? namaPerusahaan : '',
       alamatKantor: alamatKantor ? alamatKantor : '',
-      provinsiKota: provinsiKota ? provinsiKota : '',
+      provinsi: provinsi ?? '',
+      kota: kota ?? '',
     },
   });
 
   const submitData = (data: PekerjaanResponse) => {
-    // const { masaKerjaTahun, masaKerjaBulan, gajiBulanan } = data;
     dispatch(fetchUpdatePekerjaan(data));
-    // dispatch(
-    //   addPekerjaan({
-    //     ...data,
-    //     gajiBulanan: gajiBulanan,
-    //     masaKerjaTahun: masaKerjaTahun,
-    //     masaKerjaBulan: masaKerjaBulan,
-    //   }),
-    // );
-    // navigation.goBack();
   };
 
   return (
@@ -178,15 +170,6 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                   value={value}
                   maxHeight={200}
                 />
-                // <TextInputCurrency
-                //   error={errors.gajiBulanan}
-                //   errorText={errors.gajiBulanan?.message}
-                //   value={value}
-                //   onChangeValue={value => onChange(value)}
-                //   title={strings.gaji_bulanan}
-                //   keyboardType="number-pad"
-                //   placeholder="Rp"
-                // />
               )}
               rules={{
                 pattern: {
@@ -208,7 +191,18 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="provinsiKota"
+              name="provinsi"
+              render={({ field: { onChange, value } }) => (
+                <TextInputForm
+                  value={value}
+                  onChangeText={value => onChange(value)}
+                  title={strings.provinsi_kota}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="kota"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}

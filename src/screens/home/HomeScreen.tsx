@@ -15,6 +15,7 @@ import {
   FlatList,
   BackHandler,
   SafeAreaView,
+  RefreshControl,
 } from 'react-native';
 import {
   CardKabar,
@@ -86,6 +87,9 @@ const menuList = [
 const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   navigation,
 }) => {
+  const [refreshing] = useState(false);
+  const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
+
   const dispatch = useAppDispatch();
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
   const {
@@ -99,7 +103,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   } = useAppSelector(state => state.HomeReducer);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   useEffect(() => {
     dispatch(fetchBerandaUser());
@@ -124,6 +127,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const snapPoints = useMemo(() => ['85%', '90%'], []);
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
+  }, []);
+
+  //PULL TO REFRESH
+  const onRefresh = useCallback(() => {
+    dispatch(fetchBerandaUser());
   }, []);
 
   const selectKabarCard = (item: KabarData) => {
@@ -462,7 +470,10 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
       <ScrollView
         nestedScrollEnabled={true}
         contentContainerStyle={{ paddingBottom: sizes.padding }}
-        style={{ width: '100%', height: '100%' }}>
+        style={{ width: '100%', height: '100%' }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {/* BODY */}
         <View
           style={{

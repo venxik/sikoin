@@ -28,24 +28,23 @@ type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const {
-    alamatPt,
+    alamatKantor,
     bank,
     gajiBulanan,
-    jabatan,
+    jabatanTerakhir,
     kota,
     masaKerjaBulan,
     masaKerjaTahun,
     namaKantorCabang,
     namaPemilik,
-    namaPt,
+    namaPerusahaan,
     noRek,
     noTelpPt,
     provinsi,
-    idJenisPinjaman,
   } = useAppSelector(s => s.PinjamanReducer.pinjamanStep3Data);
 
   const navigateToStep4 = (data: PinjamanStep3Data) => {
-    dispatch(fetchPinjamanStep4({ ...data, idJenisPinjaman: idJenisPinjaman }));
+    dispatch(fetchPinjamanStep4({ ...data }));
   };
 
   const {
@@ -54,16 +53,16 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<PinjamanStep3Data>({
     defaultValues: {
-      alamatPt,
+      alamatKantor,
       bank,
       masaKerjaTahun,
       masaKerjaBulan,
       gajiBulanan,
-      jabatan,
+      jabatanTerakhir,
       kota,
       namaKantorCabang,
       namaPemilik,
-      namaPt,
+      namaPerusahaan,
       noRek,
       noTelpPt,
       provinsi,
@@ -181,24 +180,24 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="namaPt"
+              name="namaPerusahaan"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.namaPt}
-                  errorText={errors?.namaPt?.message}
+                  error={errors?.namaPerusahaan}
+                  errorText={errors?.namaPerusahaan?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title="No Perusahaan / PT"
+                  title="Nama Perusahaan / PT"
                 />
               )}
             />
             <Controller
               control={control}
-              name="jabatan"
+              name="jabatanTerakhir"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.jabatan}
-                  errorText={errors?.jabatan?.message}
+                  error={errors?.jabatanTerakhir}
+                  errorText={errors?.jabatanTerakhir?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title="Jabatan"
@@ -214,17 +213,17 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   errorText={errors?.noTelpPt?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
-                  title="No Telepon Kantor"
+                  title="Nomor Telepon Kantor"
                 />
               )}
             />
             <Controller
               control={control}
-              name="alamatPt"
+              name="alamatKantor"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.alamatPt}
-                  errorText={errors?.alamatPt?.message}
+                  error={errors?.alamatKantor}
+                  errorText={errors?.alamatKantor?.message}
                   value={value}
                   onChangeText={value => onChange(value)}
                   title="Alamat Kantor"

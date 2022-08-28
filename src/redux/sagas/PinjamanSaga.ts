@@ -17,14 +17,6 @@ import {
   fetchPinjamanStep4,
   fetchPinjamanStep4Failed,
   fetchPinjamanStep4Success,
-  getPinjamanInitialDataFailed,
-  getPinjamanInitialDataSuccess,
-  GetPinjamanInitialDataResponse,
-  PinjamanDetailResponse,
-  getPinjamanDisetujuiSuccess,
-  getPinjamanDisetujuiFailed,
-  getPinjamanDitolakSuccess,
-  getPinjamanDitolakFailed,
   fetchPinjamanDisetujuiData,
   fetchPinjamanDitolakData,
   fetchPatchCreatePinjaman,
@@ -34,14 +26,22 @@ import {
   fetchPinjamanSummary,
   fetchPinjamanSummaryFailed,
   fetchPinjamanSummarySuccess,
+  fetchPinjamanDisetujuiDetailData,
+  getPinjamanInitialDataFailed,
+  getPinjamanInitialDataSuccess,
+  getPinjamanDisetujuiSuccess,
+  getPinjamanDisetujuiFailed,
+  getPinjamanDitolakSuccess,
+  getPinjamanDitolakFailed,
+  getPinjamanDisetujuiDetailSuccess,
+  getPinjamanDisetujuiDetailFailed,
 } from '../reducers/PinjamanReducer';
 import { navigate } from '../../config/navigation';
 
 function* getPinjamanInitialData() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.getInitialData);
+    const response: AxiosResponse = yield call(PinjamanApi.getInitialData);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -63,8 +63,10 @@ function* getPinjamanDisetujui(
 ) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: PinjamanDetailResponse }> =
-      yield call(PinjamanApi.getDisetujuiData, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.getDisetujuiData,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -86,8 +88,10 @@ function* getPinjamanDitolak(
 ) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.getDitolakData, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.getDitolakData,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -104,11 +108,35 @@ function* getPinjamanDitolak(
   yield put(hideLoading());
 }
 
-function* getPinjamanDataStep1(action: ReturnType<typeof fetchPinjamanStep1>) {
+function* getPinjamanDisetujuiDetail(
+  action: ReturnType<typeof fetchPinjamanDisetujuiDetailData>,
+) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep1, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.getDisetujuiDetail,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getPinjamanDisetujuiDetailSuccess(data?.data));
+      } else {
+        yield put(getPinjamanDisetujuiDetailFailed('Error'));
+      }
+    } else {
+      yield put(getPinjamanDisetujuiDetailFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getPinjamanDisetujuiDetailFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getPinjamanDataStep1() {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse = yield call(PinjamanApi.fetchDataStep1);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -125,11 +153,10 @@ function* getPinjamanDataStep1(action: ReturnType<typeof fetchPinjamanStep1>) {
   yield put(hideLoading());
 }
 
-function* getPinjamanDataStep2(action: ReturnType<typeof fetchPinjamanStep2>) {
+function* getPinjamanDataStep2() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep2, action.payload);
+    const response: AxiosResponse = yield call(PinjamanApi.fetchDataStep2);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -150,8 +177,10 @@ function* getPinjamanDataStep2(action: ReturnType<typeof fetchPinjamanStep2>) {
 function* getPinjamanDataStep3(action: ReturnType<typeof fetchPinjamanStep3>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep3, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.fetchDataStep3,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -172,8 +201,10 @@ function* getPinjamanDataStep3(action: ReturnType<typeof fetchPinjamanStep3>) {
 function* getPinjamanDataStep4(action: ReturnType<typeof fetchPinjamanStep4>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.fetchDataStep4,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -196,8 +227,10 @@ function* patchCreatePinjaman(
 ) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.fetchPatchCreate,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -219,12 +252,14 @@ function* getPinjamanSummaryData(
 ) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.fetchSummaryData,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
-        yield put(fetchPinjamanSummarySuccess(data));
+        yield put(fetchPinjamanSummarySuccess(data?.data));
         navigate('PinjamanSummaryScreen');
       } else {
         yield put(fetchPinjamanSummaryFailed('Error'));
@@ -243,8 +278,10 @@ function* postCreatePinjaman(
 ) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
-      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    const response: AxiosResponse = yield call(
+      PinjamanApi.fetchPostCreate,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -271,6 +308,13 @@ export function* watchGetPinjamanDisetujui() {
 
 export function* watchGetPinjamanDitolak() {
   yield takeLatest(fetchPinjamanDitolakData, getPinjamanDitolak);
+}
+
+export function* watchGetPinjamanDisetujuiDetail() {
+  yield takeLatest(
+    fetchPinjamanDisetujuiDetailData,
+    getPinjamanDisetujuiDetail,
+  );
 }
 
 export function* watchGetPinjamanDataStep1() {

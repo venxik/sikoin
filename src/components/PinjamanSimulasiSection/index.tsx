@@ -6,12 +6,14 @@ import { formatter } from '../../utils';
 import { PinjamanSimulasiSectionProps } from './model';
 
 const PinjamanSimulasiSection = (props: PinjamanSimulasiSectionProps) => {
-  const { onPress, item } = props;
+  const { onPress, item, simulasi = false } = props;
   const { totalAngsuran, totalAngsuranBunga, totalAngsuranPokok } = item;
   return (
     <View style={{ marginTop: 30 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text style={styles.textItemTitle}>Simulasi Pinjaman</Text>
+        <Text style={styles.textItemTitle}>
+          {simulasi ? 'Simulasi Pinjaman' : 'Rincian Angsuran'}
+        </Text>
         <TouchableOpacity onPress={onPress}>
           <Search
             color={colors.primary}

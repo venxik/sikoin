@@ -261,6 +261,10 @@ const HomeStackNavigator = () => (
       name="PinjamanRincianScreen"
       component={screens.PinjamanRincianScreen}
     />
+    <HomeStack.Screen
+      name="PinjamanSimulasiScreen"
+      component={screens.PinjamanSimulasiScreen}
+    />
   </HomeStack.Navigator>
 );
 

@@ -8,7 +8,8 @@ export type PekerjaanResponse = {
   gajiBulanan?: string;
   namaPerusahaan?: string;
   alamatKantor?: string;
-  provinsiKota?: string;
+  provinsi?: string;
+  kota?: string;
 };
 
 interface RootState {

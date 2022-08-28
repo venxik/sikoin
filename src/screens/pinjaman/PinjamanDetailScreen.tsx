@@ -19,8 +19,8 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
 
   const dispatch = useAppDispatch();
   const {
+    nama,
     nominal,
-    nominalPinjamanDiterima,
     jenisPinjaman,
     lamaPinjaman,
     namaBankTujuan,
@@ -39,7 +39,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   }, []);
 
   const navigateToRincian = () => {
-    navigation.navigate('PinjamanRincianScreen');
+    navigation.navigate('PinjamanRincianScreen', { id });
   };
 
   return (
@@ -54,11 +54,9 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
           <Text style={styles.textTitle}>Total Jumlah Pinjaman</Text>
           <Text style={styles.textSubtitle}>
             {'Rp. '}
-            {formatter.formatNumberToCurreny(
-              nominal ? nominal : nominalPinjamanDiterima,
-            )}
+            {formatter.formatNumberToCurreny(nominal)}
           </Text>
-          {/* <Item title="Nama Lengkap" content={} /> */}
+          <PinjamanDetailItem title="Nama Lengkap" content={nama} />
           <PinjamanDetailItem
             title="Nama Bank Tujuan"
             content={namaBankTujuan}
@@ -85,7 +83,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
               />
               <PinjamanDetailItem
                 title="Sisa Bulan Pembayaran"
-                content={sisaAngsuran as string}
+                content={sisaAngsuran}
               />
             </View>
           ) : (

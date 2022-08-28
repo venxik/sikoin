@@ -39,8 +39,7 @@ import PaymentItem from './PaymentItem';
 import PinjamanListItem from './PinjamanListItem';
 import PinjamanHorizontalListItem from './PinjamanHorizontalListItem';
 import PinjamanItemModal from './PinjamanItemModal';
-import PinjamanRincianItem from './PinjamanRincianItem';
-import PinjamanSimulasiItem from './PinjamanSimulasiItem';
+import PinjamanRincianSimulasiItem from './PinjamanRincianSimulasiItem';
 import PinjamanDetailItem from './PinjamanDetailItem';
 
 export {
@@ -85,7 +84,6 @@ export {
   PinjamanListItem,
   PinjamanHorizontalListItem,
   PinjamanItemModal,
-  PinjamanRincianItem,
-  PinjamanSimulasiItem,
+  PinjamanRincianSimulasiItem,
   PinjamanDetailItem,
 };

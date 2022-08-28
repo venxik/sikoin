@@ -9,7 +9,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
-import { PengajuanPinjaman } from '../../redux/reducers/PinjamanReducer';
 import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 
 declare global {
@@ -82,7 +81,8 @@ export type HomeStackParamList = {
   PinjamanSucessScreen: undefined;
   PinjamanSummaryScreen: undefined;
   PinjamanDetailScreen: { id: number; status: string };
-  PinjamanRincianScreen: undefined;
+  PinjamanRincianScreen: { id: number };
+  PinjamanSimulasiScreen: undefined;
   DaftarKtpCameraScreen: undefined;
   VoucherMainScreen: undefined;
   MarketMainScreen: undefined;

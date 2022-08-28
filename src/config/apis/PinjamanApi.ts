@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 import {
   CreatePinjamanInfo,
-  IdJenisPinjaman,
   CreatePinjamanRequest,
   PinjamanStep2Data,
   PinjamanStep3Data,
@@ -26,17 +25,23 @@ class PinjamanApi {
     const resp = await HttpService.get(
       `${apis.endpoints.pinjaman.ditolak}/${id}`,
     );
-
     return resp;
   }
 
-  static async fetchDataStep1(data: IdJenisPinjaman): Promise<AxiosResponse> {
-    const resp = await HttpService.post(apis.endpoints.pinjaman.step1, data);
+  static async getDisetujuiDetail(id: number): Promise<AxiosResponse> {
+    const resp = await HttpService.get(
+      `${apis.endpoints.pinjaman.detailDisetujui}/${id}`,
+    );
     return resp;
   }
 
-  static async fetchDataStep2(data: IdJenisPinjaman): Promise<AxiosResponse> {
-    const resp = await HttpService.post(apis.endpoints.pinjaman.step2, data);
+  static async fetchDataStep1(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.pinjaman.step1);
+    return resp;
+  }
+
+  static async fetchDataStep2(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.pinjaman.step2);
     return resp;
   }
 
@@ -46,7 +51,7 @@ class PinjamanApi {
   }
 
   static async fetchDataStep4(data: PinjamanStep3Data): Promise<AxiosResponse> {
-    const resp = await HttpService.post(apis.endpoints.pinjaman.step3, data);
+    const resp = await HttpService.post(apis.endpoints.pinjaman.step4, data);
     return resp;
   }
 
@@ -60,7 +65,7 @@ class PinjamanApi {
   static async fetchSummaryData(
     data: CreatePinjamanInfo,
   ): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(apis.endpoints.pinjaman.summary, data);
+    const resp = await HttpService.post(apis.endpoints.pinjaman.summary, data);
     return resp;
   }
 

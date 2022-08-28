@@ -68,7 +68,6 @@ class HttpService {
       if (accessToken !== '' || accessToken !== null) {
         request.headers.Authorization = `Bearer ${accessToken}`;
       }
-      // request.headers.Authorization = `Bearer 1|PnzpfYVUQCK6gaYwbKnKankUgtAWMf8D0D5tkkDy`;
       return request;
     }
     return request;
@@ -100,6 +99,7 @@ class HttpService {
         this.showErrorDialogHandler(apis.errorTypes.unauthorized);
         return Promise.reject(new Error());
       default:
+        this.showErrorDialogHandler(apis.errorTypes.generic);
         return Promise.reject(error.response);
     }
     // }

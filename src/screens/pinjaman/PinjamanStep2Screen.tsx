@@ -30,7 +30,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
   const {
     agama,
     detailPekerjaan,
-    gender,
+    jenisKelamin,
     golDarah,
     jumlahAnak,
     kewarganegaraan,
@@ -39,11 +39,10 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
     statusPernikahan,
     tanggalLahir,
     tempatLahir,
-    idJenisPinjaman,
   } = useAppSelector(s => s.PinjamanReducer.pinjamanStep2Data);
 
   const navigateToStep3 = (data: PinjamanStep2Data) => {
-    dispatch(fetchPinjamanStep3({ ...data, idJenisPinjaman }));
+    dispatch(fetchPinjamanStep3({ ...data }));
   };
 
   const {
@@ -55,7 +54,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
       tempatLahir,
       tanggalLahir,
       jumlahAnak,
-      gender,
+      jenisKelamin,
       golDarah,
       kewarganegaraan,
       pendidikanTerakhir,
@@ -104,7 +103,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
-                name="gender"
+                name="jenisKelamin"
                 render={({ field: { onChange, value } }) => (
                   <DropdownForm
                     style={{ width: '55%' }}
