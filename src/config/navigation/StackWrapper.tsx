@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import {
   getFocusedRouteNameFromRoute,
@@ -10,7 +10,6 @@ import * as screens from '../../screens';
 import { navigationRef } from './NavigationService';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
-import { AsyncStore } from '../../utils';
 import {
   ChatStackParamList,
   HomeStackParamList,
@@ -367,17 +366,6 @@ const ProfileStackNavigator = () => (
 );
 
 const ParentStackNavigator = () => {
-  const [isFirstLaunch, setIsFirstLaunch] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const data = await AsyncStore.getData('@onboardingComplete');
-      if (data !== null) {
-        setIsFirstLaunch(false);
-      }
-    })();
-  }, []);
-
   return (
     <NavigationContainer
       // linking={Linking}
@@ -387,12 +375,14 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}>
-        {isFirstLaunch && (
-          <ParentStack.Screen
-            name={'OnboardingStackNavigator'}
-            component={screens.OnboardingScreen}
-          />
-        )}
+        <ParentStack.Screen
+          name={'SplashScreen'}
+          component={screens.SplashScreen}
+        />
+        <ParentStack.Screen
+          name={'OnboardingScreen'}
+          component={screens.OnboardingScreen}
+        />
         <ParentStack.Screen
           name={'LoginScreen'}
           component={screens.LoginScreen}

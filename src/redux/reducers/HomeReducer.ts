@@ -12,21 +12,27 @@ export interface BerandaUserResponse {
   promo: [];
   conversationId: number;
   userId: number;
-  error?: unknown;
 }
 
-const initialState: BerandaUserResponse = {
-  profilePic: '',
-  nama: '',
-  noAnggota: '',
-  logoKoperasi: '',
-  namaKoperasi: '',
-  simpanan: 0,
-  saldoBelanja: 0,
-  conversationId: 0,
-  userId: 0,
-  kabar: [],
-  promo: [],
+export type IntitalState = {
+  user: BerandaUserResponse;
+  error?: unknown;
+};
+
+const initialState: IntitalState = {
+  user: {
+    conversationId: 0,
+    kabar: [],
+    logoKoperasi: '',
+    nama: '',
+    namaKoperasi: '',
+    noAnggota: '',
+    profilePic: '',
+    promo: [],
+    saldoBelanja: 0,
+    simpanan: 0,
+    userId: 0,
+  },
 };
 
 const homeSlice = createSlice({
@@ -34,36 +40,13 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     getBerandaUserSuccess: (
-      state: BerandaUserResponse,
+      state: IntitalState,
       { payload }: PayloadAction<BerandaUserResponse>,
     ) => {
-      const {
-        kabar,
-        logoKoperasi,
-        nama,
-        namaKoperasi,
-        noAnggota,
-        profilePic,
-        promo,
-        saldoBelanja,
-        simpanan,
-        conversationId,
-        userId,
-      } = payload;
-      state.kabar = kabar;
-      state.logoKoperasi = logoKoperasi;
-      state.nama = nama;
-      state.namaKoperasi = namaKoperasi;
-      state.noAnggota = noAnggota;
-      state.saldoBelanja = saldoBelanja;
-      state.simpanan = simpanan;
-      state.profilePic = profilePic;
-      state.promo = promo;
-      state.conversationId = conversationId;
-      state.userId = userId;
+      state.user = payload;
     },
     getBerandaUserFailed: (
-      state: BerandaUserResponse,
+      state: IntitalState,
       { payload }: PayloadAction<unknown>,
     ) => {
       state.error = payload;

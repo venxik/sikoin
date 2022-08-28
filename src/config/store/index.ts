@@ -20,7 +20,7 @@ if (!__DEV__) {
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['HomeReducer'],
 };
 
 const persistReducers = persistReducer(persistConfig, rootReducer);

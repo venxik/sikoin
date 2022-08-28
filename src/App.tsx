@@ -2,7 +2,6 @@
 import React, { FC, useEffect } from 'react';
 import { RouterContainer } from './config/navigation';
 import { store, persist } from './config';
-import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -33,9 +32,6 @@ const App: FC = () => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 2000);
     // Startup Process
     const onProcess = async () => {
       // request user requiremnet permission

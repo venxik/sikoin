@@ -1,11 +1,12 @@
+import SplashScreen from './shared/SplashScreen';
 import OnboardingScreen from './onboarding/OnboardingScreen';
-import LoginScreen from './login/LoginScreen';
-import DaftarKoperasiIntroScreen from './login/DaftarKoperasiIntroScreen';
-import DaftarKoperasiSearchScreen from './login/DaftarKoperasiSearchScreen';
-import DaftarKoperasiStep1Screen from './login/DaftarKoperasiStep1Screen';
-import DaftarKoperasiStep2Screen from './login/DaftarKoperasiStep2Screen';
-import DaftarKoperasiSuccessScreen from './login/DaftarKoperasiSuccessScreen';
-import DaftarKoperasiFailedScreen from './login/DaftarKoperasiFailedScreen';
+import LoginScreen from './shared/LoginScreen';
+import DaftarKoperasiIntroScreen from './shared/DaftarKoperasiIntroScreen';
+import DaftarKoperasiSearchScreen from './shared/DaftarKoperasiSearchScreen';
+import DaftarKoperasiStep1Screen from './shared/DaftarKoperasiStep1Screen';
+import DaftarKoperasiStep2Screen from './shared/DaftarKoperasiStep2Screen';
+import DaftarKoperasiSuccessScreen from './shared/DaftarKoperasiSuccessScreen';
+import DaftarKoperasiFailedScreen from './shared/DaftarKoperasiFailedScreen';
 import HomeScreen from './home/HomeScreen';
 import SaldoSimpananMainScreen from './saldoSimpanan/SaldoSimpananMainScreen';
 import ProfileMainScreen from './profile/ProfileMainScreen';
@@ -57,6 +58,7 @@ import PinjamanRincianScreen from './pinjaman/PinjamanRincianScreen';
 import PinjamanSimulasiScreen from './pinjaman/PinjamansSimulasiScreen';
 
 export {
+  SplashScreen,
   OnboardingScreen,
   LoginScreen,
   DaftarKoperasiIntroScreen,

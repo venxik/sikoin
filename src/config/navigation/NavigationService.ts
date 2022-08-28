@@ -19,4 +19,17 @@ const goBack = () => {
     navigationRef.goBack();
   }
 };
-export { navigationRef, navigate, goBack };
+
+const navigateAndReset = (
+  name: keyof ReactNavigation.RootParamList,
+  params?: NavigatorScreenParams<ReactNavigation.RootParamList>['params'],
+) => {
+  if (navigationRef.isReady() && navigationRef.current) {
+    navigationRef.current.resetRoot({
+      index: 0,
+      routes: [{ name, params }],
+    });
+  }
+};
+
+export { navigationRef, navigate, goBack, navigateAndReset };

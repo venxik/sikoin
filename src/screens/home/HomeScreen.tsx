@@ -100,7 +100,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     simpanan,
     kabar,
     promo,
-  } = useAppSelector(state => state.HomeReducer);
+  } = useAppSelector(state => state.HomeReducer.user);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 

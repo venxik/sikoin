@@ -29,7 +29,8 @@ export type HomeTabScreenProps<Screen extends keyof HomeTabParamList> =
   >;
 
 export type ParentStackParamList = {
-  OnboardingStackNavigator: undefined;
+  SplashScreen: undefined;
+  OnboardingScreen: undefined;
   LoginScreen: undefined;
   DaftarKoperasiIntroScreen: undefined;
   DaftarKoperasiSearchScreen: undefined;

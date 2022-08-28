@@ -33,7 +33,7 @@ type Props = NativeStackScreenProps<ChatStackParamList, 'ChatDetailScreen'>;
 
 const ChatDetailScreen: FC<Props> = () => {
   const findStep = (step: any) => (message: any) => message._id === step;
-  const { conversationId, userId } = useAppSelector(s => s.HomeReducer);
+  const { conversationId, userId } = useAppSelector(s => s.HomeReducer.user);
   const [messages, setMessages] = useState<IMessage[]>();
   const [step, setStep] = useState<number>(1);
 
