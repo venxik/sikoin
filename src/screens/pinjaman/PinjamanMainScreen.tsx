@@ -23,6 +23,7 @@ import {
   fetchPinjamanStep1,
   JenisPinjaman,
   PengajuanPinjaman,
+  setPinjamanInfo,
 } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 import { Document } from 'react-native-iconly';
@@ -49,6 +50,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   const onPressAjukanPinjaman = () => {
     setShowModal(e => !e);
     dispatch(fetchPinjamanStep1({ idJenisPinjaman: selectedItem?.id }));
+    dispatch(setPinjamanInfo({ idJenisPinjaman: selectedItem?.id }));
     navigation.navigate('PinjamanStep1Screen');
   };
 

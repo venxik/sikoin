@@ -36,7 +36,7 @@ import PinjamanStep2 from './pinjaman/PinjamanStep2Screen';
 import PinjamanStep3 from './pinjaman/PinjamanStep3Screen';
 import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
 import PinjamanStep5 from './pinjaman/PinjamanStep5Screen';
-import PinjamanReviewScreen from './pinjaman/PinjamanReviewScreen';
+import PinjamanSummaryScreen from './pinjaman/PinjamanSummaryScreen';
 import PinjamanSuccessScreen from './pinjaman/PinjamanSuccessScreen';
 import ChatMainScreen from './chat/ChatMainScreen';
 import ChatDetailScreen from './chat/ChatDetailScreen';
@@ -91,7 +91,7 @@ export {
   PinjamanStep4,
   PinjamanStep5,
   PinjamanSuccessScreen,
-  PinjamanReviewScreen,
+  PinjamanSummaryScreen,
   ChatMainScreen,
   DaftarKtpCameraScreen,
   DaftarKtpSelfieScreen,

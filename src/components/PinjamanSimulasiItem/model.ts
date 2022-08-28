@@ -1,5 +1,5 @@
 import { PinjamanSummarySimulasi } from '../../redux/reducers/PinjamanReducer';
 
-export interface PinjamanRincianItemProps {
+export interface PinjamanSimulasiItemProps {
   item: PinjamanSummarySimulasi;
 }

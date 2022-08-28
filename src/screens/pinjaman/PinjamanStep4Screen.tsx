@@ -13,10 +13,11 @@ import {
   Image,
 } from 'react-native';
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
-import { useAppSelector } from '../../config';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import DocumentPicker from 'react-native-document-picker';
+import { fetchPatchCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep4Screen'>;
 
@@ -25,13 +26,13 @@ const documentPickerOptions = {
 };
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
-  const { ktpData } = useAppSelector(s => s.KtpReducer) || {};
-  const { noKtp, gambarKtp } = ktpData || {};
+  const dispatch = useAppDispatch();
+  const { gambarKTP, noKTP, idJenisPinjaman } = useAppSelector(
+    s => s.PinjamanReducer.pinjamanStep4Data,
+  );
 
-  const submitKtp = (data: { noKtp: string }) => {
-    if (data) {
-      navigation.navigate('PinjamanStep5Screen');
-    }
+  const submitKtp = (data: { noKTP: string }) => {
+    dispatch(fetchPatchCreatePinjaman({ noKtp: data.noKTP, idJenisPinjaman }));
   };
 
   const changeKtpImage = () => {
@@ -51,9 +52,9 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ noKtp: string }>({
+  } = useForm<{ noKTP: string }>({
     defaultValues: {
-      noKtp: noKtp ? noKtp : '',
+      noKTP,
     },
   });
 
@@ -64,8 +65,8 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
           <ImageBackground
             imageStyle={styles.imageKtp}
             source={
-              !isEmpty(gambarKtp)
-                ? { uri: gambarKtp }
+              !isEmpty(gambarKTP)
+                ? { uri: gambarKTP }
                 : icons.icon_edit_profle_picture
             }
             style={styles.imageKtp}
@@ -84,11 +85,11 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <Controller
           control={control}
-          name="noKtp"
+          name="noKTP"
           render={({ field: { onChange, value } }) => (
             <TextInputForm
-              error={errors.noKtp}
-              errorText={errors.noKtp?.message}
+              error={errors.noKTP}
+              errorText={errors.noKTP?.message}
               style={{ marginTop: sizes.padding }}
               value={value}
               onChangeText={onChange}
@@ -97,17 +98,17 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
               maxLength={16}
             />
           )}
-          // rules={{
-          //   required: { value: true, message: 'KTP Harus Diisi' },
-          //   minLength: { value: 16, message: 'KTP Harus 16 Digit' },
-          // }}
+          rules={{
+            required: { value: true, message: 'KTP Harus Diisi' },
+            minLength: { value: 16, message: 'KTP Harus 16 Digit' },
+          }}
         />
         <TouchableOpacity onPress={changeKtpImage}>
           <ImageBackground
             imageStyle={styles.imageSelfie}
             source={
-              !isEmpty(gambarKtp)
-                ? { uri: gambarKtp }
+              !isEmpty(gambarKTP)
+                ? { uri: gambarKTP }
                 : icons.icon_edit_profle_picture
             }
             style={styles.imageSelfie}

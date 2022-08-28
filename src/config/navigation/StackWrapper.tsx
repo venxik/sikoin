@@ -246,8 +246,8 @@ const HomeStackNavigator = () => (
       component={screens.PinjamanStep5}
     />
     <HomeStack.Screen
-      name="PinjamanReviewScreen"
-      component={screens.PinjamanReviewScreen}
+      name="PinjamanSummaryScreen"
+      component={screens.PinjamanSummaryScreen}
     />
     <HomeStack.Screen
       name="PinjamanSucessScreen"

@@ -2,7 +2,9 @@ import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 import {
+  CreatePinjamanInfo,
   IdJenisPinjaman,
+  CreatePinjamanRequest,
   PinjamanStep2Data,
   PinjamanStep3Data,
 } from '../../redux/reducers/PinjamanReducer';
@@ -42,8 +44,30 @@ class PinjamanApi {
     const resp = await HttpService.post(apis.endpoints.pinjaman.step3, data);
     return resp;
   }
+
   static async fetchDataStep4(data: PinjamanStep3Data): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.pinjaman.step3, data);
+    return resp;
+  }
+
+  static async fetchPatchCreate(
+    data: CreatePinjamanRequest,
+  ): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.pinjaman.create, data);
+    return resp;
+  }
+
+  static async fetchSummaryData(
+    data: CreatePinjamanInfo,
+  ): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.pinjaman.summary, data);
+    return resp;
+  }
+
+  static async fetchPostCreate(
+    data: CreatePinjamanInfo,
+  ): Promise<AxiosResponse> {
+    const resp = await HttpService.post(apis.endpoints.pinjaman.create, data);
     return resp;
   }
 }

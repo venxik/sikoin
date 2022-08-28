@@ -40,6 +40,8 @@ import PinjamanListItem from './PinjamanListItem';
 import PinjamanHorizontalListItem from './PinjamanHorizontalListItem';
 import PinjamanItemModal from './PinjamanItemModal';
 import PinjamanRincianItem from './PinjamanRincianItem';
+import PinjamanSimulasiItem from './PinjamanSimulasiItem';
+import PinjamanDetailItem from './PinjamanDetailItem';
 
 export {
   Button,
@@ -84,4 +86,6 @@ export {
   PinjamanHorizontalListItem,
   PinjamanItemModal,
   PinjamanRincianItem,
+  PinjamanSimulasiItem,
+  PinjamanDetailItem,
 };

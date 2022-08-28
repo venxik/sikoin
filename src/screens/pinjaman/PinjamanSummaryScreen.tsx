@@ -6,9 +6,12 @@ import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanReviewScreen'>;
+type Props = NativeStackScreenProps<
+  HomeStackParamList,
+  'PinjamanSummaryScreen'
+>;
 
-const PinjamanReviewScreen: React.FC<Props> = ({ navigation }) => {
+const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const navigateToSuccess = () => {
@@ -92,7 +95,7 @@ const PinjamanReviewScreen: React.FC<Props> = ({ navigation }) => {
     </View>
   );
 };
-export default PinjamanReviewScreen;
+export default PinjamanSummaryScreen;
 
 const styles = StyleSheet.create({
   container: {

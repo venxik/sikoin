@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
-import { HeaderBack, PinjamanRincianItem } from '../../components';
+import { HeaderBack, PinjamanSimulasiItem } from '../../components';
+import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
@@ -11,6 +13,9 @@ type Props = NativeStackScreenProps<
 >;
 
 const PinjamanRincianScreen: React.FC<Props> = ({ navigation }) => {
+  const { simulasi } = useAppSelector(
+    s => s.PinjamanReducer.pinjamanSummaryData,
+  );
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack onPress={() => navigation.goBack()} title={strings.kembali} />
@@ -21,11 +26,10 @@ const PinjamanRincianScreen: React.FC<Props> = ({ navigation }) => {
         }}>
         <View style={styles.mainContainer}>
           <Text style={styles.textTitle}>Rincian Angsuran</Text>
-          <PinjamanRincianItem />
-          <PinjamanRincianItem />
-          <PinjamanRincianItem />
-          <PinjamanRincianItem />
-          <PinjamanRincianItem />
+          {!isEmpty(simulasi) &&
+            simulasi?.map((item, i) => (
+              <PinjamanSimulasiItem key={i} item={item} />
+            ))}
         </View>
       </ScrollView>
     </SafeAreaView>

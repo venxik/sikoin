@@ -8,6 +8,7 @@
     "run_android_dr": "react-native run-android --variant=release",
     "build_android_dr": "cd android && .\\gradlew assembleRelease && cd ..",
     "android:local": "adb reverse tcp:8081 tcp:8081",
+    "android:reactotron": "adb reverse tcp:9090 tcp:9090",
     "android:clean-gradle": "cd android; ./gradlew clean; cd ..",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",

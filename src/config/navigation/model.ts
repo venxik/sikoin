@@ -80,7 +80,7 @@ export type HomeStackParamList = {
   PinjamanStep4Screen: undefined;
   PinjamanStep5Screen: undefined;
   PinjamanSucessScreen: undefined;
-  PinjamanReviewScreen: undefined;
+  PinjamanSummaryScreen: undefined;
   PinjamanDetailScreen: { id: number; status: string };
   PinjamanRincianScreen: undefined;
   DaftarKtpCameraScreen: undefined;

@@ -48,9 +48,34 @@ export type PinjamanStep4Data = {
   namaDokumen?: string;
 } & IdJenisPinjaman;
 
-export type PinjamanCreateRequest = {
+export type CreatePinjamanRequest = {
   noKtp?: string;
 } & IdJenisPinjaman;
+
+export type PinjamanSummaryResponse = {
+  nominal?: number;
+  tenor?: number;
+  tujuan?: string;
+  namaLengkap?: string;
+  noRek?: string;
+  namaBank?: string;
+  namaPemilik?: string;
+  namaKantorCabang?: string;
+  noKTP?: string;
+  namaJenisPinjaman?: string;
+  rumusJenisPinjaman?: string;
+  bungaJenisPinjaman?: string;
+  simulasi?: PinjamanSummarySimulasi[];
+} & IdJenisPinjaman;
+
+export type PinjamanSummarySimulasi = {
+  bulan: number;
+  saldo: number;
+  angsuran_pokok: number;
+  angsuran_bunga: number;
+  jumlah_angsuran: number;
+  saldo_setelah_bayar: number;
+};
 
 export type GetPinjamanInitialDataResponse = {
   jenisPinjaman: JenisPinjaman[];
@@ -95,7 +120,7 @@ export type PengajuanPinjaman = {
   bungaJenisPinjaman: string;
 };
 
-export type PinjamanInfo = {
+export type CreatePinjamanInfo = {
   idJenisPinjaman?: number;
   nominal?: number;
   tenor?: number;
@@ -105,11 +130,12 @@ export type PinjamanInfo = {
 interface RootState {
   pinjamanInitialData: GetPinjamanInitialDataResponse;
   pinjamanDetailData: PinjamanDetailResponse;
-  pinjamanInfo: PinjamanInfo;
+  pinjamanInfo: CreatePinjamanInfo;
   pinjamanStep1Data: PinjamanStep1Data;
   pinjamanStep2Data: PinjamanStep2Data;
   pinjamanStep3Data: PinjamanStep3Data;
   pinjamanStep4Data: PinjamanStep4Data;
+  pinjamanSummaryData: PinjamanSummaryResponse;
   error?: unknown;
 }
 
@@ -141,6 +167,7 @@ const initialState: RootState = {
   pinjamanStep3Data: {},
   pinjamanStep4Data: {},
   pinjamanInfo: {},
+  pinjamanSummaryData: {},
 };
 
 const pinjamanSlice = createSlice({
@@ -149,7 +176,7 @@ const pinjamanSlice = createSlice({
   reducers: {
     setPinjamanInfo: (
       state: RootState,
-      { payload }: PayloadAction<PinjamanInfo>,
+      { payload }: PayloadAction<CreatePinjamanInfo>,
     ) => {
       state.pinjamanInfo = payload;
     },
@@ -237,6 +264,36 @@ const pinjamanSlice = createSlice({
     ) => {
       state.error = payload;
     },
+    fetchPatchCreatePinjamanSuccess: () => {
+      null;
+    },
+    fetchPatchCreatePinjamanFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
+    fetchPinjamanSummarySuccess: (
+      state: RootState,
+      { payload }: PayloadAction<PinjamanSummaryResponse>,
+    ) => {
+      state.pinjamanSummaryData = payload;
+    },
+    fetchPinjamanSummaryFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
+    fetchPostCreatePinjamanSuccess: () => {
+      null;
+    },
+    fetchPostCreatePinjamanFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -257,14 +314,14 @@ export const fetchPinjamanStep3 =
   createAction<PinjamanStep2Data>('fetchPinjamanStep3');
 export const fetchPinjamanStep4 =
   createAction<PinjamanStep3Data>('fetchPinjamanStep4');
-export const fetchPinjamanInitialCreate = createAction<PinjamanStep4Data>(
-  'fetchPinjamanInitialCreate',
+export const fetchPatchCreatePinjaman = createAction<CreatePinjamanRequest>(
+  'fetchPatchCreatePinjaman',
 );
-export const fetchPinjamanSummary = createAction<PinjamanInfo>(
+export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>(
   'fetchPinjamanSummary',
 );
-export const fetchPinjamanCreate = createAction<PinjamanInfo>(
-  'fetchPinjamanCreate',
+export const fetchPostCreatePinjaman = createAction<CreatePinjamanInfo>(
+  'fetchPostCreatePinjaman',
 );
 
 export const {
@@ -283,6 +340,12 @@ export const {
   fetchPinjamanStep3Success,
   fetchPinjamanStep4Failed,
   fetchPinjamanStep4Success,
+  fetchPatchCreatePinjamanFailed,
+  fetchPatchCreatePinjamanSuccess,
+  fetchPinjamanSummaryFailed,
+  fetchPinjamanSummarySuccess,
+  fetchPostCreatePinjamanFailed,
+  fetchPostCreatePinjamanSuccess,
 } = pinjamanSlice.actions;
 
 export default pinjamanSlice.reducer;

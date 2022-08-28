@@ -27,6 +27,13 @@ import {
   getPinjamanDitolakFailed,
   fetchPinjamanDisetujuiData,
   fetchPinjamanDitolakData,
+  fetchPatchCreatePinjaman,
+  fetchPatchCreatePinjamanFailed,
+  fetchPostCreatePinjaman,
+  fetchPostCreatePinjamanFailed,
+  fetchPinjamanSummary,
+  fetchPinjamanSummaryFailed,
+  fetchPinjamanSummarySuccess,
 } from '../reducers/PinjamanReducer';
 import { navigate } from '../../config/navigation';
 
@@ -184,6 +191,76 @@ function* getPinjamanDataStep4(action: ReturnType<typeof fetchPinjamanStep4>) {
   yield put(hideLoading());
 }
 
+function* patchCreatePinjaman(
+  action: ReturnType<typeof fetchPatchCreatePinjaman>,
+) {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
+      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        navigate('PinjamanStep5Screen');
+      } else {
+        yield put(fetchPatchCreatePinjamanFailed('Error'));
+      }
+    } else {
+      yield put(fetchPatchCreatePinjamanFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchPatchCreatePinjamanFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getPinjamanSummaryData(
+  action: ReturnType<typeof fetchPinjamanSummary>,
+) {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
+      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchPinjamanSummarySuccess(data));
+        navigate('PinjamanSummaryScreen');
+      } else {
+        yield put(fetchPinjamanSummaryFailed('Error'));
+      }
+    } else {
+      yield put(fetchPinjamanSummaryFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchPinjamanSummaryFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* postCreatePinjaman(
+  action: ReturnType<typeof fetchPostCreatePinjaman>,
+) {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse<{ data: GetPinjamanInitialDataResponse }> =
+      yield call(PinjamanApi.fetchDataStep4, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        navigate('PinjamanSucessScreen');
+      } else {
+        yield put(fetchPostCreatePinjamanFailed('Error'));
+      }
+    } else {
+      yield put(fetchPostCreatePinjamanFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchPostCreatePinjamanFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetPinjamanInitialData() {
   yield takeLatest(fetchGetPinjamanInitialData, getPinjamanInitialData);
 }
@@ -210,4 +287,16 @@ export function* watchGetPinjamanDataStep3() {
 
 export function* watchGetPinjamanDataStep4() {
   yield takeLatest(fetchPinjamanStep4, getPinjamanDataStep4);
+}
+
+export function* watchPatchCreatePinjaman() {
+  yield takeLatest(fetchPatchCreatePinjaman, patchCreatePinjaman);
+}
+
+export function* watchGetPinjamanSummaryData() {
+  yield takeLatest(fetchPinjamanSummary, getPinjamanSummaryData);
+}
+
+export function* watchPostCreatePinjaman() {
+  yield takeLatest(fetchPostCreatePinjaman, postCreatePinjaman);
 }

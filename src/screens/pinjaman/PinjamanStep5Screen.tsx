@@ -9,14 +9,22 @@ import {
   Image,
   Text,
 } from 'react-native';
-import { Button, HeaderPinjaman } from '../../components';
+import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../config';
+import {
+  fetchPinjamanSummary,
+  setPinjamanInfo,
+} from '../../redux/reducers/PinjamanReducer';
+import { Controller, useForm } from 'react-hook-form';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
+
+type Form = { tenor: number; tujuan: string };
 
 const defaultNominal = [
   { item: '250', value: '250000' },
@@ -48,6 +56,12 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
   const [nominalContainer, setNominalContainer] = useState<string>('');
   const [selectedNominal, setSelectedNominal] = useState<number>(-1);
 
+  //redux dispatch and selector
+  const dispatch = useAppDispatch();
+  const { idJenisPinjaman } = useAppSelector(
+    s => s.PinjamanReducer.pinjamanInfo,
+  );
+
   //BottomSheet
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
@@ -55,9 +69,25 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
     setShowButton(e => !e);
   }, []);
 
-  const navigateToReview = () => {
+  const navigateToReview = (data: Form) => {
+    const { tenor, tujuan } = data;
     if (!isEmpty(nominal)) {
-      navigation.navigate('PinjamanReviewScreen');
+      dispatch(
+        setPinjamanInfo({
+          idJenisPinjaman,
+          nominal: parseInt(nominal),
+          tenor,
+          tujuan,
+        }),
+      );
+      dispatch(
+        fetchPinjamanSummary({
+          idJenisPinjaman,
+          nominal: parseInt(nominal),
+          tenor,
+          tujuan,
+        }),
+      );
     }
   };
 
@@ -104,6 +134,17 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
     setSelectedNominal(-1);
     sheetRef.current?.close();
   };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Form>({
+    defaultValues: {
+      tenor: 0,
+      tujuan: '',
+    },
+  });
 
   const renderDefaultNominal = () => {
     return (
@@ -193,6 +234,35 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         )}
+        <Controller
+          control={control}
+          name="tenor"
+          render={({ field: { onChange, value } }) => (
+            <TextInputForm
+              error={errors.tenor}
+              errorText={errors.tenor?.message}
+              style={{ marginTop: sizes.padding * 2 }}
+              value={value.toString()}
+              onChangeText={onChange}
+              title={'Jangka Waktu Pinjaman'}
+              keyboardType={'numeric'}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="tujuan"
+          render={({ field: { onChange, value } }) => (
+            <TextInputForm
+              error={errors.tujuan}
+              errorText={errors.tujuan?.message}
+              style={{ marginTop: sizes.padding }}
+              value={value}
+              onChangeText={onChange}
+              title={'Tujuan Pinjaman'}
+            />
+          )}
+        />
       </View>
     );
   };
@@ -285,7 +355,7 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
             buttonContainerStyle={{ width: '48%' }}
           />
           <Button
-            onPress={navigateToReview}
+            onPress={handleSubmit(navigateToReview)}
             shadow
             text={strings.lanjutkan}
             buttonContainerStyle={{ width: '48%' }}

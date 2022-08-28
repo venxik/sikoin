@@ -50,6 +50,8 @@ const constant = {
       step2: 'pengajuan-pinjaman-biodata',
       step3: 'pengajuan-pinjaman-pekerjaan',
       step4: 'pengajuan-pinjaman-ktp-dokumen',
+      create: 'pengajuan-pinjaman/create',
+      summary: 'pengajuan-pinjaman/create',
     },
   },
   errorTypes: {
