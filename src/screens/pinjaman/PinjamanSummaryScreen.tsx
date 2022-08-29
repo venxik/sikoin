@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
   textNominalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: sizes.padding * 1.5,
   },
   textNominal: {
     width: '70%',
