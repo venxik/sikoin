@@ -19,7 +19,8 @@ const ProfilePicture = (props: ProfilePictureProps) => {
     isProfile = false,
   } = props || {};
 
-  const { profilePic, logoKoperasi } = useAppSelector(s => s.HomeReducer) || {};
+  const { logoKoperasi, profilePic } =
+    useAppSelector(s => s.HomeReducer.user) || {};
   const { profilePic: profilePic2, logoKoperasi: logoKoperasi2 } =
     useAppSelector(s => s.ProfileReducer.profileData) || {};
 

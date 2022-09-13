@@ -22,6 +22,7 @@ const img_bca = require('assets/images/img_bca.png');
 const img_mandiri = require('assets/images/img_mandiri.png');
 const img_bni = require('assets/images/img_bni.png');
 const splash_screen = require('assets/images/splash_screen.png');
+const img_circle_overlay = require('assets/images/img_circle_overlay.png');
 
 export default {
   onboarding_1,
@@ -47,4 +48,5 @@ export default {
   img_bni,
   img_mandiri,
   splash_screen,
+  img_circle_overlay,
 };

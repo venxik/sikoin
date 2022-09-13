@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { colors, icons, sizes } from '../../constants';
+import { colors, icons, images, sizes } from '../../constants';
 import { PinjamanItemModalProps } from './model';
 import CheckBox from '@react-native-community/checkbox';
 import Button from '../Button';
@@ -21,6 +21,18 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
     <Modal animationType="slide" transparent={true} visible={showModal}>
       <View style={styles.modalMainView}>
         <View style={styles.modalView}>
+          <Image
+            source={images.img_circle_overlay}
+            resizeMode="stretch"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              width: '120%',
+              height: '70%',
+            }}
+          />
           <TouchableOpacity
             onPress={onPressClose}
             style={{
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: 'Inter-Bold',
     color: colors.bodyText,
-    marginTop: 150,
+    marginTop: 100,
   },
   textContent: {
     fontSize: 12,
