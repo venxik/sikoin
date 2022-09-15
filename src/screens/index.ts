@@ -56,6 +56,7 @@ import PinjamanListScreen from './pinjaman/PinjamanListScreen';
 import PinjamanDetailScreen from './pinjaman/PinjamanDetailScreen';
 import PinjamanRincianScreen from './pinjaman/PinjamanRincianScreen';
 import PinjamanSimulasiScreen from './pinjaman/PinjamansSimulasiScreen';
+import IDCardMainScreen from './profile/IDCardMainScreen';
 
 export {
   SplashScreen,
@@ -116,4 +117,5 @@ export {
   PinjamanDetailScreen,
   PinjamanRincianScreen,
   PinjamanSimulasiScreen,
+  IDCardMainScreen,
 };

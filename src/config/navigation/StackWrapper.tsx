@@ -370,6 +370,10 @@ const ProfileStackNavigator = () => (
       name="DokumenPendukungMainScreen"
       component={screens.DokumenPendukungMainScreen}
     />
+    <ProfileStack.Screen
+      name="IDCardMainScreen"
+      component={screens.IDCardMainScreen}
+    />
   </ProfileStack.Navigator>
 );
 

@@ -79,6 +79,11 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
             onPress={() => navigation.navigate('DataDiriMainScreen')}
           />
           <SubmenuItemList
+            icon={icons.icon_id_card_menu}
+            title={'ID Card'}
+            onPress={() => navigation.navigate('IDCardMainScreen')}
+          />
+          <SubmenuItemList
             icon={icons.icon_data_koperasi}
             title={strings.data_koperasi}
             onPress={() => navigation.navigate('DataKoperasiMainScreen')}
