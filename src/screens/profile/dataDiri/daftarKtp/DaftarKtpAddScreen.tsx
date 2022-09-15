@@ -53,7 +53,6 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
     const formData = new FormData();
     formData.append('noKtp', data.noKtp);
     if (!isEmpty(gambarKtp)) {
-      console.log('gambarKtp');
       formData.append('gambarKtp', {
         uri: gambarKtp,
         type: 'image/jpeg',
@@ -61,7 +60,6 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
       });
     }
     if (!isEmpty(gambarSelfie)) {
-      console.log('selfieKtp');
       formData.append('selfieKtp', {
         uri: gambarSelfie,
         type: 'image/jpeg',
@@ -69,7 +67,6 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
       });
     }
     if (!isEmpty(dokumenPendukung)) {
-      console.log('dokumenPendukung');
       formData.append('dokumenPendukung', {
         uri: dokumenPendukung?.uri,
         type: dokumenPendukung?.type,

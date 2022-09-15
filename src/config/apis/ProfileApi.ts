@@ -1,7 +1,6 @@
 import HttpService from '../services/HttpService';
-import { AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apis } from '../../constants';
-import { ProfileRequest } from '../../redux/reducers/ProfileReducer';
 
 /**
  * Handles API call related to diagnostic
@@ -24,8 +23,21 @@ class ProfileApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async updateProfile(data: ProfileRequest): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(apis.endpoints.profile.profile, data);
+  static async updateProfile(formData: FormData): Promise<AxiosResponse> {
+    const config: AxiosRequestConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: () => {
+        return formData;
+      },
+      data: formData,
+    };
+    const resp = await HttpService.post(
+      apis.endpoints.profile.profile,
+      {},
+      config,
+    );
     return resp;
   }
 }

@@ -65,17 +65,18 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   const saveProfile = (data: ProfileRequest) => {
     const { email, nama, noTelp } = data || {};
-    formatter.convertToBase64(profilePicture.uri).then(res => {
-      const base64string = `data:${profilePicture.data?.type};base64,${res}`;
-      dispatch(
-        fetchUpdateProfile({
-          email,
-          nama,
-          noTelp,
-          profilePic: base64string,
-        }),
-      );
-    });
+    const formData = new FormData();
+    if (!isEmpty(profilePicture.data) && !isEmpty(profilePicture.uri)) {
+      formData.append('profilePic', {
+        uri: profilePic,
+        type: 'image/jpeg',
+        name: 'profile image',
+      });
+    }
+    formData.append('nama', nama);
+    formData.append('noTelp', noTelp);
+    formData.append('email', email);
+    dispatch(fetchUpdateProfile(formData));
   };
 
   const openDocumentPicker = async () => {
@@ -105,9 +106,9 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<ProfileRequest>({
     defaultValues: {
-      email: email ? email : '',
-      nama: nama ? nama : '',
-      noTelp: noTelp ? noTelp : '',
+      email: email,
+      nama: nama,
+      noTelp: noTelp,
     },
   });
 

@@ -1,5 +1,4 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ImageSourcePropType } from 'react-native';
 
 export type ProfileResponse = {
   profilePic: string;
@@ -12,7 +11,6 @@ export type ProfileResponse = {
 };
 
 export type ProfileRequest = {
-  profilePic: string | ImageSourcePropType;
   nama: string;
   noTelp: string;
   email: string;
@@ -87,8 +85,7 @@ const profileSlice = createSlice({
 });
 
 export const fetchProfile = createAction('fetchProfile');
-export const fetchUpdateProfile =
-  createAction<ProfileRequest>('fetchUpdateProfile');
+export const fetchUpdateProfile = createAction<FormData>('fetchUpdateProfile');
 
 export const {
   getProfileFailed,
