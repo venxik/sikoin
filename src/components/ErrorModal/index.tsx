@@ -2,14 +2,7 @@ import { isEmpty } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
-import {
-  apis,
-  colors,
-  icons,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { dismissErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import Button from '../Button';
 import { ErrorModalProps } from './model';
@@ -17,7 +10,7 @@ import { ErrorModalProps } from './model';
 const ErrorModal = ({ error, options }: ErrorModalProps) => {
   const scaleValue = useRef(new Animated.Value(0)).current;
   const dispatch = useDispatch();
-  const { isVisible, errorType } = options;
+  const { isVisible } = options;
   const { title, message } = error || {};
 
   useEffect(() => {
@@ -46,59 +39,11 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
     if (!isEmpty(error?.message) || !isEmpty(error?.title)) {
       modalTitle = title;
       modalBody = message;
-      return { modalTitle, modalBody };
     } else {
-      switch (errorType) {
-        case apis.errorTypes.generic:
-          modalTitle = strings.error_generic_title;
-          modalBody = strings.error_generic_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.networkError:
-          modalTitle = strings.error;
-          modalBody = strings.error_network_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.badRequest:
-          modalTitle = strings.error_400_title;
-          modalBody = strings.error_400_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.unauthorized:
-          modalTitle = strings.error_401_title;
-          modalBody = strings.error_generic_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.forbidden:
-          modalTitle = strings.error_403_title;
-          modalBody = strings.error_403_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.notFound:
-          modalTitle = strings.error_404_title;
-          modalBody = strings.error_404_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.methodNotAllowed:
-          modalTitle = strings.error_405_title;
-          modalBody = strings.error_405_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.conflict:
-          modalTitle = strings.error_409_title;
-          modalBody = strings.error_409_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.unsupported:
-          modalTitle = strings.error_415_title;
-          modalBody = strings.error_415_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.unprocessable:
-          modalTitle = strings.error_422_title;
-          modalBody = strings.error_422_message;
-          return { modalTitle, modalBody };
-        case apis.errorTypes.serverError:
-          modalTitle = strings.error_500_title;
-          modalBody = strings.error_500_title;
-          return { modalTitle, modalBody };
-        default:
-          modalTitle = strings.error_generic_title;
-          modalBody = strings.error_generic_message;
-          return { modalTitle, modalBody };
-      }
+      modalTitle = strings.error_generic_title;
+      modalBody = strings.error_generic_message;
     }
+    return { modalTitle, modalBody };
   };
 
   return (

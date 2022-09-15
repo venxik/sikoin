@@ -78,32 +78,35 @@ class HttpService {
     store.dispatch(hideLoading());
     const error = response.data.error;
     if (error != null) {
-      this.showErrorDialogHandler(apis.errorTypes.badRequest, error);
+      this.showErrorDialogHandler(apis.errorTypes.generic, error);
     }
     return response;
   };
 
   // Response interceptor to manage token refresh
   handleErrorInterceptor = (error: AxiosError) => {
-    // const responseURL = error.response?.config.url;
-    // if (
-    //   apis.authPathArray.some(substring => !responseURL?.includes(substring))
-    // ) {
     store.dispatch(hideLoading());
     switch (error.response?.status) {
       case 400:
-        this.showErrorDialogHandler(apis.errorTypes.badRequest);
-        return Promise.reject(new Error());
+        this.showErrorDialogHandler(
+          apis.errorTypes.badRequest,
+          error.response?.data?.error,
+        );
+        break;
       case 401:
-        // redirect to login screen
-        this.showErrorDialogHandler(apis.errorTypes.unauthorized);
-        return Promise.reject(new Error());
+        this.showErrorDialogHandler(
+          apis.errorTypes.unauthorized,
+          error.response?.data?.error,
+        );
+        break;
       default:
-        this.showErrorDialogHandler(apis.errorTypes.generic);
-        return Promise.reject(error.response);
+        this.showErrorDialogHandler(
+          apis.errorTypes.generic,
+          error.response?.data?.error,
+        );
+        break;
     }
-    // }
-    // return Promise.reject(response);
+    return Promise.reject();
   };
 
   showErrorDialogHandler = (errorType: string, errorMessage?: string) => {
@@ -114,7 +117,8 @@ class HttpService {
           errorType,
         },
         error: {
-          title: errorMessage as string,
+          title: 'Error',
+          message: errorMessage as string,
         },
       }),
     );
@@ -129,10 +133,6 @@ class HttpService {
       method: 'get',
       url,
       params,
-      // responseType: 'json',
-      // transitional: {
-      //   silentJSONParsing: false,
-      // },
       ...conf,
     };
     return NetInfo.fetch()
@@ -155,10 +155,6 @@ class HttpService {
       method: 'post',
       url,
       data: params,
-      // responseType: 'json',
-      // transitional: {
-      //   silentJSONParsing: false,
-      // },
       ...conf,
     };
 
@@ -182,10 +178,6 @@ class HttpService {
       method: 'patch',
       url,
       data: params,
-      // responseType: 'json',
-      // transitional: {
-      //   silentJSONParsing: false,
-      // },
       ...conf,
     };
 
