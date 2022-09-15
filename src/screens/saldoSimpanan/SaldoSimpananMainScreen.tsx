@@ -112,6 +112,13 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
       <View>
         <View style={styles.simpananContainer}>
           <Button
+            icon={icons.icon_topup_penarikan}
+            text={strings.top_up}
+            onPress={() =>
+              navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })
+            }
+          />
+          <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
             onPress={() =>
@@ -120,20 +127,6 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
               })
             }
           />
-          <Button
-            icon={icons.icon_mutasi_primary}
-            text={strings.mutasi}
-            onPress={() => navigation.navigate('TransaksiMainScreen')}
-          />
-          {/* <Button
-            icon={icons.icon_mutasi_primary}
-            text={strings.transfer_antar_simpanan}
-            onPress={() =>
-              navigation.navigate('TransaksiStackNavigator', {
-                screen: 'TransaksiMainScreen',
-              })
-            }
-          /> */}
         </View>
         <View style={{ marginTop: 40 }}>
           {simpanan.simpananTerlihat?.map((item, i) => (

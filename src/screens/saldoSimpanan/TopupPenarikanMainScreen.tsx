@@ -325,7 +325,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                 </View>
               </TouchableOpacity>
             ))
-          : createSimpananList?.simpananDapatDitarik.map((item, index) => (
+          : createSimpananList?.simpanan.map((item, index) => (
               <TouchableOpacity
                 key={index}
                 style={{

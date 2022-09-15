@@ -38,9 +38,6 @@ const constant = {
     },
     ktpDokumen: {
       ktpDokumen: 'ktp-dokumen',
-      uploadGambarKtp: 'upload-gambar-ktp',
-      uploadSelfieKtp: 'upload-selfie-ktp',
-      uploadDokumen: 'upload-dokumen',
     },
     pinjaman: {
       getPinjaman: 'pinjaman',

@@ -1,17 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import { Button, HeaderBack, Popup1Button } from '../../components';
+import React from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Button, HeaderBack } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { colors, icons, images, sizes, strings } from '../../constants';
+import { colors, icons, sizes, strings } from '../../constants';
 import { fetchSubmitPenarikan } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
@@ -22,8 +15,6 @@ type Props = NativeStackScreenProps<
 
 const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const { selectedTopupPenarikan, nominal, isTopup } = route.params;
-
-  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const { createSimpananList } = useAppSelector(s => s.SaldoSimpananReducer);
 
@@ -43,19 +34,6 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         jenisSimpananId: selectedTopupPenarikan?.id as number,
         nominal: parseInt(nominal),
       }),
-    );
-    // navigation.navigate('PenarikanSuccessScreen');
-  };
-
-  const renderRightButtonHeader = () => {
-    return (
-      <TouchableOpacity onPress={() => setShowPopup(e => !e)}>
-        <Image
-          source={icons.icon_shield}
-          style={styles.headerIcon}
-          resizeMode="stretch"
-        />
-      </TouchableOpacity>
     );
   };
 
@@ -118,19 +96,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Popup1Button
-        iconStyle={{ width: 150, height: 200, marginBottom: -sizes.padding }}
-        headerText={strings.popup_topup_title}
-        contentText={strings.popup_topup_content}
-        showPopup={showPopup}
-        onPress={() => setShowPopup(e => !e)}
-        headerImage={images.img_topup_popup}
-        customButtonText={strings.ok_thumbs}
-      />
-      <HeaderBack
-        title={strings.konfirmasi}
-        rightIcon={renderRightButtonHeader()}
-      />
+      <HeaderBack title={strings.konfirmasi} />
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{strings.jumlah_topup}</Text>
         <View style={styles.rowContainerBorderless}>

@@ -24,7 +24,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
     jenisPinjaman,
     lamaPinjaman,
     namaBankTujuan,
-    nomorKtp,
+    noKtp,
     nomorRekeningBank,
     alasan,
     sisaAngsuran,
@@ -34,9 +34,13 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
   } = useAppSelector(s => s.PinjamanReducer.pinjamanDetailData);
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     if (status === 'DISETUJUI') dispatch(fetchPinjamanDisetujuiData(id));
     else dispatch(fetchPinjamanDitolakData(id));
-  }, []);
+  };
 
   const navigateToRincian = () => {
     navigation.navigate('PinjamanRincianScreen', { id });
@@ -65,7 +69,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
             title="Nomor Rekening Bank"
             content={nomorRekeningBank}
           />
-          <PinjamanDetailItem title="Nomor KTP" content={nomorKtp} />
+          <PinjamanDetailItem title="Nomor KTP" content={noKtp} />
           <PinjamanDetailItem title="Jenis Pinjaman" content={jenisPinjaman} />
           <PinjamanDetailItem
             title="Lama Pinjaman"

@@ -37,6 +37,7 @@ import {
   getPinjamanDisetujuiDetailFailed,
 } from '../reducers/PinjamanReducer';
 import { navigate } from '../../config/navigation';
+import { removeKtpImage, removeKtpSelfie } from '../reducers/KtpReducer';
 
 function* getPinjamanInitialData() {
   yield put(showLoading());
@@ -234,6 +235,8 @@ function* patchCreatePinjaman(
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
+        yield removeKtpImage();
+        yield removeKtpSelfie();
         navigate('PinjamanStep5Screen');
       } else {
         yield put(fetchPatchCreatePinjamanFailed('Error'));

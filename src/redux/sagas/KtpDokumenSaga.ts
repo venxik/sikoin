@@ -11,6 +11,8 @@ import {
   fetchUploadGambarKtpFailed,
   fetchUploadGambarKtpSuccess,
   KtpDokumenResponse,
+  removeKtpImage,
+  removeKtpSelfie,
 } from '../reducers/KtpReducer';
 import { navigation } from '../../config';
 
@@ -44,6 +46,8 @@ function* uploadGambarKtp(action: ReturnType<typeof fetchUploadGambarKtp>) {
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       yield put(fetchUploadGambarKtpSuccess(data?.data));
+      yield removeKtpImage();
+      yield removeKtpSelfie();
       navigation.goBack();
     } else {
       yield put(fetchUploadGambarKtpFailed('Error'));

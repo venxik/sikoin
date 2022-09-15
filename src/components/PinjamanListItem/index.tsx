@@ -7,13 +7,21 @@ import { TickSquare } from 'react-native-iconly';
 
 const PinjamanListItem = (props: PinjamanListItemProps) => {
   const { item, onPress, disabled = false } = props;
+
+  const tickColor = () => {
+    const { status } = item;
+    if (status === 'DISETUJUI') return colors.green;
+    if (status === 'DITOLAK') return colors.red;
+    return colors.primary;
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
       disabled={disabled}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <TickSquare color={colors.primary} size={sizes.padding} />
+        <TickSquare color={tickColor()} size={sizes.padding} />
         <Text style={styles.textTitle}>{item.namaJenisPinjaman}</Text>
       </View>
       <View

@@ -1,9 +1,8 @@
 import HttpService from '../services/HttpService';
-import { AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 import {
   CreatePinjamanInfo,
-  CreatePinjamanRequest,
   PinjamanStep2Data,
   PinjamanStep3Data,
 } from '../../redux/reducers/PinjamanReducer';
@@ -55,10 +54,22 @@ class PinjamanApi {
     return resp;
   }
 
-  static async fetchPatchCreate(
-    data: CreatePinjamanRequest,
-  ): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(apis.endpoints.pinjaman.create, data);
+  static async fetchPatchCreate(formData: FormData): Promise<AxiosResponse> {
+    const config: AxiosRequestConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: () => {
+        return formData;
+      },
+      data: formData,
+    };
+
+    const resp = await HttpService.patch(
+      apis.endpoints.pinjaman.create,
+      {},
+      config,
+    );
     return resp;
   }
 

@@ -11,6 +11,7 @@ import { colors, icons, images, sizes } from '../../constants';
 import { PinjamanItemModalProps } from './model';
 import CheckBox from '@react-native-community/checkbox';
 import Button from '../Button';
+import { isEmpty } from 'lodash';
 
 const PinjamanItemModal = (props: PinjamanItemModalProps) => {
   const { onPress, onPressClose, showModal, item } = props;
@@ -29,8 +30,8 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               top: 0,
               left: 0,
               right: 0,
-              width: '120%',
-              height: '70%',
+              width: '100%',
+              height: '40%',
             }}
           />
           <TouchableOpacity
@@ -51,15 +52,17 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               style={{ width: sizes.icon_size, height: sizes.icon_size }}
             />
           </TouchableOpacity>
-          <Text style={styles.textTitle}>{item.nama}</Text>
-          <Text style={styles.textContent}>{item.keterangan}</Text>
+          <Text style={styles.textTitle}>{item?.nama}</Text>
+          <Text style={styles.textContent}>{item?.keterangan}</Text>
           <Text style={[styles.textTenor, { marginTop: 8 }]}>
             {'Tenor : '}
-            <Text style={{ color: colors.primary }}>{item.maksimumTenor}</Text>
+            <Text style={{ color: colors.primary }}>{item?.maksimumTenor}</Text>
           </Text>
           <Text style={styles.textTenor}>
             {'Plafon : '}
-            <Text style={{ color: colors.primary }}>{item.maksimumPlafon}</Text>
+            <Text style={{ color: colors.primary }}>
+              {item?.maksimumPlafon}
+            </Text>
           </Text>
           <Text style={styles.textUnduhSnk}>Unduh Syarat & Ketentuan</Text>
           <View style={styles.row}>
@@ -70,12 +73,9 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               />
             </View>
             <View style={{ marginLeft: 16 }}>
-              <Text style={styles.textNamaDokumen}>Nama Dokumen.zip</Text>
-              <View style={[styles.row, { marginTop: 0 }]}>
-                <Text style={styles.textDokumenDetail}>Admin</Text>
-                <View style={styles.dot} />
-                <Text style={styles.textDokumenDetail}>18 Januari 2022</Text>
-              </View>
+              <Text style={styles.textNamaDokumen}>
+                {!isEmpty(item.namaDokumen) ? item.namaDokumen : '-'}
+              </Text>
             </View>
           </View>
           <View style={[styles.row, { paddingHorizontal: 16, marginTop: 20 }]}>

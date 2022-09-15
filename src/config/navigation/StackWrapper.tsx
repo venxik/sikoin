@@ -264,6 +264,14 @@ const HomeStackNavigator = () => (
       name="PinjamanSimulasiScreen"
       component={screens.PinjamanSimulasiScreen}
     />
+    <HomeStack.Screen
+      name="DaftarKtpCameraScreen"
+      component={screens.DaftarKtpCameraScreen}
+    />
+    <HomeStack.Screen
+      name="DaftarKtpSelfieScreen"
+      component={screens.DaftarKtpSelfieScreen}
+    />
   </HomeStack.Navigator>
 );
 

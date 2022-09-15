@@ -114,10 +114,7 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
             title="Bunga Jenis Pinjaman"
             content={bungaJenisPinjaman}
           />
-          <PinjamanDetailItem
-            title="Lama Pinjaman"
-            content={tenor?.toString()}
-          />
+          <PinjamanDetailItem title="Lama Pinjaman" content={tenor} />
           <PinjamanDetailItem title="Tujuan" content={tujuan} />
           <PinjamanSimulasiSection
             simulasi

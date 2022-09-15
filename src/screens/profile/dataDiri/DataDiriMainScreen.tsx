@@ -32,7 +32,7 @@ const DataDiriMainScreen: React.FC<Props> = ({ navigation }) => {
         <SubmenuItemList
           icon={icons.icon_daftar_ktp}
           title={strings.ktp}
-          onPress={() => navigation.navigate('DaftarKtpMainScreen')}
+          onPress={() => navigation.navigate('DaftarKtpAddScreen')}
         />
         <SubmenuItemList
           icon={icons.icon_referensi_keluarga}

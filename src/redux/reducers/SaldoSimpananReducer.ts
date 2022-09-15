@@ -13,7 +13,7 @@ export type CreateSaldoListResponse = {
 };
 
 export type CreateSimpananListResponse = {
-  simpananDapatDitarik: {
+  simpanan: {
     id: number;
     nama: string;
     sisaSaldo: number;

@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   View,
@@ -16,7 +16,9 @@ import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import DocumentPicker from 'react-native-document-picker';
+import DocumentPicker, {
+  DocumentPickerResponse,
+} from 'react-native-document-picker';
 import { fetchPatchCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep4Screen'>;
@@ -27,25 +29,74 @@ const documentPickerOptions = {
 
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { linkGambarKtp, noKtp } = useAppSelector(
+  const { linkGambarKtp, noKtp, linkSelfieKtp } = useAppSelector(
     s => s.PinjamanReducer.pinjamanStep4Data,
   );
+  const { ktpData } = useAppSelector(s => s.KtpReducer) || {};
+  const { gambarKtp, gambarSelfie } = ktpData || {};
+
+  const [dokumenPendukung, setDokumenPendukung] =
+    useState<DocumentPickerResponse>();
 
   const submitKtp = (data: { noKtp: string }) => {
-    dispatch(fetchPatchCreatePinjaman({ noKtp: data.noKtp }));
+    const formData = new FormData();
+    formData.append('noKtp', data.noKtp);
+    if (!isEmpty(gambarKtp)) {
+      console.log('gambarKtp');
+      formData.append('gambarKtp', {
+        uri: gambarKtp,
+        type: 'image/jpeg',
+        name: 'ktp image',
+      });
+    }
+    if (!isEmpty(gambarSelfie)) {
+      console.log('selfieKtp');
+      formData.append('selfieKtp', {
+        uri: gambarSelfie,
+        type: 'image/jpeg',
+        name: 'selfie image',
+      });
+    }
+    if (!isEmpty(dokumenPendukung)) {
+      console.log('dokumenPendukung');
+      formData.append('dokumenPendukung', {
+        uri: dokumenPendukung?.uri,
+        type: dokumenPendukung?.type,
+        name: dokumenPendukung?.name,
+      });
+    }
+    dispatch(fetchPatchCreatePinjaman(formData));
+  };
+
+  const openDocumentPicker = async () => {
+    try {
+      const data = await DocumentPicker.pickSingle(documentPickerOptions);
+      setDokumenPendukung(data);
+    } catch {
+      (e: unknown) => console.error('Document picker error! ', e);
+    }
   };
 
   const changeKtpImage = () => {
     navigation.navigate('DaftarKtpCameraScreen');
   };
 
-  const openDocumentPicker = async () => {
-    try {
-      const data = await DocumentPicker.pickSingle(documentPickerOptions);
-      console.log('Dokumen Pendukung :', data);
-    } catch {
-      (e: unknown) => console.error('Document picker error! ', e);
-    }
+  const changeSelfieImage = () => {
+    navigation.navigate('DaftarKtpSelfieScreen');
+  };
+
+  const checkKtpImage = () => {
+    if (!isEmpty(linkGambarKtp) && isEmpty(gambarKtp))
+      return { uri: linkGambarKtp };
+    else if (!isEmpty(gambarKtp)) return { uri: gambarKtp };
+    else return icons.icon_edit_profle_picture;
+  };
+
+  const checkSelfieImage = () => {
+    if (!isEmpty(linkSelfieKtp) && isEmpty(gambarSelfie))
+      return { uri: linkSelfieKtp };
+    else if (!isEmpty(gambarSelfie)) return { uri: gambarSelfie };
+    else return icons.icon_edit_profle_picture;
   };
 
   const {
@@ -54,7 +105,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<{ noKtp: string }>({
     defaultValues: {
-      noKtp,
+      noKtp: noKtp,
     },
   });
 
@@ -64,11 +115,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity onPress={changeKtpImage}>
           <ImageBackground
             imageStyle={styles.imageKtp}
-            source={
-              !isEmpty(linkGambarKtp)
-                ? { uri: linkGambarKtp }
-                : icons.icon_edit_profle_picture
-            }
+            source={checkKtpImage()}
             style={styles.imageKtp}
             resizeMode="cover">
             <View style={styles.iconContainer}>
@@ -103,19 +150,16 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
             minLength: { value: 16, message: 'KTP Harus 16 Digit' },
           }}
         />
-        <TouchableOpacity onPress={changeKtpImage}>
+        <TouchableOpacity
+          onPress={changeSelfieImage}
+          style={{ marginTop: sizes.padding }}>
           <ImageBackground
             imageStyle={styles.imageSelfie}
-            source={
-              !isEmpty(linkGambarKtp)
-                ? { uri: linkGambarKtp }
-                : icons.icon_edit_profle_picture
-            }
+            source={checkSelfieImage()}
             style={styles.imageSelfie}
             resizeMode="cover">
             <View style={styles.iconContainer}>
               <Image
-                resizeMode="cover"
                 source={icons.icon_edit_profle_picture}
                 style={{
                   width: sizes.icon_size * 2,
@@ -187,7 +231,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: SCREEN_HEIGHT * 0.15,
     borderRadius: sizes.padding,
-    marginTop: 20,
   },
   cardContainer: {
     padding: sizes.padding,

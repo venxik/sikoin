@@ -13,6 +13,7 @@ const PinjamanRincianSimulasiItem = (props: PinjamanRincianItemProps) => {
     jumlahAngsuran,
     saldo,
     tanggalJatuhTempo,
+    statusBayar,
   } = props.item;
   return (
     <View style={{ marginTop: 30 }}>
@@ -38,6 +39,12 @@ const PinjamanRincianSimulasiItem = (props: PinjamanRincianItemProps) => {
           Rp. {formatter.formatNumberToCurreny(angsuranBunga)}
         </Text>
       </View>
+      {!isEmpty(statusBayar) && (
+        <View style={styles.row}>
+          <Text style={styles.textItemContentLeft}>{'Status Bayar : '}</Text>
+          <Text style={styles.textItemContentRight}>{statusBayar}</Text>
+        </View>
+      )}
       <View
         style={{
           width: '85%',

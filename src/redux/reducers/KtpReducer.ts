@@ -32,11 +32,14 @@ const ktpSlice = createSlice({
     addKtpImage: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.gambarKtp = payload;
     },
-    addKtpNumber: (state: RootState, { payload }: PayloadAction<string>) => {
-      state.ktpData.noKtp = payload;
+    removeKtpImage: (state: RootState) => {
+      state.ktpData.gambarKtp = '';
     },
     addKtpSelfie: (state: RootState, { payload }: PayloadAction<string>) => {
       state.ktpData.gambarSelfie = payload;
+    },
+    removeKtpSelfie: (state: RootState) => {
+      state.ktpData.gambarSelfie = '';
     },
     fetchKtpDokumenSuccess: (
       state: RootState,
@@ -74,10 +77,11 @@ export const {
   fetchKtpDokumenFailed,
   fetchKtpDokumenSuccess,
   addKtpImage,
-  addKtpNumber,
   addKtpSelfie,
   fetchUploadGambarKtpFailed,
   fetchUploadGambarKtpSuccess,
+  removeKtpImage,
+  removeKtpSelfie,
 } = ktpSlice.actions;
 
 export default ktpSlice.reducer;

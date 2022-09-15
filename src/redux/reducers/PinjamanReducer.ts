@@ -48,13 +48,9 @@ export type PinjamanStep4Data = {
   namaDokumen?: string;
 };
 
-export type CreatePinjamanRequest = {
-  noKtp?: string;
-};
-
 export type PinjamanSummaryResponse = {
   nominal?: number;
-  tenor?: number;
+  tenor?: string;
   tujuan?: string;
   nama?: string;
   noRek?: string;
@@ -81,7 +77,7 @@ export type PinjamanDetailResponse = {
   nominal?: number;
   namaBankTujuan: string;
   nomorRekeningBank: string;
-  nomorKtp: string;
+  noKtp: string;
   jenisPinjaman: string;
   lamaPinjaman: number;
   totalAngsuranPokok?: number;
@@ -112,7 +108,8 @@ export type JenisPinjaman = {
   maksimumTenor: string;
   bunga: string;
   maksimumPlafon: number;
-  dokumen: null;
+  dokumen: string;
+  namaDokumen: string;
 };
 
 export type PengajuanPinjaman = {
@@ -130,7 +127,7 @@ export type PengajuanPinjaman = {
 export type CreatePinjamanInfo = {
   idJenisPinjaman?: number;
   nominal?: number;
-  tenor?: number;
+  tenor?: string;
   tujuan?: string;
 };
 
@@ -152,7 +149,8 @@ const initialState: RootState = {
     jenisPinjaman: [
       {
         bunga: '',
-        dokumen: null,
+        dokumen: '',
+        namaDokumen: '',
         id: 0,
         keterangan: '',
         maksimumPlafon: 0,
@@ -167,7 +165,7 @@ const initialState: RootState = {
     jenisPinjaman: '',
     lamaPinjaman: 0,
     namaBankTujuan: '',
-    nomorKtp: '',
+    noKtp: '',
     nomorRekeningBank: '',
   },
   pinjamanStep1Data: {},
@@ -338,7 +336,7 @@ export const fetchPinjamanStep3 =
   createAction<PinjamanStep2Data>('fetchPinjamanStep3');
 export const fetchPinjamanStep4 =
   createAction<PinjamanStep3Data>('fetchPinjamanStep4');
-export const fetchPatchCreatePinjaman = createAction<CreatePinjamanRequest>(
+export const fetchPatchCreatePinjaman = createAction<FormData>(
   'fetchPatchCreatePinjaman',
 );
 export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>(

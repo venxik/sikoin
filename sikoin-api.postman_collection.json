@@ -812,7 +812,7 @@
 			"response": []
 		},
 		{
-			"name": "24a. api/upload-gambar-ktp",
+			"name": "24. api/ktp-dokumen",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
@@ -832,137 +832,27 @@
 				"body": {
 					"mode": "formdata",
 					"formdata": [
+						{
+							"key": "noKtp",
+							"value": "0123456789",
+							"type": "text"
+						},
 						{
 							"key": "gambarKtp",
 							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-agent-and-client-shake-hands-after-good-deal-to-buy-house-1.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/upload-gambar-ktp",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"upload-gambar-ktp"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "24b. api/upload-selfie-ktp",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
+							"src": []
+						},
 						{
 							"key": "selfieKtp",
 							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-boy-thinking-about-the-question.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/upload-selfie-ktp",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"upload-selfie-ktp"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "24c. api/upload-dokumen",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
+							"src": []
+						},
 						{
 							"key": "dokumenPendukung",
 							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/casual-life-3d-brown-wallet-with-money.png"
+							"src": []
 						}
 					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/upload-dokumen",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"upload-dokumen"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "24d. api/ktp-dokumen",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"noKtp\" : \"55567890123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
 				"url": {
 					"raw": "http://{{base_url}}/api/ktp-dokumen",
@@ -1360,132 +1250,6 @@
 			"response": []
 		},
 		{
-			"name": "35a. api/pinjaman-upload-gambar-ktp",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "gambarKtp",
-							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-agent-and-client-shake-hands-after-good-deal-to-buy-house-1.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/pinjaman-upload-gambar-ktp",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"pinjaman-upload-gambar-ktp"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "35b. api/pinjaman-upload-selfie-ktp",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "selfieKtp",
-							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/bonbon-boy-thinking-about-the-question.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/pinjaman-upload-selfie-ktp",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"pinjaman-upload-selfie-ktp"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "35c. api/pinjaman-upload-dokumen",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "dokumenPendukung",
-							"type": "file",
-							"src": "/D:/GGC/Khotbah 31 Juli 2022/casual-life-3d-brown-wallet-with-money.png"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/pinjaman-upload-dokumen",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"pinjaman-upload-dokumen"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "36. api/pengajuan-pinjaman/create",
 			"request": {
 				"auth": {
@@ -1501,13 +1265,29 @@
 				"method": "PATCH",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"noKtp\" : \"000123456789\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "noKtp",
+							"value": "0123456789",
+							"type": "text"
+						},
+						{
+							"key": "gambarKtp",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "selfieKtp",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "dokumenPendukung",
+							"type": "file",
+							"src": []
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "http://{{base_url}}/api/pengajuan-pinjaman/create",
@@ -1541,7 +1321,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idJenisPinjaman\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"raw": "{\r\n    \"idJenisPinjaman\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : \"36\",\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1622,7 +1402,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1664,7 +1444,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1706,7 +1486,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisPinjamanId\" : 4,\r\n    \"nominal\" : 50000000,\r\n    \"tenor\" : 36,\r\n    \"tujuan\" : \"Liburan keliling disneyland\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"

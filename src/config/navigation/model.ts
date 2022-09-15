@@ -85,6 +85,7 @@ export type HomeStackParamList = {
   PinjamanRincianScreen: { id: number };
   PinjamanSimulasiScreen: undefined;
   DaftarKtpCameraScreen: undefined;
+  DaftarKtpSelfieScreen: undefined;
   VoucherMainScreen: undefined;
   MarketMainScreen: undefined;
   MarketItemDetailsScreen: undefined;

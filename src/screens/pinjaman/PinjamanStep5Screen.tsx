@@ -24,7 +24,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 
-type Form = { tenor: number; tujuan: string };
+type Form = { tenor: string; tujuan: string };
 
 const defaultNominal = [
   { item: '250', value: '250000' },
@@ -141,7 +141,7 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<Form>({
     defaultValues: {
-      tenor: 0,
+      tenor: '',
       tujuan: '',
     },
   });

@@ -1,11 +1,12 @@
 import HttpService from '../services/HttpService';
-import { AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 
 /**
  * Handles API call related to diagnostic
  * @class
  */
+
 class KtpDokumenApi {
   /**
    * Retrieve KTP Data
@@ -17,11 +18,21 @@ class KtpDokumenApi {
     return resp;
   }
 
-  static async uploadGambarKtp(data: FormData): Promise<AxiosResponse> {
+  static async uploadGambarKtp(formData: FormData): Promise<AxiosResponse> {
+    const config: AxiosRequestConfig = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: () => {
+        return formData;
+      },
+      data: formData,
+    };
+
     const resp = await HttpService.post(
-      apis.endpoints.ktpDokumen.uploadGambarKtp,
-      data,
-      { headers: { 'Content-Type': 'multipart/form-data' } },
+      apis.endpoints.ktpDokumen.ktpDokumen,
+      {},
+      config,
     );
     return resp;
   }
