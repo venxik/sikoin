@@ -5,4 +5,5 @@ export interface SubmenuItemListProps {
   onPress: () => void;
   title: string;
   style?: ViewStyle;
+  showButtonIcon?: boolean;
 }

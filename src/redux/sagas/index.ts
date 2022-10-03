@@ -43,6 +43,7 @@ import {
   watchGetSimpananData,
   watchSubmitTopup,
   watchSubmitPenarikan,
+  watchGetMutasiSimpanan,
 } from './SaldoSimpananSaga';
 
 // Redux Saga: Root Saga
@@ -87,5 +88,6 @@ export function* rootSaga() {
     fork(watchGetPinjamanSummaryData),
     fork(watchPostCreatePinjaman),
     fork(watchGetPinjamanDisetujuiDetail),
+    fork(watchGetMutasiSimpanan),
   ]);
 }

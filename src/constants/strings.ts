@@ -21,21 +21,21 @@ export default {
 
   /* DAFTAR KOPERASI */
   daftar: 'Daftar',
-  daftar_koperasi_title_1: 'Apakah koperasimu sudah memiliki akses ke CoopApp?',
+  daftar_koperasi_title_1: 'Apakah koperasimu sudah memiliki akses ke SIKOIN?',
   daftar_koperasi_title_2:
-    'Kita lihat dulu yuk bagaimana CoopApp bisa membawa koperasi mu menjadi koperasi super',
+    'Kita lihat dulu yuk bagaimana SIKOIN bisa membawa koperasi mu menjadi koperasi super',
   daftar_koperasi_isi_data_title_1:
-    'Dapatkan akses masuk CoopApp mu hanya dengan mengikuti 2 langkah saja',
+    'Dapatkan akses masuk SIKOIN mu hanya dengan mengikuti 2 langkah saja',
   daftar_koperasi_isi_data_title_2:
     'Masukkan emailmu untuk mendapatkan Username & Password sementara',
   daftar_koperasi_isi_data_hint_2:
-    'Kamu dapat mengganti Username & Password sewaktu-waktu dari dalam aplikasi CoopApp.',
+    'Kamu dapat mengganti Username & Password sewaktu-waktu dari dalam aplikasi SIKOIN.',
   isi_data: 'Isi Data',
   daftar_koperasi_success_1: 'Username & Password sudah dikirim ke',
   daftar_koperasi_success_2:
-    'Kamu dapat menggunakan Username & Password tersebut untuk masuk ke aplikasi CoopApp.',
+    'Kamu dapat menggunakan Username & Password tersebut untuk masuk ke aplikasi SIKOIN.',
   masukan_nama_koperasimu: 'Masukkan nama koperasimu...',
-  masukan_no_anggota: 'Masukkan nomor anggotamu...',
+  masukan_no_anggota: 'Masukkan NIP',
   masukan_email: 'Masukkan emailmu...',
   cek_inbox: 'Cek Inboxmu ya!',
   daftar_koperasi_failed_title:
@@ -122,7 +122,7 @@ export default {
   wajib: 'Wajib',
   sukarela: 'Sukarela',
   popup_simpanan_content:
-    'Saldo Simpanan digunakan untuk kewajiban berkoperasi. Simpanan tertentu dapat digunakan sebagai alat transaksi pembayaran di dalam CoopApp.',
+    'Saldo Simpanan digunakan untuk kewajiban berkoperasi. Simpanan tertentu dapat digunakan sebagai alat transaksi pembayaran di dalam SIKOIN.',
   popup_saldo_content:
     'Saldo dapat digunakan sebagai alat transaksi pembayaran untuk :',
 
@@ -139,7 +139,7 @@ export default {
   ok_thumbs: 'Ok 👍',
   popup_topup_title: 'Tenang... semuanya aman!',
   popup_topup_content:
-    'Teknologi cloud computing CoopApp selalu menjaga transaksi & kegiatan berkoperasimu secara real time.',
+    'Teknologi cloud computing SIKOIN selalu menjaga transaksi & kegiatan berkoperasimu secara real time.',
   jumlah_topup: 'Jumlah Topup',
   untuk_saldo: 'Untuk Saldo',
   rincian: 'Rincian',
@@ -199,7 +199,7 @@ export default {
   laporkan_produk: 'Laporkan Produk Ini',
   pusat_bantuan: 'Pusat Bantuan',
   market_info_popup:
-    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi CoopApp.\n\nSelamat berkoperasi! ☀️',
+    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi SIKOIN.\n\nSelamat berkoperasi! ☀️',
 
   /*VOUCHER*/
   voucher_center: 'Voucher Center',
@@ -207,7 +207,7 @@ export default {
   harga: 'Harga',
   biaya_admin: 'Biaya Admin',
   voucher_info_popup:
-    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi CoopApp.\n\nSelamat berkoperasi! ☀️',
+    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi SIKOIN.\n\nSelamat berkoperasi! ☀️',
   snk: 'S&K',
   voucherku: 'Voucher Ku',
   tentang_voucher: 'Tentang Voucher Center',

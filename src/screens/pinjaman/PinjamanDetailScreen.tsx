@@ -86,7 +86,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                 }}
               />
               <PinjamanDetailItem
-                title="Sisa Bulan Pembayaran"
+                title="Cicilan Terbayar"
                 content={sisaAngsuran}
               />
             </View>

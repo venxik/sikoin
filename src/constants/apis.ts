@@ -29,12 +29,13 @@ const constant = {
     },
     chat: 'kirim-pesan',
     saldo: {
-      saldo: 'saldo-belanja',
-      createSaldoList: 'saldo-belanja/create',
+      saldo: 'top-up',
+      createSaldoList: 'top-up/create',
     },
     simpanan: {
       simpanan: 'simpanan',
       createSimpananList: 'simpanan/create',
+      mutasiSimpanan: 'mutasi-simpanan',
     },
     ktpDokumen: {
       ktpDokumen: 'ktp-dokumen',
@@ -53,7 +54,7 @@ const constant = {
     },
   },
   errorTypes: {
-    generic: 'Error',
+    generic: 'Oops!',
     serverUnreachable: 'Server Unreachable',
     networkError: 'Network Error', // no internet
     badRequest: 'Bad Request', // 400

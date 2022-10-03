@@ -16,6 +16,8 @@ import 'moment/locale/id';
 import { isEmpty } from 'lodash';
 import { User } from 'react-native-iconly';
 
+moment.locale('id');
+
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
 const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
@@ -25,7 +27,6 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(fetchProfile());
-    moment.locale('id');
   }, []);
 
   const navigateToEditProfile = () => {
@@ -92,6 +93,12 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
             icon={icons.icon_pengaturan}
             title={strings.pengaturan}
             onPress={() => navigation.navigate('PengaturanScreen')}
+          />
+          <SubmenuItemList
+            icon={icons.icon_sign_out}
+            title={'Keluar'}
+            onPress={() => null}
+            showButtonIcon={false}
           />
         </View>
       </ScrollView>

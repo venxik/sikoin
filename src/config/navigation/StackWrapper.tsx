@@ -272,6 +272,10 @@ const HomeStackNavigator = () => (
       name="DaftarKtpSelfieScreen"
       component={screens.DaftarKtpSelfieScreen}
     />
+    <HomeStack.Screen
+      name="SaldoSimpananDetailScreen"
+      component={screens.SaldoSimpananDetail}
+    />
   </HomeStack.Navigator>
 );
 

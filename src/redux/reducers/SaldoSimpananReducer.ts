@@ -29,6 +29,7 @@ export type SubmitTopupResponse = {
 export type SaldoSimpananList = {
   nama: string;
   saldo: number;
+  id?: number;
 };
 
 export type SaldoDataResponse = {
@@ -41,19 +42,39 @@ export type SimpananDataResponse = {
   simpananTerlihat?: SaldoSimpananList[];
 };
 
+export type MutasiSimpananDetail = {
+  jenis: 'SIMPANAN' | 'PENARIKAN';
+  nominal: number;
+  catatan: string;
+  tanggal: string;
+  kode: string;
+};
+
+export type MutasiSimpananResponse = {
+  jenisSimpanan: {
+    nama: string;
+  };
+  totalDana: {
+    danaSimpanan: number;
+    danaPending: number;
+  };
+  mutasi: MutasiSimpananDetail[];
+};
+
 interface RootState {
   simpanan: SimpananDataResponse;
   saldo: SaldoDataResponse;
   createSaldoList?: CreateSaldoListResponse;
   createSimpananList?: CreateSimpananListResponse;
   topUpNominal: string;
+  mutasiSimpanan?: MutasiSimpananResponse;
   error?: unknown;
   message?: string;
 }
 
 const initialState: RootState = {
   saldo: {
-    totalSaldoBelanja: 1231222,
+    totalSaldoBelanja: 0,
     simpananBelanja: [
       {
         nama: '',
@@ -150,6 +171,18 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.error = payload;
     },
+    fetchMutasiSimpananSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MutasiSimpananResponse>,
+    ) => {
+      state.mutasiSimpanan = payload;
+    },
+    fetchMutasiSimpananFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -162,6 +195,7 @@ export const fetchSubmitTopup =
 export const fetchSubmitPenarikan = createAction<SaldoSimpananTopupRequest>(
   'fetchSubmitPenarikan',
 );
+export const fetchMutasiSimpanan = createAction<number>('fetchMutasiSimpanan');
 
 export const {
   fetchSaldoDataFailed,
@@ -176,6 +210,8 @@ export const {
   fetchCreateSimpananListSuccess,
   fetchSubmitPenarikanFailed,
   fetchSubmitPenarikanSuccess,
+  fetchMutasiSimpananFailed,
+  fetchMutasiSimpananSuccess,
 } = saldoSimpananSlice.actions;
 
 export default saldoSimpananSlice.reducer;

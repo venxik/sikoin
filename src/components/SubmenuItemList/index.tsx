@@ -4,7 +4,7 @@ import { colors, icons, sizes } from '../../constants';
 import { SubmenuItemListProps } from './model';
 
 const SubmenuItemList = (props: SubmenuItemListProps) => {
-  const { icon, title, onPress, style } = props || {};
+  const { icon, title, onPress, style, showButtonIcon = true } = props || {};
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <View
@@ -14,7 +14,9 @@ const SubmenuItemList = (props: SubmenuItemListProps) => {
         <Image source={icon} style={styles.iconStyle} />
         <Text style={styles.titleStyle}>{title}</Text>
       </View>
-      <Image source={icons.arrow_right_primary_2} style={styles.iconStyle} />
+      {showButtonIcon && (
+        <Image source={icons.arrow_right_primary_2} style={styles.iconStyle} />
+      )}
     </TouchableOpacity>
   );
 };

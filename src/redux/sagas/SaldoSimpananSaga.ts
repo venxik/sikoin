@@ -27,6 +27,9 @@ import {
   SaldoDataResponse,
   SimpananDataResponse,
   SubmitTopupResponse,
+  fetchMutasiSimpanan,
+  fetchMutasiSimpananSuccess,
+  fetchMutasiSimpananFailed,
 } from '../reducers/SaldoSimpananReducer';
 import { navigate } from '../../config/navigation';
 
@@ -166,6 +169,30 @@ function* submitPenarikan(action: ReturnType<typeof fetchSubmitPenarikan>) {
   yield put(hideLoading());
 }
 
+function* getMutasiSimpanan(action: ReturnType<typeof fetchMutasiSimpanan>) {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse = yield call(
+      SaldoSimpananApi.mutasiSimpanan,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchMutasiSimpananSuccess(data?.data));
+        navigate('SaldoSimpananDetailScreen');
+      } else {
+        yield put(fetchMutasiSimpananFailed('Error'));
+      }
+    } else {
+      yield put(fetchMutasiSimpananFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchMutasiSimpananFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetSaldoData() {
   yield takeLatest(fetchSaldoData, getSaldoData);
 }
@@ -188,4 +215,8 @@ export function* watchGetCreateSimpananList() {
 
 export function* watchSubmitPenarikan() {
   yield takeLatest(fetchSubmitPenarikan, submitPenarikan);
+}
+
+export function* watchGetMutasiSimpanan() {
+  yield takeLatest(fetchMutasiSimpanan, getMutasiSimpanan);
 }

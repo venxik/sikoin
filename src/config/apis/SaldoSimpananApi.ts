@@ -75,6 +75,13 @@ class SaldoSimpananApi {
     const resp = await HttpService.post(apis.endpoints.simpanan.simpanan, data);
     return resp;
   }
+
+  static async mutasiSimpanan(id: number): Promise<AxiosResponse> {
+    const resp = await HttpService.get(
+      `${apis.endpoints.simpanan.mutasiSimpanan}/${id}`,
+    );
+    return resp;
+  }
 }
 
 export default SaldoSimpananApi;

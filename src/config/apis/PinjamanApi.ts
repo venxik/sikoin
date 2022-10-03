@@ -65,7 +65,7 @@ class PinjamanApi {
       data: formData,
     };
 
-    const resp = await HttpService.patch(
+    const resp = await HttpService.post(
       apis.endpoints.pinjaman.create,
       {},
       config,

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { colors, images, SCREEN_WIDTH, strings } from '../../constants';
 import { MenuHeaderIconProps } from './model';
 
 const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
-  const { menu } = props;
+  const { menu, title, style } = props;
   const renderIcon = () => {
     switch (menu) {
       case strings.diskon:
@@ -17,19 +17,23 @@ const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
         return images.menu_dokumen;
       case strings.market:
         return images.menu_market;
+      case strings.saldo:
+        return images.img_saldo_icon;
+      case strings.simpanan:
+        return images.img_simpanan_icon;
       default:
         return 0;
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { ...style }]}>
       <Image
         source={renderIcon()}
         style={styles.iconStyle}
-        resizeMode="cover"
+        resizeMode="contain"
       />
-      <Text style={styles.textStyle}>{menu}</Text>
+      <Text style={styles.textStyle}>{title ? title : menu}</Text>
     </View>
   );
 };
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
   },
   iconStyle: { width: SCREEN_WIDTH * 0.4, height: SCREEN_WIDTH * 0.3 },
   textStyle: {
-    marginTop: -sizes.padding,
+    // marginTop: -sizes.padding,
     color: colors.bodyText,
     fontSize: 34,
     fontFamily: 'Poppins-Regular',

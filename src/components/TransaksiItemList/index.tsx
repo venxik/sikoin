@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 import { colors, icons, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { TransaksiItemListProps } from './model';
@@ -35,18 +34,6 @@ const TransaksiItemList = (props: TransaksiItemListProps) => {
       </View>
     </TouchableOpacity>
   );
-};
-
-TransaksiItemList.propTypes = {
-  onPress: PropTypes.func,
-  item: PropTypes.any,
-  style: PropTypes.object,
-};
-
-TransaksiItemList.defaultProps = {
-  onPress: null,
-  item: null,
-  style: null,
 };
 
 export default TransaksiItemList;

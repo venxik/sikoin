@@ -25,8 +25,10 @@ import {
 } from '../../constants';
 import { formatter } from '../../utils';
 import {
+  fetchMutasiSimpanan,
   fetchSaldoData,
   fetchSimpananData,
+  SaldoSimpananList,
 } from '../../redux/reducers/SaldoSimpananReducer';
 import { ArrowLeft } from 'react-native-iconly';
 
@@ -67,9 +69,14 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
   const snapPoints = useMemo(() => ['40%', '70%'], []);
 
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     showSaldo ? dispatch(fetchSaldoData()) : dispatch(fetchSimpananData());
   }, []);
+
+  const navigateToDetail = (item: SaldoSimpananList) => {
+    dispatch(fetchMutasiSimpanan(item?.id as number));
+  };
 
   const renderSaldoContent = () => {
     return (
@@ -134,7 +141,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
               key={i}
               text={item.nama}
               nominal={item.saldo}
-              onPress={() => null}
+              onPress={() => navigateToDetail(item)}
             />
           ))}
         </View>

@@ -12,6 +12,7 @@ import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import { store } from '../store';
 import { EncryptedStorage } from '../../utils';
 import { hideLoading } from '../../redux/reducers/LoadingReducer';
+import { navigateAndReset } from '../navigation';
 
 let instance: HttpService | null = null;
 
@@ -77,7 +78,7 @@ class HttpService {
   handleResponseInterceptor = (response: AxiosResponse) => {
     store.dispatch(hideLoading());
     const error = response.data.error;
-    if (error != null) {
+    if (error) {
       this.showErrorDialogHandler(apis.errorTypes.generic, error);
     }
     return response;
@@ -94,10 +95,11 @@ class HttpService {
         );
         break;
       case 401:
-        this.showErrorDialogHandler(
-          apis.errorTypes.unauthorized,
-          error.response?.data?.error,
-        );
+        // this.showErrorDialogHandler(
+        //   apis.errorTypes.unauthorized,
+        //   error.response?.data?.error,
+        // );
+        navigateAndReset('LoginScreen');
         break;
       default:
         this.showErrorDialogHandler(

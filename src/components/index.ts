@@ -41,6 +41,7 @@ import PinjamanHorizontalListItem from './PinjamanHorizontalListItem';
 import PinjamanItemModal from './PinjamanItemModal';
 import PinjamanRincianSimulasiItem from './PinjamanRincianSimulasiItem';
 import PinjamanDetailItem from './PinjamanDetailItem';
+import SaldoSimpananDetailItem from './SaldoSimpananDetailItem';
 
 export {
   Button,
@@ -86,4 +87,5 @@ export {
   PinjamanItemModal,
   PinjamanRincianSimulasiItem,
   PinjamanDetailItem,
+  SaldoSimpananDetailItem,
 };

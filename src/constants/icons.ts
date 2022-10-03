@@ -108,6 +108,7 @@ const icon_tick_square = require('assets/icons/icon_tick_square.png');
 const icon_document_outline = require('assets/icons/icon_document_outline.png');
 const icon_cross_white = require('assets/icons/icon_cross_white.png');
 const icon_id_card_menu = require('assets/icons/icon_id_card_menu.png');
+const icon_sign_out = require('assets/icons/icon_sign_out.png');
 
 export default {
   arrow_right,
@@ -219,4 +220,5 @@ export default {
   icon_document_outline,
   icon_cross_white,
   icon_id_card_menu,
+  icon_sign_out,
 };
