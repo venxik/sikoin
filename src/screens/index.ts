@@ -60,6 +60,7 @@ import IDCardMainScreen from './profile/IDCardMainScreen';
 import SaldoSimpananDetail from './saldoSimpanan/SaldoSimpananDetailScreen';
 import KabarMainScreen from './kabarPromo/KabarMainScreen';
 import KabarDetailScreen from './kabarPromo/KabarDetailScreen';
+import PromoMainScreen from './kabarPromo/PromoMainScreen';
 
 export {
   SplashScreen,
@@ -124,4 +125,5 @@ export {
   SaldoSimpananDetail,
   KabarMainScreen,
   KabarDetailScreen,
+  PromoMainScreen,
 };

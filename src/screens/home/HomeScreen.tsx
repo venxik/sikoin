@@ -10,6 +10,7 @@ import {
   BackHandler,
   SafeAreaView,
   RefreshControl,
+  Linking,
 } from 'react-native';
 import {
   CardKabar,
@@ -144,6 +145,16 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     }
   };
 
+  const openWebPromo = (item: KabarPromoData) => {
+    Linking.canOpenURL(item.webUrl as string)
+      .then(supported => {
+        if (supported) {
+          return Linking.openURL(item.webUrl as string);
+        }
+      })
+      .catch((err: unknown) => console.error('An error occurred', err));
+  };
+
   const cardHeader = (title: string) => {
     let stack = '';
     switch (title) {
@@ -207,10 +218,10 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           data={promo}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} onPress={() => null} />
+              <CardPromo item={item} onPress={() => openWebPromo(item)} />
             </View>
           )}
         />

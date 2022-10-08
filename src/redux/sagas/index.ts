@@ -31,6 +31,7 @@ import {
   watchPostCreatePinjaman,
 } from './PinjamanSaga';
 import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
+import { watchGetAllPromo, watchGetPromoDetail } from './PromoSaga';
 import {
   watchGetRefKeluarga,
   watchSubmitRefKeluarga,
@@ -92,5 +93,7 @@ export function* rootSaga() {
     fork(watchGetMutasiSimpanan),
     fork(watchGetKabarDetail),
     fork(watchGetAllKabar),
+    fork(watchGetAllPromo),
+    fork(watchGetPromoDetail),
   ]);
 }

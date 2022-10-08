@@ -1,8 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
+import {
+  colors,
+  icons,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  sizes,
+} from '../../constants';
 import FastImage from 'react-native-fast-image';
 import { CardPromoProps } from './model';
+import Button from '../Button';
 
 const CardPromo = (props: CardPromoProps) => {
   const { item, onPress, style } = props || null;
@@ -13,6 +20,16 @@ const CardPromo = (props: CardPromoProps) => {
       <View style={styles.bottomContainer}>
         <Text style={styles.textTitle}>{judul}</Text>
         <Text style={styles.textContent}>{excerpt}</Text>
+        <Button
+          secondary
+          icon={icons.arrow_up_circle_primary}
+          iconLocation="left"
+          onPress={onPress}
+          buttonContainerStyle={{
+            width: '70%',
+          }}
+          text={'Selengkapnya'}
+        />
       </View>
     </TouchableOpacity>
   );

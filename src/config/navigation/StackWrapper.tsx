@@ -284,6 +284,10 @@ const HomeStackNavigator = () => (
       name="KabarDetailScreen"
       component={screens.KabarDetailScreen}
     />
+    <HomeStack.Screen
+      name="PromoMainScreen"
+      component={screens.PromoMainScreen}
+    />
   </HomeStack.Navigator>
 );
 

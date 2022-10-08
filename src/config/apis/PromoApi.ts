@@ -11,7 +11,7 @@ class PromoApi {
     const resp = await HttpService.get(apis.endpoints.promo.getPromo);
     return resp;
   }
-  static async getPromoDetail(id: string): Promise<AxiosResponse> {
+  static async getPromoDetail(id: number): Promise<AxiosResponse> {
     const resp = await HttpService.get(
       `${apis.endpoints.promo.getPromo}/${id}`,
     );

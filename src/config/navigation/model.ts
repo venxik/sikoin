@@ -95,6 +95,8 @@ export type HomeStackParamList = {
   SaldoSimpananDetailScreen: undefined;
   KabarMainScreen: undefined;
   KabarDetailScreen: undefined;
+  PromoMainScreen: undefined;
+  PromoDetailScreen: undefined;
 };
 
 export type ProfileStackParamList = {

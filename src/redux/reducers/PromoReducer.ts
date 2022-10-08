@@ -1,5 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { KabarPromoData } from './HomeReducer';
+
+export type PromoDetail = {
+  judul: string;
+  banner: string;
+  deskripsi: string;
+  webUrl: string;
+};
 
 interface RootState {
   promoDataList: KabarPromoData[];
@@ -15,12 +22,6 @@ const promoSlice = createSlice({
   name: 'promoSlice',
   initialState,
   reducers: {
-    fetchPromoData: (
-      state: RootState,
-      { payload }: PayloadAction<KabarPromoData[]>,
-    ) => {
-      state.promoDataList = payload;
-    },
     fetchPromoDataSuccess: (
       state: RootState,
       { payload }: PayloadAction<KabarPromoData[]>,
@@ -33,10 +34,29 @@ const promoSlice = createSlice({
     ) => {
       state.error = payload;
     },
+    fetchPromoDetailSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<KabarPromoData[]>,
+    ) => {
+      state.promoDataList = payload;
+    },
+    fetchPromoDetailFailed: (
+      state: RootState,
+      { payload }: PayloadAction<unknown>,
+    ) => {
+      state.error = payload;
+    },
   },
 });
 
-export const { fetchPromoData, fetchPromoDataFailed, fetchPromoDataSuccess } =
-  promoSlice.actions;
+export const fetchPromo = createAction('fetchPromo');
+export const fetchPromoDetail = createAction<number>('fetchPromoDetail');
+
+export const {
+  fetchPromoDataFailed,
+  fetchPromoDataSuccess,
+  fetchPromoDetailFailed,
+  fetchPromoDetailSuccess,
+} = promoSlice.actions;
 
 export default promoSlice.reducer;
