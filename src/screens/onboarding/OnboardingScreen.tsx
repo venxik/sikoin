@@ -43,10 +43,7 @@ const onBoardings = [
   },
 ];
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'OnboardingStackNavigator'
->;
+type Props = NativeStackScreenProps<ParentStackParamList, 'OnboardingScreen'>;
 
 const OnboardingScreen: FC<Props> = ({ navigation }) => {
   const scrollX = useSharedValue(0);

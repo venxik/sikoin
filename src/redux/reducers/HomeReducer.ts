@@ -1,5 +1,14 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type KabarPromoData = {
+  id: number;
+  banner: string;
+  judul: string;
+  excerpt: string;
+  webUrl?: string;
+  waktu: string;
+};
+
 export interface BerandaUserResponse {
   profilePic: string;
   logoKoperasi: string;
@@ -8,8 +17,8 @@ export interface BerandaUserResponse {
   namaKoperasi: string;
   simpanan: number;
   saldoBelanja: number;
-  kabar: [];
-  promo: [];
+  kabar: KabarPromoData[];
+  promo: KabarPromoData[];
   conversationId: number;
   userId: number;
 }
@@ -51,12 +60,15 @@ const homeSlice = createSlice({
     ) => {
       state.error = payload;
     },
+    resetUserData: (state: IntitalState) => {
+      state.user = initialState.user;
+    },
   },
 });
 
 export const fetchBerandaUser = createAction('fetchBerandaUser');
 
-export const { getBerandaUserFailed, getBerandaUserSuccess } =
+export const { getBerandaUserFailed, getBerandaUserSuccess, resetUserData } =
   homeSlice.actions;
 
 export default homeSlice.reducer;

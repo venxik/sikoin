@@ -24,6 +24,7 @@ const img_bni = require('assets/images/img_bni.png');
 const splash_screen = require('assets/images/splash_screen.png');
 const img_circle_overlay = require('assets/images/img_circle_overlay.png');
 const img_id_card = require('assets/images/img_id_card.png');
+const menu_kabar = require('assets/images/menu_kabar.png');
 
 export default {
   onboarding_1,
@@ -51,4 +52,5 @@ export default {
   splash_screen,
   img_circle_overlay,
   img_id_card,
+  menu_kabar,
 };

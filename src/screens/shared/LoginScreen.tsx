@@ -75,7 +75,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      email: 'kevin@koperasi.com',
+      email: 'wardtabi@gmail.com',
       password: 'pass',
     },
   });

@@ -52,6 +52,12 @@ const constant = {
       create: 'pengajuan-pinjaman/create',
       summary: 'pengajuan-pinjaman/summary',
     },
+    kabar: {
+      getKabar: 'kabar',
+    },
+    promo: {
+      getPromo: 'promo',
+    },
   },
   errorTypes: {
     generic: 'Oops!',

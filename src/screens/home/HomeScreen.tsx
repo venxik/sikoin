@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -22,7 +16,6 @@ import {
   CardLastItem,
   CardMarketLarge,
   CardPromo,
-  CustomBackdrop,
   HeaderBack,
   ProfilePicture,
 } from '../../components';
@@ -36,21 +29,23 @@ import {
   strings,
 } from '../../constants';
 import { formatter } from '../../utils';
-import { BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
   HomeStackParamList,
   HomeTabScreenProps,
 } from '../../config/navigation/model';
-import { KabarData } from '../../redux/reducers/KabarReducer';
 import Animated, {
   interpolateColor,
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import { fetchBerandaUser } from '../../redux/reducers/HomeReducer';
+import {
+  fetchBerandaUser,
+  KabarPromoData,
+} from '../../redux/reducers/HomeReducer';
 import { Home } from 'react-native-iconly';
+import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -88,7 +83,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   navigation,
 }) => {
   const [refreshing] = useState(false);
-  const [selectedKabar, setSelectedKabar] = useState<KabarData | null>(null);
 
   const dispatch = useAppDispatch();
   const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
@@ -101,8 +95,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     kabar,
     promo,
   } = useAppSelector(state => state.HomeReducer.user);
-
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   useEffect(() => {
     dispatch(fetchBerandaUser());
@@ -123,20 +115,13 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     return () => backHandler.remove();
   }, []);
 
-  // BOTTOMSHEET
-  const snapPoints = useMemo(() => ['85%', '90%'], []);
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-
   //PULL TO REFRESH
   const onRefresh = useCallback(() => {
     dispatch(fetchBerandaUser());
   }, []);
 
-  const selectKabarCard = (item: KabarData) => {
-    setSelectedKabar(item);
-    handlePresentModalPress();
+  const selectKabarCard = (item: KabarPromoData) => {
+    dispatch(fetchKabarDetail(item.id));
   };
 
   const navigateToSaldoSimpanan = (showSaldo: boolean) => {
@@ -166,7 +151,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         stack = 'MarketMainScreen';
         break;
       case strings.kabar:
-        stack = '';
+        stack = 'KabarMainScreen';
         break;
       case strings.promo:
         stack = '';
@@ -196,14 +181,14 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           data={kabar}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item?.id.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar item={item} onPress={() => selectKabarCard(item)} />
               {index === kabar?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() => navigateToOtherScreen('PinjamanMainScreen')}
+                  onPress={() => navigateToOtherScreen('KabarMainScreen')}
                 />
               )}
             </View>
@@ -216,7 +201,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const renderPromoCard = () => {
     return (
       <View>
-        {cardHeader(strings.promo)}
+        {cardHeader('Promo Hari Ini')}
         <FlatList
           horizontal
           data={promo}
@@ -416,46 +401,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     );
   };
 
-  const renderBottomSheet = () => {
-    return (
-      <BottomSheetModal
-        backdropComponent={CustomBackdrop}
-        enablePanDownToClose
-        ref={bottomSheetModalRef}
-        index={1}
-        snapPoints={snapPoints}>
-        <BottomSheetScrollView>
-          <View style={{ padding: sizes.padding }}>
-            <View style={styles.kabarSheetContainer}>
-              <View style={styles.kabarSheetTopIcon} />
-              <Text style={styles.kabarSheetCompany}>
-                {selectedKabar?.company}
-              </Text>
-            </View>
-            <Text style={styles.textKabarSheetTitle}>
-              {selectedKabar?.title}
-            </Text>
-            <View style={styles.kabarSheetBottomContainer}>
-              <Image
-                source={{ uri: selectedKabar?.profilePic }}
-                style={styles.kabarSheetProfileImage}
-              />
-              <View style={styles.kabarSheetNameContainer}>
-                <Text style={styles.kabarSheetNameText}>{nama}</Text>
-                <Text style={styles.kabarSheetTimeStampText}>
-                  {selectedKabar?.timestamp}
-                </Text>
-              </View>
-            </View>
-            <Text style={styles.kabarSheetContentText}>
-              {selectedKabar?.fullContent}
-            </Text>
-          </View>
-        </BottomSheetScrollView>
-      </BottomSheetModal>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack
@@ -465,8 +410,6 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         customLeftIcon={<Home color={colors.bodyText} filled />}
         rightIcon={renderRightButtonHeader()}
       />
-      {renderBottomSheet()}
-
       <ScrollView
         nestedScrollEnabled={true}
         contentContainerStyle={{ paddingBottom: sizes.padding }}
@@ -490,14 +433,15 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           style={{
             marginHorizontal: SCREEN_WIDTH * 0.05,
           }}>
-          {kabar.length > 0 && renderKabarCard()}
           {promo.length > 0 && renderPromoCard()}
-          {renderMarketCard()}
+          {kabar.length > 0 && renderKabarCard()}
+          {/* {renderMarketCard()} */}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
 export default HomeScreen;
 
 const styles = StyleSheet.create({
@@ -508,7 +452,7 @@ const styles = StyleSheet.create({
   cardHeaderContainer: {
     flexDirection: 'row',
     marginTop: sizes.padding,
-    width: '30%',
+    width: '50%',
   },
   cardHeaderTitle: {
     fontSize: 17,
@@ -599,49 +543,6 @@ const styles = StyleSheet.create({
   textProfileKoperasi: {
     fontSize: 15,
     color: colors.bodyText,
-    fontFamily: 'Inter-Regular',
-  },
-  kabarSheetContainer: {
-    flexDirection: 'row',
-    marginBottom: sizes.padding,
-  },
-  kabarSheetTopIcon: {
-    width: 3,
-    backgroundColor: colors.primary,
-    borderRadius: 3,
-    marginRight: 10,
-  },
-  kabarSheetCompany: {
-    fontSize: 16,
-    fontFamily: 'Poppins-SemiBold',
-    color: colors.primary,
-  },
-  textKabarSheetTitle: {
-    fontSize: 24,
-    color: colors.bodyText,
-    fontFamily: 'Poppins-Bold',
-  },
-  kabarSheetBottomContainer: { flexDirection: 'row', marginVertical: 30 },
-  kabarSheetProfileImage: { width: 60, height: 60, borderRadius: 60 },
-  kabarSheetNameContainer: {
-    justifyContent: 'space-evenly',
-    marginLeft: 10,
-  },
-  kabarSheetNameText: {
-    justifyContent: 'center',
-    marginLeft: 10,
-    fontFamily: 'Poppins-Medium',
-    color: colors.bodyText,
-  },
-  kabarSheetTimeStampText: {
-    fontSize: 15,
-    color: colors.bodyTextGrey,
-    fontFamily: 'Inter-Regular',
-  },
-  kabarSheetContentText: {
-    fontSize: 15,
-    color: colors.bodyText,
-    lineHeight: 24,
     fontFamily: 'Inter-Regular',
   },
 });

@@ -1,8 +1,8 @@
 import { ViewStyle } from 'react-native';
-import { PromoData } from '../../redux/reducers/PromoReducer';
+import { KabarPromoData } from '../../redux/reducers/HomeReducer';
 
 export interface CardPromoProps {
-  item: PromoData;
+  item: KabarPromoData;
   style?: ViewStyle;
   onPress: () => void;
 }

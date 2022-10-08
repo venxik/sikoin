@@ -13,6 +13,7 @@ import { store } from '../store';
 import { EncryptedStorage } from '../../utils';
 import { hideLoading } from '../../redux/reducers/LoadingReducer';
 import { navigateAndReset } from '../navigation';
+import { resetUserData } from '../../redux/reducers/HomeReducer';
 
 let instance: HttpService | null = null;
 
@@ -87,6 +88,7 @@ class HttpService {
   // Response interceptor to manage token refresh
   handleErrorInterceptor = (error: AxiosError) => {
     store.dispatch(hideLoading());
+    const url = error.request?.responseURL as string;
     switch (error.response?.status) {
       case 400:
         this.showErrorDialogHandler(
@@ -95,11 +97,15 @@ class HttpService {
         );
         break;
       case 401:
-        // this.showErrorDialogHandler(
-        //   apis.errorTypes.unauthorized,
-        //   error.response?.data?.error,
-        // );
-        navigateAndReset('LoginScreen');
+        if (url.includes('login')) {
+          this.showErrorDialogHandler(
+            apis.errorTypes.unauthorized,
+            error.response?.data?.error,
+          );
+        } else {
+          store.dispatch(resetUserData());
+          navigateAndReset('LoginScreen');
+        }
         break;
       default:
         this.showErrorDialogHandler(

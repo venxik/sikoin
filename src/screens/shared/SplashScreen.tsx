@@ -16,7 +16,7 @@ const SplashScreen: React.FC = () => {
   const validateNavigation = async () => {
     const data = await AsyncStore.getData('@onboardingComplete');
     setTimeout(() => {
-      if (userId > 0) {
+      if (userId !== 0) {
         navigateAndReset('HomeTab');
       } else if (!isEmpty(data)) {
         navigateAndReset('LoginScreen');

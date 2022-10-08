@@ -276,6 +276,14 @@ const HomeStackNavigator = () => (
       name="SaldoSimpananDetailScreen"
       component={screens.SaldoSimpananDetail}
     />
+    <HomeStack.Screen
+      name="KabarMainScreen"
+      component={screens.KabarMainScreen}
+    />
+    <HomeStack.Screen
+      name="KabarDetailScreen"
+      component={screens.KabarDetailScreen}
+    />
   </HomeStack.Navigator>
 );
 

@@ -58,6 +58,8 @@ import PinjamanRincianScreen from './pinjaman/PinjamanRincianScreen';
 import PinjamanSimulasiScreen from './pinjaman/PinjamansSimulasiScreen';
 import IDCardMainScreen from './profile/IDCardMainScreen';
 import SaldoSimpananDetail from './saldoSimpanan/SaldoSimpananDetailScreen';
+import KabarMainScreen from './kabarPromo/KabarMainScreen';
+import KabarDetailScreen from './kabarPromo/KabarDetailScreen';
 
 export {
   SplashScreen,
@@ -120,4 +122,6 @@ export {
   PinjamanSimulasiScreen,
   IDCardMainScreen,
   SaldoSimpananDetail,
+  KabarMainScreen,
+  KabarDetailScreen,
 };

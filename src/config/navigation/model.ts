@@ -10,7 +10,6 @@ import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
 import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
-import { SaldoSimpananList } from '../../redux/reducers/SaldoSimpananReducer';
 
 declare global {
   namespace ReactNavigation {
@@ -94,6 +93,8 @@ export type HomeStackParamList = {
   DokumenMainScreen: undefined;
   DokumenDetailScreen: { item: DokumenData };
   SaldoSimpananDetailScreen: undefined;
+  KabarMainScreen: undefined;
+  KabarDetailScreen: undefined;
 };
 
 export type ProfileStackParamList = {

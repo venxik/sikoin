@@ -6,13 +6,13 @@ import { CardPromoProps } from './model';
 
 const CardPromo = (props: CardPromoProps) => {
   const { item, onPress, style } = props || null;
-  const { title, content, image } = item || {};
+  const { banner, excerpt, judul } = item || {};
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <FastImage source={{ uri: image }} style={styles.imageStyle} />
+      <FastImage source={{ uri: banner }} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
-        <Text style={styles.textTitle}>{title}</Text>
-        <Text style={styles.textContent}>{content}</Text>
+        <Text style={styles.textTitle}>{judul}</Text>
+        <Text style={styles.textContent}>{excerpt}</Text>
       </View>
     </TouchableOpacity>
   );

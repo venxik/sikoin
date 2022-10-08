@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import rootReducer from '../../redux/reducers';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';

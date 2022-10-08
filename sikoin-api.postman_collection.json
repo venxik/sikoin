@@ -28,11 +28,14 @@
 		{
 			"name": "2. api/koperasi",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"namaKoperasi\": \"Testing Koperasi\",\r\n    \"noAnggota\": \"TESTING-002\",\r\n    \"tanggalLahir\": \"2000-05-30\"\r\n}",
+					"raw": "{\r\n    \"namaKoperasi\": \"KPDJP\",\r\n    \"noAnggota\": \"TESTING-002\",\r\n    \"tanggalLahir\": \"2000-05-30\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\" : 26,\r\n    \"email\" : \"wt@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"userId\" : 922,\r\n    \"email\" : \"didik@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,7 +120,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|5ch3MCSX5PnAnJwTSowEw9jmLfn0HFI2kt2O3dDu",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -174,7 +177,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -203,7 +206,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -232,7 +235,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -289,7 +292,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -327,7 +330,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -365,7 +368,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -404,7 +407,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "2|Y4fVfvAGj1IdFzZlXP9gdTCGbo9OyauNgwS4TSQl",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -443,7 +446,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -472,7 +475,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -510,7 +513,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -539,7 +542,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -577,7 +580,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -616,7 +619,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -655,7 +658,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -684,7 +687,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -722,7 +725,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -752,7 +755,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -790,7 +793,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "9|fKrYwyKPoxVvaWzv531mPh3N58CwQzIeivbsJ0Nu",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -822,7 +825,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "17|7NQXr476LgQ7q9mVXmnibqKybGo1uwNtz4A5zVkP",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -876,7 +879,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -898,14 +901,14 @@
 			"response": []
 		},
 		{
-			"name": "26. api/saldo-belanja/create",
+			"name": "26. api/top-up/create",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "14|TKU3BbfaqKSqsV9XeAk40vswWB89rQLpUKt03xmj",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -913,14 +916,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/saldo-belanja/create",
+					"raw": "http://{{base_url}}/api/top-up/create",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"saldo-belanja",
+						"top-up",
 						"create"
 					]
 				}
@@ -928,14 +931,14 @@
 			"response": []
 		},
 		{
-			"name": "27. api/saldo-belanja",
+			"name": "27. api/top-up",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "12|OJltvZiOAp7H00jinSL9MoWNhJs3rselbwsScmU9",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -952,14 +955,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/saldo-belanja",
+					"raw": "http://{{base_url}}/api/top-up",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"saldo-belanja"
+						"top-up"
 					]
 				}
 			},
@@ -973,7 +976,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1002,7 +1005,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "11|pVFat28K6YsNm2itEtMTfjtQZhrGGZh9YEaCkv3w",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1032,7 +1035,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1070,7 +1073,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1102,7 +1105,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1143,7 +1146,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1181,7 +1184,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1219,7 +1222,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1250,55 +1253,54 @@
 			"response": []
 		},
 		{
-			"name": "36. api/pengajuan-pinjaman/create",
+			"name": "36. api/pengajuan-pinjaman-update-ktp",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
 				},
-				"method": "PATCH",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "noKtp",
-							"value": "0123456789",
+							"value": "55555123123",
 							"type": "text"
 						},
 						{
 							"key": "gambarKtp",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Pictures/contoh ktp.jpg"
 						},
 						{
 							"key": "selfieKtp",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Pictures/contoh ktp.jpg"
 						},
 						{
 							"key": "dokumenPendukung",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Documents/Doc1.pdf"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/pengajuan-pinjaman/create",
+					"raw": "http://{{base_url}}/api/pengajuan-pinjaman-update-ktp",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"pengajuan-pinjaman",
-						"create"
+						"pengajuan-pinjaman-update-ktp"
 					]
 				}
 			},
@@ -1312,7 +1314,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1351,7 +1353,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1393,7 +1395,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1435,7 +1437,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1477,7 +1479,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "15|a0Oe9WuKOxIvRzaEoDKwPkgcCVpHupNDp0t7BsDm",
+							"value": "{{auth_token}}",
 							"type": "string"
 						}
 					]
@@ -1503,6 +1505,271 @@
 						"api",
 						"detail-pinjaman-disetujui",
 						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "42. api/id-card",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/id-card",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"id-card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "43. api/mutasi-simpanan/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/mutasi-simpanan/8",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"mutasi-simpanan",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "44. api/notifikasi",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/notifikasi",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"notifikasi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "45. api/notifikasi/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/notifikasi/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"notifikasi",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "46. api/kabar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/kabar",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"kabar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "47. api/kabar/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/kabar/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"kabar",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "48. api/promo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/promo",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"promo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "49. api/promo/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/promo/1",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"promo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "50. api/dokumen",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/dokumen",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"dokumen"
 					]
 				}
 			},
@@ -1533,6 +1800,11 @@
 		{
 			"key": "base_url",
 			"value": "54.169.249.120"
+		},
+		{
+			"key": "auth_token",
+			"value": "token",
+			"type": "string"
 		}
 	]
 }

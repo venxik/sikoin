@@ -8,6 +8,8 @@ import PekerjaanApi from './PekerjaanApi';
 import SaldoSimpananApi from './SaldoSimpananApi';
 import KtpDokumenApi from './KtpDokumenApi';
 import PinjamanApi from './PinjamanApi';
+import KabarApi from './KabarApi';
+import PromoApi from './PromoApi';
 
 export {
   LoginApi,
@@ -20,4 +22,6 @@ export {
   SaldoSimpananApi,
   KtpDokumenApi,
   PinjamanApi,
+  KabarApi,
+  PromoApi,
 };

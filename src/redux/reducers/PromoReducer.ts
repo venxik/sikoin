@@ -1,37 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export type PromoData = {
-  title?: string;
-  image?: string;
-  content?: string;
-};
+import { KabarPromoData } from './HomeReducer';
 
 interface RootState {
-  promoDataList: PromoData[];
+  promoDataList: KabarPromoData[];
   error?: unknown;
 }
 
 const initialState: RootState = {
-  promoDataList: [
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: 'https://picsum.photos/id/78/400/400',
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: 'https://picsum.photos/id/3/400/400',
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-    {
-      title: 'Jababeka Bakal Terbitkan Obligasi Global Rp 5,06 Triliun',
-      image: 'https://picsum.photos/id/9/400/400',
-      content:
-        'Realisasi belanja pemerintah membeli produk UMKM telah mencapai 70 persen dari target Rp 447,28 triliun.',
-    },
-  ],
+  promoDataList: [],
   error: null,
 };
 
@@ -41,13 +17,13 @@ const promoSlice = createSlice({
   reducers: {
     fetchPromoData: (
       state: RootState,
-      { payload }: PayloadAction<PromoData[]>,
+      { payload }: PayloadAction<KabarPromoData[]>,
     ) => {
       state.promoDataList = payload;
     },
     fetchPromoDataSuccess: (
       state: RootState,
-      { payload }: PayloadAction<PromoData[]>,
+      { payload }: PayloadAction<KabarPromoData[]>,
     ) => {
       state.promoDataList = payload;
     },

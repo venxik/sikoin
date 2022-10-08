@@ -21,6 +21,8 @@ const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
         return images.img_saldo_icon;
       case strings.simpanan:
         return images.img_simpanan_icon;
+      case strings.kabar:
+        return images.menu_kabar;
       default:
         return 0;
     }

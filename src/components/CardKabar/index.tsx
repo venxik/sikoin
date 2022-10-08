@@ -1,29 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { View, Text, StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import {
+  colors,
+  icons,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
 import Button from '../Button';
 import { CardKabarProps } from './model';
 
 const CardKabar = (props: CardKabarProps) => {
   const { item, onPress, style } = props || null;
-  const { title, profilePic, content, timestamp, name } = item || {};
+  const { banner, excerpt, judul } = item || {};
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.textTitle}>{title}</Text>
-      <View style={styles.rowStyle}>
-        <Image
-          source={{ uri: profilePic }}
-          style={{ width: 60, height: 60, borderRadius: 50 }}
-        />
-        <View style={styles.innerRowStyle}>
-          <Text style={styles.textName}>{name}</Text>
-          <Text style={styles.textDate}>{timestamp}</Text>
-        </View>
-      </View>
-      <Text style={styles.textContent}>{content}</Text>
-
+      <Text style={styles.textTitle}>{judul}</Text>
+      <FastImage
+        source={{ uri: banner || 'https://picsum.photos/id/3/400/400' }}
+        style={styles.bannerStyle}
+      />
+      <Text style={styles.textContent}>{excerpt}</Text>
       <Button
-        shadow={false}
         secondary
         icon={icons.arrow_up_circle_primary}
         iconLocation="left"
@@ -48,12 +48,11 @@ const styles = StyleSheet.create({
     marginRight: sizes.padding,
     justifyContent: 'center',
   },
-  rowStyle: { flexDirection: 'row' },
-  innerRowStyle: { marginLeft: 10, justifyContent: 'center' },
   textTitle: {
     fontSize: 20,
     color: colors.bodyText,
     fontFamily: 'Poppins-Medium',
+    marginBottom: 10,
   },
   textContent: {
     marginVertical: sizes.padding,
@@ -61,10 +60,9 @@ const styles = StyleSheet.create({
     color: colors.bodyTextGrey,
     fontFamily: 'Inter-Regular',
   },
-  textName: { color: colors.bodyText, fontFamily: 'Poppins-Medium' },
-  textDate: {
-    fontSize: 12,
-    color: colors.bodyTextGrey,
-    fontFamily: 'Inter-Regular',
+  bannerStyle: {
+    width: '100%',
+    height: SCREEN_HEIGHT * 0.3,
+    borderRadius: sizes.padding,
   },
 });
