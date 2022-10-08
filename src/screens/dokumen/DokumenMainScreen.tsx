@@ -1,43 +1,46 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
-import {
-  DokumenItemList,
-  HeaderBack,
-  MenuHeaderIcon,
-  Popup1Button,
-  Popup2Button,
-} from '../../components';
-import { useAppSelector } from '../../config';
+import { DokumenItemList, HeaderBack, MenuHeaderIcon } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { icons, sizes, strings } from '../../constants';
-import { DokumenData } from '../../redux/reducers/DokumenReducer';
+import { sizes, strings } from '../../constants';
+import { fetchDokumen } from '../../redux/reducers/DokumenReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'DokumenMainScreen'>;
 
-const DokumenMainScreen: React.FC<Props> = ({ navigation }) => {
+const DokumenMainScreen: React.FC<Props> = () => {
   const { dokumenDataList } = useAppSelector(s => s.DokumenReducer) || {};
-  const [showDeleteConfirmation, setShowDeleteConfirmation] =
-    useState<boolean>(false);
-  const [showDeleteSuccess, setShowDeleteSuccess] = useState<boolean>(false);
+  // const [showDeleteConfirmation, setShowDeleteConfirmation] =
+  //   useState<boolean>(false);
+  // const [showDeleteSuccess, setShowDeleteSuccess] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
-  const navigateToDetail = (item: DokumenData) => {
-    navigation.navigate('DokumenDetailScreen', { item });
+  useEffect(() => {
+    dispatch(fetchDokumen());
+  }, []);
+
+  // const navigateToDetail = (item: DokumenData) => {
+  //   navigation.navigate('DokumenDetailScreen', { item });
+  // };
+
+  const onPressUnduh = () => {
+    null;
   };
 
-  const deleteFile = () => {
-    setShowDeleteConfirmation(false);
-    setShowDeleteSuccess(true);
-  };
+  // const deleteFile = () => {
+  //   setShowDeleteConfirmation(false);
+  //   setShowDeleteSuccess(true);
+  // };
 
-  const onPressDelete = (item: DokumenData) => {
-    console.log(item);
-    setShowDeleteConfirmation(true);
-  };
+  // const onPressDelete = (item: DokumenData) => {
+  //   console.log(item);
+  //   setShowDeleteConfirmation(true);
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Popup2Button
+      {/* <Popup2Button
         buttonLeftOnPress={() => setShowDeleteConfirmation(false)}
         buttonRightOnPress={deleteFile}
         buttonLeftTitle={strings.tidak_jadi}
@@ -52,26 +55,27 @@ const DokumenMainScreen: React.FC<Props> = ({ navigation }) => {
         showPopup={showDeleteSuccess}
         onPress={() => setShowDeleteSuccess(false)}
         headerImage={icons.popup_success}
-      />
+      /> */}
       <HeaderBack />
-      <FlatList
-        data={dokumenDataList}
-        contentContainerStyle={{
-          paddingHorizontal: sizes.padding,
-        }}
-        ListHeaderComponent={<MenuHeaderIcon menu={strings.dokumen} />}
-        ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => {
-          return (
-            <DokumenItemList
-              item={item}
-              onPress={() => navigateToDetail(item)}
-              onPressDeleteFile={() => onPressDelete(item)}
-            />
-          );
-        }}
-      />
+      {dokumenDataList && (
+        <FlatList
+          data={dokumenDataList}
+          contentContainerStyle={{
+            paddingHorizontal: sizes.padding,
+          }}
+          ListHeaderComponent={<MenuHeaderIcon menu={strings.dokumen} />}
+          ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => {
+            return (
+              <DokumenItemList
+                item={item}
+                onPressUnduh={() => onPressUnduh()}
+              />
+            );
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };

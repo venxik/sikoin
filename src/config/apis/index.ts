@@ -10,6 +10,7 @@ import KtpDokumenApi from './KtpDokumenApi';
 import PinjamanApi from './PinjamanApi';
 import KabarApi from './KabarApi';
 import PromoApi from './PromoApi';
+import DokumenApi from './DokumenApi';
 
 export {
   LoginApi,
@@ -24,4 +25,5 @@ export {
   PinjamanApi,
   KabarApi,
   PromoApi,
+  DokumenApi,
 };

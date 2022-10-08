@@ -6,6 +6,7 @@ import {
   watchDeleteAlamat,
 } from './AlamatSaga';
 import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
+import { watchGetAllDokumen } from './DokumenSaga';
 import { watchGetBerandaUser } from './HomeSaga';
 import { watchGetAllKabar, watchGetKabarDetail } from './KabarSaga';
 import { watchGetKtpDokumen, watchUploadGambarKtp } from './KtpDokumenSaga';
@@ -95,5 +96,6 @@ export function* rootSaga() {
     fork(watchGetAllKabar),
     fork(watchGetAllPromo),
     fork(watchGetPromoDetail),
+    fork(watchGetAllDokumen),
   ]);
 }

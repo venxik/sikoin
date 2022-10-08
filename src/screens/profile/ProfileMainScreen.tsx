@@ -81,7 +81,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
           />
           <SubmenuItemList
             icon={icons.icon_id_card_menu}
-            title={'ID Card'}
+            title={'Kartu Anggota'}
             onPress={() => navigation.navigate('IDCardMainScreen')}
           />
           <SubmenuItemList

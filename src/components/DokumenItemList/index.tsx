@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { colors, icons, sizes, strings } from '../../constants';
 import {
   Menu,
@@ -14,27 +7,11 @@ import {
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import moment from 'moment';
 import { DokumenItemListProps } from './model';
 
 const DokumenItemList = (props: DokumenItemListProps) => {
-  const { item, onPress, onPressDeleteFile } = props || {};
-  const { namaFile, pemilik, tglDibuat, tipeFile } = item || {};
-
-  const renderTypeFileIcon = (type: string) => {
-    switch (type) {
-      case 'pdf':
-        return icons.icon_document_pdf;
-      case 'jpg':
-        return icons.icon_document_jpg;
-      case 'xls':
-        return icons.icon_document_xls;
-      case 'word':
-        return icons.icon_document_word;
-      default:
-        return icons.icon_document_other;
-    }
-  };
+  const { item, onPress, onPressUnduh } = props || {};
+  const { namaFile, deskripsi, waktu } = item || {};
 
   const renderPopupMenu = () => {
     return (
@@ -49,7 +26,7 @@ const DokumenItemList = (props: DokumenItemListProps) => {
           />
         </MenuTrigger>
         <MenuOptions optionsContainerStyle={styles.optionsContainer}>
-          <MenuOption onSelect={() => Alert.alert(`Unduh File`)}>
+          <MenuOption onSelect={() => onPressUnduh()}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_dokumen_download}
@@ -58,7 +35,7 @@ const DokumenItemList = (props: DokumenItemListProps) => {
               <Text style={styles.textPopupMenu}>{strings.unduh_file}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => Alert.alert('Buka File')}>
+          {/* <MenuOption onSelect={() => Alert.alert('Buka File')}>
             <View style={styles.popupContainer}>
               <Image
                 source={icons.icon_dokumen_open}
@@ -77,7 +54,7 @@ const DokumenItemList = (props: DokumenItemListProps) => {
                 {strings.hapus_file}
               </Text>
             </View>
-          </MenuOption>
+          </MenuOption> */}
         </MenuOptions>
       </Menu>
     );
@@ -85,18 +62,18 @@ const DokumenItemList = (props: DokumenItemListProps) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Image style={styles.icon} source={renderTypeFileIcon(tipeFile)} />
+      <Image style={styles.icon} source={icons.icon_document_other} />
       <View style={{ flex: 1, marginLeft: sizes.padding }}>
         <Text style={styles.textTitle} numberOfLines={1}>
           {namaFile}
         </Text>
         <View style={styles.subContainer}>
           <Text style={styles.textSubtext} numberOfLines={1}>
-            {pemilik}
+            {deskripsi}
           </Text>
           <View style={styles.dot} />
           <Text style={styles.textSubtext} numberOfLines={1}>
-            {moment(tglDibuat).format('DD/MM/YYYY')}
+            {waktu}
           </Text>
         </View>
       </View>

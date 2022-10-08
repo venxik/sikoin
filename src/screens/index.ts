@@ -42,7 +42,7 @@ import PinjamanSuccessScreen from './pinjaman/PinjamanSuccessScreen';
 import ChatMainScreen from './chat/ChatMainScreen';
 import ChatDetailScreen from './chat/ChatDetailScreen';
 import DokumenMainScreen from './dokumen/DokumenMainScreen';
-import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
+// import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
 import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
 import CartScreen from './paymentCartCheckout/CartScreen';
@@ -105,7 +105,7 @@ export {
   DaftarKtpSelfieScreen,
   ChatDetailScreen,
   DokumenMainScreen,
-  DokumenDetailScreen,
+  // DokumenDetailScreen,
   MarketMainScreen,
   DaftarKoperasiSearchScreen,
   MarketItemDetailsScreen,

@@ -58,6 +58,9 @@ const constant = {
     promo: {
       getPromo: 'promo',
     },
+    dokumen: {
+      getDokumen: 'dokumen',
+    },
   },
   errorTypes: {
     generic: 'Oops!',

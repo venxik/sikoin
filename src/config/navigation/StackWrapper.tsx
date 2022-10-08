@@ -162,10 +162,10 @@ const HomeStackNavigator = () => (
       name="DokumenMainScreen"
       component={screens.DokumenMainScreen}
     />
-    <HomeStack.Screen
+    {/* <HomeStack.Screen
       name="DokumenDetailScreen"
       component={screens.DokumenDetailScreen}
-    />
+    /> */}
     <HomeStack.Screen
       name="DiskonMainScreen"
       component={screens.DiskonMainScreen}
