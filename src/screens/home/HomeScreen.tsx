@@ -47,6 +47,7 @@ import {
 } from '../../redux/reducers/HomeReducer';
 import { Home } from 'react-native-iconly';
 import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
+import { fetchPromoDetail } from '../../redux/reducers/PromoReducer';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -123,6 +124,10 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
 
   const selectKabarCard = (item: KabarPromoData) => {
     dispatch(fetchKabarDetail(item.id));
+  };
+
+  const onPressPromoSelengkapnya = (item: KabarPromoData) => {
+    dispatch(fetchPromoDetail(item.id));
   };
 
   const navigateToSaldoSimpanan = (showSaldo: boolean) => {
@@ -221,7 +226,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} onPress={() => openWebPromo(item)} />
+              <CardPromo
+                item={item}
+                onPressSelengkapnya={() => onPressPromoSelengkapnya(item)}
+                onPressWeb={() => openWebPromo(item)}
+              />
             </View>
           )}
         />

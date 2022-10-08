@@ -11,6 +11,7 @@ import {
   fetchPromoDetailFailed,
   fetchPromoDetailSuccess,
 } from '../reducers/PromoReducer';
+import { navigate } from '../../config/navigation';
 
 function* getAllPromo() {
   yield put(showLoading());
@@ -43,6 +44,7 @@ function* getPromoDetail(action: ReturnType<typeof fetchPromoDetail>) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchPromoDetailSuccess(data?.data));
+        navigate('PromoDetailScreen');
       } else {
         yield put(fetchPromoDetailFailed('Error'));
       }

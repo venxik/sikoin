@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   colors,
   icons,
@@ -12,10 +12,10 @@ import { CardPromoProps } from './model';
 import Button from '../Button';
 
 const CardPromo = (props: CardPromoProps) => {
-  const { item, onPress, style } = props || null;
+  const { item, onPressSelengkapnya, onPressWeb, style } = props || null;
   const { banner, excerpt, judul } = item || {};
   return (
-    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
+    <View style={[styles.container, style]}>
       <FastImage source={{ uri: banner }} style={styles.imageStyle} />
       <View style={styles.bottomContainer}>
         <Text style={styles.textTitle}>{judul}</Text>
@@ -24,14 +24,22 @@ const CardPromo = (props: CardPromoProps) => {
           secondary
           icon={icons.arrow_up_circle_primary}
           iconLocation="left"
-          onPress={onPress}
+          onPress={onPressSelengkapnya as () => void}
           buttonContainerStyle={{
             width: '70%',
           }}
           text={'Selengkapnya'}
         />
+        <Button
+          onPress={onPressWeb as () => void}
+          buttonContainerStyle={{
+            width: '70%',
+            marginTop: sizes.padding,
+          }}
+          text={'Buka Halaman Web'}
+        />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

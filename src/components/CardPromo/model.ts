@@ -4,5 +4,6 @@ import { KabarPromoData } from '../../redux/reducers/HomeReducer';
 export interface CardPromoProps {
   item: KabarPromoData;
   style?: ViewStyle;
-  onPress: () => void;
+  onPressWeb?: () => void;
+  onPressSelengkapnya?: () => void;
 }

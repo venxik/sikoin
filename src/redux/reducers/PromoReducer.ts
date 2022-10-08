@@ -10,11 +10,18 @@ export type PromoDetail = {
 
 interface RootState {
   promoDataList: KabarPromoData[];
+  promoDetail: PromoDetail;
   error?: unknown;
 }
 
 const initialState: RootState = {
   promoDataList: [],
+  promoDetail: {
+    banner: '',
+    deskripsi: '',
+    judul: '',
+    webUrl: '',
+  },
   error: null,
 };
 
@@ -36,9 +43,9 @@ const promoSlice = createSlice({
     },
     fetchPromoDetailSuccess: (
       state: RootState,
-      { payload }: PayloadAction<KabarPromoData[]>,
+      { payload }: PayloadAction<PromoDetail>,
     ) => {
-      state.promoDataList = payload;
+      state.promoDetail = payload;
     },
     fetchPromoDetailFailed: (
       state: RootState,

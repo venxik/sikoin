@@ -288,6 +288,10 @@ const HomeStackNavigator = () => (
       name="PromoMainScreen"
       component={screens.PromoMainScreen}
     />
+    <HomeStack.Screen
+      name="PromoDetailScreen"
+      component={screens.PromoDetailScreen}
+    />
   </HomeStack.Navigator>
 );
 

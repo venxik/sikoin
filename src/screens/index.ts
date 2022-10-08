@@ -61,6 +61,7 @@ import SaldoSimpananDetail from './saldoSimpanan/SaldoSimpananDetailScreen';
 import KabarMainScreen from './kabarPromo/KabarMainScreen';
 import KabarDetailScreen from './kabarPromo/KabarDetailScreen';
 import PromoMainScreen from './kabarPromo/PromoMainScreen';
+import PromoDetailScreen from './kabarPromo/PromoDetailScreen';
 
 export {
   SplashScreen,
@@ -126,4 +127,5 @@ export {
   KabarMainScreen,
   KabarDetailScreen,
   PromoMainScreen,
+  PromoDetailScreen,
 };

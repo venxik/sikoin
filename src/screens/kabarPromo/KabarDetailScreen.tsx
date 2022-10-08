@@ -61,27 +61,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     marginBottom: 10,
   },
-  kabarSheetNameContainer: {
-    justifyContent: 'space-evenly',
-    marginLeft: 10,
-  },
-  kabarSheetNameText: {
-    justifyContent: 'center',
-    marginLeft: 10,
-    fontFamily: 'Poppins-Medium',
-    color: colors.bodyText,
-  },
-  kabarSheetTimeStampText: {
-    fontSize: 15,
-    color: colors.bodyTextGrey,
-    fontFamily: 'Inter-Regular',
-  },
-  kabarSheetContentText: {
-    fontSize: 15,
-    color: colors.bodyText,
-    lineHeight: 24,
-    fontFamily: 'Inter-Regular',
-  },
   bannerStyle: {
     width: '100%',
     height: SCREEN_HEIGHT * 0.3,
