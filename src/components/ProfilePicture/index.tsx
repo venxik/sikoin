@@ -1,11 +1,7 @@
 import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  ImageBackground,
-  Image,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { useAppSelector } from '../../config';
 import { icons, SCREEN_WIDTH } from '../../constants';
 import { ProfilePictureProps } from './model';
@@ -72,21 +68,19 @@ const ProfilePicture = (props: ProfilePictureProps) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
-      <ImageBackground
+      <FastImage
         onLoadEnd={onLoadEndProfile}
         onError={onErrorProfile}
-        imageStyle={styles.profilePicStyle}
-        source={profileImage}
-        style={styles.profilePicStyle}>
-        {showKoperasi && (
-          <Image
-            source={koperasiImage}
-            style={styles.koperasiPicStyle}
-            onLoadEnd={onLoadEndKoperasi}
-            onError={onErrorKoperasi}
-          />
-        )}
-      </ImageBackground>
+        source={profileImage || icons.popup_failed}
+        style={styles.profilePicStyle}></FastImage>
+      {showKoperasi && (
+        <FastImage
+          source={koperasiImage}
+          style={styles.koperasiPicStyle}
+          onLoadEnd={onLoadEndKoperasi}
+          onError={onErrorKoperasi}
+        />
+      )}
     </TouchableOpacity>
   );
 };

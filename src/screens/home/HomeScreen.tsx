@@ -29,7 +29,7 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { formatter } from '../../utils';
+import { formatter, openUrl } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../config';
 import {
   HomeStackParamList,
@@ -151,13 +151,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   };
 
   const openWebPromo = (item: KabarPromoData) => {
-    Linking.canOpenURL(item.webUrl as string)
-      .then(supported => {
-        if (supported) {
-          return Linking.openURL(item.webUrl as string);
-        }
-      })
-      .catch((err: unknown) => console.error('An error occurred', err));
+    openUrl(item.webUrl as string);
   };
 
   const cardHeader = (title: string) => {
@@ -224,13 +218,19 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={{ marginTop: 20 }}>
+          renderItem={({ item, index }) => (
+            <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardPromo
                 item={item}
                 onPressSelengkapnya={() => onPressPromoSelengkapnya(item)}
                 onPressWeb={() => openWebPromo(item)}
               />
+              {index === promo?.length - 1 && (
+                <CardLastItem
+                  icon={icons.icon_kabar_white}
+                  onPress={() => navigateToOtherScreen('PromoMainScreen')}
+                />
+              )}
             </View>
           )}
         />

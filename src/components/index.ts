@@ -42,6 +42,7 @@ import PinjamanItemModal from './PinjamanItemModal';
 import PinjamanRincianSimulasiItem from './PinjamanRincianSimulasiItem';
 import PinjamanDetailItem from './PinjamanDetailItem';
 import SaldoSimpananDetailItem from './SaldoSimpananDetailItem';
+import NotifikasiItem from './NotifikasiItem';
 
 export {
   Button,
@@ -88,4 +89,5 @@ export {
   PinjamanRincianSimulasiItem,
   PinjamanDetailItem,
   SaldoSimpananDetailItem,
+  NotifikasiItem,
 };

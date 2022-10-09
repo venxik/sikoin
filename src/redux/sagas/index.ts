@@ -17,6 +17,10 @@ import {
   watchSendKoperasiData,
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
+import {
+  watchGetAllNotifikasi,
+  watchGetNotifikasiDetail,
+} from './NotifikasiSaga';
 import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
 import {
   watchGetPinjamanDataStep1,
@@ -97,5 +101,7 @@ export function* rootSaga() {
     fork(watchGetAllPromo),
     fork(watchGetPromoDetail),
     fork(watchGetAllDokumen),
+    fork(watchGetAllNotifikasi),
+    fork(watchGetNotifikasiDetail),
   ]);
 }

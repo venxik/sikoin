@@ -11,6 +11,7 @@ import PinjamanApi from './PinjamanApi';
 import KabarApi from './KabarApi';
 import PromoApi from './PromoApi';
 import DokumenApi from './DokumenApi';
+import NotifikasiApi from './NotifikasiApi';
 
 export {
   LoginApi,
@@ -26,4 +27,5 @@ export {
   KabarApi,
   PromoApi,
   DokumenApi,
+  NotifikasiApi,
 };

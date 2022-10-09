@@ -18,7 +18,7 @@ import {
   ParentStackParamList,
   ProfileStackParamList,
 } from './model';
-import { Chat, Home, User } from 'react-native-iconly';
+import { Home, Message, User } from 'react-native-iconly';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
@@ -117,7 +117,10 @@ const HomeTab = () => {
             <IconBottom
               focused={focused}
               icon={
-                <Chat color={colors.primary} filled={focused ? true : false} />
+                <Message
+                  color={colors.primary}
+                  filled={focused ? true : false}
+                />
               }
               badge
             />

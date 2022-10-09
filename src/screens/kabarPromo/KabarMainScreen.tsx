@@ -29,9 +29,9 @@ const KabarMainScreen: FC<Props> = () => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack />
-      <MenuHeaderIcon menu={strings.kabar} />
       {kabarDataList && (
         <FlatList
+          ListHeaderComponent={<MenuHeaderIcon menu={strings.kabar} />}
           data={kabarDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}

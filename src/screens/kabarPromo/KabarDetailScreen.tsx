@@ -28,7 +28,11 @@ const KabarDetailScreen: FC<Props> = () => {
             source={{ uri: banner || 'https://picsum.photos/id/3/400/400' }}
             style={styles.bannerStyle}
           />
-          <RenderHTML contentWidth={SCREEN_WIDTH} source={{ html: konten }} />
+          <RenderHTML
+            contentWidth={SCREEN_WIDTH}
+            source={{ html: konten }}
+            baseStyle={{ color: 'black' }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -65,5 +69,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: SCREEN_HEIGHT * 0.3,
     borderRadius: sizes.padding,
+    marginBottom: sizes.padding,
   },
 });

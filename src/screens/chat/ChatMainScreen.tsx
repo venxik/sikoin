@@ -1,41 +1,67 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { FC } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { HeaderBack } from '../../components';
+import React, { FC, useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { HeaderBack, NotifikasiItem } from '../../components';
 import { ChatStackParamList } from '../../config/navigation/model';
-import { colors, sizes, strings } from '../../constants';
-import { Chat } from 'react-native-iconly';
+import { colors, sizes } from '../../constants';
+import { Message, Search } from 'react-native-iconly';
+import { useAppDispatch, useAppSelector } from '../../config';
+import {
+  fetchNotifikasi,
+  fetchNotifikasiDetail,
+  NotifikasiData,
+} from '../../redux/reducers/NotifikasiReducer';
+import { isEmpty } from 'lodash';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatMainScreen'>;
 
-const ChatMainScreen: FC<Props> = ({ navigation }) => {
+const ChatMainScreen: FC<Props> = () => {
+  const dispatch = useAppDispatch();
+  const { notifikasi } = useAppSelector(
+    s => s.NotifikasiReducer.notifikasiDataList,
+  );
+
+  useEffect(() => {
+    dispatch(fetchNotifikasi());
+  }, []);
+
+  const onPressNotifikasi = (item: NotifikasiData) => {
+    dispatch(fetchNotifikasiDetail(item.id));
+  };
+  const renderRightButtonHeader = () => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity onPress={() => null}>
+          <Search color={colors.primary} />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <HeaderBack
         disabled
-        customLeftIcon={<Chat filled color={colors.bodyText} />}
-        title={strings.chat}
+        customLeftIcon={<Message filled color={colors.bodyText} />}
+        title={'Notifikasi'}
+        rightIcon={renderRightButtonHeader()}
       />
-      <TouchableOpacity
-        onPress={() => navigation.navigate('ChatDetailScreen')}
-        style={styles.chatContainer}>
-        <Image
-          source={{ uri: 'https://picsum.photos/200/300' }}
-          style={styles.iconContainer}
+      {!isEmpty(notifikasi) && (
+        <FlatList
+          data={notifikasi}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <NotifikasiItem
+              item={item}
+              onPress={() => onPressNotifikasi(item)}
+            />
+          )}
         />
-        <View style={styles.textContainer}>
-          <View style={styles.textInnerContainer}>
-            <Text numberOfLines={1} style={styles.textName}>
-              Admin Koperasi
-            </Text>
-            <Text style={styles.textTime}>19.30</Text>
-          </View>
-          <Text style={styles.textContent} numberOfLines={1}>
-            This is dummy chat text adasd das dasd asd asd as d asd asd as das
-            dasdasdas asd asd ad
-          </Text>
-        </View>
-      </TouchableOpacity>
+      )}
     </View>
   );
 };

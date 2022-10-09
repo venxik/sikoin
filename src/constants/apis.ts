@@ -61,6 +61,9 @@ const constant = {
     dokumen: {
       getDokumen: 'dokumen',
     },
+    notifikasi: {
+      getNotifikasi: 'notifikasi',
+    },
   },
   errorTypes: {
     generic: 'Oops!',

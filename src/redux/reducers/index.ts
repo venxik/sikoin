@@ -18,6 +18,7 @@ import VoucherReducer from './VoucherReducer';
 import DokumenReducer from './DokumenReducer';
 import HomeReducer from './HomeReducer';
 import PinjamanReducer from './PinjamanReducer';
+import NotifikasiReducer from './NotifikasiReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,
@@ -39,6 +40,7 @@ const rootReducers = combineReducers({
   DokumenReducer,
   HomeReducer,
   PinjamanReducer,
+  NotifikasiReducer,
 });
 
 export default rootReducers;

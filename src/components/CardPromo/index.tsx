@@ -26,14 +26,14 @@ const CardPromo = (props: CardPromoProps) => {
           iconLocation="left"
           onPress={onPressSelengkapnya as () => void}
           buttonContainerStyle={{
-            width: '70%',
+            width: '100%',
           }}
           text={'Selengkapnya'}
         />
         <Button
           onPress={onPressWeb as () => void}
           buttonContainerStyle={{
-            width: '70%',
+            width: '100%',
             marginTop: sizes.padding,
           }}
           text={'Buka Halaman Web'}

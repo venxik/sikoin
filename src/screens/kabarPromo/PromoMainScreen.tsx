@@ -1,15 +1,16 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet, FlatList } from 'react-native';
-import { CardKabar, HeaderBack, MenuHeaderIcon } from '../../components';
+import { CardPromo, HeaderBack, MenuHeaderIcon } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { colors, sizes, strings } from '../../constants';
-import {
-  fetchKabar,
-  fetchKabarDetail,
-} from '../../redux/reducers/KabarReducer';
 import { KabarPromoData } from '../../redux/reducers/HomeReducer';
+import {
+  fetchPromo,
+  fetchPromoDetail,
+} from '../../redux/reducers/PromoReducer';
+import { openUrl } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PromoMainScreen'>;
 
@@ -19,19 +20,19 @@ const PromoMainScreen: FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchKabar());
+    dispatch(fetchPromo());
   }, []);
 
-  const selectKabarCard = (item: KabarPromoData) => {
-    dispatch(fetchKabarDetail(item.id));
+  const onPressSelengkapnya = (item: KabarPromoData) => {
+    dispatch(fetchPromoDetail(item.id));
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <HeaderBack />
-      <MenuHeaderIcon menu={strings.kabar} />
       {promoDataList && (
         <FlatList
+          ListHeaderComponent={<MenuHeaderIcon menu={strings.promo} />}
           data={promoDataList}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
@@ -41,9 +42,10 @@ const PromoMainScreen: FC<Props> = () => {
           keyExtractor={item => item?.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardKabar
+              <CardPromo
                 item={item}
-                onPress={() => selectKabarCard(item)}
+                onPressSelengkapnya={() => onPressSelengkapnya(item)}
+                onPressWeb={() => openUrl(item.webUrl as string)}
                 style={{ marginRight: 0 }}
               />
             </View>

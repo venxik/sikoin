@@ -23,6 +23,8 @@ const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
         return images.img_simpanan_icon;
       case strings.kabar:
         return images.menu_kabar;
+      case strings.promo:
+        return images.menu_kabar;
       default:
         return 0;
     }
