@@ -30,7 +30,7 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
     gajiBulanan,
     namaPerusahaan,
     alamatKantor,
-    provinsiKota,
+    provinsi,
   } = pekerjaanData || {};
 
   const navigateToAddScreen = () => {
@@ -78,10 +78,7 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
             title={strings.alamat_kantor}
             content={alamatKantor}
           />
-          <DetailItemList
-            title={strings.provinsi_kota}
-            content={provinsiKota}
-          />
+          <DetailItemList title={strings.provinsi_kota} content={provinsi} />
           <Button
             shadow={false}
             onPress={() => navigateToAddScreen()}

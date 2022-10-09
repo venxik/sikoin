@@ -1,4 +1,5 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ProfileResponse } from './ProfileReducer';
 
 export type KabarPromoData = {
   id: number;
@@ -63,12 +64,23 @@ const homeSlice = createSlice({
     resetUserData: (state: IntitalState) => {
       state.user = initialState.user;
     },
+    updateUserData: (
+      state: IntitalState,
+      { payload }: PayloadAction<ProfileResponse>,
+    ) => {
+      state.user.nama = payload.nama;
+      state.user.profilePic = payload.profilePic;
+    },
   },
 });
 
 export const fetchBerandaUser = createAction('fetchBerandaUser');
 
-export const { getBerandaUserFailed, getBerandaUserSuccess, resetUserData } =
-  homeSlice.actions;
+export const {
+  getBerandaUserFailed,
+  getBerandaUserSuccess,
+  resetUserData,
+  updateUserData,
+} = homeSlice.actions;
 
 export default homeSlice.reducer;

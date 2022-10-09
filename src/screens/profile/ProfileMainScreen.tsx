@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: sizes.padding,
     backgroundColor: colors.white,
     padding: sizes.padding,
-    width: '100%',
+    // width: '100%',
     marginBottom: sizes.padding,
   },
   mainContainer: {

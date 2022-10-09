@@ -5,7 +5,6 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
-  ImageBackground,
   Image,
   TouchableOpacity,
 } from 'react-native';
@@ -26,6 +25,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { isEmpty } from 'lodash';
+import FastImage from 'react-native-fast-image';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 
@@ -39,28 +39,8 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     data: DocumentPickerResponse | null;
   }>({ uri: profilePic, data: null });
 
-  const [isDefault, setIsDefault] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  const [loadingSource] = useState(icons.popup_failed);
-  const [errorSource] = useState(icons.popup_failed);
-
   const documentPickerOptions = {
     type: [DocumentPicker.types.images],
-  };
-
-  const profileImage = isDefault
-    ? loadingSource
-    : isError
-    ? errorSource
-    : { uri: profilePicture.uri };
-
-  const onErrorProfile = () => {
-    setIsError(true);
-  };
-
-  const onLoadEndProfile = () => {
-    setIsDefault(false);
   };
 
   const saveProfile = (data: ProfileRequest) => {
@@ -68,7 +48,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
     const formData = new FormData();
     if (!isEmpty(profilePicture.data) && !isEmpty(profilePicture.uri)) {
       formData.append('profilePic', {
-        uri: profilePic,
+        uri: profilePicture.uri,
         type: 'image/jpeg',
         name: 'profile image',
       });
@@ -85,7 +65,6 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
       formatter
         .resizeImage(data)
         .then(res => {
-          setIsError(false);
           setProfilePicture({ uri: res.uri, data: data });
         })
         .catch(err => {
@@ -127,12 +106,10 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
             <TouchableOpacity
               onPress={openDocumentPicker}
               style={styles.profilePicStyle}>
-              <ImageBackground
-                onError={onErrorProfile}
-                onLoadEnd={onLoadEndProfile}
-                imageStyle={styles.profilePicStyle}
+              <FastImage
+                style={styles.profilePicStyle}
                 resizeMode="cover"
-                source={profileImage}>
+                source={profilePicture}>
                 <View style={styles.iconContainer}>
                   <Image
                     resizeMode="cover"
@@ -143,7 +120,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                     }}
                   />
                 </View>
-              </ImageBackground>
+              </FastImage>
             </TouchableOpacity>
 
             <View

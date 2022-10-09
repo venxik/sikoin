@@ -14,6 +14,7 @@ import {
   updateProfileFailed,
   updateProfileSuccess,
 } from '../reducers/ProfileReducer';
+import { updateUserData } from '../reducers/HomeReducer';
 
 function* getProfile() {
   yield put(showLoading());
@@ -48,6 +49,7 @@ function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(updateProfileSuccess(data?.data));
+        yield put(updateUserData(data?.data));
         if (!isEmpty(data?.data)) {
           goBack();
         }

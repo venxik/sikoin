@@ -27,58 +27,28 @@ const ProfilePicture = (props: ProfilePictureProps) => {
     uri: isProfile ? logoKoperasi2 : logoKoperasi,
   });
 
-  const [loadingSource] = useState(icons.popup_failed);
-  const [errorSource] = useState(icons.popup_failed);
-
-  const [isDefault, setIsDefault] = useState(true);
-  const [isErrorProfile, setIsErrorProfile] = useState(false);
-  const [isErrorKoperasi, setIsErrorKoperasi] = useState(false);
-
   useEffect(() => {
     if (!isEmpty(profilePic)) setProfileSource({ uri: profilePic });
     if (!isEmpty(logoKoperasi)) setKoperasiSource({ uri: logoKoperasi });
   }, [profilePic, logoKoperasi]);
 
-  const profileImage = isDefault
-    ? loadingSource
-    : isErrorProfile
-    ? errorSource
-    : profileSource;
-  const koperasiImage = isDefault
-    ? loadingSource
-    : isErrorKoperasi
-    ? errorSource
-    : koperasiSource;
-
-  const onErrorProfile = () => {
-    setIsErrorProfile(true);
-  };
-
-  const onLoadEndProfile = () => {
-    setIsDefault(false);
-  };
-
-  const onErrorKoperasi = () => {
-    setIsErrorKoperasi(true);
-  };
-
-  const onLoadEndKoperasi = () => {
-    setIsDefault(false);
-  };
-
   return (
-    <TouchableOpacity onPress={onPress} style={style} disabled={disabled}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.container, style]}
+      disabled={disabled}>
       <FastImage
-        onLoadEnd={onLoadEndProfile}
-        onError={onErrorProfile}
-        source={profileImage || icons.popup_failed}
-        style={styles.profilePicStyle}></FastImage>
+        source={
+          !isEmpty(profileSource.uri) ? profileSource : icons.popup_failed
+        }
+        style={styles.profilePicStyle}
+      />
       {showKoperasi && (
         <FastImage
-          source={koperasiImage}
+          source={
+            !isEmpty(koperasiSource.uri) ? koperasiSource : icons.popup_failed
+          }
           style={styles.koperasiPicStyle}
-          onLoadEnd={onLoadEndKoperasi}
-          onError={onErrorKoperasi}
         />
       )}
     </TouchableOpacity>
@@ -88,6 +58,7 @@ const ProfilePicture = (props: ProfilePictureProps) => {
 export default ProfilePicture;
 
 const styles = StyleSheet.create({
+  container: { width: SCREEN_WIDTH * 0.25 },
   profilePicStyle: {
     width: SCREEN_WIDTH * 0.25,
     height: SCREEN_WIDTH * 0.25,
@@ -100,10 +71,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: -6,
     right: -6,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    zIndex: 99,
   },
 });
