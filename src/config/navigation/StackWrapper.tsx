@@ -19,6 +19,7 @@ import {
   ProfileStackParamList,
 } from './model';
 import { Home, Message, User } from 'react-native-iconly';
+import { useAppSelector } from '../store';
 
 // import Linking from 'config/navigation/Linking';
 // Top Stack
@@ -84,6 +85,9 @@ const IconBottom = ({
 );
 
 const HomeTab = () => {
+  const { notifikasi } = useAppSelector(
+    s => s.NotifikasiReducer.notifikasiDataList,
+  );
   return (
     <Tab.Navigator
       screenOptions={{
@@ -122,7 +126,7 @@ const HomeTab = () => {
                   filled={focused ? true : false}
                 />
               }
-              badge
+              badge={notifikasi.length > 0}
             />
           ),
           tabBarStyle: {

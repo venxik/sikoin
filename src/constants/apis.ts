@@ -78,6 +78,7 @@ const constant = {
     unsupported: 'Unsupported Type', // 415
     unprocessable: 'Unprocessable Entity', // 422
     serverError: 'Internal server error', // 500
+    anggotaTerdaftar: 'Data Anggota Sudah Dapat Diakses',
   },
   authPathArray: ['koperasi', 'email-anggota', 'lupa-password', 'login'],
 };

@@ -10,12 +10,10 @@ import {
   BackHandler,
   SafeAreaView,
   RefreshControl,
-  Linking,
 } from 'react-native';
 import {
   CardKabar,
   CardLastItem,
-  CardMarketLarge,
   CardPromo,
   HeaderBack,
   ProfilePicture,
@@ -87,7 +85,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const [refreshing] = useState(false);
 
   const dispatch = useAppDispatch();
-  const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
+  // const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
   const {
     nama,
     namaKoperasi,
@@ -238,41 +236,41 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     );
   };
 
-  const renderMarketCard = () => {
-    return (
-      <View>
-        {cardHeader(strings.market)}
-        <FlatList
-          horizontal
-          data={marketDataList}
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketLarge
-                onPressVoucher={() => {
-                  navigateToOtherScreen('VoucherMainScreen');
-                }}
-                item={item}
-                onPress={() => {
-                  navigation.navigate('MarketItemDetailsScreen');
-                }}
-              />
-              {index === marketDataList.length - 1 && (
-                <CardLastItem
-                  icon={icons.icon_market_white}
-                  onPress={() => {
-                    navigateToOtherScreen('MarketMainScreen');
-                  }}
-                />
-              )}
-            </View>
-          )}
-        />
-      </View>
-    );
-  };
+  // const renderMarketCard = () => {
+  //   return (
+  //     <View>
+  //       {cardHeader(strings.market)}
+  //       <FlatList
+  //         horizontal
+  //         data={marketDataList}
+  //         showsHorizontalScrollIndicator={false}
+  //         scrollEventThrottle={16}
+  //         keyExtractor={(_, index) => index.toString()}
+  //         renderItem={({ item, index }) => (
+  //           <View style={{ marginTop: 20, flexDirection: 'row' }}>
+  //             <CardMarketLarge
+  //               onPressVoucher={() => {
+  //                 navigateToOtherScreen('VoucherMainScreen');
+  //               }}
+  //               item={item}
+  //               onPress={() => {
+  //                 navigation.navigate('MarketItemDetailsScreen');
+  //               }}
+  //             />
+  //             {index === marketDataList.length - 1 && (
+  //               <CardLastItem
+  //                 icon={icons.icon_market_white}
+  //                 onPress={() => {
+  //                   navigateToOtherScreen('MarketMainScreen');
+  //                 }}
+  //               />
+  //             )}
+  //           </View>
+  //         )}
+  //       />
+  //     </View>
+  //   );
+  // };
 
   const renderMainMenu = () => {
     return (

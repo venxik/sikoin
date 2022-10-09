@@ -2,7 +2,14 @@ import { isEmpty } from 'lodash';
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import {
+  apis,
+  colors,
+  icons,
+  SCREEN_WIDTH,
+  sizes,
+  strings,
+} from '../../constants';
 import { dismissErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import Button from '../Button';
 import { ErrorModalProps } from './model';
@@ -10,7 +17,7 @@ import { ErrorModalProps } from './model';
 const ErrorModal = ({ error, options }: ErrorModalProps) => {
   const scaleValue = useRef(new Animated.Value(0)).current;
   const dispatch = useDispatch();
-  const { isVisible } = options;
+  const { isVisible, errorType } = options;
   const { title, message } = error || {};
 
   useEffect(() => {
@@ -37,13 +44,25 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
     let modalBody;
 
     if (!isEmpty(error?.message) || !isEmpty(error?.title)) {
-      modalTitle = title;
-      modalBody = message;
+      if (errorType === apis.errorTypes.anggotaTerdaftar) {
+        modalTitle = message;
+      } else {
+        modalTitle = title;
+        modalBody = message;
+      }
     } else {
       modalTitle = strings.error_generic_title;
       modalBody = strings.error_generic_message;
     }
     return { modalTitle, modalBody };
+  };
+
+  const getPopupImage = () => {
+    if (errorType === apis.errorTypes.anggotaTerdaftar) {
+      return icons.popup_success;
+    } else {
+      return icons.popup_failed;
+    }
   };
 
   return (
@@ -55,7 +74,7 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
             style={{
               alignItems: 'center',
             }}>
-            <Image source={icons.popup_failed} style={styles.icon} />
+            <Image source={getPopupImage()} style={styles.icon} />
             <View style={{ alignItems: 'center' }}>
               {!isEmpty(getModalText().modalTitle) && (
                 <Text style={styles.headerModalText}>

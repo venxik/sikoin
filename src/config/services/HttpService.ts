@@ -79,8 +79,11 @@ class HttpService {
   handleResponseInterceptor = (response: AxiosResponse) => {
     store.dispatch(hideLoading());
     const error = response.data.error;
+    const url = response?.request?.responseURL as string;
     if (error) {
-      this.showErrorDialogHandler(apis.errorTypes.generic, error);
+      if (url.includes('api/koperasi'))
+        this.showErrorDialogHandler(apis.errorTypes.anggotaTerdaftar, error);
+      else this.showErrorDialogHandler(apis.errorTypes.generic, error);
     }
     return response;
   };
