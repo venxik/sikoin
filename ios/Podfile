@@ -14,6 +14,8 @@ target 'sikoin' do
 
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'react-native-blob-util', :path => '../node_modules/react-native-blob-util'
+
   target 'sikoinTests' do
     inherit! :complete
     # Pods for testing

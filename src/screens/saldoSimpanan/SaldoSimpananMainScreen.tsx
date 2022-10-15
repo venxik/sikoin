@@ -27,6 +27,8 @@ import {
   strings,
 } from '../../constants';
 import {
+  fetchCreateSaldoList,
+  fetchCreateSimpananList,
   fetchMutasiSimpanan,
   fetchSaldoData,
   fetchSimpananData,
@@ -72,6 +74,14 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
     dispatch(fetchMutasiSimpanan(item?.id as number));
   };
 
+  const navigateToPenarikan = () => {
+    dispatch(fetchCreateSimpananList());
+  };
+
+  const navigateToTopup = () => {
+    dispatch(fetchCreateSaldoList());
+  };
+
   const renderSaldoContent = () => {
     return (
       <View>
@@ -79,7 +89,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Button
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
-            onPress={() => navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })}
+            onPress={() => navigateToTopup()}
           />
           <Button
             icon={icons.icon_mutasi_primary}
@@ -108,16 +118,12 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Button
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
-            onPress={() => navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })}
+            onPress={() => navigateToTopup()}
           />
           <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
-            onPress={() =>
-              navigation.navigate('TopupPenarikanMainScreen', {
-                isTopup: false,
-              })
-            }
+            onPress={() => navigateToPenarikan()}
           />
         </View>
         <View style={{ marginTop: 40 }}>

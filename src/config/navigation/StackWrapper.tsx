@@ -72,16 +72,27 @@ const IconBottom = ({
       {badge && (
         <View
           style={{
-            width: 14,
-            height: 14,
-            borderRadius: 14,
+            width: 20,
+            height: 20,
+            borderRadius: 20,
             backgroundColor: colors.red,
             position: 'absolute',
-            top: -4,
-            right: -4,
+            top: -8,
+            right: -8,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          {number > 1 && <Text style={{ color: colors.white }}>{number}</Text>}
+          {number > 1 && (
+            <Text
+              style={{
+                color: colors.white,
+                fontSize: 12,
+              }}
+            >
+              {number}
+            </Text>
+          )}
         </View>
       )}
     </View>

@@ -32,7 +32,7 @@ const ChatDetailScreen: FC<Props> = () => {
           />
           <View style={styles.textContainer}>
             <View style={styles.textInnerContainer}>
-              <Text numberOfLines={1} style={styles.textName}>
+              <Text numberOfLines={1} style={styles.textPerihal}>
                 {perihal}
               </Text>
               <Text style={styles.textTime}>{getFormattedDate(waktu)}</Text>
@@ -76,15 +76,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  textName: {
+  textPerihal: {
     color: colors.bodyText,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
+    flex: 0.65,
   },
   textContent: {
     color: colors.bodyText,
     width: '70%',
     fontFamily: 'Inter-Regular',
   },
-  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium' },
+  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium', textAlign: 'right' },
 });

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -16,13 +16,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
 
 import { Button, HeaderBack } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../config';
+import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import {
-  fetchCreateSaldoList,
-  fetchCreateSimpananList,
-} from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
 const topupDefaultNominal = [
@@ -55,11 +51,6 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
   const handleSheetChange = useCallback(() => null, []);
 
   const { createSaldoList, createSimpananList } = useAppSelector((s) => s.SaldoSimpananReducer);
-
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    isTopup ? dispatch(fetchCreateSaldoList()) : dispatch(fetchCreateSimpananList());
-  }, []);
 
   const navigateToDetailScreen = () => {
     if (!isEmpty(nominal) && !isEmpty(selectedTopupPenarikan)) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import dayjs from 'dayjs';
 import FastImage from 'react-native-fast-image';
 
 import { useAppSelector } from '../../config';
@@ -28,7 +29,9 @@ const NotifikasiItem = (props: NotifikasiItemProps) => {
               {perihal}
             </Text>
             <Text numberOfLines={1} style={styles.textTime}>
-              {getFormattedDate(waktu)}
+              {dayjs().diff(waktu, 'day') === 0
+                ? dayjs(waktu).format('HH:mm')
+                : getFormattedDate(waktu)}
             </Text>
           </View>
           <Text style={styles.textContent} numberOfLines={1}>
@@ -72,5 +75,11 @@ const styles = StyleSheet.create({
     width: '70%',
     fontFamily: 'Inter-Regular',
   },
-  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium', flex: 0.3 },
+  textTime: {
+    color: colors.primaryLight,
+    fontFamily: 'Poppins-Medium',
+    flex: 0.35,
+    textAlign: 'right',
+    paddingRight: sizes.padding,
+  },
 });

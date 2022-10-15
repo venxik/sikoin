@@ -23,9 +23,10 @@ const img_bca = require('assets/images/img_bca.png');
 const img_mandiri = require('assets/images/img_mandiri.png');
 const img_bni = require('assets/images/img_bni.png');
 const splash_screen = require('assets/images/splash_screen.png');
-const img_circle_overlay = require('assets/images/img_circle_overlay.png');
+const img_pinjaman_overlay_2 = require('assets/images/img_pinjaman_overlay_2.png');
 const img_id_card = require('assets/images/img_id_card.png');
 const menu_kabar = require('assets/images/menu_kabar.png');
+const img_pinjaman_overlay_1 = require('assets/images/img_pinjaman_overlay_1.png');
 
 export default {
   onboarding_1,
@@ -51,7 +52,8 @@ export default {
   img_bni,
   img_mandiri,
   splash_screen,
-  img_circle_overlay,
+  img_pinjaman_overlay_2,
   img_id_card,
   menu_kabar,
+  img_pinjaman_overlay_1,
 };

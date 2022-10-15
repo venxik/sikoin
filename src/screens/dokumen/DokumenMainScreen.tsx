@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { FlatList, Platform, SafeAreaView, StyleSheet } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import dayjs from 'dayjs';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 
 import { DokumenItemList, HeaderBack, MenuHeaderIcon } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { sizes, strings } from '../../constants';
-import { fetchDokumen } from '../../redux/reducers/DokumenReducer';
+import { apis, sizes, strings } from '../../constants';
+import { DokumenData, fetchDokumen } from '../../redux/reducers/DokumenReducer';
+import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'DokumenMainScreen'>;
 
@@ -26,7 +29,42 @@ const DokumenMainScreen: React.FC<Props> = () => {
   //   navigation.navigate('DokumenDetailScreen', { item });
   // };
 
-  const onPressUnduh = () => {};
+  const onPressUnduh = (item: DokumenData) => {
+    // send http request in a new thread (using native code)
+    const dirs = ReactNativeBlobUtil.fs.dirs;
+    const dirsOS = Platform.select({ ios: dirs.DocumentDir, android: dirs.DownloadDir });
+    ReactNativeBlobUtil.config({
+      fileCache: true,
+      addAndroidDownloads: {
+        path:
+          dirsOS + '/file_' + Math.floor(dayjs().get('date') + dayjs().get('second') / 2) + '.jpeg',
+        description: 'Sedang Mengunduh file',
+        notification: true,
+        // useDownloadManager works with Android only
+        useDownloadManager: true,
+      },
+    })
+      .fetch('GET', item.dokumen)
+      .then((res) => {
+        console.warn('The file saved to ', res.path());
+      })
+      // Something went wrong:
+      .catch((errorMessage) => {
+        // error handling
+        dispatch(
+          showErrorModal({
+            options: {
+              screenSource: 'DokumenMainScreen',
+              errorType: apis.errorTypes.generic,
+            },
+            error: {
+              title: 'Error',
+              message: errorMessage as string,
+            },
+          }),
+        );
+      });
+  };
 
   // const deleteFile = () => {
   //   setShowDeleteConfirmation(false);
@@ -67,7 +105,7 @@ const DokumenMainScreen: React.FC<Props> = () => {
           ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
-            return <DokumenItemList item={item} onPressUnduh={() => onPressUnduh()} />;
+            return <DokumenItemList item={item} onPressUnduh={() => onPressUnduh(item)} />;
           }}
         />
       )}

@@ -18,7 +18,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
       <View style={styles.modalMainView}>
         <View style={styles.modalView}>
           <Image
-            source={images.img_circle_overlay}
+            source={images.img_pinjaman_overlay_2}
             resizeMode="stretch"
             style={{
               position: 'absolute',

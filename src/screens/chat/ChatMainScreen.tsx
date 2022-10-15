@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
@@ -20,6 +20,7 @@ type Props = NativeStackScreenProps<ChatStackParamList, 'ChatMainScreen'>;
 const ChatMainScreen: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { notifikasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
+  const [refreshing] = useState(false);
 
   useEffect(() => {
     dispatch(fetchNotifikasi());
@@ -55,6 +56,9 @@ const ChatMainScreen: FC<Props> = () => {
         <FlatList
           data={notifikasi}
           keyExtractor={(item) => item.id.toString()}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={() => dispatch(fetchNotifikasi())} />
+          }
           renderItem={({ item }) => (
             <NotifikasiItem item={item} onPress={() => onPressNotifikasi(item)} />
           )}

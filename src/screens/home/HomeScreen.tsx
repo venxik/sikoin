@@ -34,6 +34,7 @@ import {
 } from '../../constants';
 import { fetchBerandaUser, KabarPromoData } from '../../redux/reducers/HomeReducer';
 import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
+import { fetchGetPinjamanInitialData } from '../../redux/reducers/PinjamanReducer';
 import { fetchPromoDetail } from '../../redux/reducers/PromoReducer';
 import { formatter, openUrl } from '../../utils';
 
@@ -113,8 +114,17 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
     });
   };
 
-  const navigateToOtherScreen = (screen: string) => {
-    navigation.navigate(screen as keyof HomeStackParamList);
+  const navigateToOtherScreen = (item: { image: string; label: string; navigateTo: string }) => {
+    switch (item?.label) {
+      case strings.pinjaman: {
+        dispatch(fetchGetPinjamanInitialData());
+        break;
+      }
+      default: {
+        navigation.navigate(item.navigateTo as keyof HomeStackParamList);
+        break;
+      }
+    }
   };
 
   const onClickMiniScrollButton = (showSaldo: boolean) => {
@@ -140,14 +150,14 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
       case strings.kabar:
         stack = 'KabarMainScreen';
         break;
-      case strings.promo:
-        stack = '';
+      case 'Promo Hari Ini':
+        stack = 'PromoMainScreen';
         break;
     }
     return (
       <TouchableOpacity
         style={styles.cardHeaderContainer}
-        onPress={() => navigateToOtherScreen(stack)}
+        onPress={() => navigation.navigate(stack as keyof HomeStackParamList)}
       >
         <Text style={styles.cardHeaderTitle}>{title}</Text>
         <View>
@@ -173,7 +183,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
               {index === kabar?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() => navigateToOtherScreen('KabarMainScreen')}
+                  onPress={() => navigation.navigate('KabarMainScreen')}
                 />
               )}
             </View>
@@ -203,7 +213,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
               {index === promo?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_kabar_white}
-                  onPress={() => navigateToOtherScreen('PromoMainScreen')}
+                  onPress={() => navigation.navigate('PromoMainScreen')}
                 />
               )}
             </View>
@@ -256,7 +266,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
           <TouchableOpacity
             key={index}
             style={styles.menuInnerContainer}
-            onPress={() => navigateToOtherScreen(item.navigateTo)}
+            onPress={() => navigateToOtherScreen(item)}
           >
             <Image source={item.image} style={{ width: menuSize, height: menuSize }} />
             <Text style={styles.menuText}>{item.label}</Text>

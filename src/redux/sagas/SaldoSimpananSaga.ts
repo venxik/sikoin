@@ -67,6 +67,7 @@ function* getCreateSaldoList() {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchCreateSaldoListSuccess(data?.data));
+        navigate('TopupPenarikanMainScreen', { isTopup: true });
       } else {
         yield put(fetchCreateSaldoListFailed('Error'));
       }
@@ -137,6 +138,7 @@ function* getCreateSimpananList() {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchCreateSimpananListSuccess(data?.data));
+        navigate('TopupPenarikanMainScreen');
       } else {
         yield put(fetchCreateSimpananListFailed('Error'));
       }
