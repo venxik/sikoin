@@ -4,6 +4,7 @@ import { Animated, Image, Modal, StyleSheet, Text, View } from 'react-native';
 import { isEmpty } from 'lodash';
 import { useDispatch } from 'react-redux';
 
+import { navigate } from '../../config/navigation';
 import { apis, colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { dismissErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import Button from '../Button';
@@ -31,6 +32,7 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
       useNativeDriver: true,
     }).start(() => {
       dispatch(dismissErrorModal());
+      if (errorType === apis.errorTypes.anggotaTerdaftar) navigate('LoginScreen');
     });
   };
 

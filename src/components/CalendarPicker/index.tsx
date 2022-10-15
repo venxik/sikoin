@@ -3,13 +3,22 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { getFormattedDate } from '../../utils';
 import { CalendarPickerProps } from './model';
 
 const CalendarPicker = (props: CalendarPickerProps) => {
-  const { title, style, onChangeDate, value, error, errorText, showIcon = true } = props || {};
+  const {
+    title,
+    style,
+    onChangeDate,
+    value,
+    error,
+    errorText,
+    showIcon = true,
+    customText = strings.pilih_dot,
+  } = props || {};
   const [date, setDate] = useState<Date>(value ? new Date(value as Date) : new Date());
   const [show, setShow] = useState(false);
 
@@ -42,7 +51,7 @@ const CalendarPicker = (props: CalendarPickerProps) => {
         >
           <Image source={icons.icon_calendar_small} style={styles.icon} />
           <Text style={styles.valueText}>
-            {value ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}
+            {value ? getFormattedDate(value as string) : customText}
           </Text>
         </View>
         {showIcon && (

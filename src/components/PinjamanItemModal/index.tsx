@@ -26,7 +26,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               left: 0,
               right: 0,
               width: '100%',
-              height: '40%',
+              height: '50%',
             }}
           />
           <TouchableOpacity

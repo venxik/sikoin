@@ -1,13 +1,13 @@
 export default {
   /*ONBOARDING*/
-  onboarding_title_1: 'Jelajahi Pengalaman Berkoperasi Baru',
+  onboarding_title_1: 'Jelajahi Pengalaman Baru Berkoperasi',
   onboarding_desc_1:
-    'Berkomunikasi dengan tim Kamu serta siapkan proses dan sasaran bisnis melalui aplikasi seluler dan web.',
+    'Nikmati proses bisnis dan pelayanan optimal melalui aplikasi sellular dan website interaktif.',
   onboarding_title_2: 'Semua Di Satu Tempat',
   onboarding_desc_2: 'Nikmati fitur koperasi modern yang berlimpah dalam satu sistem terpadu. ',
-  onboarding_title_3: 'Akses Tiada Batas',
+  onboarding_title_3: 'Aman Nyaman Transparan',
   onboarding_desc_3:
-    'Data anggota, simpanan, pinjaman, keuangan, bisnis, transaksi, dan lainnya akan terekam dan terkait satu sama lain.',
+    'Data Anggota, Simpanan, Pinjaman, dan Transaksi Bisnis tersistem dapat diakses sewaktu-waktu.',
   /*LOGIN REGISTER*/
   email_textbox_placeholder: 'Email...',
   password_textbox_placeholder: 'Password...',
@@ -22,8 +22,7 @@ export default {
   daftar_koperasi_title_1: 'Apakah koperasimu sudah memiliki akses ke SIKOIN?',
   daftar_koperasi_title_2:
     'Kita lihat dulu yuk bagaimana SIKOIN bisa membawa koperasi mu menjadi koperasi super',
-  daftar_koperasi_isi_data_title_1:
-    'Dapatkan akses masuk SIKOIN mu hanya dengan mengikuti 2 langkah saja',
+  daftar_koperasi_isi_data_title_1: 'Dapatkan akses masuk ke KoJak hanya dengan 2 langkah ',
   daftar_koperasi_isi_data_title_2:
     'Masukkan emailmu untuk mendapatkan Username & Password sementara',
   daftar_koperasi_isi_data_hint_2:
@@ -92,6 +91,8 @@ export default {
   nomor_rekening: 'Nomor Rekening',
   nomor_ktp: 'Nomor KTP',
   pinjaman_success_title: 'Selamat, Kamu berhasil mengajukan pinjaman!',
+  pinjaman_success_content:
+    'Tim kami akan memverifikasi pinjaman Kamu. Dalam waktu 1x24 Jam tim kami akan menghubungi kamu melalui nomor terdaftar dan atau email.',
 
   /*DOKUMEN*/
   unduh_file: 'Unduh File',

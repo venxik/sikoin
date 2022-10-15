@@ -52,11 +52,11 @@ const menuList = [
     label: strings.pinjaman,
     navigateTo: 'PinjamanMainScreen',
   },
-  {
-    image: images.menu_market,
-    label: strings.market,
-    navigateTo: 'MarketMainScreen',
-  },
+  // {
+  //   image: images.menu_market,
+  //   label: strings.market,
+  //   navigateTo: 'MarketMainScreen',
+  // },
   {
     image: images.menu_voucher,
     label: strings.voucher,
@@ -445,6 +445,7 @@ const styles = StyleSheet.create({
     marginTop: sizes.padding,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
+    // justifyContent: 'center',
     flexDirection: 'row',
     width: '100%',
   },

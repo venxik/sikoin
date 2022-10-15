@@ -46,7 +46,7 @@ const SaldoSimpananDetail: React.FC<Props> = () => {
           <View style={styles.saldoRowContainer}>
             <Image source={icons.icon_rp_dark} style={{ width: 34, height: 34, opacity: 0.5 }} />
             <Text style={[styles.textSaldo, { opacity: 0.5 }]}>
-              {formatter.formatNumberToCurreny(mutasiSimpanan?.totalDana?.danaSimpanan)}
+              {formatter.formatNumberToCurreny(mutasiSimpanan?.totalDana?.danaPending)}
             </Text>
           </View>
         </View>

@@ -2,10 +2,9 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 
 import { colors, icons, sizes } from '../../constants';
-import { formatter } from '../../utils';
+import { formatter, getFormattedDate } from '../../utils';
 import { TransaksiItemListProps } from './model';
 
 const TransaksiItemList = (props: TransaksiItemListProps) => {
@@ -30,7 +29,7 @@ const TransaksiItemList = (props: TransaksiItemListProps) => {
         </View>
         <Text style={styles.textDetail}>{detail}</Text>
         <Text style={styles.textTime}>
-          {!isEmpty(time) ? moment(time).format('DD/MM/YYYY') : '-'}
+          {!isEmpty(time) ? getFormattedDate(time as string) : '-'}
         </Text>
       </View>
     </TouchableOpacity>

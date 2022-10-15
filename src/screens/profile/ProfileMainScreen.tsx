@@ -1,11 +1,8 @@
-import 'moment/locale/id';
-
 import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 import { User } from 'react-native-iconly';
 
 import { Button, HeaderBack, ProfilePicture, SubmenuItemList } from '../../components';
@@ -13,8 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../config';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
-
-moment.locale('id');
+import { getFormattedDate } from '../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
@@ -53,9 +49,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
             <View style={{ marginTop: 10 }}>
               <Text style={styles.descText}>{checkIsEmpty(noAnggota)}</Text>
               <Text style={styles.descText}>
-                {!isEmpty(memberSejak)
-                  ? `Member Sejak ${moment(memberSejak).format('DD MMMM YYYY')}`
-                  : '-'}
+                {!isEmpty(memberSejak) ? `Member Sejak ${getFormattedDate(memberSejak)}` : '-'}
               </Text>
               <Text style={styles.descText}>{checkIsEmpty(email)}</Text>
               <Text style={styles.descText}>{checkIsEmpty(noTelp)}</Text>

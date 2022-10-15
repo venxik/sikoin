@@ -14,7 +14,7 @@ import CustomBackdrop from './CustomBackdrop';
 import DetailItemList from './DetailItemList';
 import DetailItemProfileHeader from './DetailItemProfileHeader';
 import DokumenItemList from './DokumenItemList';
-import DokumenMemberItem from './DokumenMemberItem';
+// import DokumenMemberItem from './DokumenMemberItem';
 import DropdownForm from './DropdownForm';
 import ErrorModal from './ErrorModal';
 import FilterHorizontal from './FilterHorizontal';
@@ -61,7 +61,7 @@ export {
   DetailItemList,
   DetailItemProfileHeader,
   DokumenItemList,
-  DokumenMemberItem,
+  // DokumenMemberItem,
   DropdownForm,
   ErrorModal,
   FilterHorizontal,

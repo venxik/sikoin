@@ -16,10 +16,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Button, HeaderPinjaman, TextInputForm } from '../../components';
+import { Button, DropdownForm, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
+import { colors, dropdownItems, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import { fetchPinjamanSummary, setPinjamanInfo } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
@@ -223,14 +223,13 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
           control={control}
           name="tenor"
           render={({ field: { onChange, value } }) => (
-            <TextInputForm
-              error={errors.tenor}
-              errorText={errors.tenor?.message}
-              style={{ marginTop: sizes.padding * 2 }}
-              value={value.toString()}
-              onChangeText={onChange}
-              title={'Jangka Waktu Pinjaman'}
-              keyboardType={'numeric'}
+            <DropdownForm
+              style={{ width: '100%', marginTop: sizes.padding }}
+              title={'Jangka Waktu Pinjaman / Tenor'}
+              data={dropdownItems.tenorPinjaman}
+              onChange={(value) => onChange(value)}
+              value={value}
+              maxHeight={250}
             />
           )}
         />

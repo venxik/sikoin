@@ -10,4 +10,5 @@ export interface CalendarPickerProps {
   error?: FieldError;
   errorText?: string;
   showIcon?: boolean;
+  customText?: string;
 }

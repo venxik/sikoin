@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import moment from 'moment';
 import RNFS from 'react-native-fs';
 import ImageResizer, { Response } from 'react-native-image-resizer';
 
@@ -48,10 +47,6 @@ const validateEmail = (email: string) => {
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
-};
-
-const trimDate = (data: string) => {
-  return moment(data).toISOString().substring(0, 10);
 };
 
 const addMissingBracketJSON = (data: any): any => {
@@ -105,7 +100,6 @@ export default {
   formatStringToCurrencyNumber,
   validateEmail,
   formatNumberToCurreny,
-  trimDate,
   EMAIL_REGEX,
   NUMBER_REGEX,
   addMissingBracketJSON,

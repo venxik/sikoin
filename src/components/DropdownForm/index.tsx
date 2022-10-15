@@ -25,7 +25,7 @@ const DropdownForm = (props: DropdownFormProps) => {
       data={data}
       onChange={(item) => onChange(item?.value)}
       value={value}
-      maxHeight={maxHeight ? maxHeight : 120}
+      maxHeight={maxHeight || 120}
       labelField="label"
       valueField="value"
       placeholder={strings.pilih_dot}

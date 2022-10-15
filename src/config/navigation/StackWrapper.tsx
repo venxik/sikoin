@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute, NavigationContainer, Route } from '@react-navigation/native';
@@ -48,10 +48,12 @@ const IconBottom = ({
   focused,
   badge = false,
   icon,
+  number = 0,
 }: {
   focused: boolean;
   badge?: boolean;
   icon: JSX.Element;
+  number?: number;
 }) => (
   <View
     style={
@@ -78,7 +80,9 @@ const IconBottom = ({
             top: -4,
             right: -4,
           }}
-        />
+        >
+          {number > 1 && <Text style={{ color: colors.white }}>{number}</Text>}
+        </View>
       )}
     </View>
   </View>
@@ -119,6 +123,7 @@ const HomeTab = () => {
               focused={focused}
               icon={<Message color={colors.primary} filled={focused ? true : false} />}
               badge={notifikasi.length > 0}
+              number={notifikasi.length}
             />
           ),
           tabBarStyle: {

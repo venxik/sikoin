@@ -9,6 +9,7 @@ import { HeaderBack } from '../../components';
 import { useAppSelector } from '../../config';
 import { ChatStackParamList } from '../../config/navigation/model';
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
+import { getFormattedDate } from '../../utils';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatDetailScreen'>;
 
@@ -34,7 +35,7 @@ const ChatDetailScreen: FC<Props> = () => {
               <Text numberOfLines={1} style={styles.textName}>
                 {perihal}
               </Text>
-              <Text style={styles.textTime}>{waktu}</Text>
+              <Text style={styles.textTime}>{getFormattedDate(waktu)}</Text>
             </View>
             <Text style={styles.textContent} numberOfLines={1}>
               {pengirim}

@@ -3,7 +3,7 @@ import React from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 
 import {
@@ -64,7 +64,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
     dispatch(
       fetchUpdateBiodata({
         ...data,
-        tanggalLahir: tanggalLahir ?? moment(tanggalLahir).format(),
+        tanggalLahir: dayjs(tanggalLahir).format('YYYY-MM-DD'),
       }),
     );
   };

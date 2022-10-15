@@ -1,62 +1,59 @@
-import React, { FC, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { FC, useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, CalendarPicker, HeaderBack, TextInputBorder } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../config';
+import { useAppDispatch } from '../../config';
 import { SendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
 import { ParentStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import {
-  fetchKoperasiList,
-  fetchUserKoperasi,
-  KoperasiListResponse,
-} from '../../redux/reducers/LoginReducer';
-import { formatter } from '../../utils';
+import { fetchKoperasiList, fetchUserKoperasi } from '../../redux/reducers/LoginReducer';
 
 type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiStep1Screen'>;
 
 const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const [koperasiName, setKoperasiName] = useState<string>('');
-  const [selected, setSelected] = useState<boolean>(false);
-  const { koperasiListData } = useAppSelector((s) => s.LoginReducer);
-  const [data, setData] = useState<KoperasiListResponse[] | null>(null);
+  // const [koperasiName, setKoperasiName] = useState<string>('');
+  // const [selected, setSelected] = useState<boolean>(false);
+  // const { koperasiListData } = useAppSelector((s) => s.LoginReducer);
+  // const [data, setData] = useState<KoperasiListResponse[] | null>(null);
 
   // // Using a query hook automatically fetches data and returns query values
   // const { data: dataKoperasi } = useGetKoperasiListQuery();
   // console.log('dataKoperasi: ', dataKoperasi);
 
-  const onChangeKoperasiName = (value: string) => {
-    setValue('namaKoperasi', value);
-    setKoperasiName(value);
-  };
+  // const onChangeKoperasiName = (value: string) => {
+  //   setValue('namaKoperasi', value);
+  //   setKoperasiName(value);
+  // };
 
   useEffect(() => {
     dispatch(fetchKoperasiList());
   }, []);
 
-  useEffect(() => {
-    if (!selected) {
-      if (koperasiName.length > 2) {
-        const result: KoperasiListResponse[] = koperasiListData?.filter((value) =>
-          value.namaKoperasi.toLowerCase().includes(koperasiName.toLowerCase()),
-        );
-        setData(result);
-      } else setData(null);
-    }
-  }, [koperasiName, selected]);
+  // useEffect(() => {
+  //   if (!selected) {
+  //     if (koperasiName.length > 2) {
+  //       const result: KoperasiListResponse[] = koperasiListData?.filter((value) =>
+  //         value.namaKoperasi.toLowerCase().includes(koperasiName.toLowerCase()),
+  //       );
+  //       setData(result);
+  //     } else setData(null);
+  //   }
+  // }, [koperasiName, selected]);
 
   const onSubmit = (submitData: SendUserKoperasiResponseParams) => {
     const { tanggalLahir } = submitData;
     dispatch(
       fetchUserKoperasi({
         ...submitData,
-        tanggalLahir: formatter.trimDate(tanggalLahir),
+        namaKoperasi: 'KPDJP',
+        tanggalLahir: dayjs(tanggalLahir).format('YYYY-MM-DD'),
       }),
     );
   };
@@ -64,7 +61,6 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const {
     control,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<SendUserKoperasiResponseParams>({
     defaultValues: {
@@ -96,7 +92,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>
-        <View>
+        {/* <View>
           <Controller
             control={control}
             name="namaKoperasi"
@@ -155,7 +151,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
               }}
             />
           )}
-        </View>
+        </View> */}
         <Controller
           control={control}
           name="noAnggota"
@@ -189,6 +185,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
               }}
               value={value}
               style={{ marginTop: sizes.padding, marginBottom: 0 }}
+              customText={'Pilih Tanggal Lahir'}
             />
           )}
           rules={{

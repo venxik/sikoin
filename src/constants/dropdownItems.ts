@@ -62,6 +62,17 @@ const gajiBualanan = [
   { label: '> 15.000.000', value: '> 15.000.000' },
 ];
 
+const tenorPinjaman = [
+  { label: '3', value: '3' },
+  { label: '6', value: '6' },
+  { label: '9', value: '9' },
+  { label: '12', value: '12' },
+  { label: '18', value: '18' },
+  { label: '24', value: '24' },
+  { label: '36', value: '36' },
+  { label: '48', value: '48' },
+];
+
 export default {
   genderItem,
   golDarahItem,
@@ -72,4 +83,5 @@ export default {
   pekerjaanItem,
   statusKeluarga,
   gajiBualanan,
+  tenorPinjaman,
 };

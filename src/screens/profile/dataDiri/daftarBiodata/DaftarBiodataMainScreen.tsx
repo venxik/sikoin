@@ -3,7 +3,6 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import moment from 'moment';
 
 import {
   Button,
@@ -15,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../../../config';
 import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../../../constants';
 import { fetchBiodata } from '../../../../redux/reducers/BiodataReducer';
+import { getFormattedDate } from '../../../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarBiodataMainScreen'>;
 
@@ -58,7 +58,7 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
           <DetailItemList title={strings.tempat_lahir} content={tempatLahir} />
           <DetailItemList
             title={strings.tgl_lahir}
-            content={!isEmpty(tanggalLahir) ? moment(tanggalLahir).format('DD/MM/YYYY') : ''}
+            content={!isEmpty(tanggalLahir) ? getFormattedDate(tanggalLahir) : ''}
           />
           <DetailItemList title={strings.jenis_kelamin} content={jenisKelamin} />
           <DetailItemList title={strings.golongan_darah} content={golDarah} />

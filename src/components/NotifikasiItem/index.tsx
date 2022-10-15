@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 
 import { useAppSelector } from '../../config';
 import { colors, sizes } from '../../constants';
+import { getFormattedDate } from '../../utils';
 import { NotifikasiItemProps } from './model';
 
 const NotifikasiItem = (props: NotifikasiItemProps) => {
@@ -26,7 +27,9 @@ const NotifikasiItem = (props: NotifikasiItemProps) => {
             <Text numberOfLines={1} style={styles.textName}>
               {perihal}
             </Text>
-            <Text style={styles.textTime}>{waktu}</Text>
+            <Text numberOfLines={1} style={styles.textTime}>
+              {getFormattedDate(waktu)}
+            </Text>
           </View>
           <Text style={styles.textContent} numberOfLines={1}>
             {excerpt}
@@ -46,14 +49,15 @@ const styles = StyleSheet.create({
   },
   chatContainer: {
     flexDirection: 'row',
-    padding: sizes.padding,
+    paddingVertical: sizes.padding,
+    paddingHorizontal: sizes.padding / 2,
     alignItems: 'center',
   },
   iconContainer: { width: 50, height: 50, borderRadius: 50 },
   textContainer: { marginLeft: sizes.padding / 2, width: '100%' },
   textInnerContainer: {
     flexDirection: 'row',
-    width: '80%',
+    width: '90%',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -61,11 +65,12 @@ const styles = StyleSheet.create({
     color: colors.bodyText,
     fontFamily: 'Poppins-SemiBold',
     fontSize: 16,
+    flex: 0.65,
   },
   textContent: {
     color: colors.bodyText,
     width: '70%',
     fontFamily: 'Inter-Regular',
   },
-  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium' },
+  textTime: { color: colors.primaryLight, fontFamily: 'Poppins-Medium', flex: 0.3 },
 });
