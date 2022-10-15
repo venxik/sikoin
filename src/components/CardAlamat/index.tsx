@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { useAppSelector } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
 import Button from '../Button';
-import { useAppSelector } from '../../config';
 import { CardAlamatProps } from './model';
 
 const CardAlamat = (props: CardAlamatProps) => {
   const { item, onPressUbah, onPressDelete, isCheckout = false } = props || {};
   const { judul, alamat } = item;
-  const { nama } =
-    useAppSelector(state => state.ProfileReducer.profileData) || {};
+  const { nama } = useAppSelector((state) => state.ProfileReducer.profileData) || {};
 
   return !isCheckout ? (
     <View style={styles.container}>
@@ -40,11 +40,7 @@ const CardAlamat = (props: CardAlamatProps) => {
       </View>
     </View>
   ) : (
-    <View
-      style={[
-        styles.container,
-        { borderWidth: 1, borderColor: colors.strokeGrey },
-      ]}>
+    <View style={[styles.container, { borderWidth: 1, borderColor: colors.strokeGrey }]}>
       <View style={styles.topContainer}>
         <Image source={icons.icon_pin} style={styles.pinIcon} />
         <Text style={styles.textJudul}>{judul}</Text>

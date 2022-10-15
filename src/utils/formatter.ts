@@ -3,13 +3,13 @@ import moment from 'moment';
 import RNFS from 'react-native-fs';
 import ImageResizer, { Response } from 'react-native-image-resizer';
 
-type formatNumberToCurrenyOptions = {
+type FormatNumberToCurrenyOptions = {
   significantDigits: number;
   thousandsSeparator: string;
   decimalSeparator: string;
 };
 
-const defaultOptions: formatNumberToCurrenyOptions = {
+const defaultOptions: FormatNumberToCurrenyOptions = {
   significantDigits: 0,
   thousandsSeparator: '.',
   decimalSeparator: ',',
@@ -17,20 +17,20 @@ const defaultOptions: formatNumberToCurrenyOptions = {
 
 const formatNumberToCurreny = (
   value: number | undefined,
-  options?: formatNumberToCurrenyOptions,
+  options?: FormatNumberToCurrenyOptions,
 ) => {
+  // eslint-disable-next-line no-param-reassign
   if (typeof value !== 'number') value = 0.0;
+  // eslint-disable-next-line no-param-reassign
   options = { ...defaultOptions, ...options };
   const temp: string = value.toFixed(options.significantDigits);
 
   const [currency] = temp.split('.');
-  return `${currency.replace(
-    /\B(?=(\d{3})+(?!\d))/g,
-    options.thousandsSeparator,
-  )}`;
+  return `${currency.replace(/\B(?=(\d{3})+(?!\d))/g, options.thousandsSeparator)}`;
 };
 
 const formatStringToCurrencyNumber = (nStr: string) => {
+  // eslint-disable-next-line no-param-reassign
   nStr += '';
   const x = nStr.split('.');
   let x1 = x[0];

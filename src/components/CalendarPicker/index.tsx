@@ -1,33 +1,16 @@
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
-import moment from 'moment';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { isEmpty } from 'lodash';
+import moment from 'moment';
+
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { CalendarPickerProps } from './model';
 
 const CalendarPicker = (props: CalendarPickerProps) => {
-  const {
-    title,
-    style,
-    onChangeDate,
-    value,
-    error,
-    errorText,
-    showIcon = true,
-  } = props || {};
-  const [date, setDate] = useState<Date>(
-    value ? new Date(value as Date) : new Date(),
-  );
+  const { title, style, onChangeDate, value, error, errorText, showIcon = true } = props || {};
+  const [date, setDate] = useState<Date>(value ? new Date(value as Date) : new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
@@ -49,15 +32,14 @@ const CalendarPicker = (props: CalendarPickerProps) => {
       {!isEmpty(title) && <Text style={styles.titleText}>{title}</Text>}
       <TouchableOpacity
         onPress={showDatepicker}
-        style={[
-          styles.container,
-          error && { borderColor: 'red', borderWidth: 1 },
-        ]}>
+        style={[styles.container, error && { borderColor: 'red', borderWidth: 1 }]}
+      >
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
+          }}
+        >
           <Image source={icons.icon_calendar_small} style={styles.icon} />
           <Text style={styles.valueText}>
             {value ? moment(date).format('DD/MM/YYYY') : strings.pilih_dot}

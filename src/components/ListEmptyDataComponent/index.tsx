@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+
 import { colors, icons, SCREEN_WIDTH, sizes } from '../../constants';
 import { ListEmptyDataComponentProps } from './model';
 

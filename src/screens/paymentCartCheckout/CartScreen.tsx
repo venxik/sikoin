@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { SafeAreaView, StyleSheet, FlatList, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button, HeaderBack } from '../../components';
 import CartItem from '../../components/CartItem';
 import { useAppSelector } from '../../config';
@@ -10,7 +12,7 @@ import { icons, sizes, strings } from '../../constants';
 type Props = NativeStackScreenProps<HomeStackParamList, 'CartScreen'>;
 
 const CartScreen: React.FC<Props> = ({ navigation }) => {
-  const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
+  const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
 
   const navigateToCheckout = () => {
     navigation.navigate('CheckoutScreen');
@@ -30,14 +32,11 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
           flexGrow: 1,
         }}
         ListEmptyComponent={
-          <View
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Keranjang Kosong</Text>
           </View>
         }
-        renderItem={({ item }) => (
-          <CartItem data={item} onPressVoucher={navigateToVoucher} />
-        )}
+        renderItem={({ item }) => <CartItem data={item} onPressVoucher={navigateToVoucher} />}
       />
       <Button
         onPress={navigateToCheckout}

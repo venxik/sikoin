@@ -99,16 +99,10 @@ const saldoSimpananSlice = createSlice({
   name: 'saldoSimpananSlice',
   initialState,
   reducers: {
-    fetchSaldoDataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<SaldoDataResponse>,
-    ) => {
+    fetchSaldoDataSuccess: (state: RootState, { payload }: PayloadAction<SaldoDataResponse>) => {
       state.saldo = payload;
     },
-    fetchSaldoDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchSaldoDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchCreateSaldoListSuccess: (
@@ -117,10 +111,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.createSaldoList = payload;
     },
-    fetchCreateSaldoListFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchCreateSaldoListFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchSubmitTopupSuccess: (
@@ -129,10 +120,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.message = payload.message;
     },
-    fetchSubmitTopupFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchSubmitTopupFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchSimpananDataSuccess: (
@@ -141,10 +129,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.simpanan = payload;
     },
-    fetchSimpananDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchSimpananDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchCreateSimpananListSuccess: (
@@ -153,10 +138,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.createSimpananList = payload;
     },
-    fetchCreateSimpananListFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchCreateSimpananListFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchSubmitPenarikanSuccess: (
@@ -165,10 +147,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.message = payload.message;
     },
-    fetchSubmitPenarikanFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchSubmitPenarikanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchMutasiSimpananSuccess: (
@@ -177,10 +156,7 @@ const saldoSimpananSlice = createSlice({
     ) => {
       state.mutasiSimpanan = payload;
     },
-    fetchMutasiSimpananFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchMutasiSimpananFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
@@ -190,11 +166,8 @@ export const fetchSaldoData = createAction('fetchSaldoData');
 export const fetchSimpananData = createAction('fetchSimpananData');
 export const fetchCreateSaldoList = createAction('fetchCreateSaldoList');
 export const fetchCreateSimpananList = createAction('fetchCreateSimpananList');
-export const fetchSubmitTopup =
-  createAction<SaldoSimpananTopupRequest>('fetchSubmitTopup');
-export const fetchSubmitPenarikan = createAction<SaldoSimpananTopupRequest>(
-  'fetchSubmitPenarikan',
-);
+export const fetchSubmitTopup = createAction<SaldoSimpananTopupRequest>('fetchSubmitTopup');
+export const fetchSubmitPenarikan = createAction<SaldoSimpananTopupRequest>('fetchSubmitPenarikan');
 export const fetchMutasiSimpanan = createAction<number>('fetchMutasiSimpanan');
 
 export const {

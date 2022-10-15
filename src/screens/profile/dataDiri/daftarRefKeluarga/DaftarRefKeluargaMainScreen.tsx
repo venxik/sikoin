@@ -1,13 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-} from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import {
   CardRefKeluarga,
   HeaderBack,
@@ -15,8 +10,8 @@ import {
   Popup1Button,
   Popup2Button,
 } from '../../../../components';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { icons, sizes, strings } from '../../../../constants';
 import {
   fetchDeleteRefKeluarga,
@@ -25,21 +20,16 @@ import {
   setDeleteRefKeluargaStatus,
 } from '../../../../redux/reducers/RefKeluargaReducer';
 
-type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
-  'DaftarRefKeluargaMainScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarRefKeluargaMainScreen'>;
 
 const DaftarRefKeluargaMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
-  const [showSuccessDeletePopup, setShowSuccessDeletePopup] =
-    useState<boolean>(false);
+  const [showSuccessDeletePopup, setShowSuccessDeletePopup] = useState<boolean>(false);
   const [showFailedPopup, setShowFailedPopup] = useState<boolean>(false);
-  const [selectKeluarga, setSelectKeluarga] =
-    useState<RefKeluargaResponse | null>(null);
+  const [selectKeluarga, setSelectKeluarga] = useState<RefKeluargaResponse | null>(null);
   const { keluargaList, deleteRefKeluargaStatus } =
-    useAppSelector(s => s.RefKeluargaReducer) || [];
+    useAppSelector((s) => s.RefKeluargaReducer) || [];
 
   useEffect(() => {
     dispatch(fetchGetRefKeluarga());

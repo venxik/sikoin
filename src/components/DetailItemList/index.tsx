@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { colors, sizes } from '../../constants';
 import { DetailItemListProps } from './model';
 
@@ -13,7 +14,8 @@ const DetailItemList = (props: DetailItemListProps) => {
           borderColor: showBorder ? colors.strokeGrey : '',
           borderBottomWidth: showBorder ? 0.5 : 0,
         },
-      ]}>
+      ]}
+    >
       <Text style={styles.titleText}>{title}</Text>
       <Text style={styles.contentText}>{content ? content : '-'}</Text>
     </View>

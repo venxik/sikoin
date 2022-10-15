@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, icons, sizes } from '../../constants';
 import { SubmenuItemListProps } from './model';
 
@@ -10,13 +11,12 @@ const SubmenuItemList = (props: SubmenuItemListProps) => {
       <View
         style={{
           flexDirection: 'row',
-        }}>
+        }}
+      >
         <Image source={icon} style={styles.iconStyle} />
         <Text style={styles.titleStyle}>{title}</Text>
       </View>
-      {showButtonIcon && (
-        <Image source={icons.arrow_right_primary_2} style={styles.iconStyle} />
-      )}
+      {showButtonIcon && <Image source={icons.arrow_right_primary_2} style={styles.iconStyle} />}
     </TouchableOpacity>
   );
 };

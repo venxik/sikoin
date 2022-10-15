@@ -1,15 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-} from '../../constants';
+import { StyleSheet, Text, View } from 'react-native';
+
 import FastImage from 'react-native-fast-image';
-import { CardPromoProps } from './model';
+
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
 import Button from '../Button';
+import { CardPromoProps } from './model';
 
 const CardPromo = (props: CardPromoProps) => {
   const { item, onPressSelengkapnya, onPressWeb, style } = props || null;

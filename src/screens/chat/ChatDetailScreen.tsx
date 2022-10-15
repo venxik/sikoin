@@ -1,27 +1,27 @@
 import React, { FC } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { HeaderBack } from '../../components';
-import { colors, SCREEN_WIDTH, sizes } from '../../constants';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ChatStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config';
 import FastImage from 'react-native-fast-image';
 import RenderHTML from 'react-native-render-html';
+
+import { HeaderBack } from '../../components';
+import { useAppSelector } from '../../config';
+import { ChatStackParamList } from '../../config/navigation/model';
+import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatDetailScreen'>;
 
 const ChatDetailScreen: FC<Props> = () => {
   const { body, logoKoperasi, pengirim, perihal, waktu } = useAppSelector(
-    s => s.NotifikasiReducer.notifikasiDetail,
+    (s) => s.NotifikasiReducer.notifikasiDetail,
   );
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
       <HeaderBack
         title={perihal}
-        rightIcon={
-          <FastImage source={{ uri: logoKoperasi }} style={styles.iconHeader} />
-        }
+        rightIcon={<FastImage source={{ uri: logoKoperasi }} style={styles.iconHeader} />}
       />
       <View style={styles.mainContainer}>
         <View style={styles.headerContainer}>

@@ -1,23 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import FastImage from 'react-native-fast-image';
-import { CardMarketSmallProps } from './model';
+
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
+import { CardMarketSmallProps } from './model';
 
 const CardMarketSmall = (props: CardMarketSmallProps) => {
   const { item, onPress, style, onPressVoucher } = props || null;
   const { productName, price, image } = item || {};
 
   const onPressWishlist = () => {
-    console.log(item);
+    console.warn(item);
   };
 
   return (
@@ -45,9 +40,7 @@ const CardMarketSmall = (props: CardMarketSmallProps) => {
           </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={onPressVoucher}
-          style={styles.touchableContainer}>
+        <TouchableOpacity onPress={onPressVoucher} style={styles.touchableContainer}>
           <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
           <Text style={styles.textVoucher}>{strings.voucher_toko}</Text>
           <Image

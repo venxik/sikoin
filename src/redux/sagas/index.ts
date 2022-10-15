@@ -1,9 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
+
 import {
+  watchDeleteAlamat,
   watchGetAlamat,
   watchSubmitAlamat,
   watchUpdateAlamat,
-  watchDeleteAlamat,
 } from './AlamatSaga';
 import { watchGetBiodata, watchUpdateBiodata } from './BiodataSaga';
 import { watchGetAllDokumen } from './DokumenSaga';
@@ -17,10 +18,7 @@ import {
   watchSendKoperasiData,
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
-import {
-  watchGetAllNotifikasi,
-  watchGetNotifikasiDetail,
-} from './NotifikasiSaga';
+import { watchGetAllNotifikasi, watchGetNotifikasiDetail } from './NotifikasiSaga';
 import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
 import {
   watchGetPinjamanDataStep1,
@@ -38,19 +36,19 @@ import {
 import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import { watchGetAllPromo, watchGetPromoDetail } from './PromoSaga';
 import {
+  watchDeleteRefKeluarga,
   watchGetRefKeluarga,
   watchSubmitRefKeluarga,
   watchUpdateRefKeluarga,
-  watchDeleteRefKeluarga,
 } from './RefKeluargaSaga';
 import {
   watchGetCreateSaldoList,
   watchGetCreateSimpananList,
+  watchGetMutasiSimpanan,
   watchGetSaldoData,
   watchGetSimpananData,
-  watchSubmitTopup,
   watchSubmitPenarikan,
-  watchGetMutasiSimpanan,
+  watchSubmitTopup,
 } from './SaldoSimpananSaga';
 
 // Redux Saga: Root Saga

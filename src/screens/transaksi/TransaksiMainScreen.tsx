@@ -1,20 +1,9 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  Image,
-  Text,
-  Alert,
-} from 'react-native';
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+import { Alert, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+
 import {
   CalendarPicker,
   FilterHorizontal,
@@ -22,20 +11,18 @@ import {
   MenuHeaderIcon,
   TransaksiItemList,
 } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 
 const filter = ['Semua', 'Pembelian', 'Topup'];
 type Props = NativeStackScreenProps<HomeStackParamList, 'TransaksiMainScreen'>;
 
 const TransaksiMainScreen: FC<Props> = () => {
-  const { transaksiDataList } = useAppSelector(s => s.TransaksiReducer) || {};
+  const { transaksiDataList } = useAppSelector((s) => s.TransaksiReducer) || {};
 
   const [selectedFilter, setSelectedFilter] = useState(filter[0]);
-  const [startDate, setStartDate] = useState<Date | number | string>(
-    Date.now(),
-  );
+  const [startDate, setStartDate] = useState<Date | number | string>(Date.now());
   const [endDate, setEndDate] = useState<Date | number | string>(Date.now());
 
   const renderRightButtonHeader = () => {
@@ -51,13 +38,12 @@ const TransaksiMainScreen: FC<Props> = () => {
                 marginTop: 30,
               },
             }}
-            optionsContainerStyle={styles.optionsContainerStyle}>
-            <MenuOption onSelect={() => Alert.alert(`Save`)}>
+            optionsContainerStyle={styles.optionsContainerStyle}
+          >
+            <MenuOption onSelect={() => Alert.alert('Save')}>
               <View style={{ flexDirection: 'row' }}>
                 <Image source={icons.icon_unduh} style={styles.icon} />
-                <Text style={styles.textPopupMenu}>
-                  {strings.unduh_riwayat_transaksi}
-                </Text>
+                <Text style={styles.textPopupMenu}>{strings.unduh_riwayat_transaksi}</Text>
               </View>
             </MenuOption>
           </MenuOptions>
@@ -72,7 +58,8 @@ const TransaksiMainScreen: FC<Props> = () => {
       <ScrollView
         style={{
           padding: sizes.padding,
-        }}>
+        }}
+      >
         <MenuHeaderIcon menu={strings.mutasi} />
         <View style={styles.mainContainer}>
           <View
@@ -80,11 +67,12 @@ const TransaksiMainScreen: FC<Props> = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
-            }}>
+            }}
+          >
             <CalendarPicker
               style={{ width: '47%' }}
               value={startDate}
-              onChangeDate={value => setStartDate(value)}
+              onChangeDate={(value) => setStartDate(value)}
               showIcon={false}
             />
             <View
@@ -98,7 +86,7 @@ const TransaksiMainScreen: FC<Props> = () => {
             <CalendarPicker
               style={{ width: '47%' }}
               value={endDate}
-              onChangeDate={value => setEndDate(value)}
+              onChangeDate={(value) => setEndDate(value)}
               showIcon={false}
             />
           </View>

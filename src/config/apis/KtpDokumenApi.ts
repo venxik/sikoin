@@ -1,6 +1,7 @@
-import HttpService from '../services/HttpService';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -29,11 +30,7 @@ class KtpDokumenApi {
       data: formData,
     };
 
-    const resp = await HttpService.post(
-      apis.endpoints.ktpDokumen.ktpDokumen,
-      {},
-      config,
-    );
+    const resp = await HttpService.post(apis.endpoints.ktpDokumen.ktpDokumen, {}, config);
     return resp;
   }
 }

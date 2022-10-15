@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import moment from 'moment';
+import { Controller, useForm } from 'react-hook-form';
+
 import {
   Button,
   CalendarPicker,
@@ -13,25 +13,16 @@ import {
   HeaderBack,
   TextInputForm,
 } from '../../../../components';
-import { colors, dropdownItems, sizes, strings } from '../../../../constants';
-import { useForm, Controller } from 'react-hook-form';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { colors, dropdownItems, sizes, strings } from '../../../../constants';
+import { BiodataResponse, fetchUpdateBiodata } from '../../../../redux/reducers/BiodataReducer';
 import { formatter } from '../../../../utils';
-import moment from 'moment';
-import {
-  BiodataResponse,
-  fetchUpdateBiodata,
-} from '../../../../redux/reducers/BiodataReducer';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarBiodataAddScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarBiodataAddScreen'>;
 
 const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
-  const { biodataData } = useAppSelector(s => s.BiodataReducer) || {};
+  const { biodataData } = useAppSelector((s) => s.BiodataReducer) || {};
   const {
     tempatLahir,
     tanggalLahir,
@@ -80,14 +71,8 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
-        <HeaderBack
-          onPress={() => navigation.goBack()}
-          title={strings.biodata}
-        />
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
+        <HeaderBack onPress={() => navigation.goBack()} title={strings.biodata} />
         <ScrollView>
           <View style={styles.innerContainer}>
             <Controller
@@ -97,7 +82,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.tempat_lahir}
                 />
               )}
@@ -108,7 +93,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <CalendarPicker
                   title={strings.tgl_lahir}
-                  onChangeDate={date => {
+                  onChangeDate={(date) => {
                     onChange(date);
                   }}
                   value={value}
@@ -116,8 +101,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
               )}
             />
 
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
                 name="jenisKelamin"
@@ -126,7 +110,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                     style={{ width: '55%' }}
                     title={strings.jenis_kelamin}
                     data={dropdownItems.genderItem}
-                    onChange={value => onChange(value)}
+                    onChange={(value) => onChange(value)}
                     value={value}
                   />
                 )}
@@ -139,7 +123,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                     style={{ width: '40%' }}
                     title={strings.gol_darah}
                     data={dropdownItems.golDarahItem}
-                    onChange={value => onChange(value)}
+                    onChange={(value) => onChange(value)}
                     value={value}
                     maxHeight={200}
                   />
@@ -153,7 +137,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.kewarganegaraan}
                   data={dropdownItems.kewarganegaraanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -165,7 +149,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.pendidikan_terakhir}
                   data={dropdownItems.pendidikanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -177,7 +161,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.agama}
                   data={dropdownItems.agamaItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -189,7 +173,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.status_pernikahan}
                   data={dropdownItems.statusPernikahanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -201,7 +185,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value.toString()}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.jumlah_anak}
                 />
               )}
@@ -215,7 +199,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                   errorText={errors.noRek?.message}
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.no_rekening}
                 />
               )}
@@ -233,7 +217,7 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.bank}
                 />
               )}

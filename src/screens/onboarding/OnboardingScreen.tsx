@@ -1,16 +1,7 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import { ParentStackParamList } from '../../config/navigation/model';
-import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
-import { AsyncStore } from '../../utils';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -19,6 +10,10 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+
+import { ParentStackParamList } from '../../config/navigation/model';
+import { colors, icons, images, SCREEN_WIDTH, strings } from '../../constants';
+import { AsyncStore } from '../../utils';
 
 const dotSize = 6;
 
@@ -54,7 +49,7 @@ const OnboardingScreen: FC<Props> = ({ navigation }) => {
   };
 
   const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
+    onScroll: (event) => {
       scrollX.value = event.contentOffset.x;
     },
   });
@@ -83,12 +78,7 @@ const OnboardingScreen: FC<Props> = ({ navigation }) => {
               ]),
             };
           });
-          return (
-            <Animated.View
-              style={[styles.dot, animatedStyles]}
-              key={`dot-${index}`}
-            />
-          );
+          return <Animated.View style={[styles.dot, animatedStyles]} key={`dot-${index}`} />;
         })}
       </View>
     );
@@ -102,16 +92,13 @@ const OnboardingScreen: FC<Props> = ({ navigation }) => {
         decelerationRate={0}
         scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}
-        onScroll={scrollHandler}>
+        onScroll={scrollHandler}
+      >
         {onBoardings.map((item, index) => {
           return (
             <View key={index} style={styles.mainContainer}>
               <View style={styles.mainInnerContainer}>
-                <Image
-                  source={item.img}
-                  resizeMode="cover"
-                  style={styles.logo}
-                />
+                <Image source={item.img} resizeMode="cover" style={styles.logo} />
               </View>
               <View style={{ paddingHorizontal: '10%' }}>
                 <Text style={styles.titleText}>{item.title}</Text>
@@ -119,13 +106,8 @@ const OnboardingScreen: FC<Props> = ({ navigation }) => {
               </View>
               {item.last ? (
                 <View style={styles.lastButtonContainer}>
-                  <TouchableOpacity
-                    onPress={navigateToLoginScreen}
-                    style={styles.lastButton}>
-                    <Image
-                      source={icons.arrow_right}
-                      style={{ width: '50%', height: '50%' }}
-                    />
+                  <TouchableOpacity onPress={navigateToLoginScreen} style={styles.lastButton}>
+                    <Image source={icons.arrow_right} style={{ width: '50%', height: '50%' }} />
                   </TouchableOpacity>
                 </View>
               ) : null}

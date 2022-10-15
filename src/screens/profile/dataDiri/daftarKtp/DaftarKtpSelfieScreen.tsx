@@ -1,23 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RNCamera } from 'react-native-camera';
 import { useCamera } from 'react-native-camera-hooks';
-import { Button } from '../../../../components';
-import {
-  colors,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-} from '../../../../constants';
-import { addKtpSelfie } from '../../../../redux/reducers/KtpReducer';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
-import { useAppDispatch } from '../../../../config';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarKtpSelfieScreen'
->;
+import { Button } from '../../../../components';
+import { useAppDispatch } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../../../constants';
+import { addKtpSelfie } from '../../../../redux/reducers/KtpReducer';
+
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarKtpSelfieScreen'>;
 
 const DaftarKtpSelfieScreen: React.FC<Props> = ({ navigation }) => {
   const [{ cameraRef, ratio, autoFocusPoint }, { takePicture }] = useCamera();
@@ -30,7 +25,7 @@ const DaftarKtpSelfieScreen: React.FC<Props> = ({ navigation }) => {
       navigation.goBack();
     } catch {
       (e: unknown) => {
-        console.log(e);
+        console.error(e);
       };
     }
   };

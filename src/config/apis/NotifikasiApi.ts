@@ -1,6 +1,7 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -13,9 +14,7 @@ class NotifikasiApi {
   }
 
   static async getNotifikasiDetail(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.notifikasi.getNotifikasi}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.notifikasi.getNotifikasi}/${id}`);
     return resp;
   }
 }

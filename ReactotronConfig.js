@@ -1,7 +1,8 @@
-import Reactotron from 'reactotron-react-native';
-import sagaPlugin from 'reactotron-redux-saga';
-import { reactotronRedux } from 'reactotron-redux';
+/* eslint-disable no-console */
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Reactotron from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
+import sagaPlugin from 'reactotron-redux-saga';
 
 Reactotron.configure({ name: 'app_name' })
   .setAsyncStorageHandler(AsyncStorage)

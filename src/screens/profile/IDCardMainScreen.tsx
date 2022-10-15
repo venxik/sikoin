@@ -1,17 +1,12 @@
-import Clipboard from '@react-native-clipboard/clipboard';
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-} from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { Button, HeaderBack } from '../../components';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, SCREEN_HEIGHT, sizes } from '../../constants';
-import { Button, HeaderBack } from '../../components';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'IDCardMainScreen'>;
 
@@ -29,13 +24,11 @@ const IDCardMainScreen: React.FC<Props> = ({ navigation }) => {
             flexDirection: 'row',
             marginVertical: sizes.padding,
             alignItems: 'center',
-          }}>
+          }}
+        >
           <Text style={styles.textStyle}>{'TESTING'}</Text>
           <TouchableOpacity onPress={copyToClipboard}>
-            <Image
-              source={icons.icon_copy_clipboard}
-              style={styles.iconClipboard}
-            />
+            <Image source={icons.icon_copy_clipboard} style={styles.iconClipboard} />
           </TouchableOpacity>
         </View>
         <Button

@@ -4,8 +4,7 @@ export default {
   onboarding_desc_1:
     'Berkomunikasi dengan tim Kamu serta siapkan proses dan sasaran bisnis melalui aplikasi seluler dan web.',
   onboarding_title_2: 'Semua Di Satu Tempat',
-  onboarding_desc_2:
-    'Nikmati fitur koperasi modern yang berlimpah dalam satu sistem terpadu. ',
+  onboarding_desc_2: 'Nikmati fitur koperasi modern yang berlimpah dalam satu sistem terpadu. ',
   onboarding_title_3: 'Akses Tiada Batas',
   onboarding_desc_3:
     'Data anggota, simpanan, pinjaman, keuangan, bisnis, transaksi, dan lainnya akan terekam dan terkait satu sama lain.',
@@ -16,8 +15,7 @@ export default {
   popup_lupa_password_desc:
     'Password akan direset menjadi password sementara dan dikirimkan ke emailmu. Gunakan password untuk login, dan ubah password dari setting sesuai keinginan.',
   popup_lupa_password_success_title: 'Reset Berhasil',
-  popup_lupa_password_success_desc:
-    'Cek emailmu untuk melihat password sementara.',
+  popup_lupa_password_success_desc: 'Cek emailmu untuk melihat password sementara.',
 
   /* DAFTAR KOPERASI */
   daftar: 'Daftar',
@@ -99,8 +97,7 @@ export default {
   unduh_file: 'Unduh File',
   buka_file: 'Buka File',
   hapus_file: 'Hapus File',
-  hapus_file_popup_confirmation_title:
-    'Kamu akan menghapus salah satu file koperasimu',
+  hapus_file_popup_confirmation_title: 'Kamu akan menghapus salah satu file koperasimu',
   hapus_file_popup_confirmation_content: 'Apa Kamu Yakin?',
   hapus_file_popup_success_title: 'File sudah dihapus dari Dokumen koperasimu',
   tipe: 'Tipe',
@@ -123,8 +120,7 @@ export default {
   sukarela: 'Sukarela',
   popup_simpanan_content:
     'Saldo Simpanan digunakan untuk kewajiban berkoperasi. Simpanan tertentu dapat digunakan sebagai alat transaksi pembayaran di dalam SIKOIN.',
-  popup_saldo_content:
-    'Saldo dapat digunakan sebagai alat transaksi pembayaran untuk :',
+  popup_saldo_content: 'Saldo dapat digunakan sebagai alat transaksi pembayaran untuk :',
 
   // TOPUP
   top_up: 'Top Up',
@@ -317,8 +313,7 @@ export default {
   error_generic_title: 'Oops!',
   error_generic_message: 'Ada Kesalahan.\nMohon dicoba kembali',
   error_unreachable_title: 'Server Unreachable',
-  error_unreachable_message:
-    'The server is currently unavailable. Please try again.',
+  error_unreachable_message: 'The server is currently unavailable. Please try again.',
   error_400_title: 'Bad Request',
   error_400_message: 'Missing parameter or bad json format.',
   error_401_title: 'Bad Request',

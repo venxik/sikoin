@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
 import { colors, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants';
 import { PinjamanHorizontalListItemProps } from './model';
 

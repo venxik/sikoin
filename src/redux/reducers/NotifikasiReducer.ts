@@ -42,16 +42,10 @@ const notifikasiSlice = createSlice({
   name: 'notifikasiSlice',
   initialState,
   reducers: {
-    fetchNotifikasiSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<NotifikasiResponse>,
-    ) => {
+    fetchNotifikasiSuccess: (state: RootState, { payload }: PayloadAction<NotifikasiResponse>) => {
       state.notifikasiDataList = payload;
     },
-    fetchNotifikasiFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchNotifikasiFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchNotifikasiDetailSuccess: (
@@ -60,19 +54,14 @@ const notifikasiSlice = createSlice({
     ) => {
       state.notifikasiDetail = payload;
     },
-    fetchNotifikasiDetailFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchNotifikasiDetailFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
 export const fetchNotifikasi = createAction('fetchNotifikasi');
-export const fetchNotifikasiDetail = createAction<number>(
-  'fetchNotifikasiDetail',
-);
+export const fetchNotifikasiDetail = createAction<number>('fetchNotifikasiDetail');
 
 export const {
   fetchNotifikasiSuccess,

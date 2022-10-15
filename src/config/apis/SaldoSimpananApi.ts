@@ -1,7 +1,8 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
 import { SaldoSimpananTopupRequest } from '../../redux/reducers/SaldoSimpananReducer';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -34,9 +35,7 @@ class SaldoSimpananApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async submitTopup(
-    data: SaldoSimpananTopupRequest,
-  ): Promise<AxiosResponse> {
+  static async submitTopup(data: SaldoSimpananTopupRequest): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.saldo.saldo, data);
     return resp;
   }
@@ -57,9 +56,7 @@ class SaldoSimpananApi {
    * @returns { Object } Promise either resolve or rejected
    */
   static async getCreateSimpananList(): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      apis.endpoints.simpanan.createSimpananList,
-    );
+    const resp = await HttpService.get(apis.endpoints.simpanan.createSimpananList);
     return resp;
   }
 
@@ -69,17 +66,13 @@ class SaldoSimpananApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async submitPenarikan(
-    data: SaldoSimpananTopupRequest,
-  ): Promise<AxiosResponse> {
+  static async submitPenarikan(data: SaldoSimpananTopupRequest): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.simpanan.simpanan, data);
     return resp;
   }
 
   static async mutasiSimpanan(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.simpanan.mutasiSimpanan}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.simpanan.mutasiSimpanan}/${id}`);
     return resp;
   }
 }

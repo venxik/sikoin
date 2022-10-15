@@ -1,6 +1,7 @@
-import HttpService from '../services/HttpService';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -33,11 +34,7 @@ class ProfileApi {
       },
       data: formData,
     };
-    const resp = await HttpService.post(
-      apis.endpoints.profile.profile,
-      {},
-      config,
-    );
+    const resp = await HttpService.post(apis.endpoints.profile.profile, {}, config);
     return resp;
   }
 }

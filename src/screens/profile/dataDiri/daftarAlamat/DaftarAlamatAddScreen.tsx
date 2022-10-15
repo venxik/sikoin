@@ -1,34 +1,27 @@
-import { useNavigation } from '@react-navigation/native';
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+
 import { Button, HeaderBack, TextInputForm } from '../../../../components';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, sizes, strings } from '../../../../constants';
-import { useForm, Controller } from 'react-hook-form';
 import {
   AlamatDataResponse,
   fetchSubmitAlamat,
   fetchUpdateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { formatter } from '../../../../utils';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarAlamatAddScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarAlamatAddScreen'>;
 
 const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const { update, item } = route.params;
-  const { id, judul, alamat, rt, rw, provinsi, kabupaten, kecamatan, kodePos } =
-    item || {};
+  const { id, judul, alamat, rt, rw, provinsi, kabupaten, kecamatan, kodePos } = item || {};
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -61,10 +54,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
         <HeaderBack
           onPress={() => navigation.goBack()}
           title={update ? strings.ubah_alamat : strings.tambah_alamat}
@@ -78,7 +68,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.judul_alamat}
                 />
               )}
@@ -90,14 +80,13 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.alamat_lengkap}
                   multiline
                 />
               )}
             />
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
                 name="rt"
@@ -106,7 +95,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                     textBoxStyle={{ width: '70%' }}
                     style={{ width: '45%' }}
                     value={value}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.rt}
                     keyboardType="numeric"
                     onBlur={onBlur}
@@ -122,7 +111,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                     style={{ width: '45%' }}
                     onBlur={onBlur}
                     value={value}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.rw}
                     keyboardType="numeric"
                   />
@@ -136,7 +125,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.provinsi}
                 />
               )}
@@ -148,7 +137,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.kabupaten_kota}
                 />
               )}
@@ -160,7 +149,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.kecamatan}
                 />
               )}
@@ -173,7 +162,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.kodepos}
                   keyboardType="numeric"
                   maxLength={5}

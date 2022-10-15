@@ -1,18 +1,20 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
-import { SafeAreaView, View, StyleSheet, ScrollView, Text } from 'react-native';
-import { HeaderBack } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config';
-import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FastImage from 'react-native-fast-image';
 import RenderHTML from 'react-native-render-html';
+
+import { HeaderBack } from '../../components';
+import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
+import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'KabarDetailScreen'>;
 
 const KabarDetailScreen: FC<Props> = () => {
   const { banner, judul, kategori, konten } =
-    useAppSelector(state => state.KabarReducer.kabarDetail) || {};
+    useAppSelector((state) => state.KabarReducer.kabarDetail) || {};
 
   return (
     <SafeAreaView style={styles.container}>

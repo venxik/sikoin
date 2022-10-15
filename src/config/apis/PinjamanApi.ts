@@ -1,11 +1,12 @@
-import HttpService from '../services/HttpService';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
 import {
   CreatePinjamanInfo,
   PinjamanStep2Data,
   PinjamanStep3Data,
 } from '../../redux/reducers/PinjamanReducer';
+import HttpService from '../services/HttpService';
 
 class PinjamanApi {
   static async getInitialData(): Promise<AxiosResponse> {
@@ -14,23 +15,17 @@ class PinjamanApi {
   }
 
   static async getDisetujuiData(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.pinjaman.disetujui}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.pinjaman.disetujui}/${id}`);
     return resp;
   }
 
   static async getDitolakData(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.pinjaman.ditolak}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.pinjaman.ditolak}/${id}`);
     return resp;
   }
 
   static async getDisetujuiDetail(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.pinjaman.detailDisetujui}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.pinjaman.detailDisetujui}/${id}`);
     return resp;
   }
 
@@ -65,24 +60,16 @@ class PinjamanApi {
       data: formData,
     };
 
-    const resp = await HttpService.post(
-      apis.endpoints.pinjaman.create,
-      {},
-      config,
-    );
+    const resp = await HttpService.post(apis.endpoints.pinjaman.create, {}, config);
     return resp;
   }
 
-  static async fetchSummaryData(
-    data: CreatePinjamanInfo,
-  ): Promise<AxiosResponse> {
+  static async fetchSummaryData(data: CreatePinjamanInfo): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.pinjaman.summary, data);
     return resp;
   }
 
-  static async fetchPostCreate(
-    data: CreatePinjamanInfo,
-  ): Promise<AxiosResponse> {
+  static async fetchPostCreate(data: CreatePinjamanInfo): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.pinjaman.create, data);
     return resp;
   }

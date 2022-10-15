@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
@@ -22,11 +24,7 @@ const PembayaranSuccessScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.mainContainer}>
-        <Image
-          source={icons.icon_topup_success}
-          style={styles.icon}
-          resizeMode="contain"
-        />
+        <Image source={icons.icon_topup_success} style={styles.icon} resizeMode="contain" />
         <Text style={styles.textTitle}>{strings.topup_success_title}</Text>
         <Text style={styles.textContent}>{strings.topup_success_content}</Text>
       </View>

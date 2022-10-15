@@ -1,7 +1,4 @@
-import {
-  createNavigationContainerRef,
-  NavigatorScreenParams,
-} from '@react-navigation/native';
+import { createNavigationContainerRef, NavigatorScreenParams } from '@react-navigation/native';
 
 const navigationRef = createNavigationContainerRef();
 
@@ -32,4 +29,4 @@ const navigateAndReset = (
   }
 };
 
-export { navigationRef, navigate, goBack, navigateAndReset };
+export { goBack, navigate, navigateAndReset, navigationRef };

@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, HeaderBack } from '../../components';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ParentStackParamList } from '../../config/navigation/model';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiSuccessScreen'
->;
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Button, HeaderBack } from '../../components';
+import { ParentStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiSuccessScreen'>;
 
 const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
   const { email } = route.params;
@@ -33,18 +32,15 @@ const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
             width={3}
             fill={100}
             tintColor={colors.primary}
-            backgroundColor={colors.primaryLight}>
+            backgroundColor={colors.primaryLight}
+          >
             {() => <Image source={icons.icon_email} style={styles.iconStyle} />}
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.cek_inbox}</Text>
         </View>
-        <Text style={styles.textContent1}>
-          {strings.daftar_koperasi_success_1}
-        </Text>
+        <Text style={styles.textContent1}>{strings.daftar_koperasi_success_1}</Text>
         <Text style={styles.textEmail}>{email}</Text>
-        <Text style={styles.textContent2}>
-          {strings.daftar_koperasi_success_2}
-        </Text>
+        <Text style={styles.textContent2}>{strings.daftar_koperasi_success_2}</Text>
       </View>
 
       <Button

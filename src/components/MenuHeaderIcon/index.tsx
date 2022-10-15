@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { colors, images, SCREEN_WIDTH, strings } from '../../constants';
 import { MenuHeaderIconProps } from './model';
 
@@ -32,11 +33,7 @@ const MenuHeaderIcon = (props: MenuHeaderIconProps) => {
 
   return (
     <View style={[styles.container, { ...style }]}>
-      <Image
-        source={renderIcon()}
-        style={styles.iconStyle}
-        resizeMode="contain"
-      />
+      <Image source={renderIcon()} style={styles.iconStyle} resizeMode="contain" />
       <Text style={styles.textStyle}>{title ? title : menu}</Text>
     </View>
   );

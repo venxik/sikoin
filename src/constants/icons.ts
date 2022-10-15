@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const arrow_right = require('assets/icons/arrow_right.png');
 const edit_textbox = require('assets/icons/edit_textbox.png');

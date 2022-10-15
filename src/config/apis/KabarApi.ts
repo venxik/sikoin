@@ -1,6 +1,7 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -11,10 +12,9 @@ class KabarApi {
     const resp = await HttpService.get(apis.endpoints.kabar.getKabar);
     return resp;
   }
+
   static async getKabarDetail(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.get(
-      `${apis.endpoints.kabar.getKabar}/${id}`,
-    );
+    const resp = await HttpService.get(`${apis.endpoints.kabar.getKabar}/${id}`);
     return resp;
   }
 }

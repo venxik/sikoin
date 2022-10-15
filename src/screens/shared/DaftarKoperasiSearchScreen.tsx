@@ -1,22 +1,14 @@
 import React, { FC, useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { HeaderBack, TextInputBorder } from '../../components';
-import {
-  colors,
-  icons,
-  namaKoperasiDummy,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ParentStackParamList } from '../../config/navigation/model';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiSearchScreen'
->;
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { HeaderBack, TextInputBorder } from '../../components';
+import { ParentStackParamList } from '../../config/navigation/model';
+import { colors, icons, namaKoperasiDummy, SCREEN_WIDTH, sizes, strings } from '../../constants';
+
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiSearchScreen'>;
 
 const DaftarKoperasiSearchScreen: FC<Props> = ({ navigation }) => {
   const [koperasi, setKoperasi] = useState<string>('');
@@ -26,9 +18,7 @@ const DaftarKoperasiSearchScreen: FC<Props> = ({ navigation }) => {
   const onChangeKoperasi = (value: string) => {
     setKoperasi(value);
     if (value.length > 2) {
-      const result = namaKoperasiDummy.filter(value =>
-        value.nama.includes(koperasi),
-      );
+      const result = namaKoperasiDummy.filter((v) => v.nama.includes(koperasi));
       setData(result);
     }
   };
@@ -39,7 +29,7 @@ const DaftarKoperasiSearchScreen: FC<Props> = ({ navigation }) => {
       <View style={styles.bottomContainer}>
         <TextInputBorder
           value={koperasi}
-          onChangeText={e => onChangeKoperasi(e)}
+          onChangeText={(e) => onChangeKoperasi(e)}
           placeholder={strings.masukan_nama_koperasimu}
           icon={icons.icon_pencil_textbox}
         />

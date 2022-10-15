@@ -57,28 +57,16 @@ const profileSlice = createSlice({
   name: 'profileSlice',
   initialState,
   reducers: {
-    getProfileSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<ProfileResponse>,
-    ) => {
+    getProfileSuccess: (state: RootState, { payload }: PayloadAction<ProfileResponse>) => {
       state.profileData = payload;
     },
-    getProfileFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getProfileFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    updateProfileSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<ProfileResponse>,
-    ) => {
+    updateProfileSuccess: (state: RootState, { payload }: PayloadAction<ProfileResponse>) => {
       state.profileData = payload;
     },
-    updateProfileFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    updateProfileFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
@@ -87,11 +75,7 @@ const profileSlice = createSlice({
 export const fetchProfile = createAction('fetchProfile');
 export const fetchUpdateProfile = createAction<FormData>('fetchUpdateProfile');
 
-export const {
-  getProfileFailed,
-  getProfileSuccess,
-  updateProfileFailed,
-  updateProfileSuccess,
-} = profileSlice.actions;
+export const { getProfileFailed, getProfileSuccess, updateProfileFailed, updateProfileSuccess } =
+  profileSlice.actions;
 
 export default profileSlice.reducer;

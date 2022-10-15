@@ -1,7 +1,8 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
 import { PekerjaanResponse } from '../../redux/reducers/PekerjaanReducer';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -24,13 +25,8 @@ class PekerjaanApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async updatePekerjaan(
-    data: PekerjaanResponse,
-  ): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(
-      apis.endpoints.pekerjaan.pekerjaan,
-      data,
-    );
+  static async updatePekerjaan(data: PekerjaanResponse): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.pekerjaan.pekerjaan, data);
     return resp;
   }
 }

@@ -1,6 +1,7 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic

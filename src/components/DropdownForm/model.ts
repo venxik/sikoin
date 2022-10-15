@@ -1,5 +1,6 @@
-import { FieldError } from 'react-hook-form';
 import { ViewStyle } from 'react-native';
+
+import { FieldError } from 'react-hook-form';
 
 export interface DropdownFormProps {
   title?: string;

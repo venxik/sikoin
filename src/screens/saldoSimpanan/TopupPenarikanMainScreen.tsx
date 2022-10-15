@@ -1,31 +1,29 @@
-import { isEmpty } from 'lodash';
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
   Image,
-  ScrollView,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Button, HeaderBack } from '../../components';
-import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import { formatter } from '../../utils';
+
 import BottomSheet from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../config/navigation/model';
+import { isEmpty } from 'lodash';
+
+import { Button, HeaderBack } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 import {
   fetchCreateSaldoList,
   fetchCreateSimpananList,
 } from '../../redux/reducers/SaldoSimpananReducer';
+import { formatter } from '../../utils';
 
 const topupDefaultNominal = [
   { item: '10', value: '10000' },
@@ -36,25 +34,9 @@ const topupDefaultNominal = [
   { item: '500', value: '500000' },
 ];
 
-const value = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '0',
-  '000',
-  'delete',
-];
+const value = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '000', 'delete'];
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'TopupPenarikanMainScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'TopupPenarikanMainScreen'>;
 
 type JenisTopupPenarikan = { nama: string; id: number };
 
@@ -63,23 +45,20 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
   const [nominal, setNominal] = useState<string>('');
   const [nominalContainer, setNominalContainer] = useState<string>('');
   const [selectedNominal, setSelectedNominal] = useState<number>(-1);
-  const [selectedTopupPenarikan, setSelectedTopupPenarikan] =
-    useState<JenisTopupPenarikan | null>(null);
+  const [selectedTopupPenarikan, setSelectedTopupPenarikan] = useState<JenisTopupPenarikan | null>(
+    null,
+  );
 
   //BottomSheet
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
   const handleSheetChange = useCallback(() => null, []);
 
-  const { createSaldoList, createSimpananList } = useAppSelector(
-    s => s.SaldoSimpananReducer,
-  );
+  const { createSaldoList, createSimpananList } = useAppSelector((s) => s.SaldoSimpananReducer);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    isTopup
-      ? dispatch(fetchCreateSaldoList())
-      : dispatch(fetchCreateSimpananList());
+    isTopup ? dispatch(fetchCreateSaldoList()) : dispatch(fetchCreateSimpananList());
   }, []);
 
   const navigateToDetailScreen = () => {
@@ -92,13 +71,13 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
     }
   };
 
-  const selectDefaultNominal = (value: string, index: number) => {
+  const selectDefaultNominal = (nominalValue: string, index: number) => {
     if (selectedNominal === index) {
       deleteNominal();
     } else {
       setSelectedNominal(index);
-      setNominalContainer(value);
-      setNominal(value);
+      setNominalContainer(nominalValue);
+      setNominal(nominalValue);
     }
   };
 
@@ -127,14 +106,14 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
   const onPressInputNominal = (item: string) => {
     if (item === 'delete') {
       if (!isEmpty(nominalContainer)) {
-        setNominalContainer(e => e.slice(0, -1));
+        setNominalContainer((e) => e.slice(0, -1));
       }
     } else if (item === '0' || item === '00') {
       if (!isEmpty(nominalContainer)) {
-        setNominalContainer(e => e.concat(item));
+        setNominalContainer((e) => e.concat(item));
       }
     } else {
-      setNominalContainer(e => e.concat(item));
+      setNominalContainer((e) => e.concat(item));
     }
   };
 
@@ -162,7 +141,8 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                   },
               styles.nominalButton,
             ]}
-            onPress={() => selectDefaultNominal(item.value, index)}>
+            onPress={() => selectDefaultNominal(item.value, index)}
+          >
             <View style={styles.textNominalContainer}>
               <Text
                 style={[
@@ -174,7 +154,8 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                         color: colors.primaryDark,
                       },
                   styles.textNominalButton,
-                ]}>
+                ]}
+              >
                 {item.item}
               </Text>
               <Text
@@ -187,7 +168,8 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                         color: colors.primaryDark,
                       },
                   styles.textRbButton,
-                ]}>
+                ]}
+              >
                 rb
               </Text>
             </View>
@@ -214,11 +196,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
         {!isEmpty(nominal) && (
           <View style={styles.showNominalContainer}>
             <View style={styles.textNominalContainer}>
-              <Image
-                source={icons.icon_rp_dark}
-                style={styles.icon}
-                resizeMode="cover"
-              />
+              <Image source={icons.icon_rp_dark} style={styles.icon} resizeMode="cover" />
               <Text style={styles.textNominal} numberOfLines={1}>
                 {formatter.formatStringToCurrencyNumber(nominal)}
               </Text>
@@ -242,7 +220,8 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
         style={{
           marginHorizontal: sizes.padding,
           height: '100%',
-        }}>
+        }}
+      >
         <View style={styles.inputNominalContainer}>
           <Text
             numberOfLines={1}
@@ -252,24 +231,22 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
               !isEmpty(nominalContainer)
                 ? { color: colors.primary }
                 : { color: colors.bodyTextLightGrey },
-            ]}>
+            ]}
+          >
             {!isEmpty(nominalContainer)
               ? `Rp${formatter.formatStringToCurrencyNumber(nominalContainer)}`
               : 'Rp0..'}
           </Text>
         </View>
-        <View
-          style={[styles.nominalButtonContainer, { marginTop: sizes.padding }]}>
+        <View style={[styles.nominalButtonContainer, { marginTop: sizes.padding }]}>
           {value.map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.inputNominalButton}
-              onPress={() => onPressInputNominal(item)}>
+              onPress={() => onPressInputNominal(item)}
+            >
               {item === 'delete' ? (
-                <Image
-                  source={icons.icon_delete_nominal}
-                  style={{ width: 60, height: 30 }}
-                />
+                <Image source={icons.icon_delete_nominal} style={{ width: 60, height: 30 }} />
               ) : (
                 <Text style={styles.textInputNominalBtn}>{item}</Text>
               )}
@@ -296,12 +273,9 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
         style={{
           marginHorizontal: sizes.padding,
           marginTop: sizes.padding * 2,
-        }}>
-        <Text
-          style={[
-            styles.textPilihJumlah,
-            { marginLeft: 10, marginBottom: 10 },
-          ]}>
+        }}
+      >
+        <Text style={[styles.textPilihJumlah, { marginLeft: 10, marginBottom: 10 }]}>
           {isTopup ? strings.pilih_saldo : strings.pilih_saldo_penarikan}
         </Text>
         {isTopup
@@ -314,12 +288,11 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                   paddingVertical: sizes.padding,
                   paddingLeft: 10,
                 }}
-                onPress={() => selectJenisTopupPenarikan(item)}>
+                onPress={() => selectJenisTopupPenarikan(item)}
+              >
                 <View style={styles.textNominalContainer}>
                   <View style={styles.radioOuter}>
-                    {item.id === selectedTopupPenarikan?.id && (
-                      <View style={styles.radioInner} />
-                    )}
+                    {item.id === selectedTopupPenarikan?.id && <View style={styles.radioInner} />}
                   </View>
                   <Text style={styles.textJenisTopup}>{item.nama}</Text>
                 </View>
@@ -334,12 +307,11 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
                   paddingVertical: sizes.padding,
                   paddingLeft: 10,
                 }}
-                onPress={() => selectJenisTopupPenarikan(item)}>
+                onPress={() => selectJenisTopupPenarikan(item)}
+              >
                 <View style={styles.textNominalContainer}>
                   <View style={styles.radioOuter}>
-                    {item.id === selectedTopupPenarikan?.id && (
-                      <View style={styles.radioInner} />
-                    )}
+                    {item.id === selectedTopupPenarikan?.id && <View style={styles.radioInner} />}
                   </View>
                   <Text style={styles.textJenisTopup}>{item.nama}</Text>
                 </View>
@@ -392,9 +364,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        title={isTopup ? strings.top_up : strings.penarikan_simpanan}
-      />
+      <HeaderBack title={isTopup ? strings.top_up : strings.penarikan_simpanan} />
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
         {renderSelectNominal()}
         {renderJenisTopup()}
@@ -418,7 +388,8 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
         index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
-        onChange={handleSheetChange}>
+        onChange={handleSheetChange}
+      >
         {renderInputManual()}
       </BottomSheet>
     </SafeAreaView>

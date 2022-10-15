@@ -1,30 +1,28 @@
 import NetInfo from '@react-native-community/netinfo';
-import { apis, storage } from '../../constants';
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-} from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
+import { apis, storage } from '../../constants';
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
+import { resetUserData } from '../../redux/reducers/HomeReducer';
+import { hideLoading } from '../../redux/reducers/LoadingReducer';
+import { EncryptedStorage } from '../../utils';
+import { navigateAndReset } from '../navigation';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../store';
-import { EncryptedStorage } from '../../utils';
-import { hideLoading } from '../../redux/reducers/LoadingReducer';
-import { navigateAndReset } from '../navigation';
-import { resetUserData } from '../../redux/reducers/HomeReducer';
 
 let instance: HttpService | null = null;
 
 class HttpService {
   instance = null;
+
   http: AxiosInstance = axios;
+
   constructor() {
     if (instance) {
       return instance;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     instance = this;
 
     const http = axios.create({
@@ -55,17 +53,11 @@ class HttpService {
   handleRequestInterceptor = async (request: AxiosRequestConfig) => {
     const requestURL = request.url;
     // apply only if the request needs an access token
-    if (
-      apis.authPathArray.some(substring => !requestURL?.includes(substring))
-    ) {
+    if (apis.authPathArray.some((substring) => !requestURL?.includes(substring))) {
       let accessToken: null | string = null;
-      accessToken = await EncryptedStorage.getEncryptedStorage(
-        storage.authCode,
-      );
+      accessToken = await EncryptedStorage.getEncryptedStorage(storage.authCode);
       if (!request?.headers) {
-        throw new Error(
-          `Expected 'config' and 'config.headers' not to be undefined`,
-        );
+        throw new Error("Expected 'config' and 'config.headers' not to be undefined");
       }
       if (accessToken !== '' || accessToken !== null) {
         request.headers.Authorization = `Bearer ${accessToken}`;
@@ -94,27 +86,18 @@ class HttpService {
     const url = error.request?.responseURL as string;
     switch (error.response?.status) {
       case 400:
-        this.showErrorDialogHandler(
-          apis.errorTypes.badRequest,
-          error.response?.data?.error,
-        );
+        this.showErrorDialogHandler(apis.errorTypes.badRequest, error.response?.data?.error);
         break;
       case 401:
         if (url.includes('login')) {
-          this.showErrorDialogHandler(
-            apis.errorTypes.unauthorized,
-            error.response?.data?.error,
-          );
+          this.showErrorDialogHandler(apis.errorTypes.unauthorized, error.response?.data?.error);
         } else {
           store.dispatch(resetUserData());
           navigateAndReset('LoginScreen');
         }
         break;
       default:
-        this.showErrorDialogHandler(
-          apis.errorTypes.generic,
-          error.response?.data?.error,
-        );
+        this.showErrorDialogHandler(apis.errorTypes.generic, error.response?.data?.error);
         break;
     }
     return Promise.reject();
@@ -135,11 +118,7 @@ class HttpService {
     );
   };
 
-  get = (
-    url: string,
-    params?: AxiosRequestConfig,
-    conf?: AxiosRequestConfig,
-  ) => {
+  get = (url: string, params?: AxiosRequestConfig, conf?: AxiosRequestConfig) => {
     const config: AxiosRequestConfig = {
       method: 'get',
       url,
@@ -147,21 +126,17 @@ class HttpService {
       ...conf,
     };
     return NetInfo.fetch()
-      .then(state => {
+      .then((state) => {
         if (state.isConnected) {
           return this.http.request(config);
         }
         return Promise.reject(new Error('Network Error'));
       })
-      .then(response => this.handleSuccessResponse(response))
-      .catch(error => this.handleFailResponse(error));
+      .then((response) => this.handleSuccessResponse(response))
+      .catch((error) => this.handleFailResponse(error));
   };
 
-  post = (
-    url: string,
-    params?: AxiosRequestConfig['data'],
-    conf?: AxiosRequestConfig,
-  ) => {
+  post = (url: string, params?: AxiosRequestConfig['data'], conf?: AxiosRequestConfig) => {
     const config: AxiosRequestConfig = {
       method: 'post',
       url,
@@ -170,21 +145,17 @@ class HttpService {
     };
 
     return NetInfo.fetch()
-      .then(state => {
+      .then((state) => {
         if (state.isConnected) {
           return this.http.request(config);
         }
         return Promise.reject(new Error('Network Error'));
       })
-      .then(response => this.handleSuccessResponse(response))
-      .catch(error => this.handleFailResponse(error));
+      .then((response) => this.handleSuccessResponse(response))
+      .catch((error) => this.handleFailResponse(error));
   };
 
-  patch = (
-    url: string,
-    params?: AxiosRequestConfig['data'],
-    conf?: AxiosRequestConfig,
-  ) => {
+  patch = (url: string, params?: AxiosRequestConfig['data'], conf?: AxiosRequestConfig) => {
     const config: AxiosRequestConfig = {
       method: 'patch',
       url,
@@ -193,21 +164,17 @@ class HttpService {
     };
 
     return NetInfo.fetch()
-      .then(state => {
+      .then((state) => {
         if (state.isConnected) {
           return this.http.request(config);
         }
         return Promise.reject(new Error('Network Error'));
       })
-      .then(response => this.handleSuccessResponse(response))
-      .catch(error => this.handleFailResponse(error));
+      .then((response) => this.handleSuccessResponse(response))
+      .catch((error) => this.handleFailResponse(error));
   };
 
-  put = (
-    url: string,
-    params?: AxiosRequestConfig['data'],
-    conf?: AxiosRequestConfig,
-  ) => {
+  put = (url: string, params?: AxiosRequestConfig['data'], conf?: AxiosRequestConfig) => {
     const config: AxiosRequestConfig = {
       method: 'put',
       url,
@@ -216,21 +183,17 @@ class HttpService {
     };
 
     return NetInfo.fetch()
-      .then(state => {
+      .then((state) => {
         if (state.isConnected) {
           return this.http.request(config);
         }
         return Promise.reject(new Error('Network Error'));
       })
-      .then(response => this.handleSuccessResponse(response))
-      .catch(error => this.handleFailResponse(error));
+      .then((response) => this.handleSuccessResponse(response))
+      .catch((error) => this.handleFailResponse(error));
   };
 
-  delete = (
-    url: string,
-    params?: AxiosRequestConfig['data'],
-    conf?: AxiosRequestConfig,
-  ) => {
+  delete = (url: string, params?: AxiosRequestConfig['data'], conf?: AxiosRequestConfig) => {
     const config: AxiosRequestConfig = {
       method: 'delete',
       url,
@@ -239,14 +202,14 @@ class HttpService {
     };
 
     return NetInfo.fetch()
-      .then(state => {
+      .then((state) => {
         if (state.isConnected) {
           return this.http.request(config);
         }
         return Promise.reject(new Error('Network Error'));
       })
-      .then(response => this.handleSuccessResponse(response))
-      .catch(error => this.handleFailResponse(error));
+      .then((response) => this.handleSuccessResponse(response))
+      .catch((error) => this.handleFailResponse(error));
   };
 
   handleSuccessResponse = (response: AxiosResponse) => response;

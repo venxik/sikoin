@@ -1,36 +1,25 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
-import {
-  Button,
-  DropdownForm,
-  HeaderBack,
-  TextInputForm,
-} from '../../../../components';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Controller, useForm } from 'react-hook-form';
+
+import { Button, DropdownForm, HeaderBack, TextInputForm } from '../../../../components';
+import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
-import { useForm, Controller } from 'react-hook-form';
 import {
   fetchUpdatePekerjaan,
   PekerjaanResponse,
 } from '../../../../redux/reducers/PekerjaanReducer';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../../../config';
 import { formatter } from '../../../../utils';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarPekerjaanAddScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarPekerjaanAddScreen'>;
 
 const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { pekerjaanData } = useAppSelector(s => s.PekerjaanReducer) || {};
+  const { pekerjaanData } = useAppSelector((s) => s.PekerjaanReducer) || {};
   const {
     pekerjaan,
     detailPekerjaan,
@@ -67,14 +56,8 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
-        <HeaderBack
-          onPress={() => navigation.goBack()}
-          title={strings.pekerjaan}
-        />
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
+        <HeaderBack onPress={() => navigation.goBack()} title={strings.pekerjaan} />
         <ScrollView>
           <View style={styles.innerContainer}>
             <Controller
@@ -84,7 +67,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.pekerjaan}
                   data={dropdownItems.pekerjaanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -95,7 +78,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.detail_pekerjaan}
                 />
               )}
@@ -106,7 +89,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.nama_perusahaan}
                 />
               )}
@@ -115,7 +98,8 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-              }}>
+              }}
+            >
               <Controller
                 control={control}
                 name="masaKerjaTahun"
@@ -125,7 +109,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     errorText={errors.masaKerjaTahun?.message}
                     style={{ width: '45%' }}
                     value={value?.toString()}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.masa_kerja_tahun}
                     keyboardType="number-pad"
                   />
@@ -146,7 +130,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                     errorText={errors.masaKerjaBulan?.message}
                     style={{ width: '45%' }}
                     value={value?.toString()}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.masa_kerja_bulan}
                     keyboardType="number-pad"
                   />
@@ -166,7 +150,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.gaji_bulanan}
                   data={dropdownItems.gajiBualanan}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                   maxHeight={200}
                 />
@@ -184,7 +168,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.alamat_kantor}
                 />
               )}
@@ -195,7 +179,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.provinsi_kota}
                 />
               )}
@@ -206,7 +190,7 @@ const DaftarPekerjaanAddScreen: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.provinsi_kota}
                 />
               )}

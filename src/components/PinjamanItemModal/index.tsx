@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Modal,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import { colors, icons, images, sizes } from '../../constants';
-import { PinjamanItemModalProps } from './model';
+import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import CheckBox from '@react-native-community/checkbox';
-import Button from '../Button';
 import { isEmpty } from 'lodash';
+
+import { colors, icons, images, sizes } from '../../constants';
+import Button from '../Button';
+import { PinjamanItemModalProps } from './model';
 
 const PinjamanItemModal = (props: PinjamanItemModalProps) => {
   const { onPress, onPressClose, showModal, item } = props;
@@ -46,7 +41,8 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               borderRadius: 48,
               alignItems: 'center',
               justifyContent: 'center',
-            }}>
+            }}
+          >
             <Image
               source={icons.icon_cross_white}
               style={{ width: sizes.icon_size, height: sizes.icon_size }}
@@ -60,9 +56,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
           </Text>
           <Text style={styles.textTenor}>
             {'Plafon : '}
-            <Text style={{ color: colors.primary }}>
-              {item?.maksimumPlafon}
-            </Text>
+            <Text style={{ color: colors.primary }}>{item?.maksimumPlafon}</Text>
           </Text>
           <Text style={styles.textUnduhSnk}>Unduh Syarat & Ketentuan</Text>
           <View style={styles.row}>
@@ -82,7 +76,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
             <CheckBox
               disabled={false}
               value={checked}
-              onValueChange={newValue => setChecked(newValue)}
+              onValueChange={(newValue) => setChecked(newValue)}
               tintColors={{ false: colors.primary, true: colors.primary }}
             />
             <Text style={styles.textSnk}>

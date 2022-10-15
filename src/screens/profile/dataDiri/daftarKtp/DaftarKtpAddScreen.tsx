@@ -1,47 +1,37 @@
-import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import {
-  View,
-  StyleSheet,
-  SafeAreaView,
   Image,
   ImageBackground,
+  SafeAreaView,
+  StyleSheet,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { Button, HeaderBack, TextInputForm } from '../../../../components';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  sizes,
-  strings,
-} from '../../../../constants';
-import { fetchUploadGambarKtp } from '../../../../redux/reducers/KtpReducer';
-import { useForm, Controller } from 'react-hook-form';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { isEmpty } from 'lodash';
+import { Controller, useForm } from 'react-hook-form';
+import DocumentPicker, { DocumentPickerResponse } from 'react-native-document-picker';
+
+import { Button, HeaderBack, TextInputForm } from '../../../../components';
 import { useAppDispatch, useAppSelector } from '../../../../config';
-import DocumentPicker, {
-  DocumentPickerResponse,
-} from 'react-native-document-picker';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../../../constants';
+import { fetchUploadGambarKtp } from '../../../../redux/reducers/KtpReducer';
 import { fetchKtpDokumen } from '../../../../redux/reducers/KtpReducer';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarKtpAddScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarKtpAddScreen'>;
 
 const documentPickerOptions = {
   type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
 };
 
 const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
-  const { ktpData, ktpDokumen } = useAppSelector(s => s.KtpReducer) || {};
+  const { ktpData, ktpDokumen } = useAppSelector((s) => s.KtpReducer) || {};
   const { linkGambarKtp, linkSelfieKtp } = ktpDokumen || {};
   const { noKtp, gambarKtp, gambarSelfie } = ktpData || {};
 
-  const [dokumenPendukung, setDokumenPendukung] =
-    useState<DocumentPickerResponse>();
+  const [dokumenPendukung, setDokumenPendukung] = useState<DocumentPickerResponse>();
 
   const dispatch = useAppDispatch();
 
@@ -81,6 +71,7 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       setDokumenPendukung(data);
     } catch {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       (e: unknown) => console.error('Document picker error! ', e);
     }
   };
@@ -94,15 +85,13 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const checkKtpImage = () => {
-    if (!isEmpty(linkGambarKtp) && isEmpty(gambarKtp))
-      return { uri: linkGambarKtp };
+    if (!isEmpty(linkGambarKtp) && isEmpty(gambarKtp)) return { uri: linkGambarKtp };
     else if (!isEmpty(gambarKtp)) return { uri: gambarKtp };
     else return icons.icon_edit_profle_picture;
   };
 
   const checkSelfieImage = () => {
-    if (!isEmpty(linkSelfieKtp) && isEmpty(gambarSelfie))
-      return { uri: linkSelfieKtp };
+    if (!isEmpty(linkSelfieKtp) && isEmpty(gambarSelfie)) return { uri: linkSelfieKtp };
     else if (!isEmpty(gambarSelfie)) return { uri: gambarSelfie };
     else return icons.icon_edit_profle_picture;
   };
@@ -125,7 +114,8 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
             imageStyle={styles.imageKtp}
             source={checkKtpImage()}
             style={styles.imageKtp}
-            resizeMode="cover">
+            resizeMode="cover"
+          >
             <View style={styles.iconContainer}>
               <Image
                 source={icons.icon_edit_profle_picture}
@@ -157,14 +147,13 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
             minLength: { value: 16, message: 'KTP Harus 16 Digit' },
           }}
         />
-        <TouchableOpacity
-          onPress={changeSelfieImage}
-          style={{ marginTop: sizes.padding }}>
+        <TouchableOpacity onPress={changeSelfieImage} style={{ marginTop: sizes.padding }}>
           <ImageBackground
             imageStyle={styles.imageSelfie}
             source={checkSelfieImage()}
             style={styles.imageSelfie}
-            resizeMode="cover">
+            resizeMode="cover"
+          >
             <View style={styles.iconContainer}>
               <Image
                 source={icons.icon_edit_profle_picture}
@@ -189,10 +178,7 @@ const DaftarKtpAddScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.ubah_ktp}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.ubah_ktp} />
 
       {renderKtpCard()}
 

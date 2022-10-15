@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, icons, sizes } from '../../constants';
 import { FilterVariasiProps } from './model';
 
@@ -25,11 +27,11 @@ const FilterVariasi = (props: FilterVariasiProps) => {
             style={[
               styles.container,
               {
-                backgroundColor:
-                  selectedItem === item ? colors.tonalPrimary : colors.white,
+                backgroundColor: selectedItem === item ? colors.tonalPrimary : colors.white,
                 borderWidth: selectedItem === item ? 0 : 1,
               },
-            ]}>
+            ]}
+          >
             <Text style={styles.textStyle}>{item}</Text>
             {selectedItem === item && (
               <Image

@@ -1,25 +1,61 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    amd: true,
-    node: true,
-  },
+  root: true,
+  plugins: ['import', 'prettier', 'simple-import-sort'],
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
+    'airbnb-typescript/base',
+    'prettier',
     'plugin:@typescript-eslint/recommended',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    project: './tsconfig.json',
   },
-  plugins: ['react', '@typescript-eslint'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   rules: {
-    '@typescript-eslint/no-namespace': 'off',
+    'no-console': [
+      2,
+      {
+        allow: ['warn', 'error'],
+      },
+    ],
+    'no-unused-vars': 2,
+    'no-param-reassign': 2,
+    'no-restricted-imports': 2,
+    'no-use-before-define': 0,
+    '@typescript-eslint/no-use-before-define': 0,
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    // simple-import-sort
+    'sort-imports': 'off',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // 1. Side effect imports
+          ['^\\u0000'],
+          // 2. React and React Native imports
+          ['^react$', '^react-native$', '^react/', '^react-native/'],
+          // 3. Any other 3rd party imports
+          ['^@?\\w'],
+          // 5. Other parts of the same module that the current file is part of
+          ['^\\.'],
+          // 6. Styles
+          ['^\\./styles'],
+          // 7. Types
+          ['^.*\\u0000$'],
+        ],
+      },
+    ],
+    'simple-import-sort/exports': 'error',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };

@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
-import { Button } from '..';
-import { colors, SCREEN_WIDTH, sizes } from '../../constants';
+import { Animated, Image, Modal, StyleSheet, Text, View } from 'react-native';
+
 import { isEmpty } from 'lodash';
+
+import { colors, SCREEN_WIDTH, sizes } from '../../constants';
+import { Button } from '..';
 import { Popup2ButtonProps } from './model';
 
 const Popup2Button = (props: Popup2ButtonProps) => {
@@ -26,25 +28,17 @@ const Popup2Button = (props: Popup2ButtonProps) => {
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={[styles.modalMainView, style]}>
         <Animated.View style={styles.modalView}>
-          {headerImage && (
-            <Image
-              source={headerImage}
-              style={[styles.icon, { ...iconStyle }]}
-            />
-          )}
+          {headerImage && <Image source={headerImage} style={[styles.icon, { ...iconStyle }]} />}
           <View
             style={{
               alignItems: 'center',
-            }}>
+            }}
+          >
             {!isEmpty(headerText) && (
-              <Text style={[styles.headerModalText, headerTextStyle]}>
-                {headerText}
-              </Text>
+              <Text style={[styles.headerModalText, headerTextStyle]}>{headerText}</Text>
             )}
             {!isEmpty(contentText) && (
-              <Text style={[styles.contentModalText, contentTextStyle]}>
-                {contentText}
-              </Text>
+              <Text style={[styles.contentModalText, contentTextStyle]}>{contentText}</Text>
             )}
           </View>
           {customContent}

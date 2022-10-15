@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
 import { colors, sizes } from '../../constants';
 import { FilterHorizontalProps } from './model';
 
@@ -16,7 +17,8 @@ const FilterHorizontal = (props: FilterHorizontalProps) => {
           borderWidth: isSelected ? 0 : 1,
         },
         style,
-      ]}>
+      ]}
+    >
       <Text style={styles.textStyle}>{item}</Text>
     </TouchableOpacity>
   );

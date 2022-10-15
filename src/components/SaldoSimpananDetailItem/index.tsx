@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { ArrowDown, ArrowUp } from 'react-native-iconly';
+
 import { colors, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { SaldoSimpananDetailItemProps } from './model';
@@ -29,7 +31,8 @@ const SaldoSimpananDetailItem = (props: SaldoSimpananDetailItemProps) => {
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
+          }}
+        >
           <Text style={[styles.textNominal, { color: textColor() }]}>Rp</Text>
           <View style={styles.dot} />
           <Text style={[styles.textNominal, { color: textColor() }]}>

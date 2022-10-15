@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { DokumenItemList, HeaderBack, MenuHeaderIcon } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -10,7 +12,7 @@ import { fetchDokumen } from '../../redux/reducers/DokumenReducer';
 type Props = NativeStackScreenProps<HomeStackParamList, 'DokumenMainScreen'>;
 
 const DokumenMainScreen: React.FC<Props> = () => {
-  const { dokumenDataList } = useAppSelector(s => s.DokumenReducer) || {};
+  const { dokumenDataList } = useAppSelector((s) => s.DokumenReducer) || {};
   // const [showDeleteConfirmation, setShowDeleteConfirmation] =
   //   useState<boolean>(false);
   // const [showDeleteSuccess, setShowDeleteSuccess] = useState<boolean>(false);
@@ -24,9 +26,7 @@ const DokumenMainScreen: React.FC<Props> = () => {
   //   navigation.navigate('DokumenDetailScreen', { item });
   // };
 
-  const onPressUnduh = () => {
-    null;
-  };
+  const onPressUnduh = () => {};
 
   // const deleteFile = () => {
   //   setShowDeleteConfirmation(false);
@@ -65,14 +65,9 @@ const DokumenMainScreen: React.FC<Props> = () => {
           }}
           ListHeaderComponent={<MenuHeaderIcon menu={strings.dokumen} />}
           ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
-            return (
-              <DokumenItemList
-                item={item}
-                onPressUnduh={() => onPressUnduh()}
-              />
-            );
+            return <DokumenItemList item={item} onPressUnduh={() => onPressUnduh()} />;
           }}
         />
       )}

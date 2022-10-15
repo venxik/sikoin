@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { SCREEN_HEIGHT, sizes } from '../../constants';
+
 import FastImage from 'react-native-fast-image';
+
+import { SCREEN_HEIGHT, sizes } from '../../constants';
 import { CardDiskonProps } from './model';
 
 const CardDiskon = (props: CardDiskonProps) => {

@@ -1,20 +1,18 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import moment from 'moment';
+import 'moment/locale/id';
+
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import {
-  Button,
-  HeaderBack,
-  ProfilePicture,
-  SubmenuItemList,
-} from '../../components';
-import { ProfileStackParamList } from '../../config/navigation/model';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
+import moment from 'moment';
+import { User } from 'react-native-iconly';
+
+import { Button, HeaderBack, ProfilePicture, SubmenuItemList } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
-import 'moment/locale/id';
-import { isEmpty } from 'lodash';
-import { User } from 'react-native-iconly';
 
 moment.locale('id');
 
@@ -22,7 +20,7 @@ type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
 
 const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
+  const { profileData } = useAppSelector((state) => state.ProfileReducer) || {};
   const { nama, email, memberSejak, noAnggota, noTelp } = profileData || {};
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
     navigation.navigate('EditProfileScreen');
   };
 
-  const checkIsEmpty = <T,>(text: T) => {
+  const checkIsEmpty = (text: string) => {
     if (isEmpty(text)) return '-';
     return text;
   };

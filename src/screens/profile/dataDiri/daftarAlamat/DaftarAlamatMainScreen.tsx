@@ -1,13 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-} from 'react-native';
+import { FlatList, Image, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import {
   HeaderBack,
   ListEmptyDataComponent,
@@ -15,8 +10,8 @@ import {
   Popup2Button,
 } from '../../../../components';
 import CardAlamat from '../../../../components/CardAlamat';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { icons, sizes, strings } from '../../../../constants';
 import {
   AlamatDataResponse,
@@ -25,23 +20,16 @@ import {
   setDeleteAlamatStatus,
 } from '../../../../redux/reducers/AlamatReducer';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarAlamatMainScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarAlamatMainScreen'>;
 
 const DaftarAlamatMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
   const [showDeletePopup, setShowDeletePopup] = useState<boolean>(false);
-  const [showSuccessDeletePopup, setShowSuccessDeletePopup] =
-    useState<boolean>(false);
+  const [showSuccessDeletePopup, setShowSuccessDeletePopup] = useState<boolean>(false);
   const [showFailedPopup, setShowFailedPopup] = useState<boolean>(false);
-  const [selectAlamat, setSelectAlamat] = useState<AlamatDataResponse | null>(
-    null,
-  );
-  const { alamatList, deleteAlamatStatus } =
-    useAppSelector(s => s.AlamatReducer) || [];
+  const [selectAlamat, setSelectAlamat] = useState<AlamatDataResponse | null>(null);
+  const { alamatList, deleteAlamatStatus } = useAppSelector((s) => s.AlamatReducer) || [];
 
   useEffect(() => {
     dispatch(fetchAlamatList());

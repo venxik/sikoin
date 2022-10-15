@@ -1,4 +1,5 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { KabarPromoData } from './HomeReducer';
 
 export type KabarDetail = {
@@ -29,28 +30,16 @@ const kabarSlice = createSlice({
   name: 'kabarSlice',
   initialState,
   reducers: {
-    fetchKabarSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<KabarPromoData[]>,
-    ) => {
+    fetchKabarSuccess: (state: RootState, { payload }: PayloadAction<KabarPromoData[]>) => {
       state.kabarDataList = payload;
     },
-    fetchKabarFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchKabarFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    fetchKabarDetailSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<KabarDetail>,
-    ) => {
+    fetchKabarDetailSuccess: (state: RootState, { payload }: PayloadAction<KabarDetail>) => {
       state.kabarDetail = payload;
     },
-    fetchKabarDetailFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchKabarDetailFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },

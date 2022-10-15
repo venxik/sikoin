@@ -1,13 +1,14 @@
-import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
+import { Controller, useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Button,
-  Popup1Button,
-  Popup2Button,
-  TextInputBorder,
-} from '../../components';
+
+import { Button, Popup1Button, Popup2Button, TextInputBorder } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
+import { ParentStackParamList } from '../../config/navigation/model';
 import {
   colors,
   icons,
@@ -17,16 +18,12 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { formatter } from '../../utils';
-import { useForm, Controller } from 'react-hook-form';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ParentStackParamList } from '../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchForgotPassword,
   fetchLogin,
   setForgotPasswordStatus,
 } from '../../redux/reducers/LoginReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<ParentStackParamList, 'LoginScreen'>;
 type FormValues = {
@@ -38,9 +35,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const [resetEmail, setResetEmail] = useState<string>('');
   const [showForgetPassModal, setShowForgetPassModal] = useState(false);
-  const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] =
-    useState(false);
-  const { forgotPasswordStatus } = useAppSelector(s => s.LoginReducer);
+  const [showForgetPassSuccessModal, setShowForgetPassSuccessModal] = useState(false);
+  const { forgotPasswordStatus } = useAppSelector((s) => s.LoginReducer);
 
   useEffect(() => {
     if (forgotPasswordStatus === 'success') {
@@ -85,7 +81,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       <TextInputBorder
         style={styles.customPopupTextInput}
         value={resetEmail}
-        onChangeText={e => onChangeResetPassEmailText(e)}
+        onChangeText={(e) => onChangeResetPassEmailText(e)}
         placeholder={strings.email_textbox_placeholder}
         keyboardType={'email-address'}
       />
@@ -122,7 +118,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               error={errors.email}
               errorText={errors.email?.message}
               value={value}
-              onChangeText={e => onChange(e)}
+              onChangeText={(e) => onChange(e)}
               placeholder={strings.email_textbox_placeholder}
               icon={icons.icon_email}
               keyboardType={'email-address'}
@@ -149,7 +145,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               errorText={errors.password?.message}
               style={{ marginTop: 10 }}
               value={value}
-              onChangeText={e => onChange(e)}
+              onChangeText={(e) => onChange(e)}
               placeholder={strings.password_textbox_placeholder}
               icon={icons.icon_password}
               secureTextEntry={true}
@@ -164,11 +160,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         />
 
         <View style={{ width: '100%', marginTop: sizes.padding }}>
-          <Button
-            shadow={false}
-            onPress={handleSubmit(doLogin)}
-            text={strings.masuk}
-          />
+          <Button shadow={false} onPress={handleSubmit(doLogin)} text={strings.masuk} />
           <Button
             shadow={false}
             onPress={navigateToDaftarKoperasi}

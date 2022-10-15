@@ -1,35 +1,16 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
 import { useAppDispatch } from '../../config';
 import { colors, icons, sizes, strings } from '../../constants';
-import {
-  addCartQty,
-  deleteCartItem,
-  substartCartQty,
-} from '../../redux/reducers/MarketReducer';
+import { addCartQty, deleteCartItem, substartCartQty } from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 import Button from '../Button';
 import QtyButton from '../QtyButton';
 import { CartItemProps } from './model';
 
 const CartItem = (props: CartItemProps) => {
-  const {
-    price,
-    image,
-    namaToko,
-    previousPrice,
-    productName,
-    qty,
-    variasi,
-    id,
-  } = props.data;
+  const { price, image, namaToko, previousPrice, productName, qty, variasi, id } = props.data;
 
   const dispatch = useAppDispatch();
   const [catatan, setCatatan] = useState<string>('');
@@ -59,14 +40,11 @@ const CartItem = (props: CartItemProps) => {
         <Image source={{ uri: image }} style={styles.productImg} />
         <View style={{ marginLeft: sizes.padding, flex: 1 }}>
           <Text style={styles.textProductName}>{productName}</Text>
-          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(
-            price,
-          )}`}</Text>
+          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
           {previousPrice && (
-            <Text
-              style={
-                styles.textPrvPrice
-              }>{`Rp ${formatter.formatNumberToCurreny(previousPrice)}`}</Text>
+            <Text style={styles.textPrvPrice}>{`Rp ${formatter.formatNumberToCurreny(
+              previousPrice,
+            )}`}</Text>
           )}
           <Text style={styles.textVariasi}>{strings.variasi}</Text>
           {variasi.map((item, index) => (
@@ -93,17 +71,13 @@ const CartItem = (props: CartItemProps) => {
         </View>
       </View>
       <View style={styles.line} />
-      <TouchableOpacity
-        onPress={props.onPressVoucher}
-        style={styles.touchableContainer}>
+      <TouchableOpacity onPress={props.onPressVoucher} style={styles.touchableContainer}>
         <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
-        <Text style={styles.textBeliDgnVoucher}>
-          {strings.voucher_toko_tersedia}
-        </Text>
+        <Text style={styles.textBeliDgnVoucher}>{strings.voucher_toko_tersedia}</Text>
         <Image source={icons.arrow_right_primary} style={styles.iconArrow} />
       </TouchableOpacity>
       <TextInput
-        onChangeText={e => setCatatan(e)}
+        onChangeText={(e) => setCatatan(e)}
         style={styles.textBox}
         placeholder={strings.catatan_placeholder}
         value={catatan}

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { images } from '../../constants';
 
 export type VoucherDetail = {
   namaToko?: string;
-  logoToko?: unknown;
+  logoToko?: string;
   detail?: string;
   SnK?: string;
   detailToko?: string;
@@ -71,22 +72,13 @@ const voucherSlice = createSlice({
   name: 'voucherSlice',
   initialState,
   reducers: {
-    fetchVoucherData: (
-      state: RootState,
-      { payload }: PayloadAction<VoucherDetail[]>,
-    ) => {
+    fetchVoucherData: (state: RootState, { payload }: PayloadAction<VoucherDetail[]>) => {
       state.voucherDataList = payload;
     },
-    fetchVoucherDataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<VoucherDetail[]>,
-    ) => {
+    fetchVoucherDataSuccess: (state: RootState, { payload }: PayloadAction<VoucherDetail[]>) => {
       state.voucherDataList = payload;
     },
-    fetchVoucherDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchVoucherDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     // addToMyVoucher: (state, { payload }: PayloadAction<VoucherDetail>) => {

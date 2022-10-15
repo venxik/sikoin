@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { colors, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 import { CheckoutItemProps } from './model';
 
 const CheckoutItem = (props: CheckoutItemProps) => {
-  const { price, image, namaToko, previousPrice, productName, qty, variasi } =
-    props.data;
+  const { price, image, namaToko, previousPrice, productName, qty, variasi } = props.data;
 
   return (
     <View style={styles.container}>
@@ -23,15 +23,9 @@ const CheckoutItem = (props: CheckoutItemProps) => {
           ))}
           <View style={{ marginTop: sizes.padding }}>
             <Text style={styles.textPrice}>{`x${qty}`}</Text>
-            <Text
-              style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(
-              price,
-            )}`}</Text>
+            <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
             {previousPrice && (
-              <Text
-                style={
-                  styles.textPrvPrice
-                }>{`Rp ${formatter.formatNumberToCurreny(
+              <Text style={styles.textPrvPrice}>{`Rp ${formatter.formatNumberToCurreny(
                 previousPrice,
               )}`}</Text>
             )}

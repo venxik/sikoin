@@ -1,7 +1,8 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import {
-  sendUserEmailKoperasiParams,
-  sendUserKoperasiResponseParams,
+  SendUserEmailKoperasiParams,
+  SendUserKoperasiResponseParams,
 } from '../../config/apis/LoginApi';
 import { storage } from '../../constants';
 import { EncryptedStorage } from '../../utils';
@@ -51,10 +52,7 @@ const loginSlice = createSlice({
     ) => {
       state.koperasiListData = payload;
     },
-    getKoperasiListFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getKoperasiListFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     getUserKoperasiSuccess: (
@@ -63,10 +61,7 @@ const loginSlice = createSlice({
     ) => {
       state.userKoperasiData = payload;
     },
-    getUserKoperasiFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getUserKoperasiFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     updateUserKoperasiEmailSuccess: (
@@ -75,10 +70,7 @@ const loginSlice = createSlice({
     ) => {
       state.userKoperasiData = payload;
     },
-    updateUserKoperasiEmailFailed: (
-      state: RootState,
-      { payload }: PayloadAction<string>,
-    ) => {
+    updateUserKoperasiEmailFailed: (state: RootState, { payload }: PayloadAction<string>) => {
       state.error = payload;
     },
     setForgotPasswordStatus: (
@@ -87,31 +79,21 @@ const loginSlice = createSlice({
     ) => {
       state.forgotPasswordStatus = payload;
     },
-    fetchLoginSuccess: (
-      _: unknown,
-      { payload }: PayloadAction<LoginResponse>,
-    ) => {
+    fetchLoginSuccess: (_: unknown, { payload }: PayloadAction<LoginResponse>) => {
       EncryptedStorage.saveEncryptedStorage(storage.authCode, payload.token);
     },
-    fetchLoginFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchLoginFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
 export const fetchKoperasiList = createAction('fetchKoperasiList');
-export const fetchUserKoperasi =
-  createAction<sendUserKoperasiResponseParams>('fetchUserKoperasi');
-export const fetchUserKoperasiEmail = createAction<sendUserEmailKoperasiParams>(
-  'fetchUserKoperasiEmail',
-);
+export const fetchUserKoperasi = createAction<SendUserKoperasiResponseParams>('fetchUserKoperasi');
+export const fetchUserKoperasiEmail =
+  createAction<SendUserEmailKoperasiParams>('fetchUserKoperasiEmail');
 export const fetchForgotPassword = createAction<string>('fetchForgotPassword');
-export const fetchLogin = createAction<{ email: string; password: string }>(
-  'fetchLogin',
-);
+export const fetchLogin = createAction<{ email: string; password: string }>('fetchLogin');
 export const {
   getKoperasiListSuccess,
   getKoperasiListFailed,

@@ -1,33 +1,22 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
-import {
-  Button,
-  DropdownForm,
-  HeaderBack,
-  TextInputForm,
-} from '../../../../components';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Controller, useForm } from 'react-hook-form';
+
+import { Button, DropdownForm, HeaderBack, TextInputForm } from '../../../../components';
+import { useAppDispatch } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
-import { useForm, Controller } from 'react-hook-form';
 import {
   fetchSubmitRefKeluarga,
   fetchUpdateRefKeluarga,
   RefKeluargaResponse,
 } from '../../../../redux/reducers/RefKeluargaReducer';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DataDiriStackParamList } from '../../../../config/navigation/model';
-import { useAppDispatch } from '../../../../config';
 import { formatter } from '../../../../utils';
 
-type Props = NativeStackScreenProps<
-  DataDiriStackParamList,
-  'DaftarRefKeluargaAddScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarRefKeluargaAddScreen'>;
 
 const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
   const { update, item } = route.params;
@@ -58,14 +47,8 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
-        <HeaderBack
-          onPress={() => navigation.goBack()}
-          title={strings.referensi_keluarga}
-        />
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
+        <HeaderBack onPress={() => navigation.goBack()} title={strings.referensi_keluarga} />
         <ScrollView>
           <View style={styles.innerContainer}>
             <Controller
@@ -75,7 +58,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.nama}
                 />
               )}
@@ -87,7 +70,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                 <DropdownForm
                   title={strings.status_ref}
                   data={dropdownItems.statusKeluarga}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                   maxHeight={200}
                 />
@@ -102,7 +85,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                   errorText={errors.ktp?.message}
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.no_ktp}
                   maxLength={16}
                   keyboardType="number-pad"
@@ -125,7 +108,7 @@ const DaftarRefKeluargaAddScreen: React.FC<Props> = ({ route, navigation }) => {
                   errorText={errors.telp?.message}
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.no_telp}
                   maxLength={13}
                   keyboardType="number-pad"

@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Clipboard from '@react-native-clipboard/clipboard';
+import { isEmpty } from 'lodash';
+
 import { colors, icons, sizes, strings } from '../../constants';
 import Button from '../Button';
-import Clipboard from '@react-native-clipboard/clipboard';
 import { CardRefKeluargaProps } from './model';
-import { isEmpty } from 'lodash';
 
 const CardRefKeluarga = (props: CardRefKeluargaProps) => {
   const { item, onPressUbah, onPressDelete } = props || {};
@@ -27,10 +29,7 @@ const CardRefKeluarga = (props: CardRefKeluargaProps) => {
           <Text style={styles.textNumber}>{telp}</Text>
           {!isEmpty(telp) && (
             <TouchableOpacity onPress={() => copyToClipboard(telp)}>
-              <Image
-                source={icons.icon_copy_clipboard}
-                style={styles.iconClipboard}
-              />
+              <Image source={icons.icon_copy_clipboard} style={styles.iconClipboard} />
             </TouchableOpacity>
           )}
         </View>
@@ -39,10 +38,7 @@ const CardRefKeluarga = (props: CardRefKeluargaProps) => {
           <Text style={styles.textNumber}>{ktp}</Text>
           {!isEmpty(ktp) && (
             <TouchableOpacity onPress={() => copyToClipboard(ktp)}>
-              <Image
-                source={icons.icon_copy_clipboard}
-                style={styles.iconClipboard}
-              />
+              <Image source={icons.icon_copy_clipboard} style={styles.iconClipboard} />
             </TouchableOpacity>
           )}
         </View>

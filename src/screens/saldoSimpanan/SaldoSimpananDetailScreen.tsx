@@ -1,31 +1,19 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  Image,
-  Text,
-} from 'react-native';
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {} from 'react-native-popup-menu';
-import {
-  HeaderBack,
-  MenuHeaderIcon,
-  SaldoSimpananDetailItem,
-} from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
+
+import { HeaderBack, MenuHeaderIcon, SaldoSimpananDetailItem } from '../../components';
 import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'SaldoSimpananDetailScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'SaldoSimpananDetailScreen'>;
 
 const SaldoSimpananDetail: React.FC<Props> = () => {
-  const { mutasiSimpanan } = useAppSelector(s => s.SaldoSimpananReducer);
+  const { mutasiSimpanan } = useAppSelector((s) => s.SaldoSimpananReducer);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,7 +21,8 @@ const SaldoSimpananDetail: React.FC<Props> = () => {
       <ScrollView
         style={{
           padding: sizes.padding,
-        }}>
+        }}
+      >
         <MenuHeaderIcon
           menu={strings.simpanan}
           title={mutasiSimpanan?.jenisSimpanan?.nama}
@@ -44,14 +33,9 @@ const SaldoSimpananDetail: React.FC<Props> = () => {
             Total Dana {mutasiSimpanan?.jenisSimpanan?.nama}
           </Text>
           <View style={styles.saldoRowContainer}>
-            <Image
-              source={icons.icon_rp_dark}
-              style={{ width: 34, height: 34 }}
-            />
+            <Image source={icons.icon_rp_dark} style={{ width: 34, height: 34 }} />
             <Text style={styles.textSaldo}>
-              {formatter.formatNumberToCurreny(
-                mutasiSimpanan?.totalDana?.danaSimpanan,
-              )}
+              {formatter.formatNumberToCurreny(mutasiSimpanan?.totalDana?.danaSimpanan)}
             </Text>
           </View>
         </View>
@@ -60,14 +44,9 @@ const SaldoSimpananDetail: React.FC<Props> = () => {
             Total Pending {mutasiSimpanan?.jenisSimpanan?.nama}
           </Text>
           <View style={styles.saldoRowContainer}>
-            <Image
-              source={icons.icon_rp_dark}
-              style={{ width: 34, height: 34, opacity: 0.5 }}
-            />
+            <Image source={icons.icon_rp_dark} style={{ width: 34, height: 34, opacity: 0.5 }} />
             <Text style={[styles.textSaldo, { opacity: 0.5 }]}>
-              {formatter.formatNumberToCurreny(
-                mutasiSimpanan?.totalDana?.danaSimpanan,
-              )}
+              {formatter.formatNumberToCurreny(mutasiSimpanan?.totalDana?.danaSimpanan)}
             </Text>
           </View>
         </View>

@@ -43,42 +43,25 @@ const biodataSlice = createSlice({
   name: 'biodataSlice',
   initialState,
   reducers: {
-    getBiodataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<BiodataResponse>,
-    ) => {
+    getBiodataSuccess: (state: RootState, { payload }: PayloadAction<BiodataResponse>) => {
       state.biodataData = payload;
     },
-    getBiodataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getBiodataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    updateBiodataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<BiodataResponse>,
-    ) => {
+    updateBiodataSuccess: (state: RootState, { payload }: PayloadAction<BiodataResponse>) => {
       state.biodataData = payload;
     },
-    updateBiodataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    updateBiodataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
 export const fetchBiodata = createAction('fetchBiodata');
-export const fetchUpdateBiodata =
-  createAction<BiodataResponse>('fetchUpdateBiodata');
+export const fetchUpdateBiodata = createAction<BiodataResponse>('fetchUpdateBiodata');
 
-export const {
-  getBiodataFailed,
-  getBiodataSuccess,
-  updateBiodataFailed,
-  updateBiodataSuccess,
-} = biodataSlice.actions;
+export const { getBiodataFailed, getBiodataSuccess, updateBiodataFailed, updateBiodataSuccess } =
+  biodataSlice.actions;
 
 export default biodataSlice.reducer;

@@ -1,33 +1,35 @@
 import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { LoginApi } from '../../config/apis';
 import { navigate, navigationRef } from '../../config/navigation';
+import { formatter } from '../../utils';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
+  fetchForgotPassword,
   fetchKoperasiList,
+  fetchLogin,
+  fetchLoginFailed,
+  fetchLoginSuccess,
+  fetchUserKoperasi,
+  fetchUserKoperasiEmail,
   getKoperasiListFailed,
   getKoperasiListSuccess,
-  fetchUserKoperasi,
-  updateUserKoperasiEmailFailed,
   getUserKoperasiFailed,
   getUserKoperasiSuccess,
-  fetchUserKoperasiEmail,
-  fetchForgotPassword,
-  setForgotPasswordStatus,
-  fetchLogin,
-  fetchLoginSuccess,
-  fetchLoginFailed,
   KoperasiListResponse,
+  setForgotPasswordStatus,
+  updateUserKoperasiEmailFailed,
   UserKoperasiResponse,
 } from '../reducers/LoginReducer';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
-import { formatter } from '../../utils';
 
 function* getKoperasiList() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: KoperasiListResponse[] }> =
-      yield call(LoginApi.getKoperasiList);
+    const response: AxiosResponse<{ data: KoperasiListResponse[] }> = yield call(
+      LoginApi.getKoperasiList,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -70,13 +72,11 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
   yield put(hideLoading());
 }
 
-function* sendUserKoperasiEmail(
-  action: ReturnType<typeof fetchUserKoperasiEmail>,
-) {
+function* sendUserKoperasiEmail(action: ReturnType<typeof fetchUserKoperasiEmail>) {
   yield put(showLoading());
   try {
     const response: AxiosResponse<{ message: string }> = yield call(
-      LoginApi.sendUserEmailKoperasiParams,
+      LoginApi.sendUserEmailKoperasi,
       action.payload,
     );
     if (response?.status === 200) {

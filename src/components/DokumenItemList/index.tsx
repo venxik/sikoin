@@ -1,12 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+
 import { colors, icons, sizes, strings } from '../../constants';
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-} from 'react-native-popup-menu';
 import { DokumenItemListProps } from './model';
 
 const DokumenItemList = (props: DokumenItemListProps) => {
@@ -28,10 +25,7 @@ const DokumenItemList = (props: DokumenItemListProps) => {
         <MenuOptions optionsContainerStyle={styles.optionsContainer}>
           <MenuOption onSelect={() => onPressUnduh()}>
             <View style={styles.popupContainer}>
-              <Image
-                source={icons.icon_dokumen_download}
-                style={styles.popupMenuIcon}
-              />
+              <Image source={icons.icon_dokumen_download} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.unduh_file}</Text>
             </View>
           </MenuOption>

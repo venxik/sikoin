@@ -1,27 +1,26 @@
+import React, { useEffect } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { useEffect } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+
 import {
   Button,
   DetailItemList,
   DetailItemProfileHeader,
   HeaderBack,
 } from '../../../../components';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../../../constants';
-import { formatter } from '../../../../utils';
 import { fetchPekerjaan } from '../../../../redux/reducers/PekerjaanReducer';
+import { formatter } from '../../../../utils';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarPekerjaanMainScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarPekerjaanMainScreen'>;
 
 const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { pekerjaanData } = useAppSelector(s => s.PekerjaanReducer) || {};
+  const { pekerjaanData } = useAppSelector((s) => s.PekerjaanReducer) || {};
   const {
     pekerjaan,
     detailPekerjaan,
@@ -46,18 +45,13 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
       <ScrollView
         contentContainerStyle={{
           paddingBottom: sizes.padding,
-        }}>
+        }}
+      >
         <View style={styles.cardContainer}>
           <DetailItemProfileHeader />
           <DetailItemList title={strings.pekerjaan} content={pekerjaan} />
-          <DetailItemList
-            title={strings.detail_pekerjaan}
-            content={detailPekerjaan}
-          />
-          <DetailItemList
-            title={strings.nama_perusahaan}
-            content={namaPerusahaan}
-          />
+          <DetailItemList title={strings.detail_pekerjaan} content={detailPekerjaan} />
+          <DetailItemList title={strings.nama_perusahaan} content={namaPerusahaan} />
           <DetailItemList
             title={strings.masa_kerja}
             content={
@@ -68,16 +62,9 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
           />
           <DetailItemList
             title={strings.gaji_penghasilan_bulanan}
-            content={
-              gajiBulanan
-                ? `Rp ${formatter.formatStringToCurrencyNumber(gajiBulanan)}`
-                : ''
-            }
+            content={gajiBulanan ? `Rp ${formatter.formatStringToCurrencyNumber(gajiBulanan)}` : ''}
           />
-          <DetailItemList
-            title={strings.alamat_kantor}
-            content={alamatKantor}
-          />
+          <DetailItemList title={strings.alamat_kantor} content={alamatKantor} />
           <DetailItemList title={strings.provinsi_kota} content={provinsi} />
           <Button
             shadow={false}
@@ -95,10 +82,7 @@ const DaftarPekerjaanMainScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.pekerjaan}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.pekerjaan} />
       {renderPekerjaan()}
     </SafeAreaView>
   );

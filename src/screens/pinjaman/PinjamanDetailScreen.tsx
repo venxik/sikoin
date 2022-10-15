@@ -1,16 +1,18 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { HeaderBack, PinjamanDetailItem } from '../../components';
+import PinjamanSimulasiSection from '../../components/PinjamanSimulasiSection';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
-import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchPinjamanDisetujuiData,
   fetchPinjamanDitolakData,
 } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
-import PinjamanSimulasiSection from '../../components/PinjamanSimulasiSection';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanDetailScreen'>;
 
@@ -31,7 +33,7 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
     totalAngsuran,
     totalAngsuranBunga,
     totalAngsuranPokok,
-  } = useAppSelector(s => s.PinjamanReducer.pinjamanDetailData);
+  } = useAppSelector((s) => s.PinjamanReducer.pinjamanDetailData);
 
   useEffect(() => {
     fetchData();
@@ -53,7 +55,8 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
         style={{
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <View style={styles.mainContainer}>
           <Text style={styles.textTitle}>Total Jumlah Pinjaman</Text>
           <Text style={styles.textSubtitle}>
@@ -61,20 +64,11 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
             {formatter.formatNumberToCurreny(nominal)}
           </Text>
           <PinjamanDetailItem title="Nama Lengkap" content={nama} />
-          <PinjamanDetailItem
-            title="Nama Bank Tujuan"
-            content={namaBankTujuan}
-          />
-          <PinjamanDetailItem
-            title="Nomor Rekening Bank"
-            content={nomorRekeningBank}
-          />
+          <PinjamanDetailItem title="Nama Bank Tujuan" content={namaBankTujuan} />
+          <PinjamanDetailItem title="Nomor Rekening Bank" content={nomorRekeningBank} />
           <PinjamanDetailItem title="Nomor KTP" content={noKtp} />
           <PinjamanDetailItem title="Jenis Pinjaman" content={jenisPinjaman} />
-          <PinjamanDetailItem
-            title="Lama Pinjaman"
-            content={lamaPinjaman.toString()}
-          />
+          <PinjamanDetailItem title="Lama Pinjaman" content={lamaPinjaman.toString()} />
           {status !== 'DITOLAK' ? (
             <View>
               <PinjamanSimulasiSection
@@ -85,16 +79,10 @@ const PinjamanDetailScreen: React.FC<Props> = ({ navigation, route }) => {
                   totalAngsuranPokok: totalAngsuranPokok as number,
                 }}
               />
-              <PinjamanDetailItem
-                title="Cicilan Terbayar"
-                content={sisaAngsuran}
-              />
+              <PinjamanDetailItem title="Cicilan Terbayar" content={sisaAngsuran} />
             </View>
           ) : (
-            <PinjamanDetailItem
-              title="Alasan Ditolak"
-              content={alasan as string}
-            />
+            <PinjamanDetailItem title="Alasan Ditolak" content={alasan as string} />
           )}
         </View>
       </ScrollView>

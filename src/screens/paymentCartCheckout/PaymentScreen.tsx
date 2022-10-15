@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button, HeaderBack } from '../../components';
 import { useAppDispatch } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -15,6 +17,7 @@ const PaymentScreen: React.FC<Props> = ({ route, navigation }) => {
   const dispatch = useAppDispatch();
 
   const navigateToSuccessScreen = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     isTopup ? submitTopup() : navigation.navigate('PaymentSuccessScreen');
   };
 
@@ -37,18 +40,11 @@ const PaymentScreen: React.FC<Props> = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        title={strings.pilih_pembayaran}
-        textStyle={{ width: '100%' }}
-      />
+      <HeaderBack title={strings.pilih_pembayaran} textStyle={{ width: '100%' }} />
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{strings.pembayaran_title_1}</Text>
-        <Text style={styles.textNominal}>
-          Rp. {formatter.formatNumberToCurreny(nominal)}
-        </Text>
+        <Text style={styles.textNominal}>Rp. {formatter.formatNumberToCurreny(nominal)}</Text>
         <Text style={styles.textTitle}>{strings.pembayaran_title_2}</Text>
-        {renderBankList()}
-        {renderBankList()}
         {renderBankList()}
         <Button
           buttonContainerStyle={{

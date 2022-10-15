@@ -1,24 +1,22 @@
 import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, HeaderBack, TextInputBorder } from '../../components';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ParentStackParamList } from '../../config/navigation/model';
-import { Controller, useForm } from 'react-hook-form';
-import { formatter } from '../../utils';
-import { useAppDispatch, useAppSelector } from '../../config';
-import { fetchUserKoperasiEmail } from '../../redux/reducers/LoginReducer';
+import { StyleSheet, Text, View } from 'react-native';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiStep2Screen'
->;
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Controller, useForm } from 'react-hook-form';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Button, HeaderBack, TextInputBorder } from '../../components';
+import { useAppDispatch } from '../../config';
+import { ParentStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { fetchUserKoperasiEmail } from '../../redux/reducers/LoginReducer';
+import { formatter } from '../../utils';
+
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiStep2Screen'>;
 
 const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { userKoperasiData } = useAppSelector(s => s.LoginReducer);
 
   const onSubmit = ({ email }: { email: string }) => {
     dispatch(
@@ -51,14 +49,13 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
             width={3}
             fill={50}
             tintColor={colors.primary}
-            backgroundColor={colors.primaryLight}>
+            backgroundColor={colors.primaryLight}
+          >
             {() => <Text style={styles.textCircle}>2/2</Text>}
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
-        <Text style={styles.textTitle2}>
-          {strings.daftar_koperasi_isi_data_title_2}
-        </Text>
+        <Text style={styles.textTitle2}>{strings.daftar_koperasi_isi_data_title_2}</Text>
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>
@@ -70,7 +67,7 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
               error={errors.email}
               errorText={errors.email?.message}
               value={value}
-              onChangeText={e => onChange(e)}
+              onChangeText={(e) => onChange(e)}
               placeholder={strings.masukan_email}
               icon={icons.icon_email}
             />
@@ -84,9 +81,7 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
           }}
         />
 
-        <Text style={styles.textHint}>
-          {strings.daftar_koperasi_isi_data_hint_2}
-        </Text>
+        <Text style={styles.textHint}>{strings.daftar_koperasi_isi_data_hint_2}</Text>
       </View>
 
       <Button

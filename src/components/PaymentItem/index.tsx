@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, sizes } from '../../constants';
 import { PaymentItemProps } from './model';
 
@@ -13,18 +14,13 @@ const PaymentItem = (props: PaymentItemProps) => {
         {
           borderWidth: isSelected ? 2 : 1,
           borderColor: isSelected ? colors.primary : colors.strokeGrey,
-          backgroundColor: isSelected
-            ? colors.tonalLightPrimary
-            : 'transparent',
+          backgroundColor: isSelected ? colors.tonalLightPrimary : 'transparent',
           elevation: isSelected ? 4 : 0,
         },
-      ]}>
+      ]}
+    >
       <View style={styles.row}>
-        <Image
-          source={data.icon}
-          style={styles.iconStyle}
-          resizeMode="contain"
-        />
+        <Image source={data.icon} style={styles.iconStyle} resizeMode="contain" />
         <Text style={styles.textStyle}>{data.text}</Text>
       </View>
     </TouchableOpacity>

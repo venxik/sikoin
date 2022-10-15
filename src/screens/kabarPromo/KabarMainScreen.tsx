@@ -1,20 +1,19 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { CardKabar, HeaderBack, MenuHeaderIcon } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
-import {
-  fetchKabar,
-  fetchKabarDetail,
-} from '../../redux/reducers/KabarReducer';
 import { KabarPromoData } from '../../redux/reducers/HomeReducer';
+import { fetchKabar, fetchKabarDetail } from '../../redux/reducers/KabarReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'KabarMainScreen'>;
 
 const KabarMainScreen: FC<Props> = () => {
-  const { kabarDataList } = useAppSelector(state => state.KabarReducer) || {};
+  const { kabarDataList } = useAppSelector((state) => state.KabarReducer) || {};
 
   const dispatch = useAppDispatch();
 
@@ -38,7 +37,7 @@ const KabarMainScreen: FC<Props> = () => {
           contentContainerStyle={{
             alignItems: 'center',
           }}
-          keyExtractor={item => item?.id.toString()}
+          keyExtractor={(item) => item?.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar

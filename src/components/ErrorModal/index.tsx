@@ -1,15 +1,10 @@
-import { isEmpty } from 'lodash';
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Modal, Animated, Image } from 'react-native';
+import { Animated, Image, Modal, StyleSheet, Text, View } from 'react-native';
+
+import { isEmpty } from 'lodash';
 import { useDispatch } from 'react-redux';
-import {
-  apis,
-  colors,
-  icons,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+
+import { apis, colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { dismissErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import Button from '../Button';
 import { ErrorModalProps } from './model';
@@ -68,23 +63,19 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalMainView}>
-        <Animated.View
-          style={[styles.modalView, { transform: [{ scale: scaleValue }] }]}>
+        <Animated.View style={[styles.modalView, { transform: [{ scale: scaleValue }] }]}>
           <View
             style={{
               alignItems: 'center',
-            }}>
+            }}
+          >
             <Image source={getPopupImage()} style={styles.icon} />
             <View style={{ alignItems: 'center' }}>
               {!isEmpty(getModalText().modalTitle) && (
-                <Text style={styles.headerModalText}>
-                  {getModalText().modalTitle}
-                </Text>
+                <Text style={styles.headerModalText}>{getModalText().modalTitle}</Text>
               )}
               {!isEmpty(getModalText().modalBody) && (
-                <Text style={styles.contentModalText}>
-                  {getModalText().modalBody}
-                </Text>
+                <Text style={styles.contentModalText}>{getModalText().modalBody}</Text>
               )}
             </View>
           </View>
@@ -92,7 +83,8 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
             style={{
               width: '100%',
               marginTop: sizes.padding,
-            }}>
+            }}
+          >
             <Button text={strings.tutup} onPress={closeModal} />
           </View>
         </Animated.View>

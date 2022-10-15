@@ -2,7 +2,7 @@ import { Linking } from 'react-native';
 
 export const openUrl = (url: string) => {
   Linking.canOpenURL(url as string)
-    .then(supported => {
+    .then((supported) => {
       if (supported) {
         return Linking.openURL(url as string);
       }

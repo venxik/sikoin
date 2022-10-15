@@ -46,31 +46,19 @@ const transaksiSlice = createSlice({
   name: 'transaksiSlice',
   initialState,
   reducers: {
-    fetchTransaksiData: (
-      state: RootState,
-      { payload }: PayloadAction<TransaksiData[]>,
-    ) => {
+    fetchTransaksiData: (state: RootState, { payload }: PayloadAction<TransaksiData[]>) => {
       state.transaksiDataList = payload;
     },
-    fetchTransaksiDataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<TransaksiData[]>,
-    ) => {
+    fetchTransaksiDataSuccess: (state: RootState, { payload }: PayloadAction<TransaksiData[]>) => {
       state.transaksiDataList = payload;
     },
-    fetchTransaksiDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchTransaksiDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
-export const {
-  fetchTransaksiData,
-  fetchTransaksiDataFailed,
-  fetchTransaksiDataSuccess,
-} = transaksiSlice.actions;
+export const { fetchTransaksiData, fetchTransaksiDataFailed, fetchTransaksiDataSuccess } =
+  transaksiSlice.actions;
 
 export default transaksiSlice.reducer;

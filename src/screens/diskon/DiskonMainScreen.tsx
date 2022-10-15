@@ -1,15 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
-import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { CardDiskon, HeaderBack, MenuHeaderIcon } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'DiskonMainScreen'>;
 
 const DiskonMainScreen: FC<Props> = () => {
-  const { diskonDataList } = useAppSelector(s => s.DiskonReducer) || {};
+  const { diskonDataList } = useAppSelector((s) => s.DiskonReducer) || {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,7 +29,7 @@ const DiskonMainScreen: FC<Props> = () => {
             <CardDiskon
               item={item}
               onPress={() => {
-                console.log(item);
+                console.warn(item);
               }}
             />
           );

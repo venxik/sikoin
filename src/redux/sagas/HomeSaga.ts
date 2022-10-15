@@ -1,14 +1,15 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { HomeApi } from '../../config/apis';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
+import { formatter } from '../../utils';
 import {
   BerandaUserResponse,
   fetchBerandaUser,
   getBerandaUserFailed,
   getBerandaUserSuccess,
 } from '../reducers/HomeReducer';
-import { formatter } from '../../utils';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getBerandaUser() {
   yield put(showLoading());

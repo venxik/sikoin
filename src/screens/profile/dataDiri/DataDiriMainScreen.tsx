@@ -1,22 +1,18 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { HeaderBack, SubmenuItemList } from '../../../components';
 import { ProfileStackParamList } from '../../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../../constants';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DataDiriMainScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DataDiriMainScreen'>;
 
 const DataDiriMainScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.data_diri}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.data_diri} />
       <View style={styles.innerContainer}>
         <Text style={styles.titleText}>{strings.identitas_pekerjaan}</Text>
         <SubmenuItemList

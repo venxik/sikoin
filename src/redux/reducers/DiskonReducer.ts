@@ -35,28 +35,18 @@ const diskonSlice = createSlice({
   name: 'diskonSlice',
   initialState,
   reducers: {
-    fetchDiskon: (
-      state: RootState,
-      { payload }: PayloadAction<DiskonData[]>,
-    ) => {
+    fetchDiskon: (state: RootState, { payload }: PayloadAction<DiskonData[]>) => {
       state.diskonDataList = payload;
     },
-    fetchDiskonSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<DiskonData[]>,
-    ) => {
+    fetchDiskonSuccess: (state: RootState, { payload }: PayloadAction<DiskonData[]>) => {
       state.diskonDataList = payload;
     },
-    fetchDiskonFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchDiskonFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
-export const { fetchDiskon, fetchDiskonFailed, fetchDiskonSuccess } =
-  diskonSlice.actions;
+export const { fetchDiskon, fetchDiskonFailed, fetchDiskonSuccess } = diskonSlice.actions;
 
 export default diskonSlice.reducer;

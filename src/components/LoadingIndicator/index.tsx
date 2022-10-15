@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Modal, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Modal, StyleSheet, View } from 'react-native';
+
 import { colors, sizes } from '../../constants';
 
 const LoadingIndicator = () => (
@@ -9,7 +10,8 @@ const LoadingIndicator = () => (
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-      }}>
+      }}
+    >
       <View
         style={{
           width: '20%',
@@ -18,7 +20,8 @@ const LoadingIndicator = () => (
           justifyContent: 'center',
           backgroundColor: colors.primaryWhite,
           borderRadius: sizes.padding,
-        }}>
+        }}
+      >
         <ActivityIndicator color={colors.primary} size="large" />
       </View>
     </View>

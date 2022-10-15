@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import FastImage from 'react-native-fast-image';
+
 import { useAppSelector } from '../../config';
 import { colors, sizes } from '../../constants';
 import { NotifikasiItemProps } from './model';
@@ -10,9 +12,7 @@ const NotifikasiItem = (props: NotifikasiItemProps) => {
   const { excerpt, perihal, waktu } = item || {};
 
   //get logo koperasi directly from redux
-  const { logoKoperasi } = useAppSelector(
-    s => s.NotifikasiReducer.notifikasiDataList,
-  );
+  const { logoKoperasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
 
   return (
     <View style={[styles.container, style]}>

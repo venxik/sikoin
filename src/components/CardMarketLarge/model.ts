@@ -1,4 +1,5 @@
 import { ViewStyle } from 'react-native';
+
 import { MarketDataResponse } from '../../redux/reducers/MarketReducer';
 
 export interface CardMarketLargeProps {

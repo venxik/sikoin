@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useEffect } from 'react';
-import { RouterContainer } from './config/navigation';
-import { store, persist } from './config';
-import { PersistGate } from 'redux-persist/integration/react';
+
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Provider } from 'react-redux';
-import { MenuProvider } from 'react-native-popup-menu';
-import useNotification from './hooks/useNotification';
-import messaging, {
-  FirebaseMessagingTypes,
-} from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
+import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { MenuProvider } from 'react-native-popup-menu';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { persist, store } from './config';
+import { RouterContainer } from './config/navigation';
+import useNotification from './hooks/useNotification';
 
 const App: FC = () => {
   const { displayNotification } = useNotification();

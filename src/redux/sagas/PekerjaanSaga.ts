@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { PekerjaanApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
-import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   fetchPekerjaan,
   fetchUpdatePekerjaan,

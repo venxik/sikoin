@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors, sizes } from '../../constants';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { isEmpty } from 'lodash';
+
+import { colors, sizes } from '../../constants';
 import { DokumenDetailItemProps } from './model';
 
 const DokumenDetailItem = (props: DokumenDetailItemProps) => {
@@ -18,7 +20,8 @@ const DokumenDetailItem = (props: DokumenDetailItemProps) => {
         <View
           style={{
             width: '60%',
-          }}>
+          }}
+        >
           {rightCustom}
         </View>
       )}

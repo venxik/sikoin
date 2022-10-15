@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
+import { navigation } from '../../config';
 import { KtpDokumenApi } from '../../config/apis';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import { formatter } from '../../utils';
 import {
   fetchKtpDokumen,
@@ -14,7 +15,7 @@ import {
   removeKtpImage,
   removeKtpSelfie,
 } from '../reducers/KtpReducer';
-import { navigation } from '../../config';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getKtpDokumen() {
   yield put(showLoading());

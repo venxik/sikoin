@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+import { isEmpty } from 'lodash';
+import { ArrowLeft } from 'react-native-iconly';
+
 import { colors } from '../../constants';
 import { HeaderBackProps } from './model';
-import { ArrowLeft } from 'react-native-iconly';
-import { isEmpty } from 'lodash';
 
 const HeaderBack = (props: HeaderBackProps) => {
   const {

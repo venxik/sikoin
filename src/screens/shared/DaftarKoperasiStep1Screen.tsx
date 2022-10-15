@@ -1,42 +1,30 @@
 import React, { FC, useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Button,
-  CalendarPicker,
-  HeaderBack,
-  TextInputBorder,
-} from '../../components';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ParentStackParamList } from '../../config/navigation/model';
 import { Controller, useForm } from 'react-hook-form';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Button, CalendarPicker, HeaderBack, TextInputBorder } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { SendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
+import { ParentStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import {
   fetchKoperasiList,
   fetchUserKoperasi,
   KoperasiListResponse,
 } from '../../redux/reducers/LoginReducer';
-import { sendUserKoperasiResponseParams } from '../../config/apis/LoginApi';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiStep1Screen'
->;
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiStep1Screen'>;
 
 const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const [koperasiName, setKoperasiName] = useState<string>('');
   const [selected, setSelected] = useState<boolean>(false);
-  const { koperasiListData } = useAppSelector(s => s.LoginReducer);
+  const { koperasiListData } = useAppSelector((s) => s.LoginReducer);
   const [data, setData] = useState<KoperasiListResponse[] | null>(null);
 
   // // Using a query hook automatically fetches data and returns query values
@@ -55,7 +43,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
   useEffect(() => {
     if (!selected) {
       if (koperasiName.length > 2) {
-        const result: KoperasiListResponse[] = koperasiListData?.filter(value =>
+        const result: KoperasiListResponse[] = koperasiListData?.filter((value) =>
           value.namaKoperasi.toLowerCase().includes(koperasiName.toLowerCase()),
         );
         setData(result);
@@ -63,11 +51,11 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     }
   }, [koperasiName, selected]);
 
-  const onSubmit = (data: sendUserKoperasiResponseParams) => {
-    const { tanggalLahir } = data;
+  const onSubmit = (submitData: SendUserKoperasiResponseParams) => {
+    const { tanggalLahir } = submitData;
     dispatch(
       fetchUserKoperasi({
-        ...data,
+        ...submitData,
         tanggalLahir: formatter.trimDate(tanggalLahir),
       }),
     );
@@ -78,7 +66,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<sendUserKoperasiResponseParams>({
+  } = useForm<SendUserKoperasiResponseParams>({
     defaultValues: {
       namaKoperasi: '',
       noAnggota: '',
@@ -98,14 +86,13 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
             width={3}
             fill={2}
             tintColor={colors.primary}
-            backgroundColor={colors.primaryLight}>
+            backgroundColor={colors.primaryLight}
+          >
             {() => <Text style={styles.textCircle}>1/2</Text>}
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
-        <Text style={styles.textTitle2}>
-          {strings.daftar_koperasi_isi_data_title_1}
-        </Text>
+        <Text style={styles.textTitle2}>{strings.daftar_koperasi_isi_data_title_1}</Text>
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>
@@ -118,7 +105,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
                 error={errors.namaKoperasi}
                 errorText={errors.namaKoperasi?.message}
                 value={value}
-                onChangeText={e => {
+                onChangeText={(e) => {
                   onChangeKoperasiName(e);
                   onChange(e);
                   if (selected) setSelected(false);
@@ -160,10 +147,9 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
                       setSelected(true);
                       setData(null);
                       onChangeKoperasiName(item.namaKoperasi);
-                    }}>
-                    <Text style={{ color: colors.bodyText }}>
-                      {item.namaKoperasi}
-                    </Text>
+                    }}
+                  >
+                    <Text style={{ color: colors.bodyText }}>{item.namaKoperasi}</Text>
                   </TouchableOpacity>
                 );
               }}
@@ -181,7 +167,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
                 marginTop: sizes.padding / 2,
               }}
               value={value}
-              onChangeText={e => onChange(e)}
+              onChangeText={(e) => onChange(e)}
               placeholder={strings.masukan_no_anggota}
               icon={icons.icon_number_textbox}
             />
@@ -198,7 +184,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
             <CalendarPicker
               error={errors.tanggalLahir}
               errorText={errors.tanggalLahir?.message}
-              onChangeDate={date => {
+              onChangeDate={(date) => {
                 onChange(date);
               }}
               value={value}

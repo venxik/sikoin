@@ -1,11 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -16,9 +13,7 @@ type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep1Screen'>;
 
 const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { email, noTelp, nama } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanStep1Data,
-  );
+  const { email, noTelp, nama } = useAppSelector((s) => s.PinjamanReducer.pinjamanStep1Data);
 
   const navigateToStep2 = () => {
     dispatch(fetchPinjamanStep2());
@@ -26,10 +21,7 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
         <HeaderPinjaman index={1} />
         <View
           style={{
@@ -37,7 +29,8 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             marginVertical: sizes.padding,
             backgroundColor: colors.white,
             borderRadius: sizes.padding,
-          }}>
+          }}
+        >
           <TextInputForm value={nama} title={strings.nama} disableEdit />
           <TextInputForm value={noTelp} title={strings.no_telp} disableEdit />
           <TextInputForm value={email} title={strings.email} disableEdit />
@@ -49,7 +42,8 @@ const PinjamanStep1: React.FC<Props> = ({ navigation }) => {
             position: 'absolute',
             bottom: sizes.padding,
             width: '100%',
-          }}>
+          }}
+        >
           <Button
             onPress={() => navigation.goBack()}
             secondary

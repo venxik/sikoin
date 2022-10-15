@@ -1,26 +1,25 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { BiodataApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
-import { isEmpty } from 'lodash';
 import { formatter } from '../../utils';
 import {
   BiodataResponse,
   fetchBiodata,
+  fetchUpdateBiodata,
   getBiodataFailed,
   getBiodataSuccess,
-  fetchUpdateBiodata,
   updateBiodataFailed,
   updateBiodataSuccess,
 } from '../reducers/BiodataReducer';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getBiodata() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
-      BiodataApi.getBiodata,
-    );
+    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(BiodataApi.getBiodata);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

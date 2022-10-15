@@ -1,6 +1,7 @@
-import { apis } from '../../constants';
 import { createSlice } from '@reduxjs/toolkit';
 import { isEmpty } from 'lodash';
+
+import { apis } from '../../constants';
 
 interface ErrorState {
   title: string;
@@ -46,9 +47,7 @@ const errorModalSlice = createSlice({
         screenSource: isEmpty(options.screenSource)
           ? initialState.options.screenSource
           : options.screenSource,
-        errorType: isEmpty(options.errorType)
-          ? initialState.options.errorType
-          : options.errorType,
+        errorType: isEmpty(options.errorType) ? initialState.options.errorType : options.errorType,
       };
     },
     dismissErrorModal: () => initialState,

@@ -1,6 +1,6 @@
-import formatter from './formatter';
 import AsyncStore from './AsyncStore';
 import EncryptedStorage from './EncryptedStorage';
+import formatter from './formatter';
 
-export { formatter, EncryptedStorage, AsyncStore };
+export { AsyncStore, EncryptedStorage, formatter };
 export * from './Linking';

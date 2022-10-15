@@ -1,28 +1,23 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC } from 'react';
-import {
-  SafeAreaView,
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Linking,
-} from 'react-native';
-import { Button, HeaderBack } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
-import { useAppSelector } from '../../config';
-import { colors, SCREEN_HEIGHT, sizes } from '../../constants';
+import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FastImage from 'react-native-fast-image';
+
+import { Button, HeaderBack } from '../../components';
+import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
+import { colors, SCREEN_HEIGHT, sizes } from '../../constants';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PromoDetailScreen'>;
 
 const PromoDetailScreen: FC<Props> = () => {
   const { banner, deskripsi, judul, webUrl } =
-    useAppSelector(state => state.PromoReducer.promoDetail) || {};
+    useAppSelector((state) => state.PromoReducer.promoDetail) || {};
 
   const onPressWebUrl = () => {
     Linking.canOpenURL(webUrl as string)
-      .then(supported => {
+      .then((supported) => {
         if (supported) {
           return Linking.openURL(webUrl as string);
         }

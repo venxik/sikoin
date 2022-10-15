@@ -1,26 +1,27 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { AlamatApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
+import { formatter } from '../../utils';
 import {
   AlamatDataResponse,
+  deleteAlamatFailed,
+  deleteAlamatSuccess,
   fetchAlamatList,
+  fetchDeleteAlamat,
+  fetchSubmitAlamat,
+  fetchUpdateAlamat,
   getAlamatListFailed,
   getAlamatListSuccess,
-  fetchSubmitAlamat,
+  setDeleteAlamatStatus,
   submitAlamatFailed,
   submitAlamatSuccess,
-  fetchUpdateAlamat,
   updateAlamatFailed,
   updateAlamatSuccess,
-  fetchDeleteAlamat,
-  deleteAlamatSuccess,
-  deleteAlamatFailed,
-  setDeleteAlamatStatus,
 } from '../reducers/AlamatReducer';
-import { isEmpty } from 'lodash';
-import { formatter } from '../../utils';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getAlamat() {
   yield put(showLoading());

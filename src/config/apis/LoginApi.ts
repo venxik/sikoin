@@ -1,14 +1,15 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
-import { apis } from '../../constants';
 
-export type sendUserKoperasiResponseParams = {
+import { apis } from '../../constants';
+import HttpService from '../services/HttpService';
+
+export type SendUserKoperasiResponseParams = {
   namaKoperasi: string;
   noAnggota: string;
   tanggalLahir: string;
 };
 
-export type sendUserEmailKoperasiParams = {
+export type SendUserEmailKoperasiParams = {
   userId: number;
   email: string;
 };
@@ -31,16 +32,14 @@ class LoginApi {
   /**
    * Send and submit user koperasi data
    *
-   * @param   { Object } data Contains sendUserKoperasiResponseParams
+   * @param   { Object } data Contains SendUserKoperasiResponseParams
    * @returns { Response }  Promise either resolve or rejected
    */
-  static async sendUserKoperasi(
-    data: sendUserKoperasiResponseParams,
-  ): Promise<AxiosResponse> {
+  static async sendUserKoperasi(data: SendUserKoperasiResponseParams): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.login.koperasi, data);
     return resp;
   }
-  // static sendUserKoperasi(data: sendUserKoperasiResponseParams) {
+  // static sendUserKoperasi(data: SendUserKoperasiResponseParams) {
   //   fetch(apis.baseURL.concat(apis.endpoints.login.koperasi), {
   //     method: 'POST',
   //     headers: {
@@ -59,13 +58,8 @@ class LoginApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async sendUserEmailKoperasiParams(
-    data: sendUserEmailKoperasiParams,
-  ): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(
-      apis.endpoints.login.emailAnggota,
-      data,
-    );
+  static async sendUserEmailKoperasi(data: SendUserEmailKoperasiParams): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.login.emailAnggota, data);
     return resp;
   }
 

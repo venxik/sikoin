@@ -31,10 +31,7 @@ const refKeluargaSlice = createSlice({
     ) => {
       state.keluargaList = payload;
     },
-    getRefKeluargaFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getRefKeluargaFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     submitRefKeluargaSuccess: (
@@ -43,10 +40,7 @@ const refKeluargaSlice = createSlice({
     ) => {
       state.keluargaList = payload;
     },
-    submitRefKeluargaFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    submitRefKeluargaFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     updateRefKeluargaSuccess: (
@@ -55,10 +49,7 @@ const refKeluargaSlice = createSlice({
     ) => {
       state.keluargaList = payload;
     },
-    updateRefKeluargaFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    updateRefKeluargaFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     setDeleteRefKeluargaStatus: (
@@ -73,10 +64,7 @@ const refKeluargaSlice = createSlice({
     ) => {
       state.keluargaList = payload;
     },
-    deleteRefKeluargaFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    deleteRefKeluargaFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     // addKeluarga: (state, { payload }: PayloadAction<RefKeluargaResponse>) => {
@@ -108,16 +96,12 @@ const refKeluargaSlice = createSlice({
 });
 
 export const fetchGetRefKeluarga = createAction('fetchGetRefKeluarga');
-export const fetchDeleteRefKeluarga = createAction<number>(
-  'fetchDeleteRefKeluarga',
-);
+export const fetchDeleteRefKeluarga = createAction<number>('fetchDeleteRefKeluarga');
 export const fetchUpdateRefKeluarga = createAction<{
   data: RefKeluargaResponse;
   id: number;
 }>('fetchUpdateRefKeluarga');
-export const fetchSubmitRefKeluarga = createAction<RefKeluargaResponse>(
-  'fetchSubmitRefKeluarga',
-);
+export const fetchSubmitRefKeluarga = createAction<RefKeluargaResponse>('fetchSubmitRefKeluarga');
 
 export const {
   deleteRefKeluargaSuccess,

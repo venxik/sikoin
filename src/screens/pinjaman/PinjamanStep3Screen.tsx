@@ -1,26 +1,15 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
-import {
-  Button,
-  DropdownForm,
-  HeaderPinjaman,
-  TextInputForm,
-} from '../../components';
+
+import { Button, DropdownForm, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
-import {
-  fetchPinjamanStep4,
-  PinjamanStep3Data,
-} from '../../redux/reducers/PinjamanReducer';
+import { fetchPinjamanStep4, PinjamanStep3Data } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
@@ -41,7 +30,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     noRek,
     noTelpPt,
     provinsi,
-  } = useAppSelector(s => s.PinjamanReducer.pinjamanStep3Data);
+  } = useAppSelector((s) => s.PinjamanReducer.pinjamanStep3Data);
 
   const navigateToStep4 = (data: PinjamanStep3Data) => {
     dispatch(fetchPinjamanStep4({ ...data }));
@@ -71,10 +60,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
         <HeaderPinjaman index={3} />
         <ScrollView>
           <View style={styles.innerContainer}>
@@ -82,7 +68,8 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-              }}>
+              }}
+            >
               <Controller
                 control={control}
                 name="masaKerjaTahun"
@@ -92,7 +79,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                     errorText={errors.masaKerjaTahun?.message}
                     style={{ width: '45%' }}
                     value={value?.toString()}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.masa_kerja_tahun}
                     keyboardType="number-pad"
                   />
@@ -113,7 +100,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                     errorText={errors.masaKerjaBulan?.message}
                     style={{ width: '45%' }}
                     value={value?.toString()}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.masa_kerja_bulan}
                     keyboardType="number-pad"
                   />
@@ -133,7 +120,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.gaji_bulanan}
                   data={dropdownItems.gajiBualanan}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                   maxHeight={200}
                 />
@@ -147,7 +134,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.bank}
                   errorText={errors?.bank?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Nama Bank"
                 />
               )}
@@ -160,7 +147,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.namaKantorCabang}
                   errorText={errors?.namaKantorCabang?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Kantor Cabang"
                 />
               )}
@@ -173,7 +160,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.noRek}
                   errorText={errors?.noRek?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="No Rekening"
                 />
               )}
@@ -186,7 +173,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.namaPerusahaan}
                   errorText={errors?.namaPerusahaan?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Nama Perusahaan / PT"
                 />
               )}
@@ -199,7 +186,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.jabatanTerakhir}
                   errorText={errors?.jabatanTerakhir?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Jabatan"
                 />
               )}
@@ -212,7 +199,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.noTelpPt}
                   errorText={errors?.noTelpPt?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Nomor Telepon Kantor"
                 />
               )}
@@ -225,7 +212,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.alamatKantor}
                   errorText={errors?.alamatKantor?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Alamat Kantor"
                 />
               )}
@@ -238,7 +225,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.provinsi}
                   errorText={errors?.provinsi?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Provinsi"
                 />
               )}
@@ -251,7 +238,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   error={errors?.kota}
                   errorText={errors?.kota?.message}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title="Kabupaten / Kota"
                 />
               )}
@@ -266,7 +253,8 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             bottom: sizes.padding,
             paddingHorizontal: sizes.padding,
             width: '100%',
-          }}>
+          }}
+        >
           <Button
             onPress={() => navigation.goBack()}
             shadow

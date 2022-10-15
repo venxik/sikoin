@@ -1,13 +1,10 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { DokumenApi } from '../../config/apis';
-import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import { formatter } from '../../utils';
-import {
-  fetchDokumen,
-  fetchDokumenFailed,
-  fetchDokumenSuccess,
-} from '../reducers/DokumenReducer';
+import { fetchDokumen, fetchDokumenFailed, fetchDokumenSuccess } from '../reducers/DokumenReducer';
+import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getAllDokumen() {
   yield put(showLoading());

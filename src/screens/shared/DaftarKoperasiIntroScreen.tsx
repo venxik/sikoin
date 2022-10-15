@@ -1,22 +1,15 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ArrowLeft } from 'react-native-iconly';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Button, HeaderBack } from '../../components';
 import { ParentStackParamList } from '../../config/navigation/model';
-import {
-  colors,
-  images,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  strings,
-} from '../../constants';
+import { colors, images, SCREEN_HEIGHT, SCREEN_WIDTH, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiIntroScreen'
->;
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiIntroScreen'>;
 
 const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
   const [index, setIndex] = useState<number>(1);
@@ -37,11 +30,7 @@ const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
         style={{ zIndex: 2 }}
         customLeftIcon={<ArrowLeft color={colors.white} />}
       />
-      <Image
-        style={styles.background}
-        resizeMode="stretch"
-        source={images.daftar_koperasi_bg}
-      />
+      <Image style={styles.background} resizeMode="stretch" source={images.daftar_koperasi_bg} />
       {index === 1 ? (
         <Image
           style={styles.bgImage1}
@@ -57,9 +46,7 @@ const DaftarKoperasiIntroScreen: React.FC<Props> = ({ navigation }) => {
       )}
 
       <Text style={styles.textTitle}>
-        {index === 1
-          ? strings.daftar_koperasi_title_1
-          : strings.daftar_koperasi_title_2}
+        {index === 1 ? strings.daftar_koperasi_title_1 : strings.daftar_koperasi_title_2}
       </Text>
 
       {index === 1 ? (

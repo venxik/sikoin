@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Platform } from 'react-native';
+
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
-import { Platform } from 'react-native';
 
 // Must be outside of any component LifeCycle (such as `componentDidMount`).
 class LocalNotificationService {
@@ -19,9 +21,7 @@ class LocalNotificationService {
           return;
         }
         notification.userInteraction = true;
-        onOpenNotification(
-          Platform.OS == 'ios' ? notification.data.item : notification.data,
-        );
+        onOpenNotification(Platform.OS == 'ios' ? notification.data.item : notification.data);
 
         if (Platform.OS == 'ios') {
           // (required) Called when a remote is received or opened, or local notification is opened
@@ -67,13 +67,7 @@ class LocalNotificationService {
     PushNotification.unregister();
   };
 
-  showNotification = (
-    id: string,
-    data: any,
-    title?: string,
-    message?: string,
-    options?: any,
-  ) => {
+  showNotification = (id: string, data: any, title?: string, message?: string, options?: any) => {
     PushNotification.localNotification({
       //Android only Properties
       ...this.buildAndroidNotification(id, data, title, message, options),

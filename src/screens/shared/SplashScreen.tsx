@@ -1,13 +1,15 @@
-import { isEmpty } from 'lodash';
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+
+import { isEmpty } from 'lodash';
+
 import { useAppSelector } from '../../config';
 import { navigateAndReset } from '../../config/navigation';
 import { images } from '../../constants';
 import { AsyncStore } from '../../utils';
 
 const SplashScreen: React.FC = () => {
-  const { userId } = useAppSelector(s => s.HomeReducer.user);
+  const { userId } = useAppSelector((s) => s.HomeReducer.user);
 
   React.useEffect(() => {
     validateNavigation();

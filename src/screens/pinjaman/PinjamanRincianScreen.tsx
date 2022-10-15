@@ -1,24 +1,21 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { HeaderBack, PinjamanRincianSimulasiItem } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 import { fetchPinjamanDisetujuiDetailData } from '../../redux/reducers/PinjamanReducer';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'PinjamanRincianScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanRincianScreen'>;
 
 const PinjamanRincianScreen: React.FC<Props> = ({ navigation, route }) => {
   const { id } = route.params;
 
   const dispatch = useAppDispatch();
-  const { rincianAngsuran } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanDisetujuiDetail,
-  );
+  const { rincianAngsuran } = useAppSelector((s) => s.PinjamanReducer.pinjamanDisetujuiDetail);
 
   useEffect(() => {
     dispatch(fetchPinjamanDisetujuiDetailData(id));
@@ -34,13 +31,12 @@ const PinjamanRincianScreen: React.FC<Props> = ({ navigation, route }) => {
         }}
         style={{
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <View style={styles.mainContainer}>
           <Text style={styles.textTitle}>Rincian Angsuran</Text>
           {rincianAngsuran &&
-            rincianAngsuran.map((item, i) => (
-              <PinjamanRincianSimulasiItem key={i} item={item} />
-            ))}
+            rincianAngsuran.map((item, i) => <PinjamanRincianSimulasiItem key={i} item={item} />)}
         </View>
       </ScrollView>
     </SafeAreaView>

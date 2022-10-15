@@ -1,5 +1,6 @@
-import { FieldError } from 'react-hook-form';
 import { ImageSourcePropType, TextInputProps, ViewStyle } from 'react-native';
+
+import { FieldError } from 'react-hook-form';
 
 export interface TextInputCurrencyProps extends TextInputProps {
   title?: string;

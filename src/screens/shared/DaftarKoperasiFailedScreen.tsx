@@ -1,26 +1,19 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ArrowLeft } from 'react-native-iconly';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { Button, HeaderBack } from '../../components';
 import { ParentStackParamList } from '../../config/navigation/model';
-import {
-  colors,
-  images,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  strings,
-} from '../../constants';
+import { colors, images, SCREEN_HEIGHT, SCREEN_WIDTH, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  ParentStackParamList,
-  'DaftarKoperasiFailedScreen'
->;
+type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiFailedScreen'>;
 
 const DaftarKoperasiFailedScreen: React.FC<Props> = ({ navigation }) => {
   const onClickAyo = () => {
-    console.log('GO TO CLUB');
+    console.warn('GO TO CLUB');
   };
 
   return (
@@ -30,20 +23,14 @@ const DaftarKoperasiFailedScreen: React.FC<Props> = ({ navigation }) => {
         style={{ zIndex: 2, width: '100%' }}
         customLeftIcon={<ArrowLeft color={colors.white} />}
       />
-      <Image
-        style={styles.background}
-        resizeMode="stretch"
-        source={images.daftar_koperasi_bg}
-      />
+      <Image style={styles.background} resizeMode="stretch" source={images.daftar_koperasi_bg} />
       <Image
         style={styles.bgImage2}
         resizeMode="stretch"
         source={images.daftar_koperasi_question_mark_2}
       />
 
-      <Text style={styles.textTitle}>
-        {strings.daftar_koperasi_failed_title}
-      </Text>
+      <Text style={styles.textTitle}>{strings.daftar_koperasi_failed_title}</Text>
 
       <View style={styles.buttonContainer2}>
         <Button

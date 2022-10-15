@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+
 import { colors, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import Button from '../Button';
 import { CardLastItemProps } from './model';
@@ -8,11 +9,7 @@ const CardLastItem = (props: CardLastItemProps) => {
   const { onPress, style, icon, customText } = props || null;
   return (
     <View style={[styles.container, style]}>
-      <Image
-        source={images.daftar_koperasi_bg}
-        style={styles.imageStyle}
-        resizeMode="cover"
-      />
+      <Image source={images.daftar_koperasi_bg} style={styles.imageStyle} resizeMode="cover" />
 
       <Image source={icon} style={styles.iconStyle} resizeMode="contain" />
 

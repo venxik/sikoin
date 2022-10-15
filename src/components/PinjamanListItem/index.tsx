@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { TickSquare } from 'react-native-iconly';
+
 import { colors, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { PinjamanListItemProps } from './model';
-import { TickSquare } from 'react-native-iconly';
 
 const PinjamanListItem = (props: PinjamanListItemProps) => {
   const { item, onPress, disabled = false } = props;
@@ -16,10 +18,7 @@ const PinjamanListItem = (props: PinjamanListItemProps) => {
   };
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      disabled={disabled}>
+    <TouchableOpacity style={styles.container} onPress={onPress} disabled={disabled}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TickSquare color={tickColor()} size={sizes.padding} />
         <Text style={styles.textTitle}>{item.namaJenisPinjaman}</Text>
@@ -27,11 +26,10 @@ const PinjamanListItem = (props: PinjamanListItemProps) => {
       <View
         style={{
           marginLeft: 8 + sizes.padding,
-        }}>
+        }}
+      >
         <Text style={styles.textContent}>{item.tanggal}</Text>
-        <Text style={styles.textNominal}>
-          Rp. {formatter.formatNumberToCurreny(item.nominal)}
-        </Text>
+        <Text style={styles.textNominal}>Rp. {formatter.formatNumberToCurreny(item.nominal)}</Text>
       </View>
     </TouchableOpacity>
   );

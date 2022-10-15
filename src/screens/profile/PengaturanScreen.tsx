@@ -1,12 +1,10 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, StyleSheet, Switch, Linking } from 'react-native';
+import { Linking, StyleSheet, Switch, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  HeaderBack,
-  SubmenuItemList,
-  SubmenuItemListCustom,
-} from '../../components';
+
+import { HeaderBack, SubmenuItemList, SubmenuItemListCustom } from '../../components';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 
@@ -15,11 +13,11 @@ const url = 'https://www.sikoin.id';
 
 const PengaturanScreen: React.FC<Props> = ({ navigation }) => {
   const [isNotifEnabled, setIsNotifEnabled] = useState<boolean>(false);
-  const toggleSwitch = () => setIsNotifEnabled(previousState => !previousState);
+  const toggleSwitch = () => setIsNotifEnabled((previousState) => !previousState);
 
   const openSikoinWeb = () => {
     Linking.canOpenURL(url)
-      .then(supported => {
+      .then((supported) => {
         if (supported) {
           return Linking.openURL(url);
         }
@@ -37,10 +35,7 @@ const PengaturanScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.pengaturan}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.pengaturan} />
       <View style={styles.innerContainer}>
         <SubmenuItemListCustom
           icon={icons.icon_notification_black}

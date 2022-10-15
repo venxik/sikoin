@@ -1,22 +1,10 @@
+import React, { FC, useState } from 'react';
+import { Alert, FlatList, Image, Modal, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { FC, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  Image,
-  Text,
-  FlatList,
-  Modal,
-  Alert,
-} from 'react-native';
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
+
 import {
   Button,
   CardVoucherItem,
@@ -27,19 +15,18 @@ import {
   QtyButton,
 } from '../../components';
 import { SelectedVoucherProps } from '../../components/CardVoucherLarge/model';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'VoucherMainScreen'>;
 
 const VoucherMainScreen: FC<Props> = ({ navigation }) => {
-  const { voucherDataList } = useAppSelector(s => s.VoucherReducer) || {};
+  const { voucherDataList } = useAppSelector((s) => s.VoucherReducer) || {};
   const [showInfoPopup, setshowInfoPopup] = useState(false);
   const [showVoucherPopup, setshowVoucherPopup] = useState(false);
-  const [selectedVoucher, setselectedVoucher] =
-    useState<SelectedVoucherProps | null>(null);
+  const [selectedVoucher, setselectedVoucher] = useState<SelectedVoucherProps | null>(null);
   const [qty, setQty] = useState(1);
 
   const onSelectVoucher = (data: SelectedVoucherProps) => {
@@ -54,12 +41,12 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
 
   const onPressMinus = () => {
     if (qty > 1) {
-      setQty(e => e - 1);
+      setQty((e) => e - 1);
     }
   };
 
   const onPressPlus = () => {
-    setQty(e => e + 1);
+    setQty((e) => e + 1);
   };
 
   const renderRightButtonHeader = () => {
@@ -75,8 +62,9 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
                 marginTop: 30,
               },
             }}
-            optionsContainerStyle={styles.optionsContainerStyle}>
-            <MenuOption onSelect={() => Alert.alert(`Go to VoucherKu`)}>
+            optionsContainerStyle={styles.optionsContainerStyle}
+          >
+            <MenuOption onSelect={() => Alert.alert('Go to VoucherKu')}>
               <View style={styles.menuOptionStyle}>
                 <Image source={icons.icon_voucher_black} style={styles.icon} />
                 <Text style={styles.textPopupMenu}>{strings.voucherku}</Text>
@@ -85,9 +73,7 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
             <MenuOption onSelect={() => setshowInfoPopup(true)}>
               <View style={{ flexDirection: 'row' }}>
                 <Image source={icons.icon_info_black} style={styles.icon} />
-                <Text style={styles.textPopupMenu}>
-                  {strings.tentang_voucher}
-                </Text>
+                <Text style={styles.textPopupMenu}>{strings.tentang_voucher}</Text>
               </View>
             </MenuOption>
           </MenuOptions>
@@ -97,23 +83,16 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
   };
 
   const renderPopupBeli = () => {
-    const harga =
-      typeof selectedVoucher?.voucher === 'number'
-        ? selectedVoucher?.voucher * qty
-        : 0;
+    const harga = typeof selectedVoucher?.voucher === 'number' ? selectedVoucher?.voucher * qty : 0;
     const biayaAdmin = 3000;
     const total = harga + biayaAdmin;
     return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showVoucherPopup}>
+      <Modal animationType="slide" transparent={true} visible={showVoucherPopup}>
         <View style={styles.modalMainView}>
           <View style={styles.modalView}>
             <CardVoucherItem data={selectedVoucher?.voucher} disabled />
             <Text style={styles.textPopupTitle}>
-              {!isEmpty(selectedVoucher) &&
-                `${strings.voucher} ${selectedVoucher?.data?.namaToko}`}
+              {!isEmpty(selectedVoucher) && `${strings.voucher} ${selectedVoucher?.data?.namaToko}`}
             </Text>
             {/* QTY CONTAINER */}
             <QtyButton
@@ -132,17 +111,11 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
                     paddingBottom: sizes.padding * 0.5,
                     justifyContent: 'space-between',
                   },
-                ]}>
+                ]}
+              >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <View
-                    style={[
-                      styles.dot,
-                      { backgroundColor: colors.bodyTextGrey },
-                    ]}
-                  />
-                  <Text style={styles.textJumlahHarga}>
-                    {strings.jumlah_voucher}
-                  </Text>
+                  <View style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]} />
+                  <Text style={styles.textJumlahHarga}>{strings.jumlah_voucher}</Text>
                 </View>
                 <Text style={styles.textJumlahHarga}>x{qty}</Text>
               </View>
@@ -154,14 +127,10 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
                     paddingBottom: sizes.padding * 0.5,
                     justifyContent: 'space-between',
                   },
-                ]}>
+                ]}
+              >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <View
-                    style={[
-                      styles.dot,
-                      { backgroundColor: colors.bodyTextGrey },
-                    ]}
-                  />
+                  <View style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]} />
                   <Text style={styles.textJumlahHarga}>{strings.harga}</Text>
                 </View>
                 <Text style={styles.textJumlahHarga}>
@@ -178,17 +147,11 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
                     justifyContent: 'space-between',
                     width: '100%',
                   },
-                ]}>
+                ]}
+              >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <View
-                    style={[
-                      styles.dot,
-                      { backgroundColor: colors.bodyTextGrey },
-                    ]}
-                  />
-                  <Text style={styles.textJumlahHarga}>
-                    {strings.biaya_admin}
-                  </Text>
+                  <View style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]} />
+                  <Text style={styles.textJumlahHarga}>{strings.biaya_admin}</Text>
                 </View>
                 <Text style={styles.textJumlahHarga}>
                   {`Rp ${formatter.formatNumberToCurreny(biayaAdmin)}`}
@@ -199,18 +162,18 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
                 style={[
                   styles.rowContainerBorderless,
                   { padding: 0, justifyContent: 'space-between', marginTop: 6 },
-                ]}>
+                ]}
+              >
                 <Text style={styles.textTitle}>{strings.total}</Text>
-                <Text
-                  style={
-                    styles.textTitle
-                  }>{`Rp${formatter.formatNumberToCurreny(total)}`}</Text>
+                <Text style={styles.textTitle}>{`Rp${formatter.formatNumberToCurreny(
+                  total,
+                )}`}</Text>
               </View>
             </View>
             <View style={styles.buttonContainer}>
               <Button
                 text={strings.batal}
-                onPress={() => setshowVoucherPopup(e => !e)}
+                onPress={() => setshowVoucherPopup((e) => !e)}
                 buttonContainerStyle={{
                   width: '47%',
                   backgroundColor: colors.white,
@@ -247,7 +210,7 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
         headerText={strings.voucher_center}
         showPopup={showInfoPopup}
         contentText={strings.voucher_info_popup}
-        onPress={() => setshowInfoPopup(e => !e)}
+        onPress={() => setshowInfoPopup((e) => !e)}
       />
 
       <FlatList
@@ -259,12 +222,7 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
         ListHeaderComponentStyle={{ marginVertical: sizes.padding }}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => {
-          return (
-            <CardVoucherLarge
-              data={item}
-              onPressVoucher={data => onSelectVoucher(data)}
-            />
-          );
+          return <CardVoucherLarge data={item} onPressVoucher={(data) => onSelectVoucher(data)} />;
         }}
       />
     </SafeAreaView>

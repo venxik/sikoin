@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { colors, icons, sizes, strings } from '../../constants';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { Dropdown } from 'react-native-element-dropdown';
+
+import { colors, icons, sizes, strings } from '../../constants';
 import { DropdownFormProps } from './model';
 
 const DropdownForm = (props: DropdownFormProps) => {
-  const { title, style, error, errorText, data, onChange, value, maxHeight } =
-    props || {};
+  const { title, style, error, errorText, data, onChange, value, maxHeight } = props || {};
 
   const dropdown = () => (
     <Dropdown
@@ -22,7 +23,7 @@ const DropdownForm = (props: DropdownFormProps) => {
         />
       )}
       data={data}
-      onChange={item => onChange(item?.value)}
+      onChange={(item) => onChange(item?.value)}
       value={value}
       maxHeight={maxHeight ? maxHeight : 120}
       labelField="label"
@@ -40,9 +41,7 @@ const DropdownForm = (props: DropdownFormProps) => {
       </View>
     );
   }
-  return (
-    <View style={[style, { marginTop: sizes.padding }]}>{dropdown()}</View>
-  );
+  return <View style={[style, { marginTop: sizes.padding }]}>{dropdown()}</View>;
 };
 
 export default DropdownForm;

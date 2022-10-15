@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Image, TextInput, Text } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
+
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { TextInputBorderProps } from './model';
 
@@ -15,10 +16,9 @@ const TextInputBorder = (props: TextInputBorderProps) => {
             borderColor: error ? colors.red : colors.strokeGrey,
           },
           style,
-        ]}>
-        {icon ? (
-          <Image resizeMode="contain" source={icon} style={styles.iconStyle} />
-        ) : null}
+        ]}
+      >
+        {icon ? <Image resizeMode="contain" source={icon} style={styles.iconStyle} /> : null}
         <TextInput
           {...props}
           style={[styles.textInputStyle, textBoxStyle]}

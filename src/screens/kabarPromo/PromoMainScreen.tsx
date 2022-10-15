@@ -1,21 +1,20 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useEffect } from 'react';
-import { SafeAreaView, View, StyleSheet, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { CardPromo, HeaderBack, MenuHeaderIcon } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 import { KabarPromoData } from '../../redux/reducers/HomeReducer';
-import {
-  fetchPromo,
-  fetchPromoDetail,
-} from '../../redux/reducers/PromoReducer';
+import { fetchPromo, fetchPromoDetail } from '../../redux/reducers/PromoReducer';
 import { openUrl } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PromoMainScreen'>;
 
 const PromoMainScreen: FC<Props> = () => {
-  const { promoDataList } = useAppSelector(state => state.PromoReducer) || {};
+  const { promoDataList } = useAppSelector((state) => state.PromoReducer) || {};
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +38,7 @@ const PromoMainScreen: FC<Props> = () => {
           contentContainerStyle={{
             alignItems: 'center',
           }}
-          keyExtractor={item => item?.id.toString()}
+          keyExtractor={(item) => item?.id.toString()}
           renderItem={({ item }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardPromo

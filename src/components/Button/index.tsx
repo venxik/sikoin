@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { ButtonTextProps } from './model';
 
@@ -66,17 +67,11 @@ const Button = (props: ButtonTextProps) => {
     return (
       <View style={styles.innerContainer}>
         {iconLocation === 'left' && icon ? (
-          <Image
-            source={icon}
-            style={[styles.iconStyle, { marginRight: 10 }, iconStyle]}
-          />
+          <Image source={icon} style={[styles.iconStyle, { marginRight: 10 }, iconStyle]} />
         ) : null}
         <Text style={updateTextStyle()}>{text}</Text>
         {iconLocation === 'right' && icon ? (
-          <Image
-            source={icon}
-            style={[styles.iconStyle, { marginLeft: 10 }, iconStyle]}
-          />
+          <Image source={icon} style={[styles.iconStyle, { marginLeft: 10 }, iconStyle]} />
         ) : null}
       </View>
     );
@@ -100,10 +95,7 @@ const Button = (props: ButtonTextProps) => {
   };
 
   return (
-    <TouchableOpacity
-      style={buttonStyle()}
-      onPress={onPress}
-      disabled={disabled}>
+    <TouchableOpacity style={buttonStyle()} onPress={onPress} disabled={disabled}>
       {iconLocation === 'center' ? renderIconOnly() : renderWithText()}
     </TouchableOpacity>
   );

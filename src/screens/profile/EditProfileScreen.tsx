@@ -1,37 +1,36 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Image,
   KeyboardAvoidingView,
   ScrollView,
-  Image,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, HeaderBack, TextInputForm } from '../../components';
-import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
-import {
-  fetchUpdateProfile,
-  ProfileRequest,
-} from '../../redux/reducers/ProfileReducer';
-import { useForm, Controller } from 'react-hook-form';
-import { formatter } from '../../utils';
-import DocumentPicker, {
-  DocumentPickerResponse,
-} from 'react-native-document-picker';
+
 import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../config/navigation/model';
-import { useAppDispatch, useAppSelector } from '../../config';
 import { isEmpty } from 'lodash';
+import { Controller, useForm } from 'react-hook-form';
+import DocumentPicker, { DocumentPickerResponse } from 'react-native-document-picker';
 import FastImage from 'react-native-fast-image';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Button, HeaderBack, TextInputForm } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
+import { ProfileStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { fetchUpdateProfile, ProfileRequest } from '../../redux/reducers/ProfileReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'EditProfileScreen'>;
 
 const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const { profileData } = useAppSelector(state => state.ProfileReducer) || {};
+  const { profileData } = useAppSelector((state) => state.ProfileReducer) || {};
   const { nama, noAnggota, email, noTelp, profilePic } = profileData || {};
 
   const [profilePicture, setProfilePicture] = useState<{
@@ -64,10 +63,10 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       formatter
         .resizeImage(data)
-        .then(res => {
+        .then((res) => {
           setProfilePicture({ uri: res.uri, data: data });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('Image resizer error', err);
         });
     } catch {
@@ -93,23 +92,12 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
-        <HeaderBack
-          onPress={() => navigation.goBack()}
-          title={strings.edit_profile}
-        />
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
+        <HeaderBack onPress={() => navigation.goBack()} title={strings.edit_profile} />
         <ScrollView>
           <View style={styles.innerContainer}>
-            <TouchableOpacity
-              onPress={openDocumentPicker}
-              style={styles.profilePicStyle}>
-              <FastImage
-                style={styles.profilePicStyle}
-                resizeMode="cover"
-                source={profilePicture}>
+            <TouchableOpacity onPress={openDocumentPicker} style={styles.profilePicStyle}>
+              <FastImage style={styles.profilePicStyle} resizeMode="cover" source={profilePicture}>
                 <View style={styles.iconContainer}>
                   <Image
                     resizeMode="cover"
@@ -123,21 +111,18 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
               </FastImage>
             </TouchableOpacity>
 
-            <View
-              style={{ paddingHorizontal: 10, marginVertical: sizes.padding }}>
+            <View style={{ paddingHorizontal: 10, marginVertical: sizes.padding }}>
               <View
                 style={{
                   flexDirection: 'row',
                   marginBottom: sizes.padding,
                   alignItems: 'center',
-                }}>
+                }}
+              >
                 <Text style={styles.codeText}>{noAnggota}</Text>
                 {!isEmpty(noAnggota) && (
                   <TouchableOpacity onPress={copyToClipboard}>
-                    <Image
-                      source={icons.icon_copy_clipboard}
-                      style={styles.iconClipboard}
-                    />
+                    <Image source={icons.icon_copy_clipboard} style={styles.iconClipboard} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -150,7 +135,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                     error={errors.nama}
                     errorText={errors.nama?.message}
                     value={value}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.nama}
                   />
                 )}
@@ -169,7 +154,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                     error={errors.noTelp}
                     errorText={errors.noTelp?.message}
                     value={value}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.no_telp}
                     keyboardType={'number-pad'}
                     maxLength={13}
@@ -194,7 +179,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }) => {
                     error={errors.email}
                     errorText={errors.email?.message}
                     value={value}
-                    onChangeText={value => onChange(value)}
+                    onChangeText={(value) => onChange(value)}
                     title={strings.email}
                   />
                 )}

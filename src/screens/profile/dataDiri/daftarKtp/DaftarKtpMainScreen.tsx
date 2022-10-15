@@ -1,43 +1,28 @@
-import Clipboard from '@react-native-clipboard/clipboard';
-import { isEmpty } from 'lodash';
+/* eslint-disable @typescript-eslint/indent */
 import React, { useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-} from 'react-native';
-import { Button, HeaderBack } from '../../../../components';
-import {
-  colors,
-  icons,
-  images,
-  SCREEN_HEIGHT,
-  sizes,
-  strings,
-} from '../../../../constants';
-import DocumentPicker from 'react-native-document-picker';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { isEmpty } from 'lodash';
+import DocumentPicker from 'react-native-document-picker';
+
+import { Button, HeaderBack } from '../../../../components';
 import { useAppDispatch, useAppSelector } from '../../../../config';
+import { ProfileStackParamList } from '../../../../config/navigation/model';
+import { colors, icons, images, SCREEN_HEIGHT, sizes, strings } from '../../../../constants';
 import { fetchKtpDokumen } from '../../../../redux/reducers/KtpReducer';
 
-type Props = NativeStackScreenProps<
-  ProfileStackParamList,
-  'DaftarKtpMainScreen'
->;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarKtpMainScreen'>;
 
 const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
   const documentPickerOptions = {
     type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
   };
 
-  const { ktpData, ktpDokumen } = useAppSelector(s => s.KtpReducer);
+  const { ktpData, ktpDokumen } = useAppSelector((s) => s.KtpReducer);
   const { noKtp, gambarKtp } = ktpData || {};
-  const { linkDokumen, linkGambarKtp, linkSelfieKtp, namaDokumen } =
-    ktpDokumen || {};
+  const { linkGambarKtp } = ktpDokumen || {};
 
   const dispatch = useAppDispatch();
 
@@ -58,6 +43,7 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       console.warn('Dokumen Pendukung :', data);
     } catch {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       (e: unknown) => console.error('Document picker error! ', e);
     }
   };
@@ -80,14 +66,12 @@ const DaftarKtpMainScreen: React.FC<Props> = ({ navigation }) => {
             flexDirection: 'row',
             marginVertical: sizes.padding,
             alignItems: 'center',
-          }}>
+          }}
+        >
           <Text style={styles.textStyle}>{noKtp ? noKtp : '-'}</Text>
           {!isEmpty(noKtp) && (
             <TouchableOpacity onPress={copyToClipboard}>
-              <Image
-                source={icons.icon_copy_clipboard}
-                style={styles.iconClipboard}
-              />
+              <Image source={icons.icon_copy_clipboard} style={styles.iconClipboard} />
             </TouchableOpacity>
           )}
         </View>

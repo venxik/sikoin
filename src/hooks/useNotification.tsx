@@ -1,15 +1,7 @@
-import notifee, {
-  RepeatFrequency,
-  TimestampTrigger,
-  TriggerType,
-} from '@notifee/react-native';
+import notifee, { RepeatFrequency, TimestampTrigger, TriggerType } from '@notifee/react-native';
 
 const useNotification = () => {
-  async function displayNotification(
-    title?: string,
-    body?: string,
-    actions?: ObjectConstructor,
-  ) {
+  async function displayNotification(title?: string, body?: string, actions?: ObjectConstructor) {
     // Create a channel required for Android Notifications
     const channelId = await notifee.createChannel({
       id: 'default',
@@ -92,9 +84,7 @@ const useNotification = () => {
   }
 
   // cancel all or specific trigger notifications
-  async function cancelTriggerNotifications(
-    notificationIds: string[] | undefined,
-  ) {
+  async function cancelTriggerNotifications(notificationIds: string[] | undefined) {
     await notifee.cancelTriggerNotifications(notificationIds);
   }
 
@@ -104,10 +94,7 @@ const useNotification = () => {
   }
 
   // cancel notification via notificationId or tag
-  async function cancelNotification(
-    notificationId: string,
-    tag: string | undefined = undefined,
-  ) {
+  async function cancelNotification(notificationId: string, tag: string | undefined = undefined) {
     await notifee.cancelNotification(notificationId, tag);
   }
 

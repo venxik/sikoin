@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { HeaderBack, PinjamanListItem } from '../../components';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -10,9 +12,7 @@ import { PengajuanPinjaman } from '../../redux/reducers/PinjamanReducer';
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanListScreen'>;
 
 const PinjamanListScreen: React.FC<Props> = ({ navigation }) => {
-  const { pengajuanPinjaman } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanInitialData,
-  );
+  const { pengajuanPinjaman } = useAppSelector((s) => s.PinjamanReducer.pinjamanInitialData);
 
   const onPressPinjamanDetail = (item: PengajuanPinjaman) => {
     navigation.navigate('PinjamanDetailScreen', {
@@ -23,15 +23,13 @@ const PinjamanListScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack
-        onPress={() => navigation.goBack()}
-        title={strings.pinjaman}
-      />
+      <HeaderBack onPress={() => navigation.goBack()} title={strings.pinjaman} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <View style={styles.mainContainer}>
           {pengajuanPinjaman.map((item, i) => {
             if (item.status === 'SELESAI' || item.status === 'DITOLAK')

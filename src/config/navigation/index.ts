@@ -1,5 +1,5 @@
-import StackWrapper from './StackWrapper';
 import RouterContainer from './RouterContainer';
+import StackWrapper from './StackWrapper';
 
 export * from './NavigationService';
-export { StackWrapper, RouterContainer };
+export { RouterContainer, StackWrapper };

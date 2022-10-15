@@ -1,24 +1,25 @@
 import { combineReducers } from 'redux';
+
+import AlamatReducer from './AlamatReducer';
+import BiodataReducer from './BiodataReducer';
+import DiskonReducer from './DiskonReducer';
+import DokumenReducer from './DokumenReducer';
 import ErrorModalReducer from './ErrorModalReducer';
+import HomeReducer from './HomeReducer';
+import KabarReducer from './KabarReducer';
+import KtpReducer from './KtpReducer';
 import LoadingReducer from './LoadingReducer';
 import LoginReducer from './LoginReducer';
-import KabarReducer from './KabarReducer';
-import PromoReducer from './PromoReducer';
 import MarketReducer from './MarketReducer';
-import ProfileReducer from './ProfileReducer';
-import SaldoSimpananReducer from './SaldoSimpananReducer';
-import AlamatReducer from './AlamatReducer';
-import RefKeluargaReducer from './RefKeluargaReducer';
-import KtpReducer from './KtpReducer';
-import BiodataReducer from './BiodataReducer';
+import NotifikasiReducer from './NotifikasiReducer';
 import PekerjaanReducer from './PekerjaanReducer';
-import DiskonReducer from './DiskonReducer';
+import PinjamanReducer from './PinjamanReducer';
+import ProfileReducer from './ProfileReducer';
+import PromoReducer from './PromoReducer';
+import RefKeluargaReducer from './RefKeluargaReducer';
+import SaldoSimpananReducer from './SaldoSimpananReducer';
 import TransaksiReducer from './TransaksiReducer';
 import VoucherReducer from './VoucherReducer';
-import DokumenReducer from './DokumenReducer';
-import HomeReducer from './HomeReducer';
-import PinjamanReducer from './PinjamanReducer';
-import NotifikasiReducer from './NotifikasiReducer';
 
 const rootReducers = combineReducers({
   errorModal: ErrorModalReducer,

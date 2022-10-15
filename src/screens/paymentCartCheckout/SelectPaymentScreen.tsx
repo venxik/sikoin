@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button, HeaderBack, PaymentItem } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, images, sizes, strings } from '../../constants';

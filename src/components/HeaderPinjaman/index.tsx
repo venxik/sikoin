@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
 import { colors, SCREEN_WIDTH } from '../../constants';
 import { HeaderPinjamanProps } from './model';
 
@@ -11,52 +12,28 @@ const HeaderPinjaman = (props: HeaderPinjamanProps) => {
       <View style={styles.innerContainer}>
         <View style={styles.dot} />
         <View
-          style={[
-            styles.line,
-            { backgroundColor: index > 1 ? colors.primary : colors.white },
-          ]}
+          style={[styles.line, { backgroundColor: index > 1 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.dot,
-            { backgroundColor: index > 1 ? colors.primary : colors.white },
-          ]}
+          style={[styles.dot, { backgroundColor: index > 1 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.line,
-            { backgroundColor: index > 2 ? colors.primary : colors.white },
-          ]}
+          style={[styles.line, { backgroundColor: index > 2 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.dot,
-            { backgroundColor: index > 2 ? colors.primary : colors.white },
-          ]}
+          style={[styles.dot, { backgroundColor: index > 2 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.line,
-            { backgroundColor: index > 3 ? colors.primary : colors.white },
-          ]}
+          style={[styles.line, { backgroundColor: index > 3 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.dot,
-            { backgroundColor: index > 3 ? colors.primary : colors.white },
-          ]}
+          style={[styles.dot, { backgroundColor: index > 3 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.line,
-            { backgroundColor: index > 4 ? colors.primary : colors.white },
-          ]}
+          style={[styles.line, { backgroundColor: index > 4 ? colors.primary : colors.white }]}
         />
         <View
-          style={[
-            styles.dot,
-            { backgroundColor: index > 4 ? colors.primary : colors.white },
-          ]}
+          style={[styles.dot, { backgroundColor: index > 4 ? colors.primary : colors.white }]}
         />
       </View>
     </View>

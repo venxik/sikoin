@@ -1,25 +1,25 @@
-import colors from './colors';
-import strings from './strings';
 import apis from './apis';
-import images from './images';
-import icons from './icons';
-import { sizes, SCREEN_WIDTH, SCREEN_HEIGHT } from './theme';
+import colors from './colors';
 import dropdownItems from './dropdownItems';
+import icons from './icons';
+import images from './images';
 import messagesDummy from './messagesDummy';
 import namaKoperasiDummy from './namaKoperasiDummy';
 import storage from './storage';
+import strings from './strings';
+import { SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from './theme';
 
 export {
-  colors,
-  strings,
   apis,
-  images,
-  icons,
-  sizes,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
+  colors,
   dropdownItems,
+  icons,
+  images,
   messagesDummy,
   namaKoperasiDummy,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  sizes,
   storage,
+  strings,
 };

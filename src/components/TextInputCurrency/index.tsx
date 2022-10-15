@@ -1,20 +1,15 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native-gesture-handler';
+
+import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import { TextInputCurrencyProps } from './model';
 
 const TextInputCurrency = (props: TextInputCurrencyProps) => {
-  const {
-    style,
-    textBoxStyle,
-    value = '0',
-    onChangeValue,
-    title,
-    error,
-    errorText,
-  } = props || {};
+  const { style, textBoxStyle, value = '0', onChangeValue, title, error, errorText } = props || {};
   const [editable, setEditable] = useState(false);
 
   const input = useRef<TextInput>(null);
@@ -53,7 +48,7 @@ const TextInputCurrency = (props: TextInputCurrencyProps) => {
           autoCorrect={false}
           editable={editable}
         />
-        <TouchableOpacity onPress={() => setEditable(e => !e)}>
+        <TouchableOpacity onPress={() => setEditable((e) => !e)}>
           <Image
             source={icons.edit_textbox}
             style={{

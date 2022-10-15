@@ -183,10 +183,7 @@ const pinjamanSlice = createSlice({
   name: 'pinjamanSlice',
   initialState,
   reducers: {
-    setPinjamanInfo: (
-      state: RootState,
-      { payload }: PayloadAction<CreatePinjamanInfo>,
-    ) => {
+    setPinjamanInfo: (state: RootState, { payload }: PayloadAction<CreatePinjamanInfo>) => {
       state.pinjamanInfo = payload;
     },
     getPinjamanInitialDataSuccess: (
@@ -195,10 +192,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanInitialData = payload;
     },
-    getPinjamanInitialDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getPinjamanInitialDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     getPinjamanDisetujuiSuccess: (
@@ -207,10 +201,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanDetailData = payload;
     },
-    getPinjamanDisetujuiFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getPinjamanDisetujuiFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     getPinjamanDitolakSuccess: (
@@ -219,10 +210,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanDetailData = payload;
     },
-    getPinjamanDitolakFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getPinjamanDitolakFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     getPinjamanDisetujuiDetailSuccess: (
@@ -231,10 +219,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanDisetujuiDetail = payload;
     },
-    getPinjamanDisetujuiDetailFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getPinjamanDisetujuiDetailFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanStep1Success: (
@@ -243,10 +228,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanStep1Data = payload;
     },
-    fetchPinjamanStep1Failed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPinjamanStep1Failed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanStep2Success: (
@@ -255,10 +237,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanStep2Data = payload;
     },
-    fetchPinjamanStep2Failed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPinjamanStep2Failed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanStep3Success: (
@@ -267,10 +246,7 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanStep3Data = payload;
     },
-    fetchPinjamanStep3Failed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPinjamanStep3Failed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanStep4Success: (
@@ -279,19 +255,11 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanStep4Data = payload;
     },
-    fetchPinjamanStep4Failed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPinjamanStep4Failed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    fetchPatchCreatePinjamanSuccess: () => {
-      null;
-    },
-    fetchPatchCreatePinjamanFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPatchCreatePinjamanSuccess: () => {},
+    fetchPatchCreatePinjamanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanSummarySuccess: (
@@ -300,51 +268,29 @@ const pinjamanSlice = createSlice({
     ) => {
       state.pinjamanSummaryData = payload;
     },
-    fetchPinjamanSummaryFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPinjamanSummaryFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    fetchPostCreatePinjamanSuccess: () => {
-      null;
-    },
-    fetchPostCreatePinjamanFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchPostCreatePinjamanSuccess: () => {},
+    fetchPostCreatePinjamanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
-export const fetchGetPinjamanInitialData = createAction(
-  'fetchGetPinjamanInitialData',
-);
-export const fetchPinjamanDisetujuiData = createAction<number>(
-  'fetchPinjamanDisetujuiData',
-);
-export const fetchPinjamanDitolakData = createAction<number>(
-  'fetchPinjamanDitolakData',
-);
+export const fetchGetPinjamanInitialData = createAction('fetchGetPinjamanInitialData');
+export const fetchPinjamanDisetujuiData = createAction<number>('fetchPinjamanDisetujuiData');
+export const fetchPinjamanDitolakData = createAction<number>('fetchPinjamanDitolakData');
 export const fetchPinjamanDisetujuiDetailData = createAction<number>(
   'fetchPinjamanDisetujuiDetailData',
 );
 export const fetchPinjamanStep1 = createAction('fetchPinjamanStep1');
 export const fetchPinjamanStep2 = createAction('fetchPinjamanStep2');
-export const fetchPinjamanStep3 =
-  createAction<PinjamanStep2Data>('fetchPinjamanStep3');
-export const fetchPinjamanStep4 =
-  createAction<PinjamanStep3Data>('fetchPinjamanStep4');
-export const fetchPatchCreatePinjaman = createAction<FormData>(
-  'fetchPatchCreatePinjaman',
-);
-export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>(
-  'fetchPinjamanSummary',
-);
-export const fetchPostCreatePinjaman = createAction<CreatePinjamanInfo>(
-  'fetchPostCreatePinjaman',
-);
+export const fetchPinjamanStep3 = createAction<PinjamanStep2Data>('fetchPinjamanStep3');
+export const fetchPinjamanStep4 = createAction<PinjamanStep3Data>('fetchPinjamanStep4');
+export const fetchPatchCreatePinjaman = createAction<FormData>('fetchPatchCreatePinjaman');
+export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>('fetchPinjamanSummary');
+export const fetchPostCreatePinjaman = createAction<CreatePinjamanInfo>('fetchPostCreatePinjaman');
 
 export const {
   setPinjamanInfo,

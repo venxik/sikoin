@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/no-namespace */
 /**
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
@@ -6,6 +8,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
@@ -22,11 +25,10 @@ declare global {
   }
 }
 
-export type HomeTabScreenProps<Screen extends keyof HomeTabParamList> =
-  CompositeScreenProps<
-    BottomTabScreenProps<HomeTabParamList, Screen>,
-    NativeStackScreenProps<HomeStackParamList>
-  >;
+export type HomeTabScreenProps<Screen extends keyof HomeTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<HomeTabParamList, Screen>,
+  NativeStackScreenProps<HomeStackParamList>
+>;
 
 export type ParentStackParamList = {
   SplashScreen: undefined;

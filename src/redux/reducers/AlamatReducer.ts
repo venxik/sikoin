@@ -28,58 +28,31 @@ const alamatSlice = createSlice({
   name: 'alamatSlice',
   initialState,
   reducers: {
-    getAlamatListSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<AlamatDataResponse[]>,
-    ) => {
+    getAlamatListSuccess: (state: RootState, { payload }: PayloadAction<AlamatDataResponse[]>) => {
       state.alamatList = payload;
     },
-    getAlamatListFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getAlamatListFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    submitAlamatSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<AlamatDataResponse[]>,
-    ) => {
+    submitAlamatSuccess: (state: RootState, { payload }: PayloadAction<AlamatDataResponse[]>) => {
       state.alamatList = payload;
     },
-    submitAlamatFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    submitAlamatFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    updateAlamatSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<AlamatDataResponse[]>,
-    ) => {
+    updateAlamatSuccess: (state: RootState, { payload }: PayloadAction<AlamatDataResponse[]>) => {
       state.alamatList = payload;
     },
-    updateAlamatFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    updateAlamatFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    setDeleteAlamatStatus: (
-      state: RootState,
-      { payload }: PayloadAction<DeleteAlamatStatus>,
-    ) => {
+    setDeleteAlamatStatus: (state: RootState, { payload }: PayloadAction<DeleteAlamatStatus>) => {
       state.deleteAlamatStatus = payload;
     },
-    deleteAlamatSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<AlamatDataResponse[]>,
-    ) => {
+    deleteAlamatSuccess: (state: RootState, { payload }: PayloadAction<AlamatDataResponse[]>) => {
       state.alamatList = payload;
     },
-    deleteAlamatFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    deleteAlamatFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     // addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {
@@ -116,8 +89,7 @@ export const fetchUpdateAlamat = createAction<{
   data: AlamatDataResponse;
   id: number;
 }>('fetchUpdateAlamat');
-export const fetchSubmitAlamat =
-  createAction<AlamatDataResponse>('fetchSubmitAlamat');
+export const fetchSubmitAlamat = createAction<AlamatDataResponse>('fetchSubmitAlamat');
 
 export const {
   getAlamatListFailed,

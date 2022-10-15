@@ -1,8 +1,10 @@
+import React, { useMemo } from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { useMemo } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+
 import { Button, CheckoutItem, HeaderBack } from '../../components';
 import CardAlamat from '../../components/CardAlamat';
 import { useAppSelector } from '../../config';
@@ -29,19 +31,19 @@ const Section = ({
 
 const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
   let totalPrice = 0;
-  const { alamatList } = useAppSelector(s => s.AlamatReducer);
-  const { cartItemDataList } = useAppSelector(s => s.MarketReducer);
+  const { alamatList } = useAppSelector((s) => s.AlamatReducer);
+  const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
 
   useMemo(
     () =>
-      cartItemDataList.map(item => {
+      cartItemDataList.map((item) => {
         totalPrice = totalPrice + item.price;
       }),
     [],
   );
 
   const navigateToAlamatScreen = () => {
-    console.log('navigateToAlamatScreen');
+    console.warn('navigateToAlamatScreen');
   };
 
   const navigateToSelectPayment = () => {
@@ -59,10 +61,7 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={styles.row}>
           <Text style={styles.textHargaPengiriman}>Rp 16.000</Text>
-          <Image
-            source={icons.arrow_right_primary_2}
-            style={styles.iconArrow}
-          />
+          <Image source={icons.arrow_right_primary_2} style={styles.iconArrow} />
         </View>
       </View>
     );
@@ -71,11 +70,8 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
   const renderTotalPesanan = () => {
     return (
       <View style={styles.row}>
-        <Text
-          style={styles.textNormal}>{`${cartItemDataList.length} Produk`}</Text>
-        <Text style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(
-          totalPrice,
-        )}`}</Text>
+        <Text style={styles.textNormal}>{`${cartItemDataList.length} Produk`}</Text>
+        <Text style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(totalPrice)}`}</Text>
       </View>
     );
   };
@@ -84,28 +80,19 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
     return (
       <View>
         <View style={[styles.row, { width: '50%' }]}>
-          <Text style={styles.textHargaPengiriman}>
-            Transfer Bank - Bank BCA (Dicek Otomatis)
-          </Text>
-          <Image
-            source={icons.arrow_right_primary_2}
-            style={styles.iconArrow}
-          />
+          <Text style={styles.textHargaPengiriman}>Transfer Bank - Bank BCA (Dicek Otomatis)</Text>
+          <Image source={icons.arrow_right_primary_2} style={styles.iconArrow} />
         </View>
         <View style={[styles.line, { marginTop: sizes.padding }]} />
         <View style={[styles.row, { marginTop: sizes.padding }]}>
           <Text style={styles.textNormal}>{strings.subtotal_produk}</Text>
-          <Text
-            style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(
+          <Text style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(
             totalPrice,
           )}`}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.textNormal}>{strings.subtotal_pengiriman}</Text>
-          <Text
-            style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(
-            16000,
-          )}`}</Text>
+          <Text style={styles.textNormal}>{`Rp ${formatter.formatNumberToCurreny(16000)}`}</Text>
         </View>
         <View style={[styles.row, { marginTop: sizes.padding }]}>
           <Text style={styles.textBold}>{strings.total_pembayaran}</Text>
@@ -124,15 +111,12 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
         contentContainerStyle={{
           paddingBottom: 60,
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <Section title={strings.alamat_tujuan}>
           {/**TODO ALAMAT IS EMPTY NEED VALIDATION TELL DIMAS */}
           {alamatList.length > 1 ? (
-            <CardAlamat
-              item={alamatList[0]}
-              onPressUbah={navigateToAlamatScreen}
-              isCheckout
-            />
+            <CardAlamat item={alamatList[0]} onPressUbah={navigateToAlamatScreen} isCheckout />
           ) : (
             <Text>Daftar Alamat Terlebih Dahulu</Text>
           )}
@@ -144,9 +128,7 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
         </Section>
         <Section title={strings.pengiriman}>{renderPengiriman()}</Section>
         <Section title={strings.total_pesanan}>{renderTotalPesanan()}</Section>
-        <Section title={strings.metode_pembayaran}>
-          {renderMetodePembayaran()}
-        </Section>
+        <Section title={strings.metode_pembayaran}>{renderMetodePembayaran()}</Section>
       </ScrollView>
       <Button
         text={strings.proses_pesanan}

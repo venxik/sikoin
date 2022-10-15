@@ -1,23 +1,28 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  FlatList,
   BackHandler,
-  SafeAreaView,
+  FlatList,
+  Image,
   RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {
-  CardKabar,
-  CardLastItem,
-  CardPromo,
-  HeaderBack,
-  ProfilePicture,
-} from '../../components';
+
+import { Home } from 'react-native-iconly';
+import Animated, {
+  interpolateColor,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
+
+import { CardKabar, CardLastItem, CardPromo, HeaderBack, ProfilePicture } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList, HomeTabScreenProps } from '../../config/navigation/model';
 import {
   colors,
   icons,
@@ -27,25 +32,10 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { formatter, openUrl } from '../../utils';
-import { useAppDispatch, useAppSelector } from '../../config';
-import {
-  HomeStackParamList,
-  HomeTabScreenProps,
-} from '../../config/navigation/model';
-import Animated, {
-  interpolateColor,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
-import {
-  fetchBerandaUser,
-  KabarPromoData,
-} from '../../redux/reducers/HomeReducer';
-import { Home } from 'react-native-iconly';
+import { fetchBerandaUser, KabarPromoData } from '../../redux/reducers/HomeReducer';
 import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
 import { fetchPromoDetail } from '../../redux/reducers/PromoReducer';
+import { formatter, openUrl } from '../../utils';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
 const dotSize = 8;
@@ -79,22 +69,14 @@ const menuList = [
   },
 ];
 
-const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
-  navigation,
-}) => {
+const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ navigation }) => {
   const [refreshing] = useState(false);
 
   const dispatch = useAppDispatch();
   // const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
-  const {
-    nama,
-    namaKoperasi,
-    noAnggota,
-    saldoBelanja,
-    simpanan,
-    kabar,
-    promo,
-  } = useAppSelector(state => state.HomeReducer.user);
+  const { nama, namaKoperasi, noAnggota, saldoBelanja, simpanan, kabar, promo } = useAppSelector(
+    (state) => state.HomeReducer.user,
+  );
 
   useEffect(() => {
     dispatch(fetchBerandaUser());
@@ -107,10 +89,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
       return true;
     };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () => backHandler.remove();
   }, []);
@@ -168,13 +147,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     return (
       <TouchableOpacity
         style={styles.cardHeaderContainer}
-        onPress={() => navigateToOtherScreen(stack)}>
+        onPress={() => navigateToOtherScreen(stack)}
+      >
         <Text style={styles.cardHeaderTitle}>{title}</Text>
         <View>
-          <Image
-            source={icons.arrow_right_circle_primary}
-            style={styles.icon}
-          />
+          <Image source={icons.arrow_right_circle_primary} style={styles.icon} />
         </View>
       </TouchableOpacity>
     );
@@ -189,7 +166,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           data={kabar}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
-          keyExtractor={item => item?.id.toString()}
+          keyExtractor={(item) => item?.id.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardKabar item={item} onPress={() => selectKabarCard(item)} />
@@ -215,7 +192,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           data={promo}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardPromo
@@ -279,11 +256,9 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           <TouchableOpacity
             key={index}
             style={styles.menuInnerContainer}
-            onPress={() => navigateToOtherScreen(item.navigateTo)}>
-            <Image
-              source={item.image}
-              style={{ width: menuSize, height: menuSize }}
-            />
+            onPress={() => navigateToOtherScreen(item.navigateTo)}
+          >
+            <Image source={item.image} style={{ width: menuSize, height: menuSize }} />
             <Text style={styles.menuText}>{item.label}</Text>
           </TouchableOpacity>
         ))}
@@ -295,7 +270,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
     const scrollY = useSharedValue(0);
 
     const scrollHandler = useAnimatedScrollHandler({
-      onScroll: event => {
+      onScroll: (event) => {
         scrollY.value = event.contentOffset.y;
       },
     });
@@ -320,10 +295,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
               };
             });
             return (
-              <Animated.View
-                key={index.toString()}
-                style={[styles.dotIndicator, animatedStyles]}
-              />
+              <Animated.View key={index.toString()} style={[styles.dotIndicator, animatedStyles]} />
             );
           })}
         </View>
@@ -336,17 +308,15 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
           }}
           onScroll={scrollHandler}
           showsVerticalScrollIndicator={false}
-          scrollEventThrottle={16}>
+          scrollEventThrottle={16}
+        >
           {saldoFlatlist.map((item, index) => {
             return (
               <View key={index} style={styles.miniScrollInnerContainer}>
                 <TouchableOpacity
-                  onPress={() =>
-                    navigateToSaldoSimpanan(
-                      item.title === strings.saldo_belanja,
-                    )
-                  }
-                  style={{ justifyContent: 'space-between' }}>
+                  onPress={() => navigateToSaldoSimpanan(item.title === strings.saldo_belanja)}
+                  style={{ justifyContent: 'space-between' }}
+                >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.textMiniScrollTitle}>{item.title}</Text>
                     <Image
@@ -366,17 +336,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
                   style={styles.miniScrollButton}
                   onPress={
                     // () => {}
-                    () =>
-                      onClickMiniScrollButton(
-                        item.title === strings.saldo_belanja,
-                      )
-                  }>
+                    () => onClickMiniScrollButton(item.title === strings.saldo_belanja)
+                  }
+                >
                   <Image
-                    source={
-                      item.button === strings.mutasi
-                        ? icons.icon_mutasi
-                        : icons.icon_topup
-                    }
+                    source={item.button === strings.mutasi ? icons.icon_mutasi : icons.icon_topup}
                     style={styles.iconMiniScrollButton}
                     resizeMode="contain"
                   />
@@ -393,9 +357,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const renderProfile = () => {
     return (
       <View style={styles.profileContainer}>
-        <ProfilePicture
-          onPress={() => navigation.jumpTo('ProfileStackNavigator')}
-        />
+        <ProfilePicture onPress={() => navigation.jumpTo('ProfileStackNavigator')} />
         <View style={styles.profileInnerContainer}>
           <Text style={styles.textProfileName}>Hi, {nama}!</Text>
           <View>
@@ -410,11 +372,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
   const renderRightButtonHeader = () => {
     return (
       <TouchableOpacity>
-        <Image
-          source={icons.icon_notification}
-          style={styles.icon}
-          resizeMode="contain"
-        />
+        <Image source={icons.icon_notification} style={styles.icon} resizeMode="contain" />
       </TouchableOpacity>
     );
   };
@@ -432,9 +390,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         nestedScrollEnabled={true}
         contentContainerStyle={{ paddingBottom: sizes.padding }}
         style={{ width: '100%', height: '100%' }}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
         {/* BODY */}
         <View
           style={{
@@ -442,7 +399,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
             borderRadius: 20,
             paddingVertical: 20,
             marginHorizontal: SCREEN_WIDTH * 0.05,
-          }}>
+          }}
+        >
           <View style={{ marginBottom: 20 }}>{renderProfile()}</View>
           {renderMiniScrollView()}
           {renderMainMenu()}
@@ -450,7 +408,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({
         <View
           style={{
             marginHorizontal: SCREEN_WIDTH * 0.05,
-          }}>
+          }}
+        >
           {promo.length > 0 && renderPromoCard()}
           {kabar.length > 0 && renderKabarCard()}
           {/* {renderMarketCard()} */}

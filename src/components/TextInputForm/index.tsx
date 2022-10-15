@@ -1,24 +1,12 @@
+/* eslint-disable @typescript-eslint/indent */
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
 import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import { TextInputFormProps } from './model';
 
 const TextInputForm = (props: TextInputFormProps) => {
-  const {
-    style,
-    textBoxStyle,
-    title,
-    error,
-    errorText,
-    disableEdit = false,
-  } = props || {};
+  const { style, textBoxStyle, title, error, errorText, disableEdit = false } = props || {};
   const [editable, setEditable] = useState(false);
 
   const input = useRef<TextInput>(null);
@@ -55,7 +43,7 @@ const TextInputForm = (props: TextInputFormProps) => {
           editable={editable}
         />
         {!disableEdit && (
-          <TouchableOpacity onPress={() => setEditable(e => !e)}>
+          <TouchableOpacity onPress={() => setEditable((e) => !e)}>
             <Image
               source={icons.edit_textbox}
               style={{

@@ -25,43 +25,26 @@ const pekerjaanSlice = createSlice({
   name: 'pekerjaanSlice',
   initialState,
   reducers: {
-    addPekerjaan: (
-      state: RootState,
-      { payload }: PayloadAction<PekerjaanResponse>,
-    ) => {
+    addPekerjaan: (state: RootState, { payload }: PayloadAction<PekerjaanResponse>) => {
       state.pekerjaanData = payload;
     },
-    getPekerjaanSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<PekerjaanResponse>,
-    ) => {
+    getPekerjaanSuccess: (state: RootState, { payload }: PayloadAction<PekerjaanResponse>) => {
       state.pekerjaanData = payload;
     },
-    getPekerjaanFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getPekerjaanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    updatePekerjaanSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<PekerjaanResponse>,
-    ) => {
+    updatePekerjaanSuccess: (state: RootState, { payload }: PayloadAction<PekerjaanResponse>) => {
       state.pekerjaanData = payload;
     },
-    updatePekerjaanFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    updatePekerjaanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
 export const fetchPekerjaan = createAction('fetchPekerjaan');
-export const fetchUpdatePekerjaan = createAction<PekerjaanResponse>(
-  'fetchUpdatePekerjaan',
-);
+export const fetchUpdatePekerjaan = createAction<PekerjaanResponse>('fetchUpdatePekerjaan');
 
 export const {
   addPekerjaan,

@@ -1,14 +1,10 @@
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { Document } from 'react-native-iconly';
+
 import {
   HeaderBack,
   PinjamanHorizontalListItem,
@@ -26,7 +22,6 @@ import {
   setPinjamanInfo,
 } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
-import { Document } from 'react-native-iconly';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanMainScreen'>;
 
@@ -35,9 +30,8 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   const [selectedItem, setSelectedItem] = useState<JenisPinjaman | null>(null);
 
   const dispatch = useAppDispatch();
-  const { pinjamanInitialData } = useAppSelector(s => s.PinjamanReducer);
-  const { jenisPinjaman, pengajuanPinjaman, totalJumlahPinjamanDisetujui } =
-    pinjamanInitialData;
+  const { pinjamanInitialData } = useAppSelector((s) => s.PinjamanReducer);
+  const { jenisPinjaman, pengajuanPinjaman, totalJumlahPinjamanDisetujui } = pinjamanInitialData;
 
   useEffect(() => {
     dispatch(fetchGetPinjamanInitialData());
@@ -48,7 +42,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const onPressAjukanPinjaman = () => {
-    setShowModal(e => !e);
+    setShowModal((e) => !e);
     dispatch(fetchPinjamanStep1());
     dispatch(setPinjamanInfo({ idJenisPinjaman: selectedItem?.id }));
     navigation.navigate('PinjamanStep1Screen');
@@ -63,7 +57,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
 
   const onPressPinjamanHorizontal = (item: JenisPinjaman) => {
     setSelectedItem(item);
-    setShowModal(e => !e);
+    setShowModal((e) => !e);
   };
 
   const renderRightButtonHeader = () => {
@@ -85,7 +79,8 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         style={{
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {!isEmpty(jenisPinjaman) &&
             jenisPinjaman.map((item: JenisPinjaman, i: number) => (
@@ -121,7 +116,7 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
           item={selectedItem as JenisPinjaman}
           showModal={showModal}
           onPress={onPressAjukanPinjaman}
-          onPressClose={() => setShowModal(e => !e)}
+          onPressClose={() => setShowModal((e) => !e)}
         />
       )}
     </SafeAreaView>

@@ -1,19 +1,22 @@
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useEffect, useMemo, useRef } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
   Image,
-  TouchableOpacity,
+  ImageBackground,
   ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ArrowLeft } from 'react-native-iconly';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { HeaderBack, SaldoItemList } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
 import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
 import {
   colors,
   icons,
@@ -23,37 +26,28 @@ import {
   sizes,
   strings,
 } from '../../constants';
-import { formatter } from '../../utils';
 import {
   fetchMutasiSimpanan,
   fetchSaldoData,
   fetchSimpananData,
   SaldoSimpananList,
 } from '../../redux/reducers/SaldoSimpananReducer';
-import { ArrowLeft } from 'react-native-iconly';
+import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'SaldoSimpananMainScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'SaldoSimpananMainScreen'>;
 
-const Button = (props: {
-  icon: ImageSourcePropType;
-  text: string;
-  onPress: () => void;
-}) => {
+const Button = (props: { icon: ImageSourcePropType; text: string; onPress: () => void }) => {
   const { icon, text, onPress } = props || {};
   return (
-    <TouchableOpacity
-      style={{ alignItems: 'center', width: '33%' }}
-      onPress={onPress}>
+    <TouchableOpacity style={{ alignItems: 'center', width: '33%' }} onPress={onPress}>
       <Image source={icon} style={{ width: 50, height: 50 }} />
       <Text
         style={{
           fontFamily: 'Poppins-Medium',
           color: colors.bodyText,
           textAlign: 'center',
-        }}>
+        }}
+      >
         {text}
       </Text>
     </TouchableOpacity>
@@ -62,8 +56,7 @@ const Button = (props: {
 
 const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
   const { showSaldo } = route.params || {};
-  const { simpanan, saldo } =
-    useAppSelector(state => state.SaldoSimpananReducer) || {};
+  const { simpanan, saldo } = useAppSelector((state) => state.SaldoSimpananReducer) || {};
 
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['40%', '70%'], []);
@@ -71,6 +64,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     showSaldo ? dispatch(fetchSaldoData()) : dispatch(fetchSimpananData());
   }, []);
 
@@ -85,9 +79,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Button
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
-            onPress={() =>
-              navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })
-            }
+            onPress={() => navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })}
           />
           <Button
             icon={icons.icon_mutasi_primary}
@@ -102,12 +94,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
         </View>
         <View style={{ marginTop: 40 }}>
           {saldo.simpananBelanja?.map((item, i) => (
-            <SaldoItemList
-              key={i}
-              text={item.nama}
-              nominal={item.saldo}
-              onPress={() => null}
-            />
+            <SaldoItemList key={i} text={item.nama} nominal={item.saldo} onPress={() => null} />
           ))}
         </View>
       </View>
@@ -121,9 +108,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           <Button
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
-            onPress={() =>
-              navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })
-            }
+            onPress={() => navigation.navigate('TopupPenarikanMainScreen', { isTopup: true })}
           />
           <Button
             icon={icons.icon_penarikan_primary}
@@ -150,9 +135,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
   };
 
   const renderBackgroundItem = () => (
-    <ImageBackground
-      source={images.daftar_koperasi_bg}
-      style={styles.background}>
+    <ImageBackground source={images.daftar_koperasi_bg} style={styles.background}>
       <View style={styles.titleContainer}>
         <Image
           source={showSaldo ? images.img_saldo_icon : images.img_simpanan_icon}
@@ -187,7 +170,8 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
         backgroundStyle={{ backgroundColor: colors.primaryWhite }}
         ref={sheetRef}
         index={0}
-        snapPoints={snapPoints}>
+        snapPoints={snapPoints}
+      >
         <BottomSheetScrollView>
           <View style={styles.bottomSheetContainer}>
             {showSaldo ? renderSaldoContent() : renderSimpananContent()}

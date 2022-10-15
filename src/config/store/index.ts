@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import rootReducer from '../../redux/reducers';
-import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { configureStore } from '@reduxjs/toolkit';
-import { rootSaga } from '../../redux/sagas';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+
 import Reactotron from '../../../ReactotronConfig';
+import rootReducer from '../../redux/reducers';
+import { rootSaga } from '../../redux/sagas';
 
 const sagaMonitor = Reactotron.createSagaMonitor!();
 let sagaMiddleware: SagaMiddleware;
@@ -28,11 +29,11 @@ const persistReducers = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistReducers,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(sagaMiddleware),
-  enhancers: e => e.concat(__DEV__ ? Reactotron.createEnhancer!() : []),
+  enhancers: (e) => e.concat(__DEV__ ? Reactotron.createEnhancer!() : []),
 });
 
 const persist = persistStore(store);
@@ -50,4 +51,4 @@ type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export { store, persist };
+export { persist, store };

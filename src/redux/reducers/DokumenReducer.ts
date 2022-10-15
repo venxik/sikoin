@@ -21,16 +21,10 @@ const dokumenSlice = createSlice({
   name: 'dokumenSlice',
   initialState,
   reducers: {
-    fetchDokumenSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<DokumenData[]>,
-    ) => {
+    fetchDokumenSuccess: (state: RootState, { payload }: PayloadAction<DokumenData[]>) => {
       state.dokumenDataList = payload;
     },
-    fetchDokumenFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchDokumenFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },

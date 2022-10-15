@@ -1,14 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
 import FastImage from 'react-native-fast-image';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import Button from '../Button';
 import { CardKabarProps } from './model';
 

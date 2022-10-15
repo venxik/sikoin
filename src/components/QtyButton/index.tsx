@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, icons, sizes } from '../../constants';
 import { QtyButtonProps } from './model';
 
@@ -12,25 +13,16 @@ const QtyButton = (props: QtyButtonProps) => {
         {
           flexDirection: 'row',
         },
-      ]}>
-      <TouchableOpacity
-        onPress={onPressMinus}
-        style={styles.plusMinusContainer}>
-        <Image
-          source={icons.minus_shape}
-          style={styles.plusMinusIcon}
-          resizeMode="contain"
-        />
+      ]}
+    >
+      <TouchableOpacity onPress={onPressMinus} style={styles.plusMinusContainer}>
+        <Image source={icons.minus_shape} style={styles.plusMinusIcon} resizeMode="contain" />
       </TouchableOpacity>
       <View style={styles.textQtyContainer}>
         <Text style={styles.textJumlahHarga}>{qty}</Text>
       </View>
       <TouchableOpacity onPress={onPressPlus} style={styles.plusMinusContainer}>
-        <Image
-          source={icons.plus_shape}
-          style={styles.plusMinusIcon}
-          resizeMode="contain"
-        />
+        <Image source={icons.plus_shape} style={styles.plusMinusIcon} resizeMode="contain" />
       </TouchableOpacity>
     </View>
   );

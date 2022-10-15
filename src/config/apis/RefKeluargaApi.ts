@@ -1,7 +1,8 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
 import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -24,9 +25,7 @@ class RefKeluargaApi {
    * @param data Contains
    * @returns { Object } Promise either resolve or rejected
    */
-  static async submitRefKeluarga(
-    data: RefKeluargaResponse,
-  ): Promise<AxiosResponse> {
+  static async submitRefKeluarga(data: RefKeluargaResponse): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.keluarga.keluarga, data);
     return resp;
   }
@@ -44,10 +43,7 @@ class RefKeluargaApi {
     data: RefKeluargaResponse;
     id: number;
   }): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(
-      `${apis.endpoints.keluarga.keluarga}/${id}`,
-      data,
-    );
+    const resp = await HttpService.patch(`${apis.endpoints.keluarga.keluarga}/${id}`, data);
     return resp;
   }
 
@@ -58,9 +54,7 @@ class RefKeluargaApi {
    * @returns { Object } Promise either resolve or rejected
    */
   static async deleteRefKeluarga(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.delete(
-      `${apis.endpoints.keluarga.keluarga}/${id}`,
-    );
+    const resp = await HttpService.delete(`${apis.endpoints.keluarga.keluarga}/${id}`);
     return resp;
   }
 }

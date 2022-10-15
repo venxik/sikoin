@@ -41,16 +41,10 @@ const ktpSlice = createSlice({
     removeKtpSelfie: (state: RootState) => {
       state.ktpData.gambarSelfie = '';
     },
-    fetchKtpDokumenSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<KtpDokumenResponse>,
-    ) => {
+    fetchKtpDokumenSuccess: (state: RootState, { payload }: PayloadAction<KtpDokumenResponse>) => {
       state.ktpDokumen = payload;
     },
-    fetchKtpDokumenFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchKtpDokumenFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchUploadGambarKtpSuccess: (
@@ -59,19 +53,14 @@ const ktpSlice = createSlice({
     ) => {
       state.ktpData = payload;
     },
-    fetchUploadGambarKtpFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    fetchUploadGambarKtpFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
   },
 });
 
 export const fetchKtpDokumen = createAction('fetchKtpDokumen');
-export const fetchUploadGambarKtp = createAction<FormData>(
-  'fetchUploadGambarKtp',
-);
+export const fetchUploadGambarKtp = createAction<FormData>('fetchUploadGambarKtp');
 
 export const {
   fetchKtpDokumenFailed,

@@ -1,19 +1,9 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import {
-  Button,
-  HeaderBack,
-  PinjamanDetailItem,
-  Popup1Button,
-} from '../../components';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { Button, HeaderBack, PinjamanDetailItem, Popup1Button } from '../../components';
 import PinjamanSimulasiSection from '../../components/PinjamanSimulasiSection';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -21,17 +11,14 @@ import { colors, icons, images, sizes, strings } from '../../constants';
 import { fetchPostCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'PinjamanSummaryScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSummaryScreen'>;
 
 const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   //redux dispatch and selector
   const dispatch = useAppDispatch();
-  const { pinjamanInfo } = useAppSelector(s => s.PinjamanReducer);
+  const { pinjamanInfo } = useAppSelector((s) => s.PinjamanReducer);
   const {
     bungaJenisPinjaman,
     namaBank,
@@ -47,7 +34,7 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
     totalAngsuran,
     totalAngsuranBunga,
     totalAngsuranPokok,
-  } = useAppSelector(s => s.PinjamanReducer.pinjamanSummaryData);
+  } = useAppSelector((s) => s.PinjamanReducer.pinjamanSummaryData);
 
   const onPressAjukan = () => {
     dispatch(fetchPostCreatePinjaman({ ...pinjamanInfo }));
@@ -59,12 +46,8 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
 
   const renderRightButtonHeader = () => {
     return (
-      <TouchableOpacity onPress={() => setShowPopup(e => !e)}>
-        <Image
-          source={icons.icon_shield}
-          style={styles.headerIcon}
-          resizeMode="stretch"
-        />
+      <TouchableOpacity onPress={() => setShowPopup((e) => !e)}>
+        <Image source={icons.icon_shield} style={styles.headerIcon} resizeMode="stretch" />
       </TouchableOpacity>
     );
   };
@@ -76,23 +59,16 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
         headerText={strings.popup_topup_title}
         contentText={strings.popup_topup_content}
         showPopup={showPopup}
-        onPress={() => setShowPopup(e => !e)}
+        onPress={() => setShowPopup((e) => !e)}
         headerImage={images.img_topup_popup}
         customButtonText={strings.ok_thumbs}
       />
-      <HeaderBack
-        title={strings.kembali}
-        rightIcon={renderRightButtonHeader()}
-      />
+      <HeaderBack title={strings.kembali} rightIcon={renderRightButtonHeader()} />
       <ScrollView>
         <View style={styles.innerContainer}>
           <Text style={styles.textTitle}>{strings.nominal_pengajuan}</Text>
           <View style={styles.textNominalContainer}>
-            <Image
-              source={icons.icon_rp_dark}
-              style={styles.icon}
-              resizeMode="cover"
-            />
+            <Image source={icons.icon_rp_dark} style={styles.icon} resizeMode="cover" />
             <Text style={styles.textNominal} numberOfLines={1}>
               {formatter.formatNumberToCurreny(nominal)}
             </Text>
@@ -100,20 +76,11 @@ const PinjamanSummaryScreen: React.FC<Props> = ({ navigation }) => {
           <PinjamanDetailItem title="Nama Lengkap" content={nama} />
           <PinjamanDetailItem title="No KTP" content={noKtp} />
           <PinjamanDetailItem title="Nama Pemilik" content={namaPemilik} />
-          <PinjamanDetailItem
-            title="Nama Jenis Pinjaman"
-            content={namaJenisPinjaman}
-          />
+          <PinjamanDetailItem title="Nama Jenis Pinjaman" content={namaJenisPinjaman} />
           <PinjamanDetailItem title="Nama Bank" content={namaBank} />
-          <PinjamanDetailItem
-            title="Nama Kantor Cabang"
-            content={namaKantorCabang}
-          />
+          <PinjamanDetailItem title="Nama Kantor Cabang" content={namaKantorCabang} />
           <PinjamanDetailItem title="Nomor Rekening" content={noRek} />
-          <PinjamanDetailItem
-            title="Bunga Jenis Pinjaman"
-            content={bungaJenisPinjaman}
-          />
+          <PinjamanDetailItem title="Bunga Jenis Pinjaman" content={bungaJenisPinjaman} />
           <PinjamanDetailItem title="Lama Pinjaman" content={tenor} />
           <PinjamanDetailItem title="Tujuan" content={tujuan} />
           <PinjamanSimulasiSection

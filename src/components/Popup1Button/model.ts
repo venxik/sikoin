@@ -1,10 +1,5 @@
 import { FC } from 'react';
-import {
-  ImageSourcePropType,
-  ImageStyle,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { ImageSourcePropType, ImageStyle, TextStyle, ViewStyle } from 'react-native';
 export interface Popup1ButtonProps {
   style?: ViewStyle;
   showPopup: boolean;

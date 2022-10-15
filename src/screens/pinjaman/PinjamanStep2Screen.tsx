@@ -1,13 +1,10 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
+import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
+
 import {
   Button,
   CalendarPicker,
@@ -18,10 +15,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
-import {
-  fetchPinjamanStep3,
-  PinjamanStep2Data,
-} from '../../redux/reducers/PinjamanReducer';
+import { fetchPinjamanStep3, PinjamanStep2Data } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep2Screen'>;
 
@@ -39,7 +33,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
     statusPernikahan,
     tanggalLahir,
     tempatLahir,
-  } = useAppSelector(s => s.PinjamanReducer.pinjamanStep2Data);
+  } = useAppSelector((s) => s.PinjamanReducer.pinjamanStep2Data);
 
   const navigateToStep3 = (data: PinjamanStep2Data) => {
     dispatch(fetchPinjamanStep3({ ...data }));
@@ -67,10 +61,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
         <HeaderPinjaman index={2} />
         <ScrollView>
           <View style={styles.innerContainer}>
@@ -81,7 +72,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.tempat_lahir}
                 />
               )}
@@ -92,15 +83,14 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
               render={({ field: { onChange, value } }) => (
                 <CalendarPicker
                   title={strings.tgl_lahir}
-                  onChangeDate={date => {
+                  onChangeDate={(date) => {
                     onChange(date);
                   }}
                   value={value}
                 />
               )}
             />
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
                 control={control}
                 name="jenisKelamin"
@@ -109,7 +99,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                     style={{ width: '55%' }}
                     title={strings.jenis_kelamin}
                     data={dropdownItems.genderItem}
-                    onChange={value => onChange(value)}
+                    onChange={(value) => onChange(value)}
                     value={value}
                   />
                 )}
@@ -122,7 +112,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                     style={{ width: '40%' }}
                     title={strings.gol_darah}
                     data={dropdownItems.golDarahItem}
-                    onChange={value => onChange(value)}
+                    onChange={(value) => onChange(value)}
                     value={value}
                     maxHeight={200}
                   />
@@ -136,7 +126,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.kewarganegaraan}
                   data={dropdownItems.kewarganegaraanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -148,7 +138,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.pendidikan_terakhir}
                   data={dropdownItems.pendidikanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -160,7 +150,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.agama}
                   data={dropdownItems.agamaItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -172,7 +162,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <DropdownForm
                   title={strings.status_pernikahan}
                   data={dropdownItems.statusPernikahanItem}
-                  onChange={value => onChange(value)}
+                  onChange={(value) => onChange(value)}
                   value={value}
                 />
               )}
@@ -184,7 +174,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                 <TextInputForm
                   onBlur={onBlur}
                   value={value?.toString()}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.jumlah_anak}
                 />
               )}
@@ -198,7 +188,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   errorText={errors.pekerjaan?.message}
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.pekerjaan}
                 />
               )}
@@ -212,7 +202,7 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   errorText={errors.detailPekerjaan?.message}
                   onBlur={onBlur}
                   value={value}
-                  onChangeText={value => onChange(value)}
+                  onChangeText={(value) => onChange(value)}
                   title={strings.detail_pekerjaan}
                 />
               )}
@@ -227,7 +217,8 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
             bottom: sizes.padding,
             paddingHorizontal: sizes.padding,
             width: '100%',
-          }}>
+          }}
+        >
           <Button
             onPress={() => navigation.goBack()}
             shadow

@@ -1,24 +1,22 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+/* eslint-disable no-param-reassign */
 import React, { useMemo, useRef, useState } from 'react';
 import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
   Alert,
-  ScrollView,
-  ImageSourcePropType,
-  ViewStyle,
   FlatList,
+  Image,
+  ImageSourcePropType,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import {
-  Menu,
-  MenuOption,
-  MenuOptions,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -27,6 +25,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
+
 import {
   Button,
   CardLastItem,
@@ -38,28 +37,17 @@ import {
 } from '../../components';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import {
-  colors,
-  icons,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-  sizes,
-  strings,
-} from '../../constants';
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'MarketItemDetailsScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketItemDetailsScreen'>;
 const dotSize = 6;
 const tab = ['Deskripsi', 'Ulasan', 'Diskusi'];
 
 const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   const scrollX = useSharedValue(0);
-  const { marketDataList } = useAppSelector(state => state.MarketReducer) || {};
-  const { marketItemDetails } = useAppSelector(s => s.MarketReducer);
+  const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
+  const { marketItemDetails } = useAppSelector((s) => s.MarketReducer);
   const {
     asuransi,
     berat,
@@ -78,14 +66,16 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
     lokasiToko,
   } = marketItemDetails;
   const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
+    onScroll: (event) => {
       scrollX.value = event.contentOffset.x;
     },
   });
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
   const [selectedTab, setSelectedTab] = useState(tab[0]);
+  // eslint-disable-next-line no-unused-vars
   const [selectedWarna, setSelectedWarna] = useState<string>('');
+  // eslint-disable-next-line no-unused-vars
   const [selectedUkuran, setSelectedUkuran] = useState<string>('');
   const [qtyValue, setQtyValue] = useState<number>(1);
 
@@ -103,12 +93,12 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
 
   const onPressMinusQty = () => {
     if (qtyValue > 1) {
-      setQtyValue(e => (e -= 1));
+      setQtyValue((e) => (e -= 1));
     }
   };
 
   const onPressPlusQty = () => {
-    setQtyValue(e => (e += 1));
+    setQtyValue((e) => (e += 1));
   };
 
   const onPressAddToCart = () => {
@@ -128,34 +118,22 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
                 index: 0,
                 routes: [{ name: 'HomeScreen' }],
               })
-            }>
+            }
+          >
             <View style={styles.popupContainer}>
-              <Image
-                source={icons.icon_home_outline}
-                style={styles.popupMenuIcon}
-              />
-              <Text style={styles.textPopupMenu}>
-                {strings.kembali_ke_beranda}
-              </Text>
+              <Image source={icons.icon_home_outline} style={styles.popupMenuIcon} />
+              <Text style={styles.textPopupMenu}>{strings.kembali_ke_beranda}</Text>
             </View>
           </MenuOption>
           <MenuOption onSelect={() => Alert.alert('Laporkan Produk')}>
             <View style={styles.popupContainer}>
-              <Image
-                source={icons.icon_info_outline}
-                style={styles.popupMenuIcon}
-              />
-              <Text style={styles.textPopupMenu}>
-                {strings.laporkan_produk}
-              </Text>
+              <Image source={icons.icon_info_outline} style={styles.popupMenuIcon} />
+              <Text style={styles.textPopupMenu}>{strings.laporkan_produk}</Text>
             </View>
           </MenuOption>
           <MenuOption onSelect={() => Alert.alert('Pusat Bantuan')}>
             <View style={{ flexDirection: 'row' }}>
-              <Image
-                source={icons.icon_pusat_bantuan}
-                style={styles.popupMenuIcon}
-              />
+              <Image source={icons.icon_pusat_bantuan} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.pusat_bantuan}</Text>
             </View>
           </MenuOption>
@@ -170,7 +148,8 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <TouchableOpacity onPress={navigateToCartScreen}>
           <Image
             source={icons.icon_cart}
@@ -206,12 +185,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
               ]),
             };
           });
-          return (
-            <Animated.View
-              style={[styles.dot, animatedStyles]}
-              key={`dot-${index}`}
-            />
-          );
+          return <Animated.View style={[styles.dot, animatedStyles]} key={`dot-${index}`} />;
         })}
       </View>
     );
@@ -226,15 +200,12 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           decelerationRate={0}
           scrollEventThrottle={16}
           showsHorizontalScrollIndicator={false}
-          onScroll={scrollHandler}>
+          onScroll={scrollHandler}
+        >
           {photos.map((item, index) => {
             return (
               <View key={index} style={styles.photosContainer}>
-                <Image
-                  source={{ uri: item }}
-                  resizeMode="cover"
-                  style={styles.photos}
-                />
+                <Image source={{ uri: item }} resizeMode="cover" style={styles.photos} />
               </View>
             );
           })}
@@ -258,7 +229,8 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
             paddingHorizontal: sizes.padding * 1.5,
           },
           style,
-        ]}>
+        ]}
+      >
         <Text style={styles.textDetailsTitle}>{title}</Text>
         <View style={styles.row}>
           <Image source={icon} style={styles.iconDetails} />
@@ -278,7 +250,8 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           marginTop: sizes.padding,
           borderBottomColor: colors.strokeGrey,
           borderBottomWidth: 1,
-        }}>
+        }}
+      >
         {renderDetailsItem(icons.icon_terjual, terjual, strings.terjual, {
           paddingLeft: 0,
         })}
@@ -316,7 +289,8 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           borderBottomWidth: 1,
           paddingBottom: 6,
           marginBottom: 10,
-        }}>
+        }}
+      >
         <Text style={styles.textDetailsTitle}>{title}</Text>
         {ifString()}
       </View>
@@ -337,13 +311,13 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
               padding: sizes.padding * 1.5,
               justifyContent: 'space-between',
             },
-          ]}>
+          ]}
+        >
           <View style={styles.row}>
             <Image source={{ uri: logoToko }} style={styles.logoToko} />
             <View style={{ marginLeft: 10 }}>
               <Text style={styles.textDescItem}>{namaToko}</Text>
-              <Text
-                style={[styles.textDesc, { color: colors.bodyTextLightGrey }]}>
+              <Text style={[styles.textDesc, { color: colors.bodyTextLightGrey }]}>
                 {lokasiToko}
               </Text>
             </View>
@@ -357,9 +331,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   const cardHeader = (title: string) => {
     return (
       <View style={styles.cardHeaderContainer}>
-        <Text style={[styles.cardHeaderTitle, { marginRight: 20 }]}>
-          {title}
-        </Text>
+        <Text style={[styles.cardHeaderTitle, { marginRight: 20 }]}>{title}</Text>
       </View>
     );
   };
@@ -380,7 +352,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
                 item={item}
                 onPress={navigateToDetailsScreen}
                 onPressVoucher={navigateToVoucherScreen}
-                onPressWishlist={() => console.log(item)}
+                onPressWishlist={() => console.warn(item)}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem
@@ -389,7 +361,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
                     width: SCREEN_WIDTH * 0.45,
                   }}
                   icon={icons.arrow_right}
-                  onPress={() => console.log(item)}
+                  onPress={() => console.warn(item)}
                 />
               )}
             </View>
@@ -408,30 +380,23 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           <Image source={{ uri: photos[0] }} style={styles.bottomSheetPhoto} />
           <View style={{ marginLeft: sizes.padding }}>
             <Text style={styles.cardHeaderTitle}>{strings.stok}</Text>
-            <Text
-              style={[styles.textDesc, { color: colors.bodyTextLightGrey }]}>
-              {stok}
-            </Text>
+            <Text style={[styles.textDesc, { color: colors.bodyTextLightGrey }]}>{stok}</Text>
           </View>
         </View>
         <FilterVariasi
-          onChangeItem={item => setSelectedWarna(item)}
+          onChangeItem={(item) => setSelectedWarna(item)}
           item={warna}
           title={strings.warna}
           style={{ marginTop: sizes.padding }}
         />
         <FilterVariasi
-          onChangeItem={item => setSelectedUkuran(item)}
+          onChangeItem={(item) => setSelectedUkuran(item)}
           item={ukuran}
           title={strings.ukuran}
           style={{ marginTop: sizes.padding }}
         />
         <Text style={styles.bottomSheetTitle}>{strings.jumlah}</Text>
-        <QtyButton
-          onPressMinus={onPressMinusQty}
-          onPressPlus={onPressPlusQty}
-          qty={qtyValue}
-        />
+        <QtyButton onPressMinus={onPressMinusQty} onPressPlus={onPressPlusQty} qty={qtyValue} />
         <Text style={styles.bottomSheetTitle}>{strings.total_harga}</Text>
         <View style={styles.showNominalContainer}>
           <View style={styles.row}>
@@ -465,9 +430,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
               <Image source={icons.icon_wishlist} style={styles.iconWishlist} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(
-            price,
-          )}`}</Text>
+          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
           {/* DETAILS SECTION */}
           {renderDetails()}
           <View style={styles.tabContainer}>
@@ -504,14 +467,8 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         />
       </View>
       {/* BOTTOM SHEET */}
-      <BottomSheet
-        ref={sheetRef}
-        index={-1}
-        snapPoints={snapPoints}
-        enablePanDownToClose>
-        <BottomSheetScrollView>
-          {renderBottomSheetContent()}
-        </BottomSheetScrollView>
+      <BottomSheet ref={sheetRef} index={-1} snapPoints={snapPoints} enablePanDownToClose>
+        <BottomSheetScrollView>{renderBottomSheetContent()}</BottomSheetScrollView>
       </BottomSheet>
     </SafeAreaView>
   );

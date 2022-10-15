@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   Image,
+  ImageSourcePropType,
   ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
+
 import { colors, icons, sizes, strings } from '../../constants';
 import CardVoucherItem from '../CardVoucherItem';
 import Popup1Button from '../Popup1Button';
@@ -22,16 +24,20 @@ const CardVoucherLarge = (props: CardVoucherLargeProps) => {
     <View style={styles.container}>
       <Popup1Button
         scrollable={true}
-        headerImage={logoToko}
+        headerImage={logoToko as ImageSourcePropType}
         headerText={namaToko}
         showPopup={showInfoPopup}
         contentText={detailToko}
-        onPress={() => setshowInfoPopup(e => !e)}
+        onPress={() => setshowInfoPopup((e) => !e)}
       />
 
       <View style={styles.iconContainer}>
-        <Image source={logoToko} style={styles.logoToko} resizeMode="contain" />
-        <TouchableOpacity onPress={() => setshowInfoPopup(e => !e)}>
+        <Image
+          source={logoToko as ImageSourcePropType}
+          style={styles.logoToko}
+          resizeMode="contain"
+        />
+        <TouchableOpacity onPress={() => setshowInfoPopup((e) => !e)}>
           <Image source={icons.icon_info_voucher} style={styles.iconPopup} />
         </TouchableOpacity>
       </View>
@@ -48,7 +54,8 @@ const CardVoucherLarge = (props: CardVoucherLargeProps) => {
               borderRadius: sizes.padding,
               marginRight: sizes.padding,
               marginLeft: i === 0 ? sizes.padding : 0,
-            }}>
+            }}
+          >
             <CardVoucherItem
               data={item}
               onPress={() => onPressVoucher({ data: data, voucher: item })}

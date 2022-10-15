@@ -1,24 +1,25 @@
 import { AxiosResponse } from 'axios';
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { isEmpty } from 'lodash';
+import { call, put, takeLatest } from 'redux-saga/effects';
+
 import { RefKeluargaApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
+import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
-import { isEmpty } from 'lodash';
 import {
+  fetchDeleteRefKeluarga,
   fetchGetRefKeluarga,
+  fetchSubmitRefKeluarga,
+  fetchUpdateRefKeluarga,
   getRefKeluargaFailed,
   getRefKeluargaSuccess,
-  fetchSubmitRefKeluarga,
+  RefKeluargaResponse,
+  setDeleteRefKeluargaStatus,
   submitRefKeluargaFailed,
   submitRefKeluargaSuccess,
-  fetchUpdateRefKeluarga,
   updateRefKeluargaFailed,
   updateRefKeluargaSuccess,
-  RefKeluargaResponse,
-  fetchDeleteRefKeluarga,
-  setDeleteRefKeluargaStatus,
 } from '../reducers/RefKeluargaReducer';
-import { formatter } from '../../utils';
 
 function* getRefKeluarga() {
   yield put(showLoading());

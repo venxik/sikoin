@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { isEmpty } from 'lodash';
+import moment from 'moment';
+
 import { colors, icons, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { TransaksiItemListProps } from './model';
-import moment from 'moment';
-import { isEmpty } from 'lodash';
 
 const TransaksiItemList = (props: TransaksiItemListProps) => {
   const { item, onPress } = props || {};
@@ -20,12 +22,11 @@ const TransaksiItemList = (props: TransaksiItemListProps) => {
             flexDirection: 'row',
             alignItems: 'center',
             marginVertical: 10,
-          }}>
+          }}
+        >
           <Text style={styles.textNominal}>Rp</Text>
           <View style={styles.dot} />
-          <Text style={styles.textNominal}>
-            {formatter.formatNumberToCurreny(nominal)}
-          </Text>
+          <Text style={styles.textNominal}>{formatter.formatNumberToCurreny(nominal)}</Text>
         </View>
         <Text style={styles.textDetail}>{detail}</Text>
         <Text style={styles.textTime}>

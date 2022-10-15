@@ -1,7 +1,8 @@
-import HttpService from '../services/HttpService';
 import { AxiosResponse } from 'axios';
+
 import { apis } from '../../constants';
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
+import HttpService from '../services/HttpService';
 
 /**
  * Handles API call related to diagnostic
@@ -42,10 +43,7 @@ class AlamatApi {
     data: AlamatDataResponse;
     id: number;
   }): Promise<AxiosResponse> {
-    const resp = await HttpService.patch(
-      `${apis.endpoints.alamat.alamat}/${id}`,
-      data,
-    );
+    const resp = await HttpService.patch(`${apis.endpoints.alamat.alamat}/${id}`, data);
     return resp;
   }
 
@@ -56,9 +54,7 @@ class AlamatApi {
    * @returns { Object } Promise either resolve or rejected
    */
   static async deleteAlamat(id: number): Promise<AxiosResponse> {
-    const resp = await HttpService.delete(
-      `${apis.endpoints.alamat.alamat}/${id}`,
-    );
+    const resp = await HttpService.delete(`${apis.endpoints.alamat.alamat}/${id}`);
     return resp;
   }
 }

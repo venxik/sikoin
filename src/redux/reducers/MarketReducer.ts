@@ -133,28 +133,18 @@ const marketSlice = createSlice({
   name: 'marketSlice',
   initialState,
   reducers: {
-    getMarketDataSuccess: (
-      state: RootState,
-      { payload }: PayloadAction<MarketDataResponse[]>,
-    ) => {
+    getMarketDataSuccess: (state: RootState, { payload }: PayloadAction<MarketDataResponse[]>) => {
       state.marketDataList = payload;
     },
-    getMarketDataFailed: (
-      state: RootState,
-      { payload }: PayloadAction<unknown>,
-    ) => {
+    getMarketDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     addCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
-      const index = state.cartItemDataList.findIndex(
-        (item: { id: number }) => item.id === payload,
-      );
+      const index = state.cartItemDataList.findIndex((item: { id: number }) => item.id === payload);
       state.cartItemDataList[index].qty += 1;
     },
     substartCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
-      const index = state.cartItemDataList.findIndex(
-        (item: { id: number }) => item.id === payload,
-      );
+      const index = state.cartItemDataList.findIndex((item: { id: number }) => item.id === payload);
       state.cartItemDataList[index].qty -= 1;
     },
     deleteCartItem: (state: RootState, { payload }: PayloadAction<number>) => {
@@ -162,10 +152,7 @@ const marketSlice = createSlice({
         (item: { id: number }) => item.id !== payload,
       );
     },
-    addCartItem: (
-      state: RootState,
-      { payload }: PayloadAction<CartItemData>,
-    ) => {
+    addCartItem: (state: RootState, { payload }: PayloadAction<CartItemData>) => {
       const index = state.cartItemDataList.findIndex(
         (item: { id: number }) => item.id === payload.id,
       );

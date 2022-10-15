@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const onboarding_1 = require('assets/images/onboarding_1.png');
 const onboarding_2 = require('assets/images/onboarding_2.png');

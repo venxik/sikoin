@@ -1,25 +1,25 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { FC, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
+import { Message, Search } from 'react-native-iconly';
+
 import { HeaderBack, NotifikasiItem } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { ChatStackParamList } from '../../config/navigation/model';
 import { colors, sizes } from '../../constants';
-import { Message, Search } from 'react-native-iconly';
-import { useAppDispatch, useAppSelector } from '../../config';
 import {
   fetchNotifikasi,
   fetchNotifikasiDetail,
   NotifikasiData,
 } from '../../redux/reducers/NotifikasiReducer';
-import { isEmpty } from 'lodash';
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatMainScreen'>;
 
 const ChatMainScreen: FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const { notifikasi } = useAppSelector(
-    s => s.NotifikasiReducer.notifikasiDataList,
-  );
+  const { notifikasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
 
   useEffect(() => {
     dispatch(fetchNotifikasi());
@@ -34,7 +34,8 @@ const ChatMainScreen: FC<Props> = () => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <TouchableOpacity onPress={() => null}>
           <Search color={colors.primary} />
         </TouchableOpacity>
@@ -53,12 +54,9 @@ const ChatMainScreen: FC<Props> = () => {
       {!isEmpty(notifikasi) && (
         <FlatList
           data={notifikasi}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <NotifikasiItem
-              item={item}
-              onPress={() => onPressNotifikasi(item)}
-            />
+            <NotifikasiItem item={item} onPress={() => onPressNotifikasi(item)} />
           )}
         />
       )}

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { colors, icons, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { SaldoItemListProps } from './model';
@@ -16,9 +17,7 @@ const SaldoItemList = (props: SaldoItemListProps) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text style={styles.nominalStyle}>Rp</Text>
               <View style={styles.nominalDotStyle} />
-              <Text style={styles.nominalStyle}>
-                {formatter.formatNumberToCurreny(nominal)}
-              </Text>
+              <Text style={styles.nominalStyle}>{formatter.formatNumberToCurreny(nominal)}</Text>
             </View>
           </View>
           <TouchableOpacity onPress={onPress}>

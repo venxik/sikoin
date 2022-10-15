@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
 import { colors, sizes } from '../../constants';
 import { SubmenuItemListCustomProps } from './model';
 
@@ -10,7 +11,8 @@ const SubmenuItemListCustom = (props: SubmenuItemListCustomProps) => {
       <View
         style={{
           flexDirection: 'row',
-        }}>
+        }}
+      >
         <Image source={icon} style={styles.iconStyle} />
         <Text style={styles.titleStyle}>{title}</Text>
       </View>

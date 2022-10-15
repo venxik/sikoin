@@ -1,6 +1,8 @@
-import { isEmpty } from 'lodash';
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import { isEmpty } from 'lodash';
+
 import { colors, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { PinjamanRincianItemProps } from './model';
@@ -55,14 +57,8 @@ const PinjamanRincianSimulasiItem = (props: PinjamanRincianItemProps) => {
         }}
       />
       <View style={{ flexDirection: 'row' }}>
-        <Text style={[styles.textItemContentLeft, { fontSize: 15 }]}>
-          {'Jumlah Angsuran : '}
-        </Text>
-        <Text
-          style={[
-            styles.textItemContentRight,
-            { fontSize: 15, textAlign: 'right' },
-          ]}>
+        <Text style={[styles.textItemContentLeft, { fontSize: 15 }]}>{'Jumlah Angsuran : '}</Text>
+        <Text style={[styles.textItemContentRight, { fontSize: 15, textAlign: 'right' }]}>
           Rp. {formatter.formatNumberToCurreny(jumlahAngsuran)}
         </Text>
       </View>

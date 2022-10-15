@@ -1,6 +1,8 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { Button, HeaderBack } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -8,15 +10,12 @@ import { colors, icons, sizes, strings } from '../../constants';
 import { fetchSubmitPenarikan } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'TopupPenarikanDetailScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'TopupPenarikanDetailScreen'>;
 
 const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const { selectedTopupPenarikan, nominal, isTopup } = route.params;
 
-  const { createSimpananList } = useAppSelector(s => s.SaldoSimpananReducer);
+  const { createSimpananList } = useAppSelector((s) => s.SaldoSimpananReducer);
 
   const dispatch = useAppDispatch();
 
@@ -39,9 +38,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   const renderTopupDetail = () => (
     <View>
-      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
-        {strings.rincian}
-      </Text>
+      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>{strings.rincian}</Text>
       <View
         style={[
           styles.rowContainer,
@@ -51,11 +48,10 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             justifyContent: 'space-between',
             width: '100%',
           },
-        ]}>
+        ]}
+      >
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View
-            style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]}
-          />
+          <View style={[styles.dot, { backgroundColor: colors.bodyTextGrey }]} />
           <Text style={styles.textJumlahTopup}>{strings.jumlah_topup}</Text>
         </View>
         <Text style={styles.textJumlahTopup}>
@@ -77,20 +73,13 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           justifyContent: 'space-between',
           width: '100%',
         },
-      ]}>
-      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
-        {strings.bank_tujuan}
-      </Text>
-      <Text
-        style={[
-          styles.textTitle,
-          { marginTop: sizes.padding, marginBottom: 0 },
-        ]}>
+      ]}
+    >
+      <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>{strings.bank_tujuan}</Text>
+      <Text style={[styles.textTitle, { marginTop: sizes.padding, marginBottom: 0 }]}>
         {createSimpananList?.noRek}
       </Text>
-      <Text style={[styles.textTitle, { marginBottom: 0 }]}>
-        {createSimpananList?.bank}
-      </Text>
+      <Text style={[styles.textTitle, { marginBottom: 0 }]}>{createSimpananList?.bank}</Text>
     </View>
   );
 
@@ -100,23 +89,15 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       <View style={styles.mainContainer}>
         <Text style={styles.textTitle}>{strings.jumlah_topup}</Text>
         <View style={styles.rowContainerBorderless}>
-          <Image
-            source={icons.icon_rp_dark}
-            style={styles.icon}
-            resizeMode="cover"
-          />
+          <Image source={icons.icon_rp_dark} style={styles.icon} resizeMode="cover" />
           <Text style={styles.textNominal} numberOfLines={1}>
             {formatter.formatStringToCurrencyNumber(nominal)}
           </Text>
         </View>
-        <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>
-          {strings.untuk_saldo}
-        </Text>
+        <Text style={[styles.textTitle, { marginTop: sizes.padding }]}>{strings.untuk_saldo}</Text>
         <View style={styles.rowContainer}>
           <View style={styles.dot} />
-          <Text style={styles.textSelectedTopup}>
-            {selectedTopupPenarikan?.nama}
-          </Text>
+          <Text style={styles.textSelectedTopup}>{selectedTopupPenarikan?.nama}</Text>
         </View>
         {isTopup ? renderTopupDetail() : renderPenarikanDetail()}
         <View
@@ -126,10 +107,9 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
               justifyContent: 'space-between',
               marginTop: 6,
             },
-          ]}>
-          <Text style={[styles.textTitle, { marginBottom: 0 }]}>
-            {strings.total}
-          </Text>
+          ]}
+        >
+          <Text style={[styles.textTitle, { marginBottom: 0 }]}>{strings.total}</Text>
           <Text style={[styles.textNominal, { fontSize: 14 }]}>
             Rp {formatter.formatStringToCurrencyNumber(nominal)}
           </Text>
@@ -147,9 +127,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         icon={icons.arrow_right_button_white}
         iconLocation={'right'}
         shadow={false}
-        onPress={
-          isTopup ? navigateToPembayaranScreen : navigateToPenarikanSuccess
-        }
+        onPress={isTopup ? navigateToPembayaranScreen : navigateToPenarikanSuccess}
       />
     </SafeAreaView>
   );

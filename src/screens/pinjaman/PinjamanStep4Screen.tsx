@@ -1,24 +1,24 @@
+import React, { useState } from 'react';
+import {
+  Image,
+  ImageBackground,
+  KeyboardAvoidingView,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ImageBackground,
-  ScrollView,
-  Image,
-} from 'react-native';
+import DocumentPicker, { DocumentPickerResponse } from 'react-native-document-picker';
+
 import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import DocumentPicker, {
-  DocumentPickerResponse,
-} from 'react-native-document-picker';
 import { fetchPatchCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep4Screen'>;
@@ -30,13 +30,12 @@ const documentPickerOptions = {
 const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const { linkGambarKtp, noKtp, linkSelfieKtp } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanStep4Data,
+    (s) => s.PinjamanReducer.pinjamanStep4Data,
   );
-  const { ktpData } = useAppSelector(s => s.KtpReducer) || {};
+  const { ktpData } = useAppSelector((s) => s.KtpReducer) || {};
   const { gambarKtp, gambarSelfie } = ktpData || {};
 
-  const [dokumenPendukung, setDokumenPendukung] =
-    useState<DocumentPickerResponse>();
+  const [dokumenPendukung, setDokumenPendukung] = useState<DocumentPickerResponse>();
 
   const submitKtp = (data: { noKtp: string }) => {
     const formData = new FormData();
@@ -70,6 +69,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
       const data = await DocumentPicker.pickSingle(documentPickerOptions);
       setDokumenPendukung(data);
     } catch {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       (e: unknown) => console.error('Document picker error! ', e);
     }
   };
@@ -83,15 +83,13 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   };
 
   const checkKtpImage = () => {
-    if (!isEmpty(linkGambarKtp) && isEmpty(gambarKtp))
-      return { uri: linkGambarKtp };
+    if (!isEmpty(linkGambarKtp) && isEmpty(gambarKtp)) return { uri: linkGambarKtp };
     else if (!isEmpty(gambarKtp)) return { uri: gambarKtp };
     else return icons.icon_edit_profle_picture;
   };
 
   const checkSelfieImage = () => {
-    if (!isEmpty(linkSelfieKtp) && isEmpty(gambarSelfie))
-      return { uri: linkSelfieKtp };
+    if (!isEmpty(linkSelfieKtp) && isEmpty(gambarSelfie)) return { uri: linkSelfieKtp };
     else if (!isEmpty(gambarSelfie)) return { uri: gambarSelfie };
     else return icons.icon_edit_profle_picture;
   };
@@ -114,7 +112,8 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
             imageStyle={styles.imageKtp}
             source={checkKtpImage()}
             style={styles.imageKtp}
-            resizeMode="cover">
+            resizeMode="cover"
+          >
             <View style={styles.iconContainer}>
               <Image
                 resizeMode="cover"
@@ -147,14 +146,13 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
             minLength: { value: 16, message: 'KTP Harus 16 Digit' },
           }}
         />
-        <TouchableOpacity
-          onPress={changeSelfieImage}
-          style={{ marginTop: sizes.padding }}>
+        <TouchableOpacity onPress={changeSelfieImage} style={{ marginTop: sizes.padding }}>
           <ImageBackground
             imageStyle={styles.imageSelfie}
             source={checkSelfieImage()}
             style={styles.imageSelfie}
-            resizeMode="cover">
+            resizeMode="cover"
+          >
             <View style={styles.iconContainer}>
               <Image
                 source={icons.icon_edit_profle_picture}
@@ -179,10 +177,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={50}>
+      <KeyboardAvoidingView behavior="height" style={{ flex: 1 }} keyboardVerticalOffset={50}>
         <HeaderPinjaman index={4} />
         <ScrollView>{renderKtpCard()}</ScrollView>
         <View
@@ -192,7 +187,8 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
             position: 'absolute',
             bottom: sizes.padding,
             width: '100%',
-          }}>
+          }}
+        >
           <Button
             onPress={() => navigation.goBack()}
             shadow

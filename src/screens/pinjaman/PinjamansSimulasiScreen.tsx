@@ -1,20 +1,17 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { HeaderBack, PinjamanRincianSimulasiItem } from '../../components';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<
-  HomeStackParamList,
-  'PinjamanSimulasiScreen'
->;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSimulasiScreen'>;
 
 const PinjamanSimulasiScreen: React.FC<Props> = ({ navigation }) => {
-  const { simulasi } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanSummaryData,
-  );
+  const { simulasi } = useAppSelector((s) => s.PinjamanReducer.pinjamanSummaryData);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,13 +23,12 @@ const PinjamanSimulasiScreen: React.FC<Props> = ({ navigation }) => {
         }}
         style={{
           paddingHorizontal: sizes.padding,
-        }}>
+        }}
+      >
         <View style={styles.mainContainer}>
           <Text style={styles.textTitle}>Simulasi Pinjaman</Text>
           {simulasi &&
-            simulasi.map((item, i) => (
-              <PinjamanRincianSimulasiItem item={item} key={i} />
-            ))}
+            simulasi.map((item, i) => <PinjamanRincianSimulasiItem item={item} key={i} />)}
         </View>
       </ScrollView>
     </SafeAreaView>

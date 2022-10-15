@@ -1,9 +1,4 @@
-import {
-  ImageSourcePropType,
-  ImageStyle,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { ImageSourcePropType, ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 export interface Popup2ButtonProps {
   style?: ViewStyle;

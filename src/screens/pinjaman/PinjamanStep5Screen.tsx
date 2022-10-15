@@ -1,26 +1,27 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+/* eslint-disable @typescript-eslint/indent */
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import {
-  View,
-  StyleSheet,
+  Image,
   SafeAreaView,
   ScrollView,
-  TouchableOpacity,
-  Image,
+  StyleSheet,
   Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Button, HeaderPinjaman, TextInputForm } from '../../components';
-import { HomeStackParamList } from '../../config/navigation/model';
+
 import BottomSheet from '@gorhom/bottom-sheet';
-import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
-import { formatter } from '../../utils';
-import { useAppDispatch, useAppSelector } from '../../config';
-import {
-  fetchPinjamanSummary,
-  setPinjamanInfo,
-} from '../../redux/reducers/PinjamanReducer';
 import { Controller, useForm } from 'react-hook-form';
+
+import { Button, HeaderPinjaman, TextInputForm } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
+import { HomeStackParamList } from '../../config/navigation/model';
+import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
+import { fetchPinjamanSummary, setPinjamanInfo } from '../../redux/reducers/PinjamanReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 
@@ -35,20 +36,7 @@ const defaultNominal = [
   { item: '10', value: '10000000' },
 ];
 
-const value = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '0',
-  '000',
-  'delete',
-];
+const value = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '000', 'delete'];
 
 const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
   const [showButton, setShowButton] = useState(true);
@@ -58,15 +46,13 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
 
   //redux dispatch and selector
   const dispatch = useAppDispatch();
-  const { idJenisPinjaman } = useAppSelector(
-    s => s.PinjamanReducer.pinjamanInfo,
-  );
+  const { idJenisPinjaman } = useAppSelector((s) => s.PinjamanReducer.pinjamanInfo);
 
   //BottomSheet
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
   const handleSheetChange = useCallback(() => {
-    setShowButton(e => !e);
+    setShowButton((e) => !e);
   }, []);
 
   const navigateToReview = (data: Form) => {
@@ -118,14 +104,14 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
   const onPressInputNominal = (item: string) => {
     if (item === 'delete') {
       if (!isEmpty(nominalContainer)) {
-        setNominalContainer(e => e.slice(0, -1));
+        setNominalContainer((e) => e.slice(0, -1));
       }
     } else if (item === '0' || item === '00') {
       if (!isEmpty(nominalContainer)) {
-        setNominalContainer(e => e.concat(item));
+        setNominalContainer((e) => e.concat(item));
       }
     } else {
-      setNominalContainer(e => e.concat(item));
+      setNominalContainer((e) => e.concat(item));
     }
   };
 
@@ -164,7 +150,8 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
                   },
               styles.nominalButton,
             ]}
-            onPress={() => selectDefaultNominal(item.value, index)}>
+            onPress={() => selectDefaultNominal(item.value, index)}
+          >
             <View style={styles.textNominalContainer}>
               <Text
                 style={[
@@ -176,7 +163,8 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
                         color: colors.primaryDark,
                       },
                   styles.textNominalButton,
-                ]}>
+                ]}
+              >
                 {item.item}
               </Text>
               <Text
@@ -189,7 +177,8 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
                         color: colors.primaryDark,
                       },
                   styles.textRbButton,
-                ]}>
+                ]}
+              >
                 {index < 2 ? 'rb' : 'jt'}
               </Text>
             </View>
@@ -216,11 +205,7 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
         {!isEmpty(nominal) && (
           <View style={styles.showNominalContainer}>
             <View style={styles.textNominalContainer}>
-              <Image
-                source={icons.icon_rp_dark}
-                style={styles.icon}
-                resizeMode="cover"
-              />
+              <Image source={icons.icon_rp_dark} style={styles.icon} resizeMode="cover" />
               <Text style={styles.textNominal} numberOfLines={1}>
                 {formatter.formatStringToCurrencyNumber(nominal)}
               </Text>
@@ -273,7 +258,8 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
         style={{
           marginHorizontal: sizes.padding,
           height: '100%',
-        }}>
+        }}
+      >
         <View style={styles.inputNominalContainer}>
           <Text
             numberOfLines={1}
@@ -283,24 +269,22 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
               !isEmpty(nominalContainer)
                 ? { color: colors.primary }
                 : { color: colors.bodyTextLightGrey },
-            ]}>
+            ]}
+          >
             {!isEmpty(nominalContainer)
               ? `Rp${formatter.formatStringToCurrencyNumber(nominalContainer)}`
               : 'Rp0..'}
           </Text>
         </View>
-        <View
-          style={[styles.nominalButtonContainer, { marginTop: sizes.padding }]}>
+        <View style={[styles.nominalButtonContainer, { marginTop: sizes.padding }]}>
           {value.map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.inputNominalButton}
-              onPress={() => onPressInputNominal(item)}>
+              onPress={() => onPressInputNominal(item)}
+            >
               {item === 'delete' ? (
-                <Image
-                  source={icons.icon_delete_nominal}
-                  style={{ width: 60, height: 30 }}
-                />
+                <Image source={icons.icon_delete_nominal} style={{ width: 60, height: 30 }} />
               ) : (
                 <Text style={styles.textInputNominalBtn}>{item}</Text>
               )}
@@ -324,16 +308,15 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderPinjaman index={5} />
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
-        {renderSelectNominal()}
-      </ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>{renderSelectNominal()}</ScrollView>
       <BottomSheet
         style={{ backgroundColor: colors.primaryWhite }}
         ref={sheetRef}
         index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose
-        onAnimate={handleSheetChange}>
+        onAnimate={handleSheetChange}
+      >
         {renderInputManual()}
       </BottomSheet>
       {showButton && (
@@ -346,7 +329,8 @@ const PinjamanStep5: React.FC<Props> = ({ navigation }) => {
             paddingHorizontal: sizes.padding,
             width: '100%',
             zIndex: 1,
-          }}>
+          }}
+        >
           <Button
             onPress={() => navigation.goBack()}
             shadow
