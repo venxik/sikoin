@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Modal, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import CheckBox from '@react-native-community/checkbox';
+import dayjs from 'dayjs';
 import { isEmpty } from 'lodash';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 
-import { colors, icons, images, sizes } from '../../constants';
+import { useAppDispatch } from '../../config';
+import { apis, colors, icons, images, sizes } from '../../constants';
+import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
+import { formatter } from '../../utils';
 import Button from '../Button';
 import { PinjamanItemModalProps } from './model';
 
@@ -12,6 +17,44 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
   const { onPress, onPressClose, showModal, item } = props;
 
   const [checked, setChecked] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const onPressUnduh = () => {
+    // send http request in a new thread (using native code)
+    const dirs = ReactNativeBlobUtil.fs.dirs;
+    const dirsOS = Platform.select({ ios: dirs.DocumentDir, android: dirs.DownloadDir });
+    ReactNativeBlobUtil.config({
+      fileCache: true,
+      addAndroidDownloads: {
+        path:
+          dirsOS + '/file_' + Math.floor(dayjs().get('date') + dayjs().get('second') / 2) + '.jpeg',
+        description: 'Sedang Mengunduh file',
+        notification: true,
+        // useDownloadManager works with Android only
+        useDownloadManager: true,
+      },
+    })
+      .fetch('GET', item.dokumen)
+      .then((res) => {
+        console.warn('The file saved to ', res.path());
+      })
+      // Something went wrong:
+      .catch((errorMessage) => {
+        // error handling
+        dispatch(
+          showErrorModal({
+            options: {
+              screenSource: 'DokumenMainScreen',
+              errorType: apis.errorTypes.generic,
+            },
+            error: {
+              title: 'Error',
+              message: errorMessage as string,
+            },
+          }),
+        );
+      });
+  };
 
   return (
     <Modal animationType="slide" transparent={true} visible={showModal}>
@@ -56,10 +99,16 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
           </Text>
           <Text style={styles.textTenor}>
             {'Plafon : '}
-            <Text style={{ color: colors.primary }}>{item?.maksimumPlafon}</Text>
+            <Text style={{ color: colors.primary }}>
+              Rp. {formatter.formatNumberToCurreny(item?.maksimumPlafon)}
+            </Text>
           </Text>
           <Text style={styles.textUnduhSnk}>Unduh Syarat & Ketentuan</Text>
-          <View style={styles.row}>
+          <TouchableOpacity
+            style={styles.row}
+            onPress={onPressUnduh}
+            disabled={isEmpty(item.dokumen)}
+          >
             <View style={styles.dokumen}>
               <Image
                 source={icons.icon_document_word}
@@ -71,7 +120,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
                 {!isEmpty(item.namaDokumen) ? item.namaDokumen : '-'}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={[styles.row, { paddingHorizontal: 16, marginTop: 20 }]}>
             <CheckBox
               disabled={false}
