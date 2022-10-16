@@ -64,6 +64,8 @@ const constant = {
     notifikasi: {
       getNotifikasi: 'notifikasi',
     },
+    logout: 'logout',
+    version: 'version',
   },
   errorTypes: {
     generic: 'Oops!',

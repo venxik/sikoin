@@ -48,6 +48,7 @@ function* getPinjamanInitialData() {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(getPinjamanInitialDataSuccess(data?.data));
+        navigate('PinjamanMainScreen');
       } else {
         yield put(getPinjamanInitialDataFailed('Error'));
       }

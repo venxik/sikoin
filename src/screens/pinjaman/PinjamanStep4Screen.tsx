@@ -100,7 +100,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<{ noKtp: string }>({
     defaultValues: {
-      noKtp: noKtp,
+      noKtp,
     },
   });
 

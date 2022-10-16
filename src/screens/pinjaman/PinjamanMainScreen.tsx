@@ -97,18 +97,18 @@ const PinjamanMainScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.textSubtitle}>
             Rp. {formatter.formatNumberToCurreny(totalJumlahPinjamanDisetujui)}
           </Text>
-          {!isEmpty(pengajuanPinjaman) &&
-            pengajuanPinjaman.map((item: PengajuanPinjaman, i: number) => {
-              if (item.status === 'PENGAJUAN' || item.status === 'DISETUJUI')
-                return (
-                  <PinjamanListItem
-                    item={item}
-                    key={i}
-                    disabled={item.status === 'PENGAJUAN'}
-                    onPress={() => onPressPinjamanDetail(item)}
-                  />
-                );
-            })}
+          {pengajuanPinjaman?.map((item: PengajuanPinjaman, i: number) => {
+            if (item.status === 'PENGAJUAN' || item.status === 'DISETUJUI')
+              return (
+                <PinjamanListItem
+                  item={item}
+                  key={i}
+                  disabled={item.status === 'PENGAJUAN'}
+                  onPress={() => onPressPinjamanDetail(item)}
+                  style={i === pengajuanPinjaman?.length - 1 ? { paddingBottom: 0 } : {}}
+                />
+              );
+          })}
         </View>
       </ScrollView>
       {selectedItem && (
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     marginTop: 30,
     paddingVertical: sizes.padding,
-    paddingBottom: 0,
     paddingHorizontal: sizes.padding,
     backgroundColor: colors.white,
     borderRadius: sizes.padding,

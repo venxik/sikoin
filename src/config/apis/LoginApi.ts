@@ -95,6 +95,16 @@ class LoginApi {
     });
     return resp;
   }
+
+  static async logout(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.logout);
+    return resp;
+  }
+
+  static async getVersionNumber(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.version);
+    return resp;
+  }
 }
 
 export default LoginApi;

@@ -14,7 +14,9 @@ import { watchGetKtpDokumen, watchUploadGambarKtp } from './KtpDokumenSaga';
 import {
   watchForgotPassword,
   watchGetKoperasiList,
+  watchGetVersionNumber,
   watchLogin,
+  watchLogout,
   watchSendKoperasiData,
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
@@ -101,5 +103,7 @@ export function* rootSaga() {
     fork(watchGetAllDokumen),
     fork(watchGetAllNotifikasi),
     fork(watchGetNotifikasiDetail),
+    fork(watchLogout),
+    fork(watchGetVersionNumber),
   ]);
 }

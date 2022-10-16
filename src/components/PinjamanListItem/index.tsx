@@ -8,7 +8,7 @@ import { formatter } from '../../utils';
 import { PinjamanListItemProps } from './model';
 
 const PinjamanListItem = (props: PinjamanListItemProps) => {
-  const { item, onPress, disabled = false } = props;
+  const { item, onPress, disabled = false, style } = props;
 
   const tickColor = () => {
     const { status } = item;
@@ -18,7 +18,7 @@ const PinjamanListItem = (props: PinjamanListItemProps) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} disabled={disabled}>
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress} disabled={disabled}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <TickSquare color={tickColor()} size={sizes.padding} />
         <Text style={styles.textTitle}>{item.namaJenisPinjaman}</Text>

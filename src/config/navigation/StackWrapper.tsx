@@ -187,6 +187,7 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="TopupPenarikanMainScreen"
       component={screens.TopupPenarikanMainScreen}
+      initialParams={{ isTopup: false }}
     />
     <HomeStack.Screen
       name="TopupPenarikanDetailScreen"

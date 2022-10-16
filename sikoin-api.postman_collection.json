@@ -113,35 +113,6 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8000/api/logout",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{base_url}}/api/logout",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "5. api/lupa-password",
 			"request": {
 				"method": "POST",
@@ -400,45 +371,6 @@
 			"response": []
 		},
 		{
-			"name": "19. api/daftar-alamat/id",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"judul\": \"Apartemen 2\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/daftar-alamat/1",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"daftar-alamat",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "12. api/biodata",
 			"request": {
 				"auth": {
@@ -612,45 +544,6 @@
 			"response": []
 		},
 		{
-			"name": "20. api/ref-keluarga/id",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 2\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{base_url}}/api/ref-keluarga/2",
-					"protocol": "http",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"api",
-						"ref-keluarga",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "17. api/pekerjaan",
 			"request": {
 				"auth": {
@@ -712,6 +605,84 @@
 					"path": [
 						"api",
 						"pekerjaan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19. api/daftar-alamat/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"judul\": \"Apartemen 2\",\r\n    \"alamat\": \"Centro city 03/18\",\r\n    \"rt\": \"04\",\r\n    \"rw\": \"07\",\r\n    \"provinsi\": \"DKI Jakarta\",\r\n    \"kabupaten\": \"Jakarta Barat\",\r\n    \"kecamatan\": \"Kebun Jeruk\",\r\n    \"kodePos\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/daftar-alamat/1",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"daftar-alamat",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20. api/ref-keluarga/id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Ibu Tiri\",\r\n    \"nama\": \"nama Ibu 2\",\r\n    \"telp\": \"08159821379123\",\r\n    \"ktp\": \"0983249873242342\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ref-keluarga/2",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ref-keluarga",
+						"2"
 					]
 				}
 			},
@@ -843,17 +814,17 @@
 						{
 							"key": "gambarKtp",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Pictures/contoh ktp.jpg"
 						},
 						{
 							"key": "selfieKtp",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Pictures/contoh ktp.jpg"
 						},
 						{
 							"key": "dokumenPendukung",
 							"type": "file",
-							"src": []
+							"src": "/C:/Users/BTC - LAFKI/Pictures/dummy_user.jpg"
 						}
 					]
 				},
@@ -1044,7 +1015,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisSimpananId\" : 4,\r\n    \"nominal\" : 30000\r\n}",
+					"raw": "{\r\n    \"jenisSimpananId\" : 3,\r\n    \"nominal\" : 1000000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1555,7 +1526,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/mutasi-simpanan/8",
+					"raw": "http://{{base_url}}/api/mutasi-simpanan/3",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1563,7 +1534,7 @@
 					"path": [
 						"api",
 						"mutasi-simpanan",
-						"8"
+						"3"
 					]
 				}
 			},
@@ -1673,7 +1644,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/kabar/2",
+					"raw": "http://{{base_url}}/api/kabar/1",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1681,7 +1652,7 @@
 					"path": [
 						"api",
 						"kabar",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -1770,6 +1741,64 @@
 					"path": [
 						"api",
 						"dokumen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "51. api/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/logout",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "52. api/version",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{base_url}}/api/version",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"version"
 					]
 				}
 			},

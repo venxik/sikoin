@@ -3,8 +3,9 @@ import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { LoginApi } from '../../config/apis';
-import { navigate, navigationRef } from '../../config/navigation';
+import { navigate, navigateAndReset } from '../../config/navigation';
 import { formatter } from '../../utils';
+import { resetUserData } from '../reducers/HomeReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   fetchForgotPassword,
@@ -12,8 +13,14 @@ import {
   fetchLogin,
   fetchLoginFailed,
   fetchLoginSuccess,
+  fetchLogout,
+  fetchLogoutFailed,
+  fetchLogoutSuccess,
   fetchUserKoperasi,
   fetchUserKoperasiEmail,
+  fetchVersionNumber,
+  fetchVersionNumberFailed,
+  fetchVersionNumberSuccess,
   getKoperasiListFailed,
   getKoperasiListSuccess,
   getUserKoperasiFailed,
@@ -128,12 +135,7 @@ function* login(action: ReturnType<typeof fetchLogin>) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchLoginSuccess(data));
-        if (navigationRef.isReady()) {
-          navigationRef.current?.resetRoot({
-            index: 0,
-            routes: [{ name: 'HomeTab' }],
-          });
-        }
+        navigateAndReset('HomeTab');
       } else {
         yield put(fetchLoginFailed('Error'));
       }
@@ -144,6 +146,46 @@ function* login(action: ReturnType<typeof fetchLogin>) {
     yield put(fetchLoginFailed(error));
   }
   yield put(hideLoading());
+}
+
+function* logout() {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse = yield call(LoginApi.logout);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchLogoutSuccess());
+        yield put(resetUserData());
+        navigateAndReset('LoginScreen');
+      } else {
+        yield put(fetchLogoutFailed('Error'));
+      }
+    } else {
+      yield put(fetchLogoutFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchLogoutFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getVersionNumber() {
+  try {
+    const response: AxiosResponse = yield call(LoginApi.getVersionNumber);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchVersionNumberSuccess(data?.data));
+      } else {
+        yield put(fetchVersionNumberFailed('Error'));
+      }
+    } else {
+      yield put(fetchVersionNumberFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchVersionNumberFailed(error));
+  }
 }
 
 export function* watchGetKoperasiList() {
@@ -164,4 +206,12 @@ export function* watchForgotPassword() {
 
 export function* watchLogin() {
   yield takeLatest(fetchLogin, login);
+}
+
+export function* watchLogout() {
+  yield takeLatest(fetchLogout, logout);
+}
+
+export function* watchGetVersionNumber() {
+  yield takeLatest(fetchVersionNumber, getVersionNumber);
 }

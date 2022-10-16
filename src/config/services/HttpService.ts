@@ -73,6 +73,7 @@ class HttpService {
     const error = response.data.error;
     const url = response?.request?.responseURL as string;
     if (error) {
+      if (!url.includes('api/version')) return;
       if (url.includes('api/koperasi'))
         this.showErrorDialogHandler(apis.errorTypes.anggotaTerdaftar, error);
       else this.showErrorDialogHandler(apis.errorTypes.generic, error);
@@ -84,6 +85,7 @@ class HttpService {
   handleErrorInterceptor = (error: AxiosError) => {
     store.dispatch(hideLoading());
     const url = error.request?.responseURL as string;
+    if (url.includes('api/version')) return;
     switch (error.response?.status) {
       case 400:
         this.showErrorDialogHandler(apis.errorTypes.badRequest, error.response?.data?.error);

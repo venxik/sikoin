@@ -1,36 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import { isEmpty } from 'lodash';
+import Config from 'react-native-config';
 
-import { useAppSelector } from '../../config';
+import { Popup1Button } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { navigateAndReset } from '../../config/navigation';
-import { images } from '../../constants';
+import { images, sizes } from '../../constants';
+import { fetchVersionNumber } from '../../redux/reducers/LoginReducer';
 import { AsyncStore } from '../../utils';
 
 const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
+  const { versionNumber } = useAppSelector((s) => s.LoginReducer);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    validateNavigation();
+    dispatch(fetchVersionNumber());
   }, []);
+
+  React.useEffect(() => {
+    if (!isEmpty(versionNumber)) {
+      if (versionNumber === Config.VERSION_NUMBER) {
+        validateNavigation();
+      } else {
+        setShowPopup(true);
+      }
+    }
+  }, [versionNumber]);
 
   const validateNavigation = async () => {
     const data = await AsyncStore.getData('@onboardingComplete');
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       if (userId !== 0) {
         navigateAndReset('HomeTab');
+        return;
       } else if (!isEmpty(data)) {
         navigateAndReset('LoginScreen');
+        return;
       } else {
         navigateAndReset('OnboardingScreen');
+        return;
       }
-    }, 4000);
+    }, 5000);
+    return () => {
+      clearTimeout(timer);
+    };
   };
 
   return (
     <View style={styles.container}>
       <Image source={images.splash_screen} style={styles.splash} />
+      <Popup1Button
+        iconStyle={{ width: 150, height: 200, marginBottom: -sizes.padding }}
+        headerText={'Versi Terbaru'}
+        contentText={'Silahkan Update Aplikasi Versi Terbaru'}
+        showPopup={showPopup}
+        onPress={() => setShowPopup((e) => !e)}
+        // headerImage={images.img_topup_popup}
+        customButtonText={'OK'}
+      />
     </View>
   );
 };

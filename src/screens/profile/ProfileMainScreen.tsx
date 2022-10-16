@@ -9,6 +9,7 @@ import { Button, HeaderBack, ProfilePicture, SubmenuItemList } from '../../compo
 import { useAppDispatch, useAppSelector } from '../../config';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
+import { fetchLogout } from '../../redux/reducers/LoginReducer';
 import { fetchProfile } from '../../redux/reducers/ProfileReducer';
 import { getFormattedDate } from '../../utils';
 
@@ -89,7 +90,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
           <SubmenuItemList
             icon={icons.icon_sign_out}
             title={'Keluar'}
-            onPress={() => null}
+            onPress={() => dispatch(fetchLogout())}
             showButtonIcon={false}
           />
         </View>

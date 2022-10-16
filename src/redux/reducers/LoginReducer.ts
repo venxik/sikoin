@@ -34,12 +34,14 @@ interface RootState {
   userKoperasiData: UserKoperasiResponse;
   error?: unknown;
   forgotPasswordStatus: ForgotPasswordStatus;
+  versionNumber: string;
 }
 
 const initialState: RootState = {
   koperasiListData: [],
   userKoperasiData: {} as UserKoperasiResponse,
   forgotPasswordStatus: 'idle',
+  versionNumber: '',
 };
 
 const loginSlice = createSlice({
@@ -85,6 +87,19 @@ const loginSlice = createSlice({
     fetchLoginFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    fetchLogoutSuccess: () => {},
+    fetchLogoutFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    fetchVersionNumberSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<{ versionNumber: string }>,
+    ) => {
+      state.versionNumber = payload.versionNumber;
+    },
+    fetchVersionNumberFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -94,6 +109,8 @@ export const fetchUserKoperasiEmail =
   createAction<SendUserEmailKoperasiParams>('fetchUserKoperasiEmail');
 export const fetchForgotPassword = createAction<string>('fetchForgotPassword');
 export const fetchLogin = createAction<{ email: string; password: string }>('fetchLogin');
+export const fetchLogout = createAction('fetchLogout');
+export const fetchVersionNumber = createAction('fetchversionNumber');
 export const {
   getKoperasiListSuccess,
   getKoperasiListFailed,
@@ -103,6 +120,10 @@ export const {
   setForgotPasswordStatus,
   fetchLoginFailed,
   fetchLoginSuccess,
+  fetchLogoutFailed,
+  fetchLogoutSuccess,
+  fetchVersionNumberFailed,
+  fetchVersionNumberSuccess,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;
