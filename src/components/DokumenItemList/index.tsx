@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
   },
   popupContainer: {
     flexDirection: 'row',
-    borderBottomWidth: 0.5,
-    borderBottomColor: colors.strokeGrey,
-    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
