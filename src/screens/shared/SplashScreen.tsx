@@ -26,6 +26,7 @@ const SplashScreen: React.FC = () => {
     if (!isEmpty(versionNumber)) {
       if (versionNumber === Config.VERSION_NUMBER) {
         validateNavigation();
+        return;
       } else {
         setShowPopup(true);
       }

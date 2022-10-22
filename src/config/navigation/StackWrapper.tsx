@@ -276,6 +276,7 @@ const ProfileStackNavigator = () => (
       component={screens.DokumenPendukungMainScreen}
     />
     <ProfileStack.Screen name="IDCardMainScreen" component={screens.IDCardMainScreen} />
+    <ProfileStack.Screen name="ChangePasswordScreen" component={screens.ChangePasswordScreen} />
   </ProfileStack.Navigator>
 );
 

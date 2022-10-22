@@ -8,6 +8,9 @@ import { formatter } from '../../utils';
 import { resetUserData } from '../reducers/HomeReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
+  fetchChangePassword,
+  fetchChangePasswordFailed,
+  fetchChangePasswordSuccess,
   fetchForgotPassword,
   fetchKoperasiList,
   fetchLogin,
@@ -26,8 +29,10 @@ import {
   getUserKoperasiFailed,
   getUserKoperasiSuccess,
   KoperasiListResponse,
+  setChangePasswordStatus,
   setForgotPasswordStatus,
   updateUserKoperasiEmailFailed,
+  updateUserKoperasiEmailSuccess,
   UserKoperasiResponse,
 } from '../reducers/LoginReducer';
 
@@ -89,7 +94,7 @@ function* sendUserKoperasiEmail(action: ReturnType<typeof fetchUserKoperasiEmail
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
-        yield put(getUserKoperasiSuccess(data?.data));
+        yield put(updateUserKoperasiEmailSuccess(data?.data));
         if (!isEmpty(data)) {
           navigate('DaftarKoperasiSuccessScreen', {
             email: action.payload.email,
@@ -188,6 +193,28 @@ function* getVersionNumber() {
   }
 }
 
+function* changePassword(action: ReturnType<typeof fetchChangePassword>) {
+  try {
+    const response: AxiosResponse = yield call(LoginApi.changePassword, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchChangePasswordSuccess());
+        yield put(setChangePasswordStatus('success'));
+      } else {
+        yield put(fetchChangePasswordFailed('Error'));
+        yield put(setChangePasswordStatus('failed'));
+      }
+    } else {
+      yield put(fetchChangePasswordFailed('Error'));
+      yield put(setChangePasswordStatus('failed'));
+    }
+  } catch (error) {
+    yield put(fetchChangePasswordFailed(error));
+    yield put(setChangePasswordStatus('failed'));
+  }
+}
+
 export function* watchGetKoperasiList() {
   yield takeLatest(fetchKoperasiList, getKoperasiList);
 }
@@ -214,4 +241,8 @@ export function* watchLogout() {
 
 export function* watchGetVersionNumber() {
   yield takeLatest(fetchVersionNumber, getVersionNumber);
+}
+
+export function* watchChangePassword() {
+  yield takeLatest(fetchChangePassword, changePassword);
 }

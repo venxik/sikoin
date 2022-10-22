@@ -36,11 +36,17 @@ const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
           >
             {() => <Image source={icons.icon_email} style={styles.iconStyle} />}
           </AnimatedCircularProgress>
-          <Text style={styles.textTitle}>{strings.cek_inbox}</Text>
+          <Text style={styles.textTitle}>{'Sip! Kami verifikasi dulu ya'}</Text>
         </View>
-        <Text style={styles.textContent1}>{strings.daftar_koperasi_success_1}</Text>
-        <Text style={styles.textEmail}>{email}</Text>
-        <Text style={styles.textContent2}>{strings.daftar_koperasi_success_2}</Text>
+        <Text style={styles.textContent1}>
+          {
+            'Biasanya akan membutuhkan waktu beberapa menit, tetapi terkadang bisa beberapa jam. Kami akan mengirimkan password sementara ke email'
+          }
+          <Text style={styles.textEmail}>
+            {email}
+            <Text style={styles.textContent2}>{'untuk login ke aplikasi Smart KoJak.'}</Text>
+          </Text>
+        </Text>
       </View>
 
       <Button

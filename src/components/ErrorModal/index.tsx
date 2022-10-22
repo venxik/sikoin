@@ -41,7 +41,10 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
     let modalBody;
 
     if (!isEmpty(error?.message) || !isEmpty(error?.title)) {
-      if (errorType === apis.errorTypes.anggotaTerdaftar) {
+      if (
+        errorType === apis.errorTypes.anggotaTerdaftar ||
+        errorType === apis.errorTypes.penarikanGagal
+      ) {
         modalTitle = message;
       } else {
         modalTitle = title;

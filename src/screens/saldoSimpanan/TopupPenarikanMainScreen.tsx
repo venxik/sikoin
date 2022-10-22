@@ -99,7 +99,7 @@ const TopupMainScreen: React.FC<Props> = ({ navigation, route }) => {
       if (!isEmpty(nominalContainer)) {
         setNominalContainer((e) => e.slice(0, -1));
       }
-    } else if (item === '0' || item === '00') {
+    } else if (item === '0' || item === '000') {
       if (!isEmpty(nominalContainer)) {
         setNominalContainer((e) => e.concat(item));
       }

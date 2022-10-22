@@ -127,4 +127,5 @@ export type ProfileStackParamList = {
   DaftarPekerjaanAddScreen: undefined;
   DokumenPendukungMainScreen: undefined;
   IDCardMainScreen: undefined;
+  ChangePasswordScreen: undefined;
 };

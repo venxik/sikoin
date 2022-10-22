@@ -12,6 +12,7 @@ import { watchGetBerandaUser } from './HomeSaga';
 import { watchGetAllKabar, watchGetKabarDetail } from './KabarSaga';
 import { watchGetKtpDokumen, watchUploadGambarKtp } from './KtpDokumenSaga';
 import {
+  watchChangePassword,
   watchForgotPassword,
   watchGetKoperasiList,
   watchGetVersionNumber,
@@ -105,5 +106,6 @@ export function* rootSaga() {
     fork(watchGetNotifikasiDetail),
     fork(watchLogout),
     fork(watchGetVersionNumber),
+    fork(watchChangePassword),
   ]);
 }

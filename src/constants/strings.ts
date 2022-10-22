@@ -22,7 +22,7 @@ export default {
   daftar_koperasi_title_1: 'Apakah koperasimu sudah memiliki akses ke SIKOIN?',
   daftar_koperasi_title_2:
     'Kita lihat dulu yuk bagaimana SIKOIN bisa membawa koperasi mu menjadi koperasi super',
-  daftar_koperasi_isi_data_title_1: 'Dapatkan akses masuk ke KoJak hanya dengan 2 langkah ',
+  daftar_koperasi_isi_data_title_1: 'Dapatkan akses masuk ke Smart KoJak hanya dengan 2 langkah ',
   daftar_koperasi_isi_data_title_2:
     'Masukkan emailmu untuk mendapatkan Username & Password sementara',
   daftar_koperasi_isi_data_hint_2:
@@ -152,6 +152,8 @@ export default {
   bank_tujuan: 'Bank Tujuan:',
   ajukan_penarikan: 'Ajukan Penarikan',
   penarikan_success_title: 'Terima kasih atas permohonan penarikan Anda',
+  penarikan_success_content:
+    'Tim kami akan melakukan verifikasi dan memproses penarikan dana Kamu. Tim kami akan menghubungi kamu kembali melalui nomor terdaftar / email / kotak pesan',
 
   /*MARKET*/
   beli_dgn_voucher: 'Beli Dengan Voucher',

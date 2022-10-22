@@ -31,7 +31,7 @@ const onBoardings = [
     last: false,
   },
   {
-    title: strings.onboarding_title_2,
+    title: strings.onboarding_title_3,
     desc: strings.onboarding_desc_3,
     img: images.onboarding_3,
     last: true,

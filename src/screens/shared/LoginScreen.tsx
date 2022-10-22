@@ -169,7 +169,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
               backgroundColor: colors.tonalPrimary,
             }}
             textStyle={{ color: colors.primary }}
-            text={strings.daftar_ke_koperasimu}
+            text={'Daftar'}
           />
           <Button
             shadow={false}

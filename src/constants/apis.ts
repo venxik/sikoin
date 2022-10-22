@@ -66,6 +66,7 @@ const constant = {
     },
     logout: 'logout',
     version: 'version',
+    ubahPassword: 'ubah-password',
   },
   errorTypes: {
     generic: 'Oops!',
@@ -81,6 +82,7 @@ const constant = {
     unprocessable: 'Unprocessable Entity', // 422
     serverError: 'Internal server error', // 500
     anggotaTerdaftar: 'Data Anggota Sudah Dapat Diakses',
+    penarikanGagal: 'Oops, Kamu gagal melakukan permohonan penarikan',
   },
   authPathArray: ['koperasi', 'email-anggota', 'lupa-password', 'login'],
 };

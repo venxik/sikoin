@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import { apis } from '../../constants';
+import { ChangePasswordForm } from '../../redux/reducers/LoginReducer';
 import HttpService from '../services/HttpService';
 
 export type SendUserKoperasiResponseParams = {
@@ -103,6 +104,11 @@ class LoginApi {
 
   static async getVersionNumber(): Promise<AxiosResponse> {
     const resp = await HttpService.get(apis.endpoints.version);
+    return resp;
+  }
+
+  static async changePassword(body: ChangePasswordForm): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.ubahPassword, body);
     return resp;
   }
 }

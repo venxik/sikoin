@@ -162,6 +162,7 @@ function* submitPenarikan(action: ReturnType<typeof fetchSubmitPenarikan>) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchSubmitPenarikanSuccess(data?.data));
+        navigate('PenarikanSuccessScreen');
       } else {
         yield put(fetchSubmitPenarikanFailed('Error'));
       }

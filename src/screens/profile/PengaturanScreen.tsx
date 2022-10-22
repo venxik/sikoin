@@ -25,6 +25,10 @@ const PengaturanScreen: React.FC<Props> = ({ navigation }) => {
       .catch((err: unknown) => console.error('An error occurred', err));
   };
 
+  const navigateToChangePassword = () => {
+    navigation.navigate('ChangePasswordScreen');
+  };
+
   const renderNotificationSwitch = () => (
     <Switch
       trackColor={{ false: colors.strokeGrey, true: colors.strokeGrey }}
@@ -41,6 +45,11 @@ const PengaturanScreen: React.FC<Props> = ({ navigation }) => {
           icon={icons.icon_notification_black}
           title={strings.notifikasi}
           customRightComponent={renderNotificationSwitch()}
+        />
+        <SubmenuItemList
+          onPress={navigateToChangePassword}
+          icon={icons.icon_key}
+          title={'Ubah Kata Sandi'}
         />
         <SubmenuItemList
           onPress={openSikoinWeb}

@@ -27,6 +27,12 @@ export interface LoginResponse {
   token: string;
 }
 
+export type ChangePasswordForm = {
+  passwordLama: string;
+  password: string;
+  confPassword: string;
+};
+
 type ForgotPasswordStatus = 'idle' | 'success' | 'failed';
 
 interface RootState {
@@ -35,6 +41,7 @@ interface RootState {
   error?: unknown;
   forgotPasswordStatus: ForgotPasswordStatus;
   versionNumber: string;
+  changePasswordStatus: ForgotPasswordStatus;
 }
 
 const initialState: RootState = {
@@ -42,6 +49,7 @@ const initialState: RootState = {
   userKoperasiData: {} as UserKoperasiResponse,
   forgotPasswordStatus: 'idle',
   versionNumber: '',
+  changePasswordStatus: 'idle',
 };
 
 const loginSlice = createSlice({
@@ -100,6 +108,16 @@ const loginSlice = createSlice({
     fetchVersionNumberFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    fetchChangePasswordSuccess: () => {},
+    fetchChangePasswordFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    setChangePasswordStatus: (
+      state: RootState,
+      { payload }: PayloadAction<ForgotPasswordStatus>,
+    ) => {
+      state.changePasswordStatus = payload;
+    },
   },
 });
 
@@ -111,6 +129,7 @@ export const fetchForgotPassword = createAction<string>('fetchForgotPassword');
 export const fetchLogin = createAction<{ email: string; password: string }>('fetchLogin');
 export const fetchLogout = createAction('fetchLogout');
 export const fetchVersionNumber = createAction('fetchversionNumber');
+export const fetchChangePassword = createAction<ChangePasswordForm>('fetchChangePassword');
 export const {
   getKoperasiListSuccess,
   getKoperasiListFailed,
@@ -124,6 +143,10 @@ export const {
   fetchLogoutSuccess,
   fetchVersionNumberFailed,
   fetchVersionNumberSuccess,
+  fetchChangePasswordFailed,
+  fetchChangePasswordSuccess,
+  updateUserKoperasiEmailSuccess,
+  setChangePasswordStatus,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;

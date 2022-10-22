@@ -28,6 +28,7 @@ import PinjamanStep4 from './pinjaman/PinjamanStep4Screen';
 import PinjamanStep5 from './pinjaman/PinjamanStep5Screen';
 import PinjamanSuccessScreen from './pinjaman/PinjamanSuccessScreen';
 import PinjamanSummaryScreen from './pinjaman/PinjamanSummaryScreen';
+import ChangePasswordScreen from './profile/ChangePasswordScreen';
 import DaftarAlamatAddScreen from './profile/dataDiri/daftarAlamat/DaftarAlamatAddScreen';
 import DaftarAlamatMainScreen from './profile/dataDiri/daftarAlamat/DaftarAlamatMainScreen';
 import DaftarBiodataAddScreen from './profile/dataDiri/daftarBiodata/DaftarBiodataAddScreen';
@@ -65,6 +66,7 @@ import VoucherMainScreen from './voucher/VoucherMainScreen';
 
 export {
   CartScreen,
+  ChangePasswordScreen,
   ChatDetailScreen,
   ChatMainScreen,
   CheckoutScreen,

@@ -91,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"didik@gmail.com\",\r\n    \"password\":\"pass\"\r\n}",
+					"raw": "{\r\n    \"email\":\"wardtabi@gmail.com\",\r\n    \"password\":\"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1015,7 +1015,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisSimpananId\" : 3,\r\n    \"nominal\" : 1000000\r\n}",
+					"raw": "{\r\n    \"jenisSimpananId\" : 9,\r\n    \"nominal\" : 100000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1164,7 +1164,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"tempatLahir\" : \"Jakarta\",\r\n    \"tanggalLahir\" : \"2022-08-09\",\r\n    \"gender\" : \"Laki-laki\",\r\n    \"golDarah\" : \"A\",\r\n    \"kewarganegaraan\" : \"WNI\",\r\n    \"pendidikanTerakhir\" : \"Diploma IV/Strata I\", \r\n    \"agama\" : \"Islam\",\r\n    \"statusPernikahan\" : \"BELUM MENIKAH\",\r\n    \"jumlahAnak\" : 0,\r\n    \"pekerjaan\" : \"Manager\",\r\n    \"detailPekerjaan\" : \"HRD\"\r\n}",
+					"raw": "{\r\n    \"tempatLahir\" : \"Jakarta\",\r\n    \"tanggalLahir\" : \"2022-08-09\",\r\n    \"gender\" : \"Laki-laki\",\r\n    \"golDarah\" : \"A\",\r\n    \"kewarganegaraan\" : \"WNI\",\r\n    \"pendidikanTerakhir\" : \"Diploma IV/Strata I\", \r\n    \"agama\" : \"Islam\",\r\n    \"statusPernikahan\" : \"BELUM MENIKAH\",\r\n    \"jumlahAnak\" : 0,\r\n    \"pekerjaan\" : \"Manager\",\r\n    \"detailPekerjaan\" : \"HRD\",\r\n\r\n    \"idRefPertama\" : 0,\r\n    \"namaRefPertama\" : \"Edward T\",\r\n    \"statusRefPertama\" : \"PROGRAMMER\",\r\n    \"ktpRefPertama\" : \"0123\",\r\n    \"telpRefPertama\" : \"0123\",\r\n\r\n    \"idRefKedua\" : 0,\r\n    \"namaRefKedua\" : \"\",\r\n    \"statusRefKedua\" : \"\",\r\n    \"ktpRefKedua\" : \"\",\r\n    \"telpRefKedua\" : \"\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1249,7 +1249,7 @@
 						{
 							"key": "gambarKtp",
 							"type": "file",
-							"src": "/C:/Users/BTC - LAFKI/Pictures/contoh ktp.jpg"
+							"src": "/C:/Users/BTC - LAFKI/Pictures/download.jpg"
 						},
 						{
 							"key": "selfieKtp",
@@ -1383,7 +1383,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/pinjaman-ditolak/1",
+					"raw": "http://{{base_url}}/api/pinjaman-ditolak/17",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1391,7 +1391,7 @@
 					"path": [
 						"api",
 						"pinjaman-ditolak",
-						"1"
+						"17"
 					]
 				}
 			},
@@ -1425,7 +1425,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/pinjaman-disetujui/11",
+					"raw": "http://{{base_url}}/api/pinjaman-disetujui/7",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1433,7 +1433,7 @@
 					"path": [
 						"api",
 						"pinjaman-disetujui",
-						"11"
+						"7"
 					]
 				}
 			},
@@ -1467,7 +1467,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{base_url}}/api/detail-pinjaman-disetujui/11",
+					"raw": "http://{{base_url}}/api/detail-pinjaman-disetujui/7",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1475,7 +1475,7 @@
 					"path": [
 						"api",
 						"detail-pinjaman-disetujui",
-						"11"
+						"7"
 					]
 				}
 			},
@@ -1779,14 +1779,7 @@
 			"name": "52. api/version",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_token}}",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -1799,6 +1792,44 @@
 					"path": [
 						"api",
 						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "53. api/ubah-password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"passwordLama\" : \"asd\",\r\n    \"password\" : \"pass\",\r\n    \"confPassword\" : \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/ubah-password",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"ubah-password"
 					]
 				}
 			},
