@@ -15,7 +15,8 @@ import {
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../constants';
-import { fetchPinjamanStep3, PinjamanStep2Data } from '../../redux/reducers/PinjamanReducer';
+import { fetchPinjamanStep3, PinjamanStep3Request } from '../../redux/reducers/PinjamanReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep2Screen'>;
 
@@ -33,17 +34,18 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
     statusPernikahan,
     tanggalLahir,
     tempatLahir,
+    referensi,
   } = useAppSelector((s) => s.PinjamanReducer.pinjamanStep2Data);
 
-  const navigateToStep3 = (data: PinjamanStep2Data) => {
-    dispatch(fetchPinjamanStep3({ ...data }));
+  const navigateToStep3 = (data: PinjamanStep3Request) => {
+    dispatch(fetchPinjamanStep3(data));
   };
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<PinjamanStep2Data>({
+  } = useForm<PinjamanStep3Request>({
     defaultValues: {
       tempatLahir,
       tanggalLahir,
@@ -56,6 +58,16 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
       statusPernikahan,
       pekerjaan,
       detailPekerjaan,
+      idRefPertama: referensi.length > 0 ? referensi[0].id : 0,
+      namaRefPertama: referensi.length > 0 ? referensi[0].nama : '',
+      statusRefPertama: referensi.length > 0 ? referensi[0].status : '',
+      ktpRefPertama: referensi.length > 0 ? referensi[0].noKTP : '',
+      telpRefPertama: referensi.length > 0 ? referensi[0].telp : '',
+      idRefKedua: referensi.length > 1 ? referensi[1].id : 0,
+      namaRefKedua: referensi.length > 1 ? referensi[1].nama : '',
+      statusRefKedua: referensi.length > 1 ? referensi[1].status : '',
+      ktpRefKedua: referensi.length > 1 ? referensi[1].noKTP : '',
+      telpRefKedua: referensi.length > 1 ? referensi[1].telp : '',
     },
   });
 
@@ -76,6 +88,9 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   title={strings.tempat_lahir}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -89,6 +104,9 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   value={value}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Controller
@@ -166,6 +184,9 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   value={value}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -178,6 +199,9 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   title={strings.jumlah_anak}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -192,6 +216,9 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   title={strings.pekerjaan}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -206,6 +233,153 @@ const PinjamanStep2: React.FC<Props> = ({ navigation }) => {
                   title={strings.detail_pekerjaan}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
+            />
+            <Controller
+              control={control}
+              name="namaRefPertama"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.namaRefPertama}
+                  errorText={errors.namaRefPertama?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nama Referensi Keluarga 1'}
+                />
+              )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
+            />
+            <Controller
+              control={control}
+              name="statusRefPertama"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.statusRefPertama}
+                  errorText={errors.statusRefPertama?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Status Referensi'}
+                />
+              )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
+            />
+            <Controller
+              control={control}
+              name="ktpRefPertama"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.ktpRefPertama}
+                  errorText={errors.ktpRefPertama?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nomor KTP'}
+                />
+              )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+                required: { value: true, message: 'Harus Di isi' },
+              }}
+            />
+            <Controller
+              control={control}
+              name="telpRefPertama"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.telpRefPertama}
+                  errorText={errors.telpRefPertama?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nomor HP'}
+                />
+              )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+                required: { value: true, message: 'Harus Di isi' },
+              }}
+            />
+            <Controller
+              control={control}
+              name="namaRefKedua"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.namaRefKedua}
+                  errorText={errors.namaRefKedua?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nama Referensi Keluarga 2'}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="statusRefKedua"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.statusRefKedua}
+                  errorText={errors.statusRefKedua?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Status Referensi'}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="ktpRefKedua"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.ktpRefKedua}
+                  errorText={errors.ktpRefKedua?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nomor KTP'}
+                />
+              )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
+            />
+            <Controller
+              control={control}
+              name="telpRefKedua"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputForm
+                  error={errors.telpRefKedua}
+                  errorText={errors.telpRefKedua?.message}
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={(value) => onChange(value)}
+                  title={'Nomor HP'}
+                />
+              )}
+              rules={{
+                pattern: {
+                  value: formatter.NUMBER_REGEX,
+                  message: 'Format harus dalam bentuk angka',
+                },
+              }}
             />
           </View>
         </ScrollView>

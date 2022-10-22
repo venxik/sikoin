@@ -89,6 +89,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                     value: formatter.NUMBER_REGEX,
                     message: 'Format harus dalam bentuk angka',
                   },
+                  required: { value: true, message: 'Harus Di isi' },
                 }}
               />
               <Controller
@@ -110,6 +111,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                     value: formatter.NUMBER_REGEX,
                     message: 'Format harus dalam bentuk angka',
                   },
+                  required: { value: true, message: 'Harus Di isi' },
                 }}
               />
             </View>
@@ -125,6 +127,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   maxHeight={200}
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -138,6 +143,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Nama Bank"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -151,6 +159,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Kantor Cabang"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -164,6 +175,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="No Rekening"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -177,6 +191,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Nama Perusahaan / PT"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -190,6 +207,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Jabatan"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -203,6 +223,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Nomor Telepon Kantor"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -216,6 +239,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Alamat Kantor"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -229,6 +255,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Provinsi"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
             <Controller
               control={control}
@@ -242,6 +271,9 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
                   title="Kabupaten / Kota"
                 />
               )}
+              rules={{
+                required: { value: true, message: 'Harus Di isi' },
+              }}
             />
           </View>
         </ScrollView>

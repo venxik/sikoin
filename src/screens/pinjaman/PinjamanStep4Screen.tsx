@@ -40,28 +40,30 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const submitKtp = (data: { noKtp: string }) => {
     const formData = new FormData();
     formData.append('noKtp', data.noKtp);
-    if (!isEmpty(gambarKtp)) {
+    if (isEmpty(gambarKtp)) {
+      return;
+    } else {
       formData.append('gambarKtp', {
         uri: gambarKtp,
         type: 'image/jpeg',
-        name: 'ktp image',
+        name: 'gambarKtp',
       });
+      if (!isEmpty(gambarSelfie)) {
+        formData.append('selfieKtp', {
+          uri: gambarSelfie,
+          type: 'image/jpeg',
+          name: 'selfieKtp',
+        });
+      }
+      if (!isEmpty(dokumenPendukung)) {
+        formData.append('dokumenPendukung', {
+          uri: dokumenPendukung?.uri,
+          type: dokumenPendukung?.type,
+          name: dokumenPendukung?.name,
+        });
+      }
+      dispatch(fetchPatchCreatePinjaman(formData));
     }
-    if (!isEmpty(gambarSelfie)) {
-      formData.append('selfieKtp', {
-        uri: gambarSelfie,
-        type: 'image/jpeg',
-        name: 'selfie image',
-      });
-    }
-    if (!isEmpty(dokumenPendukung)) {
-      formData.append('dokumenPendukung', {
-        uri: dokumenPendukung?.uri,
-        type: dokumenPendukung?.type,
-        name: dokumenPendukung?.name,
-      });
-    }
-    dispatch(fetchPatchCreatePinjaman(formData));
   };
 
   const openDocumentPicker = async () => {

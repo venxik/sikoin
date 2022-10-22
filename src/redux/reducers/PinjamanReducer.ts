@@ -10,6 +10,14 @@ export type PinjamanStep1Data = {
   email?: string;
 } & IdJenisPinjaman;
 
+export type PinjamanStep2Referensi = {
+  id: number;
+  nama: string;
+  status: string;
+  noKTP: string;
+  telp: string;
+};
+
 export type PinjamanStep2Data = {
   tempatLahir?: string;
   tanggalLahir?: string;
@@ -22,6 +30,31 @@ export type PinjamanStep2Data = {
   jumlahAnak?: number;
   pekerjaan?: string;
   detailPekerjaan?: string;
+  referensi: PinjamanStep2Referensi[];
+};
+
+export type PinjamanStep3Request = {
+  tempatLahir?: string;
+  tanggalLahir?: string;
+  jenisKelamin?: string;
+  golDarah?: string;
+  kewarganegaraan?: string;
+  pendidikanTerakhir?: string;
+  agama?: string;
+  statusPernikahan?: string;
+  jumlahAnak?: number;
+  pekerjaan?: string;
+  detailPekerjaan?: string;
+  idRefPertama: number;
+  namaRefPertama: string;
+  statusRefPertama: string;
+  ktpRefPertama: string;
+  telpRefPertama: string;
+  idRefKedua?: number;
+  namaRefKedua?: string;
+  statusRefKedua?: string;
+  ktpRefKedua?: string;
+  telpRefKedua?: string;
 };
 
 export type PinjamanStep3Data = {
@@ -169,7 +202,7 @@ const initialState: RootState = {
     nomorRekeningBank: '',
   },
   pinjamanStep1Data: {},
-  pinjamanStep2Data: {},
+  pinjamanStep2Data: { referensi: [] },
   pinjamanStep3Data: {},
   pinjamanStep4Data: {},
   pinjamanInfo: {},
@@ -286,7 +319,7 @@ export const fetchPinjamanDisetujuiDetailData = createAction<number>(
 );
 export const fetchPinjamanStep1 = createAction('fetchPinjamanStep1');
 export const fetchPinjamanStep2 = createAction('fetchPinjamanStep2');
-export const fetchPinjamanStep3 = createAction<PinjamanStep2Data>('fetchPinjamanStep3');
+export const fetchPinjamanStep3 = createAction<PinjamanStep3Request>('fetchPinjamanStep3');
 export const fetchPinjamanStep4 = createAction<PinjamanStep3Data>('fetchPinjamanStep4');
 export const fetchPatchCreatePinjaman = createAction<FormData>('fetchPatchCreatePinjaman');
 export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>('fetchPinjamanSummary');

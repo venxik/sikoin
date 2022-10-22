@@ -3,8 +3,8 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apis } from '../../constants';
 import {
   CreatePinjamanInfo,
-  PinjamanStep2Data,
   PinjamanStep3Data,
+  PinjamanStep3Request,
 } from '../../redux/reducers/PinjamanReducer';
 import HttpService from '../services/HttpService';
 
@@ -39,7 +39,7 @@ class PinjamanApi {
     return resp;
   }
 
-  static async fetchDataStep3(data: PinjamanStep2Data): Promise<AxiosResponse> {
+  static async fetchDataStep3(data: PinjamanStep3Request): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.pinjaman.step3, data);
     return resp;
   }
