@@ -28,6 +28,7 @@ const img_id_card = require('assets/images/img_id_card.png');
 const menu_kabar = require('assets/images/menu_kabar.png');
 const img_pinjaman_overlay_1 = require('assets/images/img_pinjaman_overlay_1.png');
 const menu_whatsapp = require('assets/images/menu_whatsapp.png');
+const splash_screen_2 = require('assets/images/splash_screen_2.png');
 
 export default {
   onboarding_1,
@@ -58,4 +59,5 @@ export default {
   menu_kabar,
   img_pinjaman_overlay_1,
   menu_whatsapp,
+  splash_screen_2,
 };

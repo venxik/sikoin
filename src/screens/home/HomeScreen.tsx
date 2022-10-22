@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 
+import { isEmpty } from 'lodash';
 import { Home } from 'react-native-iconly';
 import Animated, {
   interpolateColor,
@@ -67,6 +68,11 @@ const menuList = [
     image: images.menu_dokumen,
     label: strings.dokumen,
     navigateTo: 'DokumenMainScreen',
+  },
+  {
+    image: images.menu_whatsapp,
+    label: 'Whatsapp',
+    navigateTo: '',
   },
 ];
 
@@ -139,6 +145,10 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
 
   const openWebPromo = (item: KabarPromoData) => {
     openUrl(item.webUrl as string);
+  };
+
+  const openWhatsapp = () => {
+    openUrl('https://wa.me/6281282091531');
   };
 
   const cardHeader = (title: string) => {
@@ -266,7 +276,13 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
           <TouchableOpacity
             key={index}
             style={styles.menuInnerContainer}
-            onPress={() => navigateToOtherScreen(item)}
+            onPress={() => {
+              if (isEmpty(item.navigateTo)) {
+                openWhatsapp();
+              } else {
+                navigateToOtherScreen(item);
+              }
+            }}
           >
             <Image source={item.image} style={{ width: menuSize, height: menuSize }} />
             <Text style={styles.menuText}>{item.label}</Text>

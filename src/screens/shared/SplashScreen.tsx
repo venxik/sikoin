@@ -15,11 +15,20 @@ const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
   const { versionNumber } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
+  const [imageSource, setImageSource] = useState(images.splash_screen);
 
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     dispatch(fetchVersionNumber());
+
+    const timer = setTimeout(() => {
+      setImageSource(images.splash_screen_2);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   React.useEffect(() => {
@@ -54,7 +63,7 @@ const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={images.splash_screen} style={styles.splash} />
+      <Image source={imageSource} style={styles.splash} />
       <Popup1Button
         iconStyle={{ width: 150, height: 200, marginBottom: -sizes.padding }}
         headerText={'Versi Terbaru'}
