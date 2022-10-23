@@ -27,7 +27,10 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
       fileCache: true,
       addAndroidDownloads: {
         path:
-          dirsOS + '/file_' + Math.floor(dayjs().get('date') + dayjs().get('second') / 2) + '.jpeg',
+          dirsOS +
+          '/file_' +
+          Math.floor(dayjs().get('date') + dayjs().get('second') / 2) +
+          `.${item.extension}`,
         description: 'Sedang Mengunduh file',
         notification: true,
         // useDownloadManager works with Android only

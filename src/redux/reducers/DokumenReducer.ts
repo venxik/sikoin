@@ -6,6 +6,7 @@ export type DokumenData = {
   deskripsi: string;
   dokumen: string;
   waktu: string;
+  extension: string;
 };
 
 interface RootState {

@@ -143,6 +143,7 @@ export type JenisPinjaman = {
   maksimumPlafon: number;
   dokumen: string;
   namaDokumen: string;
+  extension: string;
 };
 
 export type PengajuanPinjaman = {
@@ -189,6 +190,7 @@ const initialState: RootState = {
         maksimumPlafon: 0,
         maksimumTenor: '',
         nama: '',
+        extension: '',
       },
     ],
     totalJumlahPinjamanDisetujui: 0,
