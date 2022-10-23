@@ -13,7 +13,7 @@ import { AsyncStore } from '../../utils';
 
 const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
-  const { versionNumber } = useAppSelector((s) => s.LoginReducer);
+  const { versionNumber, getVersionStatus } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
   const [imageSource, setImageSource] = useState(images.splash_screen);
 
@@ -32,15 +32,17 @@ const SplashScreen: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    if (!isEmpty(versionNumber)) {
+    if (getVersionStatus === 'success') {
       if (versionNumber === Config.VERSION_NUMBER) {
         validateNavigation();
         return;
       } else {
         setShowPopup(true);
       }
+    } else if (getVersionStatus === 'failed') {
+      validateNavigation();
     }
-  }, [versionNumber]);
+  }, [getVersionStatus]);
 
   const validateNavigation = async () => {
     const data = await AsyncStore.getData('@onboardingComplete');

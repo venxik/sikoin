@@ -33,15 +33,16 @@ export type ChangePasswordForm = {
   confPassword: string;
 };
 
-type ForgotPasswordStatus = 'idle' | 'success' | 'failed';
+type Status = 'idle' | 'success' | 'failed';
 
 interface RootState {
   koperasiListData: KoperasiListResponse[];
   userKoperasiData: UserKoperasiResponse;
   error?: unknown;
-  forgotPasswordStatus: ForgotPasswordStatus;
+  forgotPasswordStatus: Status;
   versionNumber: string;
-  changePasswordStatus: ForgotPasswordStatus;
+  changePasswordStatus: Status;
+  getVersionStatus: Status;
 }
 
 const initialState: RootState = {
@@ -50,6 +51,7 @@ const initialState: RootState = {
   forgotPasswordStatus: 'idle',
   versionNumber: '',
   changePasswordStatus: 'idle',
+  getVersionStatus: 'idle',
 };
 
 const loginSlice = createSlice({
@@ -83,10 +85,7 @@ const loginSlice = createSlice({
     updateUserKoperasiEmailFailed: (state: RootState, { payload }: PayloadAction<string>) => {
       state.error = payload;
     },
-    setForgotPasswordStatus: (
-      state: RootState,
-      { payload }: PayloadAction<ForgotPasswordStatus>,
-    ) => {
+    setForgotPasswordStatus: (state: RootState, { payload }: PayloadAction<Status>) => {
       state.forgotPasswordStatus = payload;
     },
     fetchLoginSuccess: (_: unknown, { payload }: PayloadAction<LoginResponse>) => {
@@ -112,11 +111,11 @@ const loginSlice = createSlice({
     fetchChangePasswordFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    setChangePasswordStatus: (
-      state: RootState,
-      { payload }: PayloadAction<ForgotPasswordStatus>,
-    ) => {
+    setChangePasswordStatus: (state: RootState, { payload }: PayloadAction<Status>) => {
       state.changePasswordStatus = payload;
+    },
+    setGetVersionStatus: (state: RootState, { payload }: PayloadAction<Status>) => {
+      state.getVersionStatus = payload;
     },
   },
 });
@@ -147,6 +146,7 @@ export const {
   fetchChangePasswordSuccess,
   updateUserKoperasiEmailSuccess,
   setChangePasswordStatus,
+  setGetVersionStatus,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;

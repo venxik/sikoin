@@ -35,6 +35,7 @@ import {
 } from '../../constants';
 import { fetchBerandaUser, KabarPromoData } from '../../redux/reducers/HomeReducer';
 import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
+import { fetchNotifikasi } from '../../redux/reducers/NotifikasiReducer';
 import { fetchGetPinjamanInitialData } from '../../redux/reducers/PinjamanReducer';
 import { fetchPromoDetail } from '../../redux/reducers/PromoReducer';
 import { formatter, openUrl } from '../../utils';
@@ -87,6 +88,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
 
   useEffect(() => {
     dispatch(fetchBerandaUser());
+    dispatch(fetchNotifikasi());
 
     const backAction = () => {
       if (navigation.canGoBack()) {

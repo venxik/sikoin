@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { useFocusEffect } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
 import { Message, Search } from 'react-native-iconly';
@@ -17,18 +18,21 @@ import {
 
 type Props = NativeStackScreenProps<ChatStackParamList, 'ChatMainScreen'>;
 
-const ChatMainScreen: FC<Props> = () => {
+const ChatMainScreen: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { notifikasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
   const [refreshing] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchNotifikasi());
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(fetchNotifikasi());
+    }, []),
+  );
 
   const onPressNotifikasi = (item: NotifikasiData) => {
     dispatch(fetchNotifikasiDetail(item.id));
   };
+
   const renderRightButtonHeader = () => {
     return (
       <View

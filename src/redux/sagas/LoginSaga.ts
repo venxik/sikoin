@@ -31,6 +31,7 @@ import {
   KoperasiListResponse,
   setChangePasswordStatus,
   setForgotPasswordStatus,
+  setGetVersionStatus,
   updateUserKoperasiEmailFailed,
   updateUserKoperasiEmailSuccess,
   UserKoperasiResponse,
@@ -182,14 +183,18 @@ function* getVersionNumber() {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
         yield put(fetchVersionNumberSuccess(data?.data));
+        yield put(setGetVersionStatus('success'));
       } else {
         yield put(fetchVersionNumberFailed('Error'));
+        yield put(setGetVersionStatus('failed'));
       }
     } else {
       yield put(fetchVersionNumberFailed('Error'));
+      yield put(setGetVersionStatus('failed'));
     }
   } catch (error) {
     yield put(fetchVersionNumberFailed(error));
+    yield put(setGetVersionStatus('failed'));
   }
 }
 

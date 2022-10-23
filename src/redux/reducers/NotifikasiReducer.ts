@@ -5,6 +5,7 @@ export type NotifikasiData = {
   perihal: string;
   excerpt: string;
   waktu: string;
+  isTerbaca: boolean;
 };
 
 export type NotifikasiDetail = {

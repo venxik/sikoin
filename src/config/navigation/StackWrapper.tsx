@@ -101,6 +101,7 @@ const IconBottom = ({
 
 const HomeTab = () => {
   const { notifikasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
+  const notifikasiUnread = notifikasi.filter((v) => !v.isTerbaca);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -133,8 +134,8 @@ const HomeTab = () => {
             <IconBottom
               focused={focused}
               icon={<Message color={colors.primary} filled={focused ? true : false} />}
-              badge={notifikasi.length > 0}
-              number={notifikasi.length}
+              badge={notifikasiUnread.length > 0}
+              number={notifikasiUnread.length}
             />
           ),
           tabBarStyle: {
