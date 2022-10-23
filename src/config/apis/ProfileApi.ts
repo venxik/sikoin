@@ -37,6 +37,11 @@ class ProfileApi {
     const resp = await HttpService.post(apis.endpoints.profile.profile, {}, config);
     return resp;
   }
+
+  static async getIdCard(): Promise<AxiosResponse> {
+    const resp = HttpService.get(apis.endpoints.idCard);
+    return resp;
+  }
 }
 
 export default ProfileApi;

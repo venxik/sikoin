@@ -67,6 +67,7 @@ const constant = {
     logout: 'logout',
     version: 'version',
     ubahPassword: 'ubah-password',
+    idCard: 'id-card',
   },
   errorTypes: {
     generic: 'Oops!',

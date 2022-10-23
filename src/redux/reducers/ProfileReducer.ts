@@ -25,9 +25,19 @@ export type KoperasiData = {
   website?: string;
 };
 
+export type IDCard = {
+  foto?: string;
+  logoKoperasi?: string;
+  namaKoperasi?: string;
+  nama?: string;
+  memberSejak?: string;
+  noAnggota?: string;
+};
+
 interface RootState {
   profileData: ProfileResponse;
   koperasiData: KoperasiData;
+  idCardData: IDCard;
   error?: unknown;
 }
 
@@ -50,6 +60,14 @@ const initialState: RootState = {
     noTelp: '02131321',
     website: 'www.koperasi.id',
   },
+  idCardData: {
+    foto: '',
+    logoKoperasi: '',
+    memberSejak: '',
+    nama: '',
+    namaKoperasi: '',
+    noAnggota: '',
+  },
   error: null,
 };
 
@@ -69,13 +87,26 @@ const profileSlice = createSlice({
     updateProfileFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    fetchIdCardSuccess: (state: RootState, { payload }: PayloadAction<IDCard>) => {
+      state.idCardData = payload;
+    },
+    fetchIdCardFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
 export const fetchProfile = createAction('fetchProfile');
 export const fetchUpdateProfile = createAction<FormData>('fetchUpdateProfile');
+export const fetchIdCard = createAction('fetchIdCard');
 
-export const { getProfileFailed, getProfileSuccess, updateProfileFailed, updateProfileSuccess } =
-  profileSlice.actions;
+export const {
+  getProfileFailed,
+  getProfileSuccess,
+  updateProfileFailed,
+  updateProfileSuccess,
+  fetchIdCardFailed,
+  fetchIdCardSuccess,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;

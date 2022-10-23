@@ -36,7 +36,7 @@ import {
   watchPatchCreatePinjaman,
   watchPostCreatePinjaman,
 } from './PinjamanSaga';
-import { watchGetProfile, watchUpdateProfile } from './ProfileSaga';
+import { watchGetIdCard, watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import { watchGetAllPromo, watchGetPromoDetail } from './PromoSaga';
 import {
   watchDeleteRefKeluarga,
@@ -107,5 +107,6 @@ export function* rootSaga() {
     fork(watchLogout),
     fork(watchGetVersionNumber),
     fork(watchChangePassword),
+    fork(watchGetIdCard),
   ]);
 }

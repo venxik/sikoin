@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../config';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { fetchLogout } from '../../redux/reducers/LoginReducer';
-import { fetchProfile } from '../../redux/reducers/ProfileReducer';
+import { fetchIdCard, fetchProfile } from '../../redux/reducers/ProfileReducer';
 import { getFormattedDate } from '../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'ProfileMainScreen'>;
@@ -26,6 +26,10 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
 
   const navigateToEditProfile = () => {
     navigation.navigate('EditProfileScreen');
+  };
+
+  const navigateToIDCard = () => {
+    dispatch(fetchIdCard());
   };
 
   const checkIsEmpty = (text: string) => {
@@ -75,7 +79,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
           <SubmenuItemList
             icon={icons.icon_id_card_menu}
             title={'Kartu Anggota'}
-            onPress={() => navigation.navigate('IDCardMainScreen')}
+            onPress={navigateToIDCard}
           />
           <SubmenuItemList
             icon={icons.icon_data_koperasi}

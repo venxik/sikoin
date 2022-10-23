@@ -3,11 +3,14 @@ import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { ProfileApi } from '../../config/apis';
-import { goBack } from '../../config/navigation';
+import { goBack, navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { updateUserData } from '../reducers/HomeReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
+  fetchIdCard,
+  fetchIdCardFailed,
+  fetchIdCardSuccess,
   fetchProfile,
   fetchUpdateProfile,
   getProfileFailed,
@@ -64,10 +67,35 @@ function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
   yield put(hideLoading());
 }
 
+function* getIdCard() {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse = yield call(ProfileApi.getIdCard);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(fetchIdCardSuccess(data?.data));
+        navigate('IDCardMainScreen');
+      } else {
+        yield put(fetchIdCardFailed('Error'));
+      }
+    } else {
+      yield put(fetchIdCardFailed('Error'));
+    }
+  } catch (error) {
+    yield put(fetchIdCardFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetProfile() {
   yield takeLatest(fetchProfile, getProfile);
 }
 
 export function* watchUpdateProfile() {
   yield takeLatest(fetchUpdateProfile, updateProfile);
+}
+
+export function* watchGetIdCard() {
+  yield takeLatest(fetchIdCard, getIdCard);
 }
