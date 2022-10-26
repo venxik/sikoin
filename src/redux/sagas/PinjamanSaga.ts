@@ -8,8 +8,6 @@ import { removeKtpImage, removeKtpSelfie } from '../reducers/KtpReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   fetchGetPinjamanInitialData,
-  fetchPatchCreatePinjaman,
-  fetchPatchCreatePinjamanFailed,
   fetchPinjamanDisetujuiData,
   fetchPinjamanDisetujuiDetailData,
   fetchPinjamanDitolakData,
@@ -30,6 +28,8 @@ import {
   fetchPinjamanSummarySuccess,
   fetchPostCreatePinjaman,
   fetchPostCreatePinjamanFailed,
+  fetchUpdateKtpPinjaman,
+  fetchUpdateKtpPinjamanFailed,
   getPinjamanDisetujuiDetailFailed,
   getPinjamanDisetujuiDetailSuccess,
   getPinjamanDisetujuiFailed,
@@ -204,10 +204,10 @@ function* getPinjamanDataStep4(action: ReturnType<typeof fetchPinjamanStep4>) {
   yield put(hideLoading());
 }
 
-function* patchCreatePinjaman(action: ReturnType<typeof fetchPatchCreatePinjaman>) {
+function* updateKtpPinjaman(action: ReturnType<typeof fetchUpdateKtpPinjaman>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(PinjamanApi.fetchPatchCreate, action.payload);
+    const response: AxiosResponse = yield call(PinjamanApi.fetchUpdateKtpDokumen, action.payload);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -215,13 +215,13 @@ function* patchCreatePinjaman(action: ReturnType<typeof fetchPatchCreatePinjaman
         yield removeKtpSelfie();
         navigate('PinjamanStep5Screen');
       } else {
-        yield put(fetchPatchCreatePinjamanFailed('Error'));
+        yield put(fetchUpdateKtpPinjamanFailed('Error'));
       }
     } else {
-      yield put(fetchPatchCreatePinjamanFailed('Error'));
+      yield put(fetchUpdateKtpPinjamanFailed('Error'));
     }
   } catch (error) {
-    yield put(fetchPatchCreatePinjamanFailed(error));
+    yield put(fetchUpdateKtpPinjamanFailed(error));
   }
   yield put(hideLoading());
 }
@@ -299,8 +299,8 @@ export function* watchGetPinjamanDataStep4() {
   yield takeLatest(fetchPinjamanStep4, getPinjamanDataStep4);
 }
 
-export function* watchPatchCreatePinjaman() {
-  yield takeLatest(fetchPatchCreatePinjaman, patchCreatePinjaman);
+export function* watchUpdateKtpPinjaman() {
+  yield takeLatest(fetchUpdateKtpPinjaman, updateKtpPinjaman);
 }
 
 export function* watchGetPinjamanSummaryData() {

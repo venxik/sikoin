@@ -49,7 +49,7 @@ class PinjamanApi {
     return resp;
   }
 
-  static async fetchPatchCreate(formData: FormData): Promise<AxiosResponse> {
+  static async fetchUpdateKtpDokumen(formData: FormData): Promise<AxiosResponse> {
     const config: AxiosRequestConfig = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -60,7 +60,7 @@ class PinjamanApi {
       data: formData,
     };
 
-    const resp = await HttpService.post(apis.endpoints.pinjaman.create, {}, config);
+    const resp = await HttpService.post(apis.endpoints.pinjaman.step5, {}, config);
     return resp;
   }
 

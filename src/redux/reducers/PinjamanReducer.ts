@@ -62,8 +62,8 @@ export type PinjamanStep3Data = {
   masaKerjaBulan?: number;
   gajiBulanan?: string;
   jabatanTerakhir?: string;
-  namaPerusahaan?: string;
-  alamatKantor?: string;
+  namaPt?: string;
+  alamatPt?: string;
   kota?: string;
   provinsi?: string;
   noTelpPt?: string;
@@ -293,8 +293,8 @@ const pinjamanSlice = createSlice({
     fetchPinjamanStep4Failed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    fetchPatchCreatePinjamanSuccess: () => {},
-    fetchPatchCreatePinjamanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+    fetchUpdateKtpPinjamanSuccess: () => {},
+    fetchUpdateKtpPinjamanFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     fetchPinjamanSummarySuccess: (
@@ -323,7 +323,7 @@ export const fetchPinjamanStep1 = createAction('fetchPinjamanStep1');
 export const fetchPinjamanStep2 = createAction('fetchPinjamanStep2');
 export const fetchPinjamanStep3 = createAction<PinjamanStep3Request>('fetchPinjamanStep3');
 export const fetchPinjamanStep4 = createAction<PinjamanStep3Data>('fetchPinjamanStep4');
-export const fetchPatchCreatePinjaman = createAction<FormData>('fetchPatchCreatePinjaman');
+export const fetchUpdateKtpPinjaman = createAction<FormData>('fetchUpdateKtpPinjaman');
 export const fetchPinjamanSummary = createAction<CreatePinjamanInfo>('fetchPinjamanSummary');
 export const fetchPostCreatePinjaman = createAction<CreatePinjamanInfo>('fetchPostCreatePinjaman');
 
@@ -345,8 +345,8 @@ export const {
   fetchPinjamanStep3Success,
   fetchPinjamanStep4Failed,
   fetchPinjamanStep4Success,
-  fetchPatchCreatePinjamanFailed,
-  fetchPatchCreatePinjamanSuccess,
+  fetchUpdateKtpPinjamanFailed,
+  fetchUpdateKtpPinjamanSuccess,
   fetchPinjamanSummaryFailed,
   fetchPinjamanSummarySuccess,
   fetchPostCreatePinjamanFailed,

@@ -33,8 +33,8 @@ import {
   watchGetPinjamanDitolak,
   watchGetPinjamanInitialData,
   watchGetPinjamanSummaryData,
-  watchPatchCreatePinjaman,
   watchPostCreatePinjaman,
+  watchUpdateKtpPinjaman,
 } from './PinjamanSaga';
 import { watchGetIdCard, watchGetProfile, watchUpdateProfile } from './ProfileSaga';
 import { watchGetAllPromo, watchGetPromoDetail } from './PromoSaga';
@@ -92,7 +92,7 @@ export function* rootSaga() {
     fork(watchGetPinjamanDataStep4),
     fork(watchGetPinjamanDisetujui),
     fork(watchGetPinjamanDitolak),
-    fork(watchPatchCreatePinjaman),
+    fork(watchUpdateKtpPinjaman),
     fork(watchGetPinjamanSummaryData),
     fork(watchPostCreatePinjaman),
     fork(watchGetPinjamanDisetujuiDetail),

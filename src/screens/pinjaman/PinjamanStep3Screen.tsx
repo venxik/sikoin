@@ -17,7 +17,7 @@ type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
 const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const {
-    alamatKantor,
+    alamatPt,
     bank,
     gajiBulanan,
     jabatanTerakhir,
@@ -26,7 +26,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     masaKerjaTahun,
     namaKantorCabang,
     namaPemilik,
-    namaPerusahaan,
+    namaPt,
     noRek,
     noTelpPt,
     provinsi,
@@ -42,7 +42,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     formState: { errors },
   } = useForm<PinjamanStep3Data>({
     defaultValues: {
-      alamatKantor,
+      alamatPt,
       bank,
       masaKerjaTahun,
       masaKerjaBulan,
@@ -51,7 +51,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
       kota,
       namaKantorCabang,
       namaPemilik,
-      namaPerusahaan,
+      namaPt,
       noRek,
       noTelpPt,
       provinsi,
@@ -181,11 +181,11 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="namaPerusahaan"
+              name="namaPt"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.namaPerusahaan}
-                  errorText={errors?.namaPerusahaan?.message}
+                  error={errors?.namaPt}
+                  errorText={errors?.namaPt?.message}
                   value={value}
                   onChangeText={(value) => onChange(value)}
                   title="Nama Perusahaan / PT"
@@ -229,11 +229,11 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="alamatKantor"
+              name="alamatPt"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.alamatKantor}
-                  errorText={errors?.alamatKantor?.message}
+                  error={errors?.alamatPt}
+                  errorText={errors?.alamatPt?.message}
                   value={value}
                   onChangeText={(value) => onChange(value)}
                   title="Alamat Kantor"

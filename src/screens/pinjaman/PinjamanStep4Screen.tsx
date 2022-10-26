@@ -19,7 +19,7 @@ import { Button, HeaderPinjaman, TextInputForm } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import { fetchPatchCreatePinjaman } from '../../redux/reducers/PinjamanReducer';
+import { fetchUpdateKtpPinjaman } from '../../redux/reducers/PinjamanReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep4Screen'>;
 
@@ -40,14 +40,16 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
   const submitKtp = (data: { noKtp: string }) => {
     const formData = new FormData();
     formData.append('noKtp', data.noKtp);
-    if (isEmpty(gambarKtp)) {
+    if (isEmpty(gambarKtp) && isEmpty(linkGambarKtp)) {
       return;
     } else {
-      formData.append('gambarKtp', {
-        uri: gambarKtp,
-        type: 'image/jpeg',
-        name: 'gambarKtp',
-      });
+      if (!isEmpty(gambarKtp)) {
+        formData.append('gambarKtp', {
+          uri: gambarKtp,
+          type: 'image/jpeg',
+          name: 'gambarKtp',
+        });
+      }
       if (!isEmpty(gambarSelfie)) {
         formData.append('selfieKtp', {
           uri: gambarSelfie,
@@ -62,7 +64,7 @@ const PinjamanStep4: React.FC<Props> = ({ navigation }) => {
           name: dokumenPendukung?.name,
         });
       }
-      dispatch(fetchPatchCreatePinjaman(formData));
+      dispatch(fetchUpdateKtpPinjaman(formData));
     }
   };
 

@@ -59,7 +59,7 @@ const ChatMainScreen: React.FC<Props> = () => {
       {!isEmpty(notifikasi) && (
         <FlatList
           data={notifikasi}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item, i) => `${item.id.toString()}_${i}`}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => dispatch(fetchNotifikasi())} />
           }
