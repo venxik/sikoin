@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     color: colors.primary,
     fontWeight: '600',
-    flex: 0.3,
+    flex: 0.5,
     textAlign: 'right',
   },
 });

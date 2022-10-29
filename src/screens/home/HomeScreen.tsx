@@ -38,6 +38,7 @@ import { fetchKabarDetail } from '../../redux/reducers/KabarReducer';
 import { fetchNotifikasi } from '../../redux/reducers/NotifikasiReducer';
 import { fetchGetPinjamanInitialData } from '../../redux/reducers/PinjamanReducer';
 import { fetchPromoDetail } from '../../redux/reducers/PromoReducer';
+import { fetchCreateSaldoList } from '../../redux/reducers/SaldoSimpananReducer';
 import { formatter, openUrl } from '../../utils';
 
 const miniFlatlistSize = SCREEN_HEIGHT * 0.14;
@@ -45,7 +46,7 @@ const dotSize = 8;
 const menuSize = SCREEN_HEIGHT * 0.15;
 
 const saldoFlatlist = [
-  { title: strings.simpanan, button: strings.mutasi },
+  { title: strings.simpanan, button: strings.topup },
   // { title: strings.saldo_belanja, button: strings.topup },
 ];
 
@@ -137,9 +138,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
 
   const onClickMiniScrollButton = (showSaldo: boolean) => {
     if (showSaldo) {
-      navigation.navigate('TopupPenarikanMainScreen', {
-        isTopup: true,
-      });
+      dispatch(fetchCreateSaldoList());
     } else {
       navigation.navigate('TransaksiMainScreen');
     }
@@ -364,11 +363,11 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
                   style={styles.miniScrollButton}
                   onPress={
                     // () => {}
-                    () => onClickMiniScrollButton(item.title === strings.saldo_belanja)
+                    () => onClickMiniScrollButton(item.title === strings.simpanan)
                   }
                 >
                   <Image
-                    source={item.button === strings.mutasi ? icons.icon_mutasi : icons.icon_topup}
+                    source={item.button === strings.simpanan ? icons.icon_topup : icons.icon_topup}
                     style={styles.iconMiniScrollButton}
                     resizeMode="contain"
                   />

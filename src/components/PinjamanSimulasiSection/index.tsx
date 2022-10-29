@@ -12,7 +12,7 @@ const PinjamanSimulasiSection = (props: PinjamanSimulasiSectionProps) => {
   const { totalAngsuran, totalAngsuranBunga, totalAngsuranPokok } = item;
   return (
     <View style={{ marginTop: 30 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
         <Text style={styles.textItemTitle}>
           {simulasi ? 'Simulasi Pinjaman' : 'Rincian Angsuran'}
         </Text>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     color: colors.bodyText,
     fontWeight: '600',
+    paddingTop: 2,
   },
   textItemContent: {
     fontFamily: 'Poppins-Bold',

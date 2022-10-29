@@ -87,7 +87,7 @@ const TopupDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <HeaderBack title={strings.konfirmasi} />
       <View style={styles.mainContainer}>
-        <Text style={styles.textTitle}>{strings.jumlah_topup}</Text>
+        <Text style={styles.textTitle}>{isTopup ? strings.jumlah_topup : 'Jumlah Penarikan'}</Text>
         <View style={styles.rowContainerBorderless}>
           <Image source={icons.icon_rp_dark} style={styles.icon} resizeMode="cover" />
           <Text style={styles.textNominal} numberOfLines={1}>

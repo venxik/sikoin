@@ -40,6 +40,8 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
     let modalTitle;
     let modalBody;
 
+    console.log(errorType === apis.errorTypes.anggotaTerdaftar);
+
     if (!isEmpty(error?.message) || !isEmpty(error?.title)) {
       if (
         errorType === apis.errorTypes.anggotaTerdaftar ||
