@@ -73,7 +73,6 @@ class HttpService {
     const error = response.data.error;
     const url = response?.request?.responseURL as string;
     if (error) {
-      console.log(error, url);
       if (url.includes('api/version')) return;
       else if (url.includes('api/koperasi'))
         this.showErrorDialogHandler(apis.errorTypes.anggotaTerdaftar, error);
