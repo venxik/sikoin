@@ -11,13 +11,13 @@ import { NotifikasiItemProps } from './model';
 
 const NotifikasiItem = (props: NotifikasiItemProps) => {
   const { item, onPress, style } = props || null;
-  const { excerpt, perihal, waktu } = item || {};
+  const { excerpt, perihal, waktu, isTerbaca } = item || {};
 
   //get logo koperasi directly from redux
   const { logoKoperasi } = useAppSelector((s) => s.NotifikasiReducer.notifikasiDataList);
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, style, { opacity: isTerbaca ? 0.5 : 1 }]}>
       <TouchableOpacity onPress={onPress} style={styles.chatContainer}>
         <FastImage
           source={{ uri: logoKoperasi || 'https://picsum.photos/200/300' }}

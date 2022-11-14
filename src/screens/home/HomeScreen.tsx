@@ -61,11 +61,11 @@ const menuList = [
   //   label: strings.market,
   //   navigateTo: 'MarketMainScreen',
   // },
-  {
-    image: images.menu_voucher,
-    label: strings.voucher,
-    navigateTo: 'VoucherMainScreen',
-  },
+  // {
+  //   image: images.menu_voucher,
+  //   label: strings.voucher,
+  //   navigateTo: 'VoucherMainScreen',
+  // },
   {
     image: images.menu_dokumen,
     label: strings.dokumen,

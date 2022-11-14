@@ -13,10 +13,7 @@ const CardKabar = (props: CardKabarProps) => {
   return (
     <View style={[styles.container, style]}>
       <Text style={styles.textTitle}>{judul}</Text>
-      <FastImage
-        source={{ uri: banner || 'https://picsum.photos/id/3/400/400' }}
-        style={styles.bannerStyle}
-      />
+      <FastImage source={{ uri: banner }} style={styles.bannerStyle} />
       <Text style={styles.textContent}>{excerpt}</Text>
       <Button
         secondary
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
     padding: sizes.padding,
     width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   textTitle: {
     fontSize: 20,
