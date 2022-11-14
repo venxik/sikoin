@@ -4,14 +4,13 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android:dev-debug": "react-native run-android --variant=devDebug",
-    "android:prod-debug": "react-native run-android --variant=prodDebug",
-    "android:release": "react-native run-android --variant=release",
-    "android:build-dev": "cd android && ./gradlew assembleDevRelease && cd ..",
-    "android:build-prod": "cd android && ./gradlew assembleProdRelease && cd ..",
+    "run:android-dev": "react-native run-android --variant=devDebug",
+    "run:android-prod": "react-native run-android --variant=prodDebug",
+    "build:android-dev": "cd android && ./gradlew assembleDevRelease && cd ..",
+    "build:android-prod": "cd android && ./gradlew assembleProdRelease && cd ..",
     "android:clean-gradle": "cd android; ./gradlew clean; cd ..",
     "android:local": "adb reverse tcp:8081 tcp:8081",
-    "android:reactotron": "adb reverse tcp:9090 tcp:9090",
+    "reactotron": "adb reverse tcp:9090 tcp:9090",
     "start": "react-native start --reset-cache",
     "test": "jest",
     "postinstall": "patch-package",
@@ -81,7 +80,7 @@
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.180",
-    "@types/react": "^17.0.42",
+    "@types/react": "17.0.43",
     "@types/react-native": "^0.67.3",
     "@types/react-native-push-notification": "^8.1.0",
     "@types/react-test-renderer": "^17.0.1",
@@ -108,6 +107,7 @@
     "preset": "react-native"
   },
   "resolutions": {
-    "@react-native-community/cli-debugger-ui": "4.7.0"
+    "@react-native-community/cli-debugger-ui": "4.7.0",
+    "@types/react": "17.0.43"
   }
 }
