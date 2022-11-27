@@ -85,6 +85,7 @@ const constant = {
     serverError: 'Internal server error', // 500
     anggotaTerdaftar: 'Data Anggota Sudah Dapat Diakses',
     penarikanGagal: 'Oops, Kamu gagal melakukan permohonan penarikan',
+    inputNoRek: 'Input No rekening',
   },
   authPathArray: ['koperasi', 'email-anggota', 'lupa-password', 'login'],
 };

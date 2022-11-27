@@ -173,7 +173,11 @@ const HomeStackNavigator = () => (
     }}
   >
     <HomeStack.Screen name="HomeScreen" component={screens.HomeScreen} />
-    <HomeStack.Screen name="DokumenMainScreen" component={screens.DokumenMainScreen} />
+    <HomeStack.Screen
+      name="DokumenMainScreen"
+      component={screens.DokumenMainScreen}
+      options={{ animation: 'default' }}
+    />
     {/* <HomeStack.Screen
       name="DokumenDetailScreen"
       component={screens.DokumenDetailScreen}
@@ -183,7 +187,6 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen name="CartScreen" component={screens.CartScreen} />
     <HomeStack.Screen name="CheckoutScreen" component={screens.CheckoutScreen} />
     <HomeStack.Screen name="SelectPaymentScreen" component={screens.SelectPaymentScreen} />
-    <HomeStack.Screen name="PaymentScreen" component={screens.PaymentScreen} />
     <HomeStack.Screen name="PaymentSuccessScreen" component={screens.PaymentSuccessScreen} />
     <HomeStack.Screen
       name="TopupPenarikanMainScreen"
@@ -218,6 +221,11 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen name="KabarDetailScreen" component={screens.KabarDetailScreen} />
     <HomeStack.Screen name="PromoMainScreen" component={screens.PromoMainScreen} />
     <HomeStack.Screen name="PromoDetailScreen" component={screens.PromoDetailScreen} />
+    <HomeStack.Screen
+      name="DaftarBiodataAddScreen"
+      component={screens.DaftarBiodataAddScreen}
+      initialParams={{ update: false }}
+    />
   </HomeStack.Navigator>
 );
 

@@ -42,7 +42,6 @@ const DaftarBiodataMainScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToAddScreen = (update: boolean) => {
     navigation.navigate('DaftarBiodataAddScreen', {
       update: update,
-      data: biodataData,
     });
   };
 

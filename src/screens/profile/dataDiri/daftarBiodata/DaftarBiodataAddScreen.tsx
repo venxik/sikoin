@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import dayjs from 'dayjs';
+import { isEmpty } from 'lodash';
 import { Controller, useForm } from 'react-hook-form';
 
 import {
@@ -16,7 +17,11 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../../config';
 import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { colors, dropdownItems, sizes, strings } from '../../../../constants';
-import { BiodataResponse, fetchUpdateBiodata } from '../../../../redux/reducers/BiodataReducer';
+import {
+  BiodataResponse,
+  fetchBiodata,
+  fetchUpdateBiodata,
+} from '../../../../redux/reducers/BiodataReducer';
 import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarBiodataAddScreen'>;
@@ -38,6 +43,10 @@ const DaftarBiodataAddScreen: React.FC<Props> = ({ navigation }) => {
   } = biodataData || {};
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isEmpty(biodataData.nama)) dispatch(fetchBiodata());
+  }, []);
 
   const {
     control,

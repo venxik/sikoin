@@ -72,12 +72,15 @@ class HttpService {
     store.dispatch(hideLoading());
     const error = response.data.error;
     const url = response?.request?.responseURL as string;
+
     if (error) {
       if (url.includes('api/version')) return;
       else if (url.includes('api/koperasi'))
         this.showErrorDialogHandler(apis.errorTypes.anggotaTerdaftar, error);
       else if (url.includes('api/simpanan'))
-        this.showErrorDialogHandler(apis.errorTypes.penarikanGagal, error);
+        if (url.includes('api/simpanan/create'))
+          this.showErrorDialogHandler(apis.errorTypes.inputNoRek, error);
+        else this.showErrorDialogHandler(apis.errorTypes.penarikanGagal, error);
       else this.showErrorDialogHandler(apis.errorTypes.generic, error);
     }
     return response;

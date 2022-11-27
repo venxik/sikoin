@@ -33,6 +33,7 @@ const ErrorModal = ({ error, options }: ErrorModalProps) => {
     }).start(() => {
       dispatch(dismissErrorModal());
       if (errorType === apis.errorTypes.anggotaTerdaftar) navigate('LoginScreen');
+      else if (errorType === apis.errorTypes.inputNoRek) navigate('DaftarBiodataAddScreen');
     });
   };
 

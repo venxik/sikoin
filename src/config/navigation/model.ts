@@ -99,6 +99,7 @@ export type HomeStackParamList = {
   KabarDetailScreen: undefined;
   PromoMainScreen: undefined;
   PromoDetailScreen: undefined;
+  DaftarBiodataAddScreen: { update: boolean };
 };
 
 export type ProfileStackParamList = {
@@ -122,7 +123,7 @@ export type ProfileStackParamList = {
   DaftarKtpCameraScreen: undefined;
   DaftarKtpSelfieScreen: undefined;
   DaftarBiodataMainScreen: undefined;
-  DaftarBiodataAddScreen: { update: boolean; data?: BiodataResponse };
+  DaftarBiodataAddScreen: { update: boolean };
   DaftarPekerjaanMainScreen: undefined;
   DaftarPekerjaanAddScreen: undefined;
   DokumenPendukungMainScreen: undefined;
