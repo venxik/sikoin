@@ -15,7 +15,8 @@ const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
   const { versionNumber, getVersionStatus } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSource, setImageSource] = useState(images.splash_screen);
+  const [imageSource, setImageSource] = useState(images.splash_screen_default);
+  const showDouble = false;
 
   const dispatch = useAppDispatch();
 
@@ -23,7 +24,7 @@ const SplashScreen: React.FC = () => {
     dispatch(fetchVersionNumber());
 
     const timer = setTimeout(() => {
-      setImageSource(images.splash_screen_2);
+      if (showDouble) setImageSource(images.splash_screen_2);
     }, 2000);
 
     return () => {
