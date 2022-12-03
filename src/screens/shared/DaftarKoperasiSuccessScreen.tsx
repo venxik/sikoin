@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import Config from 'react-native-config';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, HeaderBack } from '../../components';
@@ -44,7 +45,7 @@ const DaftarKoperasiSuccessScreen: FC<Props> = ({ navigation, route }) => {
           }
           <Text style={styles.textEmail}>
             {email}
-            <Text style={styles.textContent2}>{'untuk login ke aplikasi Smart KoJak.'}</Text>
+            <Text style={styles.textContent2}>{`untuk login ke aplikasi ${Config.APP_NAME}.`}</Text>
           </Text>
         </Text>
       </View>

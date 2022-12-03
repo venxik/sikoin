@@ -5,6 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import Config from 'react-native-config';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Button, CalendarPicker, HeaderBack, TextInputBorder } from '../../components';
@@ -88,7 +89,9 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
           </AnimatedCircularProgress>
           <Text style={styles.textTitle}>{strings.isi_data}</Text>
         </View>
-        <Text style={styles.textTitle2}>{strings.daftar_koperasi_isi_data_title_1}</Text>
+        <Text
+          style={styles.textTitle2}
+        >{`Dapatkan akses masuk ke ${Config.APP_NAME} hanya dengan 2 langkah `}</Text>
       </View>
       {/* BOTTOM SIDE */}
       <View style={styles.bottomContainer}>

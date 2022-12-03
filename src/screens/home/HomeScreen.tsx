@@ -130,7 +130,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
         break;
       }
       default: {
-        navigation.navigate(item.navigateTo as keyof HomeStackParamList);
+        navigation.navigate(item.navigateTo);
         break;
       }
     }
@@ -149,7 +149,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
   };
 
   const openWhatsapp = () => {
-    openUrl('https://wa.me/6281282091531');
+    openUrl('https://wa.me/6282132230100');
   };
 
   const cardHeader = (title: string) => {
@@ -168,7 +168,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
     return (
       <TouchableOpacity
         style={styles.cardHeaderContainer}
-        onPress={() => navigation.navigate(stack as keyof HomeStackParamList)}
+        onPress={() => navigation.navigate(stack)}
       >
         <Text style={styles.cardHeaderTitle}>{title}</Text>
         <View>
