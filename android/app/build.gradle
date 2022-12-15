@@ -1,8 +1,9 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
 project.ext.envConfigFiles = [
         dev: ".env.dev",
-        prod: ".env.prod"
+        kpdjp: ".env.kpdjp",
+        ika: ".env.ika",
+        mmm: ".env.mmm",
 ]
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
@@ -193,8 +194,20 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "SIKOIN Dev"
         }
-        prod {
+        ika {
+            applicationIdSuffix ".ika"
+            resValue "string", "app_name", "Koperasi IKA Teladan"
+        }
+        mmm {
+            applicationIdSuffix ".mmm"
+            resValue "string", "app_name", "MMM"
+        }
+        kpdjp {
+            applicationIdSuffix ".kpdjp"
+            resValue "string", "app_name", "KPDJP"
         }
     }
 

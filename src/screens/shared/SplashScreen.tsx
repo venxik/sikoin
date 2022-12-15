@@ -15,7 +15,7 @@ const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
   const { versionNumber, getVersionStatus } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSource, setImageSource] = useState(images.splash_ika_teladan);
+  const [imageSource, setImageSource] = useState(images.splash_mmm);
   // const showDouble = false;
 
   const dispatch = useAppDispatch();

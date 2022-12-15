@@ -32,6 +32,7 @@ const splash_ika_teladan = require('assets/images/splash_ika_teladan.png');
 const splash_mmm = require('assets/images/splash_mmm.png');
 const splash_digitalized = require('assets/images/splash_digitalized.png');
 const splash_background = require('assets/images/splash_background.png');
+const splash_kpdjp = require('assets/images/splash_kpdjp.png');
 
 export default {
   onboarding_1,
@@ -66,4 +67,5 @@ export default {
   splash_mmm,
   splash_digitalized,
   splash_background,
+  splash_kpdjp,
 };
