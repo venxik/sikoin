@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import { isEmpty } from 'lodash';
+import Config from 'react-native-config';
 import { Home } from 'react-native-iconly';
 import Animated, {
   interpolateColor,
@@ -149,7 +150,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
   };
 
   const openWhatsapp = () => {
-    openUrl('https://wa.me/6282132230100');
+    openUrl(`https://wa.me/${Config.WA_NUMBER}`);
   };
 
   const cardHeader = (title: string) => {
