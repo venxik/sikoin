@@ -22,15 +22,16 @@ const img_topup_popup = require('assets/images/img_topup_popup.png');
 const img_bca = require('assets/images/img_bca.png');
 const img_mandiri = require('assets/images/img_mandiri.png');
 const img_bni = require('assets/images/img_bni.png');
-const splash_screen = require('assets/images/splash_screen.png');
 const img_pinjaman_overlay_2 = require('assets/images/img_pinjaman_overlay_2.png');
 const img_id_card = require('assets/images/img_id_card.png');
 const menu_kabar = require('assets/images/menu_kabar.png');
 const img_pinjaman_overlay_1 = require('assets/images/img_pinjaman_overlay_1.png');
 const menu_whatsapp = require('assets/images/menu_whatsapp.png');
-const splash_screen_2 = require('assets/images/splash_screen_2.png');
 const img_id_card_bg = require('assets/images/img_id_card_bg.png');
-const splash_screen_default = require('assets/images/splash_screen_default.png');
+const splash_ika_teladan = require('assets/images/splash_ika_teladan.png');
+const splash_mmm = require('assets/images/splash_mmm.png');
+const splash_digitalized = require('assets/images/splash_digitalized.png');
+const splash_background = require('assets/images/splash_background.png');
 
 export default {
   onboarding_1,
@@ -55,13 +56,14 @@ export default {
   img_bca,
   img_bni,
   img_mandiri,
-  splash_screen,
   img_pinjaman_overlay_2,
   img_id_card,
   menu_kabar,
   img_pinjaman_overlay_1,
   menu_whatsapp,
-  splash_screen_2,
   img_id_card_bg,
-  splash_screen_default,
+  splash_ika_teladan,
+  splash_mmm,
+  splash_digitalized,
+  splash_background,
 };

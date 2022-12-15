@@ -186,6 +186,7 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen name="SaldoSimpananMainScreen" component={screens.SaldoSimpananMainScreen} />
     <HomeStack.Screen name="CartScreen" component={screens.CartScreen} />
     <HomeStack.Screen name="CheckoutScreen" component={screens.CheckoutScreen} />
+    <HomeStack.Screen name="PaymentScreen" component={screens.PaymentScreen} />
     <HomeStack.Screen name="SelectPaymentScreen" component={screens.SelectPaymentScreen} />
     <HomeStack.Screen name="PaymentSuccessScreen" component={screens.PaymentSuccessScreen} />
     <HomeStack.Screen

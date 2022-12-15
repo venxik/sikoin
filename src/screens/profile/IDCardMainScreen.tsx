@@ -71,14 +71,30 @@ const IDCardMainScreen: React.FC<Props> = ({ navigation }) => {
               style={{ width: 100, height: 100, backgroundColor: colors.white, borderRadius: 100 }}
             />
             <View>
-              <Text style={styles.textIdCard}>{`Nama : ${nama}`}</Text>
-              <Text style={styles.textIdCard}>{`Nomor ID : ${noAnggota}`}</Text>
-              <Text style={styles.textIdCard}>{`Member Sejak : ${
+              <Text
+                style={styles.textIdCard}
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >{`Nama : ${nama}`}</Text>
+              <Text
+                style={styles.textIdCard}
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >{`Nomor ID : ${noAnggota}`}</Text>
+              <Text
+                style={styles.textIdCard}
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >{`Member Sejak : ${
                 isEmpty(memberSejak)
                   ? dayjs().format('DD-MM-YYYY')
                   : dayjs(memberSejak).format('DD-MM-YYYY')
               }`}</Text>
-              <Text style={styles.textIdCard}>{`Nama Koperasi: ${namaKoperasi}`}</Text>
+              <Text
+                style={styles.textIdCard}
+                adjustsFontSizeToFit
+                numberOfLines={1}
+              >{`Nama Koperasi: ${namaKoperasi}`}</Text>
             </View>
           </View>
         </ImageBackground>

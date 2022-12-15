@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Image, Modal, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import CheckBox from '@react-native-community/checkbox';
 import dayjs from 'dayjs';
@@ -63,18 +72,6 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
     <Modal animationType="slide" transparent={true} visible={showModal}>
       <View style={styles.modalMainView}>
         <View style={styles.modalView}>
-          <Image
-            source={images.img_pinjaman_overlay_2}
-            resizeMode="stretch"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              width: '100%',
-              height: '50%',
-            }}
-          />
           <TouchableOpacity
             onPress={onPressClose}
             style={{
@@ -87,6 +84,7 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               borderRadius: 48,
               alignItems: 'center',
               justifyContent: 'center',
+              zIndex: 99,
             }}
           >
             <Image
@@ -94,56 +92,78 @@ const PinjamanItemModal = (props: PinjamanItemModalProps) => {
               style={{ width: sizes.icon_size, height: sizes.icon_size }}
             />
           </TouchableOpacity>
-          <Text style={styles.textTitle}>{item?.nama}</Text>
-          <Text style={styles.textContent}>{item?.keterangan}</Text>
-          <Text style={[styles.textTenor, { marginTop: 8 }]}>
-            {'Tenor : '}
-            <Text style={{ color: colors.primary }}>{item?.maksimumTenor}</Text>
-          </Text>
-          <Text style={styles.textTenor}>
-            {'Plafon : '}
-            <Text style={{ color: colors.primary }}>
-              Rp. {formatter.formatNumberToCurreny(item?.maksimumPlafon)}
-            </Text>
-          </Text>
-          <Text style={styles.textUnduhSnk}>Unduh Syarat & Ketentuan</Text>
-          <TouchableOpacity
-            style={styles.row}
-            onPress={onPressUnduh}
-            disabled={isEmpty(item.dokumen)}
+          <ScrollView
+            contentContainerStyle={{
+              width: '100%',
+              // height: '90%',
+              paddingHorizontal: sizes.padding * 2.5,
+              paddingVertical: sizes.padding,
+            }}
           >
-            <View style={styles.dokumen}>
-              <Image
-                source={icons.icon_document_word}
-                style={{ width: sizes.icon_size, height: sizes.icon_size }}
+            <Image
+              source={images.img_pinjaman_overlay_2}
+              resizeMode="stretch"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                width: '100%',
+                height: 240,
+              }}
+            />
+
+            <Text style={styles.textTitle}>{item?.nama}</Text>
+            <Text style={styles.textContent}>{item?.keterangan}</Text>
+            <Text style={[styles.textTenor, { marginTop: 8 }]}>
+              {'Tenor : '}
+              <Text style={{ color: colors.primary }}>{item?.maksimumTenor}</Text>
+            </Text>
+            <Text style={styles.textTenor}>
+              {'Plafon : '}
+              <Text style={{ color: colors.primary }}>
+                Rp. {formatter.formatNumberToCurreny(item?.maksimumPlafon)}
+              </Text>
+            </Text>
+            <Text style={styles.textUnduhSnk}>Unduh Syarat & Ketentuan</Text>
+            <TouchableOpacity
+              style={styles.row}
+              onPress={onPressUnduh}
+              disabled={isEmpty(item.dokumen)}
+            >
+              <View style={styles.dokumen}>
+                <Image
+                  source={icons.icon_document_word}
+                  style={{ width: sizes.icon_size, height: sizes.icon_size }}
+                />
+              </View>
+              <View style={{ marginLeft: 16 }}>
+                <Text style={styles.textNamaDokumen}>
+                  {!isEmpty(item.namaDokumen) ? item.namaDokumen : '-'}
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <View style={[styles.row, { paddingHorizontal: 16, marginTop: 20 }]}>
+              <CheckBox
+                disabled={false}
+                value={checked}
+                onValueChange={(newValue) => setChecked(newValue)}
+                tintColors={{ false: colors.primary, true: colors.primary }}
               />
-            </View>
-            <View style={{ marginLeft: 16 }}>
-              <Text style={styles.textNamaDokumen}>
-                {!isEmpty(item.namaDokumen) ? item.namaDokumen : '-'}
+              <Text style={styles.textSnk}>
+                Saya telah membaca dan menyetujui persyaratan & ketentuan di atas
               </Text>
             </View>
-          </TouchableOpacity>
-          <View style={[styles.row, { paddingHorizontal: 16, marginTop: 20 }]}>
-            <CheckBox
-              disabled={false}
-              value={checked}
-              onValueChange={(newValue) => setChecked(newValue)}
-              tintColors={{ false: colors.primary, true: colors.primary }}
+            <Button
+              disabled={!checked}
+              buttonContainerStyle={{ marginTop: 20, marginHorizontal: -26 }}
+              onPress={() => {
+                setChecked(false);
+                onPress();
+              }}
+              text={'Ajukan Pinjaman'}
             />
-            <Text style={styles.textSnk}>
-              Saya telah membaca dan menyetujui persyaratan & ketentuan di atas
-            </Text>
-          </View>
-          <Button
-            disabled={!checked}
-            buttonContainerStyle={{ marginTop: 20, marginHorizontal: -26 }}
-            onPress={() => {
-              setChecked(false);
-              onPress();
-            }}
-            text={'Ajukan Pinjaman'}
-          />
+          </ScrollView>
         </View>
       </View>
     </Modal>
@@ -163,8 +183,7 @@ const styles = StyleSheet.create({
     width: '85%',
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    paddingHorizontal: sizes.padding * 2.5,
-    paddingVertical: sizes.padding,
+    height: '90%',
     elevation: 2,
   },
   row: {
@@ -210,6 +229,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontFamily: 'Poppins-Regular',
     fontSize: 16,
+    width: '35%',
   },
   textDokumenDetail: {
     color: colors.bodyText,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 
 import { isEmpty } from 'lodash';
 import Config from 'react-native-config';
@@ -15,8 +15,8 @@ const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
   const { versionNumber, getVersionStatus } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSource, setImageSource] = useState(images.splash_screen_default);
-  const showDouble = false;
+  const [imageSource, setImageSource] = useState(images.splash_ika_teladan);
+  // const showDouble = false;
 
   const dispatch = useAppDispatch();
 
@@ -24,7 +24,8 @@ const SplashScreen: React.FC = () => {
     dispatch(fetchVersionNumber());
 
     const timer = setTimeout(() => {
-      if (showDouble) setImageSource(images.splash_screen_2);
+      // if (showDouble)
+      setImageSource(images.splash_digitalized);
     }, 2000);
 
     return () => {
@@ -66,14 +67,15 @@ const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={imageSource} style={styles.splash} />
+      <ImageBackground source={images.splash_background} style={styles.splash}>
+        <Image source={imageSource} style={styles.images} resizeMode="contain" />
+      </ImageBackground>
       <Popup1Button
         iconStyle={{ width: 150, height: 200, marginBottom: -sizes.padding }}
         headerText={'Versi Terbaru'}
         contentText={'Silahkan Update Aplikasi Versi Terbaru'}
         showPopup={showPopup}
         onPress={() => setShowPopup((e) => !e)}
-        // headerImage={images.img_topup_popup}
         customButtonText={'OK'}
       />
     </View>
@@ -91,5 +93,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  images: {
+    width: '80%',
+    height: '30%',
   },
 });

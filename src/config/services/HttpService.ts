@@ -72,13 +72,12 @@ class HttpService {
     store.dispatch(hideLoading());
     const error = response.data.error;
     const url = response?.request?.responseURL as string;
-
     if (error) {
-      if (url.includes('api/version')) return;
-      else if (url.includes('api/koperasi'))
+      if (url?.includes('api/version')) return;
+      else if (url?.includes('api/koperasi'))
         this.showErrorDialogHandler(apis.errorTypes.anggotaTerdaftar, error);
-      else if (url.includes('api/simpanan'))
-        if (url.includes('api/simpanan/create'))
+      else if (url?.includes('api/simpanan'))
+        if (url?.includes('api/simpanan/create'))
           this.showErrorDialogHandler(apis.errorTypes.inputNoRek, error);
         else this.showErrorDialogHandler(apis.errorTypes.penarikanGagal, error);
       else this.showErrorDialogHandler(apis.errorTypes.generic, error);
@@ -90,13 +89,13 @@ class HttpService {
   handleErrorInterceptor = (error: AxiosError) => {
     store.dispatch(hideLoading());
     const url = error.request?.responseURL as string;
-    if (url.includes('api/version')) return;
+    if (url?.includes('api/version')) return;
     switch (error.response?.status) {
       case 400:
         this.showErrorDialogHandler(apis.errorTypes.badRequest, error.response?.data?.error);
         break;
       case 401:
-        if (url.includes('login')) {
+        if (url?.includes('login')) {
           this.showErrorDialogHandler(apis.errorTypes.unauthorized, error.response?.data?.error);
         } else {
           store.dispatch(resetUserData());

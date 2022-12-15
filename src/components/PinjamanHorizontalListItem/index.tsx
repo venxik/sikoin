@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
     marginTop: '10%',
     fontFamily: 'Inter-Bold',
     color: colors.bodyText,
+    zIndex: 99,
   },
 });
