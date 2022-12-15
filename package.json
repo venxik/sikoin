@@ -5,7 +5,9 @@
   "scripts": {
     "android": "react-native run-android",
     "run:android-dev": "react-native run-android --variant=devDebug",
-    "run:android-prod": "react-native run-android --variant=prodDebug",
+    "run:android-ika": "react-native run-android --variant=ikaDebug",
+    "run:android-mmm": "react-native run-android --variant=mmmDebug",
+    "run:android-kpdjp": "react-native run-android --variant=kpdjpDebug",
     "build:android-dev": "cd android && .\\gradlew assembleDevRelease && cd ..",
     "build:android-kpdjp": "cd android && .\\gradlew assembleKpdjpRelease && cd ..",
     "build:android-ika": "cd android && .\\gradlew assembleIkaRelease && cd ..",

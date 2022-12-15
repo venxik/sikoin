@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import notifee from '@notifee/react-native';
-import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
+// import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { MenuProvider } from 'react-native-popup-menu';
 import { Provider } from 'react-redux';
@@ -11,19 +11,18 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { persist, store } from './config';
 import { RouterContainer } from './config/navigation';
-import useNotification from './hooks/useNotification';
+// import useNotification from './hooks/useNotification';
 
 const App: FC = () => {
-  const { displayNotification } = useNotification();
+  // const { displayNotification } = useNotification();
 
   // check and authorize user permission
   async function requestUserPermission() {
-    await messaging().requestPermission();
+    // await messaging().requestPermission();
     // const authStatus = await messaging().requestPermission();
     // const enabled =
     //   authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     //   authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
     // if (enabled) {
     //   // console.log('Authorization status:', authStatus);
     // } else {
@@ -45,18 +44,18 @@ const App: FC = () => {
         // }
       });
 
-      messaging().setBackgroundMessageHandler(
-        async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
-          // Get message image
-          // const avatar = remoteMessage.notification.android.imageUrl;
+      // messaging().setBackgroundMessageHandler(
+      //   async (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+      //     // Get message image
+      //     // const avatar = remoteMessage.notification.android.imageUrl;
 
-          // Show an alert to the user
-          displayNotification(
-            remoteMessage?.notification?.title,
-            remoteMessage?.notification?.body,
-          );
-        },
-      );
+      //     // Show an alert to the user
+      //     displayNotification(
+      //       remoteMessage?.notification?.title,
+      //       remoteMessage?.notification?.body,
+      //     );
+      //   },
+      // );
     };
     onProcess();
 
