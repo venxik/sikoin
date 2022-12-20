@@ -7,6 +7,7 @@ import DokumenReducer from './DokumenReducer';
 import ErrorModalReducer from './ErrorModalReducer';
 import HomeReducer from './HomeReducer';
 import KabarReducer from './KabarReducer';
+import KoperasiReducer from './KoperasiReducer';
 import KtpReducer from './KtpReducer';
 import LoadingReducer from './LoadingReducer';
 import LoginReducer from './LoginReducer';
@@ -42,6 +43,7 @@ const rootReducers = combineReducers({
   HomeReducer,
   PinjamanReducer,
   NotifikasiReducer,
+  KoperasiReducer,
 });
 
 export default rootReducers;

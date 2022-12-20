@@ -18,7 +18,7 @@ import FastImage from 'react-native-fast-image';
 import { Button, HeaderBack } from '../../components';
 import { useAppSelector } from '../../config';
 import { ProfileStackParamList } from '../../config/navigation/model';
-import { colors, icons, images, SCREEN_HEIGHT, sizes } from '../../constants';
+import { colors, icons, images, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'IDCardMainScreen'>;
 
@@ -50,25 +50,33 @@ const IDCardMainScreen: React.FC<Props> = ({ navigation }) => {
             <FastImage
               source={isEmpty(foto) ? images.dummy_profile_pic : { uri: logoKoperasi }}
               style={{
-                width: 30,
-                height: 30,
-                marginRight: 10,
+                width: SCREEN_WIDTH * 0.07,
+                height: SCREEN_WIDTH * 0.07,
+                marginRight: '5%',
                 backgroundColor: colors.white,
-                borderRadius: 30,
+                borderRadius: SCREEN_WIDTH * 0.07,
               }}
             />
-            <Text style={styles.textIdCardTitle}>Kartu Anggota</Text>
+            <Text style={styles.textIdCardTitle} adjustsFontSizeToFit>
+              Kartu Anggota
+            </Text>
           </View>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-around',
+              marginTop: SCREEN_HEIGHT * 0.02,
             }}
           >
             <FastImage
               source={isEmpty(foto) ? images.dummy_profile_pic : { uri: foto }}
-              style={{ width: 100, height: 100, backgroundColor: colors.white, borderRadius: 100 }}
+              style={{
+                width: SCREEN_WIDTH * 0.2,
+                height: SCREEN_WIDTH * 0.2,
+                backgroundColor: colors.white,
+                borderRadius: SCREEN_WIDTH * 0.2,
+              }}
             />
             <View>
               <Text
@@ -142,24 +150,24 @@ const styles = StyleSheet.create({
     marginHorizontal: sizes.padding,
   },
   textStyle: {
-    fontSize: 20,
+    fontSize: SCREEN_WIDTH * 0.05,
     fontFamily: 'Poppins-Medium',
     color: colors.bodyTextLightGrey,
   },
   textIdCard: {
-    fontSize: 14,
+    width: SCREEN_WIDTH * 0.5,
     fontFamily: 'Inter-Medium',
     color: colors.bodyText,
     textAlign: 'center',
   },
   textIdCardTitle: {
-    fontSize: 24,
+    fontSize: SCREEN_WIDTH * 0.05,
     fontFamily: 'Poppins-Bold',
     color: colors.bodyTextGrey,
   },
   imageKtp: {
     width: '100%',
-    height: SCREEN_HEIGHT * 0.25,
+    height: SCREEN_HEIGHT * 0.3,
     borderRadius: sizes.padding,
     justifyContent: 'center',
     backgroundColor: colors.white,

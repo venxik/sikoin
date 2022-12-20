@@ -20,7 +20,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
     alamatPt,
     bank,
     gajiBulanan,
-    jabatanTerakhir,
+    jabatan,
     kota,
     masaKerjaBulan,
     masaKerjaTahun,
@@ -47,7 +47,7 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
       masaKerjaTahun,
       masaKerjaBulan,
       gajiBulanan,
-      jabatanTerakhir,
+      jabatan,
       kota,
       namaKantorCabang,
       namaPemilik,
@@ -197,11 +197,11 @@ const PinjamanStep3: React.FC<Props> = ({ navigation }) => {
             />
             <Controller
               control={control}
-              name="jabatanTerakhir"
+              name="jabatan"
               render={({ field: { onChange, value } }) => (
                 <TextInputForm
-                  error={errors?.jabatanTerakhir}
-                  errorText={errors?.jabatanTerakhir?.message}
+                  error={errors?.jabatan}
+                  errorText={errors?.jabatan?.message}
                   value={value}
                   onChangeText={(value) => onChange(value)}
                   title="Jabatan"

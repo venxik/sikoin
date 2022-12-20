@@ -35,7 +35,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"namaKoperasi\": \"KPDJP\",\r\n    \"noAnggota\": \"TESTING-002\",\r\n    \"tanggalLahir\": \"2000-05-30\"\r\n}",
+					"raw": "{\r\n    \"namaKoperasi\": \"KPDJP\",\r\n    \"noAnggota\": \"0102090005\",\r\n    \"tanggalLahir\": \"1981-04-11\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -91,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"wardtabi@gmail.com\",\r\n    \"password\":\"pass\"\r\n}",
+					"raw": "{\r\n    \"email\":\"ega@koperasi.id\",\r\n    \"password\":\"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1015,7 +1015,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jenisSimpananId\" : 9,\r\n    \"nominal\" : 100000\r\n}",
+					"raw": "{\r\n    \"jenisSimpananId\" : 3,\r\n    \"nominal\" : 10000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1164,7 +1164,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"tempatLahir\" : \"Jakarta\",\r\n    \"tanggalLahir\" : \"2022-08-09\",\r\n    \"gender\" : \"Laki-laki\",\r\n    \"golDarah\" : \"A\",\r\n    \"kewarganegaraan\" : \"WNI\",\r\n    \"pendidikanTerakhir\" : \"Diploma IV/Strata I\", \r\n    \"agama\" : \"Islam\",\r\n    \"statusPernikahan\" : \"BELUM MENIKAH\",\r\n    \"jumlahAnak\" : 0,\r\n    \"pekerjaan\" : \"Manager\",\r\n    \"detailPekerjaan\" : \"HRD\",\r\n\r\n    \"idRefPertama\" : 0,\r\n    \"namaRefPertama\" : \"Edward T\",\r\n    \"statusRefPertama\" : \"PROGRAMMER\",\r\n    \"ktpRefPertama\" : \"0123\",\r\n    \"telpRefPertama\" : \"0123\",\r\n\r\n    \"idRefKedua\" : 0,\r\n    \"namaRefKedua\" : \"\",\r\n    \"statusRefKedua\" : \"\",\r\n    \"ktpRefKedua\" : \"\",\r\n    \"telpRefKedua\" : \"\"\r\n}",
+					"raw": "{\r\n    \"tempatLahir\" : \"Jakarta\",\r\n    \"tanggalLahir\" : \"2022-08-09\",\r\n    \"gender\" : \"Laki-laki\",\r\n    \"golDarah\" : \"A\",\r\n    \"kewarganegaraan\" : \"WNI\",\r\n    \"pendidikanTerakhir\" : \"Diploma IV/Strata I\", \r\n    \"agama\" : \"Islam\",\r\n    \"statusPernikahan\" : \"BELUM MENIKAH\",\r\n    \"jumlahAnak\" : 0,\r\n    \"pekerjaan\" : \"Manager\",\r\n    \"detailPekerjaan\" : \"HRD\",\r\n\r\n    \"idRefPertama\" : 0,\r\n    \"namaRefPertama\" : \"Edward T\",\r\n    \"statusRefPertama\" : \"PROGRAMMER\",\r\n    \"ktpRefPertama\" : \"0123\",\r\n    \"telpRefPertama\" : \"0123\",\r\n\r\n    \"idRefKedua\" : 0,\r\n    \"namaRefKedua\" : \"wt\",\r\n    \"statusRefKedua\" : \"wt\",\r\n    \"ktpRefKedua\" : \"wt\",\r\n    \"telpRefKedua\" : \"wt\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1585,7 +1585,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/notifikasi/2",
+					"raw": "http://{{base_url}}/api/notifikasi/17",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1593,7 +1593,7 @@
 					"path": [
 						"api",
 						"notifikasi",
-						"2"
+						"17"
 					]
 				}
 			},
@@ -1644,7 +1644,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{base_url}}/api/kabar/1",
+					"raw": "http://{{base_url}}/api/kabar/3",
 					"protocol": "http",
 					"host": [
 						"{{base_url}}"
@@ -1652,7 +1652,7 @@
 					"path": [
 						"api",
 						"kabar",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -1830,6 +1830,47 @@
 					"path": [
 						"api",
 						"ubah-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "54 api/data-koperasi",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"passwordLama\" : \"asd\",\r\n    \"password\" : \"pass\",\r\n    \"confPassword\" : \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{base_url}}/api/data-koperasi",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"data-koperasi"
 					]
 				}
 			},

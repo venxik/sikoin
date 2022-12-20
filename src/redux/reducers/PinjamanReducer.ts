@@ -61,7 +61,7 @@ export type PinjamanStep3Data = {
   masaKerjaTahun?: number;
   masaKerjaBulan?: number;
   gajiBulanan?: string;
-  jabatanTerakhir?: string;
+  jabatan?: string;
   namaPt?: string;
   alamatPt?: string;
   kota?: string;

@@ -69,6 +69,7 @@ const constant = {
     version: 'version',
     ubahPassword: 'ubah-password',
     idCard: 'id-card',
+    koperasi: 'data-koperasi',
   },
   errorTypes: {
     generic: 'Oops!',

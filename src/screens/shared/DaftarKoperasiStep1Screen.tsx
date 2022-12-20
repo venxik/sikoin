@@ -53,7 +53,7 @@ const DaftarKoperasiStep1Screen: FC<Props> = ({ navigation }) => {
     dispatch(
       fetchUserKoperasi({
         ...submitData,
-        namaKoperasi: 'KPDJP',
+        namaKoperasi: Config.KOPERASI_NAME || '',
         tanggalLahir: dayjs(tanggalLahir).format('YYYY-MM-DD'),
       }),
     );

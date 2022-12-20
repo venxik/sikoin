@@ -9,6 +9,7 @@ import { Button, HeaderBack, ProfilePicture, SubmenuItemList } from '../../compo
 import { useAppDispatch, useAppSelector } from '../../config';
 import { ProfileStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
+import { fetchKoperasiData } from '../../redux/reducers/KoperasiReducer';
 import { fetchLogout } from '../../redux/reducers/LoginReducer';
 import { fetchIdCard, fetchProfile } from '../../redux/reducers/ProfileReducer';
 import { getFormattedDate } from '../../utils';
@@ -30,6 +31,10 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
 
   const navigateToIDCard = () => {
     dispatch(fetchIdCard());
+  };
+
+  const navigateToKoperasiData = () => {
+    dispatch(fetchKoperasiData());
   };
 
   const checkIsEmpty = (text: string) => {
@@ -84,7 +89,7 @@ const ProfileMainScreen: React.FC<Props> = ({ navigation }) => {
           <SubmenuItemList
             icon={icons.icon_data_koperasi}
             title={strings.data_koperasi}
-            onPress={() => navigation.navigate('DataKoperasiMainScreen')}
+            onPress={navigateToKoperasiData}
           />
           <SubmenuItemList
             icon={icons.icon_pengaturan}
