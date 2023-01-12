@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FC, useState } from 'react';
+import { Linking, StyleSheet, Text, View } from 'react-native';
 
+import CheckBox from '@react-native-community/checkbox';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
@@ -18,6 +19,8 @@ type Props = NativeStackScreenProps<ParentStackParamList, 'DaftarKoperasiStep2Sc
 const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
+  const [checked, setChecked] = useState(false);
+
   const onSubmit = ({ email }: { email: string }) => {
     dispatch(
       fetchUserKoperasiEmail({
@@ -25,6 +28,16 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
         email: email,
       }),
     );
+  };
+
+  const onPressSnK = (webUrl = '') => {
+    Linking.canOpenURL(webUrl as string)
+      .then((supported) => {
+        if (supported) {
+          return Linking.openURL(webUrl as string);
+        }
+      })
+      .catch((err: unknown) => console.error('An error occurred', err));
   };
 
   const {
@@ -80,8 +93,32 @@ const DaftarKoperasiStep2Screen: FC<Props> = ({ navigation }) => {
             },
           }}
         />
-
         <Text style={styles.textHint}>{strings.daftar_koperasi_isi_data_hint_2}</Text>
+        <View style={styles.row}>
+          <CheckBox
+            disabled={false}
+            value={checked}
+            onValueChange={(newValue) => setChecked(newValue)}
+            tintColors={{ false: colors.primary, true: colors.primary }}
+          />
+          <Text style={styles.textSnk}>
+            Dengan melakukan pendaftaran, maka Pelanggan dianggap telah membaca, mengerti, memahami
+            dan menyetujui semua isi dalam
+            <Text
+              style={styles.textBlue}
+              onPress={() => onPressSnK('https://sikoin.id/syarat-ketentuan')}
+            >
+              {' Syarat & Ketentuan '}
+            </Text>
+            dan
+            <Text
+              style={styles.textBlue}
+              onPress={() => onPressSnK('https://sikoin.id/kebijakan-privasi')}
+            >
+              {' Kebijakan Privasi'}
+            </Text>
+          </Text>
+        </View>
       </View>
 
       <Button
@@ -144,4 +181,16 @@ const styles = StyleSheet.create({
     color: colors.bodyTextGrey,
     fontFamily: 'Inter-Regular',
   },
+  row: {
+    flexDirection: 'row',
+    marginTop: 20,
+    marginLeft: -6,
+    width: '90%',
+  },
+  textSnk: {
+    color: colors.bodyTextGrey,
+    fontSize: 10,
+    fontFamily: 'Inter-Regular',
+  },
+  textBlue: { color: colors.primary, fontSize: 10, fontFamily: 'Inter-Regular' },
 });

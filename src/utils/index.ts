@@ -1,7 +1,7 @@
 import AsyncStore from './AsyncStore';
-import EncryptedStorage from './EncryptedStorage';
 import formatter from './formatter';
 
-export { AsyncStore, EncryptedStorage, formatter };
+export { AsyncStore, formatter };
 export * from './datetime';
+export * from './encryptedStorage';
 export * from './Linking';

@@ -9,7 +9,7 @@ import { ProfileStackParamList } from '../../../../config/navigation/model';
 import { sizes, strings } from '../../../../constants';
 import { fetchAlamatList } from '../../../../redux/reducers/AlamatReducer';
 
-type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarAlamatMainScreen'>;
+type Props = NativeStackScreenProps<ProfileStackParamList, 'DokumenPendukungMainScreen'>;
 
 const DokumenPendukungMainScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch();

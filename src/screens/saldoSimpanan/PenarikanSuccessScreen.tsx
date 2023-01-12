@@ -7,7 +7,7 @@ import { Button } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanSucessScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PenarikanSuccessScreen'>;
 
 const PenarikanSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {

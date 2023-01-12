@@ -10,7 +10,6 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
-import { BiodataResponse } from '../../redux/reducers/BiodataReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
 import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 

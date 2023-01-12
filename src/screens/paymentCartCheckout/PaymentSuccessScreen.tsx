@@ -7,9 +7,9 @@ import { Button } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PaymentScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PaymentSuccessScreen'>;
 
-const PembayaranSuccessScreen: React.FC<Props> = ({ navigation }) => {
+const PaymentSuccessScreen: React.FC<Props> = ({ navigation }) => {
   const navigateToHome = () => {
     navigation.reset({
       index: 0,
@@ -41,7 +41,7 @@ const PembayaranSuccessScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default PembayaranSuccessScreen;
+export default PaymentSuccessScreen;
 
 const styles = StyleSheet.create({
   container: {

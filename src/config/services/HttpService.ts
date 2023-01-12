@@ -5,7 +5,7 @@ import { apis, storage } from '../../constants';
 import { showErrorModal } from '../../redux/reducers/ErrorModalReducer';
 import { resetUserData } from '../../redux/reducers/HomeReducer';
 import { hideLoading } from '../../redux/reducers/LoadingReducer';
-import { EncryptedStorage } from '../../utils';
+import { getEncryptedStorage } from '../../utils';
 import { navigateAndReset } from '../navigation';
 // import { getEncryptedStorage } from 'utils/encryptedStorage';
 import { store } from '../store';
@@ -55,7 +55,7 @@ class HttpService {
     // apply only if the request needs an access token
     if (apis.authPathArray.some((substring) => !requestURL?.includes(substring))) {
       let accessToken: null | string = null;
-      accessToken = await EncryptedStorage.getEncryptedStorage(storage.authCode);
+      accessToken = await getEncryptedStorage(storage.authCode);
       if (!request?.headers) {
         throw new Error("Expected 'config' and 'config.headers' not to be undefined");
       }

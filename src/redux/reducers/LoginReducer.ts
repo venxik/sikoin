@@ -5,7 +5,7 @@ import {
   SendUserKoperasiResponseParams,
 } from '../../config/apis/LoginApi';
 import { storage } from '../../constants';
-import { EncryptedStorage } from '../../utils';
+import { saveEncryptedStorage } from '../../utils';
 
 export interface KoperasiListResponse {
   namaKoperasi: string;
@@ -89,7 +89,7 @@ const loginSlice = createSlice({
       state.forgotPasswordStatus = payload;
     },
     fetchLoginSuccess: (_: unknown, { payload }: PayloadAction<LoginResponse>) => {
-      EncryptedStorage.saveEncryptedStorage(storage.authCode, payload.token);
+      saveEncryptedStorage(storage.authCode, payload.token);
     },
     fetchLoginFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;

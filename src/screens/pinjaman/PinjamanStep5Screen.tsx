@@ -23,7 +23,7 @@ import { colors, dropdownItems, icons, SCREEN_HEIGHT, sizes, strings } from '../
 import { fetchPinjamanSummary, setPinjamanInfo } from '../../redux/reducers/PinjamanReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep3Screen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'PinjamanStep5Screen'>;
 
 type Form = { tenor: string; tujuan: string };
 
