@@ -15,8 +15,28 @@ const SplashScreen: React.FC = () => {
   const { userId } = useAppSelector((s) => s.HomeReducer.user);
   const { versionNumber, getVersionStatus } = useAppSelector((s) => s.LoginReducer);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSource, setImageSource] = useState(images.splash_kpdjp);
-  // const showDouble = false;
+
+  const getSplashScreen = () => {
+    switch (Config.KOPERASI_NAME) {
+      case 'SIKOIN':
+        return images.splash_sikoin;
+      case 'IKA TELADAN':
+        return images.splash_ika_teladan;
+      case 'MITRA MAJU MAKMUR':
+        return images.splash_mmm;
+      case 'KPDJP':
+        return images.splash_kpdjp;
+      default:
+        return images.splash_kpdjp;
+    }
+  };
+
+  const [imageSource, setImageSource] = useState(() => {
+    const splash = getSplashScreen();
+    return splash;
+  });
+
+  const showDouble = Config.KOPERASI_NAME !== 'SIKOIN';
 
   const dispatch = useAppDispatch();
 
@@ -24,8 +44,7 @@ const SplashScreen: React.FC = () => {
     dispatch(fetchVersionNumber());
 
     const timer = setTimeout(() => {
-      // if (showDouble)
-      setImageSource(images.splash_digitalized);
+      if (showDouble) setImageSource(images.splash_digitalized);
     }, 2000);
 
     return () => {
