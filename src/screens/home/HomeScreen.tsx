@@ -24,7 +24,7 @@ import Animated, {
 
 import { CardKabar, CardLastItem, CardPromo, HeaderBack, ProfilePicture } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
-import { HomeStackParamList, HomeTabScreenProps } from '../../config/navigation/model';
+import { HomeTabScreenProps } from '../../config/navigation/model';
 import {
   colors,
   icons,

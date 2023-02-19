@@ -99,6 +99,8 @@ export type HomeStackParamList = {
   PromoMainScreen: undefined;
   PromoDetailScreen: undefined;
   DaftarBiodataAddScreen: { update: boolean };
+  MarketPesananMainScreen: undefined;
+  MarketPesananDetailScreen: undefined;
 };
 
 export type ProfileStackParamList = {

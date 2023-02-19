@@ -10,6 +10,8 @@ import PromoMainScreen from './kabarPromo/PromoMainScreen';
 import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
 // import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
+import MarketPesananDetailScreen from './market/MarketPesananDetailScreen';
+import MarketPesananMainScreen from './market/MarketPesananMainScreen';
 import OnboardingScreen from './onboarding/OnboardingScreen';
 import CartScreen from './paymentCartCheckout/CartScreen';
 import CheckoutScreen from './paymentCartCheckout/CheckoutScreen';
@@ -102,6 +104,8 @@ export {
   MarketItemDetailsScreen,
   // DokumenDetailScreen,
   MarketMainScreen,
+  MarketPesananDetailScreen,
+  MarketPesananMainScreen,
   OnboardingScreen,
   PaymentScreen,
   PaymentSuccessScreen,

@@ -7,7 +7,7 @@ import { Button, HeaderBack } from '../../components';
 import CartItem from '../../components/CartItem';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { icons, sizes, strings } from '../../constants';
+import { icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'CartScreen'>;
 
@@ -30,6 +30,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
         keyExtractor={(_, i) => i.toString()}
         contentContainerStyle={{
           flexGrow: 1,
+          paddingBottom: SCREEN_HEIGHT * 0.08,
         }}
         ListEmptyComponent={
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

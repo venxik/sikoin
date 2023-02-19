@@ -166,7 +166,7 @@ const HomeTab = () => {
 
 const HomeStackNavigator = () => (
   <HomeStack.Navigator
-    initialRouteName={'HomeScreen'}
+    initialRouteName={'MarketPesananMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -226,6 +226,11 @@ const HomeStackNavigator = () => (
       name="DaftarBiodataAddScreen"
       component={screens.DaftarBiodataAddScreen}
       initialParams={{ update: false }}
+    />
+    <HomeStack.Screen name="MarketPesananMainScreen" component={screens.MarketPesananMainScreen} />
+    <HomeStack.Screen
+      name="MarketPesananDetailScreen"
+      component={screens.MarketPesananDetailScreen}
     />
   </HomeStack.Navigator>
 );
@@ -301,6 +306,7 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}
+        initialRouteName="HomeTab"
       >
         <ParentStack.Screen name={'SplashScreen'} component={screens.SplashScreen} />
         <ParentStack.Screen name={'OnboardingScreen'} component={screens.OnboardingScreen} />

@@ -23,6 +23,7 @@ import HeaderBack from './HeaderBack';
 import HeaderPinjaman from './HeaderPinjaman';
 import ListEmptyDataComponent from './ListEmptyDataComponent';
 import LoadingIndicator from './LoadingIndicator';
+import MarketPembelianItem from './MarketPembelianItem';
 import MenuHeaderIcon from './MenuHeaderIcon';
 import NotifikasiItem from './NotifikasiItem';
 import PaymentItem from './PaymentItem';
@@ -70,6 +71,7 @@ export {
   HeaderPinjaman,
   ListEmptyDataComponent,
   LoadingIndicator,
+  MarketPembelianItem,
   MenuHeaderIcon,
   NotifikasiItem,
   PaymentItem,
