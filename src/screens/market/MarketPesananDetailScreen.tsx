@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, ToastAndroid, View } from 'react-native';
 
+import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,6 +14,11 @@ import { colors, icons, sizes } from '../../constants';
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketPesananDetailScreen'>;
 
 const MarketPesananDetailScreen = ({}: Props) => {
+  const copyToClipboard = (text?: string) => {
+    Clipboard.setString(text ?? '');
+    ToastAndroid.show('Text berhasil disalin', 2000);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <HeaderBack title={'Detail Pesanan'} textStyle={{ width: '100%' }} />
@@ -21,7 +27,7 @@ const MarketPesananDetailScreen = ({}: Props) => {
         <View style={styles.textContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={styles.textContentHeader}>INV/20220115/MPL/1951204385</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => copyToClipboard('test')}>
               <Image
                 source={icons.icon_copy_outline}
                 style={styles.iconCopy}
@@ -69,7 +75,10 @@ const MarketPesananDetailScreen = ({}: Props) => {
         </View>
         <View style={styles.infoPengirimanContainer}>
           <Text style={styles.textInfoPengirimanLeft}>No. Resi</Text>
-          <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+            onPress={() => copyToClipboard('test')}
+          >
             <Text style={[styles.textInfoPengirimanRight, { color: colors.bodyText }]}>
               36547787908659
             </Text>
