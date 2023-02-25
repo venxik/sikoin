@@ -128,7 +128,10 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
                 onPressBeli={navigateToDetailsScreen}
               />
               {index === marketDataList.length - 1 && (
-                <CardLastItem icon={icons.icon_market_white} onPress={() => console.warn(item)} />
+                <CardLastItem
+                  icon={icons.icon_market_white}
+                  onPress={() => navigation.navigate('MarketItemListScreen')}
+                />
               )}
             </View>
           )}

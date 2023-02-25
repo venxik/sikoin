@@ -101,6 +101,7 @@ export type HomeStackParamList = {
   MarketPesananMainScreen: undefined;
   MarketPesananDetailScreen: undefined;
   MarketCartScreen: undefined;
+  MarketItemListScreen: undefined;
 };
 
 export type ProfileStackParamList = {

@@ -232,6 +232,7 @@ const HomeStackNavigator = () => (
       name="MarketPesananDetailScreen"
       component={screens.MarketPesananDetailScreen}
     />
+    <HomeStack.Screen name="MarketItemListScreen" component={screens.MarketItemListScreen} />
   </HomeStack.Navigator>
 );
 

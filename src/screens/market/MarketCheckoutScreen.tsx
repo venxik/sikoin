@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useMemo, useRef, useState } from 'react';
+import { Image, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { isEmpty } from 'lodash';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -34,6 +35,11 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   const { alamatList } = useAppSelector((s) => s.AlamatReducer);
   const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
 
+  const [bottomSheetTab, setBottomSheetTab] = useState<'pembayaran' | 'pengiriman'>('pembayaran');
+
+  const sheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['70%', '70%'], []);
+
   useMemo(
     () =>
       cartItemDataList.map((item) => {
@@ -59,10 +65,16 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
             Akan diterima pada tanggal 2 - 5 Feb
           </Text>
         </View>
-        <View style={styles.row}>
+        <Pressable
+          style={styles.row}
+          onPress={() => {
+            setBottomSheetTab('pengiriman');
+            sheetRef.current?.snapToIndex(0);
+          }}
+        >
           <Text style={styles.textHargaPengiriman}>Rp 16.000</Text>
           <Image source={icons.arrow_right_primary_2} style={styles.iconArrow} />
-        </View>
+        </Pressable>
       </View>
     );
   };
@@ -79,10 +91,16 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   const renderMetodePembayaran = () => {
     return (
       <View>
-        <View style={[styles.row, { width: '50%' }]}>
+        <Pressable
+          style={[styles.row, { width: '50%' }]}
+          onPress={() => {
+            setBottomSheetTab('pembayaran');
+            sheetRef.current?.snapToIndex(0);
+          }}
+        >
           <Text style={styles.textHargaPengiriman}>Transfer Bank - Bank BCA (Dicek Otomatis)</Text>
           <Image source={icons.arrow_right_primary_2} style={styles.iconArrow} />
-        </View>
+        </Pressable>
         <View style={[styles.line, { marginTop: sizes.padding }]} />
         <View style={[styles.row, { marginTop: sizes.padding }]}>
           <Text style={styles.textNormal}>{strings.subtotal_produk}</Text>
@@ -100,6 +118,20 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
             totalPrice + 16000,
           )}`}</Text>
         </View>
+      </View>
+    );
+  };
+
+  const renderBottomSheet = () => {
+    if (bottomSheetTab === 'pembayaran')
+      return (
+        <View style={{ flex: 1 }}>
+          <HeaderBack title={'Pilih Metode Pembayaran'} onPress={() => sheetRef.current?.close()} />
+        </View>
+      );
+    return (
+      <View style={{ flex: 1 }}>
+        <HeaderBack title={'Pengiriman'} onPress={() => sheetRef.current?.close()} />
       </View>
     );
   };
@@ -137,6 +169,15 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
         onPress={navigateToSelectPayment}
         buttonContainerStyle={styles.buttonStyle}
       />
+      <BottomSheet
+        style={{ backgroundColor: colors.primaryWhite }}
+        ref={sheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+      >
+        {renderBottomSheet()}
+      </BottomSheet>
     </SafeAreaView>
   );
 };

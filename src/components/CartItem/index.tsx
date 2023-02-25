@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { useAppDispatch } from '../../config';
-import { colors, icons, sizes, strings } from '../../constants';
+import { colors, sizes, strings } from '../../constants';
 import { addCartQty, deleteCartItem, substartCartQty } from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 import Button from '../Button';
@@ -10,7 +10,7 @@ import QtyButton from '../QtyButton';
 import { CartItemProps } from './model';
 
 const CartItem = (props: CartItemProps) => {
-  const { price, image, namaToko, previousPrice, productName, qty, variasi, id } = props.data;
+  const { price, image, previousPrice, productName, qty, variasi, id } = props.data;
 
   const dispatch = useAppDispatch();
   const [catatan, setCatatan] = useState<string>('');
