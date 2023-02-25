@@ -11,9 +11,9 @@ import { HeaderBack } from '../../components';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes } from '../../constants';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCheckoutScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketPesananDetailScreen'>;
 
-const MarketCheckoutScreen = ({}: Props) => {
+const MarketPesananDetailScreen = ({}: Props) => {
   const copyToClipboard = (text?: string) => {
     Clipboard.setString(text ?? '');
     ToastAndroid.show('Text berhasil disalin', 2000);
@@ -170,7 +170,7 @@ const MarketCheckoutScreen = ({}: Props) => {
   );
 };
 
-export default MarketCheckoutScreen;
+export default MarketPesananDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
