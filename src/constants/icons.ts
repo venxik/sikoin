@@ -112,6 +112,8 @@ const icon_id_card_menu = require('assets/icons/icon_id_card_menu.png');
 const icon_sign_out = require('assets/icons/icon_sign_out.png');
 const icon_key = require('assets/icons/icon_key.png');
 const icon_copy_outline = require('assets/icons/icon_copy_outline.png');
+const icon_keranjang_primary = require('assets/icons/icon_keranjang_primary.png');
+const icon_pembelian = require('assets/icons/icon_pembelian.png');
 
 export default {
   arrow_right,
@@ -226,4 +228,6 @@ export default {
   icon_sign_out,
   icon_key,
   icon_copy_outline,
+  icon_keranjang_primary,
+  icon_pembelian,
 };

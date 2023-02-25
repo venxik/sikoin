@@ -3,12 +3,13 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import FastImage from 'react-native-fast-image';
 
-import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
 import { formatter } from '../../utils';
+import Button from '../Button';
 import { CardMarketLargeProps } from './model';
 
 const CardMarketLarge = (props: CardMarketLargeProps) => {
-  const { item, onPress, style, onPressVoucher } = props || null;
+  const { item, onPress, style, onPressBeli } = props || null;
   const { productName, price, image } = item || {};
 
   const onPressWishlist = () => {
@@ -38,11 +39,17 @@ const CardMarketLarge = (props: CardMarketLargeProps) => {
           </Text>
         </View>
 
-        <TouchableOpacity onPress={onPressVoucher} style={styles.touchableContainer}>
+        <Button
+          text={'Beli'}
+          onPress={onPressBeli}
+          buttonContainerStyle={{ width: '50%', marginTop: sizes.padding }}
+        />
+
+        {/* <TouchableOpacity onPress={onPressVoucher} style={styles.touchableContainer}>
           <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
-          <Text style={styles.textBeliDgnVoucher}>{strings.beli_dgn_voucher}</Text>
+          <Text style={styles.textBeliDgnVoucher}>{'Beli'}</Text>
           <Image source={icons.arrow_right_primary} style={styles.iconArrow} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </TouchableOpacity>
   );

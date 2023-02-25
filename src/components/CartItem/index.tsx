@@ -33,8 +33,6 @@ const CartItem = (props: CartItemProps) => {
     <View style={styles.container}>
       <View style={styles.tokoContainer}>
         <View style={styles.dummyCheck}></View>
-        <Text style={styles.textToko}>{namaToko}</Text>
-        <Image source={icons.arrow_right_primary_2} style={styles.iconArrow} />
       </View>
       <View style={{ flexDirection: 'row', marginTop: sizes.padding * 1.5 }}>
         <Image source={{ uri: image }} style={styles.productImg} />
@@ -71,19 +69,20 @@ const CartItem = (props: CartItemProps) => {
         </View>
       </View>
       <View style={styles.line} />
-      <TouchableOpacity onPress={props.onPressVoucher} style={styles.touchableContainer}>
+      {/* <TouchableOpacity onPress={props.onPressVoucher} style={styles.touchableContainer}>
         <Image source={icons.icon_voucher_small} style={styles.iconVoucher} />
         <Text style={styles.textBeliDgnVoucher}>{strings.voucher_toko_tersedia}</Text>
         <Image source={icons.arrow_right_primary} style={styles.iconArrow} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TextInput
         onChangeText={(e) => setCatatan(e)}
         style={styles.textBox}
-        placeholder={strings.catatan_placeholder}
+        placeholder={'Catatan...'}
         value={catatan}
         autoCorrect={false}
         autoCapitalize="none"
         clearButtonMode="always"
+        placeholderTextColor={colors.bodyTextLightGrey}
       />
       <Button
         onPress={onPressDelete}

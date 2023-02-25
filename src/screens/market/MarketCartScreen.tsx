@@ -9,13 +9,13 @@ import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'CartScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCartScreen'>;
 
-const CartScreen: React.FC<Props> = ({ navigation }) => {
+const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
   const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
 
   const navigateToCheckout = () => {
-    navigation.navigate('CheckoutScreen');
+    navigation.navigate('MarketCheckoutScreen');
   };
 
   const navigateToVoucher = () => {
@@ -49,7 +49,7 @@ const CartScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default CartScreen;
+export default MarketCartScreen;
 
 const styles = StyleSheet.create({
   container: {

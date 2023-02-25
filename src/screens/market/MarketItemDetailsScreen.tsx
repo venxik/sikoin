@@ -2,7 +2,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import {
   Alert,
-  FlatList,
   Image,
   ImageSourcePropType,
   SafeAreaView,
@@ -26,15 +25,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
-import {
-  Button,
-  CardLastItem,
-  CardMarketSmall,
-  FilterHorizontal,
-  FilterVariasi,
-  HeaderBack,
-  QtyButton,
-} from '../../components';
+import { Button, FilterVariasi, HeaderBack, QtyButton } from '../../components';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
@@ -42,29 +33,14 @@ import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketItemDetailsScreen'>;
 const dotSize = 6;
-const tab = ['Deskripsi', 'Ulasan', 'Diskusi'];
+// const tab = ['Deskripsi', 'Ulasan', 'Diskusi'];
 
 const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   const scrollX = useSharedValue(0);
-  const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
+  // const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
   const { marketItemDetails } = useAppSelector((s) => s.MarketReducer);
-  const {
-    asuransi,
-    berat,
-    deskripsi,
-    kondisi,
-    namaToko,
-    name,
-    photos,
-    price,
-    rating,
-    stok,
-    terjual,
-    ukuran,
-    warna,
-    logoToko,
-    lokasiToko,
-  } = marketItemDetails;
+  const { asuransi, deskripsi, kondisi, name, photos, price, stok, ukuran, warna } =
+    marketItemDetails;
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
       scrollX.value = event.contentOffset.x;
@@ -72,23 +48,23 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   });
   const sheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['90%', '95%'], []);
-  const [selectedTab, setSelectedTab] = useState(tab[0]);
+  // const [selectedTab, setSelectedTab] = useState(tab[0]);
   // eslint-disable-next-line no-unused-vars
   const [selectedWarna, setSelectedWarna] = useState<string>('');
   // eslint-disable-next-line no-unused-vars
   const [selectedUkuran, setSelectedUkuran] = useState<string>('');
   const [qtyValue, setQtyValue] = useState<number>(1);
 
-  const navigateToVoucherScreen = () => {
-    navigation.navigate('VoucherMainScreen');
-  };
+  // const navigateToVoucherScreen = () => {
+  //   navigation.navigate('VoucherMainScreen');
+  // };
 
-  const navigateToDetailsScreen = () => {
-    navigation.push('MarketItemDetailsScreen');
-  };
+  // const navigateToDetailsScreen = () => {
+  //   navigation.push('MarketItemDetailsScreen');
+  // };
 
   const navigateToCartScreen = () => {
-    navigation.push('CartScreen');
+    navigation.push('MarketCartScreen');
   };
 
   const onPressMinusQty = () => {
@@ -226,7 +202,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         style={[
           {
             paddingVertical: sizes.padding,
-            paddingHorizontal: sizes.padding * 1.5,
+            // paddingHorizontal: sizes.padding * 1.5,
           },
           style,
         ]}
@@ -241,29 +217,44 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const renderDetails = () => {
+    // return (
+    //   <ScrollView
+    //     horizontal
+    //     showsHorizontalScrollIndicator={false}
+    //     contentContainerStyle={{ alignItems: 'center' }}
+    //     style={{
+    //       marginTop: sizes.padding,
+    //       borderBottomColor: colors.strokeGrey,
+    //       borderBottomWidth: 1,
+    //     }}
+    //   >
+    //     {renderDetailsItem(icons.icon_terjual, terjual, strings.terjual, {
+    //       paddingLeft: 0,
+    //     })}
+    //     <View style={styles.verticalLine} />
+    //     {renderDetailsItem(icons.icon_kondisi, kondisi, strings.kondisi)}
+    //     <View style={styles.verticalLine} />
+    //     {renderDetailsItem(icons.icon_rating, rating, strings.rating)}
+    //     <View style={styles.verticalLine} />
+    //     {renderDetailsItem(icons.icon_berat, berat, strings.berat, {
+    //       paddingRight: 0,
+    //     })}
+    //   </ScrollView>
+    // );
     return (
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ alignItems: 'center' }}
+      <View
         style={{
+          flexDirection: 'row',
           marginTop: sizes.padding,
           borderBottomColor: colors.strokeGrey,
           borderBottomWidth: 1,
         }}
       >
-        {renderDetailsItem(icons.icon_terjual, terjual, strings.terjual, {
-          paddingLeft: 0,
+        {renderDetailsItem(icons.icon_kondisi, kondisi, strings.kondisi, { width: '50%' })}
+        {renderDetailsItem(icons.icon_berat, 100, 'Stock', {
+          width: '50%',
         })}
-        <View style={styles.verticalLine} />
-        {renderDetailsItem(icons.icon_kondisi, kondisi, strings.kondisi)}
-        <View style={styles.verticalLine} />
-        {renderDetailsItem(icons.icon_rating, rating, strings.rating)}
-        <View style={styles.verticalLine} />
-        {renderDetailsItem(icons.icon_berat, berat, strings.berat, {
-          paddingRight: 0,
-        })}
-      </ScrollView>
+      </View>
     );
   };
 
@@ -304,7 +295,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         {renderDescItem(strings.asuransi, asuransi)}
         {renderDescItem(strings.ukuran, ukuran)}
         {renderDescItem(strings.warna, warna)}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[
             styles.row,
             {
@@ -323,53 +314,53 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
             </View>
           </View>
           <Image source={icons.arrow_right_primary} style={styles.iconHeader} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
 
-  const cardHeader = (title: string) => {
-    return (
-      <View style={styles.cardHeaderContainer}>
-        <Text style={[styles.cardHeaderTitle, { marginRight: 20 }]}>{title}</Text>
-      </View>
-    );
-  };
+  // const cardHeader = (title: string) => {
+  //   return (
+  //     <View style={styles.cardHeaderContainer}>
+  //       <Text style={[styles.cardHeaderTitle, { marginRight: 20 }]}>{title}</Text>
+  //     </View>
+  //   );
+  // };
 
-  const renderMarketCardSmall = () => {
-    return (
-      <View style={{ marginTop: 40 }}>
-        {cardHeader(strings.lainnya_toko)}
-        <FlatList
-          horizontal
-          data={marketDataList}
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketSmall
-                item={item}
-                onPress={navigateToDetailsScreen}
-                onPressVoucher={navigateToVoucherScreen}
-                onPressWishlist={() => console.warn(item)}
-              />
-              {index === marketDataList.length - 1 && (
-                <CardLastItem
-                  customText={strings.kunjungi_toko}
-                  style={{
-                    width: SCREEN_WIDTH * 0.45,
-                  }}
-                  icon={icons.arrow_right}
-                  onPress={() => console.warn(item)}
-                />
-              )}
-            </View>
-          )}
-        />
-      </View>
-    );
-  };
+  // const renderMarketCardSmall = () => {
+  //   return (
+  //     <View style={{ marginTop: 40 }}>
+  //       {cardHeader(strings.lainnya_toko)}
+  //       <FlatList
+  //         horizontal
+  //         data={marketDataList}
+  //         showsHorizontalScrollIndicator={false}
+  //         scrollEventThrottle={16}
+  //         keyExtractor={(item, index) => index.toString()}
+  //         renderItem={({ item, index }) => (
+  //           <View style={{ marginTop: 20, flexDirection: 'row' }}>
+  //             <CardMarketSmall
+  //               item={item}
+  //               onPress={navigateToDetailsScreen}
+  //               onPressVoucher={navigateToVoucherScreen}
+  //               onPressWishlist={() => console.warn(item)}
+  //             />
+  //             {index === marketDataList.length - 1 && (
+  //               <CardLastItem
+  //                 customText={strings.kunjungi_toko}
+  //                 style={{
+  //                   width: SCREEN_WIDTH * 0.45,
+  //                 }}
+  //                 icon={icons.arrow_right}
+  //                 onPress={() => console.warn(item)}
+  //               />
+  //             )}
+  //           </View>
+  //         )}
+  //       />
+  //     </View>
+  //   );
+  // };
 
   const renderBottomSheetContent = () => {
     const total = useMemo(() => qtyValue * price, [qtyValue]);
@@ -433,7 +424,7 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
           {/* DETAILS SECTION */}
           {renderDetails()}
-          <View style={styles.tabContainer}>
+          {/* <View style={styles.tabContainer}>
             {tab.map((item, index) => (
               <FilterHorizontal
                 key={index}
@@ -442,9 +433,10 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
                 onPress={() => setSelectedTab(item)}
               />
             ))}
-          </View>
-          {selectedTab === 'Deskripsi' && renderDescDetails()}
-          {renderMarketCardSmall()}
+          </View> */}
+          {/* {selectedTab === 'Deskripsi' && renderDescDetails()} */}
+          {renderDescDetails()}
+          {/* {renderMarketCardSmall()} */}
         </View>
       </ScrollView>
       {/* BUTTON */}
@@ -452,19 +444,18 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         <Button
           onPress={() => sheetRef.current?.expand()}
           shadow
-          secondary
           text={strings.keranjang}
           icon={icons.plus_shape}
           iconLocation="left"
           iconStyle={{ width: 10, height: 10 }}
-          buttonContainerStyle={{ width: '48%' }}
+          buttonContainerStyle={{ width: '100%' }}
         />
-        <Button
+        {/* <Button
           onPress={navigateToCartScreen}
           shadow
           text={strings.beli}
           buttonContainerStyle={{ width: '48%' }}
-        />
+        /> */}
       </View>
       {/* BOTTOM SHEET */}
       <BottomSheet ref={sheetRef} index={-1} snapPoints={snapPoints} enablePanDownToClose>

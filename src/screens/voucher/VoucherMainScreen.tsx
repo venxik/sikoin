@@ -36,7 +36,7 @@ const VoucherMainScreen: FC<Props> = ({ navigation }) => {
 
   const onPressBeliVoucher = () => {
     setshowVoucherPopup(false);
-    navigation.navigate('CartScreen');
+    navigation.navigate('MarketCartScreen');
   };
 
   const onPressMinus = () => {

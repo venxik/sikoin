@@ -17,8 +17,6 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-m
 import {
   CardLastItem,
   CardMarketLarge,
-  CardMarketSmall,
-  CardPromo,
   HeaderBack,
   MenuHeaderIcon,
   Popup1Button,
@@ -26,23 +24,22 @@ import {
 } from '../../components';
 import { useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
-import { colors, icons, images, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import { colors, icons, images, sizes, strings } from '../../constants';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketMainScreen'>;
 
 const MarketMainScreen: FC<Props> = ({ navigation }) => {
-  const { promoDataList } = useAppSelector((state) => state.PromoReducer) || {};
   const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
 
   const [showPopupInfo, setShowPopupInfo] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const navigateToVoucherScreen = () => {
-    navigation.navigate('VoucherMainScreen');
+  const navigateToCartScreen = () => {
+    navigation.navigate('MarketCartScreen');
   };
 
-  const navigateToDiskonScreen = () => {
-    navigation.navigate('DiskonMainScreen');
+  const navigateToPembelian = () => {
+    navigation.navigate('MarketPesananMainScreen');
   };
 
   const navigateToDetailsScreen = () => {
@@ -75,16 +72,16 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => navigation.navigate('CartScreen')}>
+          <MenuOption onSelect={navigateToCartScreen}>
             <View style={styles.popupContainer}>
               <Image source={icons.icon_keranjang} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.keranjang}</Text>
             </View>
           </MenuOption>
-          <MenuOption onSelect={() => Alert.alert('Pesanan')}>
+          <MenuOption onSelect={navigateToPembelian}>
             <View style={styles.popupContainer}>
               <Image source={icons.icon_pesanan} style={styles.popupMenuIcon} />
-              <Text style={styles.textPopupMenu}>{strings.pesanan}</Text>
+              <Text style={styles.textPopupMenu}>{'Pembelian'}</Text>
             </View>
           </MenuOption>
           <MenuOption onSelect={() => setShowPopupInfo(true)}>
@@ -112,26 +109,6 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
     );
   };
 
-  const renderPromoCard = () => {
-    return (
-      <View style={{ marginBottom: 40 }}>
-        {cardHeader(strings.promo)}
-        <FlatList
-          horizontal
-          data={promoDataList}
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={{ marginTop: 20 }}>
-              <CardPromo item={item} onPressSelengkapnya={() => console.warn(item)} />
-            </View>
-          )}
-        />
-      </View>
-    );
-  };
-
   const renderMarketCard = () => {
     return (
       <View style={{ marginBottom: 40 }}>
@@ -148,7 +125,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
                 item={item}
                 onPress={navigateToDetailsScreen}
                 onPressWishlist={() => console.warn(item)}
-                onPressVoucher={navigateToVoucherScreen}
+                onPressBeli={navigateToDetailsScreen}
               />
               {index === marketDataList.length - 1 && (
                 <CardLastItem icon={icons.icon_market_white} onPress={() => console.warn(item)} />
@@ -160,40 +137,60 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
     );
   };
 
-  const renderMarketCardSmall = () => {
-    return (
-      <View style={{ marginBottom: 40 }}>
-        {cardHeader(strings.diskon)}
-        <FlatList
-          horizontal
-          data={marketDataList}
-          showsHorizontalScrollIndicator={false}
-          scrollEventThrottle={16}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={{ marginTop: 20, flexDirection: 'row' }}>
-              <CardMarketSmall
-                item={item}
-                onPress={navigateToDetailsScreen}
-                onPressWishlist={() => console.warn(item)}
-                onPressVoucher={navigateToVoucherScreen}
-              />
-              {index === marketDataList.length - 1 && (
-                <CardLastItem
-                  customText={strings.kunjungi_toko}
-                  style={{
-                    width: SCREEN_WIDTH * 0.45,
-                  }}
-                  icon={icons.arrow_right}
-                  onPress={() => console.warn(item)}
-                />
-              )}
-            </View>
-          )}
-        />
-      </View>
-    );
-  };
+  // const renderPromoCard = () => {
+  //   return (
+  //     <View style={{ marginBottom: 40 }}>
+  //       {cardHeader(strings.promo)}
+  //       <FlatList
+  //         horizontal
+  //         data={promoDataList}
+  //         showsHorizontalScrollIndicator={false}
+  //         scrollEventThrottle={16}
+  //         keyExtractor={(item, index) => index.toString()}
+  //         renderItem={({ item }) => (
+  //           <View style={{ marginTop: 20 }}>
+  //             <CardPromo item={item} onPressSelengkapnya={() => console.warn(item)} />
+  //           </View>
+  //         )}
+  //       />
+  //     </View>
+  //   );
+  // };
+
+  // const renderMarketCardSmall = () => {
+  //   return (
+  //     <View style={{ marginBottom: 40 }}>
+  //       {cardHeader(strings.diskon)}
+  //       <FlatList
+  //         horizontal
+  //         data={marketDataList}
+  //         showsHorizontalScrollIndicator={false}
+  //         scrollEventThrottle={16}
+  //         keyExtractor={(item, index) => index.toString()}
+  //         renderItem={({ item, index }) => (
+  //           <View style={{ marginTop: 20, flexDirection: 'row' }}>
+  //             <CardMarketSmall
+  //               item={item}
+  //               onPress={navigateToDetailsScreen}
+  //               onPressWishlist={() => console.warn(item)}
+  //               onPressVoucher={navigateToCartScreen}
+  //             />
+  //             {index === marketDataList.length - 1 && (
+  //               <CardLastItem
+  //                 customText={strings.kunjungi_toko}
+  //                 style={{
+  //                   width: SCREEN_WIDTH * 0.45,
+  //                 }}
+  //                 icon={icons.arrow_right}
+  //                 onPress={() => console.warn(item)}
+  //               />
+  //             )}
+  //           </View>
+  //         )}
+  //       />
+  //     </View>
+  //   );
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -212,16 +209,24 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
         <View style={styles.topMenuContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <View style={styles.topMenuIconContainer}>
-              <Image source={icons.icon_kategori} style={styles.topMenuIcon} />
+              <Image source={icons.icon_kategori} style={styles.topMenuIcon} resizeMode="contain" />
               <Text style={styles.textTopMenu}>{strings.kategori}</Text>
             </View>
-            <TouchableOpacity style={styles.topMenuIconContainer} onPress={navigateToVoucherScreen}>
-              <Image source={icons.icon_voucher_small} style={styles.topMenuIcon} />
-              <Text style={styles.textTopMenu}>{strings.voucher}</Text>
+            <TouchableOpacity style={styles.topMenuIconContainer} onPress={navigateToCartScreen}>
+              <Image
+                source={icons.icon_keranjang_primary}
+                style={styles.topMenuIcon}
+                resizeMode="contain"
+              />
+              <Text style={styles.textTopMenu}>{'Keranjang'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.topMenuIconContainer} onPress={navigateToDiskonScreen}>
-              <Image source={icons.icon_diskon} style={styles.topMenuIcon} />
-              <Text style={styles.textTopMenu}>{strings.diskon}</Text>
+            <TouchableOpacity style={styles.topMenuIconContainer} onPress={navigateToPembelian}>
+              <Image
+                source={icons.icon_pembelian}
+                style={styles.topMenuIcon}
+                resizeMode="contain"
+              />
+              <Text style={styles.textTopMenu}>{'Pembelian'}</Text>
             </TouchableOpacity>
           </View>
           <TextInputBorder
@@ -233,8 +238,8 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
           />
         </View>
         {renderMarketCard()}
-        {renderMarketCardSmall()}
-        {renderPromoCard()}
+        {/* {renderMarketCardSmall()} */}
+        {/* {renderPromoCard()} */}
       </ScrollView>
     </SafeAreaView>
   );

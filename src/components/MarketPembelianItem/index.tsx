@@ -19,7 +19,7 @@ const MarketPembelianItem = () => {
   };
 
   const navigateToDetail = () => {
-    navigation.navigate('MarketPesananDetailScreen');
+    // navigation.navigate('MarketPesananDetailScreen');
   };
 
   return (

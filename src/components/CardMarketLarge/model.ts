@@ -5,7 +5,7 @@ import { MarketDataResponse } from '../../redux/reducers/MarketReducer';
 export interface CardMarketLargeProps {
   item: MarketDataResponse;
   onPress: () => void;
-  onPressVoucher: () => void;
+  onPressBeli: () => void;
   onPressWishlist?: () => void;
   style?: ViewStyle;
 }

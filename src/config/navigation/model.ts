@@ -64,8 +64,7 @@ export type HomeStackParamList = {
     isTopup: boolean;
   };
   PenarikanSuccessScreen: undefined;
-  CartScreen: undefined;
-  CheckoutScreen: undefined;
+  MarketCheckoutScreen: undefined;
   SelectPaymentScreen: undefined;
   PaymentScreen: {
     nominal: number;
@@ -101,6 +100,7 @@ export type HomeStackParamList = {
   DaftarBiodataAddScreen: { update: boolean };
   MarketPesananMainScreen: undefined;
   MarketPesananDetailScreen: undefined;
+  MarketCartScreen: undefined;
 };
 
 export type ProfileStackParamList = {

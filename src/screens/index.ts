@@ -7,14 +7,14 @@ import KabarDetailScreen from './kabarPromo/KabarDetailScreen';
 import KabarMainScreen from './kabarPromo/KabarMainScreen';
 import PromoDetailScreen from './kabarPromo/PromoDetailScreen';
 import PromoMainScreen from './kabarPromo/PromoMainScreen';
+import MarketCartScreen from './market/MarketCartScreen';
+import MarketCheckoutScreen from './market/MarketCheckoutScreen';
 import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
 // import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
 import MarketPesananDetailScreen from './market/MarketPesananDetailScreen';
 import MarketPesananMainScreen from './market/MarketPesananMainScreen';
 import OnboardingScreen from './onboarding/OnboardingScreen';
-import CartScreen from './paymentCartCheckout/CartScreen';
-import CheckoutScreen from './paymentCartCheckout/CheckoutScreen';
 import PaymentScreen from './paymentCartCheckout/PaymentScreen';
 import PaymentSuccessScreen from './paymentCartCheckout/PaymentSuccessScreen';
 import SelectPaymentScreen from './paymentCartCheckout/SelectPaymentScreen';
@@ -67,11 +67,9 @@ import TransaksiMainScreen from './transaksi/TransaksiMainScreen';
 import VoucherMainScreen from './voucher/VoucherMainScreen';
 
 export {
-  CartScreen,
   ChangePasswordScreen,
   ChatDetailScreen,
   ChatMainScreen,
-  CheckoutScreen,
   DaftarAlamatAddScreen,
   DaftarAlamatMainScreen,
   DaftarBiodataAddScreen,
@@ -101,6 +99,8 @@ export {
   KabarDetailScreen,
   KabarMainScreen,
   LoginScreen,
+  MarketCartScreen,
+  MarketCheckoutScreen,
   MarketItemDetailsScreen,
   // DokumenDetailScreen,
   MarketMainScreen,

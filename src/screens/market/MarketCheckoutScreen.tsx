@@ -12,7 +12,7 @@ import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'CheckoutScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCheckoutScreen'>;
 
 const Section = ({
   title,
@@ -29,7 +29,7 @@ const Section = ({
   );
 };
 
-const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
+const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   let totalPrice = 0;
   const { alamatList } = useAppSelector((s) => s.AlamatReducer);
   const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
@@ -140,7 +140,7 @@ const CheckoutScreen: React.FC<Props> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-export default CheckoutScreen;
+export default MarketCheckoutScreen;
 
 const styles = StyleSheet.create({
   container: {

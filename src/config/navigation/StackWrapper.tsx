@@ -166,7 +166,7 @@ const HomeTab = () => {
 
 const HomeStackNavigator = () => (
   <HomeStack.Navigator
-    initialRouteName={'MarketPesananMainScreen'}
+    initialRouteName={'MarketMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -184,8 +184,8 @@ const HomeStackNavigator = () => (
     /> */}
     <HomeStack.Screen name="DiskonMainScreen" component={screens.DiskonMainScreen} />
     <HomeStack.Screen name="SaldoSimpananMainScreen" component={screens.SaldoSimpananMainScreen} />
-    <HomeStack.Screen name="CartScreen" component={screens.CartScreen} />
-    <HomeStack.Screen name="CheckoutScreen" component={screens.CheckoutScreen} />
+    <HomeStack.Screen name="MarketCartScreen" component={screens.MarketCartScreen} />
+    <HomeStack.Screen name="MarketCheckoutScreen" component={screens.MarketCheckoutScreen} />
     <HomeStack.Screen name="PaymentScreen" component={screens.PaymentScreen} />
     <HomeStack.Screen name="SelectPaymentScreen" component={screens.SelectPaymentScreen} />
     <HomeStack.Screen name="PaymentSuccessScreen" component={screens.PaymentSuccessScreen} />
