@@ -49,7 +49,7 @@ const validateEmail = (email: string) => {
     );
 };
 
-const addMissingBracketJSON = (data: any): any => {
+const addMissingBracketJSON = <T>(data: T): T => {
   let temp;
   let tempObj;
 

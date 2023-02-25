@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { useAppDispatch } from '../../config';
 import { colors, sizes, strings } from '../../constants';
-import { addCartQty, deleteCartItem, substartCartQty } from '../../redux/reducers/MarketReducer';
+// import { addCartQty, deleteCartItem, substartCartQty } from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 import Button from '../Button';
 import QtyButton from '../QtyButton';
@@ -16,17 +16,17 @@ const CartItem = (props: CartItemProps) => {
   const [catatan, setCatatan] = useState<string>('');
 
   const onPressPlus = () => {
-    dispatch(addCartQty(id));
+    // dispatch(addCartQty(id));
   };
 
   const onPressMinus = () => {
     if (qty > 1) {
-      dispatch(substartCartQty(id));
+      // dispatch(substartCartQty(id));
     }
   };
 
   const onPressDelete = () => {
-    dispatch(deleteCartItem(id));
+    // dispatch(deleteCartItem(id));
   };
 
   return (

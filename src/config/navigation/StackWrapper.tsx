@@ -201,8 +201,6 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen name="PenarikanSuccessScreen" component={screens.PenarikanSuccessScreen} />
     <HomeStack.Screen name="TransaksiMainScreen" component={screens.TransaksiMainScreen} />
     <HomeStack.Screen name="VoucherMainScreen" component={screens.VoucherMainScreen} />
-    <HomeStack.Screen name="MarketMainScreen" component={screens.MarketMainScreen} />
-    <HomeStack.Screen name="MarketItemDetailsScreen" component={screens.MarketItemDetailsScreen} />
     <HomeStack.Screen name="PinjamanMainScreen" component={screens.PinjamanMainScreen} />
     <HomeStack.Screen name="PinjamanListScreen" component={screens.PinjamanListScreen} />
     <HomeStack.Screen name="PinjamanStep1Screen" component={screens.PinjamanStep1} />
@@ -232,7 +230,17 @@ const HomeStackNavigator = () => (
       name="MarketPesananDetailScreen"
       component={screens.MarketPesananDetailScreen}
     />
-    <HomeStack.Screen name="MarketItemListScreen" component={screens.MarketItemListScreen} />
+    <HomeStack.Screen name="MarketFavoriteScreen" component={screens.MarketFavoriteScreen} />
+    <HomeStack.Screen
+      name="MarketProductScreen"
+      component={screens.MarketProductScreen}
+      initialParams={{ title: 'Semua Produk', type: 'all' }}
+    />
+    <HomeStack.Screen name="MarketMainScreen" component={screens.MarketMainScreen} />
+    <HomeStack.Screen
+      name="MarketProductDetailsScreen"
+      component={screens.MarketProductDetailsScreen}
+    />
   </HomeStack.Navigator>
 );
 

@@ -5,4 +5,6 @@ export interface QtyButtonProps {
   onPressMinus: () => void;
   onPressPlus: () => void;
   style?: ViewStyle;
+  max?: number;
+  min?: number;
 }

@@ -22,6 +22,15 @@ import {
   watchSendKoperasiData,
   watchSendUserKoperasiEmail,
 } from './LoginSaga';
+import {
+  watchAddToCart,
+  watchAddToFavorite,
+  watchGetMarketAllProduct,
+  watchGetMarketFavoritData,
+  watchGetMarketMainData,
+  watchGetProductDetails,
+  watchSearchMarketProduct,
+} from './MarketSaga';
 import { watchGetAllNotifikasi, watchGetNotifikasiDetail } from './NotifikasiSaga';
 import { watchGetPekerjaan, watchUpdatePekerjaan } from './PekerjaanSaga';
 import {
@@ -110,5 +119,12 @@ export function* rootSaga() {
     fork(watchChangePassword),
     fork(watchGetIdCard),
     fork(watchGetKoperasiData),
+    fork(watchGetMarketMainData),
+    fork(watchAddToFavorite),
+    fork(watchGetMarketFavoritData),
+    fork(watchGetMarketAllProduct),
+    fork(watchSearchMarketProduct),
+    fork(watchGetProductDetails),
+    fork(watchAddToCart),
   ]);
 }

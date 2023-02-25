@@ -8,4 +8,6 @@ export interface TextInputBorderProps extends TextInputProps {
   textBoxStyle?: ViewStyle;
   error?: FieldError;
   errorText?: string;
+  addRightButton?: boolean;
+  onPressButton?: () => void;
 }

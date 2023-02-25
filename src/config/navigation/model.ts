@@ -87,8 +87,6 @@ export type HomeStackParamList = {
   DaftarKtpCameraScreen: undefined;
   DaftarKtpSelfieScreen: undefined;
   VoucherMainScreen: undefined;
-  MarketMainScreen: undefined;
-  MarketItemDetailsScreen: undefined;
   DiskonMainScreen: undefined;
   DokumenMainScreen: undefined;
   DokumenDetailScreen: { item: DokumenData };
@@ -101,7 +99,10 @@ export type HomeStackParamList = {
   MarketPesananMainScreen: undefined;
   MarketPesananDetailScreen: undefined;
   MarketCartScreen: undefined;
-  MarketItemListScreen: undefined;
+  MarketFavoriteScreen: undefined;
+  MarketProductScreen: { type: 'all' | 'category' | 'search'; title: string };
+  MarketMainScreen: undefined;
+  MarketProductDetailsScreen: { id: number };
 };
 
 export type ProfileStackParamList = {

@@ -1,11 +1,47 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface MarketDataResponse {
+export type ProductData = {
   id: number;
-  productName: string;
-  price: number;
-  image: string;
-}
+  foto: string;
+  nama: 'Produk pertama';
+  kategori: string;
+  harga: number;
+  isFavorit: boolean;
+};
+
+export type MarketMainData = {
+  produkTerbaru: ProductData[];
+};
+
+export type MarketFavoritData = {
+  produkFavorit: ProductData[];
+};
+
+export type MarketProductData = {
+  produk: ProductData[];
+};
+
+export type AddToCartParam = {
+  jumlah: number;
+  variasiPertama: string;
+  variasiKedua: string;
+  catatan: string;
+  produkId: number;
+};
+
+export type OrderProccessParam = {
+  alamatId: string;
+  keranjangId: number[];
+  pengiriman: {
+    code: string;
+    service: string;
+    cost: number;
+    etd: string;
+    note: string;
+  };
+  totalBarangDanOngkir: number;
+  metodePembayaranId: number;
+};
 
 export interface CartItemData {
   id: number;
@@ -19,81 +55,59 @@ export interface CartItemData {
   catatan?: string;
 }
 
-export interface MarketItemDetailsResponse {
+export interface MarketProductDetails {
   id: number;
-  price: number;
-  photos: string[];
-  name: string;
-  terjual: number;
-  kondisi: string;
-  rating: string;
-  berat: string;
+  fotoProduk: string[];
+  nama: string;
   deskripsi: string;
-  asuransi: string;
-  ukuran: string[];
-  warna: string[];
-  namaToko: string;
+  kategori: string;
   stok: number;
-  logoToko: string;
-  lokasiToko: string;
+  harga: number;
+  isKondisiBaru: boolean;
+  status: string;
+  variasiPertama: {
+    nama: string | null;
+    pilihan: string[];
+  };
+  variasiKedua: {
+    nama: string | null;
+    pilihan: string[];
+  };
+  isFavorit: boolean;
 }
 
-interface RootState {
-  marketDataList: MarketDataResponse[];
-  marketItemDetails: MarketItemDetailsResponse;
+type RootState = {
+  marketMainData: MarketMainData;
+  marketFavoritData: MarketFavoritData;
+  marketProductData: MarketProductData;
+  marketProductDetails: MarketProductDetails;
   cartItemDataList: CartItemData[];
   error?: unknown;
-}
+};
 
 const initialState: RootState = {
-  marketDataList: [
-    {
-      id: 1,
-      productName: 'Jababeka Bakal Terbitkan ',
-      price: 17000000,
-      image: 'https://picsum.photos/id/121/400/400',
-    },
-    {
-      id: 2,
-      productName: '5,06 Triliun',
-      price: 1121000,
-      image: 'https://picsum.photos/id/1/400/400',
-    },
-    {
-      id: 3,
-      productName: 'Jababeka Triliun',
-      price: 9921210,
-      image: 'https://picsum.photos/id/11/400/400',
-    },
-    {
-      id: 4,
-      productName: 'Obligasi Global',
-      price: 256324300,
-      image: 'https://picsum.photos/id/34/400/400',
-    },
-  ],
-  marketItemDetails: {
-    id: 1,
-    asuransi: 'Optional',
-    berat: '4.9 Gram',
-    deskripsi:
-      'Tejs t saded edad ed ADdadawdwa Lora reamda dcofnijfy fneiaFd lbewiFE8asf fulef ASD dIASDNIdBADBKASdkjlASKLJDSAJDN akldnalskd askldn asldaildiow qnwd.q',
-    kondisi: 'Baru',
-    name: 'Test Nama ini 1',
-    photos: [
-      'https://picsum.photos/id/34/400/400',
-      'https://picsum.photos/id/24/400/400',
-      'https://picsum.photos/id/14/400/400',
-    ],
-    price: 700000,
-    rating: '4.5',
-    stok: 12,
-    terjual: 16,
-    ukuran: ['X', 'L', 'S', 'M', 'XL'],
-    warna: ['Hijau', 'Merah', 'Putih'],
-    namaToko: 'Testing 1',
-    logoToko: 'https://picsum.photos/id/82/400/400',
-    lokasiToko: 'Jakarta, Indonesia',
+  marketMainData: {
+    produkTerbaru: [],
+  },
+  marketFavoritData: {
+    produkFavorit: [],
+  },
+  marketProductData: {
+    produk: [],
+  },
+  marketProductDetails: {
+    deskripsi: '',
+    fotoProduk: [''],
+    harga: 0,
+    id: 0,
+    isFavorit: false,
+    isKondisiBaru: false,
+    kategori: '',
+    nama: '',
+    status: '',
+    stok: 0,
+    variasiKedua: { nama: null, pilihan: [] },
+    variasiPertama: { nama: null, pilihan: [] },
   },
   cartItemDataList: [
     {
@@ -133,48 +147,110 @@ const marketSlice = createSlice({
   name: 'marketSlice',
   initialState,
   reducers: {
-    getMarketDataSuccess: (state: RootState, { payload }: PayloadAction<MarketDataResponse[]>) => {
-      state.marketDataList = payload;
+    getMarketMainDataSuccess: (state: RootState, { payload }: PayloadAction<MarketMainData>) => {
+      state.marketMainData = payload;
     },
-    getMarketDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+    getMarketMainDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    addCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
-      const index = state.cartItemDataList.findIndex((item: { id: number }) => item.id === payload);
-      state.cartItemDataList[index].qty += 1;
+    getMarketFavoritDataSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MarketFavoritData>,
+    ) => {
+      state.marketFavoritData = payload;
     },
-    substartCartQty: (state: RootState, { payload }: PayloadAction<number>) => {
-      const index = state.cartItemDataList.findIndex((item: { id: number }) => item.id === payload);
-      state.cartItemDataList[index].qty -= 1;
+    getMarketFavoritDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
     },
-    deleteCartItem: (state: RootState, { payload }: PayloadAction<number>) => {
-      state.cartItemDataList = state.cartItemDataList.filter(
-        (item: { id: number }) => item.id !== payload,
-      );
-    },
-    addCartItem: (state: RootState, { payload }: PayloadAction<CartItemData>) => {
-      const index = state.cartItemDataList.findIndex(
-        (item: { id: number }) => item.id === payload.id,
-      );
+    addToFavoriteSuccess: (state: RootState, { payload }: PayloadAction<number>) => {
+      const temp = state.marketMainData.produkTerbaru;
 
-      if (index < 0) {
-        state.cartItemDataList.push(payload);
-      } else {
-        state.cartItemDataList[index].qty += 1;
+      const indexNewProduct = temp.findIndex((item) => item.id === payload);
+      if (indexNewProduct > -1) {
+        if (state.marketMainData.produkTerbaru[indexNewProduct].isFavorit)
+          state.marketMainData.produkTerbaru[indexNewProduct].isFavorit = false;
+        else state.marketMainData.produkTerbaru[indexNewProduct].isFavorit = true;
       }
+
+      const indexFavorite = state.marketFavoritData.produkFavorit.findIndex(
+        (item) => item.id === payload,
+      );
+      if (indexFavorite > -1) {
+        if (state.marketFavoritData.produkFavorit[indexFavorite].isFavorit)
+          state.marketFavoritData.produkFavorit[indexFavorite].isFavorit = false;
+        else state.marketFavoritData.produkFavorit[indexFavorite].isFavorit = true;
+      }
+
+      const indexProduct = state.marketProductData.produk.findIndex((item) => item.id === payload);
+      if (indexProduct > -1) {
+        if (state.marketProductData.produk[indexProduct].isFavorit)
+          state.marketProductData.produk[indexProduct].isFavorit = false;
+        else state.marketProductData.produk[indexProduct].isFavorit = true;
+      }
+
+      if (state.marketProductDetails.isFavorit) state.marketProductDetails.isFavorit = false;
+      else state.marketProductDetails.isFavorit = true;
+    },
+    addToFavoriteFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getMarketAllProductSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MarketProductData>,
+    ) => {
+      state.marketProductData = payload;
+    },
+    getMarketAllProductFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    searchMarketProductSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MarketProductData>,
+    ) => {
+      state.marketProductData = payload;
+    },
+    searchMarketProductFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getProductDetailsSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MarketProductDetails>,
+    ) => {
+      state.marketProductDetails = payload;
+    },
+    getProductDetailsFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    addToCartSuccees: () => {},
+    addToCartFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
     },
   },
 });
 
-export const fetchMarketData = createAction('fetchMarketData');
+export const fetchMarketMainData = createAction('fetchMarketMainData');
+export const fetchMarketFavoritData = createAction('fetchMarketFavoritData');
+export const fetchAddToFavorit = createAction<number>('fetchAddToFavorit');
+export const fetchMarketAllProduct = createAction('fetchMarketAllProduct');
+export const fetchSearchMarketProduct = createAction<string>('fetchSearchMarketProduct');
+export const fetchMarketProductDetails = createAction<number>('fetchMarketProductDetails');
+export const fetchAddToCart = createAction<AddToCartParam>('fetchAddToCart');
 
 export const {
-  getMarketDataFailed,
-  getMarketDataSuccess,
-  addCartItem,
-  addCartQty,
-  deleteCartItem,
-  substartCartQty,
+  getMarketMainDataFailed,
+  getMarketMainDataSuccess,
+  getMarketFavoritDataFailed,
+  getMarketFavoritDataSuccess,
+  addToFavoriteFailed,
+  addToFavoriteSuccess,
+  getMarketAllProductFailed,
+  getMarketAllProductSuccess,
+  searchMarketProductFailed,
+  searchMarketProductSuccess,
+  getProductDetailsFailed,
+  getProductDetailsSuccess,
+  addToCartFailed,
+  addToCartSuccees,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

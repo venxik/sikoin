@@ -1,11 +1,19 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors, SCREEN_WIDTH, sizes } from '../../constants';
 import { TextInputBorderProps } from './model';
 
 const TextInputBorder = (props: TextInputBorderProps) => {
-  const { style, icon, textBoxStyle, error, errorText } = props || {};
+  const {
+    style,
+    icon,
+    textBoxStyle,
+    error,
+    errorText,
+    addRightButton = false,
+    onPressButton,
+  } = props || {};
 
   return (
     <View style={style}>
@@ -18,7 +26,9 @@ const TextInputBorder = (props: TextInputBorderProps) => {
           style,
         ]}
       >
-        {icon ? <Image resizeMode="contain" source={icon} style={styles.iconStyle} /> : null}
+        {!addRightButton && icon ? (
+          <Image resizeMode="contain" source={icon} style={styles.iconStyle} />
+        ) : null}
         <TextInput
           {...props}
           style={[styles.textInputStyle, textBoxStyle]}
@@ -27,6 +37,11 @@ const TextInputBorder = (props: TextInputBorderProps) => {
           autoCapitalize="none"
           clearButtonMode="always"
         />
+        {addRightButton && icon ? (
+          <Pressable onPress={onPressButton}>
+            <Image resizeMode="contain" source={icon} style={styles.iconStyle} />
+          </Pressable>
+        ) : null}
       </View>
       {error && <Text style={styles.textError}>{errorText}</Text>}
     </View>

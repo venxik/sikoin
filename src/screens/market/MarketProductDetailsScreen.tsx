@@ -1,67 +1,71 @@
 /* eslint-disable no-param-reassign */
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Alert,
+  FlatList,
   Image,
   ImageSourcePropType,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
 
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Controller, useForm } from 'react-hook-form';
+import { Heart } from 'react-native-iconly';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  interpolateColor,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
 
 import { Button, FilterVariasi, HeaderBack, QtyButton } from '../../components';
-import { useAppSelector } from '../../config';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
+import {
+  fetchAddToCart,
+  fetchAddToFavorit,
+  fetchMarketProductDetails,
+} from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'MarketItemDetailsScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketProductDetailsScreen'>;
 const dotSize = 6;
 // const tab = ['Deskripsi', 'Ulasan', 'Diskusi'];
 
-const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
-  const scrollX = useSharedValue(0);
-  // const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
-  const { marketItemDetails } = useAppSelector((s) => s.MarketReducer);
-  const { asuransi, deskripsi, kondisi, name, photos, price, stok, ukuran, warna } =
-    marketItemDetails;
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      scrollX.value = event.contentOffset.x;
-    },
-  });
+const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
+  const { id: productId } = route.params;
+  const { marketProductDetails } = useAppSelector((s) => s.MarketReducer);
+  const dispatch = useAppDispatch();
+  const {
+    deskripsi,
+    isKondisiBaru,
+    nama,
+    fotoProduk,
+    harga,
+    stok,
+    variasiPertama,
+    variasiKedua,
+    kategori,
+    isFavorit,
+  } = marketProductDetails;
+  const { nama: namaVariasiPertama, pilihan: pilihanVariasiPertama } = variasiPertama;
+  const { nama: namaVariasiKedua, pilihan: pilihanVariasiKedua } = variasiKedua;
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const sheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['90%', '95%'], []);
-  // const [selectedTab, setSelectedTab] = useState(tab[0]);
+  const snapPoints = useMemo(() => ['70%', '85%'], []);
   // eslint-disable-next-line no-unused-vars
-  const [selectedWarna, setSelectedWarna] = useState<string>('');
+  const [selectedVariasiPertama, setSelectedVariasiPertama] = useState<string>('');
   // eslint-disable-next-line no-unused-vars
-  const [selectedUkuran, setSelectedUkuran] = useState<string>('');
+  const [selectedVariasiKedua, setSelectedVariasiKedua] = useState<string>('');
   const [qtyValue, setQtyValue] = useState<number>(1);
 
-  // const navigateToVoucherScreen = () => {
-  //   navigation.navigate('VoucherMainScreen');
-  // };
-
-  // const navigateToDetailsScreen = () => {
-  //   navigation.push('MarketItemDetailsScreen');
-  // };
+  useEffect(() => {
+    dispatch(fetchMarketProductDetails(productId));
+  }, []);
 
   const navigateToCartScreen = () => {
     navigation.push('MarketCartScreen');
@@ -77,8 +81,21 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
     setQtyValue((e) => (e += 1));
   };
 
-  const onPressAddToCart = () => {
+  const onPressAddToCart = ({ catatan }: { catatan: string }) => {
+    dispatch(
+      fetchAddToCart({
+        jumlah: qtyValue,
+        produkId: productId,
+        variasiPertama: selectedVariasiPertama,
+        variasiKedua: selectedVariasiKedua,
+        catatan,
+      }),
+    );
     sheetRef.current?.close();
+  };
+
+  const onPressAddToFavorit = () => {
+    dispatch(fetchAddToFavorit(productId));
   };
 
   const renderPopupMenu = () => {
@@ -140,55 +157,52 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   const renderPhotosIndicator = () => {
     return (
       <View style={styles.dotContainer}>
-        {photos.map((_, index) => {
-          const inputRange = [
-            (index - 1) * SCREEN_WIDTH,
-            index * SCREEN_WIDTH,
-            (index + 1) * SCREEN_WIDTH,
-          ];
-          const animatedStyles = useAnimatedStyle(() => {
-            return {
-              width: interpolate(
-                scrollX.value,
-                inputRange,
-                [dotSize + 10, dotSize + 40, dotSize + 10],
-                Extrapolate.CLAMP,
-              ),
-              backgroundColor: interpolateColor(scrollX.value, inputRange, [
-                colors.strokeGrey,
-                colors.bodyText,
-                colors.strokeGrey,
-              ]),
-            };
-          });
-          return <Animated.View style={[styles.dot, animatedStyles]} key={`dot-${index}`} />;
+        {fotoProduk.map((_, index) => {
+          return (
+            <View
+              style={[
+                styles.dot,
+                {
+                  width: currentImgIndex === index ? 50 : 10,
+                  backgroundColor:
+                    currentImgIndex === index ? colors.bodyText : colors.bodyTextGrey,
+                },
+              ]}
+              key={`dot-${index}`}
+            />
+          );
         })}
       </View>
     );
   };
 
   const renderPhotos = () => {
-    return (
-      <View>
-        <Animated.ScrollView
-          horizontal
-          pagingEnabled
-          decelerationRate={0}
-          scrollEventThrottle={16}
-          showsHorizontalScrollIndicator={false}
-          onScroll={scrollHandler}
-        >
-          {photos.map((item, index) => {
-            return (
-              <View key={index} style={styles.photosContainer}>
+    if (fotoProduk && fotoProduk.length > 0)
+      return (
+        <View>
+          <FlatList
+            horizontal
+            pagingEnabled
+            decelerationRate={0}
+            scrollEventThrottle={16}
+            showsHorizontalScrollIndicator={false}
+            data={fotoProduk}
+            onScroll={(e) => {
+              const x = e.nativeEvent.contentOffset.x;
+              const index = (x / SCREEN_WIDTH).toFixed(0);
+              setCurrentImgIndex(parseInt(index));
+            }}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <View style={styles.photosContainer}>
                 <Image source={{ uri: item }} resizeMode="cover" style={styles.photos} />
               </View>
-            );
-          })}
-        </Animated.ScrollView>
-        <View style={styles.dotMainContainer}>{renderPhotosIndicator()}</View>
-      </View>
-    );
+            )}
+          />
+          <View style={styles.dotMainContainer}>{renderPhotosIndicator()}</View>
+        </View>
+      );
+    return null;
   };
 
   const renderDetailsItem = (
@@ -250,7 +264,9 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           borderBottomWidth: 1,
         }}
       >
-        {renderDetailsItem(icons.icon_kondisi, kondisi, strings.kondisi, { width: '50%' })}
+        {renderDetailsItem(icons.icon_kondisi, isKondisiBaru ? 'Baru' : 'Bekas', strings.kondisi, {
+          width: '50%',
+        })}
         {renderDetailsItem(icons.icon_berat, 100, 'Stock', {
           width: '50%',
         })}
@@ -288,13 +304,39 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
     );
   };
 
+  const { control, handleSubmit } = useForm<{ catatan: string }>({
+    defaultValues: {
+      catatan: '',
+    },
+  });
+
   const renderDescDetails = () => {
     return (
       <View style={{ marginTop: sizes.padding * 1.5 }}>
         <Text style={[styles.textDesc, { marginBottom: 40 }]}>{deskripsi}</Text>
-        {renderDescItem(strings.asuransi, asuransi)}
-        {renderDescItem(strings.ukuran, ukuran)}
-        {renderDescItem(strings.warna, warna)}
+        {renderDescItem('Kategori', kategori)}
+        {namaVariasiPertama && renderDescItem(namaVariasiPertama, pilihanVariasiPertama)}
+        {namaVariasiKedua && renderDescItem(namaVariasiKedua, pilihanVariasiKedua)}
+        <Controller
+          control={control}
+          name="catatan"
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              value={value}
+              onChangeText={(e) => onChange(e)}
+              placeholder="Catatan..."
+              placeholderTextColor={colors.bodyTextGrey}
+              style={{
+                marginTop: sizes.padding,
+                borderBottomWidth: 0.5,
+                borderBottomColor: colors.bodyText,
+                fontSize: 15,
+                fontFamily: 'Inter-Medium',
+                color: colors.bodyText,
+              }}
+            />
+          )}
+        />
         {/* <TouchableOpacity
           style={[
             styles.row,
@@ -362,32 +404,41 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
   //   );
   // };
 
-  const renderBottomSheetContent = () => {
-    const total = useMemo(() => qtyValue * price, [qtyValue]);
+  const renderBottomSheetContent = useCallback(() => {
+    const total = useMemo(() => qtyValue * harga, [qtyValue]);
 
     return (
       <View style={{ padding: sizes.padding }}>
         <View style={{ flexDirection: 'row' }}>
-          <Image source={{ uri: photos[0] }} style={styles.bottomSheetPhoto} />
+          <Image source={{ uri: fotoProduk[0] }} style={styles.bottomSheetPhoto} />
           <View style={{ marginLeft: sizes.padding }}>
             <Text style={styles.cardHeaderTitle}>{strings.stok}</Text>
             <Text style={[styles.textDesc, { color: colors.bodyTextLightGrey }]}>{stok}</Text>
           </View>
         </View>
-        <FilterVariasi
-          onChangeItem={(item) => setSelectedWarna(item)}
-          item={warna}
-          title={strings.warna}
-          style={{ marginTop: sizes.padding }}
-        />
-        <FilterVariasi
-          onChangeItem={(item) => setSelectedUkuran(item)}
-          item={ukuran}
-          title={strings.ukuran}
-          style={{ marginTop: sizes.padding }}
-        />
+        {namaVariasiPertama && (
+          <FilterVariasi
+            onChangeItem={(item) => setSelectedVariasiPertama(item)}
+            item={pilihanVariasiPertama}
+            title={namaVariasiPertama}
+            style={{ marginTop: sizes.padding }}
+          />
+        )}
+        {namaVariasiKedua && (
+          <FilterVariasi
+            onChangeItem={(item) => setSelectedVariasiKedua(item)}
+            item={pilihanVariasiKedua}
+            title={namaVariasiKedua}
+            style={{ marginTop: sizes.padding }}
+          />
+        )}
         <Text style={styles.bottomSheetTitle}>{strings.jumlah}</Text>
-        <QtyButton onPressMinus={onPressMinusQty} onPressPlus={onPressPlusQty} qty={qtyValue} />
+        <QtyButton
+          onPressMinus={onPressMinusQty}
+          onPressPlus={onPressPlusQty}
+          qty={qtyValue}
+          max={stok}
+        />
         <Text style={styles.bottomSheetTitle}>{strings.total_harga}</Text>
         <View style={styles.showNominalContainer}>
           <View style={styles.row}>
@@ -399,12 +450,29 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <Button
           text={strings.tambahkan_keranjang}
-          onPress={onPressAddToCart}
+          onPress={handleSubmit(onPressAddToCart)}
           buttonContainerStyle={{ marginTop: sizes.padding * 2 }}
         />
       </View>
     );
-  };
+  }, [
+    onPressMinusQty,
+    onPressPlusQty,
+    onPressAddToCart,
+    setSelectedVariasiPertama,
+    setSelectedVariasiKedua,
+    qtyValue,
+    stok,
+    pilihanVariasiPertama,
+    pilihanVariasiKedua,
+    namaVariasiPertama,
+    namaVariasiKedua,
+  ]);
+
+  const renderBackdrop = useCallback(
+    (props) => <BottomSheetBackdrop {...props} disappearsOnIndex={0} appearsOnIndex={1} />,
+    [],
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -415,13 +483,13 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
           {/* TITLE SECTION */}
           <View style={[styles.row, { justifyContent: 'space-between' }]}>
             <Text style={styles.textName} numberOfLines={2}>
-              {name}
+              {nama}
             </Text>
-            <TouchableOpacity>
-              <Image source={icons.icon_wishlist} style={styles.iconWishlist} />
+            <TouchableOpacity onPress={onPressAddToFavorit}>
+              <Heart color={colors.primary} style={styles.iconWishlist} filled={isFavorit} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
+          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(harga)}`}</Text>
           {/* DETAILS SECTION */}
           {renderDetails()}
           {/* <View style={styles.tabContainer}>
@@ -458,13 +526,19 @@ const MarketItemDetailsScreen: React.FC<Props> = ({ navigation }) => {
         /> */}
       </View>
       {/* BOTTOM SHEET */}
-      <BottomSheet ref={sheetRef} index={-1} snapPoints={snapPoints} enablePanDownToClose>
+      <BottomSheet
+        ref={sheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+        backdropComponent={renderBackdrop}
+      >
         <BottomSheetScrollView>{renderBottomSheetContent()}</BottomSheetScrollView>
       </BottomSheet>
     </SafeAreaView>
   );
 };
-export default MarketItemDetailsScreen;
+export default MarketProductDetailsScreen;
 
 const styles = StyleSheet.create({
   container: {

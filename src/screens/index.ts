@@ -9,12 +9,13 @@ import PromoDetailScreen from './kabarPromo/PromoDetailScreen';
 import PromoMainScreen from './kabarPromo/PromoMainScreen';
 import MarketCartScreen from './market/MarketCartScreen';
 import MarketCheckoutScreen from './market/MarketCheckoutScreen';
-import MarketItemDetailsScreen from './market/MarketItemDetailsScreen';
-import MarketItemListScreen from './market/MarketItemListScreen';
+import MarketFavoriteScreen from './market/MarketFavoriteScreen';
 // import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
 import MarketMainScreen from './market/MarketMainScreen';
 import MarketPesananDetailScreen from './market/MarketPesananDetailScreen';
 import MarketPesananMainScreen from './market/MarketPesananMainScreen';
+import MarketProductDetailsScreen from './market/MarketProductDetailsScreen';
+import MarketProductScreen from './market/MarketProductScreen';
 import OnboardingScreen from './onboarding/OnboardingScreen';
 import PaymentScreen from './paymentCartCheckout/PaymentScreen';
 import PaymentSuccessScreen from './paymentCartCheckout/PaymentSuccessScreen';
@@ -102,12 +103,13 @@ export {
   LoginScreen,
   MarketCartScreen,
   MarketCheckoutScreen,
-  MarketItemDetailsScreen,
-  MarketItemListScreen,
+  MarketFavoriteScreen,
   // DokumenDetailScreen,
   MarketMainScreen,
   MarketPesananDetailScreen,
   MarketPesananMainScreen,
+  MarketProductDetailsScreen,
+  MarketProductScreen,
   OnboardingScreen,
   PaymentScreen,
   PaymentSuccessScreen,

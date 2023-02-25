@@ -5,7 +5,7 @@ import { colors, icons, sizes } from '../../constants';
 import { QtyButtonProps } from './model';
 
 const QtyButton = (props: QtyButtonProps) => {
-  const { onPressMinus, onPressPlus, qty, style } = props;
+  const { onPressMinus, onPressPlus, qty, style, min = 1, max = 10 } = props;
   return (
     <View
       style={[
@@ -15,13 +15,29 @@ const QtyButton = (props: QtyButtonProps) => {
         },
       ]}
     >
-      <TouchableOpacity onPress={onPressMinus} style={styles.plusMinusContainer}>
+      <TouchableOpacity
+        onPress={onPressMinus}
+        style={[
+          styles.plusMinusContainer,
+          {
+            borderColor: qty <= min ? colors.bodyTextLightGrey : colors.primary,
+          },
+        ]}
+      >
         <Image source={icons.minus_shape} style={styles.plusMinusIcon} resizeMode="contain" />
       </TouchableOpacity>
       <View style={styles.textQtyContainer}>
         <Text style={styles.textJumlahHarga}>{qty}</Text>
       </View>
-      <TouchableOpacity onPress={onPressPlus} style={styles.plusMinusContainer}>
+      <TouchableOpacity
+        onPress={onPressPlus}
+        style={[
+          styles.plusMinusContainer,
+          {
+            borderColor: qty >= max ? colors.bodyTextLightGrey : colors.primary,
+          },
+        ]}
+      >
         <Image source={icons.plus_shape} style={styles.plusMinusIcon} resizeMode="contain" />
       </TouchableOpacity>
     </View>

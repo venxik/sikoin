@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
-  Alert,
   FlatList,
   Image,
   SafeAreaView,
@@ -22,17 +21,23 @@ import {
   Popup1Button,
   TextInputBorder,
 } from '../../components';
-import { useAppSelector } from '../../config';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, images, sizes, strings } from '../../constants';
+import { fetchAddToFavorit, fetchMarketMainData } from '../../redux/reducers/MarketReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketMainScreen'>;
 
 const MarketMainScreen: FC<Props> = ({ navigation }) => {
-  const { marketDataList } = useAppSelector((state) => state.MarketReducer) || {};
+  const { marketMainData } = useAppSelector((state) => state.MarketReducer) || {};
+  const dispatch = useAppDispatch();
 
   const [showPopupInfo, setShowPopupInfo] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    dispatch(fetchMarketMainData());
+  }, []);
 
   const navigateToCartScreen = () => {
     navigation.navigate('MarketCartScreen');
@@ -42,8 +47,16 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
     navigation.navigate('MarketPesananMainScreen');
   };
 
-  const navigateToDetailsScreen = () => {
-    navigation.navigate('MarketItemDetailsScreen');
+  const navigateToDetailsScreen = (id: number) => {
+    navigation.navigate('MarketProductDetailsScreen', { id });
+  };
+
+  const navigateToFavoritScreen = () => {
+    navigation.navigate('MarketFavoriteScreen');
+  };
+
+  const onPressAddToFavorit = (idProduk: number) => {
+    dispatch(fetchAddToFavorit(idProduk));
   };
 
   const renderHeaderIcon = () => {
@@ -66,7 +79,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
           }}
           optionsContainerStyle={styles.optionsContainer}
         >
-          <MenuOption onSelect={() => Alert.alert('Favorit')}>
+          <MenuOption onSelect={navigateToFavoritScreen}>
             <View style={styles.popupContainer}>
               <Image source={icons.icon_favorit} style={styles.popupMenuIcon} />
               <Text style={styles.textPopupMenu}>{strings.favorit}</Text>
@@ -115,7 +128,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
         {cardHeader(strings.terbaru)}
         <FlatList
           horizontal
-          data={marketDataList}
+          data={marketMainData?.produkTerbaru}
           showsHorizontalScrollIndicator={false}
           scrollEventThrottle={16}
           keyExtractor={(item, index) => index.toString()}
@@ -123,14 +136,19 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
             <View style={{ marginTop: 20, flexDirection: 'row' }}>
               <CardMarketLarge
                 item={item}
-                onPress={navigateToDetailsScreen}
-                onPressWishlist={() => console.warn(item)}
-                onPressBeli={navigateToDetailsScreen}
+                onPress={() => navigateToDetailsScreen(item.id)}
+                onPressWishlist={() => onPressAddToFavorit(item.id)}
+                onPressBeli={() => navigateToDetailsScreen(item.id)}
               />
-              {index === marketDataList.length - 1 && (
+              {index === marketMainData?.produkTerbaru?.length - 1 && (
                 <CardLastItem
                   icon={icons.icon_market_white}
-                  onPress={() => navigation.navigate('MarketItemListScreen')}
+                  onPress={() =>
+                    navigation.navigate('MarketProductScreen', {
+                      title: 'Semua Produk',
+                      type: 'all',
+                    })
+                  }
                 />
               )}
             </View>
@@ -238,6 +256,10 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
             onChangeText={(e) => setSearchValue(e)}
             placeholder={strings.search_market_placeholder}
             icon={icons.icon_search_market}
+            addRightButton
+            onPressButton={() =>
+              navigation.navigate('MarketProductScreen', { title: searchValue, type: 'search' })
+            }
           />
         </View>
         {renderMarketCard()}

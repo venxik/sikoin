@@ -1,42 +1,46 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import FastImage from 'react-native-fast-image';
+import { Heart } from 'react-native-iconly';
 
-import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
+import { colors, SCREEN_HEIGHT, SCREEN_WIDTH, sizes } from '../../constants';
 import { formatter } from '../../utils';
 import { CardMarketSmallProps } from './model';
 
 const CardMarketSmall = (props: CardMarketSmallProps) => {
-  const { item, onPress, style, imageHeight = SCREEN_HEIGHT * 0.3 } = props || null;
-  const { productName, price, image } = item || {};
-
-  const onPressWishlist = () => {
-    console.warn(item);
-  };
+  const {
+    item,
+    onPress,
+    style,
+    imageHeight = SCREEN_HEIGHT * 0.3,
+    onPressWishlist,
+  } = props || null;
+  const { nama, harga, foto, isFavorit } = item || {};
 
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
-      <FastImage source={{ uri: image }} style={[styles.imageStyle, { height: imageHeight }]} />
+      <FastImage source={{ uri: foto }} style={[styles.imageStyle, { height: imageHeight }]} />
       <View style={styles.bottomContainer}>
         <View style={{ flex: 0.7 }}>
           <View style={styles.containerStyle}>
             <Text style={styles.titleStyle} numberOfLines={2}>
-              {productName}
+              {nama}
             </Text>
             <TouchableOpacity onPress={onPressWishlist}>
-              <Image
-                source={icons.icon_wishlist}
+              <Heart
                 style={{
                   width: sizes.icon_size,
                   height: sizes.icon_size,
                 }}
+                color={colors.primary}
+                filled={isFavorit}
               />
             </TouchableOpacity>
           </View>
 
           <Text style={styles.priceContainer}>
-            {`Rp ${formatter.formatNumberToCurreny(price)}`}
+            {`Rp ${formatter.formatNumberToCurreny(harga)}`}
           </Text>
         </View>
         {/* 
@@ -59,8 +63,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: sizes.padding,
-    width: SCREEN_WIDTH * 0.45,
-    marginRight: sizes.padding,
+    width: SCREEN_WIDTH * 0.42,
   },
   imageStyle: {
     width: '100%',
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    // width: '100%',
   },
   titleStyle: {
     fontSize: 13,
