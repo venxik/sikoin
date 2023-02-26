@@ -17,11 +17,12 @@ import {
 
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
 import { Controller, useForm } from 'react-hook-form';
 import { Heart } from 'react-native-iconly';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 
-import { Button, FilterVariasi, HeaderBack, QtyButton } from '../../components';
+import { Button, FilterVariasi, HeaderBack, Popup2Button, QtyButton } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, SCREEN_WIDTH, sizes, strings } from '../../constants';
@@ -29,6 +30,7 @@ import {
   fetchAddToCart,
   fetchAddToFavorit,
   fetchMarketProductDetails,
+  setShowPopupAddToCartStatus,
 } from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 
@@ -38,7 +40,7 @@ const dotSize = 6;
 
 const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   const { id: productId } = route.params;
-  const { marketProductDetails } = useAppSelector((s) => s.MarketReducer);
+  const { marketProductDetails, showPopupAddToCart } = useAppSelector((s) => s.MarketReducer);
   const dispatch = useAppDispatch();
   const {
     deskripsi,
@@ -62,6 +64,14 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   // eslint-disable-next-line no-unused-vars
   const [selectedVariasiKedua, setSelectedVariasiKedua] = useState<string>('');
   const [qtyValue, setQtyValue] = useState<number>(1);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (showPopupAddToCart === 'success') {
+      setShowPopup(true);
+      dispatch(setShowPopupAddToCartStatus('idle'));
+    }
+  }, [showPopupAddToCart]);
 
   useEffect(() => {
     dispatch(fetchMarketProductDetails(productId));
@@ -69,16 +79,17 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 
   const navigateToCartScreen = () => {
     navigation.push('MarketCartScreen');
+    if (showPopup) setShowPopup(false);
   };
 
   const onPressMinusQty = () => {
     if (qtyValue > 1) {
-      setQtyValue((e) => (e -= 1));
+      setQtyValue((prevValue) => (prevValue -= 1));
     }
   };
 
   const onPressPlusQty = () => {
-    setQtyValue((e) => (e += 1));
+    setQtyValue((prevValue) => (prevValue += 1));
   };
 
   const onPressAddToCart = ({ catatan }: { catatan: string }) => {
@@ -317,26 +328,6 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
         {renderDescItem('Kategori', kategori)}
         {namaVariasiPertama && renderDescItem(namaVariasiPertama, pilihanVariasiPertama)}
         {namaVariasiKedua && renderDescItem(namaVariasiKedua, pilihanVariasiKedua)}
-        <Controller
-          control={control}
-          name="catatan"
-          render={({ field: { onChange, value } }) => (
-            <TextInput
-              value={value}
-              onChangeText={(e) => onChange(e)}
-              placeholder="Catatan..."
-              placeholderTextColor={colors.bodyTextGrey}
-              style={{
-                marginTop: sizes.padding,
-                borderBottomWidth: 0.5,
-                borderBottomColor: colors.bodyText,
-                fontSize: 15,
-                fontFamily: 'Inter-Medium',
-                color: colors.bodyText,
-              }}
-            />
-          )}
-        />
         {/* <TouchableOpacity
           style={[
             styles.row,
@@ -404,6 +395,16 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   //   );
   // };
 
+  const validateButtonAddToCart = () => {
+    if (namaVariasiPertama && isEmpty(selectedVariasiPertama)) {
+      return true;
+    }
+    if (namaVariasiKedua && isEmpty(selectedVariasiKedua)) {
+      return true;
+    }
+    return false;
+  };
+
   const renderBottomSheetContent = useCallback(() => {
     const total = useMemo(() => qtyValue * harga, [qtyValue]);
 
@@ -448,10 +449,31 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
             </Text>
           </View>
         </View>
+        <Controller
+          control={control}
+          name="catatan"
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              value={value}
+              onChangeText={(e) => onChange(e)}
+              placeholder="Catatan..."
+              placeholderTextColor={colors.bodyTextGrey}
+              style={{
+                marginTop: sizes.padding,
+                borderBottomWidth: 0.5,
+                borderBottomColor: colors.bodyText,
+                fontSize: 15,
+                fontFamily: 'Inter-Medium',
+                color: colors.bodyText,
+              }}
+            />
+          )}
+        />
         <Button
           text={strings.tambahkan_keranjang}
           onPress={handleSubmit(onPressAddToCart)}
           buttonContainerStyle={{ marginTop: sizes.padding * 2 }}
+          disabled={validateButtonAddToCart()}
         />
       </View>
     );
@@ -474,8 +496,25 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
     [],
   );
 
+  const renderPopup = useMemo(
+    () => (
+      <Popup2Button
+        buttonLeftOnPress={() => setShowPopup(false)}
+        buttonRightOnPress={navigateToCartScreen}
+        buttonLeftTitle={'Tutup'}
+        buttonRightTitle={'Buka Keranjang'}
+        headerText={'Produk sudah ada di keranjangmu'}
+        showPopup={showPopup}
+        headerImage={icons.icon_cart}
+        headerTextStyle={{ marginBottom: sizes.padding * 1.5 }}
+      />
+    ),
+    [setShowPopup, showPopup, navigateToCartScreen],
+  );
+
   return (
     <SafeAreaView style={styles.container}>
+      {renderPopup}
       <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
         <HeaderBack rightIcon={renderRightButtonHeader()} />
         {renderPhotos()}
@@ -512,10 +551,7 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
         <Button
           onPress={() => sheetRef.current?.expand()}
           shadow
-          text={strings.keranjang}
-          icon={icons.plus_shape}
-          iconLocation="left"
-          iconStyle={{ width: 10, height: 10 }}
+          text={'Tambahkan Ke Keranjang'}
           buttonContainerStyle={{ width: '100%' }}
         />
         {/* <Button

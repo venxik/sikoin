@@ -185,7 +185,7 @@ function* addToCart(action: ReturnType<typeof fetchAddToCart>) {
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
-        yield put(addToCartSuccees());
+        yield put(addToCartSuccees('success'));
       } else {
         yield put(addToCartFailed('Error'));
       }

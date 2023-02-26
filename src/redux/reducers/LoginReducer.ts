@@ -33,7 +33,7 @@ export type ChangePasswordForm = {
   confPassword: string;
 };
 
-type Status = 'idle' | 'success' | 'failed';
+export type Status = 'idle' | 'success' | 'failed';
 
 interface RootState {
   koperasiListData: KoperasiListResponse[];

@@ -1,5 +1,7 @@
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Status } from './LoginReducer';
+
 export type ProductData = {
   id: number;
   foto: string;
@@ -82,6 +84,7 @@ type RootState = {
   marketProductData: MarketProductData;
   marketProductDetails: MarketProductDetails;
   cartItemDataList: CartItemData[];
+  showPopupAddToCart: Status;
   error?: unknown;
 };
 
@@ -109,6 +112,7 @@ const initialState: RootState = {
     variasiKedua: { nama: null, pilihan: [] },
     variasiPertama: { nama: null, pilihan: [] },
   },
+  showPopupAddToCart: 'idle',
   cartItemDataList: [
     {
       price: 5000000,
@@ -221,9 +225,14 @@ const marketSlice = createSlice({
     getProductDetailsFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
-    addToCartSuccees: () => {},
+    addToCartSuccees: (state: RootState, { payload }: PayloadAction<Status>) => {
+      state.showPopupAddToCart = payload;
+    },
     addToCartFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
+    },
+    setShowPopupAddToCartStatus: (state: RootState, { payload }: PayloadAction<Status>) => {
+      state.showPopupAddToCart = payload;
     },
   },
 });
@@ -251,6 +260,7 @@ export const {
   getProductDetailsSuccess,
   addToCartFailed,
   addToCartSuccees,
+  setShowPopupAddToCartStatus,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;
