@@ -10,13 +10,20 @@ import {
   addToCartSuccees,
   addToFavoriteFailed,
   addToFavoriteSuccess,
+  CartData,
+  deleteCartProductFailed,
+  deleteCartProductSuccess,
   fetchAddToCart,
   fetchAddToFavorit,
+  fetchCartData,
+  fetchDeleteCartProduct,
   fetchMarketAllProduct,
   fetchMarketFavoritData,
   fetchMarketMainData,
   fetchMarketProductDetails,
   fetchSearchMarketProduct,
+  getCartDataFailed,
+  getCartDataSuccess,
   getMarketAllProductFailed,
   getMarketAllProductSuccess,
   getMarketFavoritDataFailed,
@@ -198,6 +205,52 @@ function* addToCart(action: ReturnType<typeof fetchAddToCart>) {
   yield put(hideLoading());
 }
 
+function* getCartData() {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<CartData>> = yield call(MarketApi.getCartData);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getCartDataSuccess(data.data));
+      } else {
+        yield put(getCartDataFailed('Error'));
+      }
+    } else {
+      yield put(getCartDataFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getCartDataFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* deleteCartProduct(action: ReturnType<typeof fetchDeleteCartProduct>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<{ message: string }>> = yield call(
+      MarketApi.deleteCartItem,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(deleteCartProductSuccess());
+        yield call(getCartData);
+      } else {
+        yield put(deleteCartProductFailed('Error'));
+      }
+    } else {
+      yield put(deleteCartProductFailed('Error'));
+    }
+  } catch (error) {
+    yield put(deleteCartProductFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetMarketMainData() {
   yield takeLatest(fetchMarketMainData, getMarketMainData);
 }
@@ -218,4 +271,10 @@ export function* watchGetProductDetails() {
 }
 export function* watchAddToCart() {
   yield takeLatest(fetchAddToCart, addToCart);
+}
+export function* watchGetCartData() {
+  yield takeLatest(fetchCartData, getCartData);
+}
+export function* watchDeleteCartProduct() {
+  yield takeLatest(fetchDeleteCartProduct, deleteCartProduct);
 }

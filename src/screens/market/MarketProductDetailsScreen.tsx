@@ -406,7 +406,7 @@ const MarketProductDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   };
 
   const renderBottomSheetContent = useCallback(() => {
-    const total = useMemo(() => qtyValue * harga, [qtyValue]);
+    const total = useMemo(() => qtyValue * harga, [qtyValue, harga]);
 
     return (
       <View style={{ padding: sizes.padding }}>

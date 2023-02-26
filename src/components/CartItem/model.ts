@@ -1,6 +1,6 @@
-import { CartItemData } from '../../redux/reducers/MarketReducer';
+import { CartProductData } from '../../redux/reducers/MarketReducer';
 
 export interface CartItemProps {
-  data: CartItemData;
-  onPressVoucher: () => void;
+  data: CartProductData;
+  onPressCheckbox: (id: number, status: boolean) => void;
 }

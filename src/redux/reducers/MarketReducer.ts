@@ -45,6 +45,22 @@ export type OrderProccessParam = {
   metodePembayaranId: number;
 };
 
+export type CartProductData = {
+  id: number;
+  fotoProduk: string;
+  namaProduk: string;
+  hargaProduk: number;
+  namaVariasiPertama: string | null;
+  namaVariasiKedua: string | null;
+  pilihanVariasiPertama: string | null;
+  pilihanVariasiKedua: string | null;
+  catatan: string;
+};
+
+export type CartData = {
+  keranjang: CartProductData[];
+};
+
 export interface CartItemData {
   id: number;
   productName: string;
@@ -83,6 +99,7 @@ type RootState = {
   marketFavoritData: MarketFavoritData;
   marketProductData: MarketProductData;
   marketProductDetails: MarketProductDetails;
+  cartData: CartData;
   cartItemDataList: CartItemData[];
   showPopupAddToCart: Status;
   error?: unknown;
@@ -113,6 +130,7 @@ const initialState: RootState = {
     variasiPertama: { nama: null, pilihan: [] },
   },
   showPopupAddToCart: 'idle',
+  cartData: { keranjang: [] },
   cartItemDataList: [
     {
       price: 5000000,
@@ -234,6 +252,16 @@ const marketSlice = createSlice({
     setShowPopupAddToCartStatus: (state: RootState, { payload }: PayloadAction<Status>) => {
       state.showPopupAddToCart = payload;
     },
+    getCartDataSuccess: (state: RootState, { payload }: PayloadAction<CartData>) => {
+      state.cartData = payload;
+    },
+    getCartDataFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    deleteCartProductSuccess: () => {},
+    deleteCartProductFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -244,6 +272,8 @@ export const fetchMarketAllProduct = createAction('fetchMarketAllProduct');
 export const fetchSearchMarketProduct = createAction<string>('fetchSearchMarketProduct');
 export const fetchMarketProductDetails = createAction<number>('fetchMarketProductDetails');
 export const fetchAddToCart = createAction<AddToCartParam>('fetchAddToCart');
+export const fetchCartData = createAction('fetchCartData');
+export const fetchDeleteCartProduct = createAction<number>('fetchDeleteCartProduct');
 
 export const {
   getMarketMainDataFailed,
@@ -261,6 +291,10 @@ export const {
   addToCartFailed,
   addToCartSuccees,
   setShowPopupAddToCartStatus,
+  getCartDataFailed,
+  getCartDataSuccess,
+  deleteCartProductFailed,
+  deleteCartProductSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

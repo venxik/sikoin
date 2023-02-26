@@ -1,56 +1,89 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import CheckBox from '@react-native-community/checkbox';
+import { Controller, useForm } from 'react-hook-form';
+
 import { useAppDispatch } from '../../config';
 import { colors, sizes, strings } from '../../constants';
-// import { addCartQty, deleteCartItem, substartCartQty } from '../../redux/reducers/MarketReducer';
+import { fetchDeleteCartProduct } from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 import Button from '../Button';
 import QtyButton from '../QtyButton';
 import { CartItemProps } from './model';
 
 const CartItem = (props: CartItemProps) => {
-  const { price, image, previousPrice, productName, qty, variasi, id } = props.data;
+  const { onPressCheckbox, data } = props;
+  const {
+    hargaProduk,
+    fotoProduk,
+    namaProduk,
+    catatan,
+    pilihanVariasiKedua,
+    pilihanVariasiPertama,
+    id,
+  } = data;
+
+  const [checked, setChecked] = useState(false);
 
   const dispatch = useAppDispatch();
-  const [catatan, setCatatan] = useState<string>('');
+
+  const onPressDelete = () => {
+    dispatch(fetchDeleteCartProduct(id));
+  };
 
   const onPressPlus = () => {
     // dispatch(addCartQty(id));
   };
 
   const onPressMinus = () => {
-    if (qty > 1) {
-      // dispatch(substartCartQty(id));
-    }
+    // if (qty > 1) {
+    //   // dispatch(substartCartQty(id));
+    // }
   };
 
-  const onPressDelete = () => {
-    // dispatch(deleteCartItem(id));
-  };
+  const { control } = useForm<{ catatan: string }>({
+    defaultValues: {
+      catatan: catatan,
+    },
+  });
 
   return (
     <View style={styles.container}>
       <View style={styles.tokoContainer}>
-        <View style={styles.dummyCheck}></View>
+        <CheckBox
+          disabled={false}
+          value={checked}
+          onValueChange={(newValue) => {
+            setChecked(newValue);
+            onPressCheckbox(id, newValue);
+          }}
+          tintColors={{ false: colors.primary, true: colors.primary }}
+          style={styles.dummyCheck}
+        />
       </View>
       <View style={{ flexDirection: 'row', marginTop: sizes.padding * 1.5 }}>
-        <Image source={{ uri: image }} style={styles.productImg} />
+        <Image source={{ uri: fotoProduk }} style={styles.productImg} />
         <View style={{ marginLeft: sizes.padding, flex: 1 }}>
-          <Text style={styles.textProductName}>{productName}</Text>
-          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
-          {previousPrice && (
+          <Text style={styles.textProductName}>{namaProduk}</Text>
+          <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(
+            hargaProduk,
+          )}`}</Text>
+          {/* {previousPrice && (
             <Text style={styles.textPrvPrice}>{`Rp ${formatter.formatNumberToCurreny(
               previousPrice,
             )}`}</Text>
+          )} */}
+          {pilihanVariasiPertama && pilihanVariasiKedua && (
+            <Text style={styles.textVariasi}>{strings.variasi}</Text>
           )}
-          <Text style={styles.textVariasi}>{strings.variasi}</Text>
-          {variasi.map((item, index) => (
-            <Text key={index} style={styles.textVariasiItem}>
-              {`- ${item}`}
-            </Text>
-          ))}
-          <Button
+          {pilihanVariasiPertama && (
+            <Text style={styles.textVariasiItem}>{`- ${pilihanVariasiPertama}`}</Text>
+          )}
+          {pilihanVariasiKedua && (
+            <Text style={styles.textVariasiItem}>{`- ${pilihanVariasiKedua}`}</Text>
+          )}
+          {/* <Button
             onPress={() => null}
             text={strings.ubah_variasi}
             secondary
@@ -59,12 +92,12 @@ const CartItem = (props: CartItemProps) => {
               marginTop: sizes.padding,
               width: '60%',
             }}
-          />
+          /> */}
           <QtyButton
             style={{ marginTop: sizes.padding }}
             onPressMinus={onPressMinus}
             onPressPlus={onPressPlus}
-            qty={qty}
+            qty={1}
           />
         </View>
       </View>
@@ -74,7 +107,7 @@ const CartItem = (props: CartItemProps) => {
         <Text style={styles.textBeliDgnVoucher}>{strings.voucher_toko_tersedia}</Text>
         <Image source={icons.arrow_right_primary} style={styles.iconArrow} />
       </TouchableOpacity> */}
-      <TextInput
+      {/* <TextInput
         onChangeText={(e) => setCatatan(e)}
         style={styles.textBox}
         placeholder={'Catatan...'}
@@ -83,6 +116,26 @@ const CartItem = (props: CartItemProps) => {
         autoCapitalize="none"
         clearButtonMode="always"
         placeholderTextColor={colors.bodyTextLightGrey}
+      /> */}
+      <Controller
+        control={control}
+        name="catatan"
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            value={value}
+            onChangeText={(e) => onChange(e)}
+            placeholder="Catatan..."
+            placeholderTextColor={colors.bodyTextGrey}
+            style={{
+              marginTop: sizes.padding,
+              borderBottomWidth: 0.5,
+              borderBottomColor: colors.bodyText,
+              fontSize: 15,
+              fontFamily: 'Inter-Medium',
+              color: colors.bodyText,
+            }}
+          />
+        )}
       />
       <Button
         onPress={onPressDelete}
@@ -93,7 +146,7 @@ const CartItem = (props: CartItemProps) => {
     </View>
   );
 };
-export default CartItem;
+export default React.memo(CartItem);
 
 const styles = StyleSheet.create({
   container: {
@@ -105,11 +158,8 @@ const styles = StyleSheet.create({
     borderRadius: sizes.padding,
   },
   dummyCheck: {
-    width: 20,
-    height: 20,
-    borderColor: colors.bodyText,
-    borderWidth: 2,
-    borderRadius: 4,
+    width: 30,
+    height: 30,
   },
   tokoContainer: {
     flexDirection: 'row',
