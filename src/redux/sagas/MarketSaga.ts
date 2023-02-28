@@ -29,6 +29,7 @@ import {
   fetchMarketFavoritData,
   fetchMarketMainData,
   fetchMarketProductDetails,
+  fetchOrderProcess,
   fetchSearchMarketProduct,
   getCartDataFailed,
   getCartDataSuccess,
@@ -44,6 +45,8 @@ import {
   MarketMainData,
   MarketProductData,
   MarketProductDetails,
+  orderProcessFailed,
+  orderProcessSuccess,
   searchMarketProductFailed,
   searchMarketProductSuccess,
   selectCheckoutAlamat,
@@ -316,6 +319,27 @@ function* changeCheckoutAddress(action: ReturnType<typeof fetchChangeCheckoutAdd
   }
   yield put(hideLoading());
 }
+function* orderProcess(action: ReturnType<typeof fetchOrderProcess>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse = yield call(MarketApi.orderProcess, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(orderProcessSuccess());
+        navigate('MarketCheckoutSuccessScreen');
+      } else {
+        yield put(orderProcessFailed('Error'));
+      }
+    } else {
+      yield put(orderProcessFailed('Error'));
+    }
+  } catch (error) {
+    yield put(orderProcessFailed(error));
+  }
+  yield put(hideLoading());
+}
 
 export function* watchGetMarketMainData() {
   yield takeLatest(fetchMarketMainData, getMarketMainData);
@@ -349,4 +373,7 @@ export function* watchCheckout() {
 }
 export function* watchChangeCheckoutAddress() {
   yield takeLatest(fetchChangeCheckoutAddress, changeCheckoutAddress);
+}
+export function* watchOrderProcess() {
+  yield takeLatest(fetchOrderProcess, orderProcess);
 }

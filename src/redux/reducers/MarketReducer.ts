@@ -37,8 +37,8 @@ export type CheckoutParam = {
   keranjang: Array<CheckoutParamDetails>;
 };
 
-export type OrderProccessParam = {
-  alamatId: string;
+export type OrderProcessParam = {
+  alamatId: number;
   keranjangId: number[];
   pengiriman: {
     code: string;
@@ -331,26 +331,16 @@ const marketSlice = createSlice({
       state.cartData.keranjang[cartIndex].isSelected = false;
     },
     addQtyCart: (state: RootState, { payload }: PayloadAction<number>) => {
-      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload);
-      // if (index !== -1) {
-      //   state.selectedCartProduct[index].jumlah++;
-      // } else {
       const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
       if (cartIndex !== -1) {
         state.cartData.keranjang[cartIndex].jumlah += 1;
       }
-      // }
     },
     subtractQtyCart: (state: RootState, { payload }: PayloadAction<number>) => {
-      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload);
-      // if (index !== -1) {
-      //   state.selectedCartProduct[index].jumlah--;
-      // } else {
       const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
       if (cartIndex !== -1) {
         state.cartData.keranjang[cartIndex].jumlah -= 1;
       }
-      // }
     },
     editNotesCart: (
       state: RootState,
@@ -360,8 +350,6 @@ const marketSlice = createSlice({
       if (cartIndex !== -1) {
         state.cartData.keranjang[cartIndex].catatan = payload.value;
       }
-      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload.id);
-      // state.selectedCartProduct[index].catatan = payload.value;
     },
     checkoutSuccess: (state: RootState, { payload }: PayloadAction<CheckoutData>) => {
       state.checkoutData = payload;
@@ -382,6 +370,10 @@ const marketSlice = createSlice({
     changeCheckoutAddressFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    orderProcessSuccess: () => {},
+    orderProcessFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -398,6 +390,7 @@ export const fetchCheckout = createAction<CheckoutParam>('fetchCheckout');
 export const fetchChangeCheckoutAddress = createAction<ChangeCheckoutAddressParam>(
   'fetchChangeCheckoutAddress',
 );
+export const fetchOrderProcess = createAction<OrderProcessParam>('fetchOrderProcess');
 
 export const {
   getMarketMainDataFailed,
@@ -429,6 +422,8 @@ export const {
   subtractQtyCart,
   changeCheckoutAddressFailed,
   changeCheckoutAddressSuccess,
+  orderProcessFailed,
+  orderProcessSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

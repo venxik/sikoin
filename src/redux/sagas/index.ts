@@ -33,6 +33,7 @@ import {
   watchGetMarketFavoritData,
   watchGetMarketMainData,
   watchGetProductDetails,
+  watchOrderProcess,
   watchSearchMarketProduct,
 } from './MarketSaga';
 import { watchGetAllNotifikasi, watchGetNotifikasiDetail } from './NotifikasiSaga';
@@ -134,5 +135,6 @@ export function* rootSaga() {
     fork(watchDeleteCartProduct),
     fork(watchCheckout),
     fork(watchChangeCheckoutAddress),
+    fork(watchOrderProcess),
   ]);
 }

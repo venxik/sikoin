@@ -15,10 +15,14 @@ import {
   HeaderBack,
   Popup1Button,
 } from '../../components';
-import { useAppSelector } from '../../config';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes, strings } from '../../constants';
-import { DeliveryData, PaymentDetails } from '../../redux/reducers/MarketReducer';
+import {
+  DeliveryData,
+  fetchOrderProcess,
+  PaymentDetails,
+} from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCheckoutScreen'>;
@@ -39,10 +43,10 @@ const Section = ({
 };
 
 const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
-  // const { alamatList } = useAppSelector((s) => s.AlamatReducer);
-  // const { cartItemDataList } = useAppSelector((s) => s.MarketReducer);
   const { checkoutData, selectedAlamat } = useAppSelector((s) => s.MarketReducer);
   const { alamat, keranjang, metodePembayaran, pengiriman, totalBarang } = checkoutData;
+
+  const dispatch = useAppDispatch();
 
   const [bottomSheetTab, setBottomSheetTab] = useState<'pembayaran' | 'pengiriman'>('pembayaran');
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryData>({
@@ -73,7 +77,6 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   };
 
   const navigateToSelectPayment = () => {
-    // navigation.navigate('SelectPaymentScreen');
     if (selectedPaymentMethodId !== 0) {
       const index = metodePembayaran.koperasi.findIndex((v) => v.id === selectedPaymentMethodId);
       if (index !== -1) {
@@ -87,6 +90,18 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
     } else {
       setShowPopup(true);
     }
+  };
+
+  const orderProcess = () => {
+    dispatch(
+      fetchOrderProcess({
+        alamatId: selectedAlamat.id,
+        keranjangId: keranjang.map((v) => v.keranjangId as number),
+        metodePembayaranId: selectedPaymentMethodId,
+        pengiriman: selectedDelivery,
+        totalBarangDanOngkir: totalPrice,
+      }),
+    );
   };
 
   const renderBackdrop = useCallback(
@@ -267,7 +282,10 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
           'Pastikan Anda sudah memeriksa kembali detail transaksi Anda. Apakah Anda ingin melanjutkan transaksi ini?'
         }
         showPopup={showPopup}
-        onPress={() => setShowPopup(false)}
+        onPress={() => {
+          orderProcess();
+          setShowPopup(false);
+        }}
         headerImage={icons.icon_info_popup}
         customButtonText={'Lanjut'}
       />

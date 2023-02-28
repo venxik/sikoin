@@ -5,7 +5,7 @@ import {
   AddToCartParam,
   ChangeCheckoutAddressParam,
   CheckoutParam,
-  OrderProccessParam,
+  OrderProcessParam,
 } from '../../redux/reducers/MarketReducer';
 import HttpService from '../services/HttpService';
 
@@ -60,7 +60,7 @@ class MarketApi {
     return resp;
   }
 
-  static async orderProccess(data: OrderProccessParam): Promise<AxiosResponse> {
+  static async orderProcess(data: OrderProcessParam): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.market.prosesPemesanan, data);
     return resp;
   }

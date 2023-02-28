@@ -245,6 +245,10 @@ const HomeStackNavigator = () => (
       name="MarketChangeAddressScreen"
       component={screens.MarketChangeAddressScreen}
     />
+    <HomeStack.Screen
+      name="MarketCheckoutSuccessScreen"
+      component={screens.MarketCheckoutSuccessScreen}
+    />
   </HomeStack.Navigator>
 );
 

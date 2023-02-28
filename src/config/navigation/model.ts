@@ -104,6 +104,7 @@ export type HomeStackParamList = {
   MarketMainScreen: undefined;
   MarketProductDetailsScreen: { id: number };
   MarketChangeAddressScreen: undefined;
+  MarketCheckoutSuccessScreen: undefined;
 };
 
 export type ProfileStackParamList = {
