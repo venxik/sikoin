@@ -25,6 +25,8 @@ import {
 import {
   watchAddToCart,
   watchAddToFavorite,
+  watchChangeCheckoutAddress,
+  watchCheckout,
   watchDeleteCartProduct,
   watchGetCartData,
   watchGetMarketAllProduct,
@@ -130,5 +132,7 @@ export function* rootSaga() {
     fork(watchAddToCart),
     fork(watchGetCartData),
     fork(watchDeleteCartProduct),
+    fork(watchCheckout),
+    fork(watchChangeCheckoutAddress),
   ]);
 }

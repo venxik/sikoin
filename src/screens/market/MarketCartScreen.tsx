@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -8,34 +8,46 @@ import CartItem from '../../components/CartItem';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { icons, SCREEN_HEIGHT, sizes, strings } from '../../constants';
-import { fetchCartData } from '../../redux/reducers/MarketReducer';
+import {
+  addCartProduct,
+  CartProductData,
+  CheckoutParamDetails,
+  fetchCartData,
+  fetchCheckout,
+  removeCartProduct,
+} from '../../redux/reducers/MarketReducer';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCartScreen'>;
 
-const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
+const MarketCartScreen: React.FC<Props> = () => {
   const { cartData } = useAppSelector((s) => s.MarketReducer);
   const { isLoading } = useAppSelector((s) => s.loading);
   const dispatch = useAppDispatch();
 
-  const [selectedCartId, setSelectedCartId] = useState<number[]>([]);
+  const selectedCart = useMemo(() => {
+    const temp = cartData.keranjang.filter((value) => value.isSelected);
+    return temp;
+  }, [cartData]);
 
   useEffect(() => {
     dispatch(fetchCartData());
   }, []);
 
-  const navigateToCheckout = () => {
-    navigation.navigate('MarketCheckoutScreen');
+  const doCheckout = () => {
+    const temp: CheckoutParamDetails[] = selectedCart.map((cart) => {
+      return { id: cart.id, jumlah: cart.jumlah, catatan: cart.catatan };
+    });
+    dispatch(fetchCheckout({ keranjang: temp }));
   };
 
   const renderItem = useCallback(
-    ({ item }) => (
+    ({ item }: { item: CartProductData }) => (
       <CartItem
         data={item}
-        onPressCheckbox={(value, status) => {
-          if (status) setSelectedCartId((prevValue) => prevValue.concat(value));
+        onPressCheckbox={(status) => {
+          if (status) dispatch(addCartProduct(item.id));
           else {
-            const temp = selectedCartId.filter((id) => id !== value);
-            setSelectedCartId(temp);
+            dispatch(removeCartProduct(item.id));
           }
         }}
       />
@@ -63,11 +75,12 @@ const MarketCartScreen: React.FC<Props> = ({ navigation }) => {
         renderItem={renderItem}
       />
       <Button
-        onPress={navigateToCheckout}
+        onPress={doCheckout}
         buttonContainerStyle={styles.btnCheckout}
         text={`${strings.checkout} (${cartData.keranjang?.length})`}
         icon={icons.icon_checkout}
         iconLocation={'left'}
+        disabled={selectedCart.length < 1}
       />
     </SafeAreaView>
   );

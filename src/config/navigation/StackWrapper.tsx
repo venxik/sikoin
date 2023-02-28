@@ -241,6 +241,10 @@ const HomeStackNavigator = () => (
       name="MarketProductDetailsScreen"
       component={screens.MarketProductDetailsScreen}
     />
+    <HomeStack.Screen
+      name="MarketChangeAddressScreen"
+      component={screens.MarketChangeAddressScreen}
+    />
   </HomeStack.Navigator>
 );
 

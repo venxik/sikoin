@@ -31,6 +31,12 @@ export type AddToCartParam = {
   produkId: number;
 };
 
+export type CheckoutParamDetails = { id: number; jumlah: number; catatan: string };
+
+export type CheckoutParam = {
+  keranjang: Array<CheckoutParamDetails>;
+};
+
 export type OrderProccessParam = {
   alamatId: string;
   keranjangId: number[];
@@ -55,6 +61,64 @@ export type CartProductData = {
   pilihanVariasiPertama: string | null;
   pilihanVariasiKedua: string | null;
   catatan: string;
+  keranjangId?: number;
+  berat?: number;
+  jumlah: number;
+  isSelected: boolean;
+};
+
+export type CheckoutAlamatData = {
+  id: number;
+  namaPenerima: string;
+  judul: string;
+  detail: string;
+  rt: string;
+  rw: string;
+  provinsi: string;
+  kabupaten: string;
+  kecamatan: string;
+  kodePos: string;
+  isUtama: boolean;
+  cityIdRajaOngkir: number;
+};
+
+export type DeliveryData = {
+  code: string;
+  service: string;
+  cost: number;
+  etd: string;
+  note: string;
+};
+
+export type PaymentDetails = {
+  id: number;
+  nama: string;
+  info?: string;
+  saldo?: number;
+};
+
+export type PaymentMethodData = {
+  bank: PaymentDetails;
+  koperasi: PaymentDetails[];
+};
+
+export type CheckoutData = {
+  alamat: CheckoutAlamatData[];
+  keranjang: CartProductData[];
+  pengiriman: DeliveryData[];
+  totalBarang: number;
+  totalBerat: number;
+  metodePembayaran: PaymentMethodData;
+};
+
+export type ChangeCheckoutAddress = {
+  alamatTujuan: CheckoutAlamatData[];
+  pengiriman: DeliveryData[];
+};
+
+export type ChangeCheckoutAddressParam = {
+  alamatId: number;
+  totalBerat: number;
 };
 
 export type CartData = {
@@ -100,8 +164,10 @@ type RootState = {
   marketProductData: MarketProductData;
   marketProductDetails: MarketProductDetails;
   cartData: CartData;
-  cartItemDataList: CartItemData[];
   showPopupAddToCart: Status;
+  checkoutData: CheckoutData;
+  selectedAlamat: CheckoutAlamatData;
+  selectedCartProduct: CheckoutParamDetails[];
   error?: unknown;
 };
 
@@ -131,38 +197,29 @@ const initialState: RootState = {
   },
   showPopupAddToCart: 'idle',
   cartData: { keranjang: [] },
-  cartItemDataList: [
-    {
-      price: 5000000,
-      id: 1,
-      image: 'https://picsum.photos/id/34/400/400',
-      namaToko: 'Test 1',
-      previousPrice: 7000000,
-      productName: 'Product 1',
-      qty: 2,
-      variasi: ['Merah', 'Xl'],
-    },
-    {
-      price: 50000,
-      id: 2,
-      image: 'https://picsum.photos/id/34/400/400',
-      namaToko: 'Test 2',
-      previousPrice: 890000,
-      productName: 'Product 2',
-      qty: 5,
-      variasi: ['Hijau', 'S'],
-    },
-    {
-      price: 1231123,
-      id: 3,
-      image: 'https://picsum.photos/id/34/400/400',
-      namaToko: 'Test 3',
-      previousPrice: 6667454,
-      productName: 'Product 3',
-      qty: 7,
-      variasi: ['Putih', 'XXXLL'],
-    },
-  ],
+  checkoutData: {
+    alamat: [],
+    keranjang: [],
+    metodePembayaran: { bank: { id: 0, nama: '', info: '' }, koperasi: [] },
+    pengiriman: [],
+    totalBarang: 0,
+    totalBerat: 0,
+  },
+  selectedAlamat: {
+    cityIdRajaOngkir: 0,
+    detail: '',
+    id: 0,
+    isUtama: false,
+    judul: '',
+    kabupaten: '',
+    kecamatan: '',
+    kodePos: '',
+    namaPenerima: '',
+    provinsi: '',
+    rt: '',
+    rw: '',
+  },
+  selectedCartProduct: [],
 };
 
 const marketSlice = createSlice({
@@ -262,6 +319,69 @@ const marketSlice = createSlice({
     deleteCartProductFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    addCartProduct: (state: RootState, { payload }: PayloadAction<number>) => {
+      const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
+      state.cartData.keranjang[cartIndex].isSelected = true;
+      // state.selectedCartProduct = state.selectedCartProduct.concat(payload);
+    },
+    removeCartProduct: (state: RootState, { payload }: PayloadAction<number>) => {
+      // const temp = state.selectedCartProduct.filter((value) => value.id !== payload);
+      // state.selectedCartProduct = temp;
+      const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
+      state.cartData.keranjang[cartIndex].isSelected = false;
+    },
+    addQtyCart: (state: RootState, { payload }: PayloadAction<number>) => {
+      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload);
+      // if (index !== -1) {
+      //   state.selectedCartProduct[index].jumlah++;
+      // } else {
+      const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
+      if (cartIndex !== -1) {
+        state.cartData.keranjang[cartIndex].jumlah += 1;
+      }
+      // }
+    },
+    subtractQtyCart: (state: RootState, { payload }: PayloadAction<number>) => {
+      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload);
+      // if (index !== -1) {
+      //   state.selectedCartProduct[index].jumlah--;
+      // } else {
+      const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload);
+      if (cartIndex !== -1) {
+        state.cartData.keranjang[cartIndex].jumlah -= 1;
+      }
+      // }
+    },
+    editNotesCart: (
+      state: RootState,
+      { payload }: PayloadAction<{ id: number; value: string }>,
+    ) => {
+      const cartIndex = state.cartData.keranjang.findIndex((value) => value.id === payload.id);
+      if (cartIndex !== -1) {
+        state.cartData.keranjang[cartIndex].catatan = payload.value;
+      }
+      // const index = state.selectedCartProduct.findIndex((value) => value.id === payload.id);
+      // state.selectedCartProduct[index].catatan = payload.value;
+    },
+    checkoutSuccess: (state: RootState, { payload }: PayloadAction<CheckoutData>) => {
+      state.checkoutData = payload;
+    },
+    checkoutFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    selectCheckoutAlamat: (state: RootState, { payload }: PayloadAction<CheckoutAlamatData>) => {
+      state.selectedAlamat = payload;
+    },
+    changeCheckoutAddressSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<ChangeCheckoutAddress>,
+    ) => {
+      state.checkoutData.alamat = payload.alamatTujuan;
+      state.checkoutData.pengiriman = payload.pengiriman;
+    },
+    changeCheckoutAddressFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -274,6 +394,10 @@ export const fetchMarketProductDetails = createAction<number>('fetchMarketProduc
 export const fetchAddToCart = createAction<AddToCartParam>('fetchAddToCart');
 export const fetchCartData = createAction('fetchCartData');
 export const fetchDeleteCartProduct = createAction<number>('fetchDeleteCartProduct');
+export const fetchCheckout = createAction<CheckoutParam>('fetchCheckout');
+export const fetchChangeCheckoutAddress = createAction<ChangeCheckoutAddressParam>(
+  'fetchChangeCheckoutAddress',
+);
 
 export const {
   getMarketMainDataFailed,
@@ -295,6 +419,16 @@ export const {
   getCartDataSuccess,
   deleteCartProductFailed,
   deleteCartProductSuccess,
+  checkoutFailed,
+  checkoutSuccess,
+  selectCheckoutAlamat,
+  addCartProduct,
+  removeCartProduct,
+  addQtyCart,
+  editNotesCart,
+  subtractQtyCart,
+  changeCheckoutAddressFailed,
+  changeCheckoutAddressSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

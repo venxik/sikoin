@@ -8,6 +8,7 @@ import KabarMainScreen from './kabarPromo/KabarMainScreen';
 import PromoDetailScreen from './kabarPromo/PromoDetailScreen';
 import PromoMainScreen from './kabarPromo/PromoMainScreen';
 import MarketCartScreen from './market/MarketCartScreen';
+import MarketChangeAddressScreen from './market/MarketChangeAddressScreen';
 import MarketCheckoutScreen from './market/MarketCheckoutScreen';
 import MarketFavoriteScreen from './market/MarketFavoriteScreen';
 // import DokumenDetailScreen from './dokumen/DokumenDetailScreen';
@@ -102,6 +103,7 @@ export {
   KabarMainScreen,
   LoginScreen,
   MarketCartScreen,
+  MarketChangeAddressScreen,
   MarketCheckoutScreen,
   MarketFavoriteScreen,
   // DokumenDetailScreen,

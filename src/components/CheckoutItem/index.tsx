@@ -6,29 +6,47 @@ import { formatter } from '../../utils';
 import { CheckoutItemProps } from './model';
 
 const CheckoutItem = (props: CheckoutItemProps) => {
-  const { price, image, namaToko, previousPrice, productName, qty, variasi } = props.data;
+  const {
+    hargaProduk,
+    fotoProduk,
+    namaProduk,
+    jumlah,
+    pilihanVariasiPertama,
+    pilihanVariasiKedua,
+  } = props.data;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textToko}>{namaToko}</Text>
+      {/* <Text style={styles.textToko}>{namaToko}</Text> */}
       <View style={styles.mainContainer}>
-        <Image source={{ uri: image }} style={styles.productImg} />
+        <Image source={{ uri: fotoProduk }} style={styles.productImg} />
         <View style={{ marginLeft: sizes.padding, flex: 1 }}>
-          <Text style={styles.textProductName}>{productName}</Text>
-          <Text style={styles.textVariasi}>{strings.variasi}</Text>
-          {variasi.map((item, index) => (
+          <Text style={styles.textProductName}>{namaProduk}</Text>
+          {/* <Text style={styles.textVariasi}>{strings.variasi}</Text> */}
+          {pilihanVariasiPertama && pilihanVariasiKedua && (
+            <Text style={styles.textVariasi}>{strings.variasi}</Text>
+          )}
+          {pilihanVariasiPertama && (
+            <Text style={styles.textVariasiItem}>{`- ${pilihanVariasiPertama}`}</Text>
+          )}
+          {pilihanVariasiKedua && (
+            <Text style={styles.textVariasiItem}>{`- ${pilihanVariasiKedua}`}</Text>
+          )}
+          {/* {variasi.map((item, index) => (
             <Text key={index} style={styles.textVariasiItem}>
               {`- ${item}`}
             </Text>
-          ))}
+          ))} */}
           <View style={{ marginTop: sizes.padding }}>
-            <Text style={styles.textPrice}>{`x${qty}`}</Text>
-            <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(price)}`}</Text>
-            {previousPrice && (
+            <Text style={styles.textPrice}>{`x${jumlah}`}</Text>
+            <Text style={styles.textPrice}>{`Rp ${formatter.formatNumberToCurreny(
+              hargaProduk,
+            )}`}</Text>
+            {/* {previousPrice && (
               <Text style={styles.textPrvPrice}>{`Rp ${formatter.formatNumberToCurreny(
                 previousPrice,
               )}`}</Text>
-            )}
+            )} */}
           </View>
         </View>
       </View>
@@ -46,7 +64,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     flexDirection: 'row',
-    marginTop: sizes.padding * 1.5,
+    marginTop: sizes.padding,
     marginLeft: sizes.padding,
   },
   textToko: {

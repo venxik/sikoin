@@ -9,7 +9,11 @@ import CardPromo from './CardPromo';
 import CardRefKeluarga from './CardRefKeluarga';
 import CardVoucherItem from './CardVoucherItem';
 import CardVoucherLarge from './CardVoucherLarge';
+import CheckoutAddress from './CheckoutAddress';
+import CheckoutAddressItem from './CheckoutAddressItem';
+import CheckoutDeliveryItem from './CheckoutDeliveryItem';
 import CheckoutItem from './CheckoutItem';
+import CheckoutPaymentItem from './CheckoutPaymentItem';
 import CustomBackdrop from './CustomBackdrop';
 import DetailItemList from './DetailItemList';
 import DetailItemProfileHeader from './DetailItemProfileHeader';
@@ -57,7 +61,11 @@ export {
   CardRefKeluarga,
   CardVoucherItem,
   CardVoucherLarge,
+  CheckoutAddress,
+  CheckoutAddressItem,
+  CheckoutDeliveryItem,
   CheckoutItem,
+  CheckoutPaymentItem,
   CustomBackdrop,
   DetailItemList,
   DetailItemProfileHeader,

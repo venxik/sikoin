@@ -84,6 +84,7 @@ const constant = {
       pesananSelesai: 'pesanan-selesai',
       kategori: 'kategori',
       cariKategori: 'cari-kategori',
+      ubahAlamatPengiriman: 'ubah-alamat-pengiriman',
     },
   },
   errorTypes: {

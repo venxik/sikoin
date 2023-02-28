@@ -1,7 +1,12 @@
 import { AxiosResponse } from 'axios';
 
 import { apis } from '../../constants';
-import { AddToCartParam, OrderProccessParam } from '../../redux/reducers/MarketReducer';
+import {
+  AddToCartParam,
+  ChangeCheckoutAddressParam,
+  CheckoutParam,
+  OrderProccessParam,
+} from '../../redux/reducers/MarketReducer';
 import HttpService from '../services/HttpService';
 
 class MarketApi {
@@ -50,7 +55,7 @@ class MarketApi {
     return resp;
   }
 
-  static async checkout(data: { keranjangId: number[] }): Promise<AxiosResponse> {
+  static async checkout(data: CheckoutParam): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.market.checkout, data);
     return resp;
   }
@@ -82,6 +87,11 @@ class MarketApi {
 
   static async searchCategory(data: { kategoriId: number }): Promise<AxiosResponse> {
     const resp = await HttpService.post(apis.endpoints.market.cariKategori, data);
+    return resp;
+  }
+
+  static async changeCheckoutAddress(data: ChangeCheckoutAddressParam): Promise<AxiosResponse> {
+    const resp = await HttpService.patch(apis.endpoints.market.ubahAlamatPengiriman, data);
     return resp;
   }
 }

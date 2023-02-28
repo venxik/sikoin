@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { ApiResponse, MarketApi } from '../../config/apis';
+import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
@@ -11,11 +12,18 @@ import {
   addToFavoriteFailed,
   addToFavoriteSuccess,
   CartData,
+  ChangeCheckoutAddress,
+  changeCheckoutAddressSuccess,
+  CheckoutData,
+  checkoutFailed,
+  checkoutSuccess,
   deleteCartProductFailed,
   deleteCartProductSuccess,
   fetchAddToCart,
   fetchAddToFavorit,
   fetchCartData,
+  fetchChangeCheckoutAddress,
+  fetchCheckout,
   fetchDeleteCartProduct,
   fetchMarketAllProduct,
   fetchMarketFavoritData,
@@ -38,6 +46,7 @@ import {
   MarketProductDetails,
   searchMarketProductFailed,
   searchMarketProductSuccess,
+  selectCheckoutAlamat,
 } from '../reducers/MarketReducer';
 
 function* getMarketMainData() {
@@ -212,8 +221,11 @@ function* getCartData() {
     const response: AxiosResponse<ApiResponse<CartData>> = yield call(MarketApi.getCartData);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
+      const updated = data.data.keranjang.map((v) => {
+        return { ...v, isSelected: false };
+      });
       if (data?.error == null) {
-        yield put(getCartDataSuccess(data.data));
+        yield put(getCartDataSuccess({ keranjang: updated }));
       } else {
         yield put(getCartDataFailed('Error'));
       }
@@ -251,6 +263,60 @@ function* deleteCartProduct(action: ReturnType<typeof fetchDeleteCartProduct>) {
   yield put(hideLoading());
 }
 
+function* checkout(action: ReturnType<typeof fetchCheckout>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<CheckoutData>> = yield call(
+      MarketApi.checkout,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(checkoutSuccess(data.data));
+        const alamatIndex = data.data.alamat.findIndex((item) => item.isUtama === true);
+        yield put(selectCheckoutAlamat(data.data.alamat[alamatIndex]));
+        navigate('MarketCheckoutScreen');
+      } else {
+        yield put(checkoutFailed('Error'));
+      }
+    } else {
+      yield put(checkoutFailed('Error'));
+    }
+  } catch (error) {
+    yield put(checkoutFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* changeCheckoutAddress(action: ReturnType<typeof fetchChangeCheckoutAddress>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<ChangeCheckoutAddress>> = yield call(
+      MarketApi.changeCheckoutAddress,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(changeCheckoutAddressSuccess(data.data));
+        const index = data.data.alamatTujuan.findIndex((v) => v.isUtama);
+        yield put(selectCheckoutAlamat(data.data.alamatTujuan[index]));
+        navigate('MarketCheckoutScreen');
+      } else {
+        yield put(checkoutFailed('Error'));
+      }
+    } else {
+      yield put(checkoutFailed('Error'));
+    }
+  } catch (error) {
+    yield put(checkoutFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetMarketMainData() {
   yield takeLatest(fetchMarketMainData, getMarketMainData);
 }
@@ -277,4 +343,10 @@ export function* watchGetCartData() {
 }
 export function* watchDeleteCartProduct() {
   yield takeLatest(fetchDeleteCartProduct, deleteCartProduct);
+}
+export function* watchCheckout() {
+  yield takeLatest(fetchCheckout, checkout);
+}
+export function* watchChangeCheckoutAddress() {
+  yield takeLatest(fetchChangeCheckoutAddress, changeCheckoutAddress);
 }

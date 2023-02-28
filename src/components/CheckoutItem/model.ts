@@ -1,5 +1,5 @@
-import { CartItemData } from '../../redux/reducers/MarketReducer';
+import { CartProductData } from '../../redux/reducers/MarketReducer';
 
 export interface CheckoutItemProps {
-  data: CartItemData;
+  data: CartProductData;
 }

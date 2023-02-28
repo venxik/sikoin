@@ -103,6 +103,7 @@ export type HomeStackParamList = {
   MarketProductScreen: { type: 'all' | 'category' | 'search'; title: string };
   MarketMainScreen: undefined;
   MarketProductDetailsScreen: { id: number };
+  MarketChangeAddressScreen: undefined;
 };
 
 export type ProfileStackParamList = {

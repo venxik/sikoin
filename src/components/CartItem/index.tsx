@@ -6,7 +6,12 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useAppDispatch } from '../../config';
 import { colors, sizes, strings } from '../../constants';
-import { fetchDeleteCartProduct } from '../../redux/reducers/MarketReducer';
+import {
+  addQtyCart,
+  editNotesCart,
+  fetchDeleteCartProduct,
+  subtractQtyCart,
+} from '../../redux/reducers/MarketReducer';
 import { formatter } from '../../utils';
 import Button from '../Button';
 import QtyButton from '../QtyButton';
@@ -22,6 +27,7 @@ const CartItem = (props: CartItemProps) => {
     pilihanVariasiKedua,
     pilihanVariasiPertama,
     id,
+    jumlah,
   } = data;
 
   const [checked, setChecked] = useState(false);
@@ -33,13 +39,13 @@ const CartItem = (props: CartItemProps) => {
   };
 
   const onPressPlus = () => {
-    // dispatch(addCartQty(id));
+    dispatch(addQtyCart(id));
   };
 
   const onPressMinus = () => {
-    // if (qty > 1) {
-    //   // dispatch(substartCartQty(id));
-    // }
+    if (jumlah && jumlah > 1) {
+      dispatch(subtractQtyCart(id));
+    }
   };
 
   const { control } = useForm<{ catatan: string }>({
@@ -56,7 +62,7 @@ const CartItem = (props: CartItemProps) => {
           value={checked}
           onValueChange={(newValue) => {
             setChecked(newValue);
-            onPressCheckbox(id, newValue);
+            onPressCheckbox(newValue);
           }}
           tintColors={{ false: colors.primary, true: colors.primary }}
           style={styles.dummyCheck}
@@ -97,7 +103,7 @@ const CartItem = (props: CartItemProps) => {
             style={{ marginTop: sizes.padding }}
             onPressMinus={onPressMinus}
             onPressPlus={onPressPlus}
-            qty={1}
+            qty={jumlah}
           />
         </View>
       </View>
@@ -126,6 +132,9 @@ const CartItem = (props: CartItemProps) => {
             onChangeText={(e) => onChange(e)}
             placeholder="Catatan..."
             placeholderTextColor={colors.bodyTextGrey}
+            onEndEditing={() => {
+              dispatch(editNotesCart({ id: id, value: value }));
+            }}
             style={{
               marginTop: sizes.padding,
               borderBottomWidth: 0.5,
