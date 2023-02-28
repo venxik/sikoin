@@ -249,6 +249,12 @@ const HomeStackNavigator = () => (
       name="MarketCheckoutSuccessScreen"
       component={screens.MarketCheckoutSuccessScreen}
     />
+    <HomeStack.Screen name="MarketCategoryScreen" component={screens.MarketCategoryScreen} />
+    <HomeStack.Screen
+      name="MarketCategoryProductScreen"
+      component={screens.MarketCategoryProductScreen}
+      initialParams={{ id: 0, icon: '', nama: '' }}
+    />
   </HomeStack.Navigator>
 );
 

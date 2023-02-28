@@ -65,6 +65,8 @@ export type CartProductData = {
   berat?: number;
   jumlah: number;
   isSelected: boolean;
+  hargaSatuan: number;
+  hargaTotal: number;
 };
 
 export type CheckoutAlamatData = {
@@ -125,7 +127,7 @@ export type CartData = {
   keranjang: CartProductData[];
 };
 
-export interface CartItemData {
+export type CartItemData = {
   id: number;
   productName: string;
   price: number;
@@ -135,9 +137,9 @@ export interface CartItemData {
   variasi: string[];
   namaToko: string;
   catatan?: string;
-}
+};
 
-export interface MarketProductDetails {
+export type MarketProductDetails = {
   id: number;
   fotoProduk: string[];
   nama: string;
@@ -156,7 +158,50 @@ export interface MarketProductDetails {
     pilihan: string[];
   };
   isFavorit: boolean;
-}
+};
+
+export type PurchaseData = {
+  id: number;
+  nomorPesanan: string;
+  foto: string;
+  nama: string;
+  totalHarga: number;
+  waktu: string;
+  status: string;
+};
+
+export type PurchaseStatus = {
+  status: string;
+  nomorPesanan: string;
+  waktu: string;
+  nama: string;
+};
+
+export type DeliveryStatus = {
+  kurir: string;
+  noResi: string;
+  etd: string;
+};
+
+export type PaymentStatus = {
+  metodePembayaran: string;
+  totalHarga: number;
+  biayaPengiriman: number;
+  totalBayar: number;
+};
+
+export type PurchaseDetails = {
+  pesanan: PurchaseStatus;
+  detailProduk: MarketProductDetails;
+  infoPengiriman: DeliveryStatus;
+  rincianPembayaran: PaymentStatus;
+};
+
+export type CategoryData = {
+  id: number;
+  nama: string;
+  icon: string;
+};
 
 type RootState = {
   marketMainData: MarketMainData;
@@ -168,6 +213,9 @@ type RootState = {
   checkoutData: CheckoutData;
   selectedAlamat: CheckoutAlamatData;
   selectedCartProduct: CheckoutParamDetails[];
+  purchaseData: PurchaseData[];
+  purchaseDetails: PurchaseDetails;
+  categoryData: CategoryData[];
   error?: unknown;
 };
 
@@ -220,6 +268,41 @@ const initialState: RootState = {
     rw: '',
   },
   selectedCartProduct: [],
+  purchaseData: [],
+  purchaseDetails: {
+    detailProduk: {
+      deskripsi: '',
+      fotoProduk: [''],
+      harga: 0,
+      id: 0,
+      isFavorit: false,
+      isKondisiBaru: false,
+      kategori: '',
+      nama: '',
+      status: '',
+      stok: 0,
+      variasiKedua: { nama: null, pilihan: [] },
+      variasiPertama: { nama: null, pilihan: [] },
+    },
+    infoPengiriman: {
+      etd: '',
+      kurir: '',
+      noResi: '',
+    },
+    pesanan: {
+      nama: '',
+      nomorPesanan: '',
+      status: '',
+      waktu: '',
+    },
+    rincianPembayaran: {
+      biayaPengiriman: 0,
+      metodePembayaran: '',
+      totalBayar: 0,
+      totalHarga: 0,
+    },
+  },
+  categoryData: [],
 };
 
 const marketSlice = createSlice({
@@ -374,6 +457,37 @@ const marketSlice = createSlice({
     orderProcessFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
+    getPurchaseSuccess: (state: RootState, { payload }: PayloadAction<PurchaseData[]>) => {
+      state.purchaseData = payload;
+    },
+    getPurchaseFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getPurchaseDetailsSuccess: (state: RootState, { payload }: PayloadAction<PurchaseDetails>) => {
+      state.purchaseDetails = payload;
+    },
+    getPurchaseDetailsFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    setPurchaseDoneSuccess: () => {},
+    setPurchaseDoneFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getCategorySuccess: (state: RootState, { payload }: PayloadAction<CategoryData[]>) => {
+      state.categoryData = payload;
+    },
+    getCategoryFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getCategoryProductSuccess: (
+      state: RootState,
+      { payload }: PayloadAction<MarketProductData>,
+    ) => {
+      state.marketProductData = payload;
+    },
+    getCategoryProductFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
   },
 });
 
@@ -391,6 +505,11 @@ export const fetchChangeCheckoutAddress = createAction<ChangeCheckoutAddressPara
   'fetchChangeCheckoutAddress',
 );
 export const fetchOrderProcess = createAction<OrderProcessParam>('fetchOrderProcess');
+export const fetchPurchaseData = createAction('fetchPurchaseData');
+export const fetchPurchaseDetails = createAction<number>('fetchPurchaseDetails');
+export const fetchSetPurchaseDone = createAction<number>('fetchSetPurchaseDone');
+export const fetchCategoryData = createAction('fetchCategoryData');
+export const fetchCategoryProductData = createAction<number>('fetchCategoryProductData');
 
 export const {
   getMarketMainDataFailed,
@@ -424,6 +543,16 @@ export const {
   changeCheckoutAddressSuccess,
   orderProcessFailed,
   orderProcessSuccess,
+  getPurchaseFailed,
+  getPurchaseSuccess,
+  getPurchaseDetailsFailed,
+  getPurchaseDetailsSuccess,
+  setPurchaseDoneFailed,
+  setPurchaseDoneSuccess,
+  getCategoryFailed,
+  getCategorySuccess,
+  getCategoryProductFailed,
+  getCategoryProductSuccess,
 } = marketSlice.actions;
 
 export default marketSlice.reducer;

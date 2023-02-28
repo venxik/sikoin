@@ -11,6 +11,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AlamatDataResponse } from '../../redux/reducers/AlamatReducer';
 import { DokumenData } from '../../redux/reducers/DokumenReducer';
+import { CategoryData } from '../../redux/reducers/MarketReducer';
 import { RefKeluargaResponse } from '../../redux/reducers/RefKeluargaReducer';
 
 declare global {
@@ -97,7 +98,7 @@ export type HomeStackParamList = {
   PromoDetailScreen: undefined;
   DaftarBiodataAddScreen: { update: boolean };
   MarketPesananMainScreen: undefined;
-  MarketPesananDetailScreen: undefined;
+  MarketPesananDetailScreen: { id: number };
   MarketCartScreen: undefined;
   MarketFavoriteScreen: undefined;
   MarketProductScreen: { type: 'all' | 'category' | 'search'; title: string };
@@ -105,6 +106,8 @@ export type HomeStackParamList = {
   MarketProductDetailsScreen: { id: number };
   MarketChangeAddressScreen: undefined;
   MarketCheckoutSuccessScreen: undefined;
+  MarketCategoryScreen: undefined;
+  MarketCategoryProductScreen: CategoryData;
 };
 
 export type ProfileStackParamList = {

@@ -1,40 +1,58 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { debounce } from 'lodash';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { CardMarketSmall, HeaderBack } from '../../components';
+import { CardMarketSmall, HeaderBack, TextInputBorder } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, SCREEN_HEIGHT, sizes } from '../../constants';
 import {
   fetchAddToFavorit,
-  fetchMarketAllProduct,
-  fetchSearchMarketProduct,
+  fetchCategoryProductData,
   ProductData,
 } from '../../redux/reducers/MarketReducer';
 
-type Props = NativeStackScreenProps<HomeStackParamList, 'MarketProductScreen'>;
+type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCategoryProductScreen'>;
 
-const MarketProductScreen: FC<Props> = ({ navigation, route }) => {
-  const { title, type } = route.params;
+const MarketCategoryProductScreen: FC<Props> = ({ navigation, route }) => {
+  const { id, nama } = route.params;
   const { marketProductData } = useAppSelector((state) => state.MarketReducer) || {};
   const { isLoading } = useAppSelector((state) => state.loading);
   const dispatch = useAppDispatch();
 
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = useCallback(
+    debounce(async (value: string) => {
+      console.warn(value);
+    }, 300),
+    [],
+  );
+
+  const onChangeText = (e: string) => {
+    handleSearch(e);
+  };
+
+  React.useEffect(() => {
+    return () => {
+      handleSearch.cancel();
+    };
+  }, [handleSearch]);
+
   useEffect(() => {
-    if (type === 'all') dispatch(fetchMarketAllProduct());
-    else if (type === 'search') dispatch(fetchSearchMarketProduct(title));
+    dispatch(fetchCategoryProductData(4));
   }, []);
 
   const onPressAddToFavorit = (idProduk: number) => {
     dispatch(fetchAddToFavorit(idProduk));
   };
 
-  const navigateToDetailsScreen = (id: number) => {
-    navigation.navigate('MarketProductDetailsScreen', { id });
+  const navigateToDetailsScreen = (productId: number) => {
+    navigation.navigate('MarketProductDetailsScreen', { id: productId });
   };
 
   const renderHeaderIcon = () => {
@@ -110,12 +128,23 @@ const MarketProductScreen: FC<Props> = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <HeaderBack title={title} rightIcon={renderHeaderIcon()} />
+      <HeaderBack title={nama} rightIcon={renderHeaderIcon()} />
+      <View style={styles.innerContainer}>
+        <TextInputBorder
+          value={searchValue}
+          onChangeText={(e) => {
+            onChangeText(e);
+            setSearchValue(e);
+          }}
+          placeholder={'Cari Produk'}
+          icon={icons.icon_search_market}
+        />
+      </View>
       {renderBody()}
     </SafeAreaView>
   );
 };
-export default MarketProductScreen;
+export default MarketCategoryProductScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -173,5 +202,12 @@ const styles = StyleSheet.create({
   icon: {
     width: sizes.icon_size,
     height: sizes.icon_size,
+  },
+  innerContainer: {
+    backgroundColor: colors.white,
+    padding: sizes.padding,
+    borderRadius: sizes.padding,
+    marginBottom: sizes.padding,
+    marginHorizontal: sizes.padding,
   },
 });

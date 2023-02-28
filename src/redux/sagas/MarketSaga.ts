@@ -12,6 +12,7 @@ import {
   addToFavoriteFailed,
   addToFavoriteSuccess,
   CartData,
+  CategoryData,
   ChangeCheckoutAddress,
   changeCheckoutAddressSuccess,
   CheckoutData,
@@ -22,6 +23,8 @@ import {
   fetchAddToCart,
   fetchAddToFavorit,
   fetchCartData,
+  fetchCategoryData,
+  fetchCategoryProductData,
   fetchChangeCheckoutAddress,
   fetchCheckout,
   fetchDeleteCartProduct,
@@ -30,9 +33,16 @@ import {
   fetchMarketMainData,
   fetchMarketProductDetails,
   fetchOrderProcess,
+  fetchPurchaseData,
+  fetchPurchaseDetails,
   fetchSearchMarketProduct,
+  fetchSetPurchaseDone,
   getCartDataFailed,
   getCartDataSuccess,
+  getCategoryFailed,
+  getCategoryProductFailed,
+  getCategoryProductSuccess,
+  getCategorySuccess,
   getMarketAllProductFailed,
   getMarketAllProductSuccess,
   getMarketFavoritDataFailed,
@@ -41,15 +51,23 @@ import {
   getMarketMainDataSuccess,
   getProductDetailsFailed,
   getProductDetailsSuccess,
+  getPurchaseDetailsFailed,
+  getPurchaseDetailsSuccess,
+  getPurchaseFailed,
+  getPurchaseSuccess,
   MarketFavoritData,
   MarketMainData,
   MarketProductData,
   MarketProductDetails,
   orderProcessFailed,
   orderProcessSuccess,
+  PurchaseData,
+  PurchaseDetails,
   searchMarketProductFailed,
   searchMarketProductSuccess,
   selectCheckoutAlamat,
+  setPurchaseDoneFailed,
+  setPurchaseDoneSuccess,
 } from '../reducers/MarketReducer';
 
 function* getMarketMainData() {
@@ -341,6 +359,122 @@ function* orderProcess(action: ReturnType<typeof fetchOrderProcess>) {
   yield put(hideLoading());
 }
 
+function* getPurchaseData() {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<PurchaseData[]>> = yield call(
+      MarketApi.getPurchaseData,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getPurchaseSuccess(data.data));
+      } else {
+        yield put(getPurchaseFailed('Error'));
+      }
+    } else {
+      yield put(getPurchaseFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getPurchaseFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getPurchaseDetails(action: ReturnType<typeof fetchPurchaseDetails>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<PurchaseDetails>> = yield call(
+      MarketApi.getPurchaseDetail,
+      action.payload,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getPurchaseDetailsSuccess(data.data));
+      } else {
+        yield put(getPurchaseDetailsFailed('Error'));
+      }
+    } else {
+      yield put(getPurchaseDetailsFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getPurchaseDetailsFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* setPurchaseDone(action: ReturnType<typeof fetchSetPurchaseDone>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse = yield call(MarketApi.setPurchaseDone, action.payload);
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(setPurchaseDoneSuccess());
+        yield call(getPurchaseData);
+      } else {
+        yield put(setPurchaseDoneFailed('Error'));
+      }
+    } else {
+      yield put(setPurchaseDoneFailed('Error'));
+    }
+  } catch (error) {
+    yield put(setPurchaseDoneFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getCategoryData() {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<{ kategori: CategoryData[] }>> = yield call(
+      MarketApi.getCategoryList,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getCategorySuccess(data.data.kategori));
+      } else {
+        yield put(getCategoryFailed('Error'));
+      }
+    } else {
+      yield put(getCategoryFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getCategoryFailed(error));
+  }
+  yield put(hideLoading());
+}
+
+function* getCategoryProductData(action: ReturnType<typeof fetchCategoryProductData>) {
+  yield put(showLoading());
+
+  try {
+    const response: AxiosResponse<ApiResponse<MarketProductData>> = yield call(
+      MarketApi.searchCategory,
+      { kategoriId: action.payload },
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getCategoryProductSuccess(data.data));
+      } else {
+        yield put(getCategoryProductFailed('Error'));
+      }
+    } else {
+      yield put(getCategoryProductFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getCategoryProductFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetMarketMainData() {
   yield takeLatest(fetchMarketMainData, getMarketMainData);
 }
@@ -376,4 +510,19 @@ export function* watchChangeCheckoutAddress() {
 }
 export function* watchOrderProcess() {
   yield takeLatest(fetchOrderProcess, orderProcess);
+}
+export function* watchGetPurchaseData() {
+  yield takeLatest(fetchPurchaseData, getPurchaseData);
+}
+export function* watchGetPurchaseDetails() {
+  yield takeLatest(fetchPurchaseDetails, getPurchaseDetails);
+}
+export function* watchSetPurchaseDone() {
+  yield takeLatest(fetchSetPurchaseDone, setPurchaseDone);
+}
+export function* watchGetCategory() {
+  yield takeLatest(fetchCategoryData, getCategoryData);
+}
+export function* watchGetCategoryProduct() {
+  yield takeLatest(fetchCategoryProductData, getCategoryProductData);
 }

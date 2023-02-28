@@ -110,13 +110,13 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   );
 
   const renderPengiriman = useMemo(() => {
-    const { cost, service } = selectedDelivery;
+    const { cost, service, etd } = selectedDelivery;
     return (
       <View style={[styles.row, { alignItems: 'baseline' }]}>
         <View>
           <Text style={styles.textNormal}>{service}</Text>
           <Text style={[styles.textSmall, { marginTop: 4 }]}>
-            Akan diterima pada tanggal 2 - 5 Feb
+            {`Barang akan diterima dalam waktu ${etd} hari`}
           </Text>
         </View>
         <Pressable

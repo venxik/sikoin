@@ -81,7 +81,7 @@ class MarketApi {
   }
 
   static async getCategoryList(): Promise<AxiosResponse> {
-    const resp = await HttpService.get(apis.endpoints.market.kategori);
+    const resp = await HttpService.get(apis.endpoints.market.kategoriProduk);
     return resp;
   }
 

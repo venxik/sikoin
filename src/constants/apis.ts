@@ -82,7 +82,7 @@ const constant = {
       prosesPemesanan: 'proses-pemesanan',
       pembelian: 'pembelian',
       pesananSelesai: 'pesanan-selesai',
-      kategori: 'kategori',
+      kategoriProduk: 'kategori-produk',
       cariKategori: 'cari-kategori',
       ubahAlamatPengiriman: 'ubah-alamat-pengiriman',
     },

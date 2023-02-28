@@ -229,10 +229,13 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
         {/* TOP MENU */}
         <View style={styles.topMenuContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <View style={styles.topMenuIconContainer}>
+            <TouchableOpacity
+              style={styles.topMenuIconContainer}
+              onPress={() => navigation.navigate('MarketCategoryScreen')}
+            >
               <Image source={icons.icon_kategori} style={styles.topMenuIcon} resizeMode="contain" />
               <Text style={styles.textTopMenu}>{strings.kategori}</Text>
-            </View>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.topMenuIconContainer} onPress={navigateToCartScreen}>
               <Image
                 source={icons.icon_keranjang_primary}

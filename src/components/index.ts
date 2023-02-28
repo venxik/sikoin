@@ -27,6 +27,7 @@ import HeaderBack from './HeaderBack';
 import HeaderPinjaman from './HeaderPinjaman';
 import ListEmptyDataComponent from './ListEmptyDataComponent';
 import LoadingIndicator from './LoadingIndicator';
+import MarketCategoryItem from './MarketCategoryItem';
 import MarketPembelianItem from './MarketPembelianItem';
 import MenuHeaderIcon from './MenuHeaderIcon';
 import NotifikasiItem from './NotifikasiItem';
@@ -79,6 +80,7 @@ export {
   HeaderPinjaman,
   ListEmptyDataComponent,
   LoadingIndicator,
+  MarketCategoryItem,
   MarketPembelianItem,
   MenuHeaderIcon,
   NotifikasiItem,
