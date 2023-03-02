@@ -192,7 +192,7 @@ export type PaymentStatus = {
 
 export type PurchaseDetails = {
   pesanan: PurchaseStatus;
-  detailProduk: MarketProductDetails;
+  detailProduk: CartProductData[];
   infoPengiriman: DeliveryStatus;
   rincianPembayaran: PaymentStatus;
 };
@@ -270,20 +270,7 @@ const initialState: RootState = {
   selectedCartProduct: [],
   purchaseData: [],
   purchaseDetails: {
-    detailProduk: {
-      deskripsi: '',
-      fotoProduk: [''],
-      harga: 0,
-      id: 0,
-      isFavorit: false,
-      isKondisiBaru: false,
-      kategori: '',
-      nama: '',
-      status: '',
-      stok: 0,
-      variasiKedua: { nama: null, pilihan: [] },
-      variasiPertama: { nama: null, pilihan: [] },
-    },
+    detailProduk: [],
     infoPengiriman: {
       etd: '',
       kurir: '',

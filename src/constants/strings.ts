@@ -197,8 +197,7 @@ export default {
   tambahkan_keranjang: 'Tambahkan Ke Keranjang',
   laporkan_produk: 'Laporkan Produk Ini',
   pusat_bantuan: 'Pusat Bantuan',
-  market_info_popup:
-    'Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi SIKOIN.\n\nSelamat berkoperasi! ☀️',
+  market_info_popup: '',
 
   /*VOUCHER*/
   voucher_center: 'Voucher Center',

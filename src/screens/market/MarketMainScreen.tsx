@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import Config from 'react-native-config';
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 
 import {
@@ -34,6 +35,12 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
 
   const [showPopupInfo, setShowPopupInfo] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  const popupContent = useMemo(
+    () =>
+      `Pengelola aplikasi atau Koperasi dapat memiliki toko online milik sendiri. Koperasi dapat menjual produk-produk terbaik secara langsung kepada anggota. Produk-produk yang dijual oleh Koperasi akan muncul di Web dan aplikasi ${Config.KOPERASI_NAME}.\n\nSelamat berkoperasi! ☀️`,
+    [],
+  );
 
   useEffect(() => {
     dispatch(fetchMarketMainData());
@@ -218,7 +225,7 @@ const MarketMainScreen: FC<Props> = ({ navigation }) => {
       <HeaderBack rightIcon={renderHeaderIcon()} />
       <Popup1Button
         iconStyle={{ width: 150, height: 150, marginBottom: -sizes.padding }}
-        contentText={strings.market_info_popup}
+        contentText={popupContent}
         headerText={strings.market}
         showPopup={showPopupInfo}
         onPress={() => setShowPopupInfo(false)}

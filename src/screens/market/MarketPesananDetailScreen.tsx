@@ -1,67 +1,100 @@
-import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, ToastAndroid, View } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import Clipboard from '@react-native-clipboard/clipboard';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { isEmpty } from 'lodash';
 import FastImage from 'react-native-fast-image';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ArrowRightSquare } from 'react-native-iconly';
 
 import { HeaderBack } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
 import { colors, icons, sizes } from '../../constants';
+import { fetchPurchaseDetails } from '../../redux/reducers/MarketReducer';
+import { formatter } from '../../utils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketPesananDetailScreen'>;
 
-const MarketPesananDetailScreen = ({}: Props) => {
+const MarketPesananDetailScreen = ({ route }: Props) => {
+  const { id } = route.params;
+
+  const { purchaseDetails } = useAppSelector((s) => s.MarketReducer);
+
+  const { nama, nomorPesanan, status: statusPesanan, waktu } = purchaseDetails.pesanan;
+  const { kurir, noResi } = purchaseDetails.infoPengiriman;
+  const { biayaPengiriman, totalBayar, totalHarga } = purchaseDetails.rincianPembayaran;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPurchaseDetails(id));
+  }, []);
+
   const copyToClipboard = (text?: string) => {
     Clipboard.setString(text ?? '');
     ToastAndroid.show('Text berhasil disalin', 2000);
   };
 
+  const renderProducts = () =>
+    purchaseDetails.detailProduk.map((item) => {
+      const { fotoProduk, namaProduk, jumlah, hargaSatuan, hargaTotal, id: produkId } = item;
+      return (
+        <View
+          key={produkId}
+          style={{ flexDirection: 'row', marginHorizontal: sizes.padding, alignItems: 'center' }}
+        >
+          <FastImage source={{ uri: fotoProduk }} style={styles.imageProduct} />
+          <View style={{ width: '80%', marginLeft: sizes.padding }}>
+            <Text style={styles.textProductName}>{namaProduk}</Text>
+            <Text style={styles.textProductQty}>{`${jumlah} x Rp ${formatter.formatNumberToCurreny(
+              hargaSatuan,
+            )}`}</Text>
+            <Text style={styles.textProductTotal}>{`Total Rp ${formatter.formatNumberToCurreny(
+              hargaTotal,
+            )}`}</Text>
+          </View>
+        </View>
+      );
+    });
+
   return (
     <ScrollView style={styles.container}>
       <HeaderBack title={'Detail Pesanan'} textStyle={{ width: '100%' }} />
       <View style={styles.innerContainer}>
-        <Text style={styles.textSectionHeader}>Pesanan Selesai</Text>
+        <Text style={styles.textSectionHeader}>{`Pesanan ${statusPesanan.toLowerCase()}`}</Text>
         <View style={styles.textContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={styles.textContentHeader}>INV/20220115/MPL/1951204385</Text>
-            <TouchableOpacity onPress={() => copyToClipboard('test')}>
+            <Text style={styles.textContentHeader}>{nomorPesanan}</Text>
+            {/* <TouchableOpacity onPress={() => copyToClipboard('test')}>
               <Image
                 source={icons.icon_copy_outline}
                 style={styles.iconCopy}
                 resizeMode="contain"
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
-          <Text style={styles.textTime}>21 Jan 2022, 10:39 WIB</Text>
+          {/* <Text style={styles.textTime}>{waktu}</Text> */}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.textContentHeader}>Nama Pembeli</Text>
-          <Text style={styles.textContent}>Jeo Ferli</Text>
+          <Text style={styles.textContent}>{nama}</Text>
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.textContentHeader}>Tanggal Pembelian</Text>
-          <Text style={styles.textContent}>20 Jan 2022, 21:06 WIB</Text>
+          <Text style={styles.textContent}>{waktu}</Text>
         </View>
       </View>
 
       <View style={styles.innerContainer}>
         <Text style={styles.textSectionHeader}>Detail Produk</Text>
-        <View
-          style={{ flexDirection: 'row', marginHorizontal: sizes.padding, alignItems: 'center' }}
-        >
-          <FastImage
-            source={{ uri: 'https://picsum.photos/id/121/400/400' }}
-            style={styles.imageProduct}
-          />
-          <View style={{ width: '80%', marginLeft: sizes.padding }}>
-            <Text style={styles.textProductName}>The North Face HYKE Season FW18</Text>
-            <Text style={styles.textProductQty}>1 x Rp 5.600.000</Text>
-            <Text style={styles.textProductTotal}>Total: Rp 5.600.000</Text>
-          </View>
-        </View>
+        {renderProducts()}
       </View>
 
       <View style={styles.innerContainer}>
@@ -69,27 +102,29 @@ const MarketPesananDetailScreen = ({}: Props) => {
         <View style={styles.infoPengirimanContainer}>
           <Text style={styles.textInfoPengirimanLeft}>Kurir</Text>
           <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={styles.textInfoPengirimanRight}>Instant Courier - GoSend</Text>
-            <ArrowRightSquare color={colors.primary} style={{ marginLeft: 4 }} />
+            <Text style={styles.textInfoPengirimanRight}>{kurir.toUpperCase()}</Text>
+            {/* <ArrowRightSquare color={colors.primary} style={{ marginLeft: 4 }} /> */}
           </TouchableOpacity>
         </View>
-        <View style={styles.infoPengirimanContainer}>
-          <Text style={styles.textInfoPengirimanLeft}>No. Resi</Text>
-          <TouchableOpacity
-            style={{ flexDirection: 'row', alignItems: 'center' }}
-            onPress={() => copyToClipboard('test')}
-          >
-            <Text style={[styles.textInfoPengirimanRight, { color: colors.bodyText }]}>
-              36547787908659
-            </Text>
-            <Image
-              source={icons.icon_copy_clipboard}
-              style={styles.iconCopy}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoPengirimanContainer}>
+        {!isEmpty(noResi) && (
+          <View style={styles.infoPengirimanContainer}>
+            <Text style={styles.textInfoPengirimanLeft}>No. Resi</Text>
+            <TouchableOpacity
+              style={{ flexDirection: 'row', alignItems: 'center' }}
+              onPress={() => copyToClipboard('test')}
+            >
+              <Text style={[styles.textInfoPengirimanRight, { color: colors.bodyText }]}>
+                {noResi}
+              </Text>
+              <Image
+                source={icons.icon_copy_clipboard}
+                style={styles.iconCopy}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+        {/* <View style={styles.infoPengirimanContainer}>
           <Text style={styles.textInfoPengirimanLeft}>Faktur</Text>
           <View>
             <Text style={[styles.textContentHeader, { color: colors.bodyTextLightGrey }]}>
@@ -102,7 +137,7 @@ const MarketPesananDetailScreen = ({}: Props) => {
               <ArrowRightSquare color={colors.primary} style={{ marginLeft: 4 }} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.innerContainer}>
@@ -117,7 +152,9 @@ const MarketPesananDetailScreen = ({}: Props) => {
           <View style={styles.dot} />
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
             <Text style={styles.textContentHeader}>Total Harga</Text>
-            <Text style={styles.textContent}>Rp. 5.645.700</Text>
+            <Text style={styles.textContent}>{`Rp ${formatter.formatNumberToCurreny(
+              totalHarga,
+            )}`}</Text>
           </View>
         </View>
         <View
@@ -135,11 +172,15 @@ const MarketPesananDetailScreen = ({}: Props) => {
               flex: 1,
             }}
           >
-            <Text style={styles.textContentHeader}>Biaya Pengiriman JNE</Text>
-            <Text style={styles.textContent}>Rp. 33.000</Text>
+            <Text
+              style={[styles.textContentHeader, { width: '70%' }]}
+            >{`Biaya Pengiriman ${kurir.toUpperCase()}`}</Text>
+            <Text style={styles.textContent}>{`Rp ${formatter.formatNumberToCurreny(
+              biayaPengiriman,
+            )}`}</Text>
           </View>
         </View>
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -159,11 +200,13 @@ const MarketPesananDetailScreen = ({}: Props) => {
             </Text>
             <Text style={styles.textContent}>Rp. 12.000</Text>
           </View>
-        </View>
+        </View> */}
         <View style={styles.dottedLines} />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
           <Text style={[styles.textContentHeader, { fontFamily: 'Inter-Bold' }]}>Total Bayar</Text>
-          <Text style={[styles.textContent, { fontFamily: 'Inter-Bold' }]}>Rp. 5.600.000</Text>
+          <Text
+            style={[styles.textContent, { fontFamily: 'Inter-Bold' }]}
+          >{`Rp ${formatter.formatNumberToCurreny(totalBayar)}`}</Text>
         </View>
       </View>
     </ScrollView>
@@ -237,6 +280,7 @@ const styles = StyleSheet.create({
   infoPengirimanContainer: {
     flexDirection: 'row',
     marginBottom: 10,
+    width: '80%',
   },
   textInfoPengirimanLeft: {
     width: '30%',
@@ -245,7 +289,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   textInfoPengirimanRight: {
-    color: colors.primary,
+    color: colors.bodyText,
     fontFamily: 'Inter-Regular',
     fontSize: 15,
   },
