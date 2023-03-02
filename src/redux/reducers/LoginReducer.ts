@@ -21,11 +21,12 @@ export interface UserKoperasiResponse {
   noTelp: string;
 }
 
-export interface LoginResponse {
+export type LoginResponse = {
+  error: string;
   message: string;
   user: object;
   token: string;
-}
+};
 
 export type ChangePasswordForm = {
   passwordLama: string;

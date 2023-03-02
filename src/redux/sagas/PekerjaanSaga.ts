@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { PekerjaanApi } from '../../config/apis';
+import { ApiResponse, PekerjaanApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
@@ -19,7 +19,7 @@ import {
 function* getPekerjaan() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: PekerjaanResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<PekerjaanResponse>> = yield call(
       PekerjaanApi.getPekerjaan,
     );
     if (response?.status === 200) {
@@ -41,7 +41,7 @@ function* getPekerjaan() {
 function* updatePekerjaan(action: ReturnType<typeof fetchUpdatePekerjaan>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: PekerjaanResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<PekerjaanResponse>> = yield call(
       PekerjaanApi.updatePekerjaan,
       action.payload,
     );

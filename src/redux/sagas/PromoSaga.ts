@@ -1,9 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { PromoApi } from '../../config/apis';
+import { ApiResponse, PromoApi } from '../../config/apis';
 import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
+import { KabarPromoData } from '../reducers/HomeReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 import {
   fetchPromo,
@@ -12,12 +13,13 @@ import {
   fetchPromoDetail,
   fetchPromoDetailFailed,
   fetchPromoDetailSuccess,
+  PromoDetail,
 } from '../reducers/PromoReducer';
 
 function* getAllPromo() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(PromoApi.getAllPromo);
+    const response: AxiosResponse<ApiResponse<KabarPromoData[]>> = yield call(PromoApi.getAllPromo);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -37,7 +39,10 @@ function* getAllPromo() {
 function* getPromoDetail(action: ReturnType<typeof fetchPromoDetail>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(PromoApi.getPromoDetail, action.payload);
+    const response: AxiosResponse<ApiResponse<PromoDetail>> = yield call(
+      PromoApi.getPromoDetail,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

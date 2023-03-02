@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { NotifikasiApi } from '../../config/apis';
+import { ApiResponse, NotifikasiApi } from '../../config/apis';
 import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
@@ -12,12 +12,16 @@ import {
   fetchNotifikasiDetailSuccess,
   fetchNotifikasiFailed,
   fetchNotifikasiSuccess,
+  NotifikasiDetail,
+  NotifikasiResponse,
 } from '../reducers/NotifikasiReducer';
 
 function* getAllNotifikasi() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(NotifikasiApi.getAllNotifikasi);
+    const response: AxiosResponse<ApiResponse<NotifikasiResponse>> = yield call(
+      NotifikasiApi.getAllNotifikasi,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -37,7 +41,10 @@ function* getAllNotifikasi() {
 function* getNotifikasiDetail(action: ReturnType<typeof fetchNotifikasiDetail>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(NotifikasiApi.getNotifikasiDetail, action.payload);
+    const response: AxiosResponse<ApiResponse<NotifikasiDetail>> = yield call(
+      NotifikasiApi.getNotifikasiDetail,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { LoginApi } from '../../config/apis';
+import { ApiResponse, LoginApi } from '../../config/apis';
 import { navigate, navigateAndReset } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { resetUserData } from '../reducers/HomeReducer';
@@ -29,6 +29,7 @@ import {
   getUserKoperasiFailed,
   getUserKoperasiSuccess,
   KoperasiListResponse,
+  LoginResponse,
   setChangePasswordStatus,
   setForgotPasswordStatus,
   setGetVersionStatus,
@@ -40,7 +41,7 @@ import {
 function* getKoperasiList() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: KoperasiListResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<KoperasiListResponse[]>> = yield call(
       LoginApi.getKoperasiList,
     );
     if (response?.status === 200) {
@@ -62,7 +63,7 @@ function* getKoperasiList() {
 function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: UserKoperasiResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<UserKoperasiResponse>> = yield call(
       LoginApi.sendUserKoperasi,
       action.payload,
     );
@@ -88,7 +89,7 @@ function* sendUserKoperasi(action: ReturnType<typeof fetchUserKoperasi>) {
 function* sendUserKoperasiEmail(action: ReturnType<typeof fetchUserKoperasiEmail>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ message: string }> = yield call(
+    const response: AxiosResponse<ApiResponse<UserKoperasiResponse>> = yield call(
       LoginApi.sendUserEmailKoperasi,
       action.payload,
     );
@@ -118,10 +119,7 @@ function* sendUserKoperasiEmail(action: ReturnType<typeof fetchUserKoperasiEmail
 function* forgotPassword(action: ReturnType<typeof fetchForgotPassword>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ message: string }> = yield call(
-      LoginApi.forgotPassword,
-      action.payload,
-    );
+    const response: AxiosResponse = yield call(LoginApi.forgotPassword, action.payload);
     if (response?.status === 200) {
       yield put(setForgotPasswordStatus('success'));
     } else {
@@ -136,7 +134,7 @@ function* forgotPassword(action: ReturnType<typeof fetchForgotPassword>) {
 function* login(action: ReturnType<typeof fetchLogin>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(LoginApi.login, action.payload);
+    const response: AxiosResponse<LoginResponse> = yield call(LoginApi.login, action.payload);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -157,7 +155,7 @@ function* login(action: ReturnType<typeof fetchLogin>) {
 function* logout() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(LoginApi.logout);
+    const response: AxiosResponse<ApiResponse<null>> = yield call(LoginApi.logout);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -178,7 +176,9 @@ function* logout() {
 
 function* getVersionNumber() {
   try {
-    const response: AxiosResponse = yield call(LoginApi.getVersionNumber);
+    const response: AxiosResponse<ApiResponse<{ versionNumber: string }>> = yield call(
+      LoginApi.getVersionNumber,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -200,7 +200,10 @@ function* getVersionNumber() {
 
 function* changePassword(action: ReturnType<typeof fetchChangePassword>) {
   try {
-    const response: AxiosResponse = yield call(LoginApi.changePassword, action.payload);
+    const response: AxiosResponse<ApiResponse<null>> = yield call(
+      LoginApi.changePassword,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

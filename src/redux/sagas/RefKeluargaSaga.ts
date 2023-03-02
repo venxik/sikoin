@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { RefKeluargaApi } from '../../config/apis';
+import { ApiResponse, RefKeluargaApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
@@ -24,7 +24,7 @@ import {
 function* getRefKeluarga() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<RefKeluargaResponse[]>> = yield call(
       RefKeluargaApi.getRefKeluargaList,
     );
     if (response?.status === 200) {
@@ -46,7 +46,7 @@ function* getRefKeluarga() {
 function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<RefKeluargaResponse[]>> = yield call(
       RefKeluargaApi.updateRefKeluarga,
       action.payload,
     );
@@ -72,7 +72,7 @@ function* updateRefKeluarga(action: ReturnType<typeof fetchUpdateRefKeluarga>) {
 function* submitRefKeluarga(action: ReturnType<typeof fetchSubmitRefKeluarga>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: RefKeluargaResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<RefKeluargaResponse[]>> = yield call(
       RefKeluargaApi.submitRefKeluarga,
       action.payload,
     );

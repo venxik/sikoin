@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { ProfileApi } from '../../config/apis';
+import { ApiResponse, ProfileApi } from '../../config/apis';
 import { goBack, navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { updateUserData } from '../reducers/HomeReducer';
@@ -15,6 +15,7 @@ import {
   fetchUpdateProfile,
   getProfileFailed,
   getProfileSuccess,
+  IDCard,
   ProfileResponse,
   updateProfileFailed,
   updateProfileSuccess,
@@ -23,7 +24,7 @@ import {
 function* getProfile() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: ProfileResponse }> = yield call(ProfileApi.getProfile);
+    const response: AxiosResponse<ApiResponse<ProfileResponse>> = yield call(ProfileApi.getProfile);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -43,7 +44,7 @@ function* getProfile() {
 function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: ProfileResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<ProfileResponse>> = yield call(
       ProfileApi.updateProfile,
       action.payload,
     );
@@ -70,7 +71,7 @@ function* updateProfile(action: ReturnType<typeof fetchUpdateProfile>) {
 function* getIdCard() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(ProfileApi.getIdCard);
+    const response: AxiosResponse<ApiResponse<IDCard>> = yield call(ProfileApi.getIdCard);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

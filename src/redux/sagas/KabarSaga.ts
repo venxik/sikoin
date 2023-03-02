@@ -1,9 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { KabarApi } from '../../config/apis';
+import { ApiResponse, KabarApi } from '../../config/apis';
 import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
+import { KabarPromoData } from '../reducers/HomeReducer';
 import {
   fetchKabar,
   fetchKabarDetail,
@@ -11,13 +12,14 @@ import {
   fetchKabarDetailSuccess,
   fetchKabarFailed,
   fetchKabarSuccess,
+  KabarDetail,
 } from '../reducers/KabarReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getAllKabar() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(KabarApi.getAllKabar);
+    const response: AxiosResponse<ApiResponse<KabarPromoData[]>> = yield call(KabarApi.getAllKabar);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -37,7 +39,10 @@ function* getAllKabar() {
 function* getKabarDetail(action: ReturnType<typeof fetchKabarDetail>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(KabarApi.getKabarDetail, action.payload);
+    const response: AxiosResponse<ApiResponse<KabarDetail>> = yield call(
+      KabarApi.getKabarDetail,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

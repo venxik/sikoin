@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
+import { ApiResponse } from '../../config/apis';
 import KoperasiApi from '../../config/apis/KoperasiApi';
 import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
@@ -8,13 +9,16 @@ import {
   fetchKoperasiData,
   getKoperasiDataFailed,
   getKoperasiDataSuccess,
+  KoperasiDataResponse,
 } from '../reducers/KoperasiReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getKoperasiData() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(KoperasiApi.getKoperasiData);
+    const response: AxiosResponse<ApiResponse<KoperasiDataResponse>> = yield call(
+      KoperasiApi.getKoperasiData,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

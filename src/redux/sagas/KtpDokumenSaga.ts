@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { navigation } from '../../config';
-import { KtpDokumenApi } from '../../config/apis';
+import { ApiResponse, KtpDokumenApi } from '../../config/apis';
 import { formatter } from '../../utils';
 import {
   fetchKtpDokumen,
@@ -21,7 +21,7 @@ function* getKtpDokumen() {
   yield put(showLoading());
 
   try {
-    const response: AxiosResponse<{ data: KtpDokumenResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<KtpDokumenResponse>> = yield call(
       KtpDokumenApi.getKtpData,
     );
     if (response?.status === 200) {
@@ -40,7 +40,7 @@ function* uploadGambarKtp(action: ReturnType<typeof fetchUploadGambarKtp>) {
   yield put(showLoading());
 
   try {
-    const response: AxiosResponse<{ data: KtpDokumenResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<KtpDokumenResponse>> = yield call(
       KtpDokumenApi.uploadGambarKtp,
       action.payload,
     );

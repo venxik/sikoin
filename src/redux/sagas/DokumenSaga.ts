@@ -1,15 +1,22 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { DokumenApi } from '../../config/apis';
+import { ApiResponse, DokumenApi } from '../../config/apis';
 import { formatter } from '../../utils';
-import { fetchDokumen, fetchDokumenFailed, fetchDokumenSuccess } from '../reducers/DokumenReducer';
+import {
+  DokumenData,
+  fetchDokumen,
+  fetchDokumenFailed,
+  fetchDokumenSuccess,
+} from '../reducers/DokumenReducer';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 
 function* getAllDokumen() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(DokumenApi.getAllDokumen);
+    const response: AxiosResponse<ApiResponse<DokumenData[]>> = yield call(
+      DokumenApi.getAllDokumen,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

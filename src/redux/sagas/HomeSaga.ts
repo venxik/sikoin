@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { HomeApi } from '../../config/apis';
+import { ApiResponse, HomeApi } from '../../config/apis';
 import { formatter } from '../../utils';
 import {
   BerandaUserResponse,
@@ -14,7 +14,7 @@ import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 function* getBerandaUser() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: BerandaUserResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<BerandaUserResponse>> = yield call(
       HomeApi.getBerandaData,
     );
     if (response?.status === 200) {

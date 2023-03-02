@@ -166,7 +166,7 @@ const HomeTab = () => {
 
 const HomeStackNavigator = () => (
   <HomeStack.Navigator
-    initialRouteName={'MarketMainScreen'}
+    // initialRouteName={'MarketMainScreen'}
     screenOptions={{
       headerShown: false,
       gestureEnabled: false,
@@ -329,7 +329,7 @@ const ParentStackNavigator = () => {
           headerShown: false,
           gestureEnabled: false,
         }}
-        initialRouteName="HomeTab"
+        // initialRouteName="HomeTab"
       >
         <ParentStack.Screen name={'SplashScreen'} component={screens.SplashScreen} />
         <ParentStack.Screen name={'OnboardingScreen'} component={screens.OnboardingScreen} />

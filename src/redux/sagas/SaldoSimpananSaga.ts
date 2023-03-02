@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { SaldoSimpananApi } from '../../config/apis';
+import { ApiResponse, SaldoSimpananApi } from '../../config/apis';
 import { navigate } from '../../config/navigation';
 import { formatter } from '../../utils';
 import { hideLoading, showLoading } from '../reducers/LoadingReducer';
@@ -29,6 +29,7 @@ import {
   fetchSubmitTopup,
   fetchSubmitTopupFailed,
   fetchSubmitTopupSuccess,
+  MutasiSimpananResponse,
   SaldoDataResponse,
   SimpananDataResponse,
   SubmitTopupResponse,
@@ -37,7 +38,7 @@ import {
 function* getSaldoData() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: SaldoDataResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<SaldoDataResponse>> = yield call(
       SaldoSimpananApi.getSaldoData,
     );
     if (response?.status === 200) {
@@ -59,7 +60,7 @@ function* getSaldoData() {
 function* getCreateSaldoList() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: CreateSaldoListResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<CreateSaldoListResponse>> = yield call(
       SaldoSimpananApi.getCreateSaldoList,
     );
 
@@ -83,7 +84,7 @@ function* getCreateSaldoList() {
 function* submitTopup(action: ReturnType<typeof fetchSubmitTopup>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: SubmitTopupResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<SubmitTopupResponse>> = yield call(
       SaldoSimpananApi.submitTopup,
       action.payload,
     );
@@ -109,7 +110,7 @@ function* submitTopup(action: ReturnType<typeof fetchSubmitTopup>) {
 function* getSimpananData() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: SimpananDataResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<SimpananDataResponse>> = yield call(
       SaldoSimpananApi.getSimpananData,
     );
     if (response?.status === 200) {
@@ -131,7 +132,7 @@ function* getSimpananData() {
 function* getCreateSimpananList() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: CreateSimpananListResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<CreateSimpananListResponse>> = yield call(
       SaldoSimpananApi.getCreateSimpananList,
     );
     if (response?.status === 200) {
@@ -154,7 +155,7 @@ function* getCreateSimpananList() {
 function* submitPenarikan(action: ReturnType<typeof fetchSubmitPenarikan>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: SubmitTopupResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<SubmitTopupResponse>> = yield call(
       SaldoSimpananApi.submitPenarikan,
       action.payload,
     );
@@ -178,7 +179,10 @@ function* submitPenarikan(action: ReturnType<typeof fetchSubmitPenarikan>) {
 function* getMutasiSimpanan(action: ReturnType<typeof fetchMutasiSimpanan>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse = yield call(SaldoSimpananApi.mutasiSimpanan, action.payload);
+    const response: AxiosResponse<ApiResponse<MutasiSimpananResponse>> = yield call(
+      SaldoSimpananApi.mutasiSimpanan,
+      action.payload,
+    );
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {

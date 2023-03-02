@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { BiodataApi } from '../../config/apis';
+import { ApiResponse, BiodataApi } from '../../config/apis';
 import { goBack } from '../../config/navigation';
 import { formatter } from '../../utils';
 import {
@@ -19,7 +19,7 @@ import { hideLoading, showLoading } from '../reducers/LoadingReducer';
 function* getBiodata() {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(BiodataApi.getBiodata);
+    const response: AxiosResponse<ApiResponse<BiodataResponse>> = yield call(BiodataApi.getBiodata);
     if (response?.status === 200) {
       const data = formatter.addMissingBracketJSON(response.data);
       if (data?.error == null) {
@@ -39,7 +39,7 @@ function* getBiodata() {
 function* updateBiodata(action: ReturnType<typeof fetchUpdateBiodata>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: BiodataResponse }> = yield call(
+    const response: AxiosResponse<ApiResponse<BiodataResponse>> = yield call(
       BiodataApi.updateBiodata,
       action.payload,
     );

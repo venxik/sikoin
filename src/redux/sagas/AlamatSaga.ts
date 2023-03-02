@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { AlamatApi } from '../../config/apis';
+import { AlamatApi, ApiResponse } from '../../config/apis';
 import { goBack } from '../../config/navigation';
 import { formatter } from '../../utils';
 import {
@@ -27,7 +27,7 @@ function* getAlamat() {
   yield put(showLoading());
 
   try {
-    const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<AlamatDataResponse[]>> = yield call(
       AlamatApi.getAlamatList,
     );
     if (response?.status === 200) {
@@ -49,7 +49,7 @@ function* getAlamat() {
 function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<AlamatDataResponse[]>> = yield call(
       AlamatApi.updateAlamat,
       action.payload,
     );
@@ -75,7 +75,7 @@ function* updateAlamat(action: ReturnType<typeof fetchUpdateAlamat>) {
 function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<AlamatDataResponse[]>> = yield call(
       AlamatApi.submitAlamat,
       action.payload,
     );
@@ -101,7 +101,7 @@ function* submitAlamat(action: ReturnType<typeof fetchSubmitAlamat>) {
 function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
   yield put(showLoading());
   try {
-    const response: AxiosResponse<{ data: AlamatDataResponse[] }> = yield call(
+    const response: AxiosResponse<ApiResponse<AlamatDataResponse[]>> = yield call(
       AlamatApi.deleteAlamat,
       action.payload,
     );
