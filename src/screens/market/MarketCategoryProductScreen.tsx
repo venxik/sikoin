@@ -1,9 +1,10 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { debounce } from 'lodash';
+import { Controller, useForm } from 'react-hook-form';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { CardMarketSmall, HeaderBack, TextInputBorder } from '../../components';
@@ -19,16 +20,25 @@ import {
 type Props = NativeStackScreenProps<HomeStackParamList, 'MarketCategoryProductScreen'>;
 
 const MarketCategoryProductScreen: FC<Props> = ({ navigation, route }) => {
-  const { id, nama } = route.params;
+  const { nama } = route.params;
   const { marketProductData } = useAppSelector((state) => state.MarketReducer) || {};
   const { isLoading } = useAppSelector((state) => state.loading);
   const dispatch = useAppDispatch();
 
-  const [searchValue, setSearchValue] = useState('');
+  const [search, setSearch] = useState('');
+
+  const data = useMemo(() => {
+    if (search.length > 3) {
+      return marketProductData.produk.filter((item) =>
+        item.nama.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+    return marketProductData.produk;
+  }, [search, marketProductData]);
 
   const handleSearch = useCallback(
     debounce(async (value: string) => {
-      console.warn(value);
+      setSearch(value);
     }, 300),
     [],
   );
@@ -54,6 +64,12 @@ const MarketCategoryProductScreen: FC<Props> = ({ navigation, route }) => {
   const navigateToDetailsScreen = (productId: number) => {
     navigation.navigate('MarketProductDetailsScreen', { id: productId });
   };
+
+  const { control } = useForm<{ searchValue: string }>({
+    defaultValues: {
+      searchValue: '',
+    },
+  });
 
   const renderHeaderIcon = () => {
     return (
@@ -97,7 +113,7 @@ const MarketCategoryProductScreen: FC<Props> = ({ navigation, route }) => {
     return (
       <View style={{ marginBottom: 40 }}>
         <FlatList
-          data={marketProductData?.produk}
+          data={data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
           numColumns={2}
@@ -130,14 +146,20 @@ const MarketCategoryProductScreen: FC<Props> = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <HeaderBack title={nama} rightIcon={renderHeaderIcon()} />
       <View style={styles.innerContainer}>
-        <TextInputBorder
-          value={searchValue}
-          onChangeText={(e) => {
-            onChangeText(e);
-            setSearchValue(e);
-          }}
-          placeholder={'Cari Produk'}
-          icon={icons.icon_search_market}
+        <Controller
+          control={control}
+          name="searchValue"
+          render={({ field: { onChange, value } }) => (
+            <TextInputBorder
+              value={value}
+              onChangeText={(e) => {
+                onChangeText(e);
+                onChange(e);
+              }}
+              placeholder={'Cari Produk'}
+              icon={icons.icon_search_market}
+            />
+          )}
         />
       </View>
       {renderBody()}
