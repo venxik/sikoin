@@ -40,7 +40,7 @@ const CardMarketLarge = (props: CardMarketLargeProps) => {
         <Button
           text={'Beli'}
           onPress={onPressBeli}
-          buttonContainerStyle={{ width: '50%', marginTop: sizes.padding }}
+          buttonContainerStyle={{ width: '100%', marginTop: sizes.padding }}
         />
 
         {/* <TouchableOpacity onPress={onPressVoucher} style={styles.touchableContainer}>

@@ -112,15 +112,15 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
   const renderPengiriman = useMemo(() => {
     const { cost, service, etd } = selectedDelivery;
     return (
-      <View style={[styles.row, { alignItems: 'baseline' }]}>
-        <View>
+      <View style={[styles.row]}>
+        <View style={{ width: '70%' }}>
           <Text style={styles.textNormal}>{service}</Text>
           <Text style={[styles.textSmall, { marginTop: 4 }]}>
             {`Barang akan diterima dalam waktu ${etd} hari`}
           </Text>
         </View>
         <Pressable
-          style={styles.row}
+          style={[styles.row, { justifyContent: 'flex-end' }]}
           onPress={() => {
             setBottomSheetTab('pengiriman');
             sheetRef.current?.snapToIndex(0);

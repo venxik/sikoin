@@ -19,7 +19,9 @@ const TextInputForm = (props: TextInputFormProps) => {
 
   return (
     <View style={[styles.defaultContainer, style]}>
-      <Text style={styles.titleText}>{title}</Text>
+      <Text style={styles.titleText} numberOfLines={1}>
+        {title}
+      </Text>
       <View style={styles.innerContainer}>
         <TextInput
           {...props}

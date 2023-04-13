@@ -648,12 +648,13 @@ const styles = StyleSheet.create({
   },
   textDetailsItem: {
     fontFamily: 'Inter-Regular',
-    fontSize: 36,
+    fontSize: 18,
     color: colors.bodyText,
+    marginLeft: sizes.padding * 0.5,
   },
   iconDetails: {
-    width: sizes.icon_size * 2,
-    height: sizes.icon_size * 2,
+    width: sizes.icon_size,
+    height: sizes.icon_size,
   },
   verticalLine: {
     backgroundColor: colors.strokeGrey,

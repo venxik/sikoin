@@ -16,6 +16,7 @@ const DropdownForm = (props: DropdownFormProps) => {
       containerStyle={styles.dropdownItemContainer}
       placeholderStyle={styles.textValue}
       selectedTextStyle={styles.textValue}
+      activeColor={colors.tonalPrimary}
       renderRightIcon={() => (
         <Image
           source={icons.icon_dropdown}
@@ -29,6 +30,7 @@ const DropdownForm = (props: DropdownFormProps) => {
       labelField="label"
       valueField="value"
       placeholder={strings.pilih_dot}
+      showsVerticalScrollIndicator
     />
   );
 

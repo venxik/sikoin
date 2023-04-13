@@ -1,6 +1,6 @@
 const genderItem = [
-  { label: 'Pria', value: 'Pria' },
-  { label: 'Wanita', value: 'Wanita' },
+  { label: 'Laki-laki', value: 'Laki-laki' },
+  { label: 'Perempuan', value: 'Perempuan' },
 ];
 
 const golDarahItem = [
@@ -12,7 +12,7 @@ const golDarahItem = [
 
 const kewarganegaraanItem = [
   { label: 'WNI', value: 'WNI' },
-  { label: 'Asing', value: 'Asing' },
+  { label: 'WNA', value: 'WNA' },
 ];
 
 const pendidikanItem = [
@@ -21,14 +21,16 @@ const pendidikanItem = [
   { label: 'SMA', value: 'SMA' },
   { label: 'S1', value: 'S1' },
   { label: 'S2', value: 'S2' },
+  { label: 'S3', value: 'S3' },
 ];
 
 const agamaItem = [
-  { label: 'Islam', value: 'Islam' },
-  { label: 'Kristen', value: 'Kristen' },
-  { label: 'Katholik', value: 'Katholik' },
-  { label: 'Buddha', value: 'Buddha' },
-  { label: 'Hindu', value: 'Hindu' },
+  { label: 'ISLAM', value: 'ISLAM' },
+  { label: 'KRISTEN', value: 'KRISTEN' },
+  { label: 'KATHOLIK', value: 'KATHOLIK' },
+  { label: 'BUDDHA', value: 'BUDDHA' },
+  { label: 'HINDU', value: 'HINDU' },
+  { label: 'KONGHUCHU', value: 'KONGHUCHU' },
 ];
 
 const statusPernikahanItem = [
