@@ -46,7 +46,7 @@ const ProfilePicture = (props: ProfilePictureProps) => {
 export default ProfilePicture;
 
 const styles = StyleSheet.create({
-  container: { width: SCREEN_WIDTH * 0.25 },
+  container: { width: SCREEN_WIDTH * 0.25, height: SCREEN_WIDTH * 0.25 },
   profilePicStyle: {
     width: SCREEN_WIDTH * 0.25,
     height: SCREEN_WIDTH * 0.25,

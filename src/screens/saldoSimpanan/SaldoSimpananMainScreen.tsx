@@ -115,16 +115,21 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
     return (
       <View>
         <View style={styles.simpananContainer}>
-          <Button
+          {/* <Button
             icon={icons.icon_topup_penarikan}
             text={strings.top_up}
             onPress={() => navigateToTopup()}
-          />
+          /> */}
           <Button
+            icon={icons.icon_mutasi_primary}
+            text={strings.mutasi}
+            onPress={() => navigation.navigate('TransaksiMainScreen')}
+          />
+          {/* <Button
             icon={icons.icon_penarikan_primary}
             text={strings.penarikan}
             onPress={() => navigateToPenarikan()}
-          />
+          /> */}
         </View>
         <View style={{ marginTop: 40 }}>
           {simpanan.simpananTerlihat?.map((item, i) => (
@@ -147,9 +152,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
           source={showSaldo ? images.img_saldo_icon : images.img_simpanan_icon}
           style={styles.logo}
         />
-        <Text style={styles.textTitle}>
-          {showSaldo ? strings.totalSaldo : strings.totalSimpanan} :
-        </Text>
+        <Text style={styles.textTitle}>{'Komisi'} :</Text>
         <View style={styles.saldoRowContainer}>
           <Image source={icons.icon_rp} style={{ width: 34, height: 34 }} />
           <Text style={styles.textSaldo}>
@@ -167,7 +170,7 @@ const SaldoSimpananMainScreen: FC<Props> = ({ route, navigation }) => {
       <HeaderBack
         style={{ position: 'absolute', top: 0, zIndex: 2 }}
         onPress={() => navigation.goBack()}
-        title={showSaldo ? strings.saldo : strings.simpanan}
+        title={'Komisi'}
         customLeftIcon={<ArrowLeft color={colors.white} />}
         textStyle={{ color: colors.white }}
       />

@@ -51,7 +51,7 @@ const SaldoSimpananDetail: React.FC<Props> = () => {
           </View>
         </View>
         <View style={styles.mainContainer}>
-          <View style={{ marginTop: sizes.padding / 2 }}>
+          <View>
             {mutasiSimpanan?.mutasi.map((item, i) => (
               <SaldoSimpananDetailItem item={item} key={i} />
             ))}
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     backgroundColor: colors.white,
-    padding: sizes.padding,
+    paddingHorizontal: sizes.padding,
     borderRadius: sizes.padding,
   },
   saldoRowContainer: {

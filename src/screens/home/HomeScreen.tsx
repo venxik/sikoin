@@ -47,7 +47,7 @@ const dotSize = 8;
 const menuSize = SCREEN_HEIGHT * 0.15;
 
 const saldoFlatlist = [
-  { title: strings.simpanan, button: strings.topup },
+  { title: 'Komisi' },
   // { title: strings.saldo_belanja, button: strings.topup },
 ];
 
@@ -57,11 +57,11 @@ const menuList = [
     label: strings.pinjaman,
     navigateTo: 'PinjamanMainScreen',
   },
-  {
-    image: images.menu_market,
-    label: strings.market,
-    navigateTo: 'MarketMainScreen',
-  },
+  // {
+  //   image: images.menu_market,
+  //   label: strings.market,
+  //   navigateTo: 'MarketMainScreen',
+  // },
   // {
   //   image: images.menu_voucher,
   //   label: strings.voucher,
@@ -72,11 +72,11 @@ const menuList = [
     label: strings.dokumen,
     navigateTo: 'DokumenMainScreen',
   },
-  {
-    image: images.menu_whatsapp,
-    label: 'Whatsapp',
-    navigateTo: '',
-  },
+  // {
+  //   image: images.menu_whatsapp,
+  //   label: 'Whatsapp',
+  //   navigateTo: '',
+  // },
 ];
 
 const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ navigation }) => {
@@ -342,7 +342,7 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
             return (
               <View key={index} style={styles.miniScrollInnerContainer}>
                 <TouchableOpacity
-                  onPress={() => navigateToSaldoSimpanan(item.title === strings.saldo_belanja)}
+                  onPress={() => navigateToSaldoSimpanan(false)}
                   style={{ justifyContent: 'space-between' }}
                 >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -360,20 +360,24 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
                       : formatter.formatNumberToCurreny(saldoBelanja)}
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.miniScrollButton}
-                  onPress={
-                    // () => {}
-                    () => onClickMiniScrollButton(item.title === strings.simpanan)
-                  }
-                >
-                  <Image
-                    source={item.button === strings.simpanan ? icons.icon_topup : icons.icon_topup}
-                    style={styles.iconMiniScrollButton}
-                    resizeMode="contain"
-                  />
-                  <Text style={styles.textMiniScrollBtn}>{item.button}</Text>
-                </TouchableOpacity>
+                {item.button && (
+                  <TouchableOpacity
+                    style={styles.miniScrollButton}
+                    onPress={
+                      // () => {}
+                      () => onClickMiniScrollButton(item.title === strings.simpanan)
+                    }
+                  >
+                    <Image
+                      source={
+                        item.button === strings.simpanan ? icons.icon_topup : icons.icon_topup
+                      }
+                      style={styles.iconMiniScrollButton}
+                      resizeMode="contain"
+                    />
+                    <Text style={styles.textMiniScrollBtn}>{item.button}</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             );
           })}
@@ -438,8 +442,8 @@ const HomeScreen: React.FC<HomeTabScreenProps<'HomeStackNavigator'>> = ({ naviga
             marginHorizontal: SCREEN_WIDTH * 0.05,
           }}
         >
-          {promo.length > 0 && renderPromoCard()}
-          {kabar.length > 0 && renderKabarCard()}
+          {/* {promo.length > 0 && renderPromoCard()} */}
+          {/* {kabar.length > 0 && renderKabarCard()} */}
           {/* {renderMarketCard()} */}
         </View>
       </ScrollView>

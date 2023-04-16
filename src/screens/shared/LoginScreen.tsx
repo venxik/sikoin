@@ -161,7 +161,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
         <View style={{ width: '100%', marginTop: sizes.padding }}>
           <Button shadow={false} onPress={handleSubmit(doLogin)} text={strings.masuk} />
-          <Button
+          {/* <Button
             shadow={false}
             onPress={navigateToDaftarKoperasi}
             buttonContainerStyle={{
@@ -170,7 +170,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             }}
             textStyle={{ color: colors.primary }}
             text={'Daftar'}
-          />
+          /> */}
           <Button
             shadow={false}
             onPress={() => setShowForgetPassModal(true)}
