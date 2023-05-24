@@ -61,12 +61,12 @@ const styles = StyleSheet.create({
     borderRadius: sizes.padding,
     width: SCREEN_WIDTH * 0.8,
     marginRight: sizes.padding,
+    padding: sizes.padding * 1.2,
   },
   imageStyle: {
     width: '100%',
-    height: SCREEN_HEIGHT * 0.5,
-    borderTopLeftRadius: sizes.padding,
-    borderTopRightRadius: sizes.padding,
+    height: SCREEN_HEIGHT * 0.3,
+    borderRadius: sizes.padding,
   },
   bottomContainer: {
     flex: 1,
