@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
@@ -7,15 +7,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import { Button, HeaderBack, TextInputForm } from '../../../../components';
+import { Button, DropdownForm, HeaderBack, TextInputForm } from '../../../../components';
+import { useAppSelector } from '../../../../config';
 import { ProfileStackParamList } from '../../../../config/navigation/model';
-import { colors, sizes, strings } from '../../../../constants';
+import { colors, SCREEN_HEIGHT, sizes, strings } from '../../../../constants';
 import {
   AlamatDataResponse,
+  fetchCityProvince,
   fetchSubmitAlamat,
   fetchUpdateAlamat,
 } from '../../../../redux/reducers/AlamatReducer';
-import { formatter } from '../../../../utils';
 
 type Props = NativeStackScreenProps<ProfileStackParamList, 'DaftarAlamatAddScreen'>;
 
@@ -25,9 +26,18 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const { kota: kotaList, provinsi: provinsiList } = useAppSelector(
+    (s) => s.AlamatReducer.cityProvinceList,
+  );
+
+  useEffect(() => {
+    dispatch(fetchCityProvince());
+  }, []);
+
   const {
     control,
     handleSubmit,
+    watch,
     // formState: { errors },
   } = useForm<AlamatDataResponse>({
     defaultValues: {
@@ -41,6 +51,25 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
       rw: update ? rw : '',
     },
   });
+
+  const kotaListFiltered = useMemo(() => {
+    const index = provinsiList.findIndex((x) => x.nama === watch().provinsi);
+    if (index != -1) {
+      const selectedProvince = provinsiList[index];
+      const temp = kotaList.filter((x) => x.provinsiId === selectedProvince.id);
+      return temp;
+    }
+    return kotaList;
+  }, [watch().provinsi]);
+
+  const selectedKodePos = useMemo(() => {
+    const index = kotaList.findIndex((x) => x.cityId === watch().kabupaten);
+    if (index != -1) {
+      const selectedKota = kotaList[index].kodePos;
+      return selectedKota;
+    }
+    return '';
+  }, [watch().kabupaten]);
 
   const onSubmit = (data: AlamatDataResponse) => {
     if (update) {
@@ -121,24 +150,31 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
             <Controller
               control={control}
               name="provinsi"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInputForm
-                  onBlur={onBlur}
-                  value={value}
-                  onChangeText={(value) => onChange(value)}
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
                   title={strings.provinsi}
+                  data={provinsiList}
+                  onChange={(value) => onChange(value)}
+                  value={value}
+                  labelField="nama"
+                  valueField="nama"
+                  maxHeight={SCREEN_HEIGHT * 0.5}
                 />
               )}
             />
             <Controller
               control={control}
               name="kabupaten"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInputForm
-                  onBlur={onBlur}
-                  value={value}
-                  onChangeText={(value) => onChange(value)}
+              render={({ field: { onChange, value } }) => (
+                <DropdownForm
                   title={strings.kabupaten_kota}
+                  data={kotaListFiltered}
+                  onChange={(value) => onChange(value)}
+                  value={value}
+                  labelField="nama"
+                  valueField="cityId"
+                  disable={watch().provinsi == ''}
+                  maxHeight={SCREEN_HEIGHT * 0.5}
                 />
               )}
             />
@@ -154,18 +190,25 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                 />
               )}
             />
-
-            <Controller
+            <TextInputForm
+              value={selectedKodePos}
+              title={strings.kodepos}
+              keyboardType="numeric"
+              maxLength={5}
+              disableEdit
+            />
+            {/* <Controller
               control={control}
               name="kodePos"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInputForm
                   onBlur={onBlur}
-                  value={value}
+                  value={selectedKodePos}
                   onChangeText={(value) => onChange(value)}
                   title={strings.kodepos}
                   keyboardType="numeric"
                   maxLength={5}
+                  disableEdit
                 />
               )}
               rules={{
@@ -178,7 +221,7 @@ const DaftarAlamatAddScreen: React.FC<Props> = ({ route }) => {
                   message: 'Kode Pos harus 5 angka',
                 },
               }}
-            />
+            /> */}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

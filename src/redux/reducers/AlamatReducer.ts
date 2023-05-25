@@ -12,16 +12,38 @@ export type AlamatDataResponse = {
   kodePos: string;
 };
 
+export type City = {
+  cityId: string;
+  provinsiId: string;
+  nama: string;
+  kodePos: string;
+};
+
+export type Province = {
+  id: string;
+  nama: string;
+};
+
+export type CityProvinceList = {
+  kota: City[];
+  provinsi: Province[];
+};
+
 type DeleteAlamatStatus = 'idle' | 'success' | 'failed';
 
 interface RootState {
   alamatList: AlamatDataResponse[];
   error?: unknown;
   deleteAlamatStatus?: DeleteAlamatStatus;
+  cityProvinceList: CityProvinceList;
 }
 
 const initialState: RootState = {
   alamatList: [],
+  cityProvinceList: {
+    kota: [],
+    provinsi: [],
+  },
 };
 
 const alamatSlice = createSlice({
@@ -53,6 +75,12 @@ const alamatSlice = createSlice({
       state.alamatList = payload;
     },
     deleteAlamatFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
+      state.error = payload;
+    },
+    getCityProvinceSuccess: (state: RootState, { payload }: PayloadAction<CityProvinceList>) => {
+      state.cityProvinceList = payload;
+    },
+    getCityProvinceFailed: (state: RootState, { payload }: PayloadAction<unknown>) => {
       state.error = payload;
     },
     // addAlamat: (state, { payload }: PayloadAction<AlamatDataResponse>) => {
@@ -90,6 +118,7 @@ export const fetchUpdateAlamat = createAction<{
   id: number;
 }>('fetchUpdateAlamat');
 export const fetchSubmitAlamat = createAction<AlamatDataResponse>('fetchSubmitAlamat');
+export const fetchCityProvince = createAction('fetchCityProvince');
 
 export const {
   getAlamatListFailed,
@@ -101,6 +130,8 @@ export const {
   deleteAlamatFailed,
   deleteAlamatSuccess,
   setDeleteAlamatStatus,
+  getCityProvinceFailed,
+  getCityProvinceSuccess,
 } = alamatSlice.actions;
 
 export default alamatSlice.reducer;

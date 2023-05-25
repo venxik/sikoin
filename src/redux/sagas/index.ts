@@ -3,6 +3,7 @@ import { all, fork } from 'redux-saga/effects';
 import {
   watchDeleteAlamat,
   watchGetAlamat,
+  watchGetCityProvince,
   watchSubmitAlamat,
   watchUpdateAlamat,
 } from './AlamatSaga';
@@ -146,5 +147,6 @@ export function* rootSaga() {
     fork(watchSetPurchaseDone),
     fork(watchGetCategory),
     fork(watchGetCategoryProduct),
+    fork(watchGetCityProvince),
   ]);
 }

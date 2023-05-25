@@ -17,10 +17,16 @@ const MarketPesananMainScreen = ({}: Props) => {
   const dispatch = useAppDispatch();
 
   const [searchValue, setSearchValue] = useState('');
+  const [flatListData, setFlatListData] = useState<PurchaseData[]>();
+
+  useEffect(() => {
+    if (purchaseData) setFlatListData(purchaseData);
+  }, [purchaseData]);
 
   const handleSearch = useCallback(
     debounce(async (value: string) => {
-      console.warn(value);
+      const temp = purchaseData.filter((x) => x.nama.toLowerCase().includes(value.toLowerCase()));
+      setFlatListData(temp);
     }, 300),
     [],
   );
@@ -46,7 +52,7 @@ const MarketPesananMainScreen = ({}: Props) => {
   return (
     <View style={styles.container}>
       <HeaderBack title={'Transaksi'} textStyle={{ width: '100%' }} />
-      <View style={styles.innerContainer}>
+      <View style={styles.topContainer}>
         <TextInputBorder
           value={searchValue}
           onChangeText={(e) => {
@@ -56,8 +62,8 @@ const MarketPesananMainScreen = ({}: Props) => {
           placeholder={'Cari Produk'}
           icon={icons.icon_search_market}
         />
-        <FlatList data={purchaseData} renderItem={renderItem} />
       </View>
+      <FlatList data={flatListData} renderItem={renderItem} style={styles.bottomContainer} />
     </View>
   );
 };
@@ -68,11 +74,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  innerContainer: {
+  topContainer: {
     backgroundColor: colors.white,
-    padding: sizes.padding,
-    borderRadius: sizes.padding,
+    paddingHorizontal: sizes.padding,
+    paddingTop: sizes.padding,
+    borderTopLeftRadius: sizes.padding,
+    borderTopRightRadius: sizes.padding,
     marginTop: sizes.padding,
     marginHorizontal: sizes.padding,
+  },
+  bottomContainer: {
+    backgroundColor: colors.white,
+    paddingHorizontal: sizes.padding,
+    paddingBottom: sizes.padding,
+    marginHorizontal: sizes.padding,
+    borderBottomLeftRadius: sizes.padding,
+    borderBottomRightRadius: sizes.padding,
   },
 });

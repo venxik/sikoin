@@ -7,14 +7,18 @@ import { goBack } from '../../config/navigation';
 import { formatter } from '../../utils';
 import {
   AlamatDataResponse,
+  CityProvinceList,
   deleteAlamatFailed,
   deleteAlamatSuccess,
   fetchAlamatList,
+  fetchCityProvince,
   fetchDeleteAlamat,
   fetchSubmitAlamat,
   fetchUpdateAlamat,
   getAlamatListFailed,
   getAlamatListSuccess,
+  getCityProvinceFailed,
+  getCityProvinceSuccess,
   setDeleteAlamatStatus,
   submitAlamatFailed,
   submitAlamatSuccess,
@@ -125,6 +129,28 @@ function* deleteAlamat(action: ReturnType<typeof fetchDeleteAlamat>) {
   yield put(hideLoading());
 }
 
+function* getCityProvince() {
+  yield put(showLoading());
+  try {
+    const response: AxiosResponse<ApiResponse<CityProvinceList>> = yield call(
+      AlamatApi.getCityProvince,
+    );
+    if (response?.status === 200) {
+      const data = formatter.addMissingBracketJSON(response.data);
+      if (data?.error == null) {
+        yield put(getCityProvinceSuccess(data?.data));
+      } else {
+        yield put(getCityProvinceFailed('Error'));
+      }
+    } else {
+      yield put(getCityProvinceFailed('Error'));
+    }
+  } catch (error) {
+    yield put(getCityProvinceFailed(error));
+  }
+  yield put(hideLoading());
+}
+
 export function* watchGetAlamat() {
   yield takeLatest(fetchAlamatList, getAlamat);
 }
@@ -139,4 +165,8 @@ export function* watchSubmitAlamat() {
 
 export function* watchDeleteAlamat() {
   yield takeLatest(fetchDeleteAlamat, deleteAlamat);
+}
+
+export function* watchGetCityProvince() {
+  yield takeLatest(fetchCityProvince, getCityProvince);
 }

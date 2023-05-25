@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 
 import { isEmpty } from 'lodash';
 
@@ -21,6 +22,7 @@ const Popup1Button = (props: Popup1ButtonProps) => {
     iconStyle,
     style,
     scrollable = false,
+    dismiss,
   } = props;
 
   const renderScroll = () => {
@@ -57,6 +59,9 @@ const Popup1Button = (props: Popup1ButtonProps) => {
 
   return (
     <Modal animationType="slide" transparent={true} visible={showPopup}>
+      <TouchableWithoutFeedback onPress={dismiss}>
+        <View style={styles.modalOverlay} />
+      </TouchableWithoutFeedback>
       <View style={styles.modalMainView}>
         <View style={[styles.modalView, style]}>
           {scrollable ? (
@@ -129,5 +134,8 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.2,
     height: SCREEN_WIDTH * 0.2,
     marginVertical: 30,
+  },
+  modalOverlay: {
+    ...StyleSheet.absoluteFillObject,
   },
 });

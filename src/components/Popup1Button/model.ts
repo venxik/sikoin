@@ -13,4 +13,5 @@ export interface Popup1ButtonProps {
   customButtonText?: string;
   iconStyle?: ImageStyle;
   scrollable?: boolean;
+  dismiss?: () => void;
 }

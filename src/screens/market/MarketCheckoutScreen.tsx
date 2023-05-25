@@ -14,6 +14,7 @@ import {
   CheckoutPaymentItem,
   HeaderBack,
   Popup1Button,
+  Popup2Button,
 } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../config';
 import { HomeStackParamList } from '../../config/navigation/model';
@@ -276,18 +277,23 @@ const MarketCheckoutScreen: React.FC<Props> = ({ navigation }) => {
 
   const renderPopupContinue = useMemo(() => {
     return (
-      <Popup1Button
+      <Popup2Button
         headerText={'Anda akan melakukan transaksi pembelian'}
         contentText={
           'Pastikan Anda sudah memeriksa kembali detail transaksi Anda. Apakah Anda ingin melanjutkan transaksi ini?'
         }
         showPopup={showPopup}
-        onPress={() => {
+        buttonLeftOnPress={() => {
+          setShowPopup(false);
+        }}
+        buttonRightOnPress={() => {
           orderProcess();
           setShowPopup(false);
         }}
         headerImage={icons.icon_info_popup}
-        customButtonText={'Lanjut'}
+        buttonLeftTitle="Batal"
+        buttonRightTitle="Lanjut"
+        dismiss={() => setShowPopup(false)}
       />
     );
   }, [showPopup]);

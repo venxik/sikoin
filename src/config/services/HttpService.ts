@@ -80,6 +80,8 @@ class HttpService {
         if (url?.includes('api/simpanan/create'))
           this.showErrorDialogHandler(apis.errorTypes.inputNoRek, error);
         else this.showErrorDialogHandler(apis.errorTypes.penarikanGagal, error);
+      else if (url?.includes('api/checkout') && error?.message.toLowerCase().includes('alamat'))
+        this.showErrorDialogHandler(apis.errorTypes.checkout, error);
       else this.showErrorDialogHandler(apis.errorTypes.generic, error);
     }
     return response;

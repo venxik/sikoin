@@ -14,4 +14,5 @@ export interface Popup2ButtonProps {
   headerTextStyle?: TextStyle;
   contentTextStyle?: TextStyle;
   iconStyle?: ImageStyle;
+  dismiss?: () => void;
 }

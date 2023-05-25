@@ -57,6 +57,11 @@ class AlamatApi {
     const resp = await HttpService.delete(`${apis.endpoints.alamat.alamat}/${id}`);
     return resp;
   }
+
+  static async getCityProvince(): Promise<AxiosResponse> {
+    const resp = await HttpService.get(apis.endpoints.alamat.getCityProvince);
+    return resp;
+  }
 }
 
 export default AlamatApi;

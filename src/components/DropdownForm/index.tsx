@@ -7,12 +7,33 @@ import { colors, icons, sizes, strings } from '../../constants';
 import { DropdownFormProps } from './model';
 
 const DropdownForm = (props: DropdownFormProps) => {
-  const { title, style, error, errorText, data, onChange, value, maxHeight } = props || {};
+  const {
+    title,
+    style,
+    error,
+    errorText,
+    data,
+    onChange,
+    value,
+    maxHeight,
+    labelField = 'label',
+    valueField = 'value',
+    disable,
+  } = props || {};
+
+  // const disable = true;
 
   const dropdown = () => (
     <Dropdown
       {...props}
-      style={[styles.dropdown, error && { borderColor: 'red', borderWidth: 1 }]}
+      style={[
+        styles.dropdown,
+        {
+          borderColor: error ? 'red' : undefined,
+          borderWidth: error ? 1 : 0,
+          // backgroundColor: disable ? colors.bodyTextLightGrey : colors.tonalPrimary,
+        },
+      ]}
       containerStyle={styles.dropdownItemContainer}
       placeholderStyle={styles.textValue}
       selectedTextStyle={styles.textValue}
@@ -24,13 +45,16 @@ const DropdownForm = (props: DropdownFormProps) => {
         />
       )}
       data={data}
-      onChange={(item) => onChange(item?.value)}
+      onChange={(item) => {
+        onChange(item[valueField]);
+      }}
       value={value}
       maxHeight={maxHeight || 120}
-      labelField="label"
-      valueField="value"
+      labelField={labelField}
+      valueField={valueField}
       placeholder={strings.pilih_dot}
       showsVerticalScrollIndicator
+      disable={disable}
     />
   );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Image, Modal, StyleSheet, Text, View } from 'react-native';
+import { Image, Modal, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 import { isEmpty } from 'lodash';
 
@@ -22,12 +22,16 @@ const Popup2Button = (props: Popup2ButtonProps) => {
     buttonRightOnPress,
     headerTextStyle,
     contentTextStyle,
+    dismiss,
   } = props;
 
   return (
     <Modal animationType="slide" transparent={true} visible={showPopup}>
       <View style={[styles.modalMainView, style]}>
-        <Animated.View style={styles.modalView}>
+        <TouchableWithoutFeedback onPress={dismiss}>
+          <View style={styles.modalOverlay} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalView}>
           {headerImage && <Image source={headerImage} style={[styles.icon, { ...iconStyle }]} />}
           <View
             style={{
@@ -60,7 +64,7 @@ const Popup2Button = (props: Popup2ButtonProps) => {
               buttonContainerStyle={{ width: '47%' }}
             />
           </View>
-        </Animated.View>
+        </View>
       </View>
     </Modal>
   );
@@ -105,5 +109,8 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  modalOverlay: {
+    ...StyleSheet.absoluteFillObject,
   },
 });

@@ -11,6 +11,7 @@ const constant = {
     },
     alamat: {
       alamat: 'daftar-alamat',
+      getCityProvince: 'daftar-alamat/create',
     },
     home: {
       beranda: 'beranda-user',
@@ -103,6 +104,7 @@ const constant = {
     anggotaTerdaftar: 'Data Anggota Sudah Dapat Diakses',
     penarikanGagal: 'Oops, Kamu gagal melakukan permohonan penarikan',
     inputNoRek: 'Input No rekening',
+    checkout: 'Gagal Checkout',
   },
   authPathArray: ['koperasi', 'email-anggota', 'lupa-password', 'login'],
 };

@@ -58,6 +58,7 @@ const MarketPembelianItem = (props: MarketPembelianItemProps) => {
             <Text style={styles.textPrice}>{formatter.formatNumberToCurreny(totalHarga)}</Text>
           </View>
           <Text style={styles.textTime}>{waktu}</Text>
+          <Text style={[styles.textTime, { color: colors.bodyText, marginTop: 10 }]}>{status}</Text>
         </View>
         <TouchableOpacity style={{ marginTop: 12 }} onPress={navigateToDetail}>
           <ArrowRightSquare color={colors.primary} />
