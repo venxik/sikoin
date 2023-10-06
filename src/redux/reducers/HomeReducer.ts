@@ -23,6 +23,7 @@ export interface BerandaUserResponse {
   promo: KabarPromoData[];
   conversationId: number;
   userId: number;
+  role: 'UMUM' | 'ALUMNI' | 'ANGGOTA';
 }
 
 export type IntitalState = {
@@ -43,6 +44,7 @@ const initialState: IntitalState = {
     saldoBelanja: 0,
     simpanan: 0,
     userId: 0,
+    role: 'UMUM',
   },
 };
 
